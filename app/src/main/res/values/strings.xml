@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">JPAWarehose</string>
+    <string name="reTry">تلاش مجدد</string>
+    <string name="dismiss">بستن</string>
+
+
+    <string name="logoDescription">logoDescription</string>
+</resources>
