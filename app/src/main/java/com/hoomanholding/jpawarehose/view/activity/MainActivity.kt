@@ -2,19 +2,29 @@ package com.hoomanholding.jpawarehose.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ActivityMainBinding
+import com.hoomanholding.jpawarehose.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private var navController: NavController? = null
+
+    private val mainViewModel: MainViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,5 +80,32 @@ class MainActivity : AppCompatActivity() {
     }
     //---------------------------------------------------------------------------------------------- showMessage
 
+
+
+    //---------------------------------------------------------------------------------------------- gotoFirstFragment
+    fun gotoFirstFragment() {
+        deleteAllData()
+        CoroutineScope(IO).launch {
+            delay(500)
+            withContext(Main) {
+                gotoFragment(R.id.action_goto_SplashFragment)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- gotoFirstFragment
+
+
+    //---------------------------------------------------------------------------------------------- deleteAllData
+    fun deleteAllData() {
+        mainViewModel.deleteAllData()
+    }
+    //---------------------------------------------------------------------------------------------- deleteAllData
+
+
+    //---------------------------------------------------------------------------------------------- gotoFragment
+    private fun gotoFragment(fragment: Int) {
+        navController?.navigate(fragment, null)
+    }
+    //---------------------------------------------------------------------------------------------- gotoFragment
 
 }
