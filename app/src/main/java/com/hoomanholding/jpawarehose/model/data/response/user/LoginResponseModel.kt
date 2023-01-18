@@ -1,4 +1,6 @@
-package com.hoomanholding.jpawarehose.model.response
+package com.hoomanholding.jpawarehose.model.data.response.user
+
+import com.hoomanholding.jpawarehose.model.data.response.BaseResponseAbstractModel
 
 
 /**

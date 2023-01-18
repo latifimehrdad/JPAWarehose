@@ -1,6 +1,6 @@
 package com.hoomanholding.jpawarehose.utility.hilt
 
-import com.hoomanholding.jpawarehose.model.api.ApiSuperApp
+import com.hoomanholding.jpawarehose.model.api.Api
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,22 +19,22 @@ class Providers {
     companion object {
 //        const val url = "http://5.160.125.98:5081"
 //        const val url = "http://192.168.50.153:8081"
-        const val url = "http://192.168.50.153:9090"
+        const val url = "http://10.252.30.150:7575"
     }
 
-    //---------------------------------------------------------------------------------------------- provideBPMSUrl
+    //---------------------------------------------------------------------------------------------- provideUrl
     @Provides
     @Singleton
-    fun provideBPMSUrl() = "http://192.168.50.153:9090"
-    //---------------------------------------------------------------------------------------------- provideBPMSUrl
+    fun provideUrl() = "http://10.252.30.150:7575"
+    //---------------------------------------------------------------------------------------------- provideUrl
 
 
-    //---------------------------------------------------------------------------------------------- provideApiBPMS
+    //---------------------------------------------------------------------------------------------- provideApi
     @Provides
     @Singleton
-    fun provideApiBPMS(retrofit: Retrofit) : ApiSuperApp =
-        retrofit.create(ApiSuperApp::class.java)
-    //---------------------------------------------------------------------------------------------- provideApiBPMS
+    fun provideApi(retrofit: Retrofit) : Api =
+        retrofit.create(Api::class.java)
+    //---------------------------------------------------------------------------------------------- provideApi
 
 
 }

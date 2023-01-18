@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.hoomanholding.jpawarehose.viewmodel.SplashViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutParent"
         android:layout_width="match_parent"
@@ -21,11 +28,12 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher"
                 android:contentDescription="@string/logoDescription" />
 
         </FrameLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <com.hoomanholding.jpawarehose.view.custom.JpaButton
             android:id="@+id/buttonReTry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

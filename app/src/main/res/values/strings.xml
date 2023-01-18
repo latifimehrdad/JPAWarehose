@@ -8,6 +8,9 @@
     <string name="userNameIsEmpty">نام کاربری را وارد نمایید</string>
     <string name="passcodeIsEmpty">رمز ورود را وارد نمایید</string>
     <string name="bePatient">شکیبا باشید…</string>
+    <string name="userName">نام کاربری</string>
+    <string name="password">رمز ورود</string>
+    <string name="enter">ورود</string>
 
 
     <string name="logoDescription">logoDescription</string>

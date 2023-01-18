@@ -66,7 +66,7 @@ class LoginViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- setUserNamePasswordFromSharePreferences
     fun setUserNamePasswordFromSharePreferences() {
         userName.value = sharedPreferences.getString(CompanionValues.userName, "")
-        password.value = sharedPreferences.getString(CompanionValues.passcode, "")
+        password.value = sharedPreferences.getString(CompanionValues.password, "")
     }
     //---------------------------------------------------------------------------------------------- setUserNamePasswordFromSharePreferences
 
@@ -77,7 +77,7 @@ class LoginViewModel @Inject constructor(
             .edit()
             .putString(CompanionValues.TOKEN, token)
             .putString(CompanionValues.userName, userName.value)
-            .putString(CompanionValues.passcode, password.value)
+            .putString(CompanionValues.password, password.value)
             .apply()
         withContext(Main){ loginLiveDate.value = token }
     }

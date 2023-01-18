@@ -1,4 +1,4 @@
-package com.hoomanholding.jpawarehose.model.response
+package com.hoomanholding.jpawarehose.model.data.response
 
 /**
  * Created by m-latifi on 11/9/2022.

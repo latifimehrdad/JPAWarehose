@@ -12,7 +12,7 @@ class CompanionValues {
         const val channelName = "Driver"
         const val biometric = "biometric"
         const val userName = "userName"
-        const val passcode = "passcode"
+        const val password = "password"
         const val adminTaxiType = "adminTaxiType"
         const val myRequest = "myRequest"
         const val notificationLast = "notificationLast"

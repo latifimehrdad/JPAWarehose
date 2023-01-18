@@ -89,7 +89,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="start|center_vertical"
-                            android:hint="userName"
+                            android:hint="@string/userName"
                             android:inputType="none"
                             android:maxLength="20"
                             android:singleLine="true"
@@ -123,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="start|center_vertical"
                             android:inputType="textPassword"
-                            android:hint="passcode"
+                            android:hint="@string/password"
                             android:maxLength="20"
                             android:singleLine="true"
                             android:textSize="@dimen/_10sdp"
@@ -146,7 +146,7 @@
                         android:fontFamily="@font/kalameh_semibold"
                         app:cornerRadius="@dimen/_5sdp"
                         android:textColor="@color/black"
-                        android:text='enter' />
+                        android:text='@string/enter' />
 
 
 
@@ -165,7 +165,8 @@
                         android:fontFamily="@font/kalameh_semibold"
                         app:cornerRadius="@dimen/_5sdp"
                         android:textColor="@color/black"
-                        app:iconTint="@color/black"/>
+                        app:iconTint="@color/black"
+                        android:visibility="gone"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -194,7 +195,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:text="designer"
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/kalameh_light"/>
