@@ -62,10 +62,15 @@ class LoginFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         activity?.let { (it as MainActivity).deleteAllData() }
-        if (loginViewModel.isBiometricEnable())
-            binding.buttonFingerLogin.visibility = View.VISIBLE
-        else
-            binding.buttonFingerLogin.visibility = View.GONE
+//        if (loginViewModel.isBiometricEnable()) {
+//            binding.cardViewFingerPrint.visibility = View.VISIBLE
+//            binding.viewLine1.visibility = View.VISIBLE
+//            binding.viewLine2.visibility = View.VISIBLE
+//        } else {
+//            binding.cardViewFingerPrint.visibility = View.INVISIBLE
+//            binding.viewLine1.visibility = View.GONE
+//            binding.viewLine2.visibility = View.GONE
+//        }
         observeLoginLiveDate()
         observeErrorLiveDate()
     }
@@ -109,15 +114,7 @@ class LoginFragment : Fragment() {
             .setOnClickListener { login(false) }
 
         binding
-            .textInputEditTextUserName
-            .setOnClickListener { binding.textInputLayoutUserName.error = null }
-
-        binding
-            .textInputEditTextPasscode
-            .setOnClickListener { binding.textInputLayoutPasscode.error = null }
-
-        binding
-            .buttonFingerLogin
+            .cardViewFingerPrint
             .setOnClickListener { showBiometricDialog() }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -174,11 +171,11 @@ class LoginFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- checkEmpty
     private fun checkEmpty(): Boolean {
         if (loginViewModel.userName.value.isNullOrEmpty()) {
-            binding.textInputLayoutUserName.error = getString(R.string.userNameIsEmpty)
+            binding.edittextUserName.error = getString(R.string.userNameIsEmpty)
             return false
         }
         if (loginViewModel.password.value.isNullOrEmpty()) {
-            binding.textInputLayoutPasscode.error = getString(R.string.passcodeIsEmpty)
+            binding.editTextPassword.error = getString(R.string.passcodeIsEmpty)
             return false
         }
         return true
@@ -189,10 +186,10 @@ class LoginFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- startLoading
     private fun startLoading() {
         hideKeyboard()
-        binding.textInputLayoutUserName.error = null
-        binding.textInputLayoutPasscode.error = null
-        binding.textInputEditTextUserName.isEnabled = false
-        binding.textInputEditTextPasscode.isEnabled = false
+        binding.edittextUserName.error = null
+        binding.editTextPassword.error = null
+        binding.edittextUserName.isEnabled = false
+        binding.editTextPassword.isEnabled = false
         binding.buttonLogin.startLoading(getString(R.string.bePatient))
     }
     //---------------------------------------------------------------------------------------------- startLoading
@@ -200,8 +197,8 @@ class LoginFragment : Fragment() {
 
     //---------------------------------------------------------------------------------------------- stopLoading
     private fun stopLoading() {
-        binding.textInputEditTextUserName.isEnabled = true
-        binding.textInputEditTextPasscode.isEnabled = true
+        binding.edittextUserName.isEnabled = true
+        binding.editTextPassword.isEnabled = true
         binding.buttonLogin.stopLoading()
     }
     //---------------------------------------------------------------------------------------------- stopLoading

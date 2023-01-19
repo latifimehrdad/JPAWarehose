@@ -12,7 +12,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/drawable_splash_gradiant">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mask_group_1"
+            android:alpha="0.13"/>
 
         <FrameLayout
             android:id="@+id/frameLayoutLogo"
@@ -28,7 +35,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_logo"
                 android:contentDescription="@string/logoDescription" />
 
         </FrameLayout>

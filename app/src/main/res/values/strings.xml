@@ -11,7 +11,13 @@
     <string name="userName">نام کاربری</string>
     <string name="password">رمز ورود</string>
     <string name="enter">ورود</string>
+    <string name="welcome">خوش آمدید.</string>
+    <string name="loginDescription">اپلیکیشن هومن هلدینگ ابزاری برای \n آسانتر شدن تمامی فرآیندهایتان</string>
+    <string name="loginByBiometric">ورود با اثر انگشت</string>
 
 
     <string name="logoDescription">logoDescription</string>
+    <string name="userNameDescription">username</string>
+    <string name="passwordDescription">password</string>
+    <string name="fingerPrintDescription">fingerprint</string>
 </resources>

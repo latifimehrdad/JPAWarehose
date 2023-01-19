@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -7,200 +8,251 @@
             type="com.hoomanholding.jpawarehose.viewmodel.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:id="@+id/frameLayoutLogo"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintWidth_percent="0.3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/logoDescription"/>
-
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/textViewWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/frameLayoutLogo"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:textSize="@dimen/_10sdp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/kalameh_semibold"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/drawable_splash_gradiant">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/textViewWelcome"
-            app:layout_constraintBottom_toTopOf="@id/linearLayoutFooter"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_height="wrap_content">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <FrameLayout
+                android:id="@+id/frameLayoutLogo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_15sdp">
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_logo"
+                    android:contentDescription="@string/logoDescription"/>
 
-                    <TextView
-                        android:id="@+id/textViewEnterUserPass"
-                        android:layout_width="wrap_content"
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textViewWelcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/frameLayoutLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:text="@string/welcome"
+                android:fontFamily="@font/kalameh_semibold"/>
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewWelcome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/loginTextColor"
+                android:text="@string/loginDescription"
+                android:fontFamily="@font/kalameh_light"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="@dimen/_10sdp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/kalameh_light"/>
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginHorizontal="@dimen/_20sdp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayoutUserName"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/textViewEnterUserPass"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
-                        app:boxCornerRadiusBottomStart="@dimen/_5sdp"
-                        app:boxCornerRadiusTopEnd="@dimen/_5sdp"
-                        app:boxCornerRadiusTopStart="@dimen/_5sdp"
-                        app:boxStrokeColor="@color/black"
-                        app:hintTextColor="@color/dismiss"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/textInputEditTextUserName"
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:hint="@string/userName"
-                            android:inputType="none"
-                            android:maxLength="20"
-                            android:singleLine="true"
-                            android:textSize="@dimen/_10sdp"
-                            android:text="@={viewModel.userName}"
-                            android:fontFamily="@font/kalameh_light"/>
+                            android:layout_height="@dimen/_40sdp"
+                            app:cardCornerRadius="@dimen/_30sdp"
+                            app:layout_constraintTop_toTopOf="@id/cardViewUserName"
+                            app:layout_constraintBottom_toBottomOf="@id/cardViewUserName"
+                            app:cardElevation="1dp">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <EditText
+                                android:id="@+id/edittextUserName"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"
+                                android:hint="@string/userName"
+                                android:layout_marginEnd="@dimen/_55sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/kalameh_light"
+                                android:textSize="@dimen/_10sdp"
+                                android:textColor="@color/primaryColor"
+                                android:text="@={viewModel.userName}"
+                                android:autofillHints="none"
+                                android:inputType="none" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayoutPasscode"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
-                        app:boxCornerRadiusBottomStart="@dimen/_5sdp"
-                        app:boxCornerRadiusTopEnd="@dimen/_5sdp"
-                        app:boxCornerRadiusTopStart="@dimen/_5sdp"
-                        app:passwordToggleEnabled="true"
-                        android:layoutDirection="rtl"
-                        app:boxStrokeColor="@color/black"
-                        app:hintTextColor="@color/dismiss"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        </androidx.cardview.widget.CardView>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/textInputEditTextPasscode"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardViewUserName"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:cardCornerRadius="@dimen/_30sdp"
+                            app:cardElevation="3dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginVertical="@dimen/_15sdp"
+                                android:layout_marginHorizontal="@dimen/_15sdp"
+                                android:src="@drawable/ic_user"
+                                android:contentDescription="@string/userNameDescription" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            app:cardCornerRadius="@dimen/_30sdp"
+                            app:layout_constraintTop_toTopOf="@id/cardViewPassword"
+                            app:layout_constraintBottom_toBottomOf="@id/cardViewPassword"
+                            app:cardElevation="1dp">
+
+                            <EditText
+                                android:id="@+id/editTextPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"
+                                android:hint="@string/password"
+                                android:layout_marginEnd="@dimen/_55sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/kalameh_light"
+                                android:textSize="@dimen/_10sdp"
+                                android:gravity="center_vertical|end"
+                                android:textColor="@color/primaryColor"
+                                android:text="@={viewModel.password}"
+                                android:autofillHints="none"
+                                android:inputType="textPassword" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardViewPassword"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            app:layout_constraintTop_toBottomOf="@id/cardViewUserName"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:cardCornerRadius="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            app:cardElevation="3dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginVertical="@dimen/_15sdp"
+                                android:layout_marginHorizontal="@dimen/_15sdp"
+                                android:src="@drawable/ic_pass"
+                                android:contentDescription="@string/passwordDescription" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <com.hoomanholding.jpawarehose.view.custom.JpaButton
+                            android:id="@+id/buttonLogin"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:inputType="textPassword"
-                            android:hint="@string/password"
-                            android:maxLength="20"
-                            android:singleLine="true"
-                            android:textSize="@dimen/_10sdp"
-                            android:text="@={viewModel.password}"
-                            android:fontFamily="@font/kalameh_light"/>
+                            app:layout_constraintStart_toStartOf="@id/cardViewFingerPrint"
+                            app:layout_constraintEnd_toEndOf="@id/cardViewFingerPrint"
+                            app:layout_constraintTop_toBottomOf="@id/cardViewPassword"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:paddingTop="@dimen/_7sdp"
+                            android:paddingBottom="@dimen/_7sdp"
+                            android:fontFamily="@font/kalameh_semibold"
+                            app:cornerRadius="@dimen/_30sdp"
+                            android:textColor="@color/white"
+                            android:text='@string/enter' />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardViewFingerPrint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_35sdp"
+                            app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            app:cardCornerRadius="@dimen/_30sdp"
+                            app:cardBackgroundColor="@color/primaryColor">
 
-                    <com.hoomanholding.jpawarehose.view.custom.JpaButton
-                        android:id="@+id/buttonLogin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@id/textInputLayoutPasscode"
-                        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPasscode"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:minWidth="@dimen/_100sdp"
-                        android:textSize="@dimen/_12sdp"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:paddingBottom="@dimen/_5sdp"
-                        android:fontFamily="@font/kalameh_semibold"
-                        app:cornerRadius="@dimen/_5sdp"
-                        android:textColor="@color/black"
-                        android:text='@string/enter' />
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_finger_print"
+                                android:alpha="0.15"
+                                android:contentDescription="@string/fingerPrintDescription" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12sdp"
+                                android:paddingHorizontal="@dimen/_20sdp"
+                                android:fontFamily="@font/kalameh_regular"
+                                android:gravity="center"
+                                android:text="@string/loginByBiometric"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <View
+                            android:id="@+id/viewLine1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_4sdp"
+                            app:layout_constraintTop_toTopOf="@id/cardViewFingerPrint"
+                            app:layout_constraintBottom_toBottomOf="@id/cardViewFingerPrint"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/cardViewFingerPrint"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:background="@drawable/drawable_login_line"/>
+
+                        <View
+                            android:id="@+id/viewLine2"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_4sdp"
+                            app:layout_constraintTop_toTopOf="@id/cardViewFingerPrint"
+                            app:layout_constraintBottom_toBottomOf="@id/cardViewFingerPrint"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cardViewFingerPrint"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:background="@drawable/drawable_login_line"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
 
 
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/buttonFingerLogin"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/buttonLogin"
-                        app:layout_constraintBottom_toBottomOf="@id/buttonLogin"
-                        app:layout_constraintStart_toEndOf="@id/buttonLogin"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:minWidth="@dimen/_100sdp"
-                        android:textSize="@dimen/_12sdp"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:paddingBottom="@dimen/_5sdp"
-                        android:fontFamily="@font/kalameh_semibold"
-                        app:cornerRadius="@dimen/_5sdp"
-                        android:textColor="@color/black"
-                        app:iconTint="@color/black"
-                        android:visibility="gone"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayoutFooter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:orientation="vertical"
-            android:gravity="center">
+    </ScrollView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                android:alpha="0.5"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:textSize="@dimen/_8sdp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/kalameh_light"/>
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
