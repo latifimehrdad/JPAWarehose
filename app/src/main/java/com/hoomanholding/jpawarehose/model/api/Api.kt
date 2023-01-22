@@ -1,7 +1,9 @@
 package com.hoomanholding.jpawarehose.model.api
 
 import com.hoomanholding.jpawarehose.model.data.request.LoginRequestModel
+import com.hoomanholding.jpawarehose.model.data.response.brand.BrandResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.product.ProductResponseModel
+import com.hoomanholding.jpawarehose.model.data.response.receipt.ReceiptResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.supplier.SupplierResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.user.UserInfoResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.user.LoginResponseModel
@@ -46,4 +48,16 @@ interface Api {
     suspend fun requestGetProducts(
         @Header("Authorization") token : String
     ) : Response<ProductResponseModel>
+
+
+    @GET("${v1}/BaseData/basedata-get-brands")
+    suspend fun requestGetBrands(
+        @Header("Authorization") token : String
+    ) : Response<BrandResponseModel>
+
+
+    @GET("${v1}/WarehouseReceipt/warehouse-receipt-Get")
+    suspend fun requestGetReceipts(
+        @Header("Authorization") token : String
+    ) : Response<ReceiptResponseModel>
 }
