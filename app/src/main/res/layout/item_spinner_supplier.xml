@@ -11,22 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewColor"
-            android:layout_width="@dimen/_12sdp"
-            android:layout_height="@dimen/_12sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:cardCornerRadius="@dimen/_20sdp"/>
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/itemDefaultText"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/cardViewColor"
             android:layout_marginEnd="@dimen/_10sdp"
             android:gravity="center_vertical|start"/>
 

@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpawarehose.databinding.ItemSpinnerSupplierBinding
 import com.hoomanholding.jpawarehose.model.database.entity.BrandEntity
+import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
 import com.skydoves.powerspinner.*
 import com.skydoves.powerspinner.databinding.PowerspinnerItemDefaultPowerBinding
 
@@ -27,14 +28,14 @@ internal const val NO_SELECTED_INDEX: Int = -1
 class SupplierSpinnerAdapter(
     powerSpinnerView: PowerSpinnerView
 ) : RecyclerView.Adapter<SupplierSpinnerAdapter.SupplierSpinnerViewHolder>(),
-    PowerSpinnerInterface<BrandEntity> {
+    PowerSpinnerInterface<SupplierEntity> {
 
     override var index: Int = powerSpinnerView.selectedIndex
     override val spinnerView: PowerSpinnerView = powerSpinnerView
-    override var onSpinnerItemSelectedListener: OnSpinnerItemSelectedListener<BrandEntity>? = null
+    override var onSpinnerItemSelectedListener: OnSpinnerItemSelectedListener<SupplierEntity>? = null
 
     private val compoundPadding: Int = 12
-    private val spinnerItems: MutableList<BrandEntity> = arrayListOf()
+    private val spinnerItems: MutableList<SupplierEntity> = arrayListOf()
 
     init {
         this.spinnerView.compoundDrawablePadding = compoundPadding
@@ -60,7 +61,7 @@ class SupplierSpinnerAdapter(
         holder.bind(spinnerItems[position], spinnerView)
     }
 
-    override fun setItems(itemList: List<BrandEntity>) {
+    override fun setItems(itemList: List<SupplierEntity>) {
         this.spinnerItems.clear()
         this.spinnerItems.addAll(itemList)
         this.index = NO_SELECTED_INDEX
@@ -74,7 +75,7 @@ class SupplierSpinnerAdapter(
         spinnerView.applyCompoundDrawables(spinnerView, item)
         val oldIndex = this.index
         this.index = index
-        this.spinnerView.notifyItemSelected(index, item.brandName ?: "")
+        this.spinnerView.notifyItemSelected(index, item.nameTaminKonandeh ?: "")
         this.onSpinnerItemSelectedListener?.onItemSelected(
             oldIndex = oldIndex,
             oldItem = oldIndex.takeIf { it != NO_SELECTED_INDEX }?.let { spinnerItems[oldIndex] },
@@ -88,9 +89,9 @@ class SupplierSpinnerAdapter(
     inner class SupplierSpinnerViewHolder(private val binding: ItemSpinnerSupplierBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        internal fun bind(item: BrandEntity, spinnerView: PowerSpinnerView) {
+        internal fun bind(item: SupplierEntity, spinnerView: PowerSpinnerView) {
             binding.itemDefaultText.apply {
-                text = item.brandName
+                text = item.nameTaminKonandeh
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, spinnerView.textSize)
                 setTextColor(spinnerView.currentTextColor)
                 compoundDrawablePadding = spinnerView.compoundDrawablePadding
@@ -105,16 +106,13 @@ class SupplierSpinnerAdapter(
                     binding.root.height = spinnerView.spinnerItemHeight
                 }*/
             }
-            binding.cardViewColor.apply {
-                setCardBackgroundColor(Color.argb(100, item.r,item.g,item.b))
-            }
         }
     }
 
     @JvmSynthetic
     internal fun AppCompatTextView.applyCompoundDrawables(
         spinnerView: PowerSpinnerView,
-        item: BrandEntity
+        item: SupplierEntity
     ) {
 /*        val icon = item.iconRes?.let {
             ResourcesCompat.getDrawable(spinnerView.resources, it, null)

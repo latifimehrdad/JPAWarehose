@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/_60sdp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/kalameh_light"
+                android:textColor="@color/white"
+                app:setTitle="@{@string/productCodeDot}"
+                app:setValue="@{item.productsEntity.id}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutContent"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutContent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.7"
+            app:cornerRadius="@dimen/_30sdp"
+            android:textColor="@color/primaryColorVariant"
+            android:text='@string/enter'
+            app:icon="@drawable/ic_add"
+            app:iconGravity="textEnd"
+            app:iconTint="@color/primaryColorVariant"
+            android:fontFamily="@font/kalameh_semibold"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

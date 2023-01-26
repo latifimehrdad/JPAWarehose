@@ -35,4 +35,10 @@ class ProductRepository @Inject constructor(
     }
     //---------------------------------------------------------------------------------------------- deleteAllProduct
 
+
+    //---------------------------------------------------------------------------------------------- getProductByIgnoreBrandId
+    fun getProductByIgnoreBrandId(ignoreBrandId : Long) =
+        productDao.getProductByIgnoreBrandId(ignoreBrandId)
+    //---------------------------------------------------------------------------------------------- getProductByIgnoreBrandId
+
 }

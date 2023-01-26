@@ -26,10 +26,10 @@
             android:background="@drawable/drawable_border"/>
 
         <com.skydoves.powerspinner.PowerSpinnerView
-            android:id="@+id/powerSpinnerBrands"
+            android:id="@+id/powerSpinnerSupplier"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/kalameh_light"
             android:background="@drawable/drawable_login_fingerprint"
             android:gravity="center"
@@ -48,10 +48,67 @@
             app:spinner_divider_color="@color/dismiss"
             app:spinner_divider_show="true"
             app:spinner_divider_size="0.4dp"
-            app:spinner_popup_background="@drawable/drawable_border"
+            app:spinner_popup_background="@drawable/drawable_spinner_background"
             app:spinner_popup_height="@dimen/_200sdp"
             app:spinner_popup_animation="dropdown"
             app:spinner_popup_elevation="14dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/powerSpinnerSupplier"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:background="@drawable/drawable_login_fingerprint">
+
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:text="تاریخ 1401/01/01"
+                />
+
+            <TextView
+                android:id="@+id/textViewNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:text="@string/pageNumberDot"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewDate"
+                app:layout_constraintEnd_toStartOf="@id/textViewNumber"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                android:gravity="end"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerProduct"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutNumber"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/drawable_border"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

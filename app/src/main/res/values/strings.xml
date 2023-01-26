@@ -24,6 +24,8 @@
     <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
     <string name="saveReceipt">ثبت رسید</string>
     <string name="chooseSupplier">انتخاب تامین کننده</string>
+    <string name="pageNumberDot">شماره برگه :</string>
+    <string name="productCodeDot">کد کالا :</string>
 
 
     <string name="logoDescription">logoDescription</string>

@@ -1,10 +1,8 @@
 package com.hoomanholding.jpawarehose.model.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
+import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
 
 /**
  * Create by Mehrdad on 1/18/2023
@@ -18,6 +16,10 @@ interface ProductDao {
 
     @Query("SELECT * FROM Product")
     fun getProducts(): List<ProductsEntity>
+
+    @Transaction//join product table with brand table
+    @Query("SELECT * FROM Product WHERE brandId != :brandId")
+    fun getProductByIgnoreBrandId(brandId : Long) : List<ProductWithBrandModel>
 
     @Query("DELETE FROM Product")
     fun deleteAll()
