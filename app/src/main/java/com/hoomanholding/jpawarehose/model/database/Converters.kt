@@ -28,8 +28,8 @@ class Converters {
 
     //---------------------------------------------------------------------------------------------- fromString
     @TypeConverter
-    fun fromString(value: String?): List<Int>? {
-        val listType: Type = object : TypeToken<List<Int>?>() {}.type
+    fun fromString(value: String?): List<Long>? {
+        val listType: Type = object : TypeToken<List<Long>?>() {}.type
         return Gson().fromJson(value, listType)
     }
     //---------------------------------------------------------------------------------------------- fromString
@@ -37,7 +37,7 @@ class Converters {
 
     //---------------------------------------------------------------------------------------------- fromList
     @TypeConverter
-    fun fromList(list: List<Int>?): String? {
+    fun fromList(list: List<Long>?): String? {
         val gson = Gson()
         return gson.toJson(list)
     }

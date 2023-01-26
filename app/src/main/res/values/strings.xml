@@ -12,8 +12,18 @@
     <string name="password">رمز ورود</string>
     <string name="enter">ورود</string>
     <string name="welcome">خوش آمدید.</string>
-    <string name="loginDescription">اپلیکیشن هومن هلدینگ ابزاری برای \n آسانتر شدن تمامی فرآیندهایتان</string>
+    <string name="loginDescription">اپلیکیشن هومن هلدینگ ابزاری برای آسانتر شدن تمامی فرآیندهایتان</string>
     <string name="loginByBiometric">ورود با اثر انگشت</string>
+    <string name="update">بروزرسانی اطلاعات</string>
+    <string name="updateOn">بروزرسانی براساس :</string>
+    <string name="products">کالاها</string>
+    <string name="locations">لوکیشن</string>
+    <string name="brands">برندها</string>
+    <string name="suppliers">تامین کننده ها</string>
+    <string name="doUpdate">انجام بروزرسانی</string>
+    <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
+    <string name="saveReceipt">ثبت رسید</string>
+    <string name="chooseSupplier">انتخاب تامین کننده</string>
 
 
     <string name="logoDescription">logoDescription</string>

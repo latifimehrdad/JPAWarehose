@@ -14,7 +14,9 @@ import com.hoomanholding.jpawarehose.model.database.entity.*
         SupplierEntity::class,
         ProductsEntity::class,
         BrandEntity::class,
-        ReceiptEntity::class],
+        ReceiptEntity::class,
+        ReceiptDetailEntity::class,
+        LocationEntity::class],
     version = 1, exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -25,4 +27,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun brandDao(): BrandDao
     abstract fun receiptDao(): ReceiptDao
+    abstract fun receiptDetailDao() : ReceiptDetailDao
+    abstract fun locationDao() : LocationDao
 }

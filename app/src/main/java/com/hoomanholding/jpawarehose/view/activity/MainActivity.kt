@@ -2,6 +2,7 @@ package com.hoomanholding.jpawarehose.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -44,13 +45,20 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
         navController = navHostFragment?.navController
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.label != null)
                 showAndHideBottomNavigationMenu(destination.label.toString())
+        }
+
+        binding.imageViewUpdate.setOnClickListener {
+            navController?.navigate(R.id.action_goto_UpdateFragment)
+        }
+
+        binding.imageViewShelf.setOnClickListener {
+            navController?.navigate(R.id.action_goto_SaveReceiptFragment)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -61,8 +69,10 @@ class MainActivity : AppCompatActivity() {
         when (fragmentLabel) {
             "SplashFragment",
             "LoginFragment" -> {
+                binding.constraintLayoutFooterMenu.visibility = View.GONE
             }
             else -> {
+                binding.constraintLayoutFooterMenu.visibility = View.VISIBLE
             }
         }
     }

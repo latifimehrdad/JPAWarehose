@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "Supplier")
 data class SupplierEntity(
-    val codeTaminKonandeh : Int,
+    val codeTaminKonandeh : Long,
     val nameTaminKonandeh : String?
 ) {
     @PrimaryKey(autoGenerate = false)
-    var id : Int = 0
+    var id : Long = 0
 }

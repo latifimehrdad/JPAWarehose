@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hoomanholding.jpawarehose.viewmodel.UpdateViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryColorVariant"
+        android:padding="@dimen/_20sdp">
+
+
+        <TextView
+            android:id="@+id/textViewUpdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.5"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/update"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:background="@drawable/drawable_border"/>
+
+
+        <TextView
+            android:id="@+id/textViewUpdateOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewUpdate"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/updateOn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"/>
+
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewUpdateOn"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
+            android:background="@drawable/drawable_border"
+            android:layoutDirection="rtl"
+            android:columnCount="3">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:textColor="@color/primaryColor"
+                android:text="@string/brands"
+                android:textSize="@dimen/_10sdp"
+                android:checked="@={viewModel.brandLiveData}"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/products"
+                android:textSize="@dimen/_10sdp"
+                android:checked="@={viewModel.productLiveData}"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/locations"
+                android:textSize="@dimen/_10sdp"
+                android:checked="@={viewModel.locationLiveData}"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
+                android:text="@string/suppliers"
+                android:textSize="@dimen/_10sdp"
+                android:checked="@={viewModel.supplierLiveData}"/>
+
+        </GridLayout>
+
+
+        <com.hoomanholding.jpawarehose.view.custom.JpaButton
+            android:id="@+id/buttonDoUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/gridLayout"
+            app:layout_constraintTop_toBottomOf="@id/gridLayout"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:backgroundTint="@color/primaryColor"
+            android:textSize="@dimen/_10sdp"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingBottom="@dimen/_7sdp"
+            android:fontFamily="@font/kalameh_semibold"
+            app:cornerRadius="@dimen/_30sdp"
+            android:textColor="@color/primaryColorVariant"
+            android:text='@string/doUpdate'
+            app:icon="@drawable/ic_refresh"
+            app:iconGravity="end"
+            app:iconTint="@color/primaryColorVariant"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

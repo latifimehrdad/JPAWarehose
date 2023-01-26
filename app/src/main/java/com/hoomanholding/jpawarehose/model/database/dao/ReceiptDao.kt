@@ -18,20 +18,20 @@ interface ReceiptDao {
     fun insertReceipt(receipts : List<ReceiptEntity>)
 
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertReceiptDetail(receiptDetails : List<ReceiptDetailEntity>)
+/*    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertReceiptDetail(receiptDetails : List<ReceiptDetailEntity>)*/
 
     @Query("Select * From Receipt")
     fun getReceipt() : List<ReceiptEntity>
 
 
-    @Query("Select * From ReceiptDetail")
-    fun getReceiptDetail() : List<ReceiptDetailEntity>
+/*    @Query("Select * From ReceiptDetail")
+    fun getReceiptDetail() : List<ReceiptDetailEntity>*/
 
 
     @Query("DELETE FROM Receipt")
     fun deleteAllReceipt()
 
-    @Query("DELETE FROM ReceiptDetail")
-    fun deleteAllReceiptDetail()
+/*    @Query("DELETE FROM ReceiptDetail")
+    fun deleteAllReceiptDetail()*/
 }

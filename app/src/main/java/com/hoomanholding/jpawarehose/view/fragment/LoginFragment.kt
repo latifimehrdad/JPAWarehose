@@ -171,11 +171,11 @@ class LoginFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- checkEmpty
     private fun checkEmpty(): Boolean {
         if (loginViewModel.userName.value.isNullOrEmpty()) {
-            binding.edittextUserName.error = getString(R.string.userNameIsEmpty)
+            binding.textInputLayoutUserName.error = getString(R.string.userNameIsEmpty)
             return false
         }
         if (loginViewModel.password.value.isNullOrEmpty()) {
-            binding.editTextPassword.error = getString(R.string.passcodeIsEmpty)
+            binding.textInputLayoutPasscode.error = getString(R.string.passcodeIsEmpty)
             return false
         }
         return true
@@ -186,10 +186,10 @@ class LoginFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- startLoading
     private fun startLoading() {
         hideKeyboard()
-        binding.edittextUserName.error = null
-        binding.editTextPassword.error = null
-        binding.edittextUserName.isEnabled = false
-        binding.editTextPassword.isEnabled = false
+        binding.textInputLayoutUserName.error = null
+        binding.textInputLayoutPasscode.error = null
+        binding.textInputEditTextUserName.isEnabled = false
+        binding.textInputEditTextPasscode.isEnabled = false
         binding.buttonLogin.startLoading(getString(R.string.bePatient))
     }
     //---------------------------------------------------------------------------------------------- startLoading
@@ -197,8 +197,8 @@ class LoginFragment : Fragment() {
 
     //---------------------------------------------------------------------------------------------- stopLoading
     private fun stopLoading() {
-        binding.edittextUserName.isEnabled = true
-        binding.editTextPassword.isEnabled = true
+        binding.textInputEditTextUserName.isEnabled = true
+        binding.textInputEditTextPasscode.isEnabled = true
         binding.buttonLogin.stopLoading()
     }
     //---------------------------------------------------------------------------------------------- stopLoading

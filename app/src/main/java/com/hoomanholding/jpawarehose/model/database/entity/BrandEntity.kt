@@ -15,5 +15,5 @@ data class BrandEntity(
     val b : Int
 ) {
     @PrimaryKey(autoGenerate = false)
-    var id : Int = 0
+    var id : Long = 0
 }

@@ -2,6 +2,7 @@ package com.hoomanholding.jpawarehose.model.api
 
 import com.hoomanholding.jpawarehose.model.data.request.LoginRequestModel
 import com.hoomanholding.jpawarehose.model.data.response.brand.BrandResponseModel
+import com.hoomanholding.jpawarehose.model.data.response.location.LocationResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.product.ProductResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.receipt.ReceiptResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.supplier.SupplierResponseModel
@@ -60,4 +61,10 @@ interface Api {
     suspend fun requestGetReceipts(
         @Header("Authorization") token : String
     ) : Response<ReceiptResponseModel>
+
+
+    @GET("${v1}/BaseData/basedata-get-locations")
+    suspend fun requestGetLocations(
+        @Header("Authorization") token : String
+    ) : Response<LocationResponseModel>
 }

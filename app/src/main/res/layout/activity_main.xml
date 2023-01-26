@@ -8,15 +8,78 @@
         android:id="@+id/constraintLayoutParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.activity.MainActivity">
+        tools:context=".view.activity.MainActivity"
+        android:background="@color/primaryColorVariant">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayoutFooterMenu"
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_host" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutFooterMenu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/drawable_main_menu">
+
+            <ImageView
+                android:id="@+id/imageViewReport"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imageViewUpdate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="@dimen/_9sdp"
+                android:src="@drawable/ic_report"/>
+
+
+            <ImageView
+                android:id="@+id/imageViewUpdate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/imageViewReport"
+                app:layout_constraintEnd_toStartOf="@id/imageViewHome"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="@dimen/_9sdp"
+                android:src="@drawable/ic_update"/>
+
+
+
+            <ImageView
+                android:id="@+id/imageViewHome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/imageViewUpdate"
+                app:layout_constraintEnd_toStartOf="@id/imageViewShelf"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="@dimen/_9sdp"
+                android:src="@drawable/ic_home"/>
+
+            <ImageView
+                android:id="@+id/imageViewShelf"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/imageViewHome"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="@dimen/_9sdp"
+                android:src="@drawable/ic_shelf"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

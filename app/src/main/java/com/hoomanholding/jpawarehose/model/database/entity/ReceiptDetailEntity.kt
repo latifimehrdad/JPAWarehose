@@ -15,5 +15,5 @@ data class ReceiptDetailEntity(
     var tedad : Int
 ) {
     @PrimaryKey(autoGenerate = false)
-    var id : Int = 0
+    var id : Long = 0
 }

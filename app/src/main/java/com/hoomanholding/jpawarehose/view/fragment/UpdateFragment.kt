@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.hoomanholding.jpawarehose.databinding.FragmentHomeBinding
+import androidx.fragment.app.viewModels
+import com.hoomanholding.jpawarehose.databinding.FragmentUpdateBinding
+import com.hoomanholding.jpawarehose.view.activity.MainActivity
+import com.hoomanholding.jpawarehose.viewmodel.UpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -13,18 +16,20 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class UpdateFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
 
+    private val updateViewModel : UpdateViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        binding.viewModel = updateViewModel
         return binding.root
     }
     //---------------------------------------------------------------------------------------------- onCreateView
@@ -34,6 +39,19 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+        updateViewModel.successLiveData.observe(viewLifecycleOwner) {
+            binding.buttonDoUpdate.stopLoading()
+            (activity as MainActivity).showMessage(it)
+        }
+
+
+        binding.buttonDoUpdate.setOnClickListener {
+            if (binding.buttonDoUpdate.isLoading)
+                return@setOnClickListener
+            binding.buttonDoUpdate.startLoading("شکیبا باشید")
+            updateViewModel.requestGetData()
+        }
+
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 

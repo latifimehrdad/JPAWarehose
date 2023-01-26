@@ -11,7 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/drawable_splash_gradiant">
+        android:background="@color/primaryColorVariant">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,39 +36,12 @@
 
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/textViewWelcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/frameLayoutLogo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/white"
-                android:text="@string/welcome"
-                android:fontFamily="@font/kalameh_semibold"/>
-
-            <TextView
-                android:id="@+id/textViewDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/textViewWelcome"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_9sdp"
-                android:textColor="@color/loginTextColor"
-                android:text="@string/loginDescription"
-                android:fontFamily="@font/kalameh_light"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayoutLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+                app:layout_constraintTop_toBottomOf="@id/frameLayoutLogo"
                 android:layout_marginTop="@dimen/_20sdp">
 
                 <ScrollView
@@ -82,96 +55,76 @@
                         android:layout_marginHorizontal="@dimen/_20sdp">
 
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            app:cardCornerRadius="@dimen/_30sdp"
-                            app:layout_constraintTop_toTopOf="@id/cardViewUserName"
-                            app:layout_constraintBottom_toBottomOf="@id/cardViewUserName"
-                            app:cardElevation="1dp">
-
-                            <EditText
-                                android:id="@+id/edittextUserName"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/white"
-                                android:hint="@string/userName"
-                                android:layout_marginEnd="@dimen/_55sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/kalameh_light"
-                                android:textSize="@dimen/_10sdp"
-                                android:textColor="@color/primaryColor"
-                                android:text="@={viewModel.userName}"
-                                android:autofillHints="none"
-                                android:inputType="none" />
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardViewUserName"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputLayoutUserName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:cardCornerRadius="@dimen/_30sdp"
-                            app:cardElevation="3dp">
+                            android:layout_marginTop="@dimen/_15sdp"
+                            app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+                            app:boxCornerRadiusBottomStart="@dimen/_20sdp"
+                            app:boxCornerRadiusTopEnd="@dimen/_20sdp"
+                            app:boxCornerRadiusTopStart="@dimen/_20sdp"
+                            app:boxStrokeColor="@color/primaryColor"
+                            app:hintTextColor="@color/dismiss"
+                            android:textColorHint="@color/dismiss"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                            <ImageView
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/textInputEditTextUserName"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginVertical="@dimen/_15sdp"
-                                android:layout_marginHorizontal="@dimen/_15sdp"
-                                android:src="@drawable/ic_user"
-                                android:contentDescription="@string/userNameDescription" />
-
-                        </androidx.cardview.widget.CardView>
-
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            app:cardCornerRadius="@dimen/_30sdp"
-                            app:layout_constraintTop_toTopOf="@id/cardViewPassword"
-                            app:layout_constraintBottom_toBottomOf="@id/cardViewPassword"
-                            app:cardElevation="1dp">
-
-                            <EditText
-                                android:id="@+id/editTextPassword"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/white"
-                                android:hint="@string/password"
-                                android:layout_marginEnd="@dimen/_55sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/kalameh_light"
+                                android:layout_height="wrap_content"
+                                android:gravity="start|center_vertical"
+                                android:hint="@string/userName"
+                                android:inputType="none"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:textColor="@color/primaryColor"
                                 android:textSize="@dimen/_10sdp"
-                                android:gravity="center_vertical|end"
+                                android:text="@={viewModel.userName}"
+                                android:fontFamily="@font/kalameh_light"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputLayoutPasscode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+                            app:boxCornerRadiusBottomStart="@dimen/_20sdp"
+                            app:boxCornerRadiusTopEnd="@dimen/_20sdp"
+                            app:boxCornerRadiusTopStart="@dimen/_20sdp"
+                            app:passwordToggleEnabled="true"
+                            android:layoutDirection="rtl"
+                            app:startIconDrawable="@drawable/ic_pass"
+                            app:startIconTint="@color/primaryColor"
+                            app:passwordToggleTint="@color/primaryColor"
+                            app:boxStrokeColor="@color/primaryColor"
+                            app:hintTextColor="@color/primaryColor"
+                            android:textColorHint="@color/dismiss"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/textInputEditTextPasscode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start|center_vertical"
+                                android:inputType="textPassword"
+                                android:hint="@string/password"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:textSize="@dimen/_10sdp"
                                 android:textColor="@color/primaryColor"
                                 android:text="@={viewModel.password}"
-                                android:autofillHints="none"
-                                android:inputType="textPassword" />
+                                android:fontFamily="@font/kalameh_light"/>
 
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardViewPassword"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            app:layout_constraintTop_toBottomOf="@id/cardViewUserName"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:cardCornerRadius="@dimen/_30sdp"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            app:cardElevation="3dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginVertical="@dimen/_15sdp"
-                                android:layout_marginHorizontal="@dimen/_15sdp"
-                                android:src="@drawable/ic_pass"
-                                android:contentDescription="@string/passwordDescription" />
-
-                        </androidx.cardview.widget.CardView>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <com.hoomanholding.jpawarehose.view.custom.JpaButton
                             android:id="@+id/buttonLogin"
@@ -179,17 +132,18 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="@id/cardViewFingerPrint"
                             app:layout_constraintEnd_toEndOf="@id/cardViewFingerPrint"
-                            app:layout_constraintTop_toBottomOf="@id/cardViewPassword"
+                            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPasscode"
                             android:layout_marginTop="@dimen/_15sdp"
+                            android:backgroundTint="@color/primaryColor"
                             android:textSize="@dimen/_12sdp"
                             android:paddingTop="@dimen/_7sdp"
                             android:paddingBottom="@dimen/_7sdp"
                             android:fontFamily="@font/kalameh_semibold"
                             app:cornerRadius="@dimen/_30sdp"
-                            android:textColor="@color/white"
+                            android:textColor="@color/primaryColorVariant"
                             android:text='@string/enter' />
 
-                        <androidx.cardview.widget.CardView
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cardViewFingerPrint"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_35sdp"
@@ -197,13 +151,14 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="@dimen/_15sdp"
-                            app:cardCornerRadius="@dimen/_30sdp"
-                            app:cardBackgroundColor="@color/primaryColor">
+                            android:background="@drawable/drawable_login_fingerprint">
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_finger_print"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 android:alpha="0.15"
                                 android:contentDescription="@string/fingerPrintDescription" />
 
@@ -211,13 +166,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/white"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 android:textSize="@dimen/_12sdp"
                                 android:paddingHorizontal="@dimen/_20sdp"
                                 android:fontFamily="@font/kalameh_regular"
                                 android:gravity="center"
                                 android:text="@string/loginByBiometric"/>
 
-                        </androidx.cardview.widget.CardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <View
                             android:id="@+id/viewLine1"

@@ -60,6 +60,21 @@ class DataBaseModule {
 
 
 
+    //---------------------------------------------------------------------------------------------- providerReceiptDetailDao
+    @Provides
+    @Singleton
+    fun providerReceiptDetailDao(appDatabase: AppDatabase) = appDatabase.receiptDetailDao()
+    //---------------------------------------------------------------------------------------------- providerReceiptDetailDao
+
+
+    //---------------------------------------------------------------------------------------------- providerLocationDao
+    @Provides
+    @Singleton
+    fun providerLocationDao(appDatabase: AppDatabase) = appDatabase.locationDao()
+    //---------------------------------------------------------------------------------------------- providerLocationDao
+
+
+
     //---------------------------------------------------------------------------------------------- provideAppDatabase
     @Provides
     @Singleton

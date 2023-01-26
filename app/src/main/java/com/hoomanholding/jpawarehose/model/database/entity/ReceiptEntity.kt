@@ -17,5 +17,5 @@ data class ReceiptEntity(
     val tozihat : String?
 ) {
     @PrimaryKey(autoGenerate = false)
-    var id : Int = 0
+    var id : Long = 0
 }

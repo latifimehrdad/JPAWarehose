@@ -21,10 +21,21 @@ class SupplierRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetSuppliers
 
 
+    //---------------------------------------------------------------------------------------------- getSupplierFromDB
+    fun getSupplierFromDB() = supplierDao.getSuppliers()
+    //---------------------------------------------------------------------------------------------- getSupplierFromDB
+
+
     //---------------------------------------------------------------------------------------------- insertSuppliers
     fun insertSuppliers(supplies: List<SupplierEntity>) {
         supplierDao.insertSuppliers(supplies)
     }
     //---------------------------------------------------------------------------------------------- insertSuppliers
 
+
+    //---------------------------------------------------------------------------------------------- deleteAllSuppliers
+    fun deleteAllSuppliers() {
+        supplierDao.deleteAll()
+    }
+    //---------------------------------------------------------------------------------------------- deleteAllSuppliers
 }

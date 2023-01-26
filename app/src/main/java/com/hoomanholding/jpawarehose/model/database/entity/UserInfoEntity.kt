@@ -13,9 +13,9 @@ data class UserInfoEntity(
     val userName : String?,
     val fullName : String?,
     val personnelNumber : String?,
-    val rolesId : List<Int>?,
+    val rolesId : List<Long>?,
 ) {
     @PrimaryKey(autoGenerate = false)
-    var id : Int = 0
+    var id : Long = 0
 }
 
