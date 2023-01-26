@@ -1,5 +1,6 @@
 package com.hoomanholding.jpawarehose.view.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentHomeBinding
 import com.hoomanholding.jpawarehose.databinding.FragmentSaveReceiptBinding
+import com.hoomanholding.jpawarehose.model.database.entity.BrandEntity
+import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
 import com.hoomanholding.jpawarehose.viewmodel.SaveReceiptViewModel
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
@@ -25,7 +28,7 @@ class SaveReceiptFragment : Fragment() {
     private var _binding: FragmentSaveReceiptBinding? = null
     private val binding get() = _binding!!
 
-    private val saveReceiptViewModel : SaveReceiptViewModel by viewModels()
+    private val saveReceiptViewModel: SaveReceiptViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onCreateView(
@@ -43,10 +46,9 @@ class SaveReceiptFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         setListener()
-        initOriginSpinner()
+        initBrandsSpinner()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
-
 
 
     //---------------------------------------------------------------------------------------------- setListener
@@ -56,57 +58,30 @@ class SaveReceiptFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- setListener
 
 
+    //---------------------------------------------------------------------------------------------- initBrandsSpinner
+    private fun initBrandsSpinner() {
 
-    //---------------------------------------------------------------------------------------------- initOriginSpinner
-    private fun initOriginSpinner() {
-
-            val items = saveReceiptViewModel.getSuppliers().map {
-                it.nameTaminKonandeh?.let { name ->
-                    IconSpinnerItem(name)
-                }
+        val brands = saveReceiptViewModel.getBrands()
+        val items = brands.map {
+            it.brandName?.let { name ->
+                IconSpinnerItem(name)
             }
+        }
 
-            binding.powerSpinnerSupplier.apply {
-                setSpinnerAdapter(IconSpinnerAdapter(this))
-                setItems(items)
-                getSpinnerRecyclerView().layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                lifecycleOwner = viewLifecycleOwner
+        binding.powerSpinnerBrands.apply {
+            setSpinnerAdapter(SupplierSpinnerAdapter(this))
+            setItems(brands)
+            getSpinnerRecyclerView().layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            lifecycleOwner = viewLifecycleOwner
 
-                setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, newIndex, _ ->
-                    binding.powerSpinnerSupplier.showArrow = true
-                    binding.powerSpinnerSupplier.setTextColor()
-                }
+            setOnSpinnerItemSelectedListener<BrandEntity> { _, _, newIndex, _ ->
+                binding.powerSpinnerBrands.showArrow = true
+                val item = brands[newIndex]
             }
-    }
-    //---------------------------------------------------------------------------------------------- initOriginSpinner
-
-
-
-/*
-    //---------------------------------------------------------------------------------------------- powerSpinnerSupplierClick
-    private fun powerSpinnerSupplierClick() {
-        if (context == null)
-            return
-        taxiReservationViewModel.getOriginMarker()?.let {
-            ConfirmDialog(requireContext(),
-                ConfirmDialog.ConfirmType.DELETE,
-                getString(R.string.originLocationIsSelect),
-                object : ConfirmDialog.Click {
-                    override fun clickYes() {
-                        activity?.onBackPressedDispatcher?.onBackPressed()
-                    }
-                }).show()
-        } ?: run {
-            if (binding.powerSpinnerOrigin.isShowing)
-                binding.powerSpinnerOrigin.dismiss()
-            else
-                binding.powerSpinnerOrigin.show()
         }
     }
-    //---------------------------------------------------------------------------------------------- powerSpinnerSupplierClick
-
-*/
+    //---------------------------------------------------------------------------------------------- initBrandsSpinner
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

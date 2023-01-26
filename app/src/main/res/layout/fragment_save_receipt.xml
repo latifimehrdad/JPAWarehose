@@ -26,10 +26,10 @@
             android:background="@drawable/drawable_border"/>
 
         <com.skydoves.powerspinner.PowerSpinnerView
-            android:id="@+id/powerSpinnerSupplier"
+            android:id="@+id/powerSpinnerBrands"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/kalameh_light"
             android:background="@drawable/drawable_login_fingerprint"
             android:gravity="center"
@@ -48,7 +48,6 @@
             app:spinner_divider_color="@color/dismiss"
             app:spinner_divider_show="true"
             app:spinner_divider_size="0.4dp"
-            app:spinner_item_height="46dp"
             app:spinner_popup_background="@drawable/drawable_border"
             app:spinner_popup_height="@dimen/_200sdp"
             app:spinner_popup_animation="dropdown"
