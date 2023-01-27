@@ -72,7 +72,6 @@ class SupplierSpinnerAdapter(
         if (index == NO_SELECTED_INDEX) return
         val item = spinnerItems[index]
         spinnerView.compoundDrawablePadding = spinnerView.compoundDrawablePadding
-        spinnerView.applyCompoundDrawables(spinnerView, item)
         val oldIndex = this.index
         this.index = index
         this.spinnerView.notifyItemSelected(index, item.nameTaminKonandeh ?: "")
@@ -95,7 +94,6 @@ class SupplierSpinnerAdapter(
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, spinnerView.textSize)
                 setTextColor(spinnerView.currentTextColor)
                 compoundDrawablePadding = spinnerView.compoundDrawablePadding
-                applyCompoundDrawables(spinnerView, item)
                 binding.root.setPadding(
                     spinnerView.paddingLeft,
                     spinnerView.paddingTop,
@@ -109,27 +107,4 @@ class SupplierSpinnerAdapter(
         }
     }
 
-    @JvmSynthetic
-    internal fun AppCompatTextView.applyCompoundDrawables(
-        spinnerView: PowerSpinnerView,
-        item: SupplierEntity
-    ) {
-/*        val icon = item.iconRes?.let {
-            ResourcesCompat.getDrawable(spinnerView.resources, it, null)
-        } ?: item.icon
-        val start = compoundDrawablesRelative[0]
-        val top = compoundDrawablesRelative[1]
-        val end = compoundDrawablesRelative[2]
-        val bottom = compoundDrawablesRelative[3]
-        when (item.iconGravity) {
-            Gravity.START ->
-                setCompoundDrawablesRelativeWithIntrinsicBounds(icon, top, end, bottom)
-            Gravity.END ->
-                setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, icon, bottom)
-            Gravity.TOP ->
-                setCompoundDrawablesRelativeWithIntrinsicBounds(start, icon, end, bottom)
-            Gravity.BOTTOM ->
-                setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, icon)
-        }*/
-    }
 }

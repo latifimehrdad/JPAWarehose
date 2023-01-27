@@ -14,6 +14,7 @@ import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
 import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
 import com.hoomanholding.jpawarehose.view.adapter.ProductSaveReceiptAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
+import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolder
 import com.hoomanholding.jpawarehose.viewmodel.SaveReceiptViewModel
 import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,8 @@ class SaveReceiptFragment : Fragment() {
     lateinit var loadingManager : LoadingManager
 
     private val saveReceiptViewModel: SaveReceiptViewModel by viewModels()
+
+    private var productAdapter : ProductSaveReceiptAdapter? = null
 
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onCreateView(
@@ -68,6 +71,9 @@ class SaveReceiptFragment : Fragment() {
     private fun observeLiveData() {
         saveReceiptViewModel.productLiveData.observe(viewLifecycleOwner){
             setProductAdapter(it)
+        }
+        saveReceiptViewModel.adapterNotifyChangeLiveData.observe(viewLifecycleOwner) {
+            productAdapter?.notifyItemChanged(it)
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -120,15 +126,36 @@ class SaveReceiptFragment : Fragment() {
         if (context == null)
             return
         loadingManager.stopLoadingRecycler()
-        val adapter = ProductSaveReceiptAdapter(products)
+        productAdapter = ProductSaveReceiptAdapter(products, clickProduct())
         val manager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
             false)
-        binding.recyclerProduct.adapter = adapter
+        binding.recyclerProduct.adapter = productAdapter
         binding.recyclerProduct.layoutManager = manager
     }
     //---------------------------------------------------------------------------------------------- setProductAdapter
+
+
+    //---------------------------------------------------------------------------------------------- clickProduct
+    private fun clickProduct() = object : ProductSaveReceiptHolder.Click{
+        override fun addCarton(position: Int) {
+            saveReceiptViewModel.addCarton(position)
+        }
+
+        override fun addPacket(position: Int) {
+            saveReceiptViewModel.addPacket(position)
+        }
+
+        override fun minusCarton(position: Int) {
+            saveReceiptViewModel.minusCarton(position)
+        }
+
+        override fun minusPacket(position: Int) {
+            saveReceiptViewModel.minusPacket(position)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- clickProduct
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

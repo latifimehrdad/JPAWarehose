@@ -26,6 +26,7 @@ class SaveReceiptViewModel @Inject constructor(
 ) : JpaViewModel(){
 
     val productLiveData = MutableLiveData<List<ProductWithBrandModel>>()
+    var adapterNotifyChangeLiveData = MutableLiveData<Int>()
 
     //---------------------------------------------------------------------------------------------- getSuppliers
     fun getSuppliers() = supplierRepository.getSupplierFromDB()
@@ -45,5 +46,57 @@ class SaveReceiptViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getProductByIgnoreBrandId
+
+
+    //---------------------------------------------------------------------------------------------- addCarton
+    fun addCarton(position: Int) {
+        productLiveData.value?.get(position)?.productsEntity?.let {
+            val count = it.cartonCount + 1
+            it.cartonCount = count
+            productRepository.updateProduct(it)
+            adapterNotifyChangeLiveData.value = position
+        }
+    }
+    //---------------------------------------------------------------------------------------------- addCarton
+
+
+    //---------------------------------------------------------------------------------------------- addPacket
+    fun addPacket(position: Int) {
+        productLiveData.value?.get(position)?.productsEntity?.let {
+            val count = it.packetCount + 1
+            it.packetCount = count
+            productRepository.updateProduct(it)
+            adapterNotifyChangeLiveData.value = position
+        }
+    }
+    //---------------------------------------------------------------------------------------------- addPacket
+
+
+    //---------------------------------------------------------------------------------------------- minusCarton
+    fun minusCarton(position: Int) {
+        productLiveData.value?.get(position)?.productsEntity?.let {
+            if (it.cartonCount == 0)
+                return
+            val count = it.cartonCount - 1
+            it.cartonCount = count
+            productRepository.updateProduct(it)
+            adapterNotifyChangeLiveData.value = position
+        }
+    }
+    //---------------------------------------------------------------------------------------------- minusCarton
+
+
+    //---------------------------------------------------------------------------------------------- minusPacket
+    fun minusPacket(position: Int) {
+        productLiveData.value?.get(position)?.productsEntity?.let {
+            if (it.packetCount == 0)
+                return
+            val count = it.packetCount - 1
+            it.packetCount = count
+            productRepository.updateProduct(it)
+            adapterNotifyChangeLiveData.value = position
+        }
+    }
+    //---------------------------------------------------------------------------------------------- minusPacket
 
 }

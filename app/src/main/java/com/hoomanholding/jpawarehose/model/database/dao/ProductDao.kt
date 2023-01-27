@@ -14,6 +14,9 @@ interface ProductDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProducts(products : List<ProductsEntity>)
 
+    @Update
+    fun updateProduct(productsEntity: ProductsEntity)
+
     @Query("SELECT * FROM Product")
     fun getProducts(): List<ProductsEntity>
 

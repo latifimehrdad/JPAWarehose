@@ -12,7 +12,8 @@ import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolde
  * Create by Mehrdad on 1/27/2023
  */
 class ProductSaveReceiptAdapter(
-    private val products : List<ProductWithBrandModel>
+    private val products : List<ProductWithBrandModel>,
+    private val click: ProductSaveReceiptHolder.Click
 ) : RecyclerView.Adapter<ProductSaveReceiptHolder>() {
 
     private var inflater: LayoutInflater? = null
@@ -23,14 +24,14 @@ class ProductSaveReceiptAdapter(
             inflater = LayoutInflater.from(viewGroup.context)
         return ProductSaveReceiptHolder(ItemProductSaveReceiptBinding.inflate(
             inflater!!,viewGroup,false
-        ))
+        ), click)
     }
     //---------------------------------------------------------------------------------------------- onCreateViewHolder
 
 
     //---------------------------------------------------------------------------------------------- onBindViewHolder
     override fun onBindViewHolder(holder: ProductSaveReceiptHolder, position: Int) {
-        holder.bing(products[position])
+        holder.bing(products[position], position)
     }
     //---------------------------------------------------------------------------------------------- onBindViewHolder
 

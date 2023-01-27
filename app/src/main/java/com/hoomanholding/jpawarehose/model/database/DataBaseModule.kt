@@ -75,6 +75,14 @@ class DataBaseModule {
 
 
 
+    //---------------------------------------------------------------------------------------------- providerSaveReceiptDap
+    @Provides
+    @Singleton
+    fun providerSaveReceiptDap(appDatabase: AppDatabase) = appDatabase.saveReceiptDao()
+    //---------------------------------------------------------------------------------------------- providerSaveReceiptDap
+
+
+
     //---------------------------------------------------------------------------------------------- provideAppDatabase
     @Provides
     @Singleton

@@ -26,6 +26,9 @@
     <string name="chooseSupplier">انتخاب تامین کننده</string>
     <string name="pageNumberDot">شماره برگه :</string>
     <string name="productCodeDot">کد کالا :</string>
+    <string name="add">اضافه کردن</string>
+    <string name="carton">کارتن</string>
+    <string name="packet">بسته</string>
 
 
     <string name="logoDescription">logoDescription</string>
