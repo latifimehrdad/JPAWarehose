@@ -23,9 +23,7 @@ data class ProductsEntity(
     val productGroup3Name : String?,
     val productGroup4Name : String?,
     val tedadDarKarton : Int,
-    val tedadDarBasteh : Int,
-    var cartonCount : Int = 0,
-    var packetCount : Int = 0
+    val tedadDarBasteh : Int
 ) {
     @PrimaryKey(autoGenerate = false)
     var id : Long = 0

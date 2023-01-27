@@ -9,9 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSaveReceiptBinding
-import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
+import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
-import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
 import com.hoomanholding.jpawarehose.view.adapter.ProductSaveReceiptAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
 import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolder
@@ -122,7 +121,7 @@ class SaveReceiptFragment : Fragment() {
 
 
     //---------------------------------------------------------------------------------------------- setProductAdapter
-    private fun setProductAdapter(products : List<ProductWithBrandModel>) {
+    private fun setProductAdapter(products : List<ProductSaveReceiptEntity>) {
         if (context == null)
             return
         loadingManager.stopLoadingRecycler()

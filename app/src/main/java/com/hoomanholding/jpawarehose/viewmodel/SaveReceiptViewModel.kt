@@ -1,10 +1,11 @@
 package com.hoomanholding.jpawarehose.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
-import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
+import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
+import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.repository.BrandRepository
 import com.hoomanholding.jpawarehose.model.repository.ProductRepository
+import com.hoomanholding.jpawarehose.model.repository.ProductSaveReceiptRepository
 import com.hoomanholding.jpawarehose.model.repository.SupplierRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -21,11 +22,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SaveReceiptViewModel @Inject constructor(
     private val supplierRepository: SupplierRepository,
-    private val brandRepository: BrandRepository,
-    private val productRepository: ProductRepository
-) : JpaViewModel(){
+    private val productSaveReceiptRepository: ProductSaveReceiptRepository
+) : JpaViewModel() {
 
-    val productLiveData = MutableLiveData<List<ProductWithBrandModel>>()
+    val saveReceiptLiveData = MutableLiveData<SaveReceiptEntity?>(null)
+    val productLiveData = MutableLiveData<List<ProductSaveReceiptEntity>>()
     var adapterNotifyChangeLiveData = MutableLiveData<Int>()
 
     //---------------------------------------------------------------------------------------------- getSuppliers
@@ -33,16 +34,12 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getSuppliers
 
 
-    //---------------------------------------------------------------------------------------------- getBrands
-    fun getBrands() = brandRepository.getBrands()
-    //---------------------------------------------------------------------------------------------- getBrands
-
-
     //---------------------------------------------------------------------------------------------- getProductByIgnoreBrandId
-    fun getProductByIgnoreBrandId(ignoreBrandId : Long) {
+    fun getProductByIgnoreBrandId(ignoreBrandId: Long) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val product = productRepository.getProductByIgnoreBrandId(ignoreBrandId)
-            withContext(Main){ productLiveData.value = product }
+            val product =
+                productSaveReceiptRepository.getProductForSaveReceiptByIgnoreBrandId(ignoreBrandId)
+            withContext(Main) { productLiveData.value = product }
         }
     }
     //---------------------------------------------------------------------------------------------- getProductByIgnoreBrandId
@@ -50,10 +47,10 @@ class SaveReceiptViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- addCarton
     fun addCarton(position: Int) {
-        productLiveData.value?.get(position)?.productsEntity?.let {
+        productLiveData.value?.get(position)?.let {
             val count = it.cartonCount + 1
             it.cartonCount = count
-            productRepository.updateProduct(it)
+            productSaveReceiptRepository.updateProduct(it)
             adapterNotifyChangeLiveData.value = position
         }
     }
@@ -62,10 +59,10 @@ class SaveReceiptViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- addPacket
     fun addPacket(position: Int) {
-        productLiveData.value?.get(position)?.productsEntity?.let {
+        productLiveData.value?.get(position)?.let {
             val count = it.packetCount + 1
             it.packetCount = count
-            productRepository.updateProduct(it)
+            productSaveReceiptRepository.updateProduct(it)
             adapterNotifyChangeLiveData.value = position
         }
     }
@@ -74,12 +71,12 @@ class SaveReceiptViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- minusCarton
     fun minusCarton(position: Int) {
-        productLiveData.value?.get(position)?.productsEntity?.let {
+        productLiveData.value?.get(position)?.let {
             if (it.cartonCount == 0)
                 return
             val count = it.cartonCount - 1
             it.cartonCount = count
-            productRepository.updateProduct(it)
+            productSaveReceiptRepository.updateProduct(it)
             adapterNotifyChangeLiveData.value = position
         }
     }
@@ -88,12 +85,12 @@ class SaveReceiptViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- minusPacket
     fun minusPacket(position: Int) {
-        productLiveData.value?.get(position)?.productsEntity?.let {
+        productLiveData.value?.get(position)?.let {
             if (it.packetCount == 0)
                 return
             val count = it.packetCount - 1
             it.packetCount = count
-            productRepository.updateProduct(it)
+            productSaveReceiptRepository.updateProduct(it)
             adapterNotifyChangeLiveData.value = position
         }
     }

@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpawarehose.databinding.ItemProductSaveReceiptBinding
-import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
+import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.utility.CreateDrawableByBrand
 
 
@@ -27,12 +27,12 @@ class ProductSaveReceiptHolder(
     }
 
     //---------------------------------------------------------------------------------------------- bing
-    fun bing(product: ProductWithBrandModel, position : Int) {
+    fun bing(product: ProductSaveReceiptEntity, position : Int) {
         binding.item = product
 
         setListener(position)
 
-        if (product.productsEntity.cartonCount == 0 && product.productsEntity.packetCount == 0) {
+        if (product.cartonCount == 0 && product.packetCount == 0) {
             binding.materialButtonAdd.visibility = View.VISIBLE
             binding.textViewTotal.visibility = View.GONE
             binding.constraintLayoutCarton.visibility = View.GONE
@@ -45,7 +45,7 @@ class ProductSaveReceiptHolder(
         }
 
         val context = binding.root.context
-        val brand = product.brandEntity
+        val brand = product.productWithBrandModel.brandEntity
         val color = brand?.let {
             Color.rgb(it.r, it.g, it.b)
         } ?: run {

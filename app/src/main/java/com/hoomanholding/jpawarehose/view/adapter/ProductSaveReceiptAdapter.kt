@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpawarehose.databinding.ItemProductSaveReceiptBinding
+import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
 import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
 import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolder
@@ -12,7 +13,7 @@ import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolde
  * Create by Mehrdad on 1/27/2023
  */
 class ProductSaveReceiptAdapter(
-    private val products : List<ProductWithBrandModel>,
+    private val products : List<ProductSaveReceiptEntity>,
     private val click: ProductSaveReceiptHolder.Click
 ) : RecyclerView.Adapter<ProductSaveReceiptHolder>() {
 

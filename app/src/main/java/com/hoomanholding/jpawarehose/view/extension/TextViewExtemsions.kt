@@ -2,6 +2,7 @@ package com.hoomanholding.jpawarehose.view.extension
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
 import com.zar.core.tools.extensions.toSolarDate
 import java.time.LocalDateTime
@@ -18,10 +19,10 @@ fun TextView.setTitleAndValue(title : String, value : Any?){
             is Long -> "$value $title"
             is Int -> "$value $title"
             is LocalDateTime -> "$title ${value.toSolarDate()?.getSolarDate()}"
-            is ProductWithBrandModel -> {
-                val count = value.productsEntity.cartonCount *
-                        value.productsEntity.tedadDarKarton +
-                        value.productsEntity.packetCount
+            is ProductSaveReceiptEntity -> {
+                val count = value.cartonCount *
+                        value.productWithBrandModel.productsEntity.tedadDarKarton +
+                        value.packetCount
                 "$count $title"
             }
             else -> ""

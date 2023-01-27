@@ -3,6 +3,7 @@ package com.hoomanholding.jpawarehose.model.database
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
 import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
 import java.lang.reflect.Type
 import java.time.Instant
@@ -61,4 +62,23 @@ class Converters {
         return gson.toJson(list)
     }
     //---------------------------------------------------------------------------------------------- fromList
+
+
+    //---------------------------------------------------------------------------------------------- fromStringSupplier
+    @TypeConverter
+    fun fromStringSupplier(value: String?): SupplierEntity? {
+        val supplier: Type = object : TypeToken<SupplierEntity?>() {}.type
+        return Gson().fromJson(value, supplier)
+    }
+    //---------------------------------------------------------------------------------------------- fromStringSupplier
+
+
+    //---------------------------------------------------------------------------------------------- fromSupplier
+    @TypeConverter
+    fun fromSupplier(supplier: SupplierEntity?): String? {
+        val gson = Gson()
+        return gson.toJson(supplier)
+    }
+    //---------------------------------------------------------------------------------------------- fromSupplier
+
 }
