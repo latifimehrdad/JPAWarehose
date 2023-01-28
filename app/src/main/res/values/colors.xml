@@ -12,6 +12,7 @@
     <color name="primaryColorVariant">#061420</color>
 
     <color name="dismiss">#BCBCBC</color>
+    <color name="hint">#6E6D6D</color>
 
     <color name="mtrl_textinput_default_box_stroke_color">@color/primaryColor</color>
 

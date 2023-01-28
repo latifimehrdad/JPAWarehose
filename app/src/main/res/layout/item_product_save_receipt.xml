@@ -29,8 +29,9 @@
                 android:textSize="@dimen/_9sdp"
                 android:fontFamily="@font/kalameh_light"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 app:setTitle="@{@string/productCodeDot}"
-                app:setValue="@{item.productWithBrandModel.productsEntity.id}"/>
+                app:setValue="@{item.productWithBrandModel.productsEntity.codeKala}"/>
 
             <TextView
                 android:id="@+id/textViewName"

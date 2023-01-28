@@ -11,7 +11,7 @@ import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
 interface SaveReceiptDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSaveReceipts(supplies: SaveReceiptEntity)
+    fun insertSaveReceipts(saveReceipt: SaveReceiptEntity)
 
 
     @Query("SELECT * FROM SaveReceipt Limit 1")
@@ -19,4 +19,12 @@ interface SaveReceiptDao {
 
     @Query("DELETE FROM SaveReceipt")
     fun deleteAllRecord()
+
+
+    @Query("UPDATE SaveReceipt SET number = :number WHERE id = 1")
+    fun updateReceiptNumber(number : Long)
+
+    @Query("SELECT COUNT(id) FROM SaveReceipt")
+    fun getCount() : Int
+
 }

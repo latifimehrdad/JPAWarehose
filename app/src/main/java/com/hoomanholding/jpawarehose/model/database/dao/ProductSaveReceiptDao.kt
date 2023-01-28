@@ -1,6 +1,7 @@
 package com.hoomanholding.jpawarehose.model.database.dao
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
@@ -13,7 +14,7 @@ import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
 interface ProductSaveReceiptDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProductSaveReceipts(supplies: List<ProductSaveReceiptEntity>)
+    fun insertProductSaveReceipts(products: List<ProductSaveReceiptEntity>)
 
 
     @Query("SELECT * FROM ProductSaveReceipt")
@@ -24,4 +25,7 @@ interface ProductSaveReceiptDao {
 
     @Update
     fun updateProduct(productSaveReceiptEntity: ProductSaveReceiptEntity)
+
+    @RawQuery(observedEntities = [ProductSaveReceiptEntity::class])
+    fun search(query: SupportSQLiteQuery): List<ProductSaveReceiptEntity>
 }

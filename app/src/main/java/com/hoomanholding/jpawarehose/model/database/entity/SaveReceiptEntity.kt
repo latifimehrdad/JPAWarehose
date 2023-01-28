@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 data class SaveReceiptEntity(
     val supplierEntity: SupplierEntity,
     val date : String,
-    val number : Long
+    val number : Long?
 ) {
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0

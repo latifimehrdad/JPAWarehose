@@ -24,15 +24,19 @@
     <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
     <string name="saveReceipt">ثبت رسید</string>
     <string name="chooseSupplier">انتخاب تامین کننده</string>
+    <string name="pageNumber">شماره برگه</string>
     <string name="pageNumberDot">شماره برگه :</string>
     <string name="productCodeDot">کد کالا :</string>
     <string name="add">اضافه کردن</string>
     <string name="carton">کارتن</string>
     <string name="packet">بسته</string>
+    <string name="dateDot">تاریخ :</string>
+    <string name="search">جستجو</string>
 
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>
     <string name="passwordDescription">password</string>
     <string name="fingerPrintDescription">fingerprint</string>
+    <string name="receiptNumberHint">---</string>
 </resources>

@@ -25,13 +25,13 @@ interface ReceiptDao {
     fun getReceipt() : List<ReceiptEntity>
 
 
-/*    @Query("Select * From ReceiptDetail")
-    fun getReceiptDetail() : List<ReceiptDetailEntity>*/
+    @Query("Select * From ReceiptDetail")
+    fun getReceiptDetail() : List<ReceiptDetailEntity>
 
 
     @Query("DELETE FROM Receipt")
     fun deleteAllReceipt()
 
-/*    @Query("DELETE FROM ReceiptDetail")
-    fun deleteAllReceiptDetail()*/
+    @Query("DELETE FROM ReceiptDetail")
+    fun deleteAllReceiptDetail()
 }

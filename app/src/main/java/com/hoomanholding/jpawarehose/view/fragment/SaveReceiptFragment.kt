@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,9 @@ import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolde
 import com.hoomanholding.jpawarehose.viewmodel.SaveReceiptViewModel
 import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import javax.inject.Inject
 
 /**
@@ -36,12 +40,15 @@ class SaveReceiptFragment : Fragment() {
 
     private var productAdapter : ProductSaveReceiptAdapter? = null
 
+    private var job : Job? = null
+
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSaveReceiptBinding.inflate(inflater, container, false)
+        binding.viewModel = saveReceiptViewModel
         return binding.root
     }
     //---------------------------------------------------------------------------------------------- onCreateView
@@ -53,7 +60,7 @@ class SaveReceiptFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         observeLiveData()
         setListener()
-        initBrandsSpinner()
+        saveReceiptViewModel.getSuppliers()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -61,29 +68,91 @@ class SaveReceiptFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
 
+        binding.editTextReceiptNumber.addTextChangedListener {
+            job?.cancel()
+            createJobForUpdateReceiptNumber(it.toString())
+        }
+
+        binding.textViewReceipt.setOnClickListener {
+            saveReceiptViewModel.deleteReceipt()
+        }
+
+
+        binding.editTextSearch.addTextChangedListener {
+            job?.cancel()
+            createJobForSearch(it.toString())
+        }
+
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
 
+    //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
+    private fun createJobForUpdateReceiptNumber(receiptNumber: String) {
+        job = CoroutineScope(IO).launch {
+            delay(1000)
+            withContext(Main) {
+                if (receiptNumber.isNotEmpty())
+                    saveReceiptViewModel.updateLastSaveReceipt(receiptNumber)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
+
+
+
+    //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
+    private fun createJobForSearch(search: String) {
+        job = CoroutineScope(IO).launch {
+            delay(1000)
+            saveReceiptViewModel.searchProduct(search)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
+
+
+
     //---------------------------------------------------------------------------------------------- observeLiveData
     private fun observeLiveData() {
+        saveReceiptViewModel.supplierLiveData.observe(viewLifecycleOwner) {
+            initBrandsSpinner(it)
+        }
+
         saveReceiptViewModel.productLiveData.observe(viewLifecycleOwner){
             setProductAdapter(it)
         }
+
         saveReceiptViewModel.adapterNotifyChangeLiveData.observe(viewLifecycleOwner) {
             productAdapter?.notifyItemChanged(it)
         }
+
+/*
+        saveReceiptViewModel.supplierSelectedLiveData.observe(viewLifecycleOwner) {
+            if (it > -1) {
+                val supplier = saveReceiptViewModel.supplierLiveData.value?.get(it)
+                if (supplier != null) {
+                    loadProduct(supplier)
+                    binding.powerSpinnerSupplier.isEnabled = true
+                } else
+
+            } else {
+                binding.powerSpinnerSupplier.isEnabled = false
+            }
+
+        }
+
+
+*/
+
+
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
 
 
 
     //---------------------------------------------------------------------------------------------- initBrandsSpinner
-    private fun initBrandsSpinner() {
-
-        val suppliers = saveReceiptViewModel.getSuppliers()
-
+    private fun initBrandsSpinner(suppliers : List<SupplierEntity>) {
         binding.powerSpinnerSupplier.apply {
             setSpinnerAdapter(SupplierSpinnerAdapter(this))
             setItems(suppliers)
@@ -91,18 +160,22 @@ class SaveReceiptFragment : Fragment() {
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             lifecycleOwner = viewLifecycleOwner
 
-            setOnSpinnerItemSelectedListener<SupplierEntity> { _, _, _, newItem ->
+            setOnSpinnerItemSelectedListener<SupplierEntity> { _, _, newIndex, _ ->
                 binding.powerSpinnerSupplier.showArrow = true
-                loadProduct(newItem)
+                loadProduct(newIndex)
             }
         }
+        if (suppliers.size == 1) {
+            binding.powerSpinnerSupplier.selectItemByIndex(0)
+            binding.powerSpinnerSupplier.isEnabled = false
+        } else binding.powerSpinnerSupplier.isEnabled = true
     }
     //---------------------------------------------------------------------------------------------- initBrandsSpinner
 
 
 
     //---------------------------------------------------------------------------------------------- loadProduct
-    private fun loadProduct(supplierEntity: SupplierEntity) {
+    private fun loadProduct(supplierIndex : Int) {
         binding.recyclerProduct.adapter = null
         loadingManager.setRecyclerLoading(
             binding.recyclerProduct,
@@ -110,11 +183,7 @@ class SaveReceiptFragment : Fragment() {
             R.color.recyclerLoadingShadow,
             1
         )
-        val ignoreBrandId = if (supplierEntity.id == 3180L)
-            2481L
-        else
-            2480L
-        saveReceiptViewModel.getProductByIgnoreBrandId(ignoreBrandId)
+        saveReceiptViewModel.selectSupplier(supplierIndex)
     }
     //---------------------------------------------------------------------------------------------- loadProduct
 
@@ -160,6 +229,7 @@ class SaveReceiptFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- onDestroyView
     override fun onDestroyView() {
         super.onDestroyView()
+        job?.cancel()
         _binding = null
     }
     //---------------------------------------------------------------------------------------------- onDestroyView

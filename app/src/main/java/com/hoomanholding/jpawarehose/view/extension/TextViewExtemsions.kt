@@ -16,7 +16,7 @@ fun TextView.setTitleAndValue(title : String, value : Any?){
     val temp = value?.let {
         when(value){
             is String -> "$title $value"
-            is Long -> "$value $title"
+            is Long -> "$title $value"
             is Int -> "$value $title"
             is LocalDateTime -> "$title ${value.toSolarDate()?.getSolarDate()}"
             is ProductSaveReceiptEntity -> {
