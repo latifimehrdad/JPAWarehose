@@ -21,8 +21,9 @@ interface SaveReceiptDao {
     fun deleteAllRecord()
 
 
-    @Query("UPDATE SaveReceipt SET number = :number WHERE id = 1")
+    @Query("UPDATE SaveReceipt SET number = :number WHERE id > 0")
     fun updateReceiptNumber(number : Long)
+
 
     @Query("SELECT COUNT(id) FROM SaveReceipt")
     fun getCount() : Int

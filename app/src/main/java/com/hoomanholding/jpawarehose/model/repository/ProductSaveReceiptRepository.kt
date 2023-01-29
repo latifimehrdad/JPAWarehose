@@ -30,6 +30,12 @@ class ProductSaveReceiptRepository @Inject constructor(
 
 
 
+    //---------------------------------------------------------------------------------------------- getProductToSend
+    fun getProductToSend() = productSaveReceiptDao.getProductToSend()
+    //---------------------------------------------------------------------------------------------- getProductToSend
+
+
+
     //---------------------------------------------------------------------------------------------- getProductByIgnoreBrandId
     fun getProductByIgnoreBrandId(ignoreBrandId : Long)
     : List<ProductSaveReceiptEntity> {
@@ -66,5 +72,10 @@ class ProductSaveReceiptRepository @Inject constructor(
         return productSaveReceiptDao.search(query)
     }
     //---------------------------------------------------------------------------------------------- search
+
+
+    //---------------------------------------------------------------------------------------------- getProductAmount
+    fun getProductAmount() = productSaveReceiptDao.getProductAmount()
+    //---------------------------------------------------------------------------------------------- getProductAmount
 
 }

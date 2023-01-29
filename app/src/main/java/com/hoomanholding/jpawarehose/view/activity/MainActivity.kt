@@ -83,9 +83,9 @@ class MainActivity : AppCompatActivity() {
     fun showMessage(message: String) {
         val snack = Snackbar.make(binding.constraintLayoutParent, message, 5 * 1000)
         snack.setBackgroundTint(resources.getColor(R.color.primaryColor, theme))
-        snack.setTextColor(resources.getColor(R.color.black, theme))
+        snack.setTextColor(resources.getColor(R.color.primaryColorVariant, theme))
         snack.setAction(getString(R.string.dismiss)) { snack.dismiss() }
-        snack.setActionTextColor(resources.getColor(R.color.white, theme))
+        snack.setActionTextColor(resources.getColor(R.color.primaryColorVariant, theme))
         snack.show()
     }
     //---------------------------------------------------------------------------------------------- showMessage

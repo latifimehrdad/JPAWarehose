@@ -2,10 +2,14 @@ package com.hoomanholding.jpawarehose.viewmodel
 
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
+import com.hoomanholding.jpawarehose.R
+import com.hoomanholding.jpawarehose.model.data.request.AddWarehouseReceipt
+import com.hoomanholding.jpawarehose.model.data.request.WarehouseReceiptItem
 import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
 import com.hoomanholding.jpawarehose.model.repository.*
+import com.hoomanholding.jpawarehose.utility.hilt.ResourcesProvider
 import com.zar.core.tools.extensions.persianNumberToEnglishNumber
 import com.zar.core.tools.extensions.toSolarDate
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +30,8 @@ import javax.inject.Inject
 class SaveReceiptViewModel @Inject constructor(
     private val supplierRepository: SupplierRepository,
     private val productSaveReceiptRepository: ProductSaveReceiptRepository,
-    private val saveReceiptRepository: SaveReceiptRepository
+    private val saveReceiptRepository: SaveReceiptRepository,
+    private val resourcesProvider: ResourcesProvider
 ) : JpaViewModel() {
 
     val supplierLiveData = MutableLiveData<List<SupplierEntity>>()
@@ -34,15 +39,8 @@ class SaveReceiptViewModel @Inject constructor(
     var adapterNotifyChangeLiveData = MutableLiveData<Int>()
     val dateLiveData = MutableLiveData<String>()
     val receiptNumberLiveData = MutableLiveData<String>()
+    val sendReceiptToServer = MutableLiveData<String>()
     private var supplierSelected: SupplierEntity? = null
-
-
-    fun deleteReceipt() {
-        receiptNumberLiveData.value = ""
-        productLiveData.value = listOf()
-        saveReceiptRepository.deleteAllRecord()
-        getSuppliers()
-    }
 
 
     //---------------------------------------------------------------------------------------------- getSuppliers
@@ -190,5 +188,67 @@ class SaveReceiptViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- updateLastSaveReceipt
+
+
+    //---------------------------------------------------------------------------------------------- sendReceipt
+    fun sendReceipt(description: String) {
+        CoroutineScope(IO + exceptionHandler()).launch {
+            if (productSaveReceiptRepository.getProductAmount() == 0)
+                setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+            else {
+                val receipt = saveReceiptRepository.getSaveReceipt()
+                receipt?.let {
+                    if (receipt.number == null)
+                        setMessage(resourcesProvider.getString(R.string.receiptNumberIsEmpty))
+                    else {
+                        val products = productSaveReceiptRepository.getProductToSend()
+                        val items = products.map {
+                            val count = it.cartonCount *
+                                    it.productWithBrandModel.productsEntity.tedadDarKarton +
+                                    it.packetCount
+                            WarehouseReceiptItem(
+                                it.productWithBrandModel.productsEntity.id, count.toLong()
+                            )
+                        }
+                        val request = AddWarehouseReceipt(
+                            receipt.supplierEntity.id,
+                            description,
+                            receipt.number.toString(),
+                            items
+                        )
+                        requestAddWarehouseReceipt(request)
+                    }
+                }
+
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- sendReceipt
+
+
+    //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
+    private fun requestAddWarehouseReceipt(request: AddWarehouseReceipt) {
+        job = CoroutineScope(IO + exceptionHandler()).launch {
+            val response = saveReceiptRepository.requestAddWarehouseReceipt(request)
+            if (response?.isSuccessful == true) {
+                val send = response.body()
+                send?.let {
+                    if (!it.hasError) {
+                        productSaveReceiptRepository.deleteAll()
+                        saveReceiptRepository.deleteAllRecord()
+                    }
+                    withContext(Main){
+                        sendReceiptToServer.value = it.message
+                    }
+                } ?: run {
+                    setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                }
+            } else
+                setMessage(response)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
+
+
 
 }

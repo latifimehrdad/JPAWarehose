@@ -1,6 +1,7 @@
 package com.hoomanholding.jpawarehose.view.fragment
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,19 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSaveReceiptBinding
 import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
+import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ProductSaveReceiptAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
 import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolder
 import com.hoomanholding.jpawarehose.viewmodel.SaveReceiptViewModel
 import com.zar.core.tools.loadings.LoadingManager
+import com.zar.core.tools.manager.DialogManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -65,6 +70,16 @@ class SaveReceiptFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- onViewCreated
 
 
+    //---------------------------------------------------------------------------------------------- showMessage
+    private fun showMessage(message: String) {
+        activity?.let {
+            (it as MainActivity).showMessage(message)
+        }
+        binding.buttonSave.stopLoading()
+    }
+    //---------------------------------------------------------------------------------------------- showMessage
+
+
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
 
@@ -73,16 +88,14 @@ class SaveReceiptFragment : Fragment() {
             createJobForUpdateReceiptNumber(it.toString())
         }
 
-        binding.textViewReceipt.setOnClickListener {
-            saveReceiptViewModel.deleteReceipt()
-        }
-
-
         binding.editTextSearch.addTextChangedListener {
             job?.cancel()
             createJobForSearch(it.toString())
         }
 
+        binding.buttonSave.setOnClickListener {
+            saveReceipt()
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -127,27 +140,49 @@ class SaveReceiptFragment : Fragment() {
             productAdapter?.notifyItemChanged(it)
         }
 
-/*
-        saveReceiptViewModel.supplierSelectedLiveData.observe(viewLifecycleOwner) {
-            if (it > -1) {
-                val supplier = saveReceiptViewModel.supplierLiveData.value?.get(it)
-                if (supplier != null) {
-                    loadProduct(supplier)
-                    binding.powerSpinnerSupplier.isEnabled = true
-                } else
-
-            } else {
-                binding.powerSpinnerSupplier.isEnabled = false
-            }
-
+        saveReceiptViewModel.sendReceiptToServer.observe(viewLifecycleOwner) {
+            showMessage(it)
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
-
-
-*/
-
-
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
+
+
+    //---------------------------------------------------------------------------------------------- saveReceipt
+    private fun saveReceipt() {
+        if (context == null)
+            return
+
+        if(binding.editTextReceiptNumber.text.isNullOrEmpty()) {
+            showMessage(requireContext().getString(R.string.receiptNumberIsEmpty))
+            binding.editTextReceiptNumber.error =
+                requireContext().getString(R.string.receiptNumberIsEmpty)
+            return
+        }
+
+        val dialog = DialogManager().createDialogHeightWrapContent(
+            requireContext(),
+            R.layout.dialog_confirm_save_receipt,
+            Gravity.CENTER,
+            0)
+
+        val editText = dialog.findViewById<TextInputEditText>(R.id.textInputEditTextDescription)
+        val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
+        val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
+
+        buttonNo.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        buttonYes.setOnClickListener {
+            binding.buttonSave.startLoading(buttonYes.context.getString(R.string.bePatient))
+            saveReceiptViewModel.sendReceipt(editText.text.toString())
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+    //---------------------------------------------------------------------------------------------- saveReceipt
 
 
 

@@ -9,6 +9,7 @@
     <string name="passcodeIsEmpty">رمز ورود را وارد نمایید</string>
     <string name="bePatient">شکیبا باشید…</string>
     <string name="userName">نام کاربری</string>
+    <string name="description">توضیحات</string>
     <string name="password">رمز ورود</string>
     <string name="enter">ورود</string>
     <string name="welcome">خوش آمدید.</string>
@@ -32,6 +33,7 @@
     <string name="packet">بسته</string>
     <string name="dateDot">تاریخ :</string>
     <string name="search">جستجو</string>
+    <string name="receiptNumberIsEmpty">شماره برگه را وارد کنید</string>
 
 
     <string name="logoDescription">logoDescription</string>

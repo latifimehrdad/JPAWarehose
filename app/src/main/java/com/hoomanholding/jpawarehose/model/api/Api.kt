@@ -1,6 +1,8 @@
 package com.hoomanholding.jpawarehose.model.api
 
+import com.hoomanholding.jpawarehose.model.data.request.AddWarehouseReceipt
 import com.hoomanholding.jpawarehose.model.data.request.LoginRequestModel
+import com.hoomanholding.jpawarehose.model.data.response.AddWarehouseReceiptResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.brand.BrandResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.location.LocationResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.product.ProductResponseModel
@@ -67,4 +69,12 @@ interface Api {
     suspend fun requestGetLocations(
         @Header("Authorization") token : String
     ) : Response<LocationResponseModel>
+
+
+    @POST("${v1}/WarehouseReceipt/warehouse-receipt-add")
+    suspend fun requestAddWarehouseReceipt(
+        @Body addWarehouseReceipt: AddWarehouseReceipt,
+        @Header("Authorization") token : String
+    ) : Response<AddWarehouseReceiptResponseModel>
+
 }

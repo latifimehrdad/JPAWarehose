@@ -68,4 +68,6 @@ dependencies {
     implementation "com.github.skydoves:powerspinner:1.2.4"
 
     implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'
+
+    implementation("net.orandja.shadowlayout:shadowlayout:1.0.1")
 }

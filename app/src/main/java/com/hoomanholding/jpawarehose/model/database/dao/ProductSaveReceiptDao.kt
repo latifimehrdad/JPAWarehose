@@ -28,4 +28,10 @@ interface ProductSaveReceiptDao {
 
     @RawQuery(observedEntities = [ProductSaveReceiptEntity::class])
     fun search(query: SupportSQLiteQuery): List<ProductSaveReceiptEntity>
+
+    @Query("SELECT COUNT(id) FROM ProductSaveReceipt WHERE cartonCount > 0 OR packetCount > 0")
+    fun getProductAmount() : Int
+
+    @Query("SELECT * FROM ProductSaveReceipt WHERE cartonCount > 0 OR packetCount > 0")
+    fun getProductToSend(): List<ProductSaveReceiptEntity>
 }
