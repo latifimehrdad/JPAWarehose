@@ -6,6 +6,7 @@ import com.hoomanholding.jpawarehose.model.data.response.AddWarehouseReceiptResp
 import com.hoomanholding.jpawarehose.model.data.response.brand.BrandResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.location.LocationResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.product.ProductResponseModel
+import com.hoomanholding.jpawarehose.model.data.response.receipt.ReceiptDetailResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.receipt.ReceiptResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.supplier.SupplierResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.user.UserInfoResponseModel
@@ -63,6 +64,12 @@ interface Api {
     suspend fun requestGetReceipts(
         @Header("Authorization") token : String
     ) : Response<ReceiptResponseModel>
+
+    @GET("${v1}/WarehouseReceipt/warehouse-receipt-Get-Details")
+    suspend fun requestGetReceiptDetail(
+        @Query("ReceiptId") id : Long,
+        @Header("Authorization") token : String
+    ) : Response<ReceiptDetailResponseModel>
 
 
     @GET("${v1}/BaseData/basedata-get-locations")

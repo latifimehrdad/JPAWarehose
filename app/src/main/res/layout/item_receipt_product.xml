@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@id/constraintLayoutParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_5sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/_60sdp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/_9sdp"
+                android:fontFamily="@font/kalameh_light"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:setTitle="@{@string/productCodeDot}"
+                app:setValue="@{item.productsEntity.codeKala}"/>
+
+            <TextView
+                android:id="@+id/textViewRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/textViewName"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/kalameh_medium"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:gravity="center"
+                app:setTitle="@{@string/packetRemaining}"
+                app:setValue="@{item}"/>
+
+            <TextView
+                android:id="@+id/textViewTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/textViewName"
+                app:layout_constraintStart_toEndOf="@id/textViewRemaining"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/kalameh_medium"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:gravity="center"
+                app:setTitle="@{@string/packet}"
+                app:setValue="@{item.receiptDetailEntity.tedad}"/>
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewCode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewTotal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:fontFamily="@font/kalameh_bold"
+                android:textColor="@color/white"
+                android:text="@{item.productsEntity.nameKala}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutContent"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutContent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.7"
+            app:cornerRadius="@dimen/_30sdp"
+            android:textColor="@color/primaryColorVariant"
+            android:text='@string/replace'
+            app:icon="@drawable/ic_opened_packaged"
+            app:iconGravity="textEnd"
+            app:iconTint="@color/primaryColorVariant"
+            android:fontFamily="@font/kalameh_semibold"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

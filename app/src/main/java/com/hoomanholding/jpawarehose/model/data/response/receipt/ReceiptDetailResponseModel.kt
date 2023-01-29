@@ -1,13 +1,11 @@
 package com.hoomanholding.jpawarehose.model.data.response.receipt
 
 import com.hoomanholding.jpawarehose.model.data.response.BaseResponseAbstractModel
-import com.hoomanholding.jpawarehose.model.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.database.entity.ReceiptDetailEntity
 
-/**
- * Create by Mehrdad on 1/22/2023
- */
-data class ReceiptResponseModel(
+data class ReceiptDetailResponseModel(
     override val hasError: Boolean,
     override val message: String,
-    val data : List<ReceiptEntity>?
+    val data : List<ReceiptDetailEntity>?
+
 ) : BaseResponseAbstractModel()

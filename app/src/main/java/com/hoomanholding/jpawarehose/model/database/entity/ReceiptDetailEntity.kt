@@ -9,11 +9,12 @@ import com.hoomanholding.jpawarehose.model.data.response.receipt.WarehouseReceip
  */
 @Entity(tableName = "ReceiptDetail")
 data class ReceiptDetailEntity(
-    val codeKala : Int,
-    val nameKala : String?,
-    val ccBrand : Int,
-    var tedad : Int
+    val id : Long,
+    val productId : Long,
+    val ccBrand : Long,
+    val tedad : Int,
+    var placed : Int = 0
 ) {
     @PrimaryKey(autoGenerate = false)
-    var id : Long = 0
+    var rowId : Long = 0
 }

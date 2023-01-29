@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.hoomanholding.jpawarehose.model.database.entity.ReceiptDetailEntity
+import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
 
 /**
  * Create by Mehrdad on 1/22/2023
@@ -23,4 +24,8 @@ interface ReceiptDetailDao {
 
     @Query("DELETE FROM ReceiptDetail")
     fun deleteAllReceiptDetail()
+
+    @Query("Select * From ReceiptDetail")
+    fun getReceiptDetailJoin() : List<ReceiptWithProduct>
+
 }

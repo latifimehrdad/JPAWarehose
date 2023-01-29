@@ -4,6 +4,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
+import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
 import com.zar.core.tools.extensions.toSolarDate
 import java.time.LocalDateTime
 
@@ -23,6 +24,10 @@ fun TextView.setTitleAndValue(title : String, value : Any?){
                 val count = value.cartonCount *
                         value.productWithBrandModel.productsEntity.tedadDarKarton +
                         value.packetCount
+                "$count $title"
+            }
+            is ReceiptWithProduct -> {
+                val count = value.receiptDetailEntity.tedad - value.receiptDetailEntity.placed
                 "$count $title"
             }
             else -> ""

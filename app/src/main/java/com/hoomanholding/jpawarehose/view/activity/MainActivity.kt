@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.imageViewShelf.setOnClickListener {
-            navController?.navigate(R.id.action_goto_SaveReceiptFragment)
-//            navController?.navigate(R.id.action_goto_ArrangeFragment)
+//            navController?.navigate(R.id.action_goto_SaveReceiptFragment)
+            navController?.navigate(R.id.action_goto_ArrangeFragment)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener

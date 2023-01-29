@@ -31,11 +31,16 @@
     <string name="add">اضافه کردن</string>
     <string name="carton">کارتن</string>
     <string name="packet">بسته</string>
+    <string name="packetRemaining">بسته مانده</string>
     <string name="dateDot">تاریخ :</string>
     <string name="search">جستجو</string>
     <string name="receiptNumberIsEmpty">شماره برگه را وارد کنید</string>
     <string name="receiptNumberHint">فقط عدد</string>
     <string name="doYouWantToDeleteReceipt">ایا برای حذف رسید مطمئن هستید؟</string>
+    <string name="arrange">چیدمان</string>
+    <string name="chooseReceipt">انتخاب رسید</string>
+    <string name="confirmAndSend">تایید و ارسال</string>
+    <string name="replace">جایگذاری کردن</string>
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>

@@ -64,11 +64,21 @@ class SaveReceiptFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+        observeErrorLiveDate()
         observeLiveData()
         setListener()
         saveReceiptViewModel.getSuppliers()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
+
+
+    //---------------------------------------------------------------------------------------------- observeErrorLiveDate
+    private fun observeErrorLiveDate() {
+        saveReceiptViewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            showMessage(it.message)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- observeErrorLiveDate
 
 
     //---------------------------------------------------------------------------------------------- showMessage
