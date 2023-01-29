@@ -38,7 +38,7 @@ class SaveReceiptViewModel @Inject constructor(
     val productLiveData = MutableLiveData<List<ProductSaveReceiptEntity>>()
     var adapterNotifyChangeLiveData = MutableLiveData<Int>()
     val dateLiveData = MutableLiveData<String>()
-    val receiptNumberLiveData = MutableLiveData<String>()
+    val receiptNumberLiveData = MutableLiveData<String?>()
     val sendReceiptToServer = MutableLiveData<String>()
     private var supplierSelected: SupplierEntity? = null
 
@@ -57,6 +57,7 @@ class SaveReceiptViewModel @Inject constructor(
                 listOf(it.supplierEntity)
             } ?: run {
                 withContext(Main) {
+                    receiptNumberLiveData.value = null
                     dateLiveData.value = LocalDateTime.now().toSolarDate()?.getSolarDate()
                 }
                 supplierRepository.getSupplierFromDB()
@@ -250,5 +251,17 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
 
 
+    //---------------------------------------------------------------------------------------------- createNewReceipt
+    fun createNewReceipt() {
+        CoroutineScope(IO + exceptionHandler()).launch {
+            productSaveReceiptRepository.deleteAll()
+            saveReceiptRepository.deleteAllRecord()
+            supplierSelected = null
+            delay(300)
+            getSuppliers()
+
+        }
+    }
+    //---------------------------------------------------------------------------------------------- createNewReceipt
 
 }

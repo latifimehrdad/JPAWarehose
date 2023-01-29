@@ -19,6 +19,7 @@ import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ProductSaveReceiptAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
 import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolder
+import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
 import com.hoomanholding.jpawarehose.viewmodel.SaveReceiptViewModel
 import com.zar.core.tools.loadings.LoadingManager
 import com.zar.core.tools.manager.DialogManager
@@ -95,6 +96,10 @@ class SaveReceiptFragment : Fragment() {
 
         binding.buttonSave.setOnClickListener {
             saveReceipt()
+        }
+
+        binding.imageviewDelete.setOnClickListener {
+            createNewReceipt()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -259,6 +264,25 @@ class SaveReceiptFragment : Fragment() {
         }
     }
     //---------------------------------------------------------------------------------------------- clickProduct
+
+
+    //---------------------------------------------------------------------------------------------- createNewReceipt
+    private fun createNewReceipt() {
+        val click = object : ConfirmDialog.Click{
+            override fun clickYes() {
+                binding.recyclerProduct.adapter = null
+                binding.powerSpinnerSupplier.clearSelectedItem()
+                saveReceiptViewModel.createNewReceipt()
+            }
+        }
+
+        ConfirmDialog(
+            requireContext(),
+            getString(R.string.doYouWantToDeleteReceipt),
+            click
+        ).show()
+    }
+    //---------------------------------------------------------------------------------------------- createNewReceipt
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

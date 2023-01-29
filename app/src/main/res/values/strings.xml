@@ -34,11 +34,15 @@
     <string name="dateDot">تاریخ :</string>
     <string name="search">جستجو</string>
     <string name="receiptNumberIsEmpty">شماره برگه را وارد کنید</string>
-
+    <string name="receiptNumberHint">فقط عدد</string>
+    <string name="doYouWantToDeleteReceipt">ایا برای حذف رسید مطمئن هستید؟</string>
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>
     <string name="passwordDescription">password</string>
     <string name="fingerPrintDescription">fingerprint</string>
-    <string name="receiptNumberHint">---</string>
+    <string name="closeDescription">close</string>
+    <string name="deleteDescription">delete</string>
+    <string name="backgroundDescription">background</string>
+
 </resources>

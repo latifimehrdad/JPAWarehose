@@ -38,7 +38,6 @@
         android:name="com.hoomanholding.jpawarehose.view.fragment.HomeFragment"
         android:label="HomeFragment"/>
 
-
     <fragment
         android:id="@+id/UpdateFragment"
         android:name="com.hoomanholding.jpawarehose.view.fragment.UpdateFragment"
@@ -48,6 +47,12 @@
         android:id="@+id/SaveReceiptFragment"
         android:name="com.hoomanholding.jpawarehose.view.fragment.SaveReceiptFragment"
         android:label="SaveReceiptFragment"/>
+
+    <fragment
+        android:id="@+id/ArrangeFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.ArrangeFragment"
+        android:label="ArrangeFragment"/>
+
 
     <action
         android:id="@+id/action_goto_SplashFragment"
@@ -69,7 +74,6 @@
         app:popUpTo="@id/UpdateFragment"
         app:launchSingleTop="true"/>
 
-
     <action
         android:id="@+id/action_goto_SaveReceiptFragment"
         app:destination="@id/SaveReceiptFragment"
@@ -78,6 +82,16 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/SaveReceiptFragment"
+        app:launchSingleTop="true"/>
+
+    <action
+        android:id="@+id/action_goto_ArrangeFragment"
+        app:destination="@id/ArrangeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/ArrangeFragment"
         app:launchSingleTop="true"/>
 
 </navigation>
