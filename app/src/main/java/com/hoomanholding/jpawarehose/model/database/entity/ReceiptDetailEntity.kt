@@ -12,8 +12,7 @@ data class ReceiptDetailEntity(
     val id : Long,
     val productId : Long,
     val ccBrand : Long,
-    val tedad : Int,
-    var placed : Int = 0
+    val tedad : Int
 ) {
     @PrimaryKey(autoGenerate = false)
     var rowId : Long = 0

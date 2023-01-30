@@ -1,9 +1,6 @@
 package com.hoomanholding.jpawarehose.model.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.hoomanholding.jpawarehose.model.database.entity.ReceiptDetailEntity
 import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
 
@@ -25,7 +22,10 @@ interface ReceiptDetailDao {
     @Query("DELETE FROM ReceiptDetail")
     fun deleteAllReceiptDetail()
 
+    @Transaction
     @Query("Select * From ReceiptDetail")
     fun getReceiptDetailJoin() : List<ReceiptWithProduct>
+
+
 
 }

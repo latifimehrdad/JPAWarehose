@@ -36,7 +36,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutDescription"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -50,17 +50,17 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextDescription"
+                        android:id="@+id/textInputEditTextNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/yekan_bakh_medium"
+                        android:layout_height="wrap_content"
                         android:gravity="start|top"
-                        android:hint="@string/description"
-                        android:inputType="textPersonName"
-                        android:maxLength="300"
+                        android:inputType="number"
+                        android:hint="@string/count"
+                        android:maxLength="5"
                         android:singleLine="true"
                         android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_10sdp"
+                        android:fontFamily="@font/yekan_bakh_medium"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

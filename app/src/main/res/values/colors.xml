@@ -23,4 +23,6 @@
     <color name="recyclerLoadingShadow">#E6FFFFFF</color>
     <color name="recyclerLoadingBack">#0DFFFFFF</color>
 
+    <color name="locationAmount">#00e22d</color>
+
 </resources>

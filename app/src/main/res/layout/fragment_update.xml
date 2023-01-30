@@ -27,6 +27,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/update"
             android:textColor="@color/white"
+            android:fontFamily="@font/yekan_bakh_bold"
             android:textSize="@dimen/_10sdp"
             android:paddingVertical="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
@@ -42,6 +43,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/updateOn"
             android:textColor="@color/white"
+            android:fontFamily="@font/yekan_bakh_bold"
             android:textSize="@dimen/_10sdp"
             android:textStyle="bold"/>
 
@@ -61,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:textColor="@color/primaryColor"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:text="@string/brands"
                 android:textSize="@dimen/_10sdp"
                 android:checked="@={viewModel.brandLiveData}"/>
@@ -70,6 +73,7 @@
                 android:layout_columnWeight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryColor"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:text="@string/products"
                 android:textSize="@dimen/_10sdp"
                 android:checked="@={viewModel.productLiveData}"/>
@@ -79,6 +83,7 @@
                 android:layout_columnWeight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryColor"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:text="@string/locations"
                 android:textSize="@dimen/_10sdp"
                 android:checked="@={viewModel.locationLiveData}"/>
@@ -88,6 +93,7 @@
                 android:layout_columnWeight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryColor"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:text="@string/suppliers"
                 android:textSize="@dimen/_10sdp"
                 android:checked="@={viewModel.supplierLiveData}"/>
@@ -106,7 +112,7 @@
             android:textSize="@dimen/_10sdp"
             android:paddingTop="@dimen/_7sdp"
             android:paddingBottom="@dimen/_7sdp"
-            android:fontFamily="@font/kalameh_semibold"
+            android:fontFamily="@font/yekan_bakh_bold"
             app:cornerRadius="@dimen/_30sdp"
             android:textColor="@color/primaryColorVariant"
             android:text='@string/doUpdate'

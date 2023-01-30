@@ -1,8 +1,10 @@
 package com.hoomanholding.jpawarehose.model.repository
 
 import com.hoomanholding.jpawarehose.model.api.Api
+import com.hoomanholding.jpawarehose.model.database.dao.LocationAmountDao
 import com.hoomanholding.jpawarehose.model.database.dao.ReceiptDao
 import com.hoomanholding.jpawarehose.model.database.dao.ReceiptDetailDao
+import com.hoomanholding.jpawarehose.model.database.entity.LocationAmountEntity
 import com.hoomanholding.jpawarehose.model.database.entity.ReceiptDetailEntity
 import com.hoomanholding.jpawarehose.model.database.entity.ReceiptEntity
 import com.zar.core.tools.api.apiCall
@@ -15,7 +17,8 @@ class ReceiptRepository @Inject constructor(
     private val api: Api,
     private val tokenRepository: TokenRepository,
     private val receiptDao: ReceiptDao,
-    private val receiptDetailDao: ReceiptDetailDao
+    private val receiptDetailDao: ReceiptDetailDao,
+    private val locationAmountDao: LocationAmountDao
     ) {
 
 
@@ -58,4 +61,23 @@ class ReceiptRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- getReceipt
     fun getReceipt(id : Long) = receiptDao.getReceipt(id)
     //---------------------------------------------------------------------------------------------- getReceipt
+
+
+    //---------------------------------------------------------------------------------------------- insertLocationAmount
+    fun insertLocationAmount(locationAmount : LocationAmountEntity) {
+        locationAmountDao.insertLocationAmount(locationAmount)
+    }
+    //---------------------------------------------------------------------------------------------- insertLocationAmount
+
+
+    //---------------------------------------------------------------------------------------------- getSumAmount
+    fun getSumAmount(locationId : Long, productId : Long) =
+        locationAmountDao.getSumAmount(locationId, productId)
+    //---------------------------------------------------------------------------------------------- getSumAmount
+
+
+    //---------------------------------------------------------------------------------------------- getSumAmount
+    fun getSumAmount() = locationAmountDao.getSumAmount()
+    //---------------------------------------------------------------------------------------------- getSumAmount
+
 }

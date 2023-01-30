@@ -78,7 +78,7 @@ class DataBaseModule {
     //---------------------------------------------------------------------------------------------- providerSaveReceiptDap
     @Provides
     @Singleton
-    fun providerSaveReceiptDap(appDatabase: AppDatabase) = appDatabase.saveReceiptDao()
+    fun providerSaveReceiptDao(appDatabase: AppDatabase) = appDatabase.saveReceiptDao()
     //---------------------------------------------------------------------------------------------- providerSaveReceiptDap
 
 
@@ -86,8 +86,15 @@ class DataBaseModule {
     //---------------------------------------------------------------------------------------------- providerProductSaveReceiptDap
     @Provides
     @Singleton
-    fun providerProductSaveReceiptDap(appDatabase: AppDatabase) = appDatabase.productSaveReceiptDao()
+    fun providerProductSaveReceiptDao(appDatabase: AppDatabase) = appDatabase.productSaveReceiptDao()
     //---------------------------------------------------------------------------------------------- providerProductSaveReceiptDap
+
+
+    //---------------------------------------------------------------------------------------------- providerLocationAmountDao
+    @Provides
+    @Singleton
+    fun providerLocationAmountDao(appDatabase: AppDatabase) = appDatabase.locationAmountDao()
+    //---------------------------------------------------------------------------------------------- providerLocationAmountDao
 
 
 

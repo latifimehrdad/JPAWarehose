@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="@dimen/_9sdp"
-                android:fontFamily="@font/kalameh_light"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:setTitle="@{@string/productCodeDot}"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_11sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:fontFamily="@font/kalameh_bold"
+                android:fontFamily="@font/yekan_bakh_bold"
                 android:textColor="@color/white"
                 android:text="@{item.productWithBrandModel.productsEntity.nameKala}"/>
 
@@ -57,7 +57,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/constraintLayoutCarton"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/kalameh_medium"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:paddingHorizontal="@dimen/_8sdp"
                 android:gravity="center"
                 app:setTitle="@{@string/packet}"
@@ -83,6 +83,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:fontFamily="@font/yekan_bakh_light"
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
@@ -96,6 +97,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/yekan_bakh_light"
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
@@ -111,6 +113,7 @@
                     app:layout_constraintStart_toEndOf="@id/textViewCartonAdd"
                     app:layout_constraintEnd_toStartOf="@id/textViewCartonMinus"
                     android:layout_marginHorizontal="@dimen/_3sdp"
+                    android:fontFamily="@font/yekan_bakh_light"
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
@@ -140,6 +143,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_9sdp"
+                    android:fontFamily="@font/yekan_bakh_light"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:text="+1"/>
@@ -151,6 +155,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/yekan_bakh_light"
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
@@ -169,6 +174,7 @@
                     android:padding="@dimen/_3sdp"
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
+                    android:fontFamily="@font/yekan_bakh_light"
                     android:textColor="@color/dismiss"
                     android:textStyle="bold"
                     app:setTitle="@{@string/packet}"
@@ -193,7 +199,7 @@
             app:icon="@drawable/ic_add"
             app:iconGravity="textEnd"
             app:iconTint="@color/primaryColorVariant"
-            android:fontFamily="@font/kalameh_semibold"/>
+            android:fontFamily="@font/yekan_bakh_bold"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

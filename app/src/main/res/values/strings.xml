@@ -41,6 +41,14 @@
     <string name="chooseReceipt">انتخاب رسید</string>
     <string name="confirmAndSend">تایید و ارسال</string>
     <string name="replace">جایگذاری کردن</string>
+    <string name="scanQR">اسکن لوکیشن</string>
+    <string name="count">تعداد</string>
+    <string name="countEmpty">تعداد را وارد نمایید</string>
+    <string name="countIsInvalidate">تعداد را بصورت صحیح وارد نمایید</string>
+    <string name="scanQRCode">لطفا دوربین را روبروی بارکد بگیرید</string>
+    <string name="qrCodeNotId">تصویر اسکن شده اشتباه است</string>
+    <string name="amountIsOverLoad">مقدار وارد شده بیشتر از اندازه است</string>
+    <string name="amountIsLessThenAmount">مقدار وارد شده کمتر از اندازه است</string>
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>
@@ -49,5 +57,6 @@
     <string name="closeDescription">close</string>
     <string name="deleteDescription">delete</string>
     <string name="backgroundDescription">background</string>
+    <string name="locationDescription">location</string>
 
 </resources>

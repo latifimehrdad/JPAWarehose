@@ -14,7 +14,7 @@ import com.hoomanholding.jpawarehose.model.database.entity.LocationEntity
 interface LocationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLocation(brands : List<LocationEntity>)
+    fun insertLocation(locations : List<LocationEntity>)
 
     @Query("SELECT * FROM Location")
     fun getLocation(): List<LocationEntity>

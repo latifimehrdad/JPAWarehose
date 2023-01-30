@@ -20,8 +20,9 @@ data class ReceiptWithProduct(
     )
     val brandEntity: BrandEntity,
     @Relation(
+        entity = LocationEntity::class,
         parentColumn = "productId",
         entityColumn = "productId"
     )
-    val location : List<LocationEntity>
+    val location : List<LocationWithAmount>
 )

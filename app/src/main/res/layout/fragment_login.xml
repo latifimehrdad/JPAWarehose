@@ -84,7 +84,7 @@
                                 android:textColor="@color/primaryColor"
                                 android:textSize="@dimen/_10sdp"
                                 android:text="@={viewModel.userName}"
-                                android:fontFamily="@font/kalameh_light"/>
+                                android:fontFamily="@font/yekan_bakh_light"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,7 +122,7 @@
                                 android:textSize="@dimen/_10sdp"
                                 android:textColor="@color/primaryColor"
                                 android:text="@={viewModel.password}"
-                                android:fontFamily="@font/kalameh_light"/>
+                                android:fontFamily="@font/yekan_bakh_light"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,7 +138,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:paddingTop="@dimen/_7sdp"
                             android:paddingBottom="@dimen/_7sdp"
-                            android:fontFamily="@font/kalameh_semibold"
+                            android:fontFamily="@font/yekan_bakh_bold"
                             app:cornerRadius="@dimen/_30sdp"
                             android:textColor="@color/primaryColorVariant"
                             android:text='@string/enter' />
@@ -170,7 +170,7 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 android:textSize="@dimen/_12sdp"
                                 android:paddingHorizontal="@dimen/_20sdp"
-                                android:fontFamily="@font/kalameh_regular"
+                                android:fontFamily="@font/yekan_bakh_bold"
                                 android:gravity="center"
                                 android:text="@string/loginByBiometric"/>
 

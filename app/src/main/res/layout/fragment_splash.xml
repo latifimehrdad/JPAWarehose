@@ -32,7 +32,7 @@
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/white"
             android:text="@string/welcome"
-            android:fontFamily="@font/kalameh_semibold"/>
+            android:fontFamily="@font/yekan_bakh_bold"/>
 
         <TextView
             android:id="@+id/textViewDescription"
@@ -46,7 +46,7 @@
             android:textSize="@dimen/_9sdp"
             android:textColor="@color/white"
             android:text="@string/loginDescription"
-            android:fontFamily="@font/kalameh_light"/>
+            android:fontFamily="@font/yekan_bakh_light"/>
 
         <FrameLayout
             android:id="@+id/frameLayoutLogo"

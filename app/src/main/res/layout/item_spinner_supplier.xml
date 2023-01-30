@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/yekan_bakh_medium"
             android:gravity="center_vertical|start"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

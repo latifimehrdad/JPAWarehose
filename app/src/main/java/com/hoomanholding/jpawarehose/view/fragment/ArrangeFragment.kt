@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +15,14 @@ import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptProductAdapter
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptSpinnerAdapter
+import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptLocationHolder
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
 import com.hoomanholding.jpawarehose.viewmodel.ArrangeViewModel
 import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.g00fy2.quickie.QRResult
+import io.github.g00fy2.quickie.ScanCustomCode
+import io.github.g00fy2.quickie.config.ScannerConfig
 import javax.inject.Inject
 
 /**
@@ -30,12 +35,15 @@ class ArrangeFragment : Fragment() {
     private var _binding: FragmentArrangeBinding? = null
     private val binding get() = _binding!!
 
-    private val arrangeViewModel : ArrangeViewModel by viewModels()
+    private val arrangeViewModel: ArrangeViewModel by viewModels()
 
     @Inject
-    lateinit var loadingManager : LoadingManager
+    lateinit var loadingManager: LoadingManager
 
-    private var productAdapter : ReceiptProductAdapter? = null
+    private var productAdapter: ReceiptProductAdapter? = null
+
+    private val scanCustomCode =
+        registerForActivityResult(ScanCustomCode()) { result -> handleResult(result) }
 
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onCreateView(
@@ -60,7 +68,6 @@ class ArrangeFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- onViewCreated
 
 
-
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
         activity?.let {
@@ -69,7 +76,6 @@ class ArrangeFragment : Fragment() {
         binding.buttonSave.stopLoading()
     }
     //---------------------------------------------------------------------------------------------- showMessage
-
 
 
     //---------------------------------------------------------------------------------------------- observeErrorLiveDate
@@ -83,13 +89,12 @@ class ArrangeFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- observeErrorLiveDate
 
 
-
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.powerSpinnerReceipt.setOnClickListener { powerSpinnerReceiptClick() }
+        binding.buttonScanQR.setOnClickListener { startQRCodeReader() }
     }
     //---------------------------------------------------------------------------------------------- setListener
-
 
 
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -102,8 +107,49 @@ class ArrangeFragment : Fragment() {
         arrangeViewModel.receiptDetailLiveData.observe(viewLifecycleOwner) {
             setProductAdapter(it)
         }
+
+        arrangeViewModel.locationFindLiveData.observe(viewLifecycleOwner) {
+            productAdapter?.let { adapter ->
+                adapter.notifyItemChanged(it)
+                binding.recyclerDetail.smoothScrollToPosition(it)
+            }
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
+
+
+    //---------------------------------------------------------------------------------------------- startQRCodeReader
+    private fun startQRCodeReader() {
+        scanCustomCode.launch(
+            ScannerConfig.build {
+                setOverlayStringRes(R.string.scanQRCode) // string resource used for the scanner overlay
+                setOverlayDrawableRes(R.drawable.ic_qr_code) // drawable resource used for the scanner overlay
+                setShowTorchToggle(true)
+                setUseFrontCamera(false) // use the front camera
+            }
+        )
+    }
+    //---------------------------------------------------------------------------------------------- startQRCodeReader
+
+
+    //---------------------------------------------------------------------------------------------- handleResult
+    private fun handleResult(result: QRResult) {
+        when (result) {
+            is QRResult.QRSuccess -> {
+                result.content.rawValue
+                try {
+                    val id = result.content.rawValue.toLong()
+                    arrangeViewModel.findLocation(id)
+                } catch (e : NumberFormatException) {
+                    showMessage(getString(R.string.qrCodeNotId))
+                }
+            }
+            else -> {
+                activity?.onBackPressedDispatcher?.onBackPressed()
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- handleResult
 
 
     //---------------------------------------------------------------------------------------------- powerSpinnerReceiptClick
@@ -131,7 +177,7 @@ class ArrangeFragment : Fragment() {
 
 
     //---------------------------------------------------------------------------------------------- initReceiptSpinner
-    private fun initReceiptSpinner(receipt : List<ReceiptEntity>) {
+    private fun initReceiptSpinner(receipt: List<ReceiptEntity>) {
         binding.powerSpinnerReceipt.dismiss()
         binding.powerSpinnerReceipt.apply {
             setSpinnerAdapter(ReceiptSpinnerAdapter(this))
@@ -154,7 +200,7 @@ class ArrangeFragment : Fragment() {
 
 
     //---------------------------------------------------------------------------------------------- loadReceiptDetail
-    private fun loadReceiptDetail(index : Int) {
+    private fun loadReceiptDetail(index: Int) {
         if (arrangeViewModel.receiptDetailLiveData.value != null)
             return
         binding.recyclerDetail.adapter = null
@@ -170,20 +216,40 @@ class ArrangeFragment : Fragment() {
 
 
     //---------------------------------------------------------------------------------------------- setProductAdapter
-    private fun setProductAdapter(product : List<ReceiptWithProduct>) {
+    private fun setProductAdapter(product: List<ReceiptWithProduct>) {
+        binding.recyclerDetail.adapter = null
+        productAdapter = null
         if (context == null)
             return
+        val clickForReplaceOnLocation = object : ReceiptLocationHolder.Click {
+            override fun addToLocation(count: String) {
+                replaceOnLocation(count)
+            }
+        }
         loadingManager.stopLoadingRecycler()
-        productAdapter = ReceiptProductAdapter(product)
+        productAdapter = ReceiptProductAdapter(product, clickForReplaceOnLocation)
         val manager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
-            false)
+            false
+        )
         ReceiptProductHolder.productPosition = -1
+        ReceiptProductHolder.locationPosition = -1
         binding.recyclerDetail.adapter = productAdapter
         binding.recyclerDetail.layoutManager = manager
     }
     //---------------------------------------------------------------------------------------------- setProductAdapter
+
+
+    //---------------------------------------------------------------------------------------------- replaceOnLocation
+    private fun replaceOnLocation(amount: String) {
+        if (!amount.isDigitsOnly()) {
+            showMessage(getString(R.string.countIsInvalidate))
+            return
+        }
+        arrangeViewModel.replaceOnLocation(amount.toInt())
+    }
+    //---------------------------------------------------------------------------------------------- replaceOnLocation
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

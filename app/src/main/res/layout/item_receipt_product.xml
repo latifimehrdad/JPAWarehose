@@ -4,6 +4,11 @@
         <variable
             name="item"
             type="com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct" />
+
+        <variable
+            name="color"
+            type="Integer" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="@dimen/_9sdp"
-                android:fontFamily="@font/kalameh_light"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:setTitle="@{@string/productCodeDot}"
@@ -40,11 +45,11 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/textViewName"
                 app:layout_constraintStart_toStartOf="parent"
-                android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/kalameh_medium"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:paddingHorizontal="@dimen/_8sdp"
                 android:gravity="center"
+                android:textColor="@{color}"
                 app:setTitle="@{@string/packetRemaining}"
                 app:setValue="@{item}"/>
 
@@ -55,11 +60,11 @@
                 app:layout_constraintTop_toTopOf="@id/textViewName"
                 app:layout_constraintStart_toEndOf="@id/textViewRemaining"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/kalameh_medium"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:paddingHorizontal="@dimen/_8sdp"
                 android:gravity="center"
+                android:textColor="@{color}"
                 app:setTitle="@{@string/packet}"
                 app:setValue="@{item.receiptDetailEntity.tedad}"/>
 
@@ -74,9 +79,17 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:fontFamily="@font/kalameh_bold"
+                android:fontFamily="@font/yekan_bakh_medium"
                 android:textColor="@color/white"
                 android:text="@{item.productsEntity.nameKala}"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginVertical="@dimen/_5sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -94,8 +107,9 @@
             android:text='@string/replace'
             app:icon="@drawable/ic_opened_packaged"
             app:iconGravity="textEnd"
+            android:visibility="gone"
             app:iconTint="@color/primaryColorVariant"
-            android:fontFamily="@font/kalameh_semibold"/>
+            android:fontFamily="@font/yekan_bakh_bold"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
