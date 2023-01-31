@@ -36,12 +36,12 @@ class ReceiptProductHolder(
 
         binding.color = color
 
+        binding.recyclerViewLocation.visibility = View.GONE
+        binding.viewDisable.visibility = View.VISIBLE
+
         if (productPosition == position) {
-            binding.constraintLayoutParent.alpha = 1.0f
+            binding.viewDisable.visibility = View.GONE
             setLocationAdapter(context,product.brandEntity, product.location)
-        } else {
-            binding.constraintLayoutParent.alpha = 0.3f
-            binding.recyclerViewLocation.visibility = View.GONE
         }
 
         binding.constraintLayoutContent.background =

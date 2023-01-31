@@ -24,5 +24,7 @@
     <color name="recyclerLoadingBack">#0DFFFFFF</color>
 
     <color name="locationAmount">#00e22d</color>
+    <color name="snackBack">#FFF59D</color>
+    <color name="disableList">#80000000</color>
 
 </resources>

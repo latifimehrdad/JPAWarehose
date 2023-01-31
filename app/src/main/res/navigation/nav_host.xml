@@ -65,6 +65,16 @@
         app:launchSingleTop="true"/>
 
     <action
+        android:id="@+id/action_goto_HomeFragment"
+        app:destination="@id/HomeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/HomeFragment"
+        app:launchSingleTop="true"/>
+
+    <action
         android:id="@+id/action_goto_UpdateFragment"
         app:destination="@id/UpdateFragment"
         app:enterAnim="@anim/slide_in_left"

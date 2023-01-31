@@ -38,7 +38,8 @@ public class JpaButton extends MaterialButton {
     //---------------------------------------------------------------------------------------------- stopLoading
     public void stopLoading() {
         loading = false;
-        setText(defaultTitle);
+        if (defaultTitle != null)
+            setText(defaultTitle);
     }
     //---------------------------------------------------------------------------------------------- stopLoading
 

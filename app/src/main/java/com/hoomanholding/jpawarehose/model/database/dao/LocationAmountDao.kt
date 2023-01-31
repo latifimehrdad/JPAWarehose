@@ -26,7 +26,7 @@ interface LocationAmountDao {
     @Query("SELECT SUM(amount) FROM LocationAmount WHERE productId = :productId AND locationId <> :locationId")
     fun getSumAmount(locationId : Long, productId : Long) : Long
 
-    @Query("SELECT SUM(amount) FROM LocationAmount")
-    fun getSumAmount() : Long
+    @Query("SELECT SUM(amount) FROM LocationAmount WHERE productId = :productId")
+    fun getSumAmount(productId : Long) : Long
 
 }

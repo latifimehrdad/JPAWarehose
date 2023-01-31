@@ -66,13 +66,14 @@ class ReceiptLocationHolder(
         )
 
         val item = binding.item
-        val amount = item?.locationAmount?.amount.toString()
+        val amount = item?.locationAmount?.amount
+
 
         val editText = dialog.findViewById<TextInputEditText>(R.id.textInputEditTextNumber)
         val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
         val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
 
-        editText.setText(amount)
+        amount?.let { editText.setText(amount.toString()) } ?: run { editText.setText("") }
 
         buttonNo.setOnClickListener { dialog.dismiss() }
 

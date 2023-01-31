@@ -77,7 +77,19 @@ class ReceiptRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- getSumAmount
-    fun getSumAmount() = locationAmountDao.getSumAmount()
+    fun getSumAmount(productId : Long) = locationAmountDao.getSumAmount(productId)
     //---------------------------------------------------------------------------------------------- getSumAmount
 
+
+    //---------------------------------------------------------------------------------------------- requestConfirmReceipt
+    suspend fun requestConfirmReceipt(receiptId : Long) =
+        apiCall { api.requestConfirmReceipt(receiptId, tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestConfirmReceipt
+
+
+    //---------------------------------------------------------------------------------------------- deleteAllReceiptDetail
+    fun deleteAllReceiptDetail() {
+        receiptDetailDao.deleteAllReceiptDetail()
+    }
+    //---------------------------------------------------------------------------------------------- deleteAllReceiptDetail
 }

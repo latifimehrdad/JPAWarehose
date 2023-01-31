@@ -93,6 +93,7 @@ class ArrangeFragment : Fragment() {
     private fun setListener() {
         binding.powerSpinnerReceipt.setOnClickListener { powerSpinnerReceiptClick() }
         binding.buttonScanQR.setOnClickListener { startQRCodeReader() }
+        binding.buttonSave.setOnClickListener { productCompletingOnReceipt() }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -110,9 +111,14 @@ class ArrangeFragment : Fragment() {
 
         arrangeViewModel.locationFindLiveData.observe(viewLifecycleOwner) {
             productAdapter?.let { adapter ->
-                adapter.notifyItemChanged(it)
+                adapter.notifyItemRangeChanged(0, adapter.itemCount)
                 binding.recyclerDetail.smoothScrollToPosition(it)
             }
+        }
+
+        arrangeViewModel.sendReceiptToServer.observe(viewLifecycleOwner) {
+            showMessage(it)
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -140,7 +146,7 @@ class ArrangeFragment : Fragment() {
                 try {
                     val id = result.content.rawValue.toLong()
                     arrangeViewModel.findLocation(id)
-                } catch (e : NumberFormatException) {
+                } catch (e: NumberFormatException) {
                     showMessage(getString(R.string.qrCodeNotId))
                 }
             }
@@ -194,7 +200,10 @@ class ArrangeFragment : Fragment() {
         if (receipt.size == 1) {
             binding.powerSpinnerReceipt.selectItemByIndex(0)
             binding.powerSpinnerReceipt.isEnabled = false
-        } else binding.powerSpinnerReceipt.isEnabled = true
+        } else {
+            binding.powerSpinnerReceipt.isEnabled = true
+            binding.powerSpinnerReceipt.show()
+        }
     }
     //---------------------------------------------------------------------------------------------- initReceiptSpinner
 
@@ -250,6 +259,15 @@ class ArrangeFragment : Fragment() {
         arrangeViewModel.replaceOnLocation(amount.toInt())
     }
     //---------------------------------------------------------------------------------------------- replaceOnLocation
+
+
+    //---------------------------------------------------------------------------------------------- productCompletingOnReceipt
+    private fun productCompletingOnReceipt() {
+        if (binding.buttonSave.isLoading)
+            return
+        arrangeViewModel.productCompletingOnReceipt()
+    }
+    //---------------------------------------------------------------------------------------------- productCompletingOnReceipt
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

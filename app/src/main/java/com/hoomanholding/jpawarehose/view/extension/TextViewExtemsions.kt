@@ -33,12 +33,16 @@ fun TextView.setTitleAndValue(title : String, value : Any?){
             }
             is LocationWithAmount -> {
                 val count = whenIsLocationWithAmount(value)
-                if (count == 0)
-                    background = AppCompatResources.
-                    getDrawable(context, R.drawable.drawable_location_amount_zero)
-                else
-                    background = AppCompatResources.
-                    getDrawable(context, R.drawable.drawable_location_amount)
+                background = if (count == 0) {
+                    setTextColor(context.getColor(R.color.white))
+                    AppCompatResources.getDrawable(
+                        context,
+                        R.drawable.drawable_location_amount_zero
+                    )
+                } else {
+                    setTextColor(context.getColor(R.color.primaryColorVariant))
+                    AppCompatResources.getDrawable(context, R.drawable.drawable_location_amount)
+                }
                 "$count $title"
             }
             else -> ""

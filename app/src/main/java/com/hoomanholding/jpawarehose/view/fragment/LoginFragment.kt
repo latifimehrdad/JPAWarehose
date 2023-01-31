@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentLoginBinding
 import com.hoomanholding.jpawarehose.utility.extension.hideKeyboard
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
+import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
 import com.hoomanholding.jpawarehose.viewmodel.LoginViewModel
 import com.zar.core.tools.BiometricTools
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +37,25 @@ class LoginFragment : Fragment() {
     lateinit var biometricTools: BiometricTools
 
     private val loginViewModel: LoginViewModel by viewModels()
+
+
+    //---------------------------------------------------------------------------------------------- OnBackPressedCallback
+    private val backClick = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            context?.let {
+                ConfirmDialog(
+                    it,
+                    getString(R.string.doYouWantToExitApp),
+                    object : ConfirmDialog.Click {
+                        override fun clickYes() {
+                            activity?.finish()
+                        }
+                    }).show()
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- OnBackPressedCallback
+
 
 
     //---------------------------------------------------------------------------------------------- onCreateView
@@ -61,6 +82,7 @@ class LoginFragment : Fragment() {
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         activity?.let { (it as MainActivity).deleteAllData() }
 //        if (loginViewModel.isBiometricEnable()) {
 //            binding.cardViewFingerPrint.visibility = View.VISIBLE
@@ -90,6 +112,7 @@ class LoginFragment : Fragment() {
     //---------------------------------------------------------------------------------------------- observeLoginLiveDate
     private fun observeLoginLiveDate() {
         loginViewModel.loginLiveDate.observe(viewLifecycleOwner) {
+            backClick.isEnabled = false
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }

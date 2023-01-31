@@ -23,6 +23,7 @@ class ArrangeViewModel @Inject constructor(
     val receiptLiveData = MutableLiveData<List<ReceiptEntity>>()
     val receiptDetailLiveData = MutableLiveData<List<ReceiptWithProduct>>()
     val locationFindLiveData = MutableLiveData<Int>()
+    val sendReceiptToServer = MutableLiveData<String>()
 
 
     //---------------------------------------------------------------------------------------------- getOldData
@@ -108,6 +109,7 @@ class ArrangeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- findLocation
     fun findLocation(id: Long) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
+            var foundId : Long? = null
             val listProduct = receiptDetailLiveData.value
             listProduct?.let {
                 for (i in it.indices) {
@@ -117,15 +119,17 @@ class ArrangeViewModel @Inject constructor(
                         if (location.locationEntity.locationId == id) {
                             ReceiptProductHolder.productPosition = i
                             ReceiptProductHolder.locationPosition = j
+                            foundId = i.toLong()
                             withContext(Main) {
                                 locationFindLiveData.value = i
-
                             }
                             cancel()
                             break
                         }
                     }
                 }
+                if (foundId == null)
+                    setMessage(resourcesProvider.getString(R.string.qrCodeNotFoundInReceipt))
             }
         }
     }
@@ -164,7 +168,7 @@ class ArrangeViewModel @Inject constructor(
                     val sum = if (locationId != null)
                         receiptRepository.getSumAmount(locationId!!, receipt.productsEntity.id)
                     else
-                        receiptRepository.getSumAmount()
+                        receiptRepository.getSumAmount(receipt.productsEntity.id)
                     if (sum + amount > receipt.receiptDetailEntity.tedad) {
                         setMessage(resourcesProvider.getString(R.string.amountIsOverLoad))
                         return@launch
@@ -182,5 +186,48 @@ class ArrangeViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- replaceOnLocation
+
+
+    //---------------------------------------------------------------------------------------------- productCompletingOnReceipt
+    fun productCompletingOnReceipt() {
+        job = CoroutineScope(IO + exceptionHandler()).launch {
+            val listProduct = receiptDetailLiveData.value
+            listProduct?.let { list ->
+                for (product in list) {
+                    val count = product.receiptDetailEntity.tedad
+                    val productName = product.productsEntity.nameKala
+                    val productId = product.productsEntity.id
+                    val sum = receiptRepository.getSumAmount(productId)
+                    if (count.toLong() != sum) {
+                        setMessage(
+                            resourcesProvider.getString(
+                                R.string.ErrorOnCompletingOnReceipt,
+                                productName
+                            )
+                        )
+                        cancel()
+                        break
+                    }
+                }
+                val response = receiptRepository.requestConfirmReceipt(list[0].receiptDetailEntity.id)
+                if (response?.isSuccessful == true) {
+                    val send = response.body()
+                    send?.let {
+                        if (!it.hasError) {
+                            receiptRepository.deleteAllReceiptDetail()
+                        }
+                        withContext(Main){
+                            sendReceiptToServer.value = it.message
+                        }
+                    } ?: run {
+                        setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                    }
+                }else
+                    setMessage(response)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- productCompletingOnReceipt
+
 
 }

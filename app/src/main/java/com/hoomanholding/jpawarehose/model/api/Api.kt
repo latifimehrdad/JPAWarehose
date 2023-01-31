@@ -6,6 +6,7 @@ import com.hoomanholding.jpawarehose.model.data.response.AddWarehouseReceiptResp
 import com.hoomanholding.jpawarehose.model.data.response.brand.BrandResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.location.LocationResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.product.ProductResponseModel
+import com.hoomanholding.jpawarehose.model.data.response.receipt.ConfirmWarehouseReceiptResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.receipt.ReceiptDetailResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.receipt.ReceiptResponseModel
 import com.hoomanholding.jpawarehose.model.data.response.supplier.SupplierResponseModel
@@ -83,5 +84,11 @@ interface Api {
         @Body addWarehouseReceipt: AddWarehouseReceipt,
         @Header("Authorization") token : String
     ) : Response<AddWarehouseReceiptResponseModel>
+
+    @GET("${v1}/WarehouseReceipt/warehouse-receipt-confirm-receipt")
+    suspend fun requestConfirmReceipt(
+        @Query("ReceiptId") id : Long,
+        @Header("Authorization") token : String
+    ) : Response<ConfirmWarehouseReceiptResponseModel>
 
 }

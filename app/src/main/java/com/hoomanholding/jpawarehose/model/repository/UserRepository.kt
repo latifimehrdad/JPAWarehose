@@ -75,4 +75,9 @@ class UserRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- getBearerToken
     fun getBearerToken() = tokenRepository.getBearerToken()
     //---------------------------------------------------------------------------------------------- getBearerToken
+
+
+    //---------------------------------------------------------------------------------------------- getPermission
+    fun getPermission(permission : String) = userInfoDao.getUserInfo()
+    //---------------------------------------------------------------------------------------------- getPermission
 }

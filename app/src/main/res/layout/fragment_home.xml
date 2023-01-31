@@ -2,10 +2,107 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hoomanholding.jpawarehose.viewmodel.HomeViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColorVariant">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mask_group_1"
+            android:alpha="0.03"
+            android:contentDescription="@string/backgroundDescription" />
+
+        <TextView
+            android:id="@+id/textViewReceipt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.5"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/home"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:fontFamily="@font/yekan_bakh_bold"
+            android:background="@drawable/drawable_border"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/_20sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:background="@drawable/drawable_circle"
+                android:src="@drawable/ic_user"
+                android:contentDescription="@string/logoDescription" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/drawable_login_fingerprint"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/yekan_bakh_medium"
+                android:drawablePadding="@dimen/_10sdp"
+                app:drawableEndCompat="@drawable/ic_user"
+                app:drawableTint="@color/primaryColor"
+                app:setTitle="@{@string/fullNameDot}"
+                app:setValue="@{viewModel.userLiveData.fullName}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/drawable_login_fingerprint"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/yekan_bakh_medium"
+                android:drawablePadding="@dimen/_10sdp"
+                app:drawableEndCompat="@drawable/ic_smartphone"
+                app:drawableTint="@color/primaryColor"
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/drawable_login_fingerprint"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/yekan_bakh_medium"
+                android:drawablePadding="@dimen/_10sdp"
+                app:drawableEndCompat="@drawable/ic_carrier"
+                app:drawableTint="@color/primaryColor"
+                app:setTitle="@{@string/personnelCodeDot}"
+                app:setValue="@{viewModel.userLiveData.personnelNumber}"/>
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

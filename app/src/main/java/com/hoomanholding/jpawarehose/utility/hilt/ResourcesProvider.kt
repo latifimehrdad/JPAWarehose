@@ -16,4 +16,8 @@ class ResourcesProvider @Inject constructor(
     fun getString(@StringRes stringResId: Int): String {
         return context.getString(stringResId)
     }
+
+    fun getString(@StringRes resId: Int, vararg formatArgs: Any?): String {
+        return context.getString(resId, *formatArgs)
+    }
 }

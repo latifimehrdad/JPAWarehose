@@ -1,9 +1,15 @@
 package com.hoomanholding.jpawarehose.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -18,6 +24,7 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -38,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        mainViewModel.setActionImageViewShelf()
         setListener()
     }
     //---------------------------------------------------------------------------------------------- initView
@@ -57,40 +65,90 @@ class MainActivity : AppCompatActivity() {
             navController?.navigate(R.id.action_goto_UpdateFragment)
         }
 
-        binding.imageViewShelf.setOnClickListener {
-//            navController?.navigate(R.id.action_goto_SaveReceiptFragment)
-            navController?.navigate(R.id.action_goto_ArrangeFragment)
+        binding.imageViewHome.setOnClickListener {
+            navController?.navigate(R.id.action_goto_HomeFragment)
         }
+
+        binding.imageViewShelf.setOnClickListener { clickOnImageShelf() }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
+    //---------------------------------------------------------------------------------------------- clickOnImageShelf
+    private fun clickOnImageShelf() {
+        navController?.navigate(mainViewModel.actionImageViewShelf)
+    }
+    //---------------------------------------------------------------------------------------------- clickOnImageShelf
+
+
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
     private fun showAndHideBottomNavigationMenu(fragmentLabel: String) {
+        resetMenuColor()
         when (fragmentLabel) {
             "SplashFragment",
             "LoginFragment" -> {
                 binding.constraintLayoutFooterMenu.visibility = View.GONE
             }
-            else -> {
-                binding.constraintLayoutFooterMenu.visibility = View.VISIBLE
-            }
+            "UpdateFragment" -> selectCurrentMenu(binding.imageViewUpdate)
+            "HomeFragment" -> selectCurrentMenu(binding.imageViewHome)
+            "SaveReceiptFragment",
+            "ArrangeFragment" -> selectCurrentMenu(binding.imageViewShelf)
         }
     }
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
 
 
+    //---------------------------------------------------------------------------------------------- resetMenuColor
+    private fun resetMenuColor() {
+        resetImageNavigationMenu(binding.imageViewReport)
+        resetImageNavigationMenu(binding.imageViewUpdate)
+        resetImageNavigationMenu(binding.imageViewHome)
+        resetImageNavigationMenu(binding.imageViewShelf)
+    }
+    //---------------------------------------------------------------------------------------------- resetMenuColor
+
+
+    //---------------------------------------------------------------------------------------------- resetImageNavigationMenu
+    private fun resetImageNavigationMenu(imageIcon: ImageView) {
+        imageIcon.setColorFilter(
+            ContextCompat.getColor(this, R.color.white),
+            android.graphics.PorterDuff.Mode.SRC_IN
+        )
+        imageIcon.scaleX = 0.75f
+        imageIcon.scaleY = 0.75f
+    }
+    //---------------------------------------------------------------------------------------------- resetImageNavigationMenu
+
+
+    //---------------------------------------------------------------------------------------------- selectCurrentMenu
+    private fun selectCurrentMenu(imageIcon: ImageView) {
+        binding.constraintLayoutFooterMenu.visibility = View.VISIBLE
+        imageIcon.setColorFilter(
+            ContextCompat.getColor(this, R.color.primaryColor),
+            android.graphics.PorterDuff.Mode.SRC_IN
+        )
+        imageIcon.scaleX = 1.2f
+        imageIcon.scaleY = 1.2f
+    }
+    //---------------------------------------------------------------------------------------------- selectCurrentMenu
+
+
     //---------------------------------------------------------------------------------------------- showMessage
     fun showMessage(message: String) {
         val snack = Snackbar.make(binding.constraintLayoutParent, message, 5 * 1000)
-        snack.setBackgroundTint(resources.getColor(R.color.primaryColor, theme))
+        val view = snack.view
+        val textView = (view).findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        val font = Typeface.createFromAsset(assets, "font/yekan_bakh_medium.ttf")
+        textView.typeface = font
+        val params = view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        snack.setBackgroundTint(resources.getColor(R.color.snackBack, theme))
         snack.setTextColor(resources.getColor(R.color.primaryColorVariant, theme))
         snack.setAction(getString(R.string.dismiss)) { snack.dismiss() }
         snack.setActionTextColor(resources.getColor(R.color.primaryColorVariant, theme))
         snack.show()
     }
     //---------------------------------------------------------------------------------------------- showMessage
-
 
 
     //---------------------------------------------------------------------------------------------- gotoFirstFragment
