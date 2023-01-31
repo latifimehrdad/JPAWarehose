@@ -65,9 +65,7 @@ class ReceiptLocationHolder(
             0
         )
 
-        val item = binding.item
-        val amount = item?.locationAmount?.amount
-
+        val amount = binding.item?.locationAmount?.amount
 
         val editText = dialog.findViewById<TextInputEditText>(R.id.textInputEditTextNumber)
         val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)

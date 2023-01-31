@@ -163,6 +163,32 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- minusPacket
 
 
+    //---------------------------------------------------------------------------------------------- setCarton
+    fun setCarton(position: Int, amount: Int) {
+        productLiveData.value?.get(position)?.let {
+            it.cartonCount = amount
+            productSaveReceiptRepository.updateProduct(it)
+            insertNewSaveReceipt()
+            adapterNotifyChangeLiveData.value = position
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setCarton
+
+
+
+    //---------------------------------------------------------------------------------------------- setPacket
+    fun setPacket(position: Int, amount: Int) {
+        productLiveData.value?.get(position)?.let {
+            it.packetCount = amount
+            productSaveReceiptRepository.updateProduct(it)
+            insertNewSaveReceipt()
+            adapterNotifyChangeLiveData.value = position
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setPacket
+
+
+
     //---------------------------------------------------------------------------------------------- insertNewSaveReceipt
     private fun insertNewSaveReceipt() {
         if (saveReceiptRepository.getCount() > 0)

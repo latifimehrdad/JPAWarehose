@@ -41,13 +41,14 @@ class UpdateFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         updateViewModel.successLiveData.observe(viewLifecycleOwner) {
             binding.buttonDoUpdate.stopLoading()
+            binding.gifImageView.visibility = View.GONE
             (activity as MainActivity).showMessage(it)
         }
-
 
         binding.buttonDoUpdate.setOnClickListener {
             if (binding.buttonDoUpdate.isLoading)
                 return@setOnClickListener
+            binding.gifImageView.visibility = View.VISIBLE
             binding.buttonDoUpdate.startLoading("شکیبا باشید")
             updateViewModel.requestGetData()
         }

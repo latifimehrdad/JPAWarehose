@@ -13,7 +13,7 @@ class MainViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : JpaViewModel() {
 
-    var actionImageViewShelf = R.id.action_goto_ArrangeFragment
+    var actionImageViewShelf = R.id.action_goto_SaveReceiptFragment
 
     //---------------------------------------------------------------------------------------------- deleteAllData
     fun deleteAllData() {

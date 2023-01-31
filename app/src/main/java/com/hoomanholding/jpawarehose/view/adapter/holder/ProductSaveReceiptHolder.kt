@@ -1,12 +1,19 @@
 package com.hoomanholding.jpawarehose.view.adapter.holder
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.view.Gravity
 import android.view.View
+import androidx.core.text.isDigitsOnly
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
+import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ItemProductSaveReceiptBinding
 import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.utility.CreateDrawableByBrand
+import com.zar.core.tools.manager.DialogManager
 
 
 /**
@@ -20,14 +27,16 @@ class ProductSaveReceiptHolder(
 
 
     interface Click {
-        fun addCarton(position : Int)
-        fun addPacket(position : Int)
-        fun minusCarton(position : Int)
-        fun minusPacket(position : Int)
+        fun addCarton(position: Int)
+        fun addPacket(position: Int)
+        fun minusCarton(position: Int)
+        fun minusPacket(position: Int)
+        fun setCarton(position: Int, amount: Int)
+        fun setPacket(position: Int, amount: Int)
     }
 
     //---------------------------------------------------------------------------------------------- bing
-    fun bing(product: ProductSaveReceiptEntity, position : Int) {
+    fun bing(product: ProductSaveReceiptEntity, position: Int) {
         binding.item = product
 
         setListener(position)
@@ -67,7 +76,7 @@ class ProductSaveReceiptHolder(
 
 
     //---------------------------------------------------------------------------------------------- setListener
-    private fun setListener(position : Int) {
+    private fun setListener(position: Int) {
         binding.materialButtonAdd.setOnClickListener {
             binding.materialButtonAdd.visibility = View.GONE
             binding.textViewTotal.visibility = View.VISIBLE
@@ -90,12 +99,22 @@ class ProductSaveReceiptHolder(
         binding.textViewPacketMinus.setOnClickListener {
             click.minusPacket(position)
         }
+
+        binding.textViewCartonCount.setOnClickListener {
+            showDialogConfirm(binding.root.context, position, true)
+        }
+
+        binding.textViewPacketCount.setOnClickListener {
+            showDialogConfirm(binding.root.context, position, false)
+        }
+
+
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
     //---------------------------------------------------------------------------------------------- setCartonColor
-    private fun setCartonColor(color : Int) {
+    private fun setCartonColor(color: Int) {
         val context = binding.root.context
         binding.constraintLayoutCarton.background =
             CreateDrawableByBrand().getRounded(context, color)
@@ -110,7 +129,7 @@ class ProductSaveReceiptHolder(
 
 
     //---------------------------------------------------------------------------------------------- setPacketColor
-    private fun setPacketColor(color : Int) {
+    private fun setPacketColor(color: Int) {
         val context = binding.root.context
         binding.constraintLayoutPacket.background =
             CreateDrawableByBrand().getRounded(context, color)
@@ -122,5 +141,53 @@ class ProductSaveReceiptHolder(
         binding.textViewPacketMinus.setTextColor(color)
     }
     //---------------------------------------------------------------------------------------------- setPacketColor
+
+
+    //---------------------------------------------------------------------------------------------- showDialogConfirm
+    private fun showDialogConfirm(context: Context, position: Int, carton: Boolean) {
+        val dialog = DialogManager().createDialogHeightWrapContent(
+            context,
+            R.layout.dialog_set_amount,
+            Gravity.CENTER,
+            0
+        )
+
+        val amount = if (carton)
+            binding.item?.cartonCount
+        else
+            binding.item?.packetCount
+
+        val editText = dialog.findViewById<TextInputEditText>(R.id.textInputEditTextAmount)
+        val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
+        val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
+
+        amount?.let {
+            if (it > 0)
+                editText.setText(amount.toString())
+            else
+                editText.setText("")
+        } ?: run { editText.setText("") }
+        
+        buttonNo.setOnClickListener { dialog.dismiss() }
+
+        buttonYes.setOnClickListener {
+            if (editText.text.isNullOrEmpty()) {
+                editText.error = context.getString(R.string.countEmpty)
+                return@setOnClickListener
+            }
+            if (editText.text.toString().isDigitsOnly()) {
+                val amount = editText.text.toString().toInt()
+                if (carton)
+                    click.setCarton(position, amount)
+                else
+                    click.setPacket(position, amount)
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
+    }
+    //---------------------------------------------------------------------------------------------- showDialogConfirm
+
 
 }

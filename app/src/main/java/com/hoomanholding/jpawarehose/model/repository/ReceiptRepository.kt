@@ -87,9 +87,10 @@ class ReceiptRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestConfirmReceipt
 
 
-    //---------------------------------------------------------------------------------------------- deleteAllReceiptDetail
-    fun deleteAllReceiptDetail() {
+    //---------------------------------------------------------------------------------------------- deleteAllReceiptDetailAndAmount
+    fun deleteAllReceiptDetailAndAmount() {
         receiptDetailDao.deleteAllReceiptDetail()
+        locationAmountDao.deleteAll()
     }
-    //---------------------------------------------------------------------------------------------- deleteAllReceiptDetail
+    //---------------------------------------------------------------------------------------------- deleteAllReceiptDetailAndAmount
 }

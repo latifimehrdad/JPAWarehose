@@ -153,6 +153,7 @@ class SaveReceiptFragment : Fragment() {
 
         saveReceiptViewModel.adapterNotifyChangeLiveData.observe(viewLifecycleOwner) {
             productAdapter?.notifyItemChanged(it)
+            binding.powerSpinnerSupplier.isEnabled = false
         }
 
         saveReceiptViewModel.sendReceiptToServer.observe(viewLifecycleOwner) {
@@ -271,6 +272,14 @@ class SaveReceiptFragment : Fragment() {
 
         override fun minusPacket(position: Int) {
             saveReceiptViewModel.minusPacket(position)
+        }
+
+        override fun setCarton(position: Int, amount: Int) {
+            saveReceiptViewModel.setCarton(position, amount)
+        }
+
+        override fun setPacket(position: Int, amount: Int) {
+            saveReceiptViewModel.setPacket(position, amount)
         }
     }
     //---------------------------------------------------------------------------------------------- clickProduct

@@ -214,7 +214,7 @@ class ArrangeViewModel @Inject constructor(
                     val send = response.body()
                     send?.let {
                         if (!it.hasError) {
-                            receiptRepository.deleteAllReceiptDetail()
+                            receiptRepository.deleteAllReceiptDetailAndAmount()
                         }
                         withContext(Main){
                             sendReceiptToServer.value = it.message
