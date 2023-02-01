@@ -1,5 +1,6 @@
 package com.hoomanholding.jpawarehose.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.hoomanholding.jpawarehose.utility.SingleLiveEvent
 import com.zar.core.enums.EnumApiError
@@ -40,7 +41,10 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
     //---------------------------------------------------------------------------------------------- exceptionHandler
     fun exceptionHandler() = CoroutineExceptionHandler { _, throwable ->
         CoroutineScope(Dispatchers.Main).launch {
-            throwable.localizedMessage?.let { setMessage(it) }
+            throwable.localizedMessage?.let {
+            Log.e("meri", it)
+                setMessage(it)
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- exceptionHandler

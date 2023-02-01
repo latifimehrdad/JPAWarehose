@@ -2,6 +2,7 @@ package com.hoomanholding.jpawarehose.model.database.dao
 
 import androidx.room.*
 import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
+import com.hoomanholding.jpawarehose.model.database.join.SaveReceiptWithSupplier
 
 /**
  * Create by Mehrdad on 1/18/2023
@@ -15,7 +16,7 @@ interface SaveReceiptDao {
 
 
     @Query("SELECT * FROM SaveReceipt Limit 1")
-    fun getSaveReceipts(): SaveReceiptEntity?
+    fun getSaveReceipt(): SaveReceiptWithSupplier?
 
     @Query("DELETE FROM SaveReceipt")
     fun deleteAllRecord()

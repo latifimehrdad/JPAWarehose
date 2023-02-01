@@ -18,7 +18,7 @@ import com.hoomanholding.jpawarehose.model.database.entity.*
         ReceiptDetailEntity::class,
         LocationEntity::class,
         SaveReceiptEntity::class,
-        ProductSaveReceiptEntity::class,
+        SaveReceiptAmountEntity::class,
         LocationAmountEntity::class],
     version = 1, exportSchema = true
 )
@@ -33,6 +33,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun receiptDetailDao(): ReceiptDetailDao
     abstract fun locationDao(): LocationDao
     abstract fun saveReceiptDao(): SaveReceiptDao
-    abstract fun productSaveReceiptDao(): ProductSaveReceiptDao
+    abstract fun saveReceiptAmountDao(): SaveReceiptAmountDao
     abstract fun locationAmountDao() : LocationAmountDao
 }

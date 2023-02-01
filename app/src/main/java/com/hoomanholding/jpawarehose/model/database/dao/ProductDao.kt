@@ -1,8 +1,10 @@
 package com.hoomanholding.jpawarehose.model.database.dao
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
-import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
+import com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel
+import com.hoomanholding.jpawarehose.model.database.join.ProductAmountSearchModel
 
 /**
  * Create by Mehrdad on 1/18/2023
@@ -20,9 +22,8 @@ interface ProductDao {
     @Query("SELECT * FROM Product")
     fun getProducts(): List<ProductsEntity>
 
-    @Transaction//join product table with brand table
-    @Query("SELECT * FROM Product WHERE brandId != :brandId")
-    fun getProductByIgnoreBrandId(brandId : Long) : List<ProductWithBrandModel>
+    @RawQuery
+    fun search(query: SupportSQLiteQuery): List<ProductAmountSearchModel>
 
     @Query("DELETE FROM Product")
     fun deleteAll()

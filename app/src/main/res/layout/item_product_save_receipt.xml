@@ -3,7 +3,7 @@
     <data>
         <variable
             name="item"
-            type="com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity" />
+            type="com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:setTitle="@{@string/productCodeDot}"
-                app:setValue="@{item.productWithBrandModel.productsEntity.codeKala}"/>
+                app:setValue="@{item.productsEntity.codeKala}"/>
 
             <TextView
                 android:id="@+id/textViewName"
@@ -45,7 +45,7 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:fontFamily="@font/yekan_bakh_bold"
                 android:textColor="@color/white"
-                android:text="@{item.productWithBrandModel.productsEntity.nameKala}"/>
+                android:text="@{item.productsEntity.nameKala}"/>
 
 
             <TextView
@@ -120,7 +120,7 @@
                     android:textColor="@color/dismiss"
                     android:textStyle="bold"
                     app:setTitle="@{@string/carton}"
-                    app:setValue="@{item.cartonCount}"/>
+                    app:setValue="@{item.saveReceiptAmountEntity.cartonCount}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,7 +178,7 @@
                     android:textColor="@color/dismiss"
                     android:textStyle="bold"
                     app:setTitle="@{@string/packet}"
-                    app:setValue="@{item.packetCount}"/>
+                    app:setValue="@{item.saveReceiptAmountEntity.packetCount}"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

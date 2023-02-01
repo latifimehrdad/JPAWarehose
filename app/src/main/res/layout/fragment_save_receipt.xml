@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintWidth_percent="0.4"
                 android:background="@drawable/drawable_login_fingerprint"
                 android:drawableStart="@drawable/ic_search"
                 android:drawableTint="@color/primaryColor"
@@ -165,7 +165,62 @@
                 android:textSize="@dimen/_11sdp"
                 android:hint="@string/search"
                 android:autofillHints="null"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:text="@={viewModel.searchProductLiveData}"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/editTextSearch"
+                app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editTextSearch"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@drawable/drawable_login_fingerprint"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    android:id="@+id/textViewOrderType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/yekan_bakh_light"
+                    android:textSize="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:background="@drawable/drawable_login_fingerprint"
+                    android:paddingHorizontal="@dimen/_5sdp" />
+
+                <TextView
+                    android:id="@+id/textViewOrderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/textViewOrderType"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/yekan_bakh_light"
+                    android:textSize="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:background="@drawable/drawable_login_fingerprint"
+                    android:paddingHorizontal="@dimen/_5sdp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@id/textViewOrderName"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/yekan_bakh_light"
+                    android:textSize="@dimen/_8sdp"
+                    android:lines="1"
+                    android:gravity="center_vertical|start"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:text="@string/orderBy"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerProduct"

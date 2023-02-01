@@ -4,9 +4,8 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import com.hoomanholding.jpawarehose.R
-import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.join.LocationWithAmount
-import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
+import com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel
 import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
 import com.zar.core.tools.extensions.toSolarDate
 import java.time.LocalDateTime
@@ -23,8 +22,8 @@ fun TextView.setTitleAndValue(title : String, value : Any?){
             is Long -> "$title $value"
             is Int -> "$value $title"
             is LocalDateTime -> "$title ${value.toSolarDate()?.getSolarDate()}"
-            is ProductSaveReceiptEntity -> {
-                val count = whenIsProductSaveReceiptEntity(value)
+            is ProductAmountModel -> {
+                val count = whenIsProductWithBrandAndAmountModel(value)
                 "$count $title"
             }
             is ReceiptWithProduct -> {
@@ -52,14 +51,17 @@ fun TextView.setTitleAndValue(title : String, value : Any?){
 }
 
 
-//-------------------------------------------------------------------------------------------------- whenIsProductSaveReceiptEntity
-private fun whenIsProductSaveReceiptEntity(value : ProductSaveReceiptEntity) : String {
-    val count = value.cartonCount *
-            value.productWithBrandModel.productsEntity.tedadDarKarton +
-            value.packetCount
-    return count.toString()
+//-------------------------------------------------------------------------------------------------- whenIsProductWithBrandAndAmountModel
+private fun whenIsProductWithBrandAndAmountModel(value : ProductAmountModel) : String {
+    value.saveReceiptAmountEntity?.let {
+        val count = it.cartonCount *
+                value.productsEntity.tedadDarKarton +
+                it.packetCount
+        return count.toString()
+    }
+    return "0"
 }
-//-------------------------------------------------------------------------------------------------- whenIsProductSaveReceiptEntity
+//-------------------------------------------------------------------------------------------------- whenIsProductWithBrandAndAmountModel
 
 
 //-------------------------------------------------------------------------------------------------- whenIsReceiptWithProduct

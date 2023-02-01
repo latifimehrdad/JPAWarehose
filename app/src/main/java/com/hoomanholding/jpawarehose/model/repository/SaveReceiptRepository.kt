@@ -24,7 +24,7 @@ class SaveReceiptRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- getSaveReceipt
-    fun getSaveReceipt() = saveReceiptDao.getSaveReceipts()
+    fun getSaveReceipt() = saveReceiptDao.getSaveReceipt()
     //---------------------------------------------------------------------------------------------- getSaveReceipt
 
 

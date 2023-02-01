@@ -1,13 +1,17 @@
 package com.hoomanholding.jpawarehose.viewmodel
 
+import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.data.request.AddWarehouseReceipt
 import com.hoomanholding.jpawarehose.model.data.request.WarehouseReceiptItem
-import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
+import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptAmountEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
+import com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel
+import com.hoomanholding.jpawarehose.model.enum.EnumSearchName
+import com.hoomanholding.jpawarehose.model.enum.EnumSearchOrderType
 import com.hoomanholding.jpawarehose.model.repository.*
 import com.hoomanholding.jpawarehose.utility.hilt.ResourcesProvider
 import com.zar.core.tools.extensions.persianNumberToEnglishNumber
@@ -29,18 +33,50 @@ import javax.inject.Inject
 @HiltViewModel
 class SaveReceiptViewModel @Inject constructor(
     private val supplierRepository: SupplierRepository,
-    private val productSaveReceiptRepository: ProductSaveReceiptRepository,
+    private val saveReceiptAmountRepository: SaveReceiptAmountRepository,
     private val saveReceiptRepository: SaveReceiptRepository,
     private val resourcesProvider: ResourcesProvider
 ) : JpaViewModel() {
 
     val supplierLiveData = MutableLiveData<List<SupplierEntity>>()
-    val productLiveData = MutableLiveData<List<ProductSaveReceiptEntity>>()
+    val productLiveData = MutableLiveData<List<ProductAmountModel>>()
     var adapterNotifyChangeLiveData = MutableLiveData<Int>()
     val dateLiveData = MutableLiveData<String>()
     val receiptNumberLiveData = MutableLiveData<String?>()
     val sendReceiptToServer = MutableLiveData<String>()
+    val searchProductLiveData = MutableLiveData<String>()
+    val orderChangeLiveData = MutableLiveData(EnumSearchName.nameKala.name)
+    var orderName = EnumSearchName.nameKala
+    var orderType = EnumSearchOrderType.DESC
     private var supplierSelected: SupplierEntity? = null
+    private var ignoreBrandId: Long? = null
+
+
+
+    //---------------------------------------------------------------------------------------------- changeOrderType
+    fun changeOrderType() {
+        orderType = when(orderType) {
+            EnumSearchOrderType.DESC -> EnumSearchOrderType.ASC
+            EnumSearchOrderType.ASC -> EnumSearchOrderType.DESC
+        }
+        orderChangeLiveData.value = orderType.name
+        searchProduct()
+    }
+    //---------------------------------------------------------------------------------------------- changeOrderType
+
+
+
+    //---------------------------------------------------------------------------------------------- changeOrderType
+    fun changeOrderName() {
+        orderName = when(orderName) {
+            EnumSearchName.codeKala -> EnumSearchName.nameKala
+            EnumSearchName.nameKala -> EnumSearchName.codeKala
+        }
+        orderChangeLiveData.value = orderName.name
+        searchProduct()
+    }
+    //---------------------------------------------------------------------------------------------- changeOrderType
+
 
 
     //---------------------------------------------------------------------------------------------- getSuppliers
@@ -50,9 +86,10 @@ class SaveReceiptViewModel @Inject constructor(
             val receipt = saveReceiptRepository.getSaveReceipt()
             val suppliers = receipt?.let {
                 withContext(Main) {
-                    dateLiveData.value = it.date
+                    dateLiveData.value = it.saveReceiptEntity.date
                     receiptNumberLiveData.value =
-                        if (it.number != null) it.number.toString() else ""
+                        if (it.saveReceiptEntity.number != null)
+                            it.saveReceiptEntity.number.toString() else ""
                 }
                 listOf(it.supplierEntity)
             } ?: run {
@@ -72,49 +109,69 @@ class SaveReceiptViewModel @Inject constructor(
     fun selectSupplier(index: Int) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             supplierLiveData.value?.let {
-                if (it.size > 1) productSaveReceiptRepository.deleteAll()
+                if (it.size > 1) saveReceiptAmountRepository.deleteAll()
             }
-            var products = getProductFromDB()
-            if (products.isEmpty()) {
-                supplierSelected = supplierLiveData.value?.get(index)
-                supplierSelected?.let {
-                    val ignoreBrandId = if (it.id == 3180L) 2481L
-                    else 2480L
-                    products = productSaveReceiptRepository.getProductByIgnoreBrandId(ignoreBrandId)
-                }
+            supplierSelected = supplierLiveData.value?.get(index)
+            supplierSelected?.let {
+                ignoreBrandId = if (it.id == 3180L) 2481L
+                else 2480L
+                searchProduct()
             }
-            withContext(Main) { productLiveData.value = products }
         }
     }
     //---------------------------------------------------------------------------------------------- selectSupplier
 
 
     //---------------------------------------------------------------------------------------------- searchProduct
-    fun searchProduct(search: String) {
+    fun searchProduct() {
+        if (supplierSelected == null)
+            return
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val products = if (search.isEmpty())
-                getProductFromDB()
-            else {
-                val words = search.split(" ")
-                productSaveReceiptRepository.search(words)
+            if (ignoreBrandId == null)
+                return@launch
+            val search = searchProductLiveData.value
+            val temp = if (search?.isEmpty() == true) {
+                saveReceiptAmountRepository.search(
+                    ignoreBrandId!!,
+                    orderName.name,
+                    orderType.name
+                )
+            } else {
+                val words = search?.split(" ")
+                saveReceiptAmountRepository.search(
+                    ignoreBrandId!!,
+                    orderName.name,
+                    orderType.name,
+                    words
+                )
             }
+            val products = temp.map { item ->
+                ProductAmountModel(
+                    item.productsEntity, item.saveReceiptAmountEntity, item.brandEntity
+                )
+            }
+            Log.e("meri", "${products.size}")
             withContext(Main) { productLiveData.value = products }
         }
     }
     //---------------------------------------------------------------------------------------------- searchProduct
 
 
-    //---------------------------------------------------------------------------------------------- getProductFromDB
-    private fun getProductFromDB() = productSaveReceiptRepository.getProductFromDB()
-    //---------------------------------------------------------------------------------------------- getProductFromDB
-
-
     //---------------------------------------------------------------------------------------------- addCarton
     fun addCarton(position: Int) {
         productLiveData.value?.get(position)?.let {
-            val count = it.cartonCount + 1
-            it.cartonCount = count
-            productSaveReceiptRepository.updateProduct(it)
+            val saveAmount = it.saveReceiptAmountEntity?.let { amount ->
+                val count = amount.cartonCount + 1
+                amount.cartonCount = count
+                amount
+            } ?: run {
+                SaveReceiptAmountEntity(
+                    it.productsEntity.id,
+                    1, 0
+                )
+            }
+            productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
+            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
@@ -125,9 +182,18 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- addPacket
     fun addPacket(position: Int) {
         productLiveData.value?.get(position)?.let {
-            val count = it.packetCount + 1
-            it.packetCount = count
-            productSaveReceiptRepository.updateProduct(it)
+            val saveAmount = it.saveReceiptAmountEntity?.let { amount ->
+                val count = amount.packetCount + 1
+                amount.packetCount = count
+                amount
+            } ?: run {
+                SaveReceiptAmountEntity(
+                    it.productsEntity.id,
+                    0, 1
+                )
+            }
+            productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
+            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
@@ -138,12 +204,15 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- minusCarton
     fun minusCarton(position: Int) {
         productLiveData.value?.get(position)?.let {
-            if (it.cartonCount == 0) return
-            val count = it.cartonCount - 1
-            it.cartonCount = count
-            productSaveReceiptRepository.updateProduct(it)
-            insertNewSaveReceipt()
-            adapterNotifyChangeLiveData.value = position
+            it.saveReceiptAmountEntity?.let { entity ->
+                val count = entity.cartonCount - 1
+                if (count < 0)
+                    return
+                entity.cartonCount = count
+                saveReceiptAmountRepository.insertSaveReceiptAmount(entity)
+                insertNewSaveReceipt()
+                adapterNotifyChangeLiveData.value = position
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- minusCarton
@@ -152,12 +221,15 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- minusPacket
     fun minusPacket(position: Int) {
         productLiveData.value?.get(position)?.let {
-            if (it.packetCount == 0) return
-            val count = it.packetCount - 1
-            it.packetCount = count
-            productSaveReceiptRepository.updateProduct(it)
-            insertNewSaveReceipt()
-            adapterNotifyChangeLiveData.value = position
+            it.saveReceiptAmountEntity?.let { entity ->
+                val count = entity.packetCount - 1
+                if (count < 0)
+                    return
+                entity.packetCount = count
+                saveReceiptAmountRepository.insertSaveReceiptAmount(entity)
+                insertNewSaveReceipt()
+                adapterNotifyChangeLiveData.value = position
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- minusPacket
@@ -166,8 +238,17 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- setCarton
     fun setCarton(position: Int, amount: Int) {
         productLiveData.value?.get(position)?.let {
-            it.cartonCount = amount
-            productSaveReceiptRepository.updateProduct(it)
+            val saveAmount = it.saveReceiptAmountEntity?.let { entity ->
+                entity.cartonCount = amount
+                entity
+            } ?: run {
+                SaveReceiptAmountEntity(
+                    it.productsEntity.id,
+                    amount, 0
+                )
+            }
+            productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
+            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
@@ -175,18 +256,25 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- setCarton
 
 
-
     //---------------------------------------------------------------------------------------------- setPacket
     fun setPacket(position: Int, amount: Int) {
         productLiveData.value?.get(position)?.let {
-            it.packetCount = amount
-            productSaveReceiptRepository.updateProduct(it)
+            val saveAmount = it.saveReceiptAmountEntity?.let { entity ->
+                entity.packetCount = amount
+                entity
+            } ?: run {
+                SaveReceiptAmountEntity(
+                    it.productsEntity.id,
+                    0, amount
+                )
+            }
+            productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
+            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
     }
     //---------------------------------------------------------------------------------------------- setPacket
-
 
 
     //---------------------------------------------------------------------------------------------- insertNewSaveReceipt
@@ -199,7 +287,7 @@ class SaveReceiptViewModel @Inject constructor(
             else null
         supplierSelected?.let {
             val saveReceiptEntity = SaveReceiptEntity(
-                it, date, number
+                it.id, date, number
             )
             saveReceiptRepository.insertSaveReceipts(saveReceiptEntity)
         }
@@ -220,27 +308,27 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- sendReceipt
     fun sendReceipt(description: String) {
         CoroutineScope(IO + exceptionHandler()).launch {
-            if (productSaveReceiptRepository.getProductAmount() == 0)
+            val amounts = saveReceiptAmountRepository.getReceiptAmountWithProduct()
+            if (amounts.isEmpty())
                 setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
             else {
                 val receipt = saveReceiptRepository.getSaveReceipt()
                 receipt?.let {
-                    if (receipt.number == null)
+                    if (receipt.saveReceiptEntity.number == null)
                         setMessage(resourcesProvider.getString(R.string.receiptNumberIsEmpty))
                     else {
-                        val products = productSaveReceiptRepository.getProductToSend()
-                        val items = products.map {
-                            val count = it.cartonCount *
-                                    it.productWithBrandModel.productsEntity.tedadDarKarton +
-                                    it.packetCount
+                        val items = amounts.map {
+                            val count = it.saveReceiptAmountEntity.cartonCount *
+                                    it.productsEntity.tedadDarKarton +
+                                    it.saveReceiptAmountEntity.packetCount
                             WarehouseReceiptItem(
-                                it.productWithBrandModel.productsEntity.id, count.toLong()
+                                it.productsEntity.id, count.toLong()
                             )
                         }
                         val request = AddWarehouseReceipt(
                             receipt.supplierEntity.id,
                             description,
-                            receipt.number.toString(),
+                            receipt.saveReceiptEntity.number.toString(),
                             items
                         )
                         requestAddWarehouseReceipt(request)
@@ -261,10 +349,10 @@ class SaveReceiptViewModel @Inject constructor(
                 val send = response.body()
                 send?.let {
                     if (!it.hasError) {
-                        productSaveReceiptRepository.deleteAll()
+                        saveReceiptAmountRepository.deleteAll()
                         saveReceiptRepository.deleteAllRecord()
                     }
-                    withContext(Main){
+                    withContext(Main) {
                         sendReceiptToServer.value = it.message
                     }
                 } ?: run {
@@ -280,7 +368,7 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- createNewReceipt
     fun createNewReceipt() {
         CoroutineScope(IO + exceptionHandler()).launch {
-            productSaveReceiptRepository.deleteAll()
+            saveReceiptAmountRepository.deleteAll()
             saveReceiptRepository.deleteAllRecord()
             supplierSelected = null
             delay(300)

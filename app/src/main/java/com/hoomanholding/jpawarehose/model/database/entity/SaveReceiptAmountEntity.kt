@@ -6,12 +6,13 @@ import androidx.room.PrimaryKey
 /**
  * Create by Mehrdad on 1/27/2023
  */
-@Entity(tableName = "SaveReceipt")
-data class SaveReceiptEntity(
-    val supplierId : Long,
-    val date : String,
-    val number : Long?
+
+@Entity(tableName = "SaveReceiptAmount")
+data class SaveReceiptAmountEntity(
+    val productId : Long,
+    var cartonCount : Int = 0,
+    var packetCount : Int = 0
 ) {
     @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
+    var id : Long = 0
 }

@@ -11,7 +11,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ItemProductSaveReceiptBinding
-import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
+import com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel
 import com.hoomanholding.jpawarehose.utility.CreateDrawableByBrand
 import com.zar.core.tools.manager.DialogManager
 
@@ -36,12 +36,15 @@ class ProductSaveReceiptHolder(
     }
 
     //---------------------------------------------------------------------------------------------- bing
-    fun bing(product: ProductSaveReceiptEntity, position: Int) {
+    fun bing(product: ProductAmountModel, position: Int) {
         binding.item = product
 
         setListener(position)
 
-        if (product.cartonCount == 0 && product.packetCount == 0) {
+        val cartonCount = product.saveReceiptAmountEntity?.cartonCount ?: 0
+        val packetCount = product.saveReceiptAmountEntity?.packetCount ?: 0
+
+        if (cartonCount == 0 && packetCount == 0) {
             binding.materialButtonAdd.visibility = View.VISIBLE
             binding.textViewTotal.visibility = View.GONE
             binding.constraintLayoutCarton.visibility = View.GONE
@@ -54,7 +57,7 @@ class ProductSaveReceiptHolder(
         }
 
         val context = binding.root.context
-        val brand = product.productWithBrandModel.brandEntity
+        val brand = product.brandEntity
         val color = brand?.let {
             Color.rgb(it.r, it.g, it.b)
         } ?: run {
@@ -153,9 +156,9 @@ class ProductSaveReceiptHolder(
         )
 
         val amount = if (carton)
-            binding.item?.cartonCount
+            binding.item?.saveReceiptAmountEntity?.cartonCount
         else
-            binding.item?.packetCount
+            binding.item?.saveReceiptAmountEntity?.packetCount
 
         val editText = dialog.findViewById<TextInputEditText>(R.id.textInputEditTextAmount)
         val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
@@ -167,7 +170,7 @@ class ProductSaveReceiptHolder(
             else
                 editText.setText("")
         } ?: run { editText.setText("") }
-        
+
         buttonNo.setOnClickListener { dialog.dismiss() }
 
         buttonYes.setOnClickListener {
@@ -176,11 +179,11 @@ class ProductSaveReceiptHolder(
                 return@setOnClickListener
             }
             if (editText.text.toString().isDigitsOnly()) {
-                val amount = editText.text.toString().toInt()
+                val count = editText.text.toString().toInt()
                 if (carton)
-                    click.setCarton(position, amount)
+                    click.setCarton(position, count)
                 else
-                    click.setPacket(position, amount)
+                    click.setPacket(position, count)
                 dialog.dismiss()
             }
         }

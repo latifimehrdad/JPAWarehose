@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
-import com.hoomanholding.jpawarehose.model.database.join.ProductWithBrandModel
+import com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel
 import java.lang.reflect.Type
 import java.time.Instant
 import java.time.LocalDateTime
@@ -39,8 +39,8 @@ class Converters {
 
     //---------------------------------------------------------------------------------------------- fromString
     @TypeConverter
-    fun fromStringProduct(value: String?): ProductWithBrandModel? {
-        val product: Type = object : TypeToken<ProductWithBrandModel?>() {}.type
+    fun fromStringProduct(value: String?): ProductAmountModel? {
+        val product: Type = object : TypeToken<ProductAmountModel?>() {}.type
         return Gson().fromJson(value, product)
     }
     //---------------------------------------------------------------------------------------------- fromString
@@ -48,7 +48,7 @@ class Converters {
 
     //---------------------------------------------------------------------------------------------- fromList
     @TypeConverter
-    fun fromProduct(product: ProductWithBrandModel?): String? {
+    fun fromProduct(product: ProductAmountModel?): String? {
         val gson = Gson()
         return gson.toJson(product)
     }

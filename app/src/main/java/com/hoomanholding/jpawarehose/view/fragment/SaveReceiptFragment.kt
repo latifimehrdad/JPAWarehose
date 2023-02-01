@@ -13,8 +13,10 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSaveReceiptBinding
-import com.hoomanholding.jpawarehose.model.database.entity.ProductSaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
+import com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel
+import com.hoomanholding.jpawarehose.model.enum.EnumSearchName
+import com.hoomanholding.jpawarehose.model.enum.EnumSearchOrderType
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ProductSaveReceiptAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
@@ -101,7 +103,7 @@ class SaveReceiptFragment : Fragment() {
 
         binding.editTextSearch.addTextChangedListener {
             job?.cancel()
-            createJobForSearch(it.toString())
+            createJobForSearch()
         }
 
         binding.buttonSave.setOnClickListener {
@@ -110,6 +112,14 @@ class SaveReceiptFragment : Fragment() {
 
         binding.imageviewDelete.setOnClickListener {
             createNewReceipt()
+        }
+
+        binding.textViewOrderType.setOnClickListener {
+            saveReceiptViewModel.changeOrderType()
+        }
+
+        binding.textViewOrderName.setOnClickListener {
+            saveReceiptViewModel.changeOrderName()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -131,10 +141,10 @@ class SaveReceiptFragment : Fragment() {
 
 
     //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
-    private fun createJobForSearch(search: String) {
+    private fun createJobForSearch() {
         job = CoroutineScope(IO).launch {
             delay(1000)
-            saveReceiptViewModel.searchProduct(search)
+            saveReceiptViewModel.searchProduct()
         }
     }
     //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
@@ -159,6 +169,21 @@ class SaveReceiptFragment : Fragment() {
         saveReceiptViewModel.sendReceiptToServer.observe(viewLifecycleOwner) {
             showMessage(it)
             activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+
+        saveReceiptViewModel.orderChangeLiveData.observe(viewLifecycleOwner) {
+            when(saveReceiptViewModel.orderName){
+                EnumSearchName.nameKala ->
+                    binding.textViewOrderName.text = getString(R.string.productName)
+                EnumSearchName.codeKala ->
+                    binding.textViewOrderName.text = getString(R.string.productCode)
+            }
+            when(saveReceiptViewModel.orderType) {
+                EnumSearchOrderType.DESC ->
+                    binding.textViewOrderType.text = getString(R.string.DESC)
+                EnumSearchOrderType.ASC ->
+                    binding.textViewOrderType.text = getString(R.string.ASC)
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -241,7 +266,7 @@ class SaveReceiptFragment : Fragment() {
 
 
     //---------------------------------------------------------------------------------------------- setProductAdapter
-    private fun setProductAdapter(products : List<ProductSaveReceiptEntity>) {
+    private fun setProductAdapter(products : List<ProductAmountModel>) {
         if (context == null)
             return
         loadingManager.stopLoadingRecycler()

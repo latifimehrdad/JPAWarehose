@@ -56,6 +56,12 @@
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
     <string name="ErrorOnCompletingOnReceipt">چیدمان کالای ( %1$s ) بصورت کامل انجام نشده است</string>
     <string name="qrCodeNotFoundInReceipt">لوکیشن اسکن شده در رسید جود ندارد</string>
+    <string name="orderBy">مرتب سازی بر اساس</string>
+    <string name="productName">نام کالا</string>
+    <string name="productCode">کد کالا</string>
+    <string name="DESC">نزولی</string>
+    <string name="ASC">صعودی</string>
+
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>
