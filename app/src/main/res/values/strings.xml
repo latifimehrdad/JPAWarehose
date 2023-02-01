@@ -61,6 +61,8 @@
     <string name="productCode">کد کالا</string>
     <string name="DESC">نزولی</string>
     <string name="ASC">صعودی</string>
+    <string name="logOut">خروج از حساب کاربری</string>
+    <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
 
 
     <string name="logoDescription">logoDescription</string>

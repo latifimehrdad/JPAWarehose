@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         mainViewModel.setActionImageViewShelf()
+        if (mainViewModel.actionImageViewShelf == 0)
+            binding.imageViewShelf.visibility = View.GONE
+        else
+            binding.imageViewShelf.visibility = View.VISIBLE
         setListener()
     }
     //---------------------------------------------------------------------------------------------- initView

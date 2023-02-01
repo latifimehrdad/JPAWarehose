@@ -27,4 +27,6 @@
     <color name="snackBack">#FFF59D</color>
     <color name="disableList">#80000000</color>
 
+    <color name="red">#F44336</color>
+
 </resources>

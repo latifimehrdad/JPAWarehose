@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentHomeBinding
+import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
 import com.hoomanholding.jpawarehose.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,10 +43,40 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         backClickControl()
+        observeLiveData()
+        setListener()
         homeViewModel.getUserInfo()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
+
+    //---------------------------------------------------------------------------------------------- observeLiveData
+    private fun observeLiveData() {
+        homeViewModel.userLogOut.observe(viewLifecycleOwner) {
+            (activity as MainActivity).gotoFirstFragment()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- observeLiveData
+
+
+
+    //---------------------------------------------------------------------------------------------- setListener
+    private fun setListener() {
+        binding.textViewLogout.setOnClickListener {
+            val click = object : ConfirmDialog.Click {
+                override fun clickYes() {
+                    binding.textViewLogout.text = getText(R.string.bePatient)
+                    homeViewModel.logOut()
+                }
+            }
+            ConfirmDialog(
+                requireContext(),
+                getString(R.string.doYouWantToExitAccount),
+                click
+            ).show()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setListener
 
 
     //---------------------------------------------------------------------------------------------- backClickControl

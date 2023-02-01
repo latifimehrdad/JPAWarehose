@@ -28,12 +28,17 @@ class MainViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- setActionImageViewShelf
     fun setActionImageViewShelf() {
-/*        val roleReceiptAdd = userRepository.getPermission("Warehouse.Receipt.Add")
+        val roleReceiptAdd = userRepository.getPermission("Warehouse.Receipt.Add")
         roleReceiptAdd?.let {
             actionImageViewShelf = R.id.action_goto_SaveReceiptFragment
         } ?: run {
-
-        }*/
+            val roleReceiptView = userRepository.getPermission("Warehouse.Receipt.View")
+            roleReceiptView?.let {
+                actionImageViewShelf = R.id.action_goto_ArrangeFragment
+            }?: run {
+                actionImageViewShelf = 0
+            }
+        }
     }
     //---------------------------------------------------------------------------------------------- setActionImageViewShelf
 

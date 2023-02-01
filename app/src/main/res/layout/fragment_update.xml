@@ -140,6 +140,20 @@
             app:layout_constraintTop_toBottomOf="@id/buttonDoUpdate" />
 
 
+        <TextView
+            android:id="@+id/textViewPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:fontFamily="@font/yekan_bakh_bold"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="@id/gifImageView"
+            app:layout_constraintBottom_toBottomOf="@id/gifImageView"
+            app:layout_constraintStart_toStartOf="@id/gifImageView"
+            app:layout_constraintEnd_toEndOf="@id/gifImageView"
+            android:visibility="gone"/>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

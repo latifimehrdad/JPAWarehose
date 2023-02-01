@@ -1,6 +1,5 @@
 package com.hoomanholding.jpawarehose.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.*
@@ -9,6 +8,7 @@ import com.hoomanholding.jpawarehose.utility.hilt.ResourcesProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import javax.inject.Inject
 
 /**
@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UpdateViewModel @Inject constructor(
-    private val userRepository: UserRepository,
     private val brandRepository: BrandRepository,
     private val resourcesProvider: ResourcesProvider,
     private val productRepository: ProductRepository,
@@ -30,11 +29,25 @@ class UpdateViewModel @Inject constructor(
     val productLiveData = MutableLiveData(false)
     val supplierLiveData = MutableLiveData(false)
     val locationLiveData = MutableLiveData(false)
+    val percentUpdatingLiveData = MutableLiveData(0)
+    private var countUpdate = 0
+    private var percentUpdate = 0
 
     //---------------------------------------------------------------------------------------------- requestGetData
     fun requestGetData() {
+        countUpdate = 0
+        percentUpdate = 0
+        if (brandLiveData.value == true)
+            countUpdate++
+        if (productLiveData.value == true)
+            countUpdate++
+        if (locationLiveData.value == true)
+            countUpdate++
+        if (supplierLiveData.value == true)
+            countUpdate++
         job?.cancel()
         job = CoroutineScope(IO).launch {
+            withContext(Main){ percentUpdatingLiveData.value = 0 }
             if (brandLiveData.value == true)
                 getBrands().join()
             if (productLiveData.value == true)
@@ -65,6 +78,7 @@ class UpdateViewModel @Inject constructor(
                     else {
                         it.data?.let { brands ->
                             brandRepository.insertBrands(brands)
+                            serPercentOfUpdate()
                         } ?: run {
                             setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                         }
@@ -95,6 +109,7 @@ class UpdateViewModel @Inject constructor(
                     else {
                         it.data?.let { products ->
                             productRepository.insertProducts(products)
+                            serPercentOfUpdate()
                         } ?: run {
                             setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                         }
@@ -124,6 +139,7 @@ class UpdateViewModel @Inject constructor(
                     else {
                         it.data?.let { locations ->
                             locationsRepository.insertLocations(locations)
+                            serPercentOfUpdate()
                         } ?: run {
                             setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                         }
@@ -154,6 +170,7 @@ class UpdateViewModel @Inject constructor(
                     else {
                         it.data?.let { suppliers ->
                             supplierRepository.insertSuppliers(suppliers)
+                            serPercentOfUpdate()
                         } ?: run {
                             setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                         }
@@ -168,9 +185,18 @@ class UpdateViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getSuppliers
 
 
+    //---------------------------------------------------------------------------------------------- serPercentOfUpdate
+    private suspend fun serPercentOfUpdate() {
+        percentUpdate++
+        withContext(Main){ percentUpdatingLiveData.value =
+            (percentUpdate / countUpdate.toFloat() * 100).toInt() }
+    }
+    //---------------------------------------------------------------------------------------------- serPercentOfUpdate
+
+
     //---------------------------------------------------------------------------------------------- getAllData
     private fun getAllData(): Job {
-        return CoroutineScope(Dispatchers.Main).launch {
+        return CoroutineScope(Main).launch {
             successLiveData.value = resourcesProvider.getString(R.string.updateIsSuccess)
         }
     }

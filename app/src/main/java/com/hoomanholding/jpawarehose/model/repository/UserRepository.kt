@@ -6,6 +6,9 @@ import com.zar.core.tools.api.apiCall
 import com.hoomanholding.jpawarehose.model.database.dao.RoleDao
 import com.hoomanholding.jpawarehose.model.database.entity.RoleEntity
 import com.hoomanholding.jpawarehose.model.database.entity.UserInfoEntity
+import com.hoomanholding.jpawarehose.utility.CompanionValues
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -60,6 +63,7 @@ class UserRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- deleteUser
     fun deleteUser() {
         userInfoDao.deleteAll()
+        tokenRepository.deleteToken()
     }
     //---------------------------------------------------------------------------------------------- deleteUser
 
@@ -78,6 +82,6 @@ class UserRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- getPermission
-    fun getPermission(permission : String) = userInfoDao.getUserInfo()
+    fun getPermission(permission : String) = roleDao.getPermission(permission)
     //---------------------------------------------------------------------------------------------- getPermission
 }

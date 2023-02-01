@@ -39,22 +39,41 @@ class UpdateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+        observeLiveData()
+        setListener()
+    }
+    //---------------------------------------------------------------------------------------------- onViewCreated
+
+
+    //---------------------------------------------------------------------------------------------- observeLiveData
+    private fun observeLiveData() {
         updateViewModel.successLiveData.observe(viewLifecycleOwner) {
             binding.buttonDoUpdate.stopLoading()
             binding.gifImageView.visibility = View.GONE
+            binding.textViewPercent.visibility = View.GONE
             (activity as MainActivity).showMessage(it)
         }
 
+        updateViewModel.percentUpdatingLiveData.observe(viewLifecycleOwner) {
+            val title = "$it%"
+            binding.textViewPercent.text = title
+        }
+    }
+    //---------------------------------------------------------------------------------------------- observeLiveData
+
+
+    //---------------------------------------------------------------------------------------------- setListener
+    private fun setListener() {
         binding.buttonDoUpdate.setOnClickListener {
             if (binding.buttonDoUpdate.isLoading)
                 return@setOnClickListener
             binding.gifImageView.visibility = View.VISIBLE
+            binding.textViewPercent.visibility = View.VISIBLE
             binding.buttonDoUpdate.startLoading("شکیبا باشید")
             updateViewModel.requestGetData()
         }
-
     }
-    //---------------------------------------------------------------------------------------------- onViewCreated
+    //---------------------------------------------------------------------------------------------- setListener
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView
