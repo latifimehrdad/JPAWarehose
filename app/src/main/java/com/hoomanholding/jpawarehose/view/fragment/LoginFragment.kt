@@ -1,6 +1,7 @@
 package com.hoomanholding.jpawarehose.view.fragment
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,17 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentLoginBinding
 import com.hoomanholding.jpawarehose.utility.extension.hideKeyboard
+import com.hoomanholding.jpawarehose.utility.extension.isIP
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
 import com.hoomanholding.jpawarehose.viewmodel.LoginViewModel
 import com.zar.core.tools.BiometricTools
+import com.zar.core.tools.manager.DialogManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
@@ -84,15 +89,15 @@ class LoginFragment : Fragment() {
     private fun initView() {
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         activity?.let { (it as MainActivity).deleteAllData() }
-//        if (loginViewModel.isBiometricEnable()) {
-//            binding.cardViewFingerPrint.visibility = View.VISIBLE
-//            binding.viewLine1.visibility = View.VISIBLE
-//            binding.viewLine2.visibility = View.VISIBLE
-//        } else {
-//            binding.cardViewFingerPrint.visibility = View.INVISIBLE
-//            binding.viewLine1.visibility = View.GONE
-//            binding.viewLine2.visibility = View.GONE
-//        }
+        if (loginViewModel.isBiometricEnable()) {
+            binding.cardViewFingerPrint.visibility = View.VISIBLE
+            binding.viewLine1.visibility = View.VISIBLE
+            binding.viewLine2.visibility = View.VISIBLE
+        } else {
+            binding.cardViewFingerPrint.visibility = View.INVISIBLE
+            binding.viewLine1.visibility = View.GONE
+            binding.viewLine2.visibility = View.GONE
+        }
         observeLoginLiveDate()
         observeErrorLiveDate()
     }
@@ -139,6 +144,39 @@ class LoginFragment : Fragment() {
         binding
             .cardViewFingerPrint
             .setOnClickListener { showBiometricDialog() }
+
+        binding.buttonLogin.setOnLongClickListener {
+            if (context != null) {
+                val dialog = DialogManager().createDialogHeightWrapContent(
+                    requireContext(),
+                    R.layout.dialog_confirm_ip,
+                    Gravity.CENTER,
+                    0
+                )
+
+                val textInputEditTextIp =
+                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIp)
+
+                val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
+                buttonNo.setOnClickListener { dialog.dismiss() }
+
+                val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
+                buttonYes.setOnClickListener {
+                    if (textInputEditTextIp.text.toString().isIP()) {
+                        loginViewModel.saveNewIp(textInputEditTextIp.text.toString())
+                        CoroutineScope(Main).launch {
+                            delay(500)
+                            activity?.finish()
+                        }
+                    } else {
+                        textInputEditTextIp.error = getString(R.string.ipIsIncorrect)
+                        showMessage(getString(R.string.ipIsIncorrect))
+                    }
+                }
+                dialog.show()
+            }
+            return@setOnLongClickListener true
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 

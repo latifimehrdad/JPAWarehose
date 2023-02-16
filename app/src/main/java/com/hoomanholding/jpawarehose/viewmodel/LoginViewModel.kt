@@ -84,4 +84,13 @@ class LoginViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
 
 
+    //---------------------------------------------------------------------------------------------- saveNewIp
+    fun saveNewIp(ip : String?) {
+        sharedPreferences
+            .edit()
+            .putString(CompanionValues.URL, ip)
+            .apply()
+    }
+    //---------------------------------------------------------------------------------------------- saveNewIp
+
 }

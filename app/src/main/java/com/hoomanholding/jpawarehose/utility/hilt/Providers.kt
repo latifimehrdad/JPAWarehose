@@ -1,9 +1,12 @@
 package com.hoomanholding.jpawarehose.utility.hilt
 
+import android.content.Context
 import com.hoomanholding.jpawarehose.model.api.Api
+import com.hoomanholding.jpawarehose.utility.CompanionValues.Companion.URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -25,8 +28,13 @@ class Providers {
     //---------------------------------------------------------------------------------------------- provideUrl
     @Provides
     @Singleton
-    fun provideUrl() = "http://10.252.30.150:7575"
+    fun provideUrl(@ApplicationContext appContext: Context): String {
+        val share = appContext.getSharedPreferences("secret_shared_prefs", Context.MODE_PRIVATE)
+        val ip = share.getString(URL,null)
+        return ip ?: run { url }
+    }
     //---------------------------------------------------------------------------------------------- provideUrl
+
 
 
     //---------------------------------------------------------------------------------------------- provideApi

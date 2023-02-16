@@ -1,4 +1,4 @@
-package com.hoomanholding.jpawarehose.view.fragment
+package com.hoomanholding.jpawarehose.view.fragment.arrange
 
 import android.os.Bundle
 import android.view.LayoutInflater

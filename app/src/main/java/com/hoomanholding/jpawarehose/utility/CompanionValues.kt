@@ -7,6 +7,7 @@ package com.hoomanholding.jpawarehose.utility
 class CompanionValues {
 
     companion object {
+        const val URL = "url"
         const val TOKEN = "token"
         const val channelId = "Zar"
         const val channelName = "Driver"

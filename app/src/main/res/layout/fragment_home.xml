@@ -20,23 +20,45 @@
             android:alpha="0.03"
             android:contentDescription="@string/backgroundDescription" />
 
-        <TextView
-            android:id="@+id/textViewReceipt"
-            android:layout_width="0dp"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.5"
-            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/home"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_15sdp"
-            android:fontFamily="@font/yekan_bakh_bold"
-            android:background="@drawable/drawable_border"/>
+            android:layout_marginTop="-13dp"
+            android:background="@drawable/drawable_border_curve"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_mask_group_1"
+                app:tint="@color/primaryColor"
+                android:contentDescription="@string/logoDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.5"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/home"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:fontFamily="@font/yekan_bakh_bold"/>
+
+        </LinearLayout>
+
 
 
         <LinearLayout
@@ -101,6 +123,37 @@
                 app:drawableTint="@color/primaryColor"
                 app:setTitle="@{@string/personnelCodeDot}"
                 app:setValue="@{viewModel.userLiveData.personnelNumber}"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/drawable_login_fingerprint"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:theme="@style/switchStyle" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/yekan_bakh_medium"
+                    android:drawablePadding="@dimen/_10sdp"
+                    app:drawableEndCompat="@drawable/ic_finger_print"
+                    app:drawableTint="@color/primaryColor"
+                    android:text="@string/fingerprint"/>
+
+            </LinearLayout>
 
 
             <TextView

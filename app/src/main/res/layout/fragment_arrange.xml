@@ -20,23 +20,44 @@
             android:alpha="0.03"
             android:contentDescription="@string/backgroundDescription" />
 
-        <TextView
-            android:id="@+id/textViewReceipt"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/linearLayoutPageTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.5"
-            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/arrange"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_15sdp"
-            android:fontFamily="@font/yekan_bakh_bold"
-            android:background="@drawable/drawable_border"/>
+            android:layout_marginTop="-13dp"
+            android:background="@drawable/drawable_border_curve"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/ic_mask_group_1"
+                app:tint="@color/primaryColor"
+                android:contentDescription="@string/logoDescription" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.5"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/arrange"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:fontFamily="@font/yekan_bakh_bold"/>
+
+        </LinearLayout>
 
 
         <com.skydoves.powerspinner.PowerSpinnerView
@@ -54,7 +75,7 @@
             android:textSize="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewReceipt"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutPageTitle"
             app:layout_constraintWidth_percent="0.7"
             app:spinner_arrow_gravity="start"
             app:spinner_arrow_padding="8dp"

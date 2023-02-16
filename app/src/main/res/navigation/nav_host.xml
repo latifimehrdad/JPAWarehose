@@ -50,7 +50,7 @@
 
     <fragment
         android:id="@+id/ArrangeFragment"
-        android:name="com.hoomanholding.jpawarehose.view.fragment.ArrangeFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.arrange.ArrangeFragment"
         android:label="ArrangeFragment"/>
 
 

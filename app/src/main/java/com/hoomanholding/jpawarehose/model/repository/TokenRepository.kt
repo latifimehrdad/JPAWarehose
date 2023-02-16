@@ -23,8 +23,6 @@ class TokenRepository @Inject constructor(private val sp: SharedPreferences ) {
     fun deleteToken() {
         sp.edit()
             .putString(CompanionValues.TOKEN, null)
-            .putString(CompanionValues.userName, null)
-            .putString(CompanionValues.password, null)
             .apply()
     }
     //---------------------------------------------------------------------------------------------- deleteToken

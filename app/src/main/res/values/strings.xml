@@ -63,7 +63,9 @@
     <string name="ASC">صعودی</string>
     <string name="logOut">خروج از حساب کاربری</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
-
+    <string name="fingerprint">ورود با اثر انگشت</string>
+    <string name="actionIsDone">انجام شد</string>
+    <string name="ipIsIncorrect">آدرس وارد شده اشتباه است</string>
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>
@@ -73,5 +75,6 @@
     <string name="deleteDescription">delete</string>
     <string name="backgroundDescription">background</string>
     <string name="locationDescription">location</string>
+
 
 </resources>
