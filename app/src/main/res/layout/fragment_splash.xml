@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_mask_group_1"
-            android:alpha="0.05"/>
+            android:alpha="0.05"
+            android:contentDescription="@string/logoDescription" />
 
         <TextView
             android:id="@+id/textViewWelcome"

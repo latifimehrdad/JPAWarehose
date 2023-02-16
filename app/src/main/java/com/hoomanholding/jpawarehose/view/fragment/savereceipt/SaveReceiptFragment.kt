@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -101,6 +102,19 @@ class SaveReceiptFragment : Fragment() {
         }
 
         binding.editTextSearch.addTextChangedListener {
+            if (it.toString().isNullOrEmpty()) {
+                binding.imageviewSearchDelete.setImageResource(R.drawable.ic_search)
+                binding.imageviewSearchDelete.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.primaryColor),
+                    android.graphics.PorterDuff.Mode.SRC_IN
+                )
+            } else {
+                binding.imageviewSearchDelete.setImageResource(R.drawable.ic_close)
+                binding.imageviewSearchDelete.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.red),
+                    android.graphics.PorterDuff.Mode.SRC_IN
+                )
+            }
             job?.cancel()
             createJobForSearch()
         }
@@ -119,6 +133,10 @@ class SaveReceiptFragment : Fragment() {
 
         binding.textViewOrderName.setOnClickListener {
             saveReceiptViewModel.changeOrderName()
+        }
+
+        binding.imageviewSearchDelete.setOnClickListener {
+            binding.editTextSearch.setText("")
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
