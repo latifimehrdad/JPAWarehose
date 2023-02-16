@@ -1,9 +1,9 @@
 package com.hoomanholding.jpawarehose.model.repository
 
 import com.hoomanholding.jpawarehose.model.api.Api
+import com.hoomanholding.jpawarehose.model.data.database.dao.SaveReceiptDao
+import com.hoomanholding.jpawarehose.model.data.database.entity.SaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.request.AddWarehouseReceipt
-import com.hoomanholding.jpawarehose.model.database.dao.SaveReceiptDao
-import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptEntity
 import com.zar.core.tools.api.apiCall
 import javax.inject.Inject
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpawarehose.databinding.ItemReceiptProductBinding
-import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
+import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptLocationHolder
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
 

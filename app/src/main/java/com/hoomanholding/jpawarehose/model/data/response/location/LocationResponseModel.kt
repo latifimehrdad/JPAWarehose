@@ -1,7 +1,7 @@
 package com.hoomanholding.jpawarehose.model.data.response.location
 
+import com.hoomanholding.jpawarehose.model.data.database.entity.LocationEntity
 import com.hoomanholding.jpawarehose.model.data.response.BaseResponseAbstractModel
-import com.hoomanholding.jpawarehose.model.database.entity.LocationEntity
 
 /**
  * Create by Mehrdad on 1/18/2023

@@ -16,7 +16,6 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ActivityMainBinding
-import com.hoomanholding.jpawarehose.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -45,14 +44,21 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        showImageViewShelf()
+        setListener()
+    }
+    //---------------------------------------------------------------------------------------------- initView
+
+
+    //---------------------------------------------------------------------------------------------- showImageViewShelf
+    fun showImageViewShelf() {
         mainViewModel.setActionImageViewShelf()
         if (mainViewModel.actionImageViewShelf == 0)
             binding.imageViewShelf.visibility = View.GONE
         else
             binding.imageViewShelf.visibility = View.VISIBLE
-        setListener()
     }
-    //---------------------------------------------------------------------------------------------- initView
+    //---------------------------------------------------------------------------------------------- showImageViewShelf
 
 
     //---------------------------------------------------------------------------------------------- setListener

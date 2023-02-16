@@ -4,9 +4,9 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import com.hoomanholding.jpawarehose.R
-import com.hoomanholding.jpawarehose.model.database.join.LocationWithAmount
-import com.hoomanholding.jpawarehose.model.database.join.ProductAmountModel
-import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
+import com.hoomanholding.jpawarehose.model.data.database.join.LocationWithAmount
+import com.hoomanholding.jpawarehose.model.data.database.join.ProductAmountModel
+import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import com.zar.core.tools.extensions.toSolarDate
 import java.time.LocalDateTime
 

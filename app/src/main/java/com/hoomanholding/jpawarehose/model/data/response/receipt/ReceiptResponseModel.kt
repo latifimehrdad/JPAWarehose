@@ -1,7 +1,7 @@
 package com.hoomanholding.jpawarehose.model.data.response.receipt
 
+import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.response.BaseResponseAbstractModel
-import com.hoomanholding.jpawarehose.model.database.entity.ReceiptEntity
 
 /**
  * Create by Mehrdad on 1/22/2023

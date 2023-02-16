@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.hoomanholding.jpawarehose.viewmodel.HomeViewModel" />
+            type="com.hoomanholding.jpawarehose.view.fragment.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

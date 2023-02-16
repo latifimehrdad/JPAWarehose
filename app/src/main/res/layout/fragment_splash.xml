@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.hoomanholding.jpawarehose.viewmodel.SplashViewModel" />
+            type="com.hoomanholding.jpawarehose.view.fragment.splash.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

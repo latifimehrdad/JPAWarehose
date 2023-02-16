@@ -1,18 +1,12 @@
 package com.hoomanholding.jpawarehose.view.adapter
 
-import android.graphics.Color
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpawarehose.databinding.ItemSpinnerSupplierBinding
-import com.hoomanholding.jpawarehose.model.database.entity.BrandEntity
-import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.SupplierEntity
 import com.skydoves.powerspinner.*
-import com.skydoves.powerspinner.databinding.PowerspinnerItemDefaultPowerBinding
 
 /**
  * Create by Mehrdad on 1/26/2023

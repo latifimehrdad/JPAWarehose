@@ -7,9 +7,9 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpawarehose.databinding.ItemReceiptProductBinding
-import com.hoomanholding.jpawarehose.model.database.entity.BrandEntity
-import com.hoomanholding.jpawarehose.model.database.join.LocationWithAmount
-import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
+import com.hoomanholding.jpawarehose.model.data.database.entity.BrandEntity
+import com.hoomanholding.jpawarehose.model.data.database.join.LocationWithAmount
+import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import com.hoomanholding.jpawarehose.utility.CreateDrawableByBrand
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptLocationAdapter
 
@@ -61,7 +61,7 @@ class ReceiptProductHolder(
 
 
     //---------------------------------------------------------------------------------------------- setLocationAdapter
-    private fun setLocationAdapter(context : Context ,
+    private fun setLocationAdapter(context : Context,
                                    brandEntity: BrandEntity,
                                    locations : List<LocationWithAmount>) {
         binding.recyclerViewLocation.visibility = View.VISIBLE

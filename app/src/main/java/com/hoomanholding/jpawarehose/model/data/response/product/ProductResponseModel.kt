@@ -1,7 +1,7 @@
 package com.hoomanholding.jpawarehose.model.data.response.product
 
+import com.hoomanholding.jpawarehose.model.data.database.entity.ProductsEntity
 import com.hoomanholding.jpawarehose.model.data.response.BaseResponseAbstractModel
-import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
 
 /**
  * Create by Mehrdad on 1/18/2023

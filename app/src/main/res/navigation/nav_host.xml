@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.hoomanholding.jpawarehose.view.fragment.SplashFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.splash.SplashFragment"
         android:label="SplashFragment" >
 
         <action
@@ -30,22 +30,22 @@
 
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.hoomanholding.jpawarehose.view.fragment.LoginFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.login.LoginFragment"
         android:label="LoginFragment" />
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.hoomanholding.jpawarehose.view.fragment.HomeFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.home.HomeFragment"
         android:label="HomeFragment"/>
 
     <fragment
         android:id="@+id/UpdateFragment"
-        android:name="com.hoomanholding.jpawarehose.view.fragment.UpdateFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.update.UpdateFragment"
         android:label="UpdateFragment"/>
 
     <fragment
         android:id="@+id/SaveReceiptFragment"
-        android:name="com.hoomanholding.jpawarehose.view.fragment.SaveReceiptFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.savereceipt.SaveReceiptFragment"
         android:label="SaveReceiptFragment"/>
 
     <fragment

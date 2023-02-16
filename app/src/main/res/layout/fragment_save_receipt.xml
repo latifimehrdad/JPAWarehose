@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.hoomanholding.jpawarehose.viewmodel.SaveReceiptViewModel" />
+            type="com.hoomanholding.jpawarehose.view.fragment.savereceipt.SaveReceiptViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

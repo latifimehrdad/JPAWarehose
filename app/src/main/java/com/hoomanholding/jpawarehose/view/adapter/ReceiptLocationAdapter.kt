@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpawarehose.databinding.ItemReceiptLocationBinding
-import com.hoomanholding.jpawarehose.model.database.entity.BrandEntity
-import com.hoomanholding.jpawarehose.model.database.join.LocationWithAmount
+import com.hoomanholding.jpawarehose.model.data.database.entity.BrandEntity
+import com.hoomanholding.jpawarehose.model.data.database.join.LocationWithAmount
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptLocationHolder
 
 class ReceiptLocationAdapter(

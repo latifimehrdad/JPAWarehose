@@ -1,8 +1,8 @@
 package com.hoomanholding.jpawarehose.model.repository
 
 import com.hoomanholding.jpawarehose.model.api.Api
-import com.hoomanholding.jpawarehose.model.database.dao.ProductDao
-import com.hoomanholding.jpawarehose.model.database.entity.ProductsEntity
+import com.hoomanholding.jpawarehose.model.data.database.dao.ProductDao
+import com.hoomanholding.jpawarehose.model.data.database.entity.ProductsEntity
 import com.zar.core.tools.api.apiCall
 import javax.inject.Inject
 

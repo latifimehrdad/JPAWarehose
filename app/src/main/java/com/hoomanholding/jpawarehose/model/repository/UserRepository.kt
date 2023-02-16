@@ -1,14 +1,11 @@
 package com.hoomanholding.jpawarehose.model.repository
 
 import com.hoomanholding.jpawarehose.model.api.Api
-import com.hoomanholding.jpawarehose.model.database.dao.UserInfoDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.RoleDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.UserInfoDao
+import com.hoomanholding.jpawarehose.model.data.database.entity.RoleEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.UserInfoEntity
 import com.zar.core.tools.api.apiCall
-import com.hoomanholding.jpawarehose.model.database.dao.RoleDao
-import com.hoomanholding.jpawarehose.model.database.entity.RoleEntity
-import com.hoomanholding.jpawarehose.model.database.entity.UserInfoEntity
-import com.hoomanholding.jpawarehose.utility.CompanionValues
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**

@@ -1,12 +1,12 @@
 package com.hoomanholding.jpawarehose.model.repository
 
 import com.hoomanholding.jpawarehose.model.api.Api
-import com.hoomanholding.jpawarehose.model.database.dao.LocationAmountDao
-import com.hoomanholding.jpawarehose.model.database.dao.ReceiptDao
-import com.hoomanholding.jpawarehose.model.database.dao.ReceiptDetailDao
-import com.hoomanholding.jpawarehose.model.database.entity.LocationAmountEntity
-import com.hoomanholding.jpawarehose.model.database.entity.ReceiptDetailEntity
-import com.hoomanholding.jpawarehose.model.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.dao.LocationAmountDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.ReceiptDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.ReceiptDetailDao
+import com.hoomanholding.jpawarehose.model.data.database.entity.LocationAmountEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptDetailEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
 import com.zar.core.tools.api.apiCall
 import javax.inject.Inject
 

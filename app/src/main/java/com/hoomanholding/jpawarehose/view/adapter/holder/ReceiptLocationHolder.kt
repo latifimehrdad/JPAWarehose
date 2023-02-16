@@ -8,8 +8,8 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ItemReceiptLocationBinding
-import com.hoomanholding.jpawarehose.model.database.entity.BrandEntity
-import com.hoomanholding.jpawarehose.model.database.join.LocationWithAmount
+import com.hoomanholding.jpawarehose.model.data.database.entity.BrandEntity
+import com.hoomanholding.jpawarehose.model.data.database.join.LocationWithAmount
 import com.hoomanholding.jpawarehose.utility.CreateDrawableByBrand
 import com.zar.core.tools.manager.DialogManager
 

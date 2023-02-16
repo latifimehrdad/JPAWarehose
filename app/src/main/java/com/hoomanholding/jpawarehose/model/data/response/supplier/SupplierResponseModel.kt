@@ -1,7 +1,7 @@
 package com.hoomanholding.jpawarehose.model.data.response.supplier
 
+import com.hoomanholding.jpawarehose.model.data.database.entity.SupplierEntity
 import com.hoomanholding.jpawarehose.model.data.response.BaseResponseAbstractModel
-import com.hoomanholding.jpawarehose.model.database.entity.SupplierEntity
 
 /**
  * Create by Mehrdad on 1/18/2023

@@ -1,6 +1,6 @@
 package com.hoomanholding.jpawarehose.model.data.response.user
 
-import com.hoomanholding.jpawarehose.model.database.entity.UserInfoEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.UserInfoEntity
 
 
 data class UserItemsModel(

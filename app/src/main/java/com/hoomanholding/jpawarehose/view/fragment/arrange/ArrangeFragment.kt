@@ -10,14 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentArrangeBinding
-import com.hoomanholding.jpawarehose.model.database.entity.ReceiptEntity
-import com.hoomanholding.jpawarehose.model.database.join.ReceiptWithProduct
+import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptProductAdapter
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptSpinnerAdapter
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptLocationHolder
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
-import com.hoomanholding.jpawarehose.viewmodel.ArrangeViewModel
 import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.g00fy2.quickie.QRResult

@@ -2,10 +2,10 @@ package com.hoomanholding.jpawarehose.model.repository
 
 import android.util.Log
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.hoomanholding.jpawarehose.model.database.dao.ProductDao
-import com.hoomanholding.jpawarehose.model.database.dao.SaveReceiptAmountDao
-import com.hoomanholding.jpawarehose.model.database.entity.SaveReceiptAmountEntity
-import com.hoomanholding.jpawarehose.model.database.join.ProductAmountSearchModel
+import com.hoomanholding.jpawarehose.model.data.database.dao.ProductDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.SaveReceiptAmountDao
+import com.hoomanholding.jpawarehose.model.data.database.entity.SaveReceiptAmountEntity
+import com.hoomanholding.jpawarehose.model.data.database.join.ProductAmountSearchModel
 import com.zar.core.tools.extensions.persianNumberToEnglishNumber
 import javax.inject.Inject
 
@@ -38,12 +38,18 @@ class SaveReceiptAmountRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- search
-    fun search(ignoreBrandId: Long, orderBy : String, orderType : String, words : List<String>? = null): List<ProductAmountSearchModel> {
+    fun search(
+        ignoreBrandId: Long,
+        orderBy: String,
+        orderType: String,
+        words: List<String>? = null
+    ): List<ProductAmountSearchModel> {
         val selectQuery = "SELECT * FROM Product WHERE brandId != $ignoreBrandId"
         var finalQuery = selectQuery
         if (words != null)
             finalQuery = selectQuery + words.joinToString(prefix = " AND ", separator = " AND ") {
-                "(codeKala LIKE '%${it.persianNumberToEnglishNumber()}%' OR nameKala LIKE '%${it.persianNumberToEnglishNumber()}%')"}
+                "(codeKala LIKE '%${it.persianNumberToEnglishNumber()}%' OR nameKala LIKE '%${it.persianNumberToEnglishNumber()}%')"
+            }
         finalQuery = "$finalQuery ORDER BY $orderBy $orderType"
         val query = SimpleSQLiteQuery(finalQuery)
         Log.e("meri", query.sql)

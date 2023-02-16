@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.WindowManager
-import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
 import com.hoomanholding.jpawarehose.R

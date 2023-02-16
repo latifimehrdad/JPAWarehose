@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.hoomanholding.jpawarehose.viewmodel.LoginViewModel" />
+            type="com.hoomanholding.jpawarehose.view.fragment.login.LoginViewModel" />
     </data>
 
     <ScrollView
@@ -35,7 +35,6 @@
                     android:contentDescription="@string/logoDescription"/>
 
             </FrameLayout>
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayoutLogin"
