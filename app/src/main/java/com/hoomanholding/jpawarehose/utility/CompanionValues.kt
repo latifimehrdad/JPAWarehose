@@ -7,7 +7,7 @@ package com.hoomanholding.jpawarehose.utility
 class CompanionValues {
 
     companion object {
-        const val URL = "url"
+        const val URL = "newUrl"
         const val TOKEN = "token"
         const val biometric = "biometric"
         const val userName = "userName"

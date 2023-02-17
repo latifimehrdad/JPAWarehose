@@ -66,6 +66,9 @@
     <string name="fingerprint">ورود با اثر انگشت</string>
     <string name="actionIsDone">انجام شد</string>
     <string name="ipIsIncorrect">آدرس وارد شده اشتباه است</string>
+    <string name="newIp">ip</string>
+    <string name="ipPassword">ip password</string>
+    <string name="passwordIsInCorrect">رمز اشتباه است</string>
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>

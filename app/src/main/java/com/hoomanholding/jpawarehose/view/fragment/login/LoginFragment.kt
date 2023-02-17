@@ -156,13 +156,27 @@ class LoginFragment : Fragment() {
                 val textInputEditTextIp =
                     dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIp)
 
+                val textInputEditTextIpPassword =
+                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIpPassword)
+
                 val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
                 buttonNo.setOnClickListener { dialog.dismiss() }
 
                 val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
                 buttonYes.setOnClickListener {
+
                     if (textInputEditTextIp.text.toString().isIP()) {
+                        if (textInputEditTextIpPassword.text.toString() != "holeshdaf"){
+                            textInputEditTextIpPassword.error = getString(R.string.passwordIsInCorrect)
+                            showMessage(getString(R.string.passwordIsInCorrect))
+                            return@setOnClickListener
+                        }
                         loginViewModel.saveNewIp(textInputEditTextIp.text.toString())
+                        showMessage(getString(R.string.updateIsSuccess))
+                        CoroutineScope(Main).launch {
+                            delay(1500)
+                            (activity as MainActivity).finish()
+                        }
                     } else {
                         textInputEditTextIp.error = getString(R.string.ipIsIncorrect)
                         showMessage(getString(R.string.ipIsIncorrect))
