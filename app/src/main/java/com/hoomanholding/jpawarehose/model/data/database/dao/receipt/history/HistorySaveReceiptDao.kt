@@ -15,8 +15,12 @@ interface HistorySaveReceiptDao {
     fun insertSaveReceipts(saveReceipt: HistorySaveReceiptEntity): Long
 
 
+    @Query("SELECT * FROM HistorySaveReceipt WHERE id = :id LIMIT 1")
+    fun getSaveReceipt(id: Int): HistorySaveReceiptWithSupplier
+
+
     @Query("SELECT * FROM HistorySaveReceipt")
-    fun getSaveReceipt(): List<HistorySaveReceiptWithSupplier>
+    fun getSaveReceipts(): List<HistorySaveReceiptWithSupplier>
 
     @Query("DELETE FROM HistorySaveReceipt")
     fun deleteAllRecord()

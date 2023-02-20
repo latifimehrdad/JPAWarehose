@@ -44,7 +44,7 @@ class SaveReceiptRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- getHistorySaveReceipt
-    fun getHistorySaveReceipt() = historySaveReceiptDao.getSaveReceipt()
+    fun getHistorySaveReceipts() = historySaveReceiptDao.getSaveReceipts()
     //---------------------------------------------------------------------------------------------- getHistorySaveReceipt
 
 

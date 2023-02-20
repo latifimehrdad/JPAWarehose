@@ -67,7 +67,7 @@ class HistorySaveReceiptFragment(override var layout: Int = R.layout.fragment_hi
             R.color.recyclerLoadingShadow,
             1
         )
-        viewModel.getSaveReceipt()
+        viewModel.getSaveReceipts()
     }
     //---------------------------------------------------------------------------------------------- getSaveReceipt
 

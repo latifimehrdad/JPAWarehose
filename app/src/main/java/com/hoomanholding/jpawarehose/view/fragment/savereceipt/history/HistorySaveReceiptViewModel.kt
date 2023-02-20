@@ -24,9 +24,9 @@ class HistorySaveReceiptViewModel @Inject constructor(
     }
 
     //---------------------------------------------------------------------------------------------- getSaveReceipt
-    fun getSaveReceipt() {
+    fun getSaveReceipts() {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            saveReceiptsLiveData.postValue(saveReceiptRepository.getHistorySaveReceipt())
+            saveReceiptsLiveData.postValue(saveReceiptRepository.getHistorySaveReceipts())
         }
     }
     //---------------------------------------------------------------------------------------------- getSaveReceipt
