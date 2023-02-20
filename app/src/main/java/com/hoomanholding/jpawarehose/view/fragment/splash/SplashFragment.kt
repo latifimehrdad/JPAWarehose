@@ -1,12 +1,10 @@
 package com.hoomanholding.jpawarehose.view.fragment.splash
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.hoomanholding.jpawarehose.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSplashBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
@@ -22,30 +20,16 @@ import kotlinx.coroutines.Dispatchers.Main
 
 
 @AndroidEntryPoint
-class SplashFragment : Fragment() {
-
-    private var _binding: FragmentSplashBinding? = null
-    private val binding get() = _binding!!
+class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
+    JpaFragment<FragmentSplashBinding>() {
 
     private val splashViewModel: SplashViewModel by viewModels()
 
     private var job: Job? = null
 
-    //---------------------------------------------------------------------------------------------- onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSplashBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-    //---------------------------------------------------------------------------------------------- onCreateView
-
-
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.buttonReTry.setOnClickListener { checkUserIsLogged() }
         checkUserIsLogged()
     }
@@ -137,16 +121,5 @@ class SplashFragment : Fragment() {
         binding.buttonReTry.visibility = View.VISIBLE
     }
     //---------------------------------------------------------------------------------------------- stopLoading
-
-
-
-    //---------------------------------------------------------------------------------------------- onDestroyView
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job?.cancel()
-        _binding = null
-    }
-    //---------------------------------------------------------------------------------------------- onDestroyView
-
 
 }

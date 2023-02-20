@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.jpawarehose.model.data.database.join.HistorySaveReceiptWithSupplier" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardBackgroundColor="@color/primaryColorVariant2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/yekan_bakh_light"
+                android:textColor="@color/white"
+                app:setSplitter="@{@string/dote}"
+                app:setTitle="@{@string/date}"
+                app:setValue="@{item.saveReceiptEntity.date}"/>
+
+            <TextView
+                android:id="@+id/textViewNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewDate"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/yekan_bakh_light"
+                android:textColor="@color/white"
+                app:setSplitter="@{@string/dote}"
+                app:setTitle="@{@string/pageNumber}"
+                app:setValue="@{item.saveReceiptEntity.number}"/>
+
+            <TextView
+                android:id="@+id/textViewSupplier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewNumber"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/yekan_bakh_light"
+                android:textColor="@color/white"
+                app:setSplitter="@{@string/dote}"
+                app:setTitle="@{@string/supplier}"
+                app:setValue="@{item.supplierEntity}"/>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/expandableMore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewSupplier"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:el_duration="500"
+                app:el_expanded="false"
+                app:el_parallax="0.5">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_main_menu"/>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

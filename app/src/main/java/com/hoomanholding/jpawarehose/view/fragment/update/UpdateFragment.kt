@@ -1,11 +1,10 @@
 package com.hoomanholding.jpawarehose.view.fragment.update
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.hoomanholding.jpawarehose.JpaFragment
+import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentUpdateBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,29 +14,15 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class UpdateFragment : Fragment() {
-
-    private var _binding: FragmentUpdateBinding? = null
-    private val binding get() = _binding!!
+class UpdateFragment(override var layout: Int = R.layout.fragment_update) :
+    JpaFragment<FragmentUpdateBinding>() {
 
     private val updateViewModel : UpdateViewModel by viewModels()
-
-    //---------------------------------------------------------------------------------------------- onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
-        binding.viewModel = updateViewModel
-        return binding.root
-    }
-    //---------------------------------------------------------------------------------------------- onCreateView
-
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = updateViewModel
         observeLiveData()
         setListener()
     }
@@ -73,14 +58,5 @@ class UpdateFragment : Fragment() {
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
-
-
-    //---------------------------------------------------------------------------------------------- onDestroyView
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-    //---------------------------------------------------------------------------------------------- onDestroyView
-
 
 }

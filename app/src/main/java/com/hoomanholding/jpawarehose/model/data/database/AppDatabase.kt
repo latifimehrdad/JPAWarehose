@@ -4,7 +4,19 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.hoomanholding.jpawarehose.model.data.database.dao.*
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.arrange.ReceiptDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.arrange.ReceiptDetailDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.history.HistorySaveReceiptAmountDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.history.HistorySaveReceiptDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.save.SaveReceiptAmountDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.save.SaveReceiptDao
 import com.hoomanholding.jpawarehose.model.data.database.entity.*
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.history.HistorySaveReceiptAmountEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.history.HistorySaveReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.SaveReceiptAmountEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.SaveReceiptEntity
 
 
 @Database(
@@ -19,7 +31,9 @@ import com.hoomanholding.jpawarehose.model.data.database.entity.*
         LocationEntity::class,
         SaveReceiptEntity::class,
         SaveReceiptAmountEntity::class,
-        LocationAmountEntity::class],
+        LocationAmountEntity::class,
+        HistorySaveReceiptEntity::class,
+        HistorySaveReceiptAmountEntity::class],
     version = 1
 )
 @TypeConverters(Converters::class)
@@ -34,5 +48,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun locationDao(): LocationDao
     abstract fun saveReceiptDao(): SaveReceiptDao
     abstract fun saveReceiptAmountDao(): SaveReceiptAmountDao
-    abstract fun locationAmountDao() : LocationAmountDao
+    abstract fun locationAmountDao(): LocationAmountDao
+    abstract fun historySaveReceiptDao(): HistorySaveReceiptDao
+    abstract fun historySaveReceiptAmountDao(): HistorySaveReceiptAmountDao
 }

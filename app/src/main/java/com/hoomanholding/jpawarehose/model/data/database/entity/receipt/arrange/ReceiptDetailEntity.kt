@@ -1,8 +1,7 @@
-package com.hoomanholding.jpawarehose.model.data.database.entity
+package com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.hoomanholding.jpawarehose.model.data.response.receipt.WarehouseReceiptProductLocationModel
 
 /**
  * Create by Mehrdad on 1/22/2023

@@ -30,7 +30,8 @@
                 android:fontFamily="@font/yekan_bakh_medium"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                app:setTitle="@{@string/productCodeDot}"
+                app:setSplitter="@{@string/dote}"
+                app:setTitle="@{@string/productCode}"
                 app:setValue="@{item.productsEntity.codeKala}"/>
 
             <TextView
@@ -60,6 +61,7 @@
                 android:fontFamily="@font/yekan_bakh_medium"
                 android:paddingHorizontal="@dimen/_8sdp"
                 android:gravity="center"
+                app:setSplitter="@{@string/space}"
                 app:setTitle="@{@string/packet}"
                 app:setValue="@{item}"/>
 
@@ -88,7 +90,7 @@
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:text="+1"/>
+                    android:text="@string/plus"/>
 
                 <TextView
                     android:id="@+id/textViewCartonMinus"
@@ -102,7 +104,7 @@
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:text="1-"/>
+                    android:text="@string/reduce"/>
 
                 <TextView
                     android:id="@+id/textViewCartonCount"
@@ -119,6 +121,7 @@
                     android:gravity="center"
                     android:textColor="@color/dismiss"
                     android:textStyle="bold"
+                    app:setSplitter="@{@string/space}"
                     app:setTitle="@{@string/carton}"
                     app:setValue="@{item.saveReceiptAmountEntity.cartonCount}"/>
 
@@ -146,7 +149,7 @@
                     android:fontFamily="@font/yekan_bakh_light"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:text="+1"/>
+                    android:text="@string/plus"/>
 
                 <TextView
                     android:id="@+id/textViewPacketMinus"
@@ -160,7 +163,7 @@
                     android:textSize="@dimen/_9sdp"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:text="1-"/>
+                    android:text="@string/reduce"/>
 
                 <TextView
                     android:id="@+id/textViewPacketCount"
@@ -177,6 +180,7 @@
                     android:fontFamily="@font/yekan_bakh_light"
                     android:textColor="@color/dismiss"
                     android:textStyle="bold"
+                    app:setSplitter="@{@string/space}"
                     app:setTitle="@{@string/packet}"
                     app:setValue="@{item.saveReceiptAmountEntity.packetCount}"/>
 

@@ -2,12 +2,12 @@ package com.hoomanholding.jpawarehose.view.fragment.arrange
 
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
-import com.hoomanholding.jpawarehose.model.repository.ReceiptRepository
+import com.hoomanholding.jpawarehose.model.repository.receipt.ReceiptRepository
 import com.hoomanholding.jpawarehose.di.ResourcesProvider
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
 import com.hoomanholding.jpawarehose.JpaViewModel
 import com.hoomanholding.jpawarehose.model.data.database.entity.LocationAmountEntity
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*

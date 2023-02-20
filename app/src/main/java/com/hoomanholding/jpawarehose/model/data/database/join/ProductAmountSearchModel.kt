@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.hoomanholding.jpawarehose.model.data.database.entity.BrandEntity
 import com.hoomanholding.jpawarehose.model.data.database.entity.ProductsEntity
-import com.hoomanholding.jpawarehose.model.data.database.entity.SaveReceiptAmountEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.SaveReceiptAmountEntity
 
 /**
  * Create by Mehrdad on 1/27/2023

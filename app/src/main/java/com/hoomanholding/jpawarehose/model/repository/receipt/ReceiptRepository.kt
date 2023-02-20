@@ -1,12 +1,13 @@
-package com.hoomanholding.jpawarehose.model.repository
+package com.hoomanholding.jpawarehose.model.repository.receipt
 
 import com.hoomanholding.jpawarehose.model.api.Api
 import com.hoomanholding.jpawarehose.model.data.database.dao.LocationAmountDao
-import com.hoomanholding.jpawarehose.model.data.database.dao.ReceiptDao
-import com.hoomanholding.jpawarehose.model.data.database.dao.ReceiptDetailDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.arrange.ReceiptDao
+import com.hoomanholding.jpawarehose.model.data.database.dao.receipt.arrange.ReceiptDetailDao
 import com.hoomanholding.jpawarehose.model.data.database.entity.LocationAmountEntity
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptDetailEntity
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.repository.TokenRepository
 import com.zar.core.tools.api.apiCall
 import javax.inject.Inject
 

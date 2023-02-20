@@ -1,16 +1,14 @@
 package com.hoomanholding.jpawarehose.view.fragment.arrange
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.text.isDigitsOnly
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hoomanholding.jpawarehose.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentArrangeBinding
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptProductAdapter
@@ -29,10 +27,8 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class ArrangeFragment : Fragment() {
-
-    private var _binding: FragmentArrangeBinding? = null
-    private val binding get() = _binding!!
+class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
+    JpaFragment<FragmentArrangeBinding>() {
 
     private val arrangeViewModel: ArrangeViewModel by viewModels()
 
@@ -44,22 +40,11 @@ class ArrangeFragment : Fragment() {
     private val scanCustomCode =
         registerForActivityResult(ScanCustomCode()) { result -> handleResult(result) }
 
-    //---------------------------------------------------------------------------------------------- onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentArrangeBinding.inflate(inflater, container, false)
-        binding.viewModel = arrangeViewModel
-        return binding.root
-    }
-    //---------------------------------------------------------------------------------------------- onCreateView
-
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = arrangeViewModel
         observeLiveData()
         setListener()
         arrangeViewModel.getOldData()
@@ -267,14 +252,6 @@ class ArrangeFragment : Fragment() {
         arrangeViewModel.productCompletingOnReceipt()
     }
     //---------------------------------------------------------------------------------------------- productCompletingOnReceipt
-
-
-    //---------------------------------------------------------------------------------------------- onDestroyView
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-    //---------------------------------------------------------------------------------------------- onDestroyView
 
 
 }

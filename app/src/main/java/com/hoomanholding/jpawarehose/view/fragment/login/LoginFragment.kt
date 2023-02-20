@@ -2,16 +2,14 @@ package com.hoomanholding.jpawarehose.view.fragment.login
 
 import android.os.Bundle
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.hoomanholding.jpawarehose.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentLoginBinding
 import com.hoomanholding.jpawarehose.ext.hideKeyboard
@@ -32,10 +30,8 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
-
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+class LoginFragment(override var layout: Int = R.layout.fragment_login) :
+    JpaFragment<FragmentLoginBinding>() {
 
     @Inject
     lateinit var biometricTools: BiometricTools
@@ -62,22 +58,10 @@ class LoginFragment : Fragment() {
 
 
 
-    //---------------------------------------------------------------------------------------------- onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        binding.viewModel = loginViewModel
-        return binding.root
-    }
-    //---------------------------------------------------------------------------------------------- onCreateView
-
-
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = loginViewModel
         initView()
         setListener()
     }
@@ -273,12 +257,5 @@ class LoginFragment : Fragment() {
     }
     //---------------------------------------------------------------------------------------------- stopLoading
 
-
-    //---------------------------------------------------------------------------------------------- onDestroyView
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-    //---------------------------------------------------------------------------------------------- onDestroyView
 
 }

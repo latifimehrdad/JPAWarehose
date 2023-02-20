@@ -90,6 +90,7 @@
                 android:drawablePadding="@dimen/_10sdp"
                 app:drawableEndCompat="@drawable/ic_user"
                 app:drawableTint="@color/primaryColor"
+                app:setSplitter="@{@string/space}"
                 app:setTitle="@{@string/fullNameDot}"
                 app:setValue="@{viewModel.userLiveData.fullName}"/>
 
@@ -121,6 +122,7 @@
                 android:drawablePadding="@dimen/_10sdp"
                 app:drawableEndCompat="@drawable/ic_carrier"
                 app:drawableTint="@color/primaryColor"
+                app:setSplitter="@{@string/space}"
                 app:setTitle="@{@string/personnelCodeDot}"
                 app:setValue="@{viewModel.userLiveData.personnelNumber}"/>
 

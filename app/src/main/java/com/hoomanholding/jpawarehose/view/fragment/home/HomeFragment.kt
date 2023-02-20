@@ -1,14 +1,12 @@
 package com.hoomanholding.jpawarehose.view.fragment.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.hoomanholding.jpawarehose.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentHomeBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
@@ -22,32 +20,19 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+class HomeFragment(override var layout: Int  = R.layout.fragment_home) :
+    JpaFragment<FragmentHomeBinding>() {
 
     private val homeViewModel : HomeViewModel by viewModels()
 
     @Inject
     lateinit var biometricTools: BiometricTools
 
-    //---------------------------------------------------------------------------------------------- onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.viewModel = homeViewModel
-        return binding.root
-    }
-    //---------------------------------------------------------------------------------------------- onCreateView
-
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = homeViewModel
         binding.switchActive.isChecked = homeViewModel.isBiometricEnable()
         backClickControl()
         observeLiveData()
@@ -149,15 +134,6 @@ class HomeFragment : Fragment() {
         biometricTools.checkDeviceHasBiometric(biometricPrompt)
     }
     //---------------------------------------------------------------------------------------------- showBiometricDialog
-
-
-
-    //---------------------------------------------------------------------------------------------- onDestroyView
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-    //---------------------------------------------------------------------------------------------- onDestroyView
 
 
 }

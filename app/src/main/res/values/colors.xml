@@ -10,6 +10,7 @@
 
     <color name="primaryColor">#00e5f5</color>
     <color name="primaryColorVariant">#061420</color>
+    <color name="primaryColorVariant2">#152A3C</color>
 
     <color name="dismiss">#BCBCBC</color>
     <color name="hint">#6E6D6D</color>

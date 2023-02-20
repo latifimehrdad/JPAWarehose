@@ -33,6 +33,7 @@
             android:fontFamily="@font/yekan_bakh_light"
             android:paddingHorizontal="@dimen/_8sdp"
             android:gravity="center"
+            app:setSplitter="@{@string/space}"
             app:setTitle="@{@string/packet}"
             app:setValue="@{item}"/>
 

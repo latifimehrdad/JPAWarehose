@@ -97,6 +97,23 @@ class DataBaseModule {
 
 
 
+    //---------------------------------------------------------------------------------------------- provideHistorySaveReceiptDao
+    @Provides
+    @Singleton
+    fun provideHistorySaveReceiptDao(appDatabase: AppDatabase) = appDatabase.historySaveReceiptDao()
+    //---------------------------------------------------------------------------------------------- provideHistorySaveReceiptDao
+
+
+
+    //---------------------------------------------------------------------------------------------- providerHistorySaveReceiptAmountDao
+    @Provides
+    @Singleton
+    fun providerHistorySaveReceiptAmountDao(appDatabase: AppDatabase) =
+        appDatabase.historySaveReceiptAmountDao()
+    //---------------------------------------------------------------------------------------------- providerHistorySaveReceiptAmountDao
+
+
+
     //---------------------------------------------------------------------------------------------- provideAppDatabase
     @Provides
     @Singleton

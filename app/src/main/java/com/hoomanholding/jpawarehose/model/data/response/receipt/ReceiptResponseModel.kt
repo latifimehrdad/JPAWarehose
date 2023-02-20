@@ -1,6 +1,6 @@
 package com.hoomanholding.jpawarehose.model.data.response.receipt
 
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.response.BaseResponseAbstractModel
 
 /**

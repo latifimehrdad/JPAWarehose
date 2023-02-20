@@ -79,6 +79,10 @@ class MainActivity : AppCompatActivity() {
             navController?.navigate(R.id.action_goto_HomeFragment)
         }
 
+        binding.imageViewHistory.setOnClickListener {
+            navController?.navigate(R.id.action_goto_HistorySaveReceiptFragment)
+        }
+
         binding.imageViewShelf.setOnClickListener { clickOnImageShelf() }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -101,6 +105,7 @@ class MainActivity : AppCompatActivity() {
             }
             "UpdateFragment" -> selectCurrentMenu(binding.imageViewUpdate)
             "HomeFragment" -> selectCurrentMenu(binding.imageViewHome)
+            "HistorySaveReceiptFragment" -> selectCurrentMenu(binding.imageViewHistory)
             "SaveReceiptFragment",
             "ArrangeFragment" -> selectCurrentMenu(binding.imageViewShelf)
         }
@@ -110,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- resetMenuColor
     private fun resetMenuColor() {
-        resetImageNavigationMenu(binding.imageViewReport)
+        resetImageNavigationMenu(binding.imageViewHistory)
         resetImageNavigationMenu(binding.imageViewUpdate)
         resetImageNavigationMenu(binding.imageViewHome)
         resetImageNavigationMenu(binding.imageViewShelf)

@@ -2,16 +2,14 @@ package com.hoomanholding.jpawarehose.view.fragment.savereceipt
 
 import android.os.Bundle
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.hoomanholding.jpawarehose.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSaveReceiptBinding
 import com.hoomanholding.jpawarehose.model.data.database.entity.SupplierEntity
@@ -36,10 +34,8 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class SaveReceiptFragment : Fragment() {
-
-    private var _binding: FragmentSaveReceiptBinding? = null
-    private val binding get() = _binding!!
+class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_receipt) :
+    JpaFragment<FragmentSaveReceiptBinding>() {
 
     @Inject
     lateinit var loadingManager : LoadingManager
@@ -50,22 +46,11 @@ class SaveReceiptFragment : Fragment() {
 
     private var job : Job? = null
 
-    //---------------------------------------------------------------------------------------------- onCreateView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSaveReceiptBinding.inflate(inflater, container, false)
-        binding.viewModel = saveReceiptViewModel
-        return binding.root
-    }
-    //---------------------------------------------------------------------------------------------- onCreateView
-
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = saveReceiptViewModel
         observeErrorLiveDate()
         observeLiveData()
         setListener()
@@ -345,15 +330,6 @@ class SaveReceiptFragment : Fragment() {
         ).show()
     }
     //---------------------------------------------------------------------------------------------- createNewReceipt
-
-
-    //---------------------------------------------------------------------------------------------- onDestroyView
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job?.cancel()
-        _binding = null
-    }
-    //---------------------------------------------------------------------------------------------- onDestroyView
 
 
 }

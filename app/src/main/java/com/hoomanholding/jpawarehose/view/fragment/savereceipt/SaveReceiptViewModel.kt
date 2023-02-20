@@ -10,10 +10,13 @@ import com.hoomanholding.jpawarehose.model.data.enum.EnumSearchOrderType
 import com.hoomanholding.jpawarehose.model.repository.*
 import com.hoomanholding.jpawarehose.di.ResourcesProvider
 import com.hoomanholding.jpawarehose.JpaViewModel
-import com.hoomanholding.jpawarehose.model.data.database.entity.SaveReceiptAmountEntity
-import com.hoomanholding.jpawarehose.model.data.database.entity.SaveReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.SaveReceiptAmountEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.SaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.database.entity.SupplierEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.history.HistorySaveReceiptAmountEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.history.HistorySaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.database.join.ProductAmountModel
+import com.hoomanholding.jpawarehose.model.repository.receipt.SaveReceiptRepository
 import com.zar.core.tools.extensions.persianNumberToEnglishNumber
 import com.zar.core.tools.extensions.toSolarDate
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +34,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SaveReceiptViewModel @Inject constructor(
     private val supplierRepository: SupplierRepository,
-    private val saveReceiptAmountRepository: SaveReceiptAmountRepository,
     private val saveReceiptRepository: SaveReceiptRepository,
     private val resourcesProvider: ResourcesProvider
 ) : JpaViewModel() {
@@ -103,7 +105,7 @@ class SaveReceiptViewModel @Inject constructor(
     fun selectSupplier(index: Int) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             supplierLiveData.value?.let {
-                if (it.size > 1) saveReceiptAmountRepository.deleteAll()
+                if (it.size > 1) saveReceiptRepository.deleteAllAmount()
             }
             supplierSelected = supplierLiveData.value?.get(index)
             supplierSelected?.let {
@@ -125,14 +127,14 @@ class SaveReceiptViewModel @Inject constructor(
                 return@launch
             val search = searchProductLiveData.value
             val temp = if (search?.isEmpty() == true) {
-                saveReceiptAmountRepository.search(
+                saveReceiptRepository.search(
                     ignoreBrandId!!,
                     orderName.name,
                     orderType.name
                 )
             } else {
                 val words = search?.split(" ")
-                saveReceiptAmountRepository.search(
+                saveReceiptRepository.search(
                     ignoreBrandId!!,
                     orderName.name,
                     orderType.name,
@@ -169,7 +171,7 @@ class SaveReceiptViewModel @Inject constructor(
                 )
             }
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
-            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
+            saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
@@ -191,7 +193,7 @@ class SaveReceiptViewModel @Inject constructor(
                 )
             }
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
-            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
+            saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
@@ -207,7 +209,7 @@ class SaveReceiptViewModel @Inject constructor(
                 if (count < 0)
                     return
                 entity.cartonCount = count
-                saveReceiptAmountRepository.insertSaveReceiptAmount(entity)
+                saveReceiptRepository.insertSaveReceiptAmount(entity)
                 insertNewSaveReceipt()
                 adapterNotifyChangeLiveData.value = position
             }
@@ -224,7 +226,7 @@ class SaveReceiptViewModel @Inject constructor(
                 if (count < 0)
                     return
                 entity.packetCount = count
-                saveReceiptAmountRepository.insertSaveReceiptAmount(entity)
+                saveReceiptRepository.insertSaveReceiptAmount(entity)
                 insertNewSaveReceipt()
                 adapterNotifyChangeLiveData.value = position
             }
@@ -246,7 +248,7 @@ class SaveReceiptViewModel @Inject constructor(
                 )
             }
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
-            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
+            saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
@@ -267,7 +269,7 @@ class SaveReceiptViewModel @Inject constructor(
                 )
             }
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
-            saveReceiptAmountRepository.insertSaveReceiptAmount(saveAmount)
+            saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
             adapterNotifyChangeLiveData.value = position
         }
@@ -306,7 +308,7 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- sendReceipt
     fun sendReceipt(description: String) {
         CoroutineScope(IO + exceptionHandler()).launch {
-            val amounts = saveReceiptAmountRepository.getReceiptAmountWithProduct()
+            val amounts = saveReceiptRepository.getReceiptAmountWithProduct()
             if (amounts.isEmpty())
                 setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
             else {
@@ -346,11 +348,8 @@ class SaveReceiptViewModel @Inject constructor(
             if (response?.isSuccessful == true) {
                 val send = response.body()
                 send?.let {
-                    if (!it.hasError) {
-                        saveReceiptAmountRepository.deleteAll()
-                        saveReceiptRepository.deleteAllRecord()
-                    }
-                    sendReceiptToServer.postValue(it.message)
+                    if (!it.hasError)
+                        addToHistoryOfSaveReceipt(request.description, it.message)
                 } ?: run {
                     setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                 }
@@ -361,10 +360,40 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
 
 
+
+    //---------------------------------------------------------------------------------------------- addToHistoryOfSaveReceipt
+    private fun addToHistoryOfSaveReceipt(description: String?, message: String){
+        val saveReceipt = saveReceiptRepository.getSaveReceipt()
+        saveReceipt?.let {
+            val saveReceiptAmount = saveReceiptRepository.getReceiptAmountWithProduct()
+            val model = HistorySaveReceiptEntity(
+                saveReceipt.saveReceiptEntity.date,
+                saveReceipt.saveReceiptEntity.number,
+                description,
+                saveReceipt.supplierEntity.id
+            )
+            val receiptId = saveReceiptRepository.insertHistorySaveReceipt(model)
+            val amounts = saveReceiptAmount.map { item ->
+                HistorySaveReceiptAmountEntity(
+                    item.saveReceiptAmountEntity.cartonCount,
+                    item.saveReceiptAmountEntity.packetCount,
+                    item.productsEntity.id,
+                    receiptId
+                )
+            }
+            saveReceiptRepository.insertHistorySaveReceiptAmount(amounts)
+        }
+        saveReceiptRepository.deleteAllAmount()
+        saveReceiptRepository.deleteAllRecord()
+        sendReceiptToServer.postValue(message)
+    }
+    //---------------------------------------------------------------------------------------------- addToHistoryOfSaveReceipt
+
+
     //---------------------------------------------------------------------------------------------- createNewReceipt
     fun createNewReceipt() {
         CoroutineScope(IO + exceptionHandler()).launch {
-            saveReceiptAmountRepository.deleteAll()
+            saveReceiptRepository.deleteAllAmount()
             saveReceiptRepository.deleteAllRecord()
             supplierSelected = null
             delay(300)

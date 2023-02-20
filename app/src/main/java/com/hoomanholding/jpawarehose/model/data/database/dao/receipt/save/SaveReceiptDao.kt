@@ -1,7 +1,7 @@
-package com.hoomanholding.jpawarehose.model.data.database.dao
+package com.hoomanholding.jpawarehose.model.data.database.dao.receipt.save
 
 import androidx.room.*
-import com.hoomanholding.jpawarehose.model.data.database.entity.SaveReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.SaveReceiptEntity
 import com.hoomanholding.jpawarehose.model.data.database.join.SaveReceiptWithSupplier
 
 /**

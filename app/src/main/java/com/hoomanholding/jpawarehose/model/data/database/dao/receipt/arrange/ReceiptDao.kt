@@ -1,10 +1,10 @@
-package com.hoomanholding.jpawarehose.model.data.database.dao
+package com.hoomanholding.jpawarehose.model.data.database.dao.receipt.arrange
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptEntity
 
 /**
  * Create by Mehrdad on 1/22/2023

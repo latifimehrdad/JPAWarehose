@@ -4,21 +4,16 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.hoomanholding.jpawarehose.model.data.database.entity.BrandEntity
 import com.hoomanholding.jpawarehose.model.data.database.entity.ProductsEntity
-import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.SaveReceiptAmountEntity
 
 /**
- * Create by Mehrdad on 1/27/2023
+ * Created by zar on 2/20/2023.
  */
-data class ProductAmountModel(
+
+data class ProductWithBrandModel(
     @Embedded val productsEntity: ProductsEntity,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "productId"
-    )
-    var saveReceiptAmountEntity: SaveReceiptAmountEntity?,
     @Relation(
         parentColumn = "brandId",
         entityColumn = "id"
     )
-    var brandEntity: BrandEntity?
+    val brandEntity: BrandEntity
 )

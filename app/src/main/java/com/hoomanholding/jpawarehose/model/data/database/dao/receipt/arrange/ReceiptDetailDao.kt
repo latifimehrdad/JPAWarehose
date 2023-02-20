@@ -1,7 +1,7 @@
-package com.hoomanholding.jpawarehose.model.data.database.dao
+package com.hoomanholding.jpawarehose.model.data.database.dao.receipt.arrange
 
 import androidx.room.*
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptDetailEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
 import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 
 /**

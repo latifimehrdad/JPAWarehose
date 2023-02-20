@@ -20,6 +20,7 @@
     <string name="products">کالاها</string>
     <string name="locations">لوکیشن</string>
     <string name="brands">برندها</string>
+    <string name="supplier">تامین کننده</string>
     <string name="suppliers">تامین کننده ها</string>
     <string name="doUpdate">انجام بروزرسانی</string>
     <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
@@ -27,12 +28,14 @@
     <string name="chooseSupplier">انتخاب تامین کننده</string>
     <string name="pageNumber">شماره برگه</string>
     <string name="pageNumberDot">شماره برگه :</string>
+    <string name="productCode">کد کالا</string>
     <string name="productCodeDot">کد کالا :</string>
     <string name="add">اضافه کردن</string>
     <string name="carton">کارتن</string>
     <string name="packet">بسته</string>
     <string name="packetRemaining">بسته مانده</string>
     <string name="dateDot">تاریخ :</string>
+    <string name="date">تاریخ</string>
     <string name="search">جستجو</string>
     <string name="receiptNumberIsEmpty">شماره برگه را وارد کنید</string>
     <string name="receiptNumberHint">فقط عدد</string>
@@ -58,7 +61,6 @@
     <string name="qrCodeNotFoundInReceipt">لوکیشن اسکن شده در رسید جود ندارد</string>
     <string name="orderBy">مرتب سازی بر اساس</string>
     <string name="productName">نام کالا</string>
-    <string name="productCode">کد کالا</string>
     <string name="DESC">نزولی</string>
     <string name="ASC">صعودی</string>
     <string name="logOut">خروج از حساب کاربری</string>
@@ -69,6 +71,10 @@
     <string name="newIp">ip</string>
     <string name="ipPassword">ip password</string>
     <string name="passwordIsInCorrect">رمز اشتباه است</string>
+    <string name="plus">+1</string>
+    <string name="reduce">1-</string>
+    <string name="space"> </string>
+    <string name="dote">:</string>
 
     <string name="logoDescription">logoDescription</string>
     <string name="userNameDescription">username</string>
@@ -78,6 +84,11 @@
     <string name="deleteDescription">delete</string>
     <string name="backgroundDescription">background</string>
     <string name="locationDescription">location</string>
+    <string name="historyDescription">history</string>
+    <string name="updateDescription">update</string>
+    <string name="homeDescription">home</string>
+    <string name="shelfDescription">shelf</string>
+
 
 
 </resources>

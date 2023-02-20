@@ -1,11 +1,13 @@
-package com.hoomanholding.jpawarehose.view.extension
+package com.hoomanholding.jpawarehose.ext
 
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import com.hoomanholding.jpawarehose.R
+import com.hoomanholding.jpawarehose.model.data.database.entity.SupplierEntity
 import com.hoomanholding.jpawarehose.model.data.database.join.LocationWithAmount
 import com.hoomanholding.jpawarehose.model.data.database.join.ProductAmountModel
+import com.hoomanholding.jpawarehose.model.data.database.join.ProductWithHistoryReceipt
 import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import com.zar.core.tools.extensions.toSolarDate
 import java.time.LocalDateTime
@@ -14,21 +16,28 @@ import java.time.LocalDateTime
  * Create by Mehrdad on 1/27/2023
  */
 
-@BindingAdapter("setTitle","setValue")
-fun TextView.setTitleAndValue(title : String, value : Any?){
+@BindingAdapter("setTitle","setValue", "setSplitter")
+fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
     val temp = value?.let {
         when(value){
-            is String -> "$title $value"
-            is Long -> "$title $value"
-            is Int -> "$value $title"
-            is LocalDateTime -> "$title ${value.toSolarDate()?.getSolarDate()}"
+            is String -> "$title $splitter $value"
+            is Long -> "$title $splitter $value"
+            is Int -> "$value $splitter $title"
+            is LocalDateTime -> "$title $splitter ${value.toSolarDate()?.getSolarDate()}"
+            is ProductWithHistoryReceipt -> {
+                val count = whenIsProductWithHistoryReceipt(value)
+                "$count $splitter $title"
+            }
             is ProductAmountModel -> {
                 val count = whenIsProductWithBrandAndAmountModel(value)
-                "$count $title"
+                "$count $splitter $title"
             }
             is ReceiptWithProduct -> {
                 val count = whenIsReceiptWithProduct(value)
-                "$count $title"
+                "$count $splitter $title"
+            }
+            is SupplierEntity -> {
+                "$title $splitter ${value.nameTaminKonandeh}"
             }
             is LocationWithAmount -> {
                 val count = whenIsLocationWithAmount(value)
@@ -42,13 +51,23 @@ fun TextView.setTitleAndValue(title : String, value : Any?){
                     setTextColor(context.getColor(R.color.primaryColorVariant))
                     AppCompatResources.getDrawable(context, R.drawable.drawable_location_amount)
                 }
-                "$count $title"
+                "$count $splitter $title"
             }
             else -> ""
         }
     } ?: run { "" }
     text = temp
 }
+
+
+//-------------------------------------------------------------------------------------------------- whenIsProductWithHistoryReceipt
+private fun whenIsProductWithHistoryReceipt(value : ProductWithHistoryReceipt) : String {
+    val count = value.amount.cartonCount *
+            value.products.productsEntity.tedadDarKarton +
+            value.amount.packetCount
+    return count.toString()
+}
+//-------------------------------------------------------------------------------------------------- whenIsProductWithHistoryReceipt
 
 
 //-------------------------------------------------------------------------------------------------- whenIsProductWithBrandAndAmountModel

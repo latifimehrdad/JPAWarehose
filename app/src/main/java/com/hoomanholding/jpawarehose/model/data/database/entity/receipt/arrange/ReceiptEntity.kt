@@ -1,4 +1,4 @@
-package com.hoomanholding.jpawarehose.model.data.database.entity
+package com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

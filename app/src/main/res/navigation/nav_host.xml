@@ -53,6 +53,10 @@
         android:name="com.hoomanholding.jpawarehose.view.fragment.arrange.ArrangeFragment"
         android:label="ArrangeFragment"/>
 
+    <fragment
+        android:id="@+id/HistorySaveReceiptFragment"
+        android:name="com.hoomanholding.jpawarehose.view.fragment.savereceipt.history.HistorySaveReceiptFragment"
+        android:label="HistorySaveReceiptFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"
@@ -102,6 +106,17 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/ArrangeFragment"
+        app:launchSingleTop="true"/>
+
+
+    <action
+        android:id="@+id/action_goto_HistorySaveReceiptFragment"
+        app:destination="@id/HistorySaveReceiptFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/HistorySaveReceiptFragment"
         app:launchSingleTop="true"/>
 
 </navigation>

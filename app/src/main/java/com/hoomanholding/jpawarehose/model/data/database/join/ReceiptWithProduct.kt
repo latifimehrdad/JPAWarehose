@@ -5,7 +5,7 @@ import androidx.room.Relation
 import com.hoomanholding.jpawarehose.model.data.database.entity.BrandEntity
 import com.hoomanholding.jpawarehose.model.data.database.entity.LocationEntity
 import com.hoomanholding.jpawarehose.model.data.database.entity.ProductsEntity
-import com.hoomanholding.jpawarehose.model.data.database.entity.ReceiptDetailEntity
+import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
 
 data class ReceiptWithProduct(
     @Embedded val receiptDetailEntity: ReceiptDetailEntity,

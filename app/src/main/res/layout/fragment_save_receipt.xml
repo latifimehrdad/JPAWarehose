@@ -119,7 +119,8 @@
                 android:textSize="@dimen/_8sdp"
                 android:fontFamily="@font/yekan_bakh_light"
                 android:textColor="@color/white"
-                app:setTitle="@{@string/dateDot}"
+                app:setSplitter="@{@string/dote}"
+                app:setTitle="@{@string/date}"
                 app:setValue="@{viewModel.dateLiveData}"/>
 
             <TextView
