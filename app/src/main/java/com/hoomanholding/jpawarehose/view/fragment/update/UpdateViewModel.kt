@@ -48,7 +48,7 @@ class UpdateViewModel @Inject constructor(
             countUpdate++
         job?.cancel()
         job = CoroutineScope(IO).launch {
-            withContext(Main){ percentUpdatingLiveData.value = 0 }
+            percentUpdatingLiveData.postValue(0)
             if (brandLiveData.value == true)
                 getBrands().join()
             if (productLiveData.value == true)
@@ -187,10 +187,9 @@ class UpdateViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- serPercentOfUpdate
-    private suspend fun serPercentOfUpdate() {
+    private fun serPercentOfUpdate() {
         percentUpdate++
-        withContext(Main){ percentUpdatingLiveData.value =
-            (percentUpdate / countUpdate.toFloat() * 100).toInt() }
+        percentUpdatingLiveData.postValue((percentUpdate / countUpdate.toFloat() * 100).toInt())
     }
     //---------------------------------------------------------------------------------------------- serPercentOfUpdate
 

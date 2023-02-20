@@ -12,7 +12,6 @@ import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,10 +32,8 @@ class ArrangeViewModel @Inject constructor(
             val details = receiptRepository.getReceiptDetail()
             if (details.isNotEmpty()) {
                 val receipt = receiptRepository.getReceipt(details[0].id)
-                withContext(Main) {
-                    receiptDetailLiveData.value = receiptRepository.getReceiptDetailJoin()
-                    receiptLiveData.value = listOf(receipt)
-                }
+                receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
+                receiptLiveData.postValue(listOf(receipt))
             }
         }
     }
@@ -56,9 +53,7 @@ class ArrangeViewModel @Inject constructor(
                         it.data?.let { receipt ->
                             receiptRepository.insertReceipts(receipt)
                             delay(500)
-                            withContext(Main) {
-                                receiptLiveData.value = receipt
-                            }
+                            receiptLiveData.postValue(receipt)
                         } ?: run {
                             setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                         }
@@ -89,10 +84,7 @@ class ArrangeViewModel @Inject constructor(
                         it.data?.let { detail ->
                             receiptRepository.insertReceiptDetail(detail)
                             delay(500)
-                            withContext(Main) {
-                                receiptDetailLiveData.value =
-                                    receiptRepository.getReceiptDetailJoin()
-                            }
+                            receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
                         } ?: run {
                             setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                         }
@@ -110,7 +102,7 @@ class ArrangeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- findLocation
     fun findLocation(id: Long) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            var foundId : Long? = null
+            var foundId: Long? = null
             val listProduct = receiptDetailLiveData.value
             listProduct?.let {
                 for (i in it.indices) {
@@ -121,9 +113,7 @@ class ArrangeViewModel @Inject constructor(
                             ReceiptProductHolder.productPosition = i
                             ReceiptProductHolder.locationPosition = j
                             foundId = i.toLong()
-                            withContext(Main) {
-                                locationFindLiveData.value = i
-                            }
+                            locationFindLiveData.postValue(i)
                             cancel()
                             break
                         }
@@ -180,10 +170,7 @@ class ArrangeViewModel @Inject constructor(
             }
             ReceiptProductHolder.locationPosition = -1
             ReceiptProductHolder.productPosition = -1
-            withContext(Main) {
-                receiptDetailLiveData.value =
-                    receiptRepository.getReceiptDetailJoin()
-            }
+            receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
         }
     }
     //---------------------------------------------------------------------------------------------- replaceOnLocation
@@ -210,20 +197,19 @@ class ArrangeViewModel @Inject constructor(
                         break
                     }
                 }
-                val response = receiptRepository.requestConfirmReceipt(list[0].receiptDetailEntity.id)
+                val response =
+                    receiptRepository.requestConfirmReceipt(list[0].receiptDetailEntity.id)
                 if (response?.isSuccessful == true) {
                     val send = response.body()
                     send?.let {
                         if (!it.hasError) {
                             receiptRepository.deleteAllReceiptDetailAndAmount()
                         }
-                        withContext(Main){
-                            sendReceiptToServer.value = it.message
-                        }
+                        sendReceiptToServer.postValue(it.message)
                     } ?: run {
                         setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                     }
-                }else
+                } else
                     setMessage(response)
             }
         }

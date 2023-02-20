@@ -50,7 +50,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/arrange"
+                android:text="@string/saveReceipt"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_3sdp"
@@ -185,7 +185,8 @@
                     android:layout_width="@dimen/_13sdp"
                     android:layout_height="@dimen/_13sdp"
                     android:src="@drawable/ic_search"
-                    app:tint="@color/primaryColor" />
+                    app:tint="@color/primaryColor"
+                    android:contentDescription="@string/deleteDescription" />
 
                 <EditText
                     android:id="@+id/editTextSearch"

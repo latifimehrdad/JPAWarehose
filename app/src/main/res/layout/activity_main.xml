@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.activity.MainActivity"
-        android:background="@color/primaryColorVariant">
+        android:background="@color/primaryColorVariant"
+        android:layoutDirection="ltr">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -32,7 +33,7 @@
             android:background="@drawable/drawable_main_menu">
 
             <ImageView
-                android:id="@+id/imageViewReport"
+                android:id="@+id/imageViewHistory"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,19 +41,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="@dimen/_9sdp"
-                android:src="@drawable/ic_report"/>
+                android:src="@drawable/ic_report"
+                android:contentDescription="@string/historyDescription" />
 
 
             <ImageView
                 android:id="@+id/imageViewUpdate"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintStart_toEndOf="@id/imageViewReport"
+                app:layout_constraintStart_toEndOf="@id/imageViewHistory"
                 app:layout_constraintEnd_toStartOf="@id/imageViewHome"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="@dimen/_9sdp"
-                android:src="@drawable/ic_update"/>
+                android:src="@drawable/ic_update"
+                android:contentDescription="@string/updateDescription" />
 
 
 
@@ -65,7 +68,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="@dimen/_9sdp"
-                android:src="@drawable/ic_home"/>
+                android:src="@drawable/ic_home"
+                android:contentDescription="@string/homeDescription" />
 
             <ImageView
                 android:id="@+id/imageViewShelf"
@@ -76,7 +80,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="@dimen/_9sdp"
-                android:src="@drawable/ic_shelf"/>
+                android:src="@drawable/ic_shelf"
+                android:contentDescription="@string/shelfDescription" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

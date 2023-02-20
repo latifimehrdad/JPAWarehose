@@ -12,7 +12,6 @@ import com.hoomanholding.jpawarehose.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import javax.inject.Inject
 
 /**
@@ -73,14 +72,14 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
-    private suspend fun saveUserNameAndPassword(token: String?) {
+    private fun saveUserNameAndPassword(token: String?) {
         sharedPreferences
             .edit()
             .putString(CompanionValues.TOKEN, token)
             .putString(CompanionValues.userName, userName.value)
             .putString(CompanionValues.password, password.value)
             .apply()
-        withContext(Main){ loginLiveDate.value = token }
+        loginLiveDate.postValue(token)
     }
     //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
 

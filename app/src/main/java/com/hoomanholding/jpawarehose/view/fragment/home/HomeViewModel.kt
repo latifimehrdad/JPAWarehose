@@ -9,10 +9,8 @@ import com.hoomanholding.jpawarehose.model.data.database.entity.UserInfoEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,9 +40,8 @@ class HomeViewModel @Inject constructor(
         CoroutineScope(IO + exceptionHandler()).launch {
             userRepository.deleteUser()
             delay(300)
-            withContext(Main){ userLogOut.value = true}
+            userLogOut.postValue(true)
         }
-
     }
     //---------------------------------------------------------------------------------------------- logOut
 

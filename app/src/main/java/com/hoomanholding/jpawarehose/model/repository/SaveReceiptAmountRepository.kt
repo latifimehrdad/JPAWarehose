@@ -1,6 +1,5 @@
 package com.hoomanholding.jpawarehose.model.repository
 
-import android.util.Log
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.hoomanholding.jpawarehose.model.data.database.dao.ProductDao
 import com.hoomanholding.jpawarehose.model.data.database.dao.SaveReceiptAmountDao
@@ -52,7 +51,6 @@ class SaveReceiptAmountRepository @Inject constructor(
             }
         finalQuery = "$finalQuery ORDER BY $orderBy $orderType"
         val query = SimpleSQLiteQuery(finalQuery)
-        Log.e("meri", query.sql)
         return productDao.search(query)
     }
     //---------------------------------------------------------------------------------------------- search

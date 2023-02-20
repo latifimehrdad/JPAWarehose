@@ -44,7 +44,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/arrange"
+                android:text="@string/update"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_3sdp"

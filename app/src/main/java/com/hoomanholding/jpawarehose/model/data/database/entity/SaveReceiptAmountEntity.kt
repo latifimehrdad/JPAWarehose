@@ -9,10 +9,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "SaveReceiptAmount")
 data class SaveReceiptAmountEntity(
+    @PrimaryKey
     val productId : Long,
     var cartonCount : Int = 0,
     var packetCount : Int = 0
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id : Long = 0
-}
+)

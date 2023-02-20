@@ -89,6 +89,7 @@ class SaveReceiptFragment : Fragment() {
             (it as MainActivity).showMessage(message)
         }
         binding.buttonSave.stopLoading()
+        loadingManager.stopLoadingRecycler()
     }
     //---------------------------------------------------------------------------------------------- showMessage
 
@@ -102,7 +103,7 @@ class SaveReceiptFragment : Fragment() {
         }
 
         binding.editTextSearch.addTextChangedListener {
-            if (it.toString().isNullOrEmpty()) {
+            if (it.toString().isEmpty()) {
                 binding.imageviewSearchDelete.setImageResource(R.drawable.ic_search)
                 binding.imageviewSearchDelete.setColorFilter(
                     ContextCompat.getColor(requireContext(), R.color.primaryColor),

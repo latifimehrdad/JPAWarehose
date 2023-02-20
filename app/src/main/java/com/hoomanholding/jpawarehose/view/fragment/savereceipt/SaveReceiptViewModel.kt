@@ -1,6 +1,5 @@
 package com.hoomanholding.jpawarehose.view.fragment.savereceipt
 
-import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
@@ -20,10 +19,8 @@ import com.zar.core.tools.extensions.toSolarDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import javax.inject.Inject
 
@@ -86,21 +83,17 @@ class SaveReceiptViewModel @Inject constructor(
             delay(300)
             val receipt = saveReceiptRepository.getSaveReceipt()
             val suppliers = receipt?.let {
-                withContext(Main) {
-                    dateLiveData.value = it.saveReceiptEntity.date
-                    receiptNumberLiveData.value =
-                        if (it.saveReceiptEntity.number != null)
-                            it.saveReceiptEntity.number.toString() else ""
-                }
+                dateLiveData.postValue(it.saveReceiptEntity.date)
+                val number = if (it.saveReceiptEntity.number != null)
+                    it.saveReceiptEntity.number.toString() else ""
+                receiptNumberLiveData.postValue(number)
                 listOf(it.supplierEntity)
             } ?: run {
-                withContext(Main) {
-                    receiptNumberLiveData.value = null
-                    dateLiveData.value = LocalDateTime.now().toSolarDate()?.getSolarDate()
-                }
+                receiptNumberLiveData.postValue(null)
+                dateLiveData.postValue(LocalDateTime.now().toSolarDate()?.getSolarDate())
                 supplierRepository.getSupplierFromDB()
             }
-            withContext(Main) { supplierLiveData.value = suppliers }
+            supplierLiveData.postValue(suppliers)
         }
     }
     //---------------------------------------------------------------------------------------------- getSuppliers
@@ -146,13 +139,17 @@ class SaveReceiptViewModel @Inject constructor(
                     words
                 )
             }
-            val products = temp.map { item ->
+            val temp2 = temp.sortedBy { item ->
+                item.saveReceiptAmountEntity?.let {
+                    (it.cartonCount == 0 && it.packetCount == 0)
+                } ?: run { true }
+            }
+            val products = temp2.map { item ->
                 ProductAmountModel(
                     item.productsEntity, item.saveReceiptAmountEntity, item.brandEntity
                 )
             }
-            Log.e("meri", "${products.size}")
-            withContext(Main) { productLiveData.value = products }
+            productLiveData.postValue(products)
         }
     }
     //---------------------------------------------------------------------------------------------- searchProduct
@@ -353,9 +350,7 @@ class SaveReceiptViewModel @Inject constructor(
                         saveReceiptAmountRepository.deleteAll()
                         saveReceiptRepository.deleteAllRecord()
                     }
-                    withContext(Main) {
-                        sendReceiptToServer.value = it.message
-                    }
+                    sendReceiptToServer.postValue(it.message)
                 } ?: run {
                     setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
                 }
