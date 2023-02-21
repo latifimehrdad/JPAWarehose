@@ -1,12 +1,12 @@
 package com.hoomanholding.jpawarehose.view.fragment.savereceipt
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpawarehose.JpaFragment
@@ -18,6 +18,7 @@ import com.hoomanholding.jpawarehose.model.data.enum.EnumSearchName
 import com.hoomanholding.jpawarehose.model.data.enum.EnumSearchOrderType
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ProductSaveReceiptAdapter
+import com.hoomanholding.jpawarehose.view.adapter.SaveReceiptDetailAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
 import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolder
 import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
@@ -204,15 +205,23 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
             return
         }
 
-        val dialog = DialogManager().createDialogHeightWrapContent(
+        val dialog = DialogManager().createDialogHeightMatchParent(
             requireContext(),
-            R.layout.dialog_confirm_save_receipt,
-            Gravity.CENTER,
-            0)
+            R.layout.dialog_confirm_save_receipt, 50f)
 
         val editText = dialog.findViewById<TextInputEditText>(R.id.textInputEditTextDescription)
         val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
         val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
+        val recyclerDetail = dialog.findViewById<RecyclerView>(R.id.recyclerDetail)
+
+        val adapter = SaveReceiptDetailAdapter(saveReceiptViewModel.getReceiptAmountWithProduct())
+        val manager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        recyclerDetail.adapter = adapter
+        recyclerDetail.layoutManager = manager
 
         buttonNo.setOnClickListener {
             dialog.dismiss()

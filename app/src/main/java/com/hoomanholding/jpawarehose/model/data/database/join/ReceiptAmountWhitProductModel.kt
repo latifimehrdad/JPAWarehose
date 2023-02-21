@@ -11,8 +11,10 @@ import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.save.Sav
 data class ReceiptAmountWhitProductModel(
     @Embedded val saveReceiptAmountEntity: SaveReceiptAmountEntity,
     @Relation(
+        entity = ProductsEntity::class,
         parentColumn = "productId",
         entityColumn = "id"
     )
-    val productsEntity: ProductsEntity
+    val products: ProductWithBrandModel
+
 )

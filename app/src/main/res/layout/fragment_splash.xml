@@ -83,7 +83,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_splash_icon"
+                android:src="@drawable/icon_splash"
                 android:contentDescription="@string/logoDescription" />
 
         </FrameLayout>

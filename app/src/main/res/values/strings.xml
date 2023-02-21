@@ -71,6 +71,7 @@
     <string name="newIp">ip</string>
     <string name="ipPassword">ip password</string>
     <string name="passwordIsInCorrect">رمز اشتباه است</string>
+    <string name="detail">جزییات</string>
     <string name="plus">+1</string>
     <string name="reduce">1-</string>
     <string name="space"> </string>

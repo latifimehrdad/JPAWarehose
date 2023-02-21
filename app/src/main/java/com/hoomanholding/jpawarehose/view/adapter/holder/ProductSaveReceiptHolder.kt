@@ -11,6 +11,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ItemProductSaveReceiptBinding
+import com.hoomanholding.jpawarehose.ext.hideKeyboard
 import com.hoomanholding.jpawarehose.model.data.database.join.ProductAmountModel
 import com.hoomanholding.jpawarehose.utility.CreateDrawableByBrand
 import com.zar.core.tools.manager.DialogManager
@@ -184,6 +185,7 @@ class ProductSaveReceiptHolder(
                     click.setCarton(position, count)
                 else
                     click.setPacket(position, count)
+                editText.context.hideKeyboard(editText)
                 dialog.dismiss()
             }
         }

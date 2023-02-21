@@ -305,10 +305,15 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- updateLastSaveReceipt
 
 
+    //---------------------------------------------------------------------------------------------- getReceiptAmountWithProduct
+    fun getReceiptAmountWithProduct() = saveReceiptRepository.getReceiptAmountWithProduct()
+    //---------------------------------------------------------------------------------------------- getReceiptAmountWithProduct
+
+
     //---------------------------------------------------------------------------------------------- sendReceipt
     fun sendReceipt(description: String) {
         CoroutineScope(IO + exceptionHandler()).launch {
-            val amounts = saveReceiptRepository.getReceiptAmountWithProduct()
+            val amounts = getReceiptAmountWithProduct()
             if (amounts.isEmpty())
                 setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
             else {
@@ -319,10 +324,10 @@ class SaveReceiptViewModel @Inject constructor(
                     else {
                         val items = amounts.map {
                             val count = it.saveReceiptAmountEntity.cartonCount *
-                                    it.productsEntity.tedadDarKarton +
+                                    it.products.productsEntity.tedadDarKarton +
                                     it.saveReceiptAmountEntity.packetCount
                             WarehouseReceiptItem(
-                                it.productsEntity.id, count.toLong()
+                                it.products.productsEntity.id, count.toLong()
                             )
                         }
                         val request = AddWarehouseReceipt(
@@ -365,7 +370,7 @@ class SaveReceiptViewModel @Inject constructor(
     private fun addToHistoryOfSaveReceipt(description: String?, message: String){
         val saveReceipt = saveReceiptRepository.getSaveReceipt()
         saveReceipt?.let {
-            val saveReceiptAmount = saveReceiptRepository.getReceiptAmountWithProduct()
+            val saveReceiptAmount = getReceiptAmountWithProduct()
             val model = HistorySaveReceiptEntity(
                 saveReceipt.saveReceiptEntity.date,
                 saveReceipt.saveReceiptEntity.number,
@@ -377,7 +382,7 @@ class SaveReceiptViewModel @Inject constructor(
                 HistorySaveReceiptAmountEntity(
                     item.saveReceiptAmountEntity.cartonCount,
                     item.saveReceiptAmountEntity.packetCount,
-                    item.productsEntity.id,
+                    item.products.productsEntity.id,
                     receiptId
                 )
             }

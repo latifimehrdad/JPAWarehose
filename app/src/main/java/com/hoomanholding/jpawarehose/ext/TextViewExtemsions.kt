@@ -5,10 +5,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.data.database.entity.SupplierEntity
-import com.hoomanholding.jpawarehose.model.data.database.join.LocationWithAmount
-import com.hoomanholding.jpawarehose.model.data.database.join.ProductAmountModel
-import com.hoomanholding.jpawarehose.model.data.database.join.ProductWithHistoryReceipt
-import com.hoomanholding.jpawarehose.model.data.database.join.ReceiptWithProduct
+import com.hoomanholding.jpawarehose.model.data.database.join.*
 import com.zar.core.tools.extensions.toSolarDate
 import java.time.LocalDateTime
 
@@ -24,6 +21,10 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
             is Long -> "$title $splitter $value"
             is Int -> "$value $splitter $title"
             is LocalDateTime -> "$title $splitter ${value.toSolarDate()?.getSolarDate()}"
+            is ReceiptAmountWhitProductModel -> {
+                val count = whenIsReceiptAmountWhitProductModel(value)
+                "$count $splitter $title"
+            }
             is ProductWithHistoryReceipt -> {
                 val count = whenIsProductWithHistoryReceipt(value)
                 "$count $splitter $title"
@@ -58,6 +59,16 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
     } ?: run { "" }
     text = temp
 }
+
+//-------------------------------------------------------------------------------------------------- whenIsReceiptAmountWhitProductModel
+private fun whenIsReceiptAmountWhitProductModel(value : ReceiptAmountWhitProductModel) : String {
+    val count = value.saveReceiptAmountEntity.cartonCount *
+            value.products.productsEntity.tedadDarKarton +
+            value.saveReceiptAmountEntity.packetCount
+    return count.toString()
+}
+//-------------------------------------------------------------------------------------------------- whenIsReceiptAmountWhitProductModel
+
 
 
 //-------------------------------------------------------------------------------------------------- whenIsProductWithHistoryReceipt
