@@ -22,7 +22,7 @@ class Providers {
     companion object {
         //        const val url = "http://5.160.125.98:5081"
 //        const val url = "http://192.168.50.153:8081"
-        const val url = "http://10.252.30.43:7575"
+        const val url = "http://10.252.37.46:7575"
 //        const val url = "http://192.168.70.176:8595"
     }
 

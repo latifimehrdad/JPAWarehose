@@ -6,5 +6,7 @@ package com.hoomanholding.jpawarehose.model.data.request
 
 data class LoginRequestModel(
     val userName : String,
-    val password : String
+    val password : String,
+    val SystemType: String,
+    val AndroidId: String
 )

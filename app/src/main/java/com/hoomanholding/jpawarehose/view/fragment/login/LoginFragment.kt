@@ -1,6 +1,7 @@
 package com.hoomanholding.jpawarehose.view.fragment.login
 
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -207,15 +208,17 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
 
     //---------------------------------------------------------------------------------------------- login
     private fun login(fromFingerPrint: Boolean) {
-        if (binding.buttonLogin.isLoading)
+        if (context == null || binding.buttonLogin.isLoading)
             return
         CoroutineScope(Main).launch {
             if (fromFingerPrint)
                 loginViewModel.setUserNamePasswordFromSharePreferences()
+            val androidId =
+                Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
             delay(500)
             if (checkEmpty()) {
                 startLoading()
-                loginViewModel.requestLogin()
+                loginViewModel.requestLogin(androidId)
             }
         }
     }

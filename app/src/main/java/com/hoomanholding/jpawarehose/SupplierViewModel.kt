@@ -1,9 +1,7 @@
-package com.hoomanholding.jpawarehose.viewmodel
+package com.hoomanholding.jpawarehose
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.hoomanholding.jpawarehose.JpaViewModel
-import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.SupplierRepository
 import com.hoomanholding.jpawarehose.di.ResourcesProvider
 import com.hoomanholding.jpawarehose.model.data.database.entity.SupplierEntity

@@ -33,13 +33,15 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestLogin
-    fun requestLogin() {
+    fun requestLogin(androidId: String) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             if (userName.value.isNullOrEmpty() || password.value.isNullOrEmpty())
                 setMessage(resourcesProvider.getString(R.string.dataSendingIsEmpty))
             else {
                 val response = repository.requestLogin(
-                    LoginRequestModel(userName.value!!, password.value!!)
+                    LoginRequestModel(
+                        userName.value!!, password.value!!, "logistic", androidId
+                    )
                 )
                 if (response?.isSuccessful == true) {
                     val loginResponse = response.body()
@@ -85,7 +87,7 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- saveNewIp
-    fun saveNewIp(ip : String?) {
+    fun saveNewIp(ip: String?) {
         sharedPreferences
             .edit()
             .putString(CompanionValues.URL, ip)
