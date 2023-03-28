@@ -2,9 +2,9 @@ package com.hoomanholding.jpamanager.view.activity
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
-import com.hoomanholding.jpamanager.JpaViewModel
-import com.hoomanholding.jpamanager.model.repository.UserRepository
-import com.hoomanholding.jpamanager.tools.CompanionValues
+import com.hoomanholding.applibrary.model.repository.UserRepository
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.hoomanholding.applibrary.utility.CompanionValues
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

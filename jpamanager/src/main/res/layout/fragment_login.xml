@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.hoomanholding.jpamanager.view.fragment.login.LoginViewModel" />
+            type="com.hoomanholding.applibrary.view.fragment.LoginViewModel" />
     </data>
 
     <ScrollView
@@ -107,7 +107,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.hoomanholding.jpamanager.view.custom.JpaButton
+                <com.hoomanholding.applibrary.view.custom.JpaButton
                     android:id="@+id/buttonLogin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

@@ -3,10 +3,11 @@ package com.hoomanholding.jpamanager.model.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.hoomanholding.jpamanager.model.data.database.dao.RoleDao
-import com.hoomanholding.jpamanager.model.data.database.dao.UserInfoDao
-import com.hoomanholding.jpamanager.model.data.database.entity.RoleEntity
-import com.hoomanholding.jpamanager.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.model.data.database.Converters
+import com.hoomanholding.applibrary.model.data.database.dao.RoleDao
+import com.hoomanholding.applibrary.model.data.database.dao.UserInfoDao
+import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
+import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 
 
 @Database(

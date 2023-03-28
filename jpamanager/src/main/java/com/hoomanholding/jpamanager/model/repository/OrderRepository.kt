@@ -1,7 +1,8 @@
 package com.hoomanholding.jpamanager.model.repository
 
-import com.hoomanholding.jpamanager.model.api.Api
-import com.hoomanholding.jpamanager.model.data.request.OrderRequestModel
+import com.hoomanholding.applibrary.model.api.Api
+import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
+import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.zar.core.tools.api.apiCall
 import javax.inject.Inject
 

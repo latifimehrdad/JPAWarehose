@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpamanager.databinding.ItemOrderBinding
-import com.hoomanholding.jpamanager.model.data.response.order.OrderModel
+import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.view.adapter.holder.OrderHolder
 
 

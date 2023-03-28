@@ -1,8 +1,8 @@
 package com.hoomanholding.jpamanager.view.fragment.home
 
-import com.hoomanholding.jpamanager.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 
 
 /**

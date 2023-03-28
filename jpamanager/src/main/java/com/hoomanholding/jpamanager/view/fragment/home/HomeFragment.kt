@@ -1,20 +1,15 @@
 package com.hoomanholding.jpamanager.view.fragment.home
 
-import android.accounts.AccountManager
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hoomanholding.jpamanager.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentHomeBinding
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.recycler.HomeItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 
 
 /**

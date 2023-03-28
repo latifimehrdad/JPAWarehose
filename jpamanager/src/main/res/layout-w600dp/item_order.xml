@@ -3,7 +3,7 @@
     <data>
         <variable
             name="item"
-            type="com.hoomanholding.jpamanager.model.data.response.order.OrderModel" />
+            type="com.hoomanholding.applibrary.model.data.response.order.OrderModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

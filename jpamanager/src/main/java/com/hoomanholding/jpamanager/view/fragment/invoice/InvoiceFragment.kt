@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hoomanholding.jpamanager.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
-import com.hoomanholding.jpamanager.model.data.response.order.OrderModel
+import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.OrderHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.OrderAdapter
 import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 
 
 /**

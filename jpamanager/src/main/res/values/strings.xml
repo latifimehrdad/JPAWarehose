@@ -2,8 +2,6 @@
     <string name="app_name">JPAManager</string>
     <string name="reTry">تلاش دوباره</string>
     <string name="dismiss">بستن</string>
-    <string name="dataSendingIsEmpty">اطلاعات ارسالی خالی است</string>
-    <string name="dataReceivedIsEmpty">اطلاعات دریافت شده خالی است</string>
     <string name="userName">نام کاربری</string>
     <string name="password">رمز ورود</string>
     <string name="enter">ورود</string>
@@ -12,8 +10,6 @@
     <string name="passwordIsInCorrect">رمز اشتباه است</string>
     <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
     <string name="ipIsIncorrect">آدرس وارد شده اشتباه است</string>
-    <string name="userNameIsEmpty">نام کاربری را وارد نمایید</string>
-    <string name="passcodeIsEmpty">رمز ورود را وارد نمایید</string>
     <string name="bePatient">شکیبا باشید…</string>
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
     <string name="newIp">new ip</string>

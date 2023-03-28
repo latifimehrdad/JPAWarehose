@@ -1,18 +1,17 @@
 package com.hoomanholding.jpamanager.view.fragment.invoice
 
 import androidx.lifecycle.MutableLiveData
-import com.hoomanholding.jpamanager.JpaViewModel
-import com.hoomanholding.jpamanager.R
-import com.hoomanholding.jpamanager.model.data.request.OrderRequestModel
-import com.hoomanholding.jpamanager.model.data.response.order.DetailOrderModel
-import com.hoomanholding.jpamanager.model.data.response.order.OrderModel
+import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
+import com.hoomanholding.applibrary.model.data.response.order.DetailOrderModel
+import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.model.repository.OrderRepository
-import com.hoomanholding.jpawarehose.di.ResourcesProvider
+import com.hoomanholding.applibrary.di.ResourcesProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 
 
 /**
@@ -48,12 +47,16 @@ class InvoiceViewModel @Inject constructor(
                         it.data?.let { data ->
                             orderLiveData.postValue(data)
                         } ?: run {
-                            setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                            setMessage(resourcesProvider.getString(
+                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
+                            ))
                         }
                     else
                         setMessage(it.message)
                 } ?: run {
-                    setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                    setMessage(resourcesProvider.getString(
+                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
+                    ))
                 }
             } else
                 setMessage(response)
@@ -74,12 +77,16 @@ class InvoiceViewModel @Inject constructor(
                         it.data?.let { data ->
                             detailOrderLiveData.postValue(data)
                         } ?: run {
-                            setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                            setMessage(resourcesProvider.getString(
+                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
+                            ))
                         }
                     else
                         setMessage(it.message)
                 } ?: run {
-                    setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                    setMessage(resourcesProvider.getString(
+                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
+                    ))
                 }
             } else
                 setMessage(response)

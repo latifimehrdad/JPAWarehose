@@ -11,11 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.hoomanholding.jpamanager.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentLoginBinding
-import com.hoomanholding.jpamanager.ext.hideKeyboard
-import com.hoomanholding.jpamanager.ext.isIP
+import com.hoomanholding.applibrary.ext.hideKeyboard
+import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
 import com.zar.core.tools.BiometricTools
@@ -26,6 +25,8 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
+import com.hoomanholding.applibrary.view.fragment.LoginViewModel
 
 /**
  * Created by m-latifi on 11/9/2022.
@@ -220,7 +221,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         startLoading()
         val androidId =
             Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
-        loginViewModel.login(fromFingerPrint, androidId)
+        loginViewModel.login(fromFingerPrint, androidId, "managerapp")
     }
     //---------------------------------------------------------------------------------------------- login
 

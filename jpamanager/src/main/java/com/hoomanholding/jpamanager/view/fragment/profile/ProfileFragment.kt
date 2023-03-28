@@ -3,11 +3,11 @@ package com.hoomanholding.jpamanager.view.fragment.profile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.hoomanholding.jpamanager.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentProfileBinding
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 
 
 /**

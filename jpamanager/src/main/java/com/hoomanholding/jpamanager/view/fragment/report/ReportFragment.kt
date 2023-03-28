@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.hoomanholding.jpamanager.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentReportBinding
 import com.hoomanholding.jpamanager.model.data.other.CardBoardItemModel
@@ -13,7 +12,7 @@ import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.CardBoardItemHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.CardBoardItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 
 /**
  * create by m-latifi on 3/6/2023

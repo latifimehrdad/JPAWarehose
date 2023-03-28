@@ -11,9 +11,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/applibrary" />
             <option value="$PROJECT_DIR$/jpamanager" />
+            <option value="$PROJECT_DIR$/jpawarehose" />
           </set>
         </option>
       </GradleProjectSettings>

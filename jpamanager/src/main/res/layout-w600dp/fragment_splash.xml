@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.hoomanholding.jpamanager.view.fragment.splash.SplashViewModel" />
+            type="com.hoomanholding.applibrary.view.fragment.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,7 +90,7 @@
             android:src="@drawable/icon_manager_app_copy"
             android:contentDescription="@string/logoDescription" />
 
-        <com.hoomanholding.jpamanager.view.custom.JpaButton
+        <com.hoomanholding.applibrary.view.custom.JpaButton
             android:id="@+id/materialButtonLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

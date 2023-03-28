@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dataReceivedIsEmpty">اطلاعات دریافت شده خالی است</string>
+    <string name="dataSendingIsEmpty">اطلاعات ارسالی خالی است</string>
+    <string name="userNameIsEmpty">نام کاربری را وارد نمایید</string>
+    <string name="passcodeIsEmpty">رمز ورود را وارد نمایید</string>
+</resources>
