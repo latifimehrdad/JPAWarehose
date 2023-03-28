@@ -10,7 +10,7 @@ import com.hoomanholding.jpawarehose.databinding.ItemReceiptProductBinding
 import com.hoomanholding.applibrary.model.data.database.entity.BrandEntity
 import com.hoomanholding.applibrary.model.data.database.join.LocationWithAmount
 import com.hoomanholding.applibrary.model.data.database.join.ReceiptWithProduct
-import com.hoomanholding.jpawarehose.tools.CreateDrawableByBrand
+import com.hoomanholding.applibrary.tools.CreateDrawableByBrand
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptLocationAdapter
 
 

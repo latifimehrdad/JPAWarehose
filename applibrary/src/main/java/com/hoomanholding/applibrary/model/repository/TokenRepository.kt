@@ -1,7 +1,7 @@
 package com.hoomanholding.applibrary.model.repository
 
 import android.content.SharedPreferences
-import com.hoomanholding.applibrary.utility.CompanionValues
+import com.hoomanholding.applibrary.tools.CompanionValues
 import javax.inject.Inject
 
 /**

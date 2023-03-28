@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
-import com.hoomanholding.applibrary.utility.SingleLiveEvent
-import com.hoomanholding.applibrary.utility.CompanionValues
+import com.hoomanholding.applibrary.tools.SingleLiveEvent
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.model.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

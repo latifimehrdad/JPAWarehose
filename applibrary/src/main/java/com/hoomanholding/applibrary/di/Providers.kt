@@ -2,7 +2,7 @@ package com.hoomanholding.applibrary.di
 
 import android.content.Context
 import com.hoomanholding.applibrary.model.api.Api
-import com.hoomanholding.applibrary.utility.CompanionValues.Companion.URL
+import com.hoomanholding.applibrary.tools.CompanionValues.Companion.URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

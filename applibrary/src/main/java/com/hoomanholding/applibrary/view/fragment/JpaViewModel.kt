@@ -2,7 +2,7 @@ package com.hoomanholding.applibrary.view.fragment
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.hoomanholding.applibrary.utility.SingleLiveEvent
+import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.zar.core.enums.EnumApiError
 import com.zar.core.models.ErrorApiModel
 import com.zar.core.tools.api.checkResponseError

@@ -3,7 +3,7 @@ package com.hoomanholding.jpawarehose.view.fragment.home
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
-import com.hoomanholding.applibrary.utility.CompanionValues
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

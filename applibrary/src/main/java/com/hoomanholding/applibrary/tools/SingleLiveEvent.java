@@ -1,4 +1,4 @@
-package com.hoomanholding.applibrary.utility;
+package com.hoomanholding.applibrary.tools;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;

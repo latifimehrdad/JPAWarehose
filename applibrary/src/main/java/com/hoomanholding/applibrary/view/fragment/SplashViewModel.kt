@@ -1,7 +1,7 @@
 package com.hoomanholding.applibrary.view.fragment
 
 import com.hoomanholding.applibrary.R
-import com.hoomanholding.applibrary.utility.SingleLiveEvent
+import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
 import com.hoomanholding.applibrary.model.repository.UserRepository

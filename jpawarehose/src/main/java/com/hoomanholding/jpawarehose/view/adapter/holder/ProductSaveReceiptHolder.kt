@@ -13,7 +13,7 @@ import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ItemProductSaveReceiptBinding
 import com.hoomanholding.applibrary.model.data.database.join.ProductAmountModel
 import com.hoomanholding.applibrary.ext.hideKeyboard
-import com.hoomanholding.jpawarehose.tools.CreateDrawableByBrand
+import com.hoomanholding.applibrary.tools.CreateDrawableByBrand
 import com.zar.core.tools.manager.DialogManager
 
 

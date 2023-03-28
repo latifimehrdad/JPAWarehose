@@ -3,7 +3,7 @@ package com.hoomanholding.jpawarehose.view.fragment.update
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.*
-import com.hoomanholding.applibrary.utility.SingleLiveEvent
+import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

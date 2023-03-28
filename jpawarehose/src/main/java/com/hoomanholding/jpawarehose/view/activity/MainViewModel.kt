@@ -1,7 +1,7 @@
 package com.hoomanholding.jpawarehose.view.activity
 
 import android.content.SharedPreferences
-import com.hoomanholding.applibrary.utility.CompanionValues
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel

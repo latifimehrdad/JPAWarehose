@@ -10,7 +10,7 @@ import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ItemReceiptLocationBinding
 import com.hoomanholding.applibrary.model.data.database.entity.BrandEntity
 import com.hoomanholding.applibrary.model.data.database.join.LocationWithAmount
-import com.hoomanholding.jpawarehose.tools.CreateDrawableByBrand
+import com.hoomanholding.applibrary.tools.CreateDrawableByBrand
 import com.zar.core.tools.manager.DialogManager
 
 class ReceiptLocationHolder(
