@@ -17,10 +17,6 @@
 
     <color name="mtrl_textinput_default_box_stroke_color">@color/primaryColor</color>
 
-    <color name="splashGradiantStart">#28cdd4</color>
-    <color name="splashGradiantCenter">#3d95f0</color>
-    <color name="splashGradiantEnd">#2c097b</color>
-
     <color name="recyclerLoadingShadow">#E6FFFFFF</color>
     <color name="recyclerLoadingBack">#0DFFFFFF</color>
 

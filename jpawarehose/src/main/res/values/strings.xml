@@ -25,12 +25,10 @@
     <string name="pageNumber">شماره برگه</string>
     <string name="pageNumberDot">شماره برگه :</string>
     <string name="productCode">کد کالا</string>
-    <string name="productCodeDot">کد کالا :</string>
     <string name="add">اضافه کردن</string>
     <string name="carton">کارتن</string>
     <string name="packet">بسته</string>
     <string name="packetRemaining">بسته مانده</string>
-    <string name="dateDot">تاریخ :</string>
     <string name="date">تاریخ</string>
     <string name="search">جستجو</string>
     <string name="receiptNumberIsEmpty">شماره برگه را وارد کنید</string>
@@ -50,7 +48,6 @@
     <string name="amountIsOverLoad">مقدار وارد شده بیشتر از اندازه است</string>
     <string name="amountIsLessThenAmount">مقدار وارد شده کمتر از اندازه است</string>
     <string name="fullNameDot">نام و نام خانوادگی :</string>
-    <string name="mobileNumberDot">شماره تلفن همراه :</string>
     <string name="personnelCodeDot">کد پرسنلی :</string>
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
     <string name="ErrorOnCompletingOnReceipt">چیدمان کالای ( %1$s ) بصورت کامل انجام نشده است</string>
@@ -75,10 +72,7 @@
     <string name="historyOfSaveReceipt">تاریخچه</string>
 
     <string name="logoDescription">logoDescription</string>
-    <string name="userNameDescription">username</string>
-    <string name="passwordDescription">password</string>
     <string name="fingerPrintDescription">fingerprint</string>
-    <string name="closeDescription">close</string>
     <string name="deleteDescription">delete</string>
     <string name="backgroundDescription">background</string>
     <string name="locationDescription">location</string>

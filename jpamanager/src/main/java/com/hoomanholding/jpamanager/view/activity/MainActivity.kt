@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         val snack = Snackbar.make(binding.constraintLayoutParent, message, 5 * 1000)
         val view = snack.view
         val textView = (view).findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
-        val font = Typeface.createFromAsset(assets, "font/iransans_medium.ttf")
+        val font = Typeface.createFromAsset(assets, "font/yekan_bakh_medium.ttf")
         textView.typeface = font
         val params = view.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.TOP
