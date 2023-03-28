@@ -3,9 +3,9 @@ package com.hoomanholding.jpawarehose.view.fragment.update
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.*
-import com.hoomanholding.jpawarehose.utility.SingleLiveEvent
+import com.hoomanholding.applibrary.utility.SingleLiveEvent
 import com.hoomanholding.jpawarehose.di.ResourcesProvider
-import com.hoomanholding.jpawarehose.JpaViewModel
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -25,7 +25,8 @@ class UpdateViewModel @Inject constructor(
     private val locationsRepository: LocationsRepository
 ) : JpaViewModel() {
 
-    val successLiveData = SingleLiveEvent<String>()
+    val successLiveData =
+        SingleLiveEvent<String>()
     val brandLiveData = MutableLiveData(false)
     val productLiveData = MutableLiveData(false)
     val supplierLiveData = MutableLiveData(false)

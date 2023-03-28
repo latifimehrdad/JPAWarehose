@@ -88,7 +88,7 @@
 
         </FrameLayout>
 
-        <com.hoomanholding.jpawarehose.view.custom.JpaButton
+        <com.hoomanholding.applibrary.view.custom.JpaButton
             android:id="@+id/buttonReTry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

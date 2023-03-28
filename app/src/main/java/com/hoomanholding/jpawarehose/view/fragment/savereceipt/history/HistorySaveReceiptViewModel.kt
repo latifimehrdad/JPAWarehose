@@ -1,7 +1,7 @@
 package com.hoomanholding.jpawarehose.view.fragment.savereceipt.history
 
 import androidx.lifecycle.MutableLiveData
-import com.hoomanholding.jpawarehose.JpaViewModel
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpawarehose.model.data.database.join.HistorySaveReceiptWithSupplier
 import com.hoomanholding.jpawarehose.model.repository.receipt.SaveReceiptRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

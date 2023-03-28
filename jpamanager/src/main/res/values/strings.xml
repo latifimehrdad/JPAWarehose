@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">JPAManager</string>
+    <string name="reTry">تلاش دوباره</string>
+    <string name="dismiss">بستن</string>
+    <string name="dataSendingIsEmpty">اطلاعات ارسالی خالی است</string>
+    <string name="dataReceivedIsEmpty">اطلاعات دریافت شده خالی است</string>
+    <string name="userName">نام کاربری</string>
+    <string name="password">رمز ورود</string>
+    <string name="enter">ورود</string>
+    <string name="loginByBiometric">ورود با اثر انگشت</string>
+    <string name="onAuthenticationError">اثر انگشت شما تایید نشد</string>
+    <string name="passwordIsInCorrect">رمز اشتباه است</string>
+    <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
+    <string name="ipIsIncorrect">آدرس وارد شده اشتباه است</string>
+    <string name="userNameIsEmpty">نام کاربری را وارد نمایید</string>
+    <string name="passcodeIsEmpty">رمز ورود را وارد نمایید</string>
+    <string name="bePatient">شکیبا باشید…</string>
+    <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
+    <string name="newIp">new ip</string>
+    <string name="ipPassword">ip password</string>
+    <string name="comfortableSpace">فضایی راحت</string>
+    <string name="processManagement">برای مدیریت فرآیندهایتان</string>
+    <string name="exclamationMark">!</string>
+    <string name="forgetPassword">فراموشی رمز عبور</string>
+    <string name="cardboard">کارتابل</string>
+    <string name="home">خانه</string>
+    <string name="report">گزارش</string>
+    <string name="profile">پروفایل</string>
+    <string name="pinCard">پین کارت</string>
+    <string name="invoice">پیش فاکتور</string>
+    <string name="check">چک</string>
+    <string name="toman">تومان</string>
+    <string name="fullName">نام و نام خانوادگی</string>
+    <string name="personnelNumber">کد پرسنلی</string>
+    <string name="dot">:</string>
+    <string name="contactSupport">تماس با پشتیبانی</string>
+    <string name="hr">منابع انسانی</string>
+    <string name="sale">فروش</string>
+    <string name="financial">مالی</string>
+    <string name="indebtedness">بدهکاری</string>
+    <string name="salesAmount">مقدار فروش</string>
+    <string name="creditor">بستانکاری</string>
+    <string name="comparativeReport">گزارش مقایسه ای</string>
+    <string name="exit">خروج</string>
+
+
+    <string name="supportNumber">026-6565635</string>
+
+    <string name="logoDescription">logo</string>
+    <string name="fingerPrintDescription">finger Print</string>
+    <string name="iconDescription">icon</string>
+    <string name="profileDescription">image profile</string>
+
+</resources>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <net.orandja.shadowlayout.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:shadow_cast_only_background="false"
+        app:shadow_color="#E6A2BFDF"
+        app:shadow_downscale="0.3"
+        app:shadow_radius="30"
+        app:shadow_with_color="false"
+        app:shadow_with_css_scale="true"
+        app:shadow_with_dpi_scale="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_10sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:background="@color/primaryColorVariant">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+                    app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+                    app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+                    app:boxCornerRadiusTopStart="@dimen/_5sdp"
+                    app:boxStrokeColor="@color/primaryColor"
+                    app:hintTextColor="@color/dismiss"
+                    android:textColorHint="@color/dismiss"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextIp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start|top"
+                        android:singleLine="true"
+                        android:hint="@string/newIp"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="@dimen/_10sdp"
+                        android:fontFamily="@font/yekan_bakh_medium"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutIpPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutDescription"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+                    app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+                    app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+                    app:boxCornerRadiusTopStart="@dimen/_5sdp"
+                    app:boxStrokeColor="@color/primaryColor"
+                    app:hintTextColor="@color/dismiss"
+                    android:textColorHint="@color/dismiss"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextIpPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start|top"
+                        android:singleLine="true"
+                        android:hint="@string/ipPassword"
+                        android:textColor="@color/primaryColor"
+                        android:textSize="@dimen/_10sdp"
+                        android:fontFamily="@font/yekan_bakh_medium"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutIpPassword"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_15sdp">
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/buttonNo"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:minWidth="@dimen/_90sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:fontFamily="@font/yekan_bakh_bold"
+                        app:cornerRadius="@dimen/_5sdp"
+                        android:textColor="@color/primaryColorVariant"
+                        android:text='@string/confirm' />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buttonNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@id/buttonYes"
+                        app:layout_constraintBottom_toBottomOf="@id/buttonYes"
+                        app:layout_constraintStart_toEndOf="@id/buttonYes"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:minWidth="@dimen/_90sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:fontFamily="@font/yekan_bakh_bold"
+                        app:cornerRadius="@dimen/_5sdp"
+                        android:textColor="@color/primaryColorVariant"
+                        android:backgroundTint="@color/dismiss"
+                        android:text='@string/cancel' />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </net.orandja.shadowlayout.ShadowLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

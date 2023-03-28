@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.hoomanholding.jpawarehose.JpaFragment
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSplashBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity

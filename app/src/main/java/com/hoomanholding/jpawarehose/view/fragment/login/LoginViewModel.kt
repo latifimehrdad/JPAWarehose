@@ -6,9 +6,9 @@ import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.data.request.LoginRequestModel
 import com.hoomanholding.jpawarehose.model.repository.LoginRepository
 import com.hoomanholding.jpawarehose.utility.CompanionValues
-import com.hoomanholding.jpawarehose.utility.SingleLiveEvent
+import com.hoomanholding.applibrary.utility.SingleLiveEvent
 import com.hoomanholding.jpawarehose.di.ResourcesProvider
-import com.hoomanholding.jpawarehose.JpaViewModel
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -27,7 +27,8 @@ class LoginViewModel @Inject constructor(
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    val loginLiveDate = SingleLiveEvent<String?>()
+    val loginLiveDate =
+        SingleLiveEvent<String?>()
     val userName = MutableLiveData<String>()
     val password = MutableLiveData<String>()
 

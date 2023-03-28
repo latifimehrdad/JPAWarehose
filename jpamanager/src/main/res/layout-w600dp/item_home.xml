@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/drawable_border_mini_curve">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.6"
+                android:lines="1"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8sdp"
+                android:gravity="center_vertical"
+                android:text="تعداد پیش فاکتورهای تایید شده"
+                android:fontFamily="@font/iransans_light"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="@id/constraintLayoutParent"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayoutParent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_invoice"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:contentDescription="@string/logoDescription" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutParent"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutParent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.35"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:background="@drawable/drawable_list_button"
+            android:paddingVertical="@dimen/_2sdp"
+            android:paddingHorizontal="@dimen/_4sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:gravity="center"
+                android:lines="1"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:text="@string/toman"
+                android:fontFamily="@font/iransans_medium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_9sdp"
+                android:gravity="center"
+                android:lines="1"
+                android:text="123،456"
+                android:fontFamily="@font/iransans_bold"
+                />
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutAmount"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutAmount"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutAmount"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textSize="@dimen/_8sdp"
+            android:gravity="center"
+            android:lines="1"
+            android:background="@drawable/drawable_border_mini_curve"
+            android:text="15389"
+            android:textColor="@color/white"
+            android:fontFamily="@font/iransans_bold"
+            android:paddingVertical="@dimen/_2sdp"
+            android:paddingHorizontal="@dimen/_4sdp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

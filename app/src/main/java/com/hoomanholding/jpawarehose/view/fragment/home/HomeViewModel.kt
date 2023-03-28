@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.model.repository.UserRepository
 import com.hoomanholding.jpawarehose.utility.CompanionValues
-import com.hoomanholding.jpawarehose.JpaViewModel
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpawarehose.model.data.database.entity.UserInfoEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

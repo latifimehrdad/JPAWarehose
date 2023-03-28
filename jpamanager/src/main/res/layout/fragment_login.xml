@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hoomanholding.jpamanager.view.fragment.login.LoginViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryColorVariant">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageViewWave"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHeight_percent="0.25"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_login"
+                android:contentDescription="@string/logoDescription"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/imageViewWave"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.8"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_15sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutUserName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+                    app:boxCornerRadiusBottomStart="@dimen/_20sdp"
+                    app:boxCornerRadiusTopEnd="@dimen/_20sdp"
+                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
+                    app:boxStrokeColor="@color/primaryColor"
+                    app:hintTextColor="@color/dismiss"
+                    android:textColorHint="@color/dismiss"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/userName"
+                        android:inputType="none"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp"
+                        android:text="@={viewModel.userName}"
+                        android:fontFamily="@font/iransans_medium"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPasscode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+                    app:boxCornerRadiusBottomStart="@dimen/_20sdp"
+                    app:boxCornerRadiusTopEnd="@dimen/_20sdp"
+                    app:boxCornerRadiusTopStart="@dimen/_20sdp"
+                    app:passwordToggleEnabled="true"
+                    android:layoutDirection="rtl"
+                    app:passwordToggleTint="@color/white"
+                    app:boxStrokeColor="@color/primaryColor"
+                    app:hintTextColor="@color/white"
+                    android:textColorHint="@color/dismiss"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextPasscode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start|center_vertical"
+                        android:inputType="textPassword"
+                        android:hint="@string/password"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:text="@={viewModel.password}"
+                        android:fontFamily="@font/iransans_medium"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.hoomanholding.jpamanager.view.custom.JpaButton
+                    android:id="@+id/buttonLogin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/cardViewFingerPrint"
+                    app:layout_constraintEnd_toEndOf="@id/cardViewFingerPrint"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutPasscode"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/drawable_button"
+                    android:textSize="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/iransans_bold"
+                    android:textColor="@color/primaryColorVariant"
+                    android:text='@string/enter' />
+
+
+                <TextView
+                    android:id="@+id/textViewForgetPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/textInputLayoutPasscode"
+                    app:layout_constraintTop_toTopOf="@id/buttonLogin"
+                    app:layout_constraintBottom_toBottomOf="@id/buttonLogin"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="@string/forgetPassword"
+                    android:textColor="@color/hint"
+                    android:fontFamily="@font/iransans_medium" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cardViewFingerPrint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/drawable_login_fingerprint">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_finger_print"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:alpha="0.15"
+                        android:contentDescription="@string/fingerPrintDescription" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textSize="@dimen/_12sdp"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:fontFamily="@font/iransans_bold"
+                        android:text="@string/loginByBiometric"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+
+</layout>

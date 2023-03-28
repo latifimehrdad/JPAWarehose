@@ -6,7 +6,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.hoomanholding.jpawarehose.JpaFragment
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentHomeBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity

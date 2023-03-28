@@ -125,7 +125,7 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.hoomanholding.jpawarehose.view.custom.JpaButton
+                        <com.hoomanholding.applibrary.view.custom.JpaButton
                             android:id="@+id/buttonLogin"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

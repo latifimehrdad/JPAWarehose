@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "JPAWarehose"
 include ':app'
+include ':applibrary'
+include ':jpamanager'

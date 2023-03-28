@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.UserRepository
 import com.hoomanholding.jpawarehose.utility.CompanionValues
-import com.hoomanholding.jpawarehose.JpaViewModel
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

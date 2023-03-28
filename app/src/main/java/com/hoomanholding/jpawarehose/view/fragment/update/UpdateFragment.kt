@@ -3,7 +3,7 @@ package com.hoomanholding.jpawarehose.view.fragment.update
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.hoomanholding.jpawarehose.JpaFragment
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentUpdateBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activity.MainActivity"
+        android:background="@color/primaryColorVariant"
+        android:layoutDirection="ltr">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_height="@dimen/_50sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/icon_logo"
+                android:contentDescription="@string/logoDescription" />
+
+            <TextView
+                android:id="@+id/textViewUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent="0.3"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8sdp"
+                android:gravity="center"
+                android:lines="1"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:background="@drawable/drawable_border_mini_curve"
+                android:drawablePadding="@dimen/_5sdp"
+                app:drawableEndCompat="@drawable/ic_exclamation" />
+
+            <TextView
+                android:id="@+id/textViewLogOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewUser"
+                app:layout_constraintEnd_toEndOf="@id/textViewUser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                android:gravity="center"
+                android:text="@string/exit"
+                android:lines="1"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:background="@drawable/drawable_border_mini_curve"
+                android:drawablePadding="@dimen/_5sdp"
+                app:drawableEndCompat="@drawable/ic_logout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@id/constraintLogo"
+            app:layout_constraintBottom_toTopOf="@id/menuCardboard"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_host" />
+
+        <com.hoomanholding.jpamanager.view.custom.CustomMenu
+            android:id="@+id/menuHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:menu_title="@string/home"
+            app:menu_icon="@drawable/ic_home"/>
+
+        <com.hoomanholding.jpamanager.view.custom.CustomMenu
+            android:id="@+id/menuCardboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/menuHome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/_7sdp"
+            app:menu_title="@string/cardboard"
+            app:menu_icon="@drawable/ic_cardboard"/>
+
+        <com.hoomanholding.jpamanager.view.custom.CustomMenu
+            android:id="@+id/menuReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/menuCardboard"
+            app:layout_constraintBottom_toBottomOf="@id/menuHome"
+            app:layout_constraintEnd_toStartOf="@id/menuHome"
+            android:layout_marginEnd="@dimen/_7sdp"
+            app:menu_title="@string/report"
+            app:menu_icon="@drawable/ic_report"/>
+
+        <com.hoomanholding.jpamanager.view.custom.CustomMenu
+            android:id="@+id/menuProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/menuCardboard"
+            app:layout_constraintBottom_toBottomOf="@id/menuHome"
+            app:layout_constraintStart_toEndOf="@id/menuHome"
+            android:layout_marginStart="@dimen/_7sdp"
+            app:menu_title="@string/profile"
+            app:menu_icon="@drawable/ic_profile"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

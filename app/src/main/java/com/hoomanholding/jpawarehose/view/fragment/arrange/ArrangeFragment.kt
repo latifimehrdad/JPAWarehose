@@ -5,7 +5,7 @@ import android.view.View
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hoomanholding.jpawarehose.JpaFragment
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentArrangeBinding
 import com.hoomanholding.jpawarehose.model.data.database.entity.receipt.arrange.ReceiptEntity

@@ -2,9 +2,9 @@ package com.hoomanholding.jpawarehose.view.fragment.splash
 
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.UserRepository
-import com.hoomanholding.jpawarehose.utility.SingleLiveEvent
+import com.hoomanholding.applibrary.utility.SingleLiveEvent
 import com.hoomanholding.jpawarehose.di.ResourcesProvider
-import com.hoomanholding.jpawarehose.JpaViewModel
+import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpawarehose.model.data.database.entity.RoleEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -21,7 +21,8 @@ class SplashViewModel @Inject constructor(
     private val resourcesProvider: ResourcesProvider
 ) : JpaViewModel() {
 
-    val successLiveData = SingleLiveEvent<Boolean>()
+    val successLiveData =
+        SingleLiveEvent<Boolean>()
 
     //---------------------------------------------------------------------------------------------- userIsEntered
     fun userIsEntered() = userRepository.isEntered()

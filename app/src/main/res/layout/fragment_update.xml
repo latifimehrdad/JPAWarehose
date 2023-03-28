@@ -127,7 +127,7 @@
         </GridLayout>
 
 
-        <com.hoomanholding.jpawarehose.view.custom.JpaButton
+        <com.hoomanholding.applibrary.view.custom.JpaButton
             android:id="@+id/buttonDoUpdate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
