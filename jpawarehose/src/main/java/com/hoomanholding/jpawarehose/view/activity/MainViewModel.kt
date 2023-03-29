@@ -14,7 +14,8 @@ class MainViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : JpaViewModel() {
 
-    var actionImageViewShelf = R.id.action_goto_SaveReceiptFragment
+    var actionImageViewReceiptAdd = R.id.action_goto_SaveReceiptFragment
+    var actionImageViewReceiptView = R.id.action_goto_ArrangeFragment
 
     //---------------------------------------------------------------------------------------------- deleteAllData
     fun deleteAllData() {
@@ -26,21 +27,23 @@ class MainViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- deleteAllData
 
 
-    //---------------------------------------------------------------------------------------------- setActionImageViewShelf
-    fun setActionImageViewShelf() {
+    //---------------------------------------------------------------------------------------------- setActionImageViewReceipt
+    fun setActionImageViewReceipt() {
         val roleReceiptAdd = userRepository.getPermission("Warehouse.Receipt.Add")
         roleReceiptAdd?.let {
-            actionImageViewShelf = R.id.action_goto_SaveReceiptFragment
+            actionImageViewReceiptAdd = R.id.action_goto_SaveReceiptFragment
         } ?: run {
-            val roleReceiptView = userRepository.getPermission("Warehouse.Receipt.View")
-            roleReceiptView?.let {
-                actionImageViewShelf = R.id.action_goto_ArrangeFragment
-            }?: run {
-                actionImageViewShelf = 0
-            }
+            actionImageViewReceiptAdd = 0
+        }
+
+        val roleReceiptView = userRepository.getPermission("Warehouse.Receipt.View")
+        roleReceiptView?.let {
+            actionImageViewReceiptView = R.id.action_goto_ArrangeFragment
+        } ?: run {
+            actionImageViewReceiptView = 0
         }
     }
-    //---------------------------------------------------------------------------------------------- setActionImageViewShelf
+    //---------------------------------------------------------------------------------------------- setActionImageViewReceipt
 
 
 }

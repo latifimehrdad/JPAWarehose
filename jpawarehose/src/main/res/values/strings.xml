@@ -70,6 +70,7 @@
     <string name="space"> </string>
     <string name="dote">:</string>
     <string name="historyOfSaveReceipt">تاریخچه</string>
+    <string name="needToUpdate">نیاز به بروزرسانی اطلاعات دارید</string>
 
     <string name="logoDescription">logoDescription</string>
     <string name="fingerPrintDescription">fingerprint</string>

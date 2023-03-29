@@ -59,7 +59,7 @@ class SaveReceiptViewModel @Inject constructor(
             EnumSearchOrderType.DESC -> EnumSearchOrderType.ASC
             EnumSearchOrderType.ASC -> EnumSearchOrderType.DESC
         }
-        orderChangeLiveData.value = orderType.name
+        orderChangeLiveData.postValue(orderType.name)
         searchProduct()
     }
     //---------------------------------------------------------------------------------------------- changeOrderType
@@ -72,7 +72,7 @@ class SaveReceiptViewModel @Inject constructor(
             EnumSearchName.codeKala -> EnumSearchName.nameKala
             EnumSearchName.nameKala -> EnumSearchName.codeKala
         }
-        orderChangeLiveData.value = orderName.name
+        orderChangeLiveData.postValue(orderName.name)
         searchProduct()
     }
     //---------------------------------------------------------------------------------------------- changeOrderType
@@ -173,7 +173,7 @@ class SaveReceiptViewModel @Inject constructor(
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
             saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
-            adapterNotifyChangeLiveData.value = position
+            adapterNotifyChangeLiveData.postValue(position)
         }
     }
     //---------------------------------------------------------------------------------------------- addCarton
@@ -195,7 +195,7 @@ class SaveReceiptViewModel @Inject constructor(
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
             saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
-            adapterNotifyChangeLiveData.value = position
+            adapterNotifyChangeLiveData.postValue(position)
         }
     }
     //---------------------------------------------------------------------------------------------- addPacket
@@ -211,7 +211,7 @@ class SaveReceiptViewModel @Inject constructor(
                 entity.cartonCount = count
                 saveReceiptRepository.insertSaveReceiptAmount(entity)
                 insertNewSaveReceipt()
-                adapterNotifyChangeLiveData.value = position
+                adapterNotifyChangeLiveData.postValue(position)
             }
         }
     }
@@ -228,7 +228,7 @@ class SaveReceiptViewModel @Inject constructor(
                 entity.packetCount = count
                 saveReceiptRepository.insertSaveReceiptAmount(entity)
                 insertNewSaveReceipt()
-                adapterNotifyChangeLiveData.value = position
+                adapterNotifyChangeLiveData.postValue(position)
             }
         }
     }
@@ -250,7 +250,7 @@ class SaveReceiptViewModel @Inject constructor(
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
             saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
-            adapterNotifyChangeLiveData.value = position
+            adapterNotifyChangeLiveData.postValue(position)
         }
     }
     //---------------------------------------------------------------------------------------------- setCarton
@@ -271,7 +271,7 @@ class SaveReceiptViewModel @Inject constructor(
             productLiveData.value?.get(position)?.saveReceiptAmountEntity = saveAmount
             saveReceiptRepository.insertSaveReceiptAmount(saveAmount)
             insertNewSaveReceipt()
-            adapterNotifyChangeLiveData.value = position
+            adapterNotifyChangeLiveData.postValue(position)
         }
     }
     //---------------------------------------------------------------------------------------------- setPacket
@@ -283,7 +283,10 @@ class SaveReceiptViewModel @Inject constructor(
             return
         val date = LocalDateTime.now().toSolarDate()?.getSolarDate() ?: return
         val number =
-            if (receiptNumberLiveData.value?.isDigitsOnly() == true) receiptNumberLiveData.value?.toLong()
+            if(receiptNumberLiveData.value?.isEmpty() == true)
+                null
+            else if (receiptNumberLiveData.value?.isDigitsOnly() == true)
+                receiptNumberLiveData.value?.toLong()
             else null
         supplierSelected?.let {
             val saveReceiptEntity = SaveReceiptEntity(

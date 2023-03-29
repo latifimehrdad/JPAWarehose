@@ -39,34 +39,25 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     JpaFragment<FragmentSaveReceiptBinding>() {
 
     @Inject
-    lateinit var loadingManager : LoadingManager
+    lateinit var loadingManager: LoadingManager
 
     private val saveReceiptViewModel: SaveReceiptViewModel by viewModels()
 
-    private var productAdapter : ProductSaveReceiptAdapter? = null
+    private var productAdapter: ProductSaveReceiptAdapter? = null
 
-    private var job : Job? = null
+    private var job: Job? = null
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = saveReceiptViewModel
-        observeErrorLiveDate()
         observeLiveData()
         setListener()
         saveReceiptViewModel.getSuppliers()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
-
-    //---------------------------------------------------------------------------------------------- observeErrorLiveDate
-    private fun observeErrorLiveDate() {
-        saveReceiptViewModel.errorLiveDate.observe(viewLifecycleOwner) {
-            showMessage(it.message)
-        }
-    }
-    //---------------------------------------------------------------------------------------------- observeErrorLiveDate
 
 
     //---------------------------------------------------------------------------------------------- showMessage
@@ -129,7 +120,6 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     //---------------------------------------------------------------------------------------------- setListener
 
 
-
     //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
     private fun createJobForUpdateReceiptNumber(receiptNumber: String) {
         job = CoroutineScope(IO).launch {
@@ -143,7 +133,6 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
 
 
-
     //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
     private fun createJobForSearch() {
         job = CoroutineScope(IO).launch {
@@ -154,20 +143,25 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     //---------------------------------------------------------------------------------------------- createJobForUpdateReceiptNumber
 
 
-
     //---------------------------------------------------------------------------------------------- observeLiveData
     private fun observeLiveData() {
+
+        saveReceiptViewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            showMessage(it.message)
+        }
+
         saveReceiptViewModel.supplierLiveData.observe(viewLifecycleOwner) {
             initBrandsSpinner(it)
         }
 
-        saveReceiptViewModel.productLiveData.observe(viewLifecycleOwner){
+        saveReceiptViewModel.productLiveData.observe(viewLifecycleOwner) {
             setProductAdapter(it)
         }
 
         saveReceiptViewModel.adapterNotifyChangeLiveData.observe(viewLifecycleOwner) {
             productAdapter?.notifyItemChanged(it)
             binding.powerSpinnerSupplier.isEnabled = false
+            binding.imageviewDelete.visibility = View.VISIBLE
         }
 
         saveReceiptViewModel.sendReceiptToServer.observe(viewLifecycleOwner) {
@@ -176,13 +170,13 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
         }
 
         saveReceiptViewModel.orderChangeLiveData.observe(viewLifecycleOwner) {
-            when(saveReceiptViewModel.orderName){
+            when (saveReceiptViewModel.orderName) {
                 EnumSearchName.nameKala ->
                     binding.textViewOrderName.text = getString(R.string.productName)
                 EnumSearchName.codeKala ->
                     binding.textViewOrderName.text = getString(R.string.productCode)
             }
-            when(saveReceiptViewModel.orderType) {
+            when (saveReceiptViewModel.orderType) {
                 EnumSearchOrderType.DESC ->
                     binding.textViewOrderType.text = getString(R.string.DESC)
                 EnumSearchOrderType.ASC ->
@@ -198,7 +192,7 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
         if (context == null)
             return
 
-        if(binding.editTextReceiptNumber.text.isNullOrEmpty()) {
+        if (binding.editTextReceiptNumber.text.isNullOrEmpty()) {
             showMessage(requireContext().getString(R.string.receiptNumberIsEmpty))
             binding.editTextReceiptNumber.error =
                 requireContext().getString(R.string.receiptNumberIsEmpty)
@@ -207,7 +201,8 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
 
         val dialog = DialogManager().createDialogHeightMatchParent(
             requireContext(),
-            R.layout.dialog_confirm_save_receipt, 50f)
+            R.layout.dialog_confirm_save_receipt, 50f
+        )
 
         val editText = dialog.findViewById<TextInputEditText>(R.id.textInputEditTextDescription)
         val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
@@ -238,9 +233,8 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     //---------------------------------------------------------------------------------------------- saveReceipt
 
 
-
     //---------------------------------------------------------------------------------------------- initBrandsSpinner
-    private fun initBrandsSpinner(suppliers : List<SupplierEntity>) {
+    private fun initBrandsSpinner(suppliers: List<SupplierEntity>) {
         binding.powerSpinnerSupplier.apply {
             setSpinnerAdapter(SupplierSpinnerAdapter(this))
             setItems(suppliers)
@@ -256,14 +250,17 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
         if (suppliers.size == 1) {
             binding.powerSpinnerSupplier.selectItemByIndex(0)
             binding.powerSpinnerSupplier.isEnabled = false
-        } else binding.powerSpinnerSupplier.isEnabled = true
+            binding.imageviewDelete.visibility = View.VISIBLE
+        } else {
+            binding.powerSpinnerSupplier.isEnabled = true
+            binding.imageviewDelete.visibility = View.INVISIBLE
+        }
     }
     //---------------------------------------------------------------------------------------------- initBrandsSpinner
 
 
-
     //---------------------------------------------------------------------------------------------- loadProduct
-    private fun loadProduct(supplierIndex : Int) {
+    private fun loadProduct(supplierIndex: Int) {
         binding.recyclerProduct.adapter = null
         loadingManager.setRecyclerLoading(
             binding.recyclerProduct,
@@ -276,9 +273,8 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     //---------------------------------------------------------------------------------------------- loadProduct
 
 
-
     //---------------------------------------------------------------------------------------------- setProductAdapter
-    private fun setProductAdapter(products : List<ProductAmountModel>) {
+    private fun setProductAdapter(products: List<ProductAmountModel>) {
         if (context == null)
             return
         loadingManager.stopLoadingRecycler()
@@ -286,7 +282,8 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
         val manager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
-            false)
+            false
+        )
         binding.recyclerProduct.adapter = productAdapter
         binding.recyclerProduct.layoutManager = manager
     }
@@ -294,7 +291,7 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
 
 
     //---------------------------------------------------------------------------------------------- clickProduct
-    private fun clickProduct() = object : ProductSaveReceiptHolder.Click{
+    private fun clickProduct() = object : ProductSaveReceiptHolder.Click {
         override fun addCarton(position: Int) {
             saveReceiptViewModel.addCarton(position)
         }
@@ -324,7 +321,7 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
 
     //---------------------------------------------------------------------------------------------- createNewReceipt
     private fun createNewReceipt() {
-        val click = object : ConfirmDialog.Click{
+        val click = object : ConfirmDialog.Click {
             override fun clickYes() {
                 binding.recyclerProduct.adapter = null
                 binding.powerSpinnerSupplier.clearSelectedItem()

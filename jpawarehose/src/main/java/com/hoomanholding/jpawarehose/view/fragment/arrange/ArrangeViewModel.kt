@@ -32,8 +32,8 @@ class ArrangeViewModel @Inject constructor(
             val details = receiptRepository.getReceiptDetail()
             if (details.isNotEmpty()) {
                 val receipt = receiptRepository.getReceipt(details[0].id)
-                receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
                 receiptLiveData.postValue(listOf(receipt))
+                receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
             }
         }
     }

@@ -64,7 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:layout_constraintStart_toEndOf="@id/imageViewUpdate"
-                app:layout_constraintEnd_toStartOf="@id/imageViewShelf"
+                app:layout_constraintEnd_toStartOf="@id/imageViewReceiptAdd"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="@dimen/_9sdp"
@@ -72,17 +72,29 @@
                 android:contentDescription="@string/homeDescription" />
 
             <ImageView
-                android:id="@+id/imageViewShelf"
+                android:id="@+id/imageViewReceiptAdd"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:layout_constraintStart_toEndOf="@id/imageViewHome"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imageViewReceiptView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:padding="@dimen/_9sdp"
                 android:src="@drawable/ic_shelf"
                 android:contentDescription="@string/shelfDescription" />
 
+
+            <ImageView
+                android:id="@+id/imageViewReceiptView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toEndOf="@id/imageViewReceiptAdd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="@dimen/_9sdp"
+                android:src="@drawable/ic_opened_packaged"
+                android:contentDescription="@string/shelfDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

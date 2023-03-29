@@ -44,21 +44,27 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
-        showImageViewShelf()
+        showImageViewReceiptAction()
         setListener()
     }
     //---------------------------------------------------------------------------------------------- initView
 
 
-    //---------------------------------------------------------------------------------------------- showImageViewShelf
-    fun showImageViewShelf() {
-        mainViewModel.setActionImageViewShelf()
-        if (mainViewModel.actionImageViewShelf == 0)
-            binding.imageViewShelf.visibility = View.GONE
+
+    //---------------------------------------------------------------------------------------------- showImageViewReceiptAction
+    fun showImageViewReceiptAction() {
+        mainViewModel.setActionImageViewReceipt()
+        if (mainViewModel.actionImageViewReceiptAdd == 0)
+            binding.imageViewReceiptAdd.visibility = View.GONE
         else
-            binding.imageViewShelf.visibility = View.VISIBLE
+            binding.imageViewReceiptAdd.visibility = View.VISIBLE
+
+        if (mainViewModel.actionImageViewReceiptView == 0)
+            binding.imageViewReceiptView.visibility = View.GONE
+        else
+            binding.imageViewReceiptView.visibility = View.VISIBLE
     }
-    //---------------------------------------------------------------------------------------------- showImageViewShelf
+    //---------------------------------------------------------------------------------------------- showImageViewReceiptAction
 
 
     //---------------------------------------------------------------------------------------------- setListener
@@ -83,16 +89,25 @@ class MainActivity : AppCompatActivity() {
             navController?.navigate(R.id.action_goto_HistorySaveReceiptFragment)
         }
 
-        binding.imageViewShelf.setOnClickListener { clickOnImageShelf() }
+        binding.imageViewReceiptAdd.setOnClickListener { clickOnImageReceiptAdd() }
+
+        binding.imageViewReceiptView.setOnClickListener { clickOnImageReceiptView() }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
-    //---------------------------------------------------------------------------------------------- clickOnImageShelf
-    private fun clickOnImageShelf() {
-        navController?.navigate(mainViewModel.actionImageViewShelf)
+    //---------------------------------------------------------------------------------------------- clickOnImageReceiptAdd
+    private fun clickOnImageReceiptAdd() {
+        navController?.navigate(mainViewModel.actionImageViewReceiptAdd)
     }
-    //---------------------------------------------------------------------------------------------- clickOnImageShelf
+    //---------------------------------------------------------------------------------------------- clickOnImageReceiptAdd
+
+
+    //---------------------------------------------------------------------------------------------- clickOnImageReceiptView
+    private fun clickOnImageReceiptView() {
+        navController?.navigate(mainViewModel.actionImageViewReceiptView)
+    }
+    //---------------------------------------------------------------------------------------------- clickOnImageReceiptView
 
 
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
@@ -106,8 +121,8 @@ class MainActivity : AppCompatActivity() {
             "UpdateFragment" -> selectCurrentMenu(binding.imageViewUpdate)
             "HomeFragment" -> selectCurrentMenu(binding.imageViewHome)
             "HistorySaveReceiptFragment" -> selectCurrentMenu(binding.imageViewHistory)
-            "SaveReceiptFragment",
-            "ArrangeFragment" -> selectCurrentMenu(binding.imageViewShelf)
+            "SaveReceiptFragment" -> selectCurrentMenu(binding.imageViewReceiptAdd)
+            "ArrangeFragment" -> selectCurrentMenu(binding.imageViewReceiptView)
         }
     }
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
@@ -118,7 +133,8 @@ class MainActivity : AppCompatActivity() {
         resetImageNavigationMenu(binding.imageViewHistory)
         resetImageNavigationMenu(binding.imageViewUpdate)
         resetImageNavigationMenu(binding.imageViewHome)
-        resetImageNavigationMenu(binding.imageViewShelf)
+        resetImageNavigationMenu(binding.imageViewReceiptAdd)
+        resetImageNavigationMenu(binding.imageViewReceiptView)
     }
     //---------------------------------------------------------------------------------------------- resetMenuColor
 

@@ -20,6 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.g00fy2.quickie.QRResult
 import io.github.g00fy2.quickie.ScanCustomCode
 import io.github.g00fy2.quickie.config.ScannerConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -45,6 +49,8 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = arrangeViewModel
+        binding.buttonSave.visibility = View.INVISIBLE
+        binding.buttonScanQR.visibility = View.INVISIBLE
         observeLiveData()
         setListener()
         arrangeViewModel.getOldData()
@@ -55,22 +61,13 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
         activity?.let {
-            (it as MainActivity).showMessage(message)
+            if (message.contains("Entity"))
+                (it as MainActivity).showMessage(getString(R.string.needToUpdate))
+            else (it as MainActivity).showMessage(message)
         }
         binding.buttonSave.stopLoading()
     }
     //---------------------------------------------------------------------------------------------- showMessage
-
-
-    //---------------------------------------------------------------------------------------------- observeErrorLiveDate
-    private fun observeErrorLiveDate() {
-        arrangeViewModel.errorLiveDate.observe(viewLifecycleOwner) {
-            loadingManager.stopLoadingView()
-            loadingManager.stopLoadingRecycler()
-            showMessage(it.message)
-        }
-    }
-    //---------------------------------------------------------------------------------------------- observeErrorLiveDate
 
 
     //---------------------------------------------------------------------------------------------- setListener
@@ -84,12 +81,19 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
 
     //---------------------------------------------------------------------------------------------- observeLiveData
     private fun observeLiveData() {
-        observeErrorLiveDate()
+        arrangeViewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            loadingManager.stopLoadingView()
+            loadingManager.stopLoadingRecycler()
+            showMessage(it.message)
+        }
+
         arrangeViewModel.receiptLiveData.observe(viewLifecycleOwner) {
             initReceiptSpinner(it)
         }
 
         arrangeViewModel.receiptDetailLiveData.observe(viewLifecycleOwner) {
+            binding.buttonSave.visibility = View.VISIBLE
+            binding.buttonScanQR.visibility = View.VISIBLE
             setProductAdapter(it)
         }
 
@@ -181,12 +185,21 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
                 loadReceiptDetail(newIndex)
             }
         }
-        if (receipt.size == 1) {
+        if (receipt.isEmpty()) {
+            binding.powerSpinnerReceipt.isEnabled = false
+            binding.buttonSave.visibility = View.INVISIBLE
+            binding.buttonScanQR.visibility = View.INVISIBLE
+        } else if (receipt.size == 1) {
             binding.powerSpinnerReceipt.selectItemByIndex(0)
             binding.powerSpinnerReceipt.isEnabled = false
+            binding.powerSpinnerReceipt.dismiss()
         } else {
             binding.powerSpinnerReceipt.isEnabled = true
-            binding.powerSpinnerReceipt.show()
+            binding.powerSpinnerReceipt.dismiss()
+            CoroutineScope(Main).launch {
+                delay(300)
+                binding.powerSpinnerReceipt.show()
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- initReceiptSpinner

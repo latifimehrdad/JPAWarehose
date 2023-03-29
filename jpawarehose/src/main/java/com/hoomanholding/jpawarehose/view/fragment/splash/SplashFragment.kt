@@ -105,7 +105,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     private fun observeSuccessLiveDataLiveData() {
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
             activity?.let {main->
-                (main as MainActivity).showImageViewShelf()
+                (main as MainActivity).showImageViewReceiptAction()
             }
             if (it)
                 findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
