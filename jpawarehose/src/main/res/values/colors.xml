@@ -18,7 +18,7 @@
     <color name="mtrl_textinput_default_box_stroke_color">@color/primaryColor</color>
 
     <color name="recyclerLoadingShadow">#E6FFFFFF</color>
-    <color name="recyclerLoadingBack">#0DFFFFFF</color>
+    <color name="recyclerLoadingBack">#33FFFFFF</color>
 
     <color name="snackBack">#FFF59D</color>
     <color name="disableList">#80000000</color>

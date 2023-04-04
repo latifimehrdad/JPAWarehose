@@ -45,6 +45,24 @@
 
         </LinearLayout>
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/recyclerViewReceipt"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerViewReceipt"
+            app:layout_constraintStart_toStartOf="@id/recyclerViewReceipt"
+            app:layout_constraintEnd_toEndOf="@id/recyclerViewReceipt">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/recyclerLoadingBack"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReceipt"
             android:layout_width="match_parent"

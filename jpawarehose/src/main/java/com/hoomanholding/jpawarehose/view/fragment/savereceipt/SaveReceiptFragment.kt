@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.hoomanholding.applibrary.ext.config
+import com.hoomanholding.applibrary.ext.startLoading
+import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSaveReceiptBinding
@@ -16,19 +19,18 @@ import com.hoomanholding.applibrary.model.data.database.entity.SupplierEntity
 import com.hoomanholding.applibrary.model.data.database.join.ProductAmountModel
 import com.hoomanholding.applibrary.model.data.enums.EnumSearchName
 import com.hoomanholding.applibrary.model.data.enums.EnumSearchOrderType
+import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ProductSaveReceiptAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SaveReceiptDetailAdapter
 import com.hoomanholding.jpawarehose.view.adapter.SupplierSpinnerAdapter
 import com.hoomanholding.jpawarehose.view.adapter.holder.ProductSaveReceiptHolder
 import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
-import com.zar.core.tools.loadings.LoadingManager
 import com.zar.core.tools.manager.DialogManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import javax.inject.Inject
 
 /**
  * Create by Mehrdad on 1/18/2023
@@ -37,9 +39,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_receipt) :
     JpaFragment<FragmentSaveReceiptBinding>() {
-
-    @Inject
-    lateinit var loadingManager: LoadingManager
 
     private val saveReceiptViewModel: SaveReceiptViewModel by viewModels()
 
@@ -52,6 +51,7 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = saveReceiptViewModel
+        binding.shimmerViewContainer.config(getShimmerBuild())
         observeLiveData()
         setListener()
         saveReceiptViewModel.getSuppliers()
@@ -62,11 +62,11 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
 
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
+        binding.shimmerViewContainer.stopLoading()
         activity?.let {
             (it as MainActivity).showMessage(message)
         }
         binding.buttonSave.stopLoading()
-        loadingManager.stopLoadingRecycler()
     }
     //---------------------------------------------------------------------------------------------- showMessage
 
@@ -155,6 +155,7 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
         }
 
         saveReceiptViewModel.productLiveData.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainer.stopLoading()
             setProductAdapter(it)
         }
 
@@ -262,12 +263,7 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     //---------------------------------------------------------------------------------------------- loadProduct
     private fun loadProduct(supplierIndex: Int) {
         binding.recyclerProduct.adapter = null
-        loadingManager.setRecyclerLoading(
-            binding.recyclerProduct,
-            R.layout.item_loading,
-            R.color.recyclerLoadingShadow,
-            1
-        )
+        binding.shimmerViewContainer.startLoading()
         saveReceiptViewModel.selectSupplier(supplierIndex)
     }
     //---------------------------------------------------------------------------------------------- loadProduct
@@ -277,7 +273,6 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
     private fun setProductAdapter(products: List<ProductAmountModel>) {
         if (context == null)
             return
-        loadingManager.stopLoadingRecycler()
         productAdapter = ProductSaveReceiptAdapter(products, clickProduct())
         val manager = LinearLayoutManager(
             requireContext(),

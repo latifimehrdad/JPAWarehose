@@ -5,17 +5,20 @@ import android.view.View
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hoomanholding.applibrary.ext.config
+import com.hoomanholding.applibrary.ext.startLoading
+import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentArrangeBinding
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.applibrary.model.data.database.join.ReceiptWithProduct
+import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptProductAdapter
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptSpinnerAdapter
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptLocationHolder
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
-import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.g00fy2.quickie.QRResult
 import io.github.g00fy2.quickie.ScanCustomCode
@@ -24,7 +27,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  * Create by Mehrdad on 1/18/2023
@@ -35,9 +37,6 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
     JpaFragment<FragmentArrangeBinding>() {
 
     private val arrangeViewModel: ArrangeViewModel by viewModels()
-
-    @Inject
-    lateinit var loadingManager: LoadingManager
 
     private var productAdapter: ReceiptProductAdapter? = null
 
@@ -51,6 +50,7 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
         binding.viewModel = arrangeViewModel
         binding.buttonSave.visibility = View.INVISIBLE
         binding.buttonScanQR.visibility = View.INVISIBLE
+        binding.shimmerViewContainer.config(getShimmerBuild())
         observeLiveData()
         setListener()
         arrangeViewModel.getOldData()
@@ -82,18 +82,19 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
     //---------------------------------------------------------------------------------------------- observeLiveData
     private fun observeLiveData() {
         arrangeViewModel.errorLiveDate.observe(viewLifecycleOwner) {
-            loadingManager.stopLoadingView()
-            loadingManager.stopLoadingRecycler()
+            binding.shimmerViewContainer.stopLoading()
             showMessage(it.message)
         }
 
         arrangeViewModel.receiptLiveData.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainer.stopLoading()
             initReceiptSpinner(it)
         }
 
         arrangeViewModel.receiptDetailLiveData.observe(viewLifecycleOwner) {
             binding.buttonSave.visibility = View.VISIBLE
             binding.buttonScanQR.visibility = View.VISIBLE
+            binding.shimmerViewContainer.stopLoading()
             setProductAdapter(it)
         }
 
@@ -158,12 +159,7 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
             else
                 binding.powerSpinnerReceipt.show()
         } ?: run {
-            binding.powerSpinnerReceipt.show()
-            loadingManager.setViewLoading(
-                binding.powerSpinnerReceipt.getSpinnerBodyView(),
-                R.layout.item_loading,
-                R.color.recyclerLoadingShadow,
-            )
+            binding.shimmerViewContainer.startLoading()
             arrangeViewModel.requestGetReceipts()
         }
     }
@@ -195,11 +191,11 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
             binding.powerSpinnerReceipt.dismiss()
         } else {
             binding.powerSpinnerReceipt.isEnabled = true
-            binding.powerSpinnerReceipt.dismiss()
             CoroutineScope(Main).launch {
-                delay(300)
+                delay(100)
                 binding.powerSpinnerReceipt.show()
             }
+
         }
     }
     //---------------------------------------------------------------------------------------------- initReceiptSpinner
@@ -210,12 +206,7 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
         if (arrangeViewModel.receiptDetailLiveData.value != null)
             return
         binding.recyclerDetail.adapter = null
-        loadingManager.setRecyclerLoading(
-            binding.recyclerDetail,
-            R.layout.item_loading,
-            R.color.recyclerLoadingShadow,
-            1
-        )
+        binding.shimmerViewContainer.startLoading()
         arrangeViewModel.requestGerReceiptDetail(index)
     }
     //---------------------------------------------------------------------------------------------- loadReceiptDetail
@@ -232,7 +223,6 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
                 replaceOnLocation(count)
             }
         }
-        loadingManager.stopLoadingRecycler()
         productAdapter = ReceiptProductAdapter(product, clickForReplaceOnLocation)
         val manager = LinearLayoutManager(
             requireContext(),

@@ -7,12 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
+import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.OrderHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.OrderAdapter
-import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 
 
@@ -24,13 +23,12 @@ import com.hoomanholding.applibrary.view.fragment.JpaFragment
 class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     JpaFragment<FragmentInvoiceBinding>() {
 
-    @Inject lateinit var loadingManager: LoadingManager
-
     private val viewModel: InvoiceViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.shimmerViewContainer.setShimmer(getShimmerBuild())
         observeLiveData()
         setListener()
         getOrder()
@@ -41,7 +39,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
-        loadingManager.stopLoadingRecycler()
+        binding.shimmerViewContainer.stopShimmer()
         activity?.let {
             (it as MainActivity).showMessage(message)
         }
@@ -57,6 +55,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         }
 
         viewModel.orderLiveData.observe(viewLifecycleOwner){
+            binding.shimmerViewContainer.stopShimmer()
             setAdapter(it)
         }
 
@@ -79,12 +78,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
     //---------------------------------------------------------------------------------------------- getOrder
     private fun getOrder() {
-        loadingManager.setRecyclerLoading(
-            binding.recyclerItem,
-            R.layout.item_loading,
-            R.color.recyclerLoadingShadow,
-            1
-        )
+        binding.shimmerViewContainer.startShimmer()
         viewModel.requestGetOrder()
     }
     //---------------------------------------------------------------------------------------------- getOrder

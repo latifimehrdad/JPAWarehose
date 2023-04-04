@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hoomanholding.applibrary.ext.config
+import com.hoomanholding.applibrary.ext.startLoading
+import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentHistorySaveReceiptBinding
 import com.hoomanholding.applibrary.model.data.database.join.HistorySaveReceiptWithSupplier
+import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.adapter.HistorySaveReceiptAdapter
-import com.zar.core.tools.loadings.LoadingManager
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 /**
  * Created by zar on 2/20/2023.
@@ -24,12 +26,10 @@ class HistorySaveReceiptFragment(override var layout: Int = R.layout.fragment_hi
 
     private val viewModel: HistorySaveReceiptViewModel by viewModels()
 
-    @Inject
-    lateinit var loadingManager: LoadingManager
-
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.shimmerViewContainer.config(getShimmerBuild())
         observeLiveDate()
         getSaveReceipt()
     }
@@ -38,10 +38,10 @@ class HistorySaveReceiptFragment(override var layout: Int = R.layout.fragment_hi
 
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
+        binding.shimmerViewContainer.stopLoading()
         activity?.let {
             (it as MainActivity).showMessage(message)
         }
-        loadingManager.stopLoadingRecycler()
     }
     //---------------------------------------------------------------------------------------------- showMessage
 
@@ -53,6 +53,7 @@ class HistorySaveReceiptFragment(override var layout: Int = R.layout.fragment_hi
         }
 
         viewModel.saveReceiptsLiveData.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainer.stopLoading()
             setReceiptAdapter(it)
         }
     }
@@ -61,12 +62,7 @@ class HistorySaveReceiptFragment(override var layout: Int = R.layout.fragment_hi
 
     //---------------------------------------------------------------------------------------------- getSaveReceipt
     private fun getSaveReceipt() {
-        loadingManager.setRecyclerLoading(
-            binding.recyclerViewReceipt,
-            R.layout.item_loading,
-            R.color.recyclerLoadingShadow,
-            1
-        )
+        binding.shimmerViewContainer.startLoading()
         viewModel.getSaveReceipts()
     }
     //---------------------------------------------------------------------------------------------- getSaveReceipt
@@ -74,7 +70,6 @@ class HistorySaveReceiptFragment(override var layout: Int = R.layout.fragment_hi
 
     //---------------------------------------------------------------------------------------------- setReceiptAdapter
     private fun setReceiptAdapter(items: List<HistorySaveReceiptWithSupplier>) {
-        loadingManager.stopLoadingRecycler()
         if (context == null)
             return
         val adapter = HistorySaveReceiptAdapter(items)
