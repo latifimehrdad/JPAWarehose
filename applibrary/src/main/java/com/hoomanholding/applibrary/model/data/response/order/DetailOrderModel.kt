@@ -6,13 +6,13 @@ package com.hoomanholding.applibrary.model.data.response.order
  */
 
 data class DetailOrderModel(
-    val orderId: Long,
-    val id: Long,
+    val orderId: Int,
+    val id: Int,
     val productCode: String?,
     val productName: String?,
     val count: Int,
     val price: Long,
     val amount: Long,
-    val discount: Int,
+    val discount: Long,
     val finalAmount: Long
 )

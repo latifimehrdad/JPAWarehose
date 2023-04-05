@@ -6,19 +6,19 @@ package com.hoomanholding.applibrary.model.data.response.order
  */
 
 data class OrderModel(
-    val id: Long,
+    val id: Int,
     val orderDate: String?,
-    val orderNumber: Long,
-    val customerId: Long,
-    val customerCode: Long,
+    val orderNumber: Int,
+    val customerId: Int,
+    val customerCode: Int,
     val customerName: String?,
-    val visitorId: Long?,
+    val visitorId: Int?,
     val visitorName: String?,
-    val paymentTypeId: Long,
+    val paymentTypeId: Int,
     val paymentTypeName: String?,
     val paymentDate: Short,
     val orderAmount: Long,
-    val discount: Int,
+    val discount: Long,
     val orderFinaleAmount: Long,
     val visitorDescription: String?
 )

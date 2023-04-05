@@ -2,6 +2,7 @@ package com.hoomanholding.applibrary.view.fragment
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.zar.core.enums.EnumApiError
 import com.zar.core.models.ErrorApiModel
@@ -17,6 +18,26 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
     var job: Job? = null
     val errorLiveDate =
         SingleLiveEvent<ErrorApiModel>()
+
+/*
+    //---------------------------------------------------------------------------------------------- checkResponse
+    suspend fun <T: Any> checkResponse(response: Response<T>?): T?{
+        if (response?.isSuccessful == true) {
+            val body = response.body()
+            body?.let {
+                return it
+            } ?: run {
+                setMessage(
+                    resourcesProvider.getString(
+                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
+                    )
+                )
+            }
+        } else setMessage(response)
+        return null
+    }
+    //---------------------------------------------------------------------------------------------- checkResponse
+*/
 
 
     //---------------------------------------------------------------------------------------------- setError

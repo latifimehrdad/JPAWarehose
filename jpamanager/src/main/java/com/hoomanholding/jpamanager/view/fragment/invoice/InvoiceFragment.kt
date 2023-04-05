@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
@@ -30,8 +31,8 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         super.onViewCreated(view, savedInstanceState)
         binding.shimmerViewContainer.setShimmer(getShimmerBuild())
         observeLiveData()
-        setListener()
-        getOrder()
+        viewModel.requestGetCustomerFinancialDetail(12413, EnumCheckType.bouncedCheck)
+//        getOrder()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -50,7 +51,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
     //---------------------------------------------------------------------------------------------- observeLiveData
     private fun observeLiveData() {
-        viewModel.errorLiveDate.observe(viewLifecycleOwner) {
+        viewModel.errorLiveDate.observe(viewLifecycleOwner){
             showMessage(it.message)
         }
 
@@ -62,17 +63,28 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         viewModel.detailOrderLiveData.observe(viewLifecycleOwner){
             showMessage("count of product is ${it.size}")
         }
+
+        viewModel.visitorLiveData.observe(viewLifecycleOwner){
+            showMessage("count of visitor is ${it.size}")
+        }
+
+        viewModel.disApprovalReasons.observe(viewLifecycleOwner){
+            showMessage("count of visitor is ${it.size}")
+        }
+
+        viewModel.customerLiveData.observe(viewLifecycleOwner){
+            showMessage("count of visitor is ${it.size} $it")
+        }
+
+        viewModel.customerFinancialDetailLiveData.observe(viewLifecycleOwner){
+            showMessage("count of visitor is ${it.size} $it")
+        }
+
+        viewModel.customerFinancialLiveData.observe(viewLifecycleOwner){
+            showMessage("count of visitor is $it")
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
-
-
-
-
-    //---------------------------------------------------------------------------------------------- setListener
-    private fun setListener() {
-
-    }
-    //---------------------------------------------------------------------------------------------- setListener
 
 
 

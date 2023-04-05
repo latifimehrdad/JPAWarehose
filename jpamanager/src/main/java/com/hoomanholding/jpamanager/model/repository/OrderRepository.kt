@@ -24,7 +24,7 @@ class OrderRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestOrderDetail
-    suspend fun requestOrderDetail(orderId: Long) =
+    suspend fun requestOrderDetail(orderId: Int) =
         apiCall { api.requestOrderDetail(orderId, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestOrderDetail
 
