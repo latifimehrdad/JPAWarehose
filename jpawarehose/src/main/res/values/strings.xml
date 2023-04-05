@@ -21,6 +21,7 @@
     <string name="doUpdate">انجام بروزرسانی</string>
     <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
     <string name="saveReceipt">ثبت رسید</string>
+    <string name="saveReceiptSuccess">ثبت رسید با موفقیت انجام شد</string>
     <string name="chooseSupplier">انتخاب تامین کننده</string>
     <string name="pageNumber">شماره برگه</string>
     <string name="pageNumberDot">شماره برگه :</string>

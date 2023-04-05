@@ -14,9 +14,7 @@ import com.hoomanholding.applibrary.view.fragment.JpaViewModel
  */
 
 @HiltViewModel
-class ReportViewModel @Inject constructor(
-    private val resourcesProvider: ResourcesProvider
-): JpaViewModel() {
+class ReportViewModel @Inject constructor(): JpaViewModel() {
 
     val itemLiveData: MutableLiveData<List<CardBoardItemModel>> by lazy {
         MutableLiveData<List<CardBoardItemModel>>()

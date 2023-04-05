@@ -1,8 +1,6 @@
 package com.hoomanholding.applibrary.view.fragment
 
-import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
-import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val userRepository: UserRepository,
-    private val resourcesProvider: ResourcesProvider
+    private val userRepository: UserRepository
 ) : JpaViewModel() {
 
     val successLiveData = SingleLiveEvent<Boolean>()
@@ -43,24 +40,8 @@ class SplashViewModel @Inject constructor(
     private fun requestUserInfo(): Job {
         return CoroutineScope(IO + exceptionHandler()).launch {
             delay(500)
-            val response = userRepository.requestUserInfo()
-            if (response?.isSuccessful == true) {
-                val userInfo = response.body()
-                userInfo?.let {
-                    if (it.hasError)
-                        setMessage(it.message)
-                    else {
-                        it.data?.let { userInfoEntity ->
-                            userRepository.insertUserInfo(userInfoEntity)
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(userRepository.requestUserInfo())
+            response?.let { userRepository.insertUserInfo(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestUserInfo
@@ -70,25 +51,10 @@ class SplashViewModel @Inject constructor(
     private fun requestUserPermission(): Job {
         return CoroutineScope(IO + exceptionHandler()).launch {
             delay(500)
-            val response = userRepository.requestUserPermission()
-            if (response?.isSuccessful == true) {
-                val userPermissionResponse = response.body()
-                userPermissionResponse?.let { userPermission ->
-                    if (userPermission.hasError)
-                        setMessage(userPermission.message)
-                    else {
-                        userPermission.data?.let { permissions ->
-                            val roles: List<RoleEntity> = permissions.map { RoleEntity(it) }
-                            userRepository.insertUserRole(roles)
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
-                }
-            } else {
-                setMessage(response)
+            val response = checkResponse(userRepository.requestUserPermission())
+            response?.let {permissions ->
+                val roles: List<RoleEntity> = permissions.map { RoleEntity(it) }
+                userRepository.insertUserRole(roles)
             }
         }
     }

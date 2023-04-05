@@ -54,6 +54,10 @@ class HomeFragment(override var layout: Int  = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- observeLiveData
     private fun observeLiveData() {
+        homeViewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            showMessage(it.message)
+        }
+
         homeViewModel.userLogOut.observe(viewLifecycleOwner) {
             (activity as MainActivity).gotoFirstFragment()
         }

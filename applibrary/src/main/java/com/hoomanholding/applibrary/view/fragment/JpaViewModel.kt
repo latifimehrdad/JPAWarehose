@@ -3,6 +3,7 @@ package com.hoomanholding.applibrary.view.fragment
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.hoomanholding.applibrary.di.ResourcesProvider
+import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.zar.core.enums.EnumApiError
 import com.zar.core.models.ErrorApiModel
@@ -15,17 +16,19 @@ import javax.inject.Inject
 @HiltViewModel
 open class JpaViewModel @Inject constructor() : ViewModel() {
 
+    @Inject lateinit var resourcesProvider: ResourcesProvider
     var job: Job? = null
-    val errorLiveDate =
-        SingleLiveEvent<ErrorApiModel>()
+    val errorLiveDate = SingleLiveEvent<ErrorApiModel>()
 
-/*
     //---------------------------------------------------------------------------------------------- checkResponse
-    suspend fun <T: Any> checkResponse(response: Response<T>?): T?{
+    suspend fun <T: Any> checkResponse(response: Response<GeneralResponse<T?>>?): T?{
         if (response?.isSuccessful == true) {
             val body = response.body()
-            body?.let {
-                return it
+            body?.let {generalResponse ->
+                if (generalResponse.hasError || generalResponse.data == null)
+                    setMessage(generalResponse.message)
+                else
+                    return generalResponse.data
             } ?: run {
                 setMessage(
                     resourcesProvider.getString(
@@ -37,7 +40,6 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
         return null
     }
     //---------------------------------------------------------------------------------------------- checkResponse
-*/
 
 
     //---------------------------------------------------------------------------------------------- setError

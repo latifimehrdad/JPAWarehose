@@ -6,7 +6,6 @@ import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.tools.CompanionValues
-import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.model.repository.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -19,8 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private var repository: LoginRepository,
-    private val resourcesProvider: ResourcesProvider
+    private var repository: LoginRepository
 ) : JpaViewModel() {
 
     @Inject
@@ -56,28 +54,20 @@ class LoginViewModel @Inject constructor(
     private fun requestLogin(androidId: String, systemType: String) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             if (userName.value.isNullOrEmpty() || password.value.isNullOrEmpty())
-                setMessage(resourcesProvider.getString(
-                    com.hoomanholding.applibrary.R.string.dataSendingIsEmpty
-                ))
-            else {
-                val response = repository.requestLogin(
-                    LoginRequestModel(
-                        userName.value!!, password.value!!, systemType, androidId
+                setMessage(
+                    resourcesProvider.getString(
+                        R.string.dataSendingIsEmpty
                     )
                 )
-                if (response?.isSuccessful == true) {
-                    val loginResponse = response.body()
-                    loginResponse?.let {
-                        if (!it.hasError)
-                            saveUserNameAndPassword(it.data)
-                        setMessage(it.message)
-                    } ?: run {
-                        setMessage(resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        ))
-                    }
-                } else
-                    setMessage(response)
+            else {
+                val request = LoginRequestModel(
+                    userName.value!!,
+                    password.value!!,
+                    systemType,
+                    androidId
+                )
+                val response = checkResponse(repository.requestLogin(request))
+                response?.let { saveUserNameAndPassword(it) }
             }
         }
     }

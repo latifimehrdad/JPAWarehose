@@ -14,9 +14,7 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class CardboardViewModel @Inject constructor(
-    private val resourcesProvider: ResourcesProvider
-): JpaViewModel() {
+class CardboardViewModel @Inject constructor(): JpaViewModel() {
 
     val itemLiveData: MutableLiveData<List<CardBoardItemModel>> by lazy {
         MutableLiveData<List<CardBoardItemModel>>()

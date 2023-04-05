@@ -1,27 +1,21 @@
 package com.hoomanholding.applibrary.model.api
 
+import com.hoomanholding.applibrary.model.data.database.entity.*
+import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
+import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.applibrary.model.data.request.AddWarehouseReceipt
 import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
 import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
-import com.hoomanholding.applibrary.model.data.response.AddWarehouseReceiptResponseModel
-import com.hoomanholding.applibrary.model.data.response.brand.BrandResponseModel
-import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailResponseModel
-import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialResponseModel
-import com.hoomanholding.applibrary.model.data.response.customer.CustomerResponseModel
-import com.hoomanholding.applibrary.model.data.response.location.LocationResponseModel
-import com.hoomanholding.applibrary.model.data.response.order.DetailOrderResponseModel
-import com.hoomanholding.applibrary.model.data.response.order.OrderResponseModel
-import com.hoomanholding.applibrary.model.data.response.product.ProductResponseModel
-import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonResponseModel
-import com.hoomanholding.applibrary.model.data.response.receipt.ConfirmWarehouseReceiptResponseModel
-import com.hoomanholding.applibrary.model.data.response.receipt.ReceiptDetailResponseModel
-import com.hoomanholding.applibrary.model.data.response.receipt.ReceiptResponseModel
-import com.hoomanholding.applibrary.model.data.response.supplier.SupplierResponseModel
-import com.hoomanholding.applibrary.model.data.response.user.LoginResponseModel
-import com.hoomanholding.applibrary.model.data.response.user.UserInfoResponseModel
-import com.hoomanholding.applibrary.model.data.response.user.UserPermissionResponseModel
-import com.hoomanholding.applibrary.model.data.response.visitor.VisitorResponseModel
+import com.hoomanholding.applibrary.model.data.request.OrderToggleStateRequest
+import com.hoomanholding.applibrary.model.data.response.GeneralResponse
+import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
+import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
+import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
+import com.hoomanholding.applibrary.model.data.response.order.DetailOrderModel
+import com.hoomanholding.applibrary.model.data.response.order.OrderModel
+import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
+import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -35,54 +29,66 @@ interface Api {
     companion object {
         const val api = "/Api"
         const val v1 = "$api/V1"
+        const val user = "$v1/User"
         const val baseData = "$v1/BaseData"
         const val saleOrders = "$v1/SaleOrders"
         const val customer = "$v1/Customers"
+        const val warehouseReceipt = "$v1/WarehouseReceipt"
     }
 
-    @POST("$v1/User/login-users")
-    suspend fun requestLogin(@Body login : LoginRequestModel) : Response<LoginResponseModel>
+    //---------------------------------------------------------------------------------------------- user
+    @POST("$user/login-users")
+    suspend fun requestLogin(
+        @Body login : LoginRequestModel
+    ): Response<GeneralResponse<String?>>
 
 
-    @GET("$v1/User/login-userInfo")
+    @GET("$user/login-userInfo")
     suspend fun requestGetUserInfo(
         @Header("Authorization") token : String
-    ) : Response<UserInfoResponseModel>
+    ) : Response<GeneralResponse<UserInfoEntity?>>
 
 
-    @GET("$v1/User/login-getPersmissions")
+    @GET("$user/login-getPersmissions")
     suspend fun requestUserPermission(
         @Header("Authorization") token : String
-    ) : Response<UserPermissionResponseModel>
+    ) : Response<GeneralResponse<List<String>?>>
+    //---------------------------------------------------------------------------------------------- user
+
 
 
     //---------------------------------------------------------------------------------------------- baseData
     @GET("$baseData/basedata-get-supplier")
     suspend fun requestGetSuppliers(
         @Header("Authorization") token : String
-    ) : Response<SupplierResponseModel>
+    ) : Response<GeneralResponse<List<SupplierEntity>?>>
 
 
     @GET("$baseData/basedata-get-products")
     suspend fun requestGetProducts(
         @Header("Authorization") token : String
-    ) : Response<ProductResponseModel>
+    ) : Response<GeneralResponse<List<ProductsEntity>?>>
 
 
     @GET("$baseData/basedata-get-brands")
     suspend fun requestGetBrands(
         @Header("Authorization") token : String
-    ) : Response<BrandResponseModel>
+    ) : Response<GeneralResponse<List<BrandEntity>?>>
 
     @GET("$baseData/basedata-get-visitors")
     suspend fun requestGetVisitor(
         @Header("Authorization") token : String
-    ): Response<VisitorResponseModel>
+    ): Response<GeneralResponse<List<VisitorModel>?>>
 
     @GET("$baseData/basedata-get-disapprovalreasons")
     suspend fun requestDisApprovalReasons(
         @Header("Authorization") token : String
-    ): Response<DisApprovalReasonResponseModel>
+    ): Response<GeneralResponse<List<DisApprovalReasonModel>?>>
+
+    @GET("$baseData/basedata-get-locations")
+    suspend fun requestGetLocations(
+        @Header("Authorization") token : String
+    ) : Response<GeneralResponse<List<LocationEntity>?>>
     //---------------------------------------------------------------------------------------------- baseData
 
 
@@ -91,14 +97,20 @@ interface Api {
     suspend fun requestGetOrder(
         @Body request: OrderRequestModel,
         @Header("Authorization") token : String
-    ): Response<OrderResponseModel>
+    ): Response<GeneralResponse<List<OrderModel>?>>
 
 
     @GET("$saleOrders/managerApp-OrderValidation-OrderDetails-View")
     suspend fun requestOrderDetail(
         @Query("orderId") orderId: Int,
         @Header("Authorization") token : String
-    ): Response<DetailOrderResponseModel>
+    ): Response<GeneralResponse<List<DetailOrderModel>?>>
+
+    @POST("$saleOrders/managerApp-OrderValidation-Order-ToggleState")
+    suspend fun requestOrderToggleState(
+        @Body request: OrderToggleStateRequest,
+        @Header("Authorization") token : String
+    ): Response<GeneralResponse<Boolean?>>
     //---------------------------------------------------------------------------------------------- saleOrders
 
 
@@ -109,53 +121,49 @@ interface Api {
         @Query("VisitorId") visitorId: Int,
         @Query("strFilter") strFilter: String,
         @Header("Authorization") token : String
-    ): Response<CustomerResponseModel>
+    ): Response<GeneralResponse<List<CustomerModel>?>>
 
     @GET("$customer/financial-get-details")
     suspend fun requestGetCustomerFinancial(
         @Query("CustomerId") customerId: Int,
         @Header("Authorization") token : String
-    ): Response<CustomerFinancialResponseModel>
+    ): Response<GeneralResponse<CustomerFinancialModel?>>
 
     @GET("$customer/financial-get-check-details")
     suspend fun requestGetCustomerFinancialDetail(
         @Query("CustomerId") customerId: Int,
         @Query("checktype") checktype: EnumCheckType,
         @Header("Authorization") token : String
-    ): Response<CustomerFinancialDetailResponseModel>
+    ): Response<GeneralResponse<List<CustomerFinancialDetailModel>?>>
     //---------------------------------------------------------------------------------------------- Customers
 
 
-
-    @GET("${v1}/WarehouseReceipt/warehouse-receipt-Get")
+    //---------------------------------------------------------------------------------------------- warehouseReceipt
+    @GET("$warehouseReceipt/warehouse-receipt-Get")
     suspend fun requestGetReceipts(
         @Header("Authorization") token : String
-    ) : Response<ReceiptResponseModel>
+    ) : Response<GeneralResponse<List<ReceiptEntity>?>>
 
-    @GET("${v1}/WarehouseReceipt/warehouse-receipt-Get-Details")
+    @GET("$warehouseReceipt/warehouse-receipt-Get-Details")
     suspend fun requestGetReceiptDetail(
         @Query("ReceiptId") id : Long,
         @Header("Authorization") token : String
-    ) : Response<ReceiptDetailResponseModel>
+    ) : Response<GeneralResponse<List<ReceiptDetailEntity>?>>
 
 
-    @GET("${v1}/BaseData/basedata-get-locations")
-    suspend fun requestGetLocations(
-        @Header("Authorization") token : String
-    ) : Response<LocationResponseModel>
-
-
-    @POST("${v1}/WarehouseReceipt/warehouse-receipt-add")
+    @POST("$warehouseReceipt/warehouse-receipt-add")
     suspend fun requestAddWarehouseReceipt(
         @Body addWarehouseReceipt: AddWarehouseReceipt,
         @Header("Authorization") token : String
-    ) : Response<AddWarehouseReceiptResponseModel>
+    ) : Response<GeneralResponse<Long?>>
 
-    @GET("${v1}/WarehouseReceipt/warehouse-receipt-confirm-receipt")
+    @GET("$warehouseReceipt/warehouse-receipt-confirm-receipt")
     suspend fun requestConfirmReceipt(
         @Query("ReceiptId") id : Long,
         @Header("Authorization") token : String
-    ) : Response<ConfirmWarehouseReceiptResponseModel>
+    ) : Response<GeneralResponse<Boolean?>>
+    //---------------------------------------------------------------------------------------------- warehouseReceipt
+
 
 
 

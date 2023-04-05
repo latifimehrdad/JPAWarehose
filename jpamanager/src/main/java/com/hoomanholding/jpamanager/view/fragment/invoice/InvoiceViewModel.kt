@@ -5,9 +5,10 @@ import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
 import com.hoomanholding.applibrary.model.data.response.order.DetailOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.model.repository.OrderRepository
-import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
+import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.request.FilterCustomerRequest
+import com.hoomanholding.applibrary.model.data.request.OrderToggleStateRequest
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
@@ -33,7 +34,6 @@ class InvoiceViewModel @Inject constructor(
     private val orderRepository: OrderRepository,
     private val visitorRepository: VisitorRepository,
     private val reasonRepository: ReasonRepository,
-    private val resourcesProvider: ResourcesProvider,
     private val customerRepository: CustomerRepository
 ) : JpaViewModel() {
 
@@ -64,37 +64,18 @@ class InvoiceViewModel @Inject constructor(
     val customerFinancialDetailLiveData: MutableLiveData<List<CustomerFinancialDetailModel>> by
     lazy { MutableLiveData<List<CustomerFinancialDetailModel>>() }
 
+    val orderToggleStateLiveData: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
+
     //---------------------------------------------------------------------------------------------- requestGetOrder
     fun requestGetOrder() {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             val request = OrderRequestModel(
                 "14011001", "14011230", 0, 0
             )
-            val response = orderRepository.requestGetOrder(request)
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (!it.hasError)
-                        it.data?.let { data ->
-                            orderLiveData.postValue(data)
-                        } ?: run {
-                            setMessage(
-                                resourcesProvider.getString(
-                                    com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                                )
-                            )
-                        }
-                    else
-                        setMessage(it.message)
-                } ?: run {
-                    setMessage(
-                        resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        )
-                    )
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(orderRepository.requestGetOrder(request))
+            response?.let { orderLiveData.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetOrder
@@ -103,31 +84,8 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestOrderDetail
     fun requestOrderDetail(orderId: Int) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val response = orderRepository.requestOrderDetail(orderId)
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (!it.hasError)
-                        it.data?.let { data ->
-                            detailOrderLiveData.postValue(data)
-                        } ?: run {
-                            setMessage(
-                                resourcesProvider.getString(
-                                    com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                                )
-                            )
-                        }
-                    else
-                        setMessage(it.message)
-                } ?: run {
-                    setMessage(
-                        resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        )
-                    )
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(orderRepository.requestOrderDetail(orderId))
+            response?.let { detailOrderLiveData.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestOrderDetail
@@ -136,23 +94,10 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetVisitor
     fun requestGetVisitor() {
        job = CoroutineScope(IO + exceptionHandler()).launch {
-           val response = visitorRepository.requestGetVisitor()
-           if (response?.isSuccessful == true) {
-               response.body()?.let { body ->
-                   if (!body.hasError)
-                       body.data?.let {
-                           visitorLiveData.postValue(it)
-                       } ?: run {
-                           setMessage(body.message)
-                       }
-               } ?: run {
-                   setMessage(
-                       resourcesProvider.getString(
-                           com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                       )
-                   )
-               }
-           } else setMessage(response)
+           val response = checkResponse(visitorRepository.requestGetVisitor())
+           response?.let {
+               visitorLiveData.postValue(it)
+           }
        }
     }
     //---------------------------------------------------------------------------------------------- requestGetVisitor
@@ -161,23 +106,8 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
     fun requestDisApprovalReasons() {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val response = reasonRepository.requestDisApprovalReasons()
-            if (response?.isSuccessful == true) {
-                response.body()?.let { body ->
-                    if (!body.hasError)
-                        body.data?.let {
-                            disApprovalReasons.postValue(it)
-                        } ?: run {
-                            setMessage(body.message)
-                        }
-                } ?: run {
-                    setMessage(
-                        resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        )
-                    )
-                }
-            } else setMessage(response)
+            val response = checkResponse(reasonRepository.requestDisApprovalReasons())
+            response?.let { disApprovalReasons.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
@@ -187,23 +117,8 @@ class InvoiceViewModel @Inject constructor(
     fun requestGetCustomer() {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             val request = FilterCustomerRequest(0,"حامد آزاد")
-            val response = customerRepository.requestGetCustomer(request)
-            if (response?.isSuccessful == true) {
-                response.body()?.let { body ->
-                    if (!body.hasError)
-                        body.data?.let {
-                            customerLiveData.postValue(it)
-                        } ?: run {
-                            setMessage(body.message)
-                        }
-                } ?: run {
-                    setMessage(
-                        resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        )
-                    )
-                }
-            } else setMessage(response)
+            val response = checkResponse(customerRepository.requestGetCustomer(request))
+            response?.let { customerLiveData.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomer
@@ -212,23 +127,8 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
     fun requestGetCustomerFinancial(customerId: Int) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val response = customerRepository.requestGetCustomerFinancial(customerId)
-            if (response?.isSuccessful == true) {
-                response.body()?.let { body ->
-                    if (!body.hasError)
-                        body.data?.let {
-                            customerFinancialLiveData.postValue(it)
-                        } ?: run {
-                            setMessage(body.message)
-                        }
-                } ?: run {
-                    setMessage(
-                        resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        )
-                    )
-                }
-            } else setMessage(response)
+            val response = checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
+            response?.let { customerFinancialLiveData.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
@@ -237,26 +137,36 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
     fun requestGetCustomerFinancialDetail(customerId: Int, checkType: EnumCheckType) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val response = customerRepository
-                .requestGetCustomerFinancialDetail(customerId, checkType)
-            if (response?.isSuccessful == true) {
-                response.body()?.let { body ->
-                    if (!body.hasError)
-                        body.data?.let {
-                            customerFinancialDetailLiveData.postValue(it)
-                        } ?: run {
-                            setMessage(body.message)
-                        }
-                } ?: run {
-                    setMessage(
-                        resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        )
-                    )
-                }
-            } else setMessage(response)
+            val response = checkResponse(
+                customerRepository.requestGetCustomerFinancialDetail(customerId, checkType))
+            response?.let { customerFinancialDetailLiveData.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
+
+
+    //---------------------------------------------------------------------------------------------- requestOrderToggleState
+    fun requestOrderToggleState() {
+        job = CoroutineScope(IO + exceptionHandler()).launch {
+            val request = OrderToggleStateRequest(
+                EnumState.Reject,
+                "تست رد PostMan",
+                listOf(2150298,
+                    2150297,
+                    2150296,
+                    2150295,
+                    2150294,
+                    2150293,
+                    2150292,
+                    2150290,
+                    2150289,
+                    2150284)
+            )
+            val response = checkResponse(orderRepository.requestOrderToggleState(request))
+            response?.let { orderToggleStateLiveData.postValue(it) }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestOrderToggleState
+
 
 }

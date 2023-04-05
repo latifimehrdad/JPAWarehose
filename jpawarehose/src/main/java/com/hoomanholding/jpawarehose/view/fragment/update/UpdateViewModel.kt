@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.*
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
-import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -19,7 +18,6 @@ import javax.inject.Inject
 @HiltViewModel
 class UpdateViewModel @Inject constructor(
     private val brandRepository: BrandRepository,
-    private val resourcesProvider: ResourcesProvider,
     private val productRepository: ProductRepository,
     private val supplierRepository: SupplierRepository,
     private val locationsRepository: LocationsRepository
@@ -71,29 +69,11 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             brandRepository.deleteAllBrands()
             delay(500)
-            val response = brandRepository.requestGetBrands()
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (it.hasError)
-                        setMessage(it.message)
-                    else {
-                        it.data?.let { brands ->
-                            brandRepository.insertBrands(brands)
-                            serPercentOfUpdate()
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(
-                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                            ))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                    ))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(brandRepository.requestGetBrands())
+            response?.let {
+                brandRepository.insertBrands(it)
+                serPercentOfUpdate()
+            }
         }
 
     }
@@ -106,29 +86,11 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             productRepository.deleteAllProduct()
             delay(500)
-            val response = productRepository.requestGetProducts()
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (it.hasError)
-                        setMessage(it.message)
-                    else {
-                        it.data?.let { products ->
-                            productRepository.insertProducts(products)
-                            serPercentOfUpdate()
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(
-                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                            ))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                    ))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(productRepository.requestGetProducts())
+            response?.let {
+                productRepository.insertProducts(it)
+                serPercentOfUpdate()
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- getProducts
@@ -140,29 +102,10 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             locationsRepository.deleteAllLocations()
             delay(500)
-            val response = locationsRepository.requestGetLocations()
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (it.hasError)
-                        setMessage(it.message)
-                    else {
-                        it.data?.let { locations ->
-                            locationsRepository.insertLocations(locations)
-                            serPercentOfUpdate()
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(
-                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                            ))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                    ))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(locationsRepository.requestGetLocations())
+            response?.let {
+                locationsRepository.insertLocations(it)
+                serPercentOfUpdate() }
         }
     }
     //---------------------------------------------------------------------------------------------- getLocations
@@ -175,29 +118,11 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             supplierRepository.deleteAllSuppliers()
             delay(500)
-            val response = supplierRepository.requestGetSuppliers()
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (it.hasError)
-                        setMessage(it.message)
-                    else {
-                        it.data?.let { suppliers ->
-                            supplierRepository.insertSuppliers(suppliers)
-                            serPercentOfUpdate()
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(
-                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                            ))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                    ))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(supplierRepository.requestGetSuppliers())
+            response?.let {
+                supplierRepository.insertSuppliers(it)
+                serPercentOfUpdate()
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- getSuppliers

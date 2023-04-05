@@ -151,6 +151,7 @@
                 android:inputType="number"
                 android:fontFamily="@font/yekan_bakh_medium"
                 android:hint="@string/receiptNumberHint"
+                android:maxLength="10"
                 android:textColorHint="@color/hint"
                 android:text="@={viewModel.receiptNumberLiveData}"
                 android:autofillHints="null" />

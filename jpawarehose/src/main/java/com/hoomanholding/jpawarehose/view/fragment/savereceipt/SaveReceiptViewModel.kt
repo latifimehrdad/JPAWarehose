@@ -8,7 +8,6 @@ import com.hoomanholding.applibrary.model.data.request.WarehouseReceiptItem
 import com.hoomanholding.applibrary.model.data.enums.EnumSearchName
 import com.hoomanholding.applibrary.model.data.enums.EnumSearchOrderType
 import com.hoomanholding.jpawarehose.model.repository.*
-import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.save.SaveReceiptAmountEntity
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.save.SaveReceiptEntity
@@ -34,8 +33,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SaveReceiptViewModel @Inject constructor(
     private val supplierRepository: SupplierRepository,
-    private val saveReceiptRepository: SaveReceiptRepository,
-    private val resourcesProvider: ResourcesProvider
+    private val saveReceiptRepository: SaveReceiptRepository
 ) : JpaViewModel() {
 
     val supplierLiveData = MutableLiveData<List<SupplierEntity>>()
@@ -45,8 +43,8 @@ class SaveReceiptViewModel @Inject constructor(
     val receiptNumberLiveData = MutableLiveData<String?>()
     val sendReceiptToServer = MutableLiveData<String>()
     val searchProductLiveData = MutableLiveData<String>()
-    val orderChangeLiveData = MutableLiveData(EnumSearchName.nameKala.name)
-    var orderName = EnumSearchName.nameKala
+    val orderChangeLiveData = MutableLiveData(EnumSearchName.NameKala.name)
+    var orderName = EnumSearchName.NameKala
     var orderType = EnumSearchOrderType.DESC
     private var supplierSelected: SupplierEntity? = null
     private var ignoreBrandId: Long? = null
@@ -69,8 +67,8 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- changeOrderType
     fun changeOrderName() {
         orderName = when(orderName) {
-            EnumSearchName.codeKala -> EnumSearchName.nameKala
-            EnumSearchName.nameKala -> EnumSearchName.codeKala
+            EnumSearchName.CodeKala -> EnumSearchName.NameKala
+            EnumSearchName.NameKala -> EnumSearchName.CodeKala
         }
         orderChangeLiveData.postValue(orderName.name)
         searchProduct()
@@ -354,19 +352,8 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
     private fun requestAddWarehouseReceipt(request: AddWarehouseReceipt) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val response = saveReceiptRepository.requestAddWarehouseReceipt(request)
-            if (response?.isSuccessful == true) {
-                val send = response.body()
-                send?.let {
-                    if (!it.hasError)
-                        addToHistoryOfSaveReceipt(request.description, it.message)
-                } ?: run {
-                    setMessage(resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                    ))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(saveReceiptRepository.requestAddWarehouseReceipt(request))
+            response?.let { addToHistoryOfSaveReceipt(request.description) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
@@ -374,7 +361,7 @@ class SaveReceiptViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- addToHistoryOfSaveReceipt
-    private fun addToHistoryOfSaveReceipt(description: String?, message: String){
+    private fun addToHistoryOfSaveReceipt(description: String?){
         val saveReceipt = saveReceiptRepository.getSaveReceipt()
         saveReceipt?.let {
             val saveReceiptAmount = getReceiptAmountWithProduct()
@@ -397,7 +384,7 @@ class SaveReceiptViewModel @Inject constructor(
         }
         saveReceiptRepository.deleteAllAmount()
         saveReceiptRepository.deleteAllRecord()
-        sendReceiptToServer.postValue(message)
+        sendReceiptToServer.postValue(resourcesProvider.getString(R.string.saveReceiptSuccess))
     }
     //---------------------------------------------------------------------------------------------- addToHistoryOfSaveReceipt
 

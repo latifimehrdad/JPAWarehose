@@ -31,7 +31,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         super.onViewCreated(view, savedInstanceState)
         binding.shimmerViewContainer.setShimmer(getShimmerBuild())
         observeLiveData()
-        viewModel.requestGetCustomerFinancialDetail(12413, EnumCheckType.bouncedCheck)
+        viewModel.requestOrderToggleState()
 //        getOrder()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -81,6 +81,10 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         }
 
         viewModel.customerFinancialLiveData.observe(viewLifecycleOwner){
+            showMessage("count of visitor is $it")
+        }
+
+        viewModel.orderToggleStateLiveData.observe(viewLifecycleOwner){
             showMessage("count of visitor is $it")
         }
     }

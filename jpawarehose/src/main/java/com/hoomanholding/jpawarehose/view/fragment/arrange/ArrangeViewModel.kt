@@ -3,7 +3,6 @@ package com.hoomanholding.jpawarehose.view.fragment.arrange
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.receipt.ReceiptRepository
-import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.applibrary.model.data.database.entity.LocationAmountEntity
@@ -16,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArrangeViewModel @Inject constructor(
-    private val receiptRepository: ReceiptRepository,
-    private val resourcesProvider: ResourcesProvider
+    private val receiptRepository: ReceiptRepository
 ) : JpaViewModel() {
 
     val receiptLiveData = MutableLiveData<List<ReceiptEntity>>()
@@ -43,30 +41,12 @@ class ArrangeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetReceipts
     fun requestGetReceipts() {
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val response = receiptRepository.requestGetReceipts()
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (it.hasError)
-                        setMessage(it.message)
-                    else {
-                        it.data?.let { receipt ->
-                            receiptRepository.insertReceipts(receipt)
-                            delay(500)
-                            receiptLiveData.postValue(receipt)
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(
-                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                            ))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                    ))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(receiptRepository.requestGetReceipts())
+            response?.let {
+                receiptRepository.insertReceipts(it)
+                delay(500)
+                receiptLiveData.postValue(it)
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetReceipts
@@ -78,30 +58,12 @@ class ArrangeViewModel @Inject constructor(
         if (receiptId == 0L)
             return
         job = CoroutineScope(IO + exceptionHandler()).launch {
-            val response = receiptRepository.requestGerReceiptDetail(receiptId)
-            if (response?.isSuccessful == true) {
-                val body = response.body()
-                body?.let {
-                    if (it.hasError)
-                        setMessage(it.message)
-                    else {
-                        it.data?.let { detail ->
-                            receiptRepository.insertReceiptDetail(detail)
-                            delay(500)
-                            receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
-                        } ?: run {
-                            setMessage(resourcesProvider.getString(
-                                com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                            ))
-                        }
-                    }
-                } ?: run {
-                    setMessage(resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                    ))
-                }
-            } else
-                setMessage(response)
+            val response = checkResponse(receiptRepository.requestGerReceiptDetail(receiptId))
+            response?.let {
+                receiptRepository.insertReceiptDetail(it)
+                delay(500)
+                receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGerReceiptDetail
@@ -205,22 +167,16 @@ class ArrangeViewModel @Inject constructor(
                         break
                     }
                 }
-                val response =
+                val response = checkResponse(
                     receiptRepository.requestConfirmReceipt(list[0].receiptDetailEntity.id)
-                if (response?.isSuccessful == true) {
-                    val send = response.body()
-                    send?.let {
-                        if (!it.hasError) {
-                            receiptRepository.deleteAllReceiptDetailAndAmount()
-                        }
-                        sendReceiptToServer.postValue(it.message)
-                    } ?: run {
-                        setMessage(resourcesProvider.getString(
-                            com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
-                        ))
-                    }
-                } else
-                    setMessage(response)
+                )
+                response?.let {
+                    if (it)
+                        sendReceiptToServer.
+                        postValue(resourcesProvider.getString(R.string.saveReceiptSuccess))
+                    else
+                        receiptRepository.deleteAllReceiptDetailAndAmount()
+                }
             }
         }
     }

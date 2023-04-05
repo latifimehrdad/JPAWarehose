@@ -6,9 +6,9 @@ package com.hoomanholding.applibrary.model.data.enums
  */
 
 enum class EnumCheckType {
-    notRegisteredCheck,
-    bouncedCheck,
-    payedCheck,
-    notDueCheck,
-    guaranteeCheck
+    NotRegisteredCheck,
+    BouncedCheck,
+    PayedCheck,
+    NotDueCheck,
+    GuaranteeCheck
 }

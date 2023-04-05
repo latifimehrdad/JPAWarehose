@@ -172,9 +172,9 @@ class SaveReceiptFragment(override var layout: Int = R.layout.fragment_save_rece
 
         saveReceiptViewModel.orderChangeLiveData.observe(viewLifecycleOwner) {
             when (saveReceiptViewModel.orderName) {
-                EnumSearchName.nameKala ->
+                EnumSearchName.NameKala ->
                     binding.textViewOrderName.text = getString(R.string.productName)
-                EnumSearchName.codeKala ->
+                EnumSearchName.CodeKala ->
                     binding.textViewOrderName.text = getString(R.string.productCode)
             }
             when (saveReceiptViewModel.orderType) {
