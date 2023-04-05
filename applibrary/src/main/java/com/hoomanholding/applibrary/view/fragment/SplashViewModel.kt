@@ -1,5 +1,6 @@
 package com.hoomanholding.applibrary.view.fragment
 
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
 import com.hoomanholding.applibrary.model.repository.UserRepository
@@ -26,8 +27,7 @@ class SplashViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetData
     fun requestGetData() {
-        job?.cancel()
-        job = CoroutineScope(IO).launch {
+        viewModelScope.launch(IO){
             requestUserInfo().join()
             requestUserPermission().join()
             getAllData().join()

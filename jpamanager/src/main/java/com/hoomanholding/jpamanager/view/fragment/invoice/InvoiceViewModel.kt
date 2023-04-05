@@ -1,6 +1,7 @@
 package com.hoomanholding.jpamanager.view.fragment.invoice
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
 import com.hoomanholding.applibrary.model.data.response.order.DetailOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
@@ -70,7 +71,7 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetOrder
     fun requestGetOrder() {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val request = OrderRequestModel(
                 "14011001", "14011230", 0, 0
             )
@@ -83,7 +84,7 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestOrderDetail
     fun requestOrderDetail(orderId: Int) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(orderRepository.requestOrderDetail(orderId))
             response?.let { detailOrderLiveData.postValue(it) }
         }
@@ -93,19 +94,17 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetVisitor
     fun requestGetVisitor() {
-       job = CoroutineScope(IO + exceptionHandler()).launch {
-           val response = checkResponse(visitorRepository.requestGetVisitor())
-           response?.let {
-               visitorLiveData.postValue(it)
-           }
-       }
+        viewModelScope.launch(IO + exceptionHandler()){
+            val response = checkResponse(visitorRepository.requestGetVisitor())
+            response?.let { visitorLiveData.postValue(it) }
+        }
     }
     //---------------------------------------------------------------------------------------------- requestGetVisitor
 
 
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
     fun requestDisApprovalReasons() {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(reasonRepository.requestDisApprovalReasons())
             response?.let { disApprovalReasons.postValue(it) }
         }
@@ -115,7 +114,7 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetCustomer
     fun requestGetCustomer() {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val request = FilterCustomerRequest(0,"حامد آزاد")
             val response = checkResponse(customerRepository.requestGetCustomer(request))
             response?.let { customerLiveData.postValue(it) }
@@ -126,7 +125,7 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
     fun requestGetCustomerFinancial(customerId: Int) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
             response?.let { customerFinancialLiveData.postValue(it) }
         }
@@ -136,7 +135,7 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
     fun requestGetCustomerFinancialDetail(customerId: Int, checkType: EnumCheckType) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(
                 customerRepository.requestGetCustomerFinancialDetail(customerId, checkType))
             response?.let { customerFinancialDetailLiveData.postValue(it) }
@@ -147,7 +146,7 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestOrderToggleState
     fun requestOrderToggleState() {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val request = OrderToggleStateRequest(
                 EnumState.Reject,
                 "تست رد PostMan",

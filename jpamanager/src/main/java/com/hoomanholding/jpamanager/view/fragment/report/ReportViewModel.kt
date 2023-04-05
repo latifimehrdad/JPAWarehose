@@ -3,7 +3,6 @@ package com.hoomanholding.jpamanager.view.fragment.report
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.other.CardBoardItemModel
-import com.hoomanholding.applibrary.di.ResourcesProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel

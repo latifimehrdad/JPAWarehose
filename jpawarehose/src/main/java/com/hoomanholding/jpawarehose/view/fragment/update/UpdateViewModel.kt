@@ -1,6 +1,7 @@
 package com.hoomanholding.jpawarehose.view.fragment.update
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.*
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
@@ -45,8 +46,7 @@ class UpdateViewModel @Inject constructor(
             countUpdate++
         if (supplierLiveData.value == true)
             countUpdate++
-        job?.cancel()
-        job = CoroutineScope(IO).launch {
+        viewModelScope.launch(IO){
             percentUpdatingLiveData.postValue(0)
             if (brandLiveData.value == true)
                 getBrands().join()
@@ -56,7 +56,6 @@ class UpdateViewModel @Inject constructor(
                 getLocations().join()
             if (supplierLiveData.value == true)
                 getSuppliers().join()
-
             getAllData().join()
         }
     }

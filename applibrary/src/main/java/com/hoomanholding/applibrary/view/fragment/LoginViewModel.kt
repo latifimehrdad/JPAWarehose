@@ -2,6 +2,7 @@ package com.hoomanholding.applibrary.view.fragment
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
@@ -52,7 +53,7 @@ class LoginViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestLogin
     private fun requestLogin(androidId: String, systemType: String) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()) {
             if (userName.value.isNullOrEmpty() || password.value.isNullOrEmpty())
                 setMessage(
                     resourcesProvider.getString(

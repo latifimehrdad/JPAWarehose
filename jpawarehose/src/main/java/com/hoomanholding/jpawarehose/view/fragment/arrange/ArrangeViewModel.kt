@@ -1,6 +1,7 @@
 package com.hoomanholding.jpawarehose.view.fragment.arrange
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.model.repository.receipt.ReceiptRepository
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
@@ -26,7 +27,7 @@ class ArrangeViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- getOldData
     fun getOldData() {
-        CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val details = receiptRepository.getReceiptDetail()
             if (details.isNotEmpty()) {
                 val receipt = receiptRepository.getReceipt(details[0].id)
@@ -40,7 +41,7 @@ class ArrangeViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetReceipts
     fun requestGetReceipts() {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(receiptRepository.requestGetReceipts())
             response?.let {
                 receiptRepository.insertReceipts(it)
@@ -57,7 +58,7 @@ class ArrangeViewModel @Inject constructor(
         val receiptId = receiptLiveData.value?.get(index)?.id ?: 0
         if (receiptId == 0L)
             return
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(receiptRepository.requestGerReceiptDetail(receiptId))
             response?.let {
                 receiptRepository.insertReceiptDetail(it)
@@ -71,7 +72,7 @@ class ArrangeViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- findLocation
     fun findLocation(id: Long) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             var foundId: Long? = null
             val listProduct = receiptDetailLiveData.value
             listProduct?.let {
@@ -99,7 +100,7 @@ class ArrangeViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- replaceOnLocation
     fun replaceOnLocation(amount: Int) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val listProduct = receiptDetailLiveData.value
             listProduct?.let {
                 val receipt = it[ReceiptProductHolder.productPosition]
@@ -148,7 +149,7 @@ class ArrangeViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- productCompletingOnReceipt
     fun productCompletingOnReceipt() {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val listProduct = receiptDetailLiveData.value
             listProduct?.let { list ->
                 for (product in list) {

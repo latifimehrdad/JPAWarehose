@@ -17,7 +17,6 @@ import javax.inject.Inject
 open class JpaViewModel @Inject constructor() : ViewModel() {
 
     @Inject lateinit var resourcesProvider: ResourcesProvider
-    var job: Job? = null
     val errorLiveDate = SingleLiveEvent<ErrorApiModel>()
 
     //---------------------------------------------------------------------------------------------- checkResponse
@@ -47,7 +46,6 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
         withContext(Dispatchers.Main) {
             checkResponseError(response, errorLiveDate)
         }
-        job?.cancel()
     }
     //---------------------------------------------------------------------------------------------- setError
 
@@ -57,7 +55,6 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
         withContext(Dispatchers.Main) {
             errorLiveDate.value = ErrorApiModel(EnumApiError.Error, message)
         }
-        job?.cancel()
     }
     //---------------------------------------------------------------------------------------------- setMessage
 
@@ -72,13 +69,5 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
         }
     }
     //---------------------------------------------------------------------------------------------- exceptionHandler
-
-
-    //---------------------------------------------------------------------------------------------- onCleared
-    override fun onCleared() {
-        super.onCleared()
-        job?.cancel()
-    }
-    //---------------------------------------------------------------------------------------------- onCleared
 
 }

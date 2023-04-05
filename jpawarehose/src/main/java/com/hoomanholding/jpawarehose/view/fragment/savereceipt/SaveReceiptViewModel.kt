@@ -2,6 +2,7 @@ package com.hoomanholding.jpawarehose.view.fragment.savereceipt
 
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.applibrary.model.data.request.AddWarehouseReceipt
 import com.hoomanholding.applibrary.model.data.request.WarehouseReceiptItem
@@ -79,7 +80,7 @@ class SaveReceiptViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- getSuppliers
     fun getSuppliers() {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             delay(300)
             val receipt = saveReceiptRepository.getSaveReceipt()
             val suppliers = receipt?.let {
@@ -101,7 +102,7 @@ class SaveReceiptViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- selectSupplier
     fun selectSupplier(index: Int) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             supplierLiveData.value?.let {
                 if (it.size > 1) saveReceiptRepository.deleteAllAmount()
             }
@@ -120,7 +121,7 @@ class SaveReceiptViewModel @Inject constructor(
     fun searchProduct() {
         if (supplierSelected == null)
             return
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             if (ignoreBrandId == null)
                 return@launch
             val search = searchProductLiveData.value
@@ -351,7 +352,7 @@ class SaveReceiptViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
     private fun requestAddWarehouseReceipt(request: AddWarehouseReceipt) {
-        job = CoroutineScope(IO + exceptionHandler()).launch {
+        viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(saveReceiptRepository.requestAddWarehouseReceipt(request))
             response?.let { addToHistoryOfSaveReceipt(request.description) }
         }
