@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.model.data.database.entity.SupplierEntity
 import com.hoomanholding.applibrary.model.data.database.join.*
+import com.zar.core.tools.extensions.split
 import com.zar.core.tools.extensions.toSolarDate
 import java.time.LocalDateTime
 
@@ -19,7 +20,7 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
         when(value){
             is String -> "$title $splitter $value"
             is Long -> "$title $splitter $value"
-            is Int -> "$value $splitter $title"
+            is Int -> "$title $splitter $value"
             is LocalDateTime -> "$title $splitter ${value.toSolarDate()?.getSolarDate()}"
             is ReceiptAmountWhitProductModel -> {
                 val count = whenIsReceiptAmountWhitProductModel(value)
@@ -59,6 +60,18 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
     } ?: run { "" }
     text = temp
 }
+
+@BindingAdapter("setTitle","setValue", "setSplitter", "setLastTest")
+fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String, last: String){
+    val temp = value?.let {
+        when(value){
+            is Long -> "$title $splitter ${value.split()} $last"
+            else -> ""
+        }
+    } ?: run { "" }
+    text = temp
+}
+
 
 //-------------------------------------------------------------------------------------------------- whenIsReceiptAmountWhitProductModel
 private fun whenIsReceiptAmountWhitProductModel(value : ReceiptAmountWhitProductModel) : String {

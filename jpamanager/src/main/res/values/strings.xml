@@ -38,13 +38,25 @@
     <string name="creditor">بستانکاری</string>
     <string name="comparativeReport">گزارش مقایسه ای</string>
     <string name="exit">خروج</string>
-
-
+    <string name="filterBy">فیلتر بر اساس</string>
+    <string name="visitorName">نام ویزیتور</string>
+    <string name="startEndDate">تاریخ شروع و پایان</string>
+    <string name="customerName">نام مشتری</string>
+    <string name="showDetail">مشاهده جزییات</string>
     <string name="supportNumber">026-6565635</string>
+    <string name="date">تاریخ</string>
+    <string name="factorNumber">شماره فاکتور</string>
+    <string name="factorAmount">مبلغ فاکتور</string>
+    <string name="customerCode">کد مشتری</string>
+    <string name="shopName">نام فروشگاه</string>
+    <string name="rial">ریال</string>
+
 
     <string name="logoDescription">logo</string>
     <string name="fingerPrintDescription">finger Print</string>
     <string name="iconDescription">icon</string>
     <string name="profileDescription">image profile</string>
+
+    <string name="colon">:</string>
 
 </resources>

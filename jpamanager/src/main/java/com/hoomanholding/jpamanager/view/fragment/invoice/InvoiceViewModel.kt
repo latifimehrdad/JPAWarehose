@@ -21,6 +21,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
 import com.hoomanholding.jpamanager.model.repository.CustomerRepository
 import com.hoomanholding.jpamanager.model.repository.ReasonRepository
 import com.hoomanholding.jpamanager.model.repository.VisitorRepository
@@ -37,6 +38,20 @@ class InvoiceViewModel @Inject constructor(
     private val reasonRepository: ReasonRepository,
     private val customerRepository: CustomerRepository
 ) : JpaViewModel() {
+
+    val filterCustomerLiveData: MutableLiveData<CustomerModel?> by lazy {
+        MutableLiveData<CustomerModel?>()
+    }
+
+
+    val filterDateLiveData: MutableLiveData<DateFilterModel?> by lazy {
+        MutableLiveData<DateFilterModel?>()
+    }
+
+
+    val filterVisitorLiveData: MutableLiveData<VisitorModel?> by lazy {
+        MutableLiveData<VisitorModel?>()
+    }
 
     val orderLiveData: MutableLiveData<List<OrderModel>> by lazy {
         MutableLiveData<List<OrderModel>>()
@@ -68,6 +83,29 @@ class InvoiceViewModel @Inject constructor(
     val orderToggleStateLiveData: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
     }
+
+
+    //---------------------------------------------------------------------------------------------- setCustomerForFilter
+    fun setCustomerForFilter(customer: CustomerModel?){
+        filterCustomerLiveData.postValue(customer)
+    }
+    //---------------------------------------------------------------------------------------------- setCustomerForFilter
+
+
+    //---------------------------------------------------------------------------------------------- setDateForFilter
+    fun setDateForFilter(date: DateFilterModel?){
+        filterDateLiveData.postValue(date)
+    }
+    //---------------------------------------------------------------------------------------------- setDateForFilter
+
+
+
+    //---------------------------------------------------------------------------------------------- setVisitorForFilter
+    fun setVisitorForFilter(visitor: VisitorModel?){
+        filterVisitorLiveData.postValue(visitor)
+    }
+    //---------------------------------------------------------------------------------------------- setVisitorForFilter
+
 
     //---------------------------------------------------------------------------------------------- requestGetOrder
     fun requestGetOrder() {

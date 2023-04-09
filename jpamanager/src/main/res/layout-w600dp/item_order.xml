@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="item"
@@ -8,17 +9,43 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:background="@drawable/drawable_border_curve_light">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_15sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/drawable_border_curve_light">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:gravity="center"
+                android:text="@{item.customerName}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10sdp"
+            android:id="@+id/buttonLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/constraintLayoutParent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutParent"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutParent"
+            app:backgroundTint="@null"
+            android:background="@drawable/drawable_list_button"
+            android:textSize="@dimen/_9sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_3sdp"
             android:fontFamily="@font/iransans_medium"
-            android:gravity="center"
-            android:text="@{item.customerName}"/>
+            android:textColor="@color/primaryColorVariant"
+            android:text='@string/showDetail' />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

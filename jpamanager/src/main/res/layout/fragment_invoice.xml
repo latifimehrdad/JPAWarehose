@@ -6,6 +6,151 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutVisitor"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutVisitor"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutCustomer"
+            android:background="@drawable/drawable_tab_selected" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutVisitor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/linearLayoutDate"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="@dimen/_3sdp">
+            
+            <TextView
+                android:id="@+id/textViewVisitor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/visitorName"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:fontFamily="@font/yekan_bakh_medium"/>
+
+            <TextView
+                android:id="@+id/textViewVisitorFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filterBy"
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:fontFamily="@font/yekan_bakh_light"
+                android:layout_marginStart="@dimen/_3sdp"/>
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.35"
+            app:layout_constraintTop_toTopOf="@id/linearLayoutVisitor"
+            app:layout_constraintStart_toEndOf="@id/linearLayoutVisitor"
+            app:layout_constraintEnd_toStartOf="@id/linearLayoutCustomer"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="@dimen/_3sdp">
+
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/startEndDate"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:fontFamily="@font/yekan_bakh_medium"/>
+
+            <TextView
+                android:id="@+id/textViewDateFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filterBy"
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:fontFamily="@font/yekan_bakh_light"
+                android:layout_marginStart="@dimen/_3sdp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCustomer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/linearLayoutVisitor"
+            app:layout_constraintStart_toEndOf="@id/linearLayoutDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="@dimen/_3sdp">
+
+            <TextView
+                android:id="@+id/textViewCustomer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/customerName"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:fontFamily="@font/yekan_bakh_medium"/>
+
+            <TextView
+                android:id="@+id/textViewCustomerFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filterBy"
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:fontFamily="@font/yekan_bakh_light"
+                android:layout_marginStart="@dimen/_3sdp"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewVisitor"
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutVisitor"
+            android:background="@drawable/drawable_tab_selected"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutVisitor"
+            android:layout_marginEnd="@dimen/_5sdp"/>
+
+        <View
+            android:id="@+id/viewDate"
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutDate"
+            android:background="@drawable/drawable_tab_selected"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutDate"
+            android:layout_marginEnd="@dimen/_5sdp"/>
+
+        <View
+            android:id="@+id/viewCustomer"
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutCustomer"
+            android:background="@drawable/drawable_tab_selected"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutCustomer"
+            android:layout_marginEnd="@dimen/_5sdp"/>
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_view_container"
             android:layout_width="0dp"
@@ -27,7 +172,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerItem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/viewVisitor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="@dimen/_10sdp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
