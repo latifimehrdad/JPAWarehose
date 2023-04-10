@@ -10,7 +10,7 @@ import com.facebook.shimmer.Shimmer
 
 fun getShimmerBuild() = Shimmer.AlphaHighlightBuilder()
     .setDirection(Shimmer.Direction.RIGHT_TO_LEFT)
-    .setDuration(2000L)
+    .setDuration(1500L)
     .setRepeatMode(ValueAnimator.REVERSE)
     .setTilt(0f)
     .build()

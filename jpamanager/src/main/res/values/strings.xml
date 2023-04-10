@@ -50,13 +50,24 @@
     <string name="customerCode">کد مشتری</string>
     <string name="shopName">نام فروشگاه</string>
     <string name="rial">ریال</string>
+    <string name="customerFinancialState">وضعیت مالی مشتری</string>
+    <string name="products">لیست کالاها</string>
+    <string name="confirmFactor">تایید فاکتور</string>
+    <string name="productName">نام محصول</string>
+    <string name="fi">قیمت واحد</string>
+    <string name="count">تعداد</string>
+    <string name="piece">عدد</string>
+    <string name="finalAmount">قیمت نهایی</string>
+    <string name="receivingMoreItems">درحال دریافت اطلاعات</string>
 
 
     <string name="logoDescription">logo</string>
     <string name="fingerPrintDescription">finger Print</string>
     <string name="iconDescription">icon</string>
     <string name="profileDescription">image profile</string>
+    <string name="closeDescription">close</string>
 
     <string name="colon">:</string>
+    <string name="dash">-</string>
 
 </resources>

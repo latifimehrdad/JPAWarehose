@@ -1,6 +1,8 @@
 package com.hoomanholding.applibrary.view.fragment
 
+import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,5 +32,12 @@ abstract class JpaFragment<DB : ViewDataBinding> : Fragment() {
     }
     //---------------------------------------------------------------------------------------------- onCreateView
 
+
+    //---------------------------------------------------------------------------------------------- parcelable
+    inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
+        Build.VERSION.SDK_INT >= 33 -> getParcelable(key, T::class.java)
+        else -> @Suppress("DEPRECATION") getParcelable(key) as? T
+    }
+    //---------------------------------------------------------------------------------------------- parcelable
 
 }

@@ -127,29 +127,29 @@
         <View
             android:id="@+id/viewVisitor"
             android:layout_width="@dimen/_2sdp"
-            android:layout_height="@dimen/_8sdp"
+            android:layout_height="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutVisitor"
             android:background="@drawable/drawable_tab_selected"
             app:layout_constraintEnd_toEndOf="@id/linearLayoutVisitor"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_10sdp"/>
 
         <View
             android:id="@+id/viewDate"
             android:layout_width="@dimen/_2sdp"
-            android:layout_height="@dimen/_8sdp"
+            android:layout_height="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutDate"
             android:background="@drawable/drawable_tab_selected"
             app:layout_constraintEnd_toEndOf="@id/linearLayoutDate"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_10sdp"/>
 
         <View
             android:id="@+id/viewCustomer"
             android:layout_width="@dimen/_2sdp"
-            android:layout_height="@dimen/_8sdp"
+            android:layout_height="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutCustomer"
             android:background="@drawable/drawable_tab_selected"
             app:layout_constraintEnd_toEndOf="@id/linearLayoutCustomer"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_10sdp"/>
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_view_container"
@@ -178,6 +178,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginHorizontal="@dimen/_10sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="@id/recyclerItem"
+            app:layout_constraintStart_toEndOf="@id/viewCustomer"
+            app:layout_constraintBottom_toTopOf="@id/recyclerItem"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/ic_invoice"
+            android:contentDescription="@string/logoDescription"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

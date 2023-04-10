@@ -65,6 +65,7 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
 fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String, last: String){
     val temp = value?.let {
         when(value){
+            is Int -> "$title $splitter ${value.split()} $last"
             is Long -> "$title $splitter ${value.split()} $last"
             else -> ""
         }

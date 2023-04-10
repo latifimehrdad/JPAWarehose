@@ -5,12 +5,16 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hoomanholding.applibrary.ext.config
+import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.OrderHolder
@@ -18,6 +22,7 @@ import com.hoomanholding.jpamanager.view.adapter.recycler.OrderAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
+import com.hoomanholding.jpamanager.view.dialog.customer.CustomerDialog
 
 
 /**
@@ -33,7 +38,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.shimmerViewContainer.setShimmer(getShimmerBuild())
+        binding.shimmerViewContainer.config(getShimmerBuild())
         initView()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -82,8 +87,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
         binding.linearLayoutCustomer.setOnClickListener {
             if (viewModel.filterCustomerLiveData.value == null){
-                val model = CustomerModel(0,0,"","",0,"","","",0,"")
-                viewModel.setCustomerForFilter(model)
+                showPersonnelDialog()
             } else viewModel.setCustomerForFilter(null)
         }
     }
@@ -109,12 +113,8 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         }
 
         viewModel.orderLiveData.observe(viewLifecycleOwner){
-            binding.shimmerViewContainer.stopShimmer()
+            binding.shimmerViewContainer.stopLoading()
             setAdapter(it)
-        }
-
-        viewModel.detailOrderLiveData.observe(viewLifecycleOwner){
-            showMessage("count of product is ${it.size}")
         }
 
         viewModel.visitorLiveData.observe(viewLifecycleOwner){
@@ -125,9 +125,6 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
             showMessage("count of visitor is ${it.size}")
         }
 
-        viewModel.customerLiveData.observe(viewLifecycleOwner){
-            showMessage("count of visitor is ${it.size} $it")
-        }
 
         viewModel.customerFinancialDetailLiveData.observe(viewLifecycleOwner){
             showMessage("count of visitor is ${it.size} $it")
@@ -145,8 +142,23 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
 
 
+    //---------------------------------------------------------------------------------------------- showPersonnelDialog
+    private fun showPersonnelDialog() {
+        val click = object : CustomerDialog.Click {
+            override fun select(item: CustomerModel) {
+                binding.recyclerItem.adapter = null
+                viewModel.setCustomerForFilter(item)
+            }
+        }
+        CustomerDialog(click).show(childFragmentManager, "customer dialog")
+    }
+    //---------------------------------------------------------------------------------------------- showPersonnelDialog
+
+
+
     //---------------------------------------------------------------------------------------------- getOrder
     private fun getOrder() {
+        binding.recyclerItem.adapter = null
         binding.shimmerViewContainer.startShimmer()
         viewModel.requestGetOrder()
     }
@@ -158,7 +170,10 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     private fun setAdapter(items: List<OrderModel>) {
         val detail = object : OrderHolder.Click {
             override fun orderDetail(item: OrderModel) {
-                viewModel.requestOrderDetail(item.id)
+                val bundle = Bundle()
+                bundle.putParcelable(CompanionValues.SHARE_MODEL, item)
+                findNavController()
+                    .navigate(R.id.action_InvoiceFragment_to_InvoiceFragmentDetail, bundle)
             }
         }
         val adapter = OrderAdapter(items, detail)

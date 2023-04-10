@@ -8,6 +8,6 @@ package com.hoomanholding.applibrary.model.data.request
 data class OrderRequestModel(
     val fromDate: String,
     val toDate: String,
-    val customerId: Long,
+    val customerId: Int,
     val visitorId: Long
 )

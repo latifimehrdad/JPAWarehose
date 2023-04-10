@@ -12,6 +12,8 @@
     <color name="primaryColorVariant">#020A10</color>
     <color name="primaryColorVariant2">#152A3C</color>
 
+    <color name="dialogHeader">#274259</color>
+
     <color name="mtrl_textinput_default_box_stroke_color">@color/white</color>
 
     <color name="dismiss">#BCBCBC</color>
@@ -23,5 +25,12 @@
     <color name="buttonEnd">#d1bffb</color>
 
     <color name="recyclerLoadingShadow">#E6FFFFFF</color>
-    <color name="recyclerLoadingBack">#0DFFFFFF</color>
+    <color name="recyclerLoadingBack">#33FFFFFF</color>
+
+    <color name="confirmFactorButton">#e1fff0</color>
+    <color name="confirmFactorText">#04c565</color>
+
+    <color name="rejectFactorButton">#ffecec</color>
+    <color name="rejectFactorText">#ff5454</color>
+
 </resources>

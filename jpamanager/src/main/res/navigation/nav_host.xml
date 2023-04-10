@@ -68,7 +68,22 @@
     <fragment
         android:id="@+id/InvoiceFragment"
         android:name="com.hoomanholding.jpamanager.view.fragment.invoice.InvoiceFragment"
-        android:label="InvoiceFragment"/>
+        android:label="InvoiceFragment">
+
+        <action
+            android:id="@+id/action_InvoiceFragment_to_InvoiceFragmentDetail"
+            app:destination="@id/InvoiceFragmentDetail"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/InvoiceFragmentDetail"
+        android:name="com.hoomanholding.jpamanager.view.fragment.invoice.detail.InvoiceFragmentDetail"
+        android:label="InvoiceFragmentDetail"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

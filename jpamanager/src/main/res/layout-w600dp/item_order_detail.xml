@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.order.DetailOrderModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"
+            android:background="@drawable/drawable_border_curve_light"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_5sdp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/primaryColorVariant"
+                    android:textSize="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_bold"
+                    android:lines="1"
+                    app:setTitle="@{@string/count}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.count}"
+                    app:setLastTest="@{@string/piece}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/primaryColorVariant"
+                    android:textSize="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_bold"
+                    android:lines="1"
+                    app:setTitle="@{@string/finalAmount}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.finalAmount}"
+                    app:setLastTest="@{@string/rial}"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/primaryColorVariant"
+                    android:textSize="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/productName}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.productName}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/primaryColorVariant"
+                    android:textSize="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/fi}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.price}"
+                    app:setLastTest="@{@string/rial}"/>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

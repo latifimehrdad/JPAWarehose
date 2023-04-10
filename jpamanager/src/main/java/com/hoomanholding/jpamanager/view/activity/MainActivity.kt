@@ -111,7 +111,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             "CardBoardFragment",
-            "InvoiceFragment" -> {
+            "InvoiceFragment",
+            "InvoiceFragmentDetail" -> {
                 if (!binding.menuCardboard.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuCardboard.selected()
