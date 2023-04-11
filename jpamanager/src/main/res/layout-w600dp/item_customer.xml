@@ -32,11 +32,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/kalameh_regular"
                 app:setTitle="@{item.customerName}"
                 app:setValue="@{item.storeName}"
+                app:setValueTwo="@{item.customerCode}"
                 app:setSplitter="@{@string/dash}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

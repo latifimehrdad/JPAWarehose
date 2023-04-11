@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_5sdp"
-            android:padding="@dimen/_7sdp"
+            android:padding="@dimen/_5sdp"
             android:background="@drawable/drawable_border_curve_light">
 
             <LinearLayout
@@ -47,51 +47,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_9sdp"
-                        android:paddingVertical="@dimen/_2sdp"
-                        android:fontFamily="@font/iransans_light"
-                        android:lines="1"
-                        app:setTitle="@{@string/visitorName}"
-                        app:setSplitter="@{@string/colon}"
-                        app:setValue="@{viewModel.invoiceLiveData.visitorName}"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_9sdp"
-                        android:paddingVertical="@dimen/_2sdp"
-                        android:fontFamily="@font/iransans_light"
-                        android:lines="1"
-                        app:setTitle="@{@string/customerName}"
-                        app:setSplitter="@{@string/colon}"
-                        app:setValue="@{viewModel.invoiceLiveData.customerName}"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_9sdp"
-                        android:paddingVertical="@dimen/_2sdp"
-                        android:fontFamily="@font/iransans_light"
-                        android:lines="1"
-                        app:setTitle="@{@string/customerCode}"
-                        app:setSplitter="@{@string/colon}"
-                        app:setValue="@{viewModel.invoiceLiveData.customerCode}"/>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:orientation="vertical">
 
@@ -99,7 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
                         android:fontFamily="@font/iransans_light"
                         android:lines="1"
@@ -111,7 +66,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
                         android:fontFamily="@font/iransans_light"
                         android:lines="1"
@@ -119,12 +74,23 @@
                         app:setSplitter="@{@string/colon}"
                         app:setValue="@{viewModel.invoiceLiveData.orderNumber}"/>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:fontFamily="@font/iransans_light"
+                        android:lines="1"
+                        app:setTitle="@{@string/visitorName}"
+                        app:setSplitter="@{@string/colon}"
+                        app:setValue="@{viewModel.invoiceLiveData.visitorName}"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
                         android:fontFamily="@font/iransans_light"
                         android:lines="1"
@@ -132,6 +98,62 @@
                         app:setSplitter="@{@string/colon}"
                         app:setValue="@{viewModel.invoiceLiveData.orderFinaleAmount}"
                         app:setLastTest="@{@string/rial}"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:fontFamily="@font/iransans_light"
+                        android:lines="1"
+                        app:setTitle="@{@string/customerName}"
+                        app:setSplitter="@{@string/colon}"
+                        app:setValue="@{viewModel.invoiceLiveData.customerName}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:fontFamily="@font/iransans_light"
+                        android:lines="1"
+                        app:setTitle="@{@string/customerCode}"
+                        app:setSplitter="@{@string/colon}"
+                        app:setValue="@{viewModel.invoiceLiveData.customerCode}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:fontFamily="@font/iransans_light"
+                        android:lines="1"
+                        app:setTitle="@{@string/shopName}"
+                        app:setSplitter="@{@string/colon}"
+                        app:setValue="@{@string/dash}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:fontFamily="@font/iransans_light"
+                        android:lines="1"
+                        app:setTitle="@{@string/routeName}"
+                        app:setSplitter="@{@string/colon}"
+                        app:setValue="@{@string/dash}"/>
 
                 </LinearLayout>
 
@@ -179,7 +201,7 @@
                 android:layout_height="0dp"
                 app:layout_constraintTop_toBottomOf="@id/textViewProducts"
                 app:layout_constraintBottom_toTopOf="@id/buttonConfirmFactor"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:padding="@dimen/_3sdp"
                 android:background="@drawable/drawable_back_receipt_detail"/>
 
@@ -212,7 +234,7 @@
                 android:backgroundTint="@color/rejectFactorButton"
                 android:fontFamily="@font/iransans_medium"
                 android:textColor="@color/rejectFactorText"
-                android:text='@string/confirmFactor' />
+                android:text='@string/rejectFactor' />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

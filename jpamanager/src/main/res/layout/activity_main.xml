@@ -74,7 +74,7 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@id/constraintLogo"
             app:layout_constraintBottom_toTopOf="@id/menuCardboard"
@@ -88,7 +88,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             app:menu_title="@string/home"
             app:menu_icon="@drawable/ic_home"/>
 
@@ -99,7 +99,7 @@
             app:layout_constraintBottom_toTopOf="@id/menuHome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             app:menu_title="@string/cardboard"
             app:menu_icon="@drawable/ic_cardboard"/>
 
@@ -110,7 +110,7 @@
             app:layout_constraintTop_toTopOf="@id/menuCardboard"
             app:layout_constraintBottom_toBottomOf="@id/menuHome"
             app:layout_constraintEnd_toStartOf="@id/menuHome"
-            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
             app:menu_title="@string/report"
             app:menu_icon="@drawable/ic_report"/>
 
@@ -121,7 +121,7 @@
             app:layout_constraintTop_toTopOf="@id/menuCardboard"
             app:layout_constraintBottom_toBottomOf="@id/menuHome"
             app:layout_constraintStart_toEndOf="@id/menuHome"
-            android:layout_marginStart="@dimen/_7sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             app:menu_title="@string/profile"
             app:menu_icon="@drawable/ic_profile"/>
 

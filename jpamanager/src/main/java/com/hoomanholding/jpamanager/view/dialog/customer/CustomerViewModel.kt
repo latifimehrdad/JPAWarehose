@@ -6,6 +6,7 @@ import com.hoomanholding.applibrary.model.data.request.FilterCustomerRequest
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpamanager.model.repository.CustomerRepository
+import com.zar.core.tools.extensions.persianNumberToEnglishNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -28,7 +29,8 @@ class CustomerViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetCustomer
     fun requestGetCustomer(search: String) {
         viewModelScope.launch(IO + exceptionHandler()){
-            val request = FilterCustomerRequest(0,search)
+            val temp = search.persianNumberToEnglishNumber()
+            val request = FilterCustomerRequest(0,temp)
             val response = checkResponse(customerRepository.requestGetCustomer(request))
             response?.let { customerLiveData.postValue(it) }
         }

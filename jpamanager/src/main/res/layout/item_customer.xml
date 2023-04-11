@@ -37,6 +37,7 @@
                 android:fontFamily="@font/kalameh_regular"
                 app:setTitle="@{item.customerName}"
                 app:setValue="@{item.storeName}"
+                app:setValueTwo="@{item.customerCode}"
                 app:setSplitter="@{@string/dash}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

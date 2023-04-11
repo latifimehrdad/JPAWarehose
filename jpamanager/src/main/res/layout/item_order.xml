@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_15sdp">
+        android:layout_marginBottom="@dimen/_5sdp">
 
         <LinearLayout
             android:id="@+id/linearLayoutParent"
@@ -22,52 +22,6 @@
             android:paddingHorizontal="@dimen/_5sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_15sdp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
-                    android:paddingVertical="@dimen/_2sdp"
-                    android:fontFamily="@font/iransans_light"
-                    android:lines="1"
-                    app:setTitle="@{@string/visitorName}"
-                    app:setSplitter="@{@string/colon}"
-                    app:setValue="@{item.visitorName}"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
-                    android:paddingVertical="@dimen/_2sdp"
-                    android:fontFamily="@font/iransans_light"
-                    android:lines="1"
-                    app:setTitle="@{@string/customerName}"
-                    app:setSplitter="@{@string/colon}"
-                    app:setValue="@{item.customerName}"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
-                    android:paddingVertical="@dimen/_2sdp"
-                    android:fontFamily="@font/iransans_light"
-                    android:lines="1"
-                    app:setTitle="@{@string/customerCode}"
-                    app:setSplitter="@{@string/colon}"
-                    app:setValue="@{item.customerCode}"/>
-
-
-            </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -100,6 +54,17 @@
                     app:setSplitter="@{@string/colon}"
                     app:setValue="@{item.orderNumber}"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/visitorName}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.visitorName}"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -113,6 +78,62 @@
                     app:setSplitter="@{@string/colon}"
                     app:setValue="@{item.orderFinaleAmount}"
                     app:setLastTest="@{@string/rial}"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/customerName}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.customerName}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/customerCode}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.customerCode}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/shopName}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{@string/dash}"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/routeName}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{@string/dash}"/>
 
             </LinearLayout>
 

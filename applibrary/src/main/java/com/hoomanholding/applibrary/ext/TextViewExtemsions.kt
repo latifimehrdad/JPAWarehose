@@ -61,6 +61,21 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
     text = temp
 }
 
+@BindingAdapter("setTitle","setValue", "setSplitter", "setValueTwo")
+fun TextView.setTitleAndValue2(title : String, value : Any?, splitter: String, value2 : Any?){
+    val temp = value?.let {
+        when(value){
+            is String -> "$title $splitter $value $splitter $value2"
+            is Long -> "$title $splitter $value $splitter $value2"
+            is Int -> "$title $splitter $value $splitter $value2"
+            is LocalDateTime -> "$title $splitter ${value.toSolarDate()?.getSolarDate()} $splitter $value2"
+            else -> ""
+        }
+    } ?: run { "" }
+    text = temp
+}
+
+
 @BindingAdapter("setTitle","setValue", "setSplitter", "setLastTest")
 fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String, last: String){
     val temp = value?.let {

@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp">
+        android:layout_margin="@dimen/_3sdp">
 
         <LinearLayout
             android:id="@+id/linearLayoutParent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             android:orientation="horizontal"
-            android:background="@drawable/drawable_border_curve_light"
+            android:background="@drawable/drawable_border_curve_light_gray"
             android:paddingHorizontal="@dimen/_5sdp"
             android:paddingVertical="@dimen/_5sdp">
 

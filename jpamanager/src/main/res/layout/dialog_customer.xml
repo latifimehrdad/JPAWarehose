@@ -79,7 +79,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutSearch"
-            app:layout_constraintBottom_toTopOf="@id/textViewLoading" />
+            app:layout_constraintBottom_toTopOf="@id/textViewLoading"
+            android:paddingBottom="@dimen/_10sdp"/>
 
         <TextView
             android:id="@+id/textViewLoading"

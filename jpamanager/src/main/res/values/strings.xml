@@ -43,6 +43,7 @@
     <string name="startEndDate">تاریخ شروع و پایان</string>
     <string name="customerName">نام مشتری</string>
     <string name="showDetail">مشاهده جزییات</string>
+    <string name="routeName">نام مسیر</string>
     <string name="supportNumber">026-6565635</string>
     <string name="date">تاریخ</string>
     <string name="factorNumber">شماره فاکتور</string>
@@ -53,6 +54,7 @@
     <string name="customerFinancialState">وضعیت مالی مشتری</string>
     <string name="products">لیست کالاها</string>
     <string name="confirmFactor">تایید فاکتور</string>
+    <string name="rejectFactor">رد فاکتور</string>
     <string name="productName">نام محصول</string>
     <string name="fi">قیمت واحد</string>
     <string name="count">تعداد</string>
