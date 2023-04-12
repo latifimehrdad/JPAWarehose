@@ -85,7 +85,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="right">
 
 
                 <TextView
@@ -135,6 +136,12 @@
                     app:setTitle="@{@string/routeName}"
                     app:setSplitter="@{@string/colon}"
                     app:setValue="@{@string/dash}"/>
+
+                <CheckBox
+                    android:id="@+id/checkBoxSelect"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_2sdp"/>
 
             </LinearLayout>
 

@@ -18,11 +18,13 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
 import com.hoomanholding.jpamanager.model.repository.CustomerRepository
 import com.hoomanholding.jpamanager.model.repository.ReasonRepository
-import com.hoomanholding.jpamanager.model.repository.VisitorRepository
+import com.zar.core.tools.extensions.toSolarDate
 import kotlinx.coroutines.delay
+import java.time.LocalDateTime
 
 
 /**
@@ -32,10 +34,11 @@ import kotlinx.coroutines.delay
 @HiltViewModel
 class InvoiceViewModel @Inject constructor(
     private val orderRepository: OrderRepository,
-    private val visitorRepository: VisitorRepository,
     private val reasonRepository: ReasonRepository,
     private val customerRepository: CustomerRepository
 ) : JpaViewModel() {
+
+    var disApprovalReasonModel: List<DisApprovalReasonModel>? = null
 
     val filterCustomerLiveData: MutableLiveData<CustomerModel?> by lazy {
         MutableLiveData<CustomerModel?>()
@@ -56,15 +59,6 @@ class InvoiceViewModel @Inject constructor(
     }
 
 
-    val visitorLiveData: MutableLiveData<List<VisitorModel>> by lazy {
-        MutableLiveData<List<VisitorModel>>()
-    }
-
-    val disApprovalReasons: MutableLiveData<List<DisApprovalReasonModel>> by lazy {
-        MutableLiveData<List<DisApprovalReasonModel>>()
-    }
-
-
     val customerFinancialLiveData: MutableLiveData<CustomerFinancialModel> by lazy {
         MutableLiveData<CustomerFinancialModel>()
     }
@@ -78,9 +72,20 @@ class InvoiceViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- setCustomerForFilter
-    fun setCustomerForFilter(customer: CustomerModel?){
+    fun setCustomerForFilter(customer: CustomerModel?) {
         filterCustomerLiveData.postValue(customer)
-        viewModelScope.launch(IO){
+        viewModelScope.launch(IO) {
+            delay(500)
+            requestGetOrder()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setCustomerForFilter
+
+
+    //---------------------------------------------------------------------------------------------- setCustomerForFilter
+    fun setVisitorForFilter(visitor: VisitorModel?) {
+        filterVisitorLiveData.postValue(visitor)
+        viewModelScope.launch(IO) {
             delay(500)
             requestGetOrder()
         }
@@ -89,26 +94,30 @@ class InvoiceViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- setDateForFilter
-    fun setDateForFilter(date: DateFilterModel?){
+    fun setDateForFilter(date: DateFilterModel?) {
         filterDateLiveData.postValue(date)
+        viewModelScope.launch(IO) {
+            delay(500)
+            requestGetOrder()
+        }
     }
     //---------------------------------------------------------------------------------------------- setDateForFilter
 
 
-
-    //---------------------------------------------------------------------------------------------- setVisitorForFilter
-    fun setVisitorForFilter(visitor: VisitorModel?){
-        filterVisitorLiveData.postValue(visitor)
-    }
-    //---------------------------------------------------------------------------------------------- setVisitorForFilter
-
-
     //---------------------------------------------------------------------------------------------- requestGetOrder
     fun requestGetOrder() {
-        viewModelScope.launch(IO + exceptionHandler()){
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val dateNow = LocalDateTime.now().toSolarDate()?.getSolarDate() ?: "1400/01/01"
+            val date30DayAgo = LocalDateTime.now().minusDays(90).toSolarDate()?.getSolarDate()
+                ?: "1400/01/01"
+            var startDate = filterDateLiveData.value?.startDate ?: date30DayAgo
+            var endDate = filterDateLiveData.value?.endDate ?: dateNow
+            startDate = startDate.replace("/","")
+            endDate = endDate.replace("/","")
             val request = OrderRequestModel(
-                "14011001", "14011230",
-                filterCustomerLiveData.value?.id ?: 0, 0
+                startDate, endDate,
+                filterCustomerLiveData.value?.id ?: 0,
+                filterVisitorLiveData.value?.id ?: 0
             )
             val response = checkResponse(orderRepository.requestGetOrder(request))
             response?.let { orderLiveData.postValue(it) }
@@ -117,30 +126,19 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetOrder
 
 
-    //---------------------------------------------------------------------------------------------- requestGetVisitor
-    fun requestGetVisitor() {
-        viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(visitorRepository.requestGetVisitor())
-            response?.let { visitorLiveData.postValue(it) }
-        }
-    }
-    //---------------------------------------------------------------------------------------------- requestGetVisitor
-
-
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
     fun requestDisApprovalReasons() {
-        viewModelScope.launch(IO + exceptionHandler()){
+        viewModelScope.launch(IO + exceptionHandler()) {
             val response = checkResponse(reasonRepository.requestDisApprovalReasons())
-            response?.let { disApprovalReasons.postValue(it) }
+            response?.let { disApprovalReasonModel = it }
         }
     }
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
-
 
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
     fun requestGetCustomerFinancial(customerId: Int) {
-        viewModelScope.launch(IO + exceptionHandler()){
+        viewModelScope.launch(IO + exceptionHandler()) {
             val response = checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
             response?.let { customerFinancialLiveData.postValue(it) }
         }
@@ -150,9 +148,10 @@ class InvoiceViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
     fun requestGetCustomerFinancialDetail(customerId: Int, checkType: EnumCheckType) {
-        viewModelScope.launch(IO + exceptionHandler()){
+        viewModelScope.launch(IO + exceptionHandler()) {
             val response = checkResponse(
-                customerRepository.requestGetCustomerFinancialDetail(customerId, checkType))
+                customerRepository.requestGetCustomerFinancialDetail(customerId, checkType)
+            )
             response?.let { customerFinancialDetailLiveData.postValue(it) }
         }
     }
@@ -160,24 +159,22 @@ class InvoiceViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestOrderToggleState
-    fun requestOrderToggleState() {
-        viewModelScope.launch(IO + exceptionHandler()){
-            val request = OrderToggleStateRequest(
-                EnumState.Reject,
-                "تست رد PostMan",
-                listOf(2150298,
-                    2150297,
-                    2150296,
-                    2150295,
-                    2150294,
-                    2150293,
-                    2150292,
-                    2150290,
-                    2150289,
-                    2150284)
-            )
-            val response = checkResponse(orderRepository.requestOrderToggleState(request))
-            response?.let { orderToggleStateLiveData.postValue(it) }
+    fun requestOrderToggleState(positionReason: Int, description: String, state: EnumState) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val orderSelected = orderLiveData.value?.filter {
+                it.select
+            }
+            val orders = orderSelected?.map {
+                it.id
+            }
+            if (orders.isNullOrEmpty())
+                setMessage(resourcesProvider.getString(R.string.orderSelectedIsEmpty))
+            else{
+                val reason = disApprovalReasonModel?.get(positionReason)
+                val request = OrderToggleStateRequest(state, description, orders)
+                val response = checkResponse(orderRepository.requestOrderToggleState(request))
+                response?.let { orderToggleStateLiveData.postValue(it) }
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- requestOrderToggleState

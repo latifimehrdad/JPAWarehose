@@ -23,7 +23,8 @@ data class OrderModel(
     val orderAmount: Long,
     val discount: Long,
     val orderFinaleAmount: Long,
-    val visitorDescription: String?
+    val visitorDescription: String?,
+    var select : Boolean = false
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -40,7 +41,8 @@ data class OrderModel(
         parcel.readLong(),
         parcel.readLong(),
         parcel.readLong(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readByte() != 0.toByte()
     ) {
     }
 
@@ -60,6 +62,7 @@ data class OrderModel(
         parcel.writeLong(discount)
         parcel.writeLong(orderFinaleAmount)
         parcel.writeString(visitorDescription)
+        parcel.writeByte(if (select) 1 else 0)
     }
 
     override fun describeContents(): Int {

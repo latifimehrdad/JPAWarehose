@@ -2,6 +2,7 @@ package com.hoomanholding.jpamanager.view.activity
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
+import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -14,17 +15,14 @@ class MainViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : JpaViewModel() {
 
-    val userInfoLiveData: MutableLiveData<String?> by lazy {
-        MutableLiveData<String?>()
+    val userInfoLiveData: MutableLiveData<UserInfoEntity?> by lazy {
+        MutableLiveData<UserInfoEntity?>()
     }
 
 
     //---------------------------------------------------------------------------------------------- deleteAllData
     fun deleteAllData() {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.TOKEN, null)
-            .apply()
+        userRepository.deleteUser()
     }
     //---------------------------------------------------------------------------------------------- deleteAllData
 
@@ -33,7 +31,7 @@ class MainViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getUserInfo
     fun getUserInfo() {
         val userInfo = userRepository.getUser()
-        userInfoLiveData.postValue(userInfo?.fullName)
+        userInfoLiveData.postValue(userInfo)
     }
     //---------------------------------------------------------------------------------------------- getUserInfo
 

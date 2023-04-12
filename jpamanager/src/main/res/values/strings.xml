@@ -5,6 +5,7 @@
     <string name="userName">نام کاربری</string>
     <string name="password">رمز ورود</string>
     <string name="enter">ورود</string>
+    <string name="search">جستجو</string>
     <string name="loginByBiometric">ورود با اثر انگشت</string>
     <string name="onAuthenticationError">اثر انگشت شما تایید نشد</string>
     <string name="passwordIsInCorrect">رمز اشتباه است</string>
@@ -61,7 +62,11 @@
     <string name="piece">عدد</string>
     <string name="finalAmount">قیمت نهایی</string>
     <string name="receivingMoreItems">درحال دریافت اطلاعات</string>
-
+    <string name="chooseReason">انتخاب دلیل</string>
+    <string name="description">توضیحات</string>
+    <string name="orderSelectedIsEmpty">هیچ سفارشی انتخاب نشده</string>
+    <string name="setDateFrom">از %1$s - تا %2$s</string>
+    <string name="doYouWantToExitAccount">آیا برای خروج از اکانت مطمئن هستید؟</string>
 
     <string name="logoDescription">logo</string>
     <string name="fingerPrintDescription">finger Print</string>

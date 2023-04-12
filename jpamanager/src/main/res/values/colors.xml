@@ -33,4 +33,12 @@
     <color name="rejectFactorButton">#ffecec</color>
     <color name="rejectFactorText">#ff5454</color>
 
+    <color name="datePickerConfirmButtonBackColor">#051b46</color>
+    <color name="datePickerDateBackColor">#051b46</color>
+    <color name="datePickerRangeColor">#73B3EA</color>
+
+
+
+
+
 </resources>

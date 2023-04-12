@@ -9,10 +9,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hoomanholding.applibrary.model.data.enums.EnumPeopleType
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
-import com.hoomanholding.jpamanager.databinding.DialogCustomerBinding
+import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
+import com.hoomanholding.jpamanager.databinding.DialogPeopleBinding
 import com.hoomanholding.jpamanager.view.adapter.holder.CustomerSelectHolder
+import com.hoomanholding.jpamanager.view.adapter.holder.VisitorSelectHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.CustomerSelectAdapter
+import com.hoomanholding.jpamanager.view.adapter.recycler.VisitorSelectAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -23,19 +27,21 @@ import kotlinx.coroutines.Dispatchers.Main
  */
 
 @AndroidEntryPoint
-class CustomerDialog(
+class PeopleDialog(
+    private val peopleType: EnumPeopleType,
     private val chooseItem: Click
 ) : DialogFragment() {
 
-    lateinit var binding: DialogCustomerBinding
+    lateinit var binding: DialogPeopleBinding
 
-    private val customerViewModel: CustomerViewModel by viewModels()
+    private val peopleViewModel: PeopleViewModel by viewModels()
 
     private var job: Job? = null
 
     //---------------------------------------------------------------------------------------------- Click
     interface Click {
-        fun select(item: CustomerModel)
+        fun selectCustomer(item: CustomerModel)
+        fun selectVisitor(item: VisitorModel)
     }
     //---------------------------------------------------------------------------------------------- Click
 
@@ -46,7 +52,7 @@ class CustomerDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogCustomerBinding.inflate(inflater, container, false)
+        binding = DialogPeopleBinding.inflate(inflater, container, false)
         return binding.root
     }
     //---------------------------------------------------------------------------------------------- onCreateView
@@ -65,6 +71,8 @@ class CustomerDialog(
         window?.attributes = lp
         setListener()
         observeUserMutableLiveData()
+        if (peopleType == EnumPeopleType.Visitor)
+            getPeople(null)
     }
     //---------------------------------------------------------------------------------------------- onCreateView
 
@@ -89,8 +97,10 @@ class CustomerDialog(
         job = CoroutineScope(IO).launch {
             delay(800)
             withContext(Main) {
-                if (search.isNotEmpty())
-                    requestGetUser(search)
+                if (search.isNotEmpty() && peopleType == EnumPeopleType.Customer)
+                    getPeople(search)
+                else
+                    getPeople(search)
             }
         }
     }
@@ -99,28 +109,33 @@ class CustomerDialog(
 
     //---------------------------------------------------------------------------------------------- observeUserMutableLiveData
     private fun observeUserMutableLiveData() {
-        customerViewModel.customerLiveData.observe(viewLifecycleOwner) {
+        peopleViewModel.customerLiveData.observe(viewLifecycleOwner) {
             binding.textViewLoading.visibility = View.GONE
             setCustomerAdapter(it)
+        }
+
+        peopleViewModel.visitorLiveData.observe(viewLifecycleOwner){
+            binding.textViewLoading.visibility = View.GONE
+            setVisitorAdapter(it)
         }
     }
     //---------------------------------------------------------------------------------------------- observeUserMutableLiveData
 
 
-    //---------------------------------------------------------------------------------------------- requestGetUser
-    private fun requestGetUser(search: String) {
+    //---------------------------------------------------------------------------------------------- getPeople
+    private fun getPeople(search: String?) {
         binding.textViewLoading.visibility = View.VISIBLE
         binding.recyclerViewPersonnel.adapter = null
-        customerViewModel.requestGetCustomer(search)
+        peopleViewModel.getPeople(peopleType, search)
     }
-    //---------------------------------------------------------------------------------------------- requestGetUser
+    //---------------------------------------------------------------------------------------------- getPeople
 
 
     //---------------------------------------------------------------------------------------------- setCustomerAdapter
     private fun setCustomerAdapter(items: List<CustomerModel>) {
         val select = object : CustomerSelectHolder.Click {
             override fun select(item: CustomerModel) {
-                chooseItem.select(item)
+                chooseItem.selectCustomer(item)
                 dismiss()
             }
         }
@@ -134,6 +149,29 @@ class CustomerDialog(
         binding.recyclerViewPersonnel.adapter = adapter
     }
     //---------------------------------------------------------------------------------------------- setCustomerAdapter
+
+
+
+
+    //---------------------------------------------------------------------------------------------- setVisitorAdapter
+    private fun setVisitorAdapter(items: List<VisitorModel>) {
+        val select = object : VisitorSelectHolder.Click {
+            override fun select(item: VisitorModel) {
+                chooseItem.selectVisitor(item)
+                dismiss()
+            }
+        }
+        val adapter = VisitorSelectAdapter(items.toMutableList(), select)
+        val manager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        binding.recyclerViewPersonnel.layoutManager = manager
+        binding.recyclerViewPersonnel.adapter = adapter
+    }
+    //---------------------------------------------------------------------------------------------- setVisitorAdapter
+
 
 
     //---------------------------------------------------------------------------------------------- dismiss

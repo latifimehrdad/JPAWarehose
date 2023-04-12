@@ -35,7 +35,10 @@
                 android:text="@string/visitorName"
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/white"
-                android:lines="1"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:fontFamily="@font/yekan_bakh_medium"/>
 
             <TextView
@@ -72,7 +75,10 @@
                 android:text="@string/startEndDate"
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/white"
-                android:lines="1"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:fontFamily="@font/yekan_bakh_medium"/>
 
             <TextView
@@ -108,7 +114,10 @@
                 android:text="@string/customerName"
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/white"
-                android:lines="1"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
                 android:fontFamily="@font/yekan_bakh_medium"/>
 
             <TextView
@@ -176,8 +185,40 @@
             app:layout_constraintTop_toBottomOf="@id/viewVisitor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buttonConfirmFactor"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginHorizontal="@dimen/_10sdp" />
+
+        <com.hoomanholding.applibrary.view.custom.JpaButton
+            android:id="@+id/buttonConfirmFactor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.3"
+            android:textSize="@dimen/_8sdp"
+            app:cornerRadius="@dimen/_6sdp"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
+            android:backgroundTint="@color/confirmFactorButton"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/confirmFactorText"
+            android:text='@string/confirmFactor' />
+
+        <com.hoomanholding.applibrary.view.custom.JpaButton
+            android:id="@+id/buttonRejectFactor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/buttonConfirmFactor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.3"
+            android:textSize="@dimen/_8sdp"
+            app:cornerRadius="@dimen/_6sdp"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:backgroundTint="@color/rejectFactorButton"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/rejectFactorText"
+            android:text='@string/confirmFactor' />
 
         <ImageView
             android:layout_width="@dimen/_15sdp"

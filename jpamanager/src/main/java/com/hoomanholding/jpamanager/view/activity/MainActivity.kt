@@ -12,8 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
+import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.ActivityMainBinding
+import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -43,8 +45,18 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         setListener()
-        mainViewModel.userInfoLiveData.observe(this) {
-            binding.textViewUser.text = it
+        mainViewModel.userInfoLiveData.observe(this) { user ->
+            user?.let {
+                binding.textViewPersonnelCode.setTitleAndValue(
+                    getString(R.string.personnelNumber),
+                    it.personnelNumber,
+                    getString(R.string.colon)
+                )
+                binding.textViewUser.text = it.fullName
+            } ?: run {
+                binding.textViewPersonnelCode.text = ""
+                binding.textViewUser.text = ""
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- initView
@@ -74,6 +86,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.menuProfile.setOnClickListener {
             gotoFragment(R.id.action_goto_ProfileFragment)
+        }
+
+        binding.textViewLogOut.setOnClickListener {
+            val click = object : ConfirmDialog.Click {
+                override fun clickYes() {
+                    gotoFirstFragment()
+                }
+            }
+            ConfirmDialog(
+                this,
+                getString(R.string.doYouWantToExitAccount),
+                click
+            ).show()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener

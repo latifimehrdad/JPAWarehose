@@ -24,6 +24,9 @@ class OrderHolder(
     fun bind(item: OrderModel) {
         binding.item = item
         binding.root.setOnClickListener { click.orderDetail(item) }
+        binding.checkBoxSelect.setOnClickListener {
+            item.select = binding.checkBoxSelect.isChecked
+        }
         binding.executePendingBindings()
     }
     //---------------------------------------------------------------------------------------------- bind
