@@ -67,6 +67,7 @@
     <string name="orderSelectedIsEmpty">هیچ سفارشی انتخاب نشده</string>
     <string name="setDateFrom">از %1$s - تا %2$s</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از اکانت مطمئن هستید؟</string>
+    <string name="amountOfDebt">میزان بدهی</string>
 
     <string name="logoDescription">logo</string>
     <string name="fingerPrintDescription">finger Print</string>

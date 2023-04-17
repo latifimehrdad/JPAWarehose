@@ -5,11 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.model.repository.OrderRepository
-import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.request.OrderToggleStateRequest
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
-import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
@@ -20,7 +18,6 @@ import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
-import com.hoomanholding.jpamanager.model.repository.CustomerRepository
 import com.hoomanholding.jpamanager.model.repository.ReasonRepository
 import com.zar.core.tools.extensions.toSolarDate
 import kotlinx.coroutines.delay
@@ -34,8 +31,7 @@ import java.time.LocalDateTime
 @HiltViewModel
 class InvoiceViewModel @Inject constructor(
     private val orderRepository: OrderRepository,
-    private val reasonRepository: ReasonRepository,
-    private val customerRepository: CustomerRepository
+    private val reasonRepository: ReasonRepository
 ) : JpaViewModel() {
 
     var disApprovalReasonModel: List<DisApprovalReasonModel>? = null
@@ -58,13 +54,6 @@ class InvoiceViewModel @Inject constructor(
         MutableLiveData<List<OrderModel>>()
     }
 
-
-    val customerFinancialLiveData: MutableLiveData<CustomerFinancialModel> by lazy {
-        MutableLiveData<CustomerFinancialModel>()
-    }
-
-    val customerFinancialDetailLiveData: MutableLiveData<List<CustomerFinancialDetailModel>> by
-    lazy { MutableLiveData<List<CustomerFinancialDetailModel>>() }
 
     val orderToggleStateLiveData: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
@@ -134,28 +123,6 @@ class InvoiceViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
-
-
-    //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
-    fun requestGetCustomerFinancial(customerId: Int) {
-        viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
-            response?.let { customerFinancialLiveData.postValue(it) }
-        }
-    }
-    //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
-
-
-    //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
-    fun requestGetCustomerFinancialDetail(customerId: Int, checkType: EnumCheckType) {
-        viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(
-                customerRepository.requestGetCustomerFinancialDetail(customerId, checkType)
-            )
-            response?.let { customerFinancialDetailLiveData.postValue(it) }
-        }
-    }
-    //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
 
 
     //---------------------------------------------------------------------------------------------- requestOrderToggleState

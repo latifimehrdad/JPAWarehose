@@ -3,6 +3,7 @@ package com.hoomanholding.jpamanager.view.fragment.invoice.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
@@ -37,6 +38,7 @@ class InvoiceFragmentDetail(override var layout: Int = R.layout.fragment_invoice
         binding.shimmerViewContainer.config(getShimmerBuild())
         observeLiveData()
         getOrderModerFromBundle()
+        setListener()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -45,6 +47,12 @@ class InvoiceFragmentDetail(override var layout: Int = R.layout.fragment_invoice
     private fun getOrderModerFromBundle() {
         arguments?.let { bundle ->
             val invoice = bundle.parcelable<OrderModel>(CompanionValues.SHARE_MODEL)
+            val customerId = bundle.getInt(CompanionValues.CUSTOMER_ID,0)
+            if (customerId == 0){
+                activity?.onBackPressedDispatcher?.onBackPressed()
+                return
+            }
+            viewModel.customerId = customerId
             invoice?.let {
                 binding.shimmerViewContainer.startLoading()
                 viewModel.setOrderModel(it)
@@ -93,4 +101,15 @@ class InvoiceFragmentDetail(override var layout: Int = R.layout.fragment_invoice
     //---------------------------------------------------------------------------------------------- setProductAdapter
 
 
+    //---------------------------------------------------------------------------------------------- setListener
+    private fun setListener() {
+        binding.buttonLogin.setOnClickListener {
+            val customer = viewModel.customerId
+            val bundle = Bundle()
+            bundle.putInt(CompanionValues.CUSTOMER_ID, customer)
+            findNavController()
+                .navigate(R.id.action_InvoiceFragmentDetail_to_CustomerFinancialFragment, bundle)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setListener
 }

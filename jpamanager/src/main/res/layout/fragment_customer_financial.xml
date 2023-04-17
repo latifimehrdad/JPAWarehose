@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/recyclerLoadingBack"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.8"
+            android:padding="@dimen/_5sdp"
+            android:background="@drawable/drawable_back_receipt_detail">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/drawable_border_curve_light">
+
+                <TextView
+                    android:id="@+id/textViewCustomerName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textViewAmountOfDebt"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/kalameh_medium"
+                    app:layout_constraintWidth_percent="0.45"
+                    app:setTitle="@{@string/customerName}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.customerName}"/>
+
+                <TextView
+                    android:id="@+id/textViewRial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@id/textViewCustomerName"
+                    app:layout_constraintBottom_toBottomOf="@id/textViewCustomerName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/hint"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/kalameh_light"
+                    android:text="@string/rial"/>
+
+                <TextView
+                    android:id="@+id/textViewAmountOfDebt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/textViewCustomerName"
+                    app:layout_constraintBottom_toBottomOf="@id/textViewCustomerName"
+                    app:layout_constraintStart_toEndOf="@id/textViewRial"
+                    app:layout_constraintEnd_toStartOf="@id/textViewCustomerName"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:gravity="end"
+                    android:textColor="@color/hint"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/kalameh_light"
+                    app:setTitle="@{@string/amountOfDebt}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.debitAmount}"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

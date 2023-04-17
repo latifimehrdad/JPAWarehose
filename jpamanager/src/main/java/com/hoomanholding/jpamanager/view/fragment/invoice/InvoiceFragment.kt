@@ -133,14 +133,6 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         viewModel.orderToggleStateLiveData.observe(viewLifecycleOwner){
             getOrder()
         }
-
-        viewModel.customerFinancialDetailLiveData.observe(viewLifecycleOwner) {
-            showMessage("count of visitor is ${it.size} $it")
-        }
-
-        viewModel.customerFinancialLiveData.observe(viewLifecycleOwner) {
-            showMessage("count of visitor is $it")
-        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
 
@@ -181,6 +173,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
             override fun orderDetail(item: OrderModel) {
                 val bundle = Bundle()
                 bundle.putParcelable(CompanionValues.SHARE_MODEL, item)
+                bundle.putInt(CompanionValues.CUSTOMER_ID, item.customerId)
                 findNavController()
                     .navigate(R.id.action_InvoiceFragment_to_InvoiceFragmentDetail, bundle)
             }

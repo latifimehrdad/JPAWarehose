@@ -22,6 +22,8 @@ class InvoiceDetailViewModel @Inject constructor(
     private val orderRepository: OrderRepository
 ) : JpaViewModel() {
 
+    var customerId: Int = 0
+
     val invoiceLiveData: MutableLiveData<OrderModel> by lazy {
         MutableLiveData<OrderModel>()
     }

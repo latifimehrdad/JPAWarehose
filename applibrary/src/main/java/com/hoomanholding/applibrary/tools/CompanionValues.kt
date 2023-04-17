@@ -13,5 +13,6 @@ class CompanionValues {
         const val userName = "userName"
         const val password = "password"
         const val SHARE_MODEL = "share_model"
+        const val CUSTOMER_ID = "customer_id"
     }
 }
