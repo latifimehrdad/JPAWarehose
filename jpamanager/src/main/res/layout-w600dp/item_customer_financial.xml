@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.jpamanager.model.data.other.CustomerFinancialItemModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:paddingVertical="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:gravity="center"
+            android:text="@string/moreDetail"
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/black"
+            android:lines="1"
+            android:fontFamily="@font/kalameh_light"
+            android:background="@drawable/drawable_list_button"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/hint"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_marginBottom="@dimen/_1sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:lines="1"
+            android:fontFamily="@font/kalameh_light"
+            android:background="@color/customerFinancialDetail"
+            app:setCustomerFinancial="@{item.value}"
+            app:setLastTest="@{item.lastTitle}"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/hint"/>
+
+        <TextView
+            android:id="@+id/imageViewIcon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_3sdp"
+            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/white"
+            android:lines="1"
+            android:fontFamily="@font/kalameh_light"
+            android:background="@color/customerFinancialDetail"
+            android:text="@{item.title}"/>
+
+    </LinearLayout>
+
+</layout>

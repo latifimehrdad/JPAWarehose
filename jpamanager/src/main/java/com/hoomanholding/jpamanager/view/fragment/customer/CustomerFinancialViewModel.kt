@@ -43,7 +43,7 @@ class CustomerFinancialViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
-    fun requestGetCustomerFinancialDetail(customerId: Int, checkType: EnumCheckType) {
+    fun requestGetCustomerFinancialDetail(checkType: EnumCheckType) {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler()) {
             val response = checkResponse(
                 customerRepository.requestGetCustomerFinancialDetail(customerId, checkType)

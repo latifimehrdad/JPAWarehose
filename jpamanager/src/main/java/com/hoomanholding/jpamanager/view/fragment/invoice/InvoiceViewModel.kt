@@ -97,7 +97,7 @@ class InvoiceViewModel @Inject constructor(
     fun requestGetOrder() {
         viewModelScope.launch(IO + exceptionHandler()) {
             val dateNow = LocalDateTime.now().toSolarDate()?.getSolarDate() ?: "1400/01/01"
-            val date30DayAgo = LocalDateTime.now().minusDays(90).toSolarDate()?.getSolarDate()
+            val date30DayAgo = LocalDateTime.now().minusDays(120).toSolarDate()?.getSolarDate()
                 ?: "1400/01/01"
             var startDate = filterDateLiveData.value?.startDate ?: date30DayAgo
             var endDate = filterDateLiveData.value?.endDate ?: dateNow

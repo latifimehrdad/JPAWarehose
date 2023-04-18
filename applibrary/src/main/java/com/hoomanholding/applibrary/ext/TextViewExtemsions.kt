@@ -89,6 +89,19 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String, la
 }
 
 
+@BindingAdapter("setCustomerFinancial", "setLastTest")
+fun TextView.setAmount(value : Any?, last: String){
+    val temp = value?.let {
+        when(value){
+            is Int,
+            is String-> "$value $last"
+            is Long -> "${value.split()} $last"
+            else -> ""
+        }
+    } ?: run { "" }
+    text = temp
+}
+
 //-------------------------------------------------------------------------------------------------- whenIsReceiptAmountWhitProductModel
 private fun whenIsReceiptAmountWhitProductModel(value : ReceiptAmountWhitProductModel) : String {
     val count = value.saveReceiptAmountEntity.cartonCount *

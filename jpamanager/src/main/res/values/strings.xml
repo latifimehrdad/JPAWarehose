@@ -52,14 +52,17 @@
     <string name="customerCode">کد مشتری</string>
     <string name="shopName">نام فروشگاه</string>
     <string name="rial">ریال</string>
+    <string name="address">آدرس</string>
     <string name="customerFinancialState">وضعیت مالی مشتری</string>
     <string name="products">لیست کالاها</string>
     <string name="confirmFactor">تایید فاکتور</string>
     <string name="rejectFactor">رد فاکتور</string>
+    <string name="factorCount">تعداد فاکتور</string>
     <string name="productName">نام محصول</string>
     <string name="fi">قیمت واحد</string>
     <string name="count">تعداد</string>
     <string name="piece">عدد</string>
+    <string name="moreDetail">جزییات بیشتر</string>
     <string name="finalAmount">قیمت نهایی</string>
     <string name="receivingMoreItems">درحال دریافت اطلاعات</string>
     <string name="chooseReason">انتخاب دلیل</string>
@@ -68,6 +71,21 @@
     <string name="setDateFrom">از %1$s - تا %2$s</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از اکانت مطمئن هستید؟</string>
     <string name="amountOfDebt">میزان بدهی</string>
+    <string name="cashDebitAmount">میزان بدهی نقدی</string>
+    <string name="information">اطلاعات</string>
+    <string name="purchaseAmount">مبلغ خرید</string>
+    <string name="dateOfFirstPurchase">تاریخ اولین خرید</string>
+    <string name="notRegisteredCheckAmount">مبلغ چک ثبت نشده</string>
+    <string name="notRegisteredCheckCount">تعداد چک ثبت نشده</string>
+    <string name="bouncedCheckAmount">مبلغ چک برگشتی</string>
+    <string name="bouncedCheckCount">تعداد چک برگشتی</string>
+    <string name="payedCheckAmount">مبلغ چک پرداخت شده</string>
+    <string name="payedCheckCount">تعداد چک پرداخت شده</string>
+    <string name="notDueCheckAmount">مبلغ چک سررسید نشده</string>
+    <string name="notDueCheckCount">تعداد چک سررسید نشده</string>
+    <string name="guaranteeCheckAmount">مبلغ چک ضمانت</string>
+    <string name="guaranteeCheckCount">تعداد چک ضمانت</string>
+
 
     <string name="logoDescription">logo</string>
     <string name="fingerPrintDescription">finger Print</string>
@@ -77,5 +95,6 @@
 
     <string name="colon">:</string>
     <string name="dash">-</string>
+    <string name="space"> </string>
 
 </resources>
