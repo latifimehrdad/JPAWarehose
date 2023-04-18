@@ -225,9 +225,11 @@
 
             <TextView
                 android:id="@+id/textViewRoute"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textViewAddress"
+                app:layout_constraintEnd_toEndOf="@id/textViewAddress"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_6sdp"
                 android:gravity="center"
@@ -256,9 +258,16 @@
                 android:fontFamily="@font/kalameh_light"
                 app:setTitle="@{@string/address}"
                 app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.address}"
-                app:drawableEndCompat="@drawable/ic_location"
-                android:drawablePadding="@dimen/_5sdp"/>
+                app:setValue="@{item.address}" />
+
+            <ImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                app:layout_constraintTop_toTopOf="@id/textViewRoute"
+                app:layout_constraintBottom_toBottomOf="@id/textViewAddress"
+                app:layout_constraintStart_toEndOf="@id/textViewAddress"
+                android:src="@drawable/ic_location"
+                android:layout_marginStart="@dimen/_5sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

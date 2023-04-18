@@ -75,16 +75,32 @@
     <string name="information">اطلاعات</string>
     <string name="purchaseAmount">مبلغ خرید</string>
     <string name="dateOfFirstPurchase">تاریخ اولین خرید</string>
+    <string name="notRegisteredCheck">چک ثبت نشده</string>
     <string name="notRegisteredCheckAmount">مبلغ چک ثبت نشده</string>
     <string name="notRegisteredCheckCount">تعداد چک ثبت نشده</string>
+    <string name="bouncedCheck">چک برگشتی</string>
     <string name="bouncedCheckAmount">مبلغ چک برگشتی</string>
     <string name="bouncedCheckCount">تعداد چک برگشتی</string>
+    <string name="payedCheck">چک پرداخت شده</string>
     <string name="payedCheckAmount">مبلغ چک پرداخت شده</string>
     <string name="payedCheckCount">تعداد چک پرداخت شده</string>
+    <string name="notDueCheck">چک سررسید نشده</string>
     <string name="notDueCheckAmount">مبلغ چک سررسید نشده</string>
     <string name="notDueCheckCount">تعداد چک سررسید نشده</string>
+    <string name="guaranteeCheck">چک ضمانت</string>
     <string name="guaranteeCheckAmount">مبلغ چک ضمانت</string>
     <string name="guaranteeCheckCount">تعداد چک ضمانت</string>
+    <string name="checkNumber">شماره چک</string>
+    <string name="checkAmount">مبلغ چک</string>
+    <string name="stateOfCheck">وضعیت چک</string>
+    <string name="reasonForTheBouncedCheck">دلیل برگشت خوردن چک</string>
+    <string name="receiveDate">تاریخ دریافت</string>
+    <string name="dueDate">تاریخ سررسید</string>
+    <string name="statusDate">تاریخ وضعیت</string>
+    <string name="bankName">نام بانک</string>
+    <string name="branchName">نام شاخه</string>
+    <string name="accountNumber">شماره حساب</string>
+    <string name="checkOwnerName">صاحب حساب</string>
 
 
     <string name="logoDescription">logo</string>

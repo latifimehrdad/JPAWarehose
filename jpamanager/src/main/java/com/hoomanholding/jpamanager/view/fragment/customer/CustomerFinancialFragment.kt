@@ -17,6 +17,8 @@ import com.hoomanholding.jpamanager.model.data.other.CustomerFinancialItemModel
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.CustomerFinancialDetailHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.CustomerFinancialAdapter
+import com.hoomanholding.jpamanager.view.dialog.CustomerHyperLinkDialog
+import com.hoomanholding.jpamanager.view.dialog.customer.PeopleDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -222,6 +224,7 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
     private fun showMoreDialog(type: EnumCheckType?){
         if (type == null)
             return
+        CustomerHyperLinkDialog(viewModel.customerId, type).show(childFragmentManager, "dialog")
     }
     //---------------------------------------------------------------------------------------------- showMoreDialog
 
