@@ -26,7 +26,6 @@
     <string name="pinCard">پین کارت</string>
     <string name="invoice">پیش فاکتور</string>
     <string name="check">چک</string>
-    <string name="toman">تومان</string>
     <string name="fullName">نام و نام خانوادگی</string>
     <string name="personnelNumber">کد پرسنلی</string>
     <string name="dot">:</string>
@@ -52,6 +51,7 @@
     <string name="customerCode">کد مشتری</string>
     <string name="shopName">نام فروشگاه</string>
     <string name="rial">ریال</string>
+    <string name="toman">تومان</string>
     <string name="address">آدرس</string>
     <string name="customerFinancialState">وضعیت مالی مشتری</string>
     <string name="products">لیست کالاها</string>
@@ -101,6 +101,8 @@
     <string name="branchName">نام شاخه</string>
     <string name="accountNumber">شماره حساب</string>
     <string name="checkOwnerName">صاحب حساب</string>
+    <string name="returnInvoice">پیش فاکتور برگشتی</string>
+    <string name="order">سفارش</string>
 
 
     <string name="logoDescription">logo</string>

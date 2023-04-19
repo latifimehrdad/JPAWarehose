@@ -2,6 +2,7 @@ package com.hoomanholding.jpamanager.view.adapter.holder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpamanager.databinding.ItemHomeBinding
+import com.hoomanholding.jpamanager.model.data.other.HomeReportItemModel
 
 
 /**
@@ -14,7 +15,8 @@ class HomeItemHolder(
 
 
     //---------------------------------------------------------------------------------------------- bind
-    fun bind() {
+    fun bind(item: HomeReportItemModel) {
+        binding.item = item
         binding.executePendingBindings()
     }
     //---------------------------------------------------------------------------------------------- bind

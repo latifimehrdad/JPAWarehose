@@ -137,8 +137,8 @@ class InvoiceViewModel @Inject constructor(
             if (orders.isNullOrEmpty())
                 setMessage(resourcesProvider.getString(R.string.orderSelectedIsEmpty))
             else{
-                val reason = disApprovalReasonModel?.get(positionReason)
-                val request = OrderToggleStateRequest(state, description, orders)
+                val reason = disApprovalReasonModel?.get(positionReason) ?: return@launch
+                val request = OrderToggleStateRequest(state, description, orders, reason.id)
                 val response = checkResponse(orderRepository.requestOrderToggleState(request))
                 response?.let { orderToggleStateLiveData.postValue(it) }
             }

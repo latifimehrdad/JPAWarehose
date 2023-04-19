@@ -54,6 +54,8 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
         binding.shimmerViewContainer.stopShimmer()
+        binding.buttonConfirmFactor.stopLoading()
+        binding.buttonRejectFactor.stopLoading()
         activity?.let {
             (it as MainActivity).showMessage(message)
         }
@@ -356,7 +358,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
         val click = object : ConfirmOrderDialog.Click{
             override fun clickYes(position: Int, description: String) {
-                viewModel.requestOrderToggleState(position, description, state)
+                requestOrderToggleState(state, position, description)
             }
         }
 
@@ -372,4 +374,15 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
 
 
+    //---------------------------------------------------------------------------------------------- requestOrderToggleState
+    private fun requestOrderToggleState(state: EnumState, position: Int, description: String){
+        when(state){
+            EnumState.Reject ->
+                binding.buttonRejectFactor.startLoading(getString(R.string.bePatient))
+            EnumState.Confirmed ->
+                binding.buttonConfirmFactor.startLoading(getString(R.string.bePatient))
+        }
+        viewModel.requestOrderToggleState(position, description, state)
+    }
+    //---------------------------------------------------------------------------------------------- requestOrderToggleState
 }

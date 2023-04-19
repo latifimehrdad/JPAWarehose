@@ -15,6 +15,7 @@ import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.order.DetailOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
+import com.hoomanholding.applibrary.model.data.response.report.HomeReportModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import retrofit2.Response
 import retrofit2.http.*
@@ -34,6 +35,7 @@ interface Api {
         const val saleOrders = "$v1/SaleOrders"
         const val customer = "$v1/Customers"
         const val warehouseReceipt = "$v1/WarehouseReceipt"
+        const val report = "$v1/report"
     }
 
     //---------------------------------------------------------------------------------------------- user
@@ -165,6 +167,12 @@ interface Api {
     //---------------------------------------------------------------------------------------------- warehouseReceipt
 
 
+    //---------------------------------------------------------------------------------------------- requestFirstPageReport
+    @GET("$report/managerapp-get-firstPageReport")
+    suspend fun requestFirstPageReport(
+        @Header("Authorization") token : String
+    ): Response<GeneralResponse<HomeReportModel?>>
+    //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 
 }

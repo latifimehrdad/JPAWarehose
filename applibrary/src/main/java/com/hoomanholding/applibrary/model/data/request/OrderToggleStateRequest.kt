@@ -10,5 +10,6 @@ import com.hoomanholding.applibrary.model.data.enums.EnumState
 data class OrderToggleStateRequest(
     val state: EnumState,
     val description: String?,
-    val orderIds: List<Int>
+    val orderIds: List<Int>,
+    val rejectReasonId: Int
 )

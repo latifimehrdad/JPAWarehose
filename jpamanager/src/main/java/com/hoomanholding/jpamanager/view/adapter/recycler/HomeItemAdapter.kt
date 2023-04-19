@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpamanager.databinding.ItemHomeBinding
+import com.hoomanholding.jpamanager.model.data.other.HomeReportItemModel
 import com.hoomanholding.jpamanager.view.adapter.holder.HomeItemHolder
 
 
@@ -11,7 +12,9 @@ import com.hoomanholding.jpamanager.view.adapter.holder.HomeItemHolder
  * create by m-latifi on 3/7/2023
  */
 
-class HomeItemAdapter(): RecyclerView.Adapter<HomeItemHolder>() {
+class HomeItemAdapter(
+    private val items: List<HomeReportItemModel>
+): RecyclerView.Adapter<HomeItemHolder>() {
 
     private var inflater: LayoutInflater? = null
 
@@ -28,13 +31,13 @@ class HomeItemAdapter(): RecyclerView.Adapter<HomeItemHolder>() {
 
     //---------------------------------------------------------------------------------------------- onBindViewHolder
     override fun onBindViewHolder(holder: HomeItemHolder, position: Int) {
-        holder.bind()
+        holder.bind(items[position])
     }
     //---------------------------------------------------------------------------------------------- onBindViewHolder
 
 
     //---------------------------------------------------------------------------------------------- getItemCount
-    override fun getItemCount() = 5
+    override fun getItemCount() = items.size
     //---------------------------------------------------------------------------------------------- getItemCount
 
 }

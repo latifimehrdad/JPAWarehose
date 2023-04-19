@@ -14,6 +14,7 @@ import java.time.LocalDateTime
  * Create by Mehrdad on 1/27/2023
  */
 
+//-------------------------------------------------------------------------------------------------- setTitleAndValue
 @BindingAdapter("setTitle","setValue", "setSplitter")
 fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
     val temp = value?.let {
@@ -60,7 +61,10 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
     } ?: run { "" }
     text = temp
 }
+//-------------------------------------------------------------------------------------------------- setTitleAndValue
 
+
+//-------------------------------------------------------------------------------------------------- setTitleAndValue2
 @BindingAdapter("setTitle","setValue", "setSplitter", "setValueTwo")
 fun TextView.setTitleAndValue2(title : String, value : Any?, splitter: String, value2 : Any?){
     val temp = value?.let {
@@ -74,8 +78,10 @@ fun TextView.setTitleAndValue2(title : String, value : Any?, splitter: String, v
     } ?: run { "" }
     text = temp
 }
+//-------------------------------------------------------------------------------------------------- setTitleAndValue2
 
 
+//-------------------------------------------------------------------------------------------------- setTitleAndValue
 @BindingAdapter("setTitle","setValue", "setSplitter", "setLastTest")
 fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String, last: String){
     val temp = value?.let {
@@ -87,20 +93,25 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String, la
     } ?: run { "" }
     text = temp
 }
+//-------------------------------------------------------------------------------------------------- setTitleAndValue
 
 
+//-------------------------------------------------------------------------------------------------- setAmount
 @BindingAdapter("setCustomerFinancial", "setLastTest")
 fun TextView.setAmount(value : Any?, last: String){
     val temp = value?.let {
         when(value){
-            is Int,
             is String-> "$value $last"
+            is Int -> "${value.split()} $last"
             is Long -> "${value.split()} $last"
             else -> ""
         }
     } ?: run { "" }
     text = temp
 }
+//-------------------------------------------------------------------------------------------------- setAmount
+
+
 
 //-------------------------------------------------------------------------------------------------- whenIsReceiptAmountWhitProductModel
 private fun whenIsReceiptAmountWhitProductModel(value : ReceiptAmountWhitProductModel) : String {
