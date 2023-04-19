@@ -12,6 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_5sdp">
 
+        <View
+            android:id="@+id/viewSelect"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/linearLayoutParent"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutParent"
+            app:layout_constraintBottom_toBottomOf="@id/linearLayoutParent"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutParent"
+            android:background="@drawable/drawable_select_item"/>
+
         <LinearLayout
             android:id="@+id/linearLayoutParent"
             android:layout_width="match_parent"
@@ -21,7 +31,8 @@
             android:background="@drawable/drawable_border_curve_light"
             android:paddingHorizontal="@dimen/_5sdp"
             android:paddingTop="@dimen/_2sdp"
-            android:paddingBottom="@dimen/_10sdp">
+            android:paddingBottom="@dimen/_10sdp"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -85,8 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="right">
+                android:orientation="vertical">
 
 
                 <TextView
@@ -137,19 +147,13 @@
                     app:setSplitter="@{@string/colon}"
                     app:setValue="@{@string/dash}"/>
 
-                <CheckBox
-                    android:id="@+id/checkBoxSelect"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_2sdp"/>
-
             </LinearLayout>
 
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/buttonLogin"
+            android:id="@+id/buttonDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/linearLayoutParent"

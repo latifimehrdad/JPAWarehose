@@ -1,5 +1,6 @@
 package com.hoomanholding.jpamanager.view.adapter.holder
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.jpamanager.databinding.ItemOrderBinding
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
@@ -23,12 +24,24 @@ class OrderHolder(
     //---------------------------------------------------------------------------------------------- bind
     fun bind(item: OrderModel) {
         binding.item = item
-        binding.root.setOnClickListener { click.orderDetail(item) }
-        binding.checkBoxSelect.setOnClickListener {
-            item.select = binding.checkBoxSelect.isChecked
+        binding.buttonDetail.setOnClickListener { click.orderDetail(item) }
+        checkSelected(item)
+        binding.root.setOnClickListener {
+            item.select = !item.select
+            checkSelected(item)
         }
         binding.executePendingBindings()
     }
     //---------------------------------------------------------------------------------------------- bind
+
+
+    //---------------------------------------------------------------------------------------------- checkSelected
+    private fun checkSelected(item: OrderModel){
+        if (item.select)
+            binding.viewSelect.visibility = View.VISIBLE
+        else
+            binding.viewSelect.visibility = View.GONE
+    }
+    //---------------------------------------------------------------------------------------------- checkSelected
 
 }

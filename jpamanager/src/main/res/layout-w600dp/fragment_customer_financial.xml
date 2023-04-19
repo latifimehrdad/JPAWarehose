@@ -162,8 +162,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
                 android:paddingVertical="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:gravity="center"
-                android:text="@string/description"
                 android:textSize="@dimen/_7sdp"
                 android:textColor="@color/white"
                 android:lines="1"
@@ -267,7 +267,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/textViewAddress"
                 app:layout_constraintStart_toEndOf="@id/textViewAddress"
                 android:src="@drawable/ic_location"
-                android:layout_marginStart="@dimen/_5sdp"/>
+                android:layout_marginStart="@dimen/_5sdp"
+                android:contentDescription="@string/iconDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

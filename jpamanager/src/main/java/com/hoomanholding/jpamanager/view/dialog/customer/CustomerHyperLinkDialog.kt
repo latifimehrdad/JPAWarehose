@@ -1,5 +1,6 @@
-package com.hoomanholding.jpamanager.view.dialog
+package com.hoomanholding.jpamanager.view.dialog.customer
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
@@ -33,7 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CustomerHyperLinkDialog(
     private val customerId: Int,
     private val type: EnumCheckType
-): DialogFragment() {
+) : DialogFragment() {
 
     lateinit var binding: DialogHyperlinkBinding
     private val viewModel: CustomerFinancialViewModel by viewModels()
@@ -50,11 +51,12 @@ class CustomerHyperLinkDialog(
     //---------------------------------------------------------------------------------------------- onCreateView
 
 
-
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.shimmerViewContainer.config(getShimmerBuild())
+        if (activity != null)
+            (activity as MainActivity).hideFragmentContainer()
         viewModel.customerId = customerId
         val lp = WindowManager.LayoutParams()
         val window = dialog?.window
@@ -70,10 +72,10 @@ class CustomerHyperLinkDialog(
 
 
     //---------------------------------------------------------------------------------------------- initView
-    private fun initView(){
+    private fun initView() {
         setListener()
         observeUserMutableLiveData()
-        when(type){
+        when (type) {
             EnumCheckType.NotRegisteredCheck ->
                 binding.textviewTitle.text = getString(R.string.notRegisteredCheck)
             EnumCheckType.BouncedCheck ->
@@ -115,7 +117,7 @@ class CustomerHyperLinkDialog(
             showMessage(it.message)
         }
 
-        viewModel.customerFinancialDetailLiveData.observe(viewLifecycleOwner){
+        viewModel.customerFinancialDetailLiveData.observe(viewLifecycleOwner) {
             binding.shimmerViewContainer.stopLoading()
             setAdapter(it)
         }
@@ -123,9 +125,8 @@ class CustomerHyperLinkDialog(
     //---------------------------------------------------------------------------------------------- observeUserMutableLiveData
 
 
-
     //---------------------------------------------------------------------------------------------- getCustomerFinancialDetail
-    private fun getCustomerFinancialDetail(){
+    private fun getCustomerFinancialDetail() {
         binding.shimmerViewContainer.startLoading()
         viewModel.requestGetCustomerFinancialDetail(type)
     }
@@ -141,5 +142,13 @@ class CustomerHyperLinkDialog(
     }
     //---------------------------------------------------------------------------------------------- setAdapter
 
+
+    //---------------------------------------------------------------------------------------------- onDismiss
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        if (activity != null)
+            (activity as MainActivity).showFragmentContainer()
+    }
+    //---------------------------------------------------------------------------------------------- onDismiss
 
 }

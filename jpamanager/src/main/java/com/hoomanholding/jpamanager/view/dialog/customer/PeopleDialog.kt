@@ -13,6 +13,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumPeopleType
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import com.hoomanholding.jpamanager.databinding.DialogPeopleBinding
+import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.CustomerSelectHolder
 import com.hoomanholding.jpamanager.view.adapter.holder.VisitorSelectHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.CustomerSelectAdapter
@@ -61,6 +62,8 @@ class PeopleDialog(
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (activity != null)
+            (activity as MainActivity).hideFragmentContainer()
         val lp = WindowManager.LayoutParams()
         val window = dialog?.window
         val back = ColorDrawable(Color.TRANSPARENT)
@@ -178,6 +181,8 @@ class PeopleDialog(
     override fun dismiss() {
         super.dismiss()
         job?.cancel()
+        if (activity != null)
+            (activity as MainActivity).showFragmentContainer()
     }
     //---------------------------------------------------------------------------------------------- dismiss
 }

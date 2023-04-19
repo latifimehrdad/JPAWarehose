@@ -216,4 +216,19 @@ class MainActivity : AppCompatActivity() {
     }
     //---------------------------------------------------------------------------------------------- getUserInfo
 
+
+
+    //---------------------------------------------------------------------------------------------- hideFragmentContainer
+    fun hideFragmentContainer() {
+        binding.navHostFragment.alpha = 0.2f
+    }
+    //---------------------------------------------------------------------------------------------- hideFragmentContainer
+
+
+    //---------------------------------------------------------------------------------------------- showFragmentContainer
+    fun showFragmentContainer() {
+        binding.navHostFragment.alpha = 1f
+    }
+    //---------------------------------------------------------------------------------------------- showFragmentContainer
+
 }
