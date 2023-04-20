@@ -15,14 +15,66 @@
             android:background="@drawable/drawable_tab_selected" />
 
         <LinearLayout
+            android:id="@+id/linearLayoutState"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/linearLayoutVisitor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/linearLayoutVisitor"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="@dimen/_3sdp">
+
+            <TextView
+                android:id="@+id/textViewState"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/visitorName"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:fontFamily="@font/yekan_bakh_medium"/>
+
+            <TextView
+                android:id="@+id/textViewStateFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filterBy"
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/white"
+                android:lines="1"
+                android:fontFamily="@font/yekan_bakh_light"
+                android:layout_marginStart="@dimen/_3sdp"/>
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinnerOrderState"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/linearLayoutState"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutState"
+            app:layout_constraintBottom_toBottomOf="@id/linearLayoutState"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutState"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/orderState"
+            android:textSize="@dimen/_7sdp"
+            android:visibility="gone"/>
+
+        <LinearLayout
             android:id="@+id/linearLayoutVisitor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/linearLayoutState"
             app:layout_constraintEnd_toStartOf="@id/linearLayoutDate"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:orientation="horizontal"
             android:gravity="center"
             android:padding="@dimen/_3sdp">
@@ -58,7 +110,6 @@
             android:id="@+id/linearLayoutDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_percent="0.35"
             app:layout_constraintTop_toTopOf="@id/linearLayoutVisitor"
             app:layout_constraintStart_toEndOf="@id/linearLayoutVisitor"
             app:layout_constraintEnd_toStartOf="@id/linearLayoutCustomer"
@@ -134,6 +185,15 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/viewState"
+            android:layout_width="@dimen/_2sdp"
+            android:layout_height="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutState"
+            android:background="@drawable/drawable_tab_selected"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutState"
+            android:layout_marginEnd="@dimen/_10sdp"/>
+
+        <View
             android:id="@+id/viewVisitor"
             android:layout_width="@dimen/_2sdp"
             android:layout_height="@dimen/_10sdp"
@@ -202,7 +262,7 @@
             android:backgroundTint="@color/confirmFactorButton"
             android:fontFamily="@font/iransans_medium"
             android:textColor="@color/confirmFactorText"
-            android:text='@string/confirmFactor' />
+            android:text='@string/confirmOrder' />
 
         <com.hoomanholding.applibrary.view.custom.JpaButton
             android:id="@+id/buttonRejectFactor"
@@ -218,7 +278,7 @@
             android:backgroundTint="@color/rejectFactorButton"
             android:fontFamily="@font/iransans_medium"
             android:textColor="@color/rejectFactorText"
-            android:text='@string/rejectFactor' />
+            android:text='@string/rejectOrder' />
 
         <ImageView
             android:layout_width="@dimen/_15sdp"

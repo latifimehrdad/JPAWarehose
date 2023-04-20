@@ -44,7 +44,7 @@
     <string name="customerName">نام مشتری</string>
     <string name="showDetail">مشاهده جزییات</string>
     <string name="routeName">نام مسیر</string>
-    <string name="supportNumber">026-6565635</string>
+    <string name="supportNumber">026–6565635</string>
     <string name="date">تاریخ</string>
     <string name="factorNumber">شماره فاکتور</string>
     <string name="factorAmount">مبلغ فاکتور</string>
@@ -55,8 +55,8 @@
     <string name="address">آدرس</string>
     <string name="customerFinancialState">وضعیت مالی مشتری</string>
     <string name="products">لیست کالاها</string>
-    <string name="confirmFactor">تایید فاکتور</string>
-    <string name="rejectFactor">رد فاکتور</string>
+    <string name="confirmOrder">تایید سفارش</string>
+    <string name="rejectOrder">عدم تایید سفارش</string>
     <string name="factorCount">تعداد فاکتور</string>
     <string name="productName">نام محصول</string>
     <string name="fi">قیمت واحد</string>
@@ -98,11 +98,19 @@
     <string name="dueDate">تاریخ سررسید</string>
     <string name="statusDate">تاریخ وضعیت</string>
     <string name="bankName">نام بانک</string>
-    <string name="branchName">نام شاخه</string>
+    <string name="branchName">نام شعبه</string>
     <string name="accountNumber">شماره حساب</string>
     <string name="checkOwnerName">صاحب حساب</string>
     <string name="returnInvoice">پیش فاکتور برگشتی</string>
     <string name="order">سفارش</string>
+    <string name="totalSale">جمع فروش</string>
+    <string name="pluralReturn">جمع مرجوعی</string>
+    <string name="pluralOrder">جمع سفارشات</string>
+    <string name="fingerprint">ورود با اثر انگشت</string>
+    <string name="actionIsDone">انجام شد</string>
+    <string name="orderStateNoState">بدون وضعیت</string>
+
+
 
 
     <string name="logoDescription">logo</string>
@@ -114,5 +122,14 @@
     <string name="colon">:</string>
     <string name="dash">-</string>
     <string name="space"> </string>
+
+    <string-array name="orderState">
+        <item>انتخاب کنید</item>
+        <item>بدون وضعیت</item>
+        <item>تایید شده</item>
+        <item>عدم تایید</item>
+        <item>همه</item>
+    </string-array>
+
 
 </resources>

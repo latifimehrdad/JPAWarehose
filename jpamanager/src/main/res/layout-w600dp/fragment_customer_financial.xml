@@ -109,7 +109,7 @@
                     android:fontFamily="@font/kalameh_light"
                     app:setTitle="@{@string/shopName}"
                     app:setSplitter="@{@string/colon}"
-                    app:setValue="@{@string/space}"/>
+                    app:setValue="@{item.storeName}"/>
 
                 <TextView
                     android:id="@+id/textViewVisitorName"

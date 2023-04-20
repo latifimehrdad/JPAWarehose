@@ -1,8 +1,10 @@
 package com.hoomanholding.jpamanager.view.fragment.profile
 
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.repository.UserRepository
+import com.hoomanholding.applibrary.tools.CompanionValues
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
@@ -18,6 +20,8 @@ class ProfileViewModel @Inject constructor(
     private val userRepository: UserRepository
 ): JpaViewModel() {
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     val userInfoLiveData: MutableLiveData<UserInfoEntity> by lazy {
         MutableLiveData<UserInfoEntity>()
@@ -33,6 +37,21 @@ class ProfileViewModel @Inject constructor(
     }
     //---------------------------------------------------------------------------------------------- getUserInfo
 
+
+    //---------------------------------------------------------------------------------------------- isBiometricEnable
+    fun isBiometricEnable() = sharedPreferences.getBoolean(CompanionValues.biometric, false)
+    //---------------------------------------------------------------------------------------------- isBiometricEnable
+
+
+
+    //---------------------------------------------------------------------------------------------- changeBiometricEnable
+    fun changeBiometricEnable() {
+        val biometric = !isBiometricEnable()
+        sharedPreferences.edit()
+            .putBoolean(CompanionValues.biometric, biometric)
+            .apply()
+    }
+    //---------------------------------------------------------------------------------------------- changeBiometricEnable
 
 
 }

@@ -2,6 +2,7 @@ package com.hoomanholding.jpamanager.view.fragment.invoice
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
@@ -12,22 +13,22 @@ import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumPeopleType
 import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
-import com.hoomanholding.jpamanager.R
-import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
+import com.hoomanholding.jpamanager.R
+import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
+import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.OrderHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.OrderAdapter
-import dagger.hilt.android.AndroidEntryPoint
-import com.hoomanholding.applibrary.view.fragment.JpaFragment
-import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
 import com.hoomanholding.jpamanager.view.dialog.ConfirmOrderDialog
 import com.hoomanholding.jpamanager.view.dialog.customer.PeopleDialog
 import com.zar.core.view.picker.date.customviews.DateRangeCalendarView
 import com.zar.core.view.picker.date.dialog.DatePickerDialog
+import dagger.hilt.android.AndroidEntryPoint
 
 
 /**
@@ -68,6 +69,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         binding.buttonConfirmFactor.visibility = View.GONE
         binding.buttonRejectFactor.visibility = View.GONE
         resetDateFilter()
+        resetStateFilter()
         resetVisitorFilter()
         resetCustomerFilter()
         setListener()
@@ -80,6 +82,13 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
+
+        binding.linearLayoutState.setOnClickListener {
+            if (viewModel.filterStateLiveData.value == null) {
+                binding.spinnerOrderState.visibility = View.VISIBLE
+            } else viewModel.setStateForFilter(null)
+        }
+
         binding.linearLayoutVisitor.setOnClickListener {
             if (viewModel.filterVisitorLiveData.value == null) {
                 showPeopleDialog(EnumPeopleType.Visitor)
@@ -98,6 +107,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
             } else viewModel.setCustomerForFilter(null)
         }
 
+
         binding.buttonConfirmFactor.setOnClickListener {
             showDialogConformToChangeStatusOrders(EnumState.Confirmed)
         }
@@ -105,6 +115,24 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         binding.buttonRejectFactor.setOnClickListener {
             showDialogConformToChangeStatusOrders(EnumState.Reject)
         }
+
+        binding.spinnerOrderState.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0)
+                        return
+                    binding.spinnerOrderState.visibility = View.GONE
+                    viewModel.setStateForFilter(position - 1)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -117,6 +145,13 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
         viewModel.filterDateLiveData.observe(viewLifecycleOwner) {
             it?.let { selectDateFilter(it) } ?: run { resetDateFilter() }
+        }
+
+        viewModel.filterStateLiveData.observe(viewLifecycleOwner) {
+            it?.let {
+                if (it > 0)
+                    selectStateFilter(it)
+            } ?: run { resetStateFilter() }
         }
 
         viewModel.filterVisitorLiveData.observe(viewLifecycleOwner) {
@@ -132,7 +167,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
             setAdapter(it)
         }
 
-        viewModel.orderToggleStateLiveData.observe(viewLifecycleOwner){
+        viewModel.orderToggleStateLiveData.observe(viewLifecycleOwner) {
             getOrder()
         }
     }
@@ -264,6 +299,20 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     //---------------------------------------------------------------------------------------------- showDatePickerDialog
 
 
+    //---------------------------------------------------------------------------------------------- resetStateFilter
+    private fun resetStateFilter() {
+        resetFilterView(
+            binding.linearLayoutState,
+            binding.viewState,
+            binding.textViewState,
+            binding.textViewStateFilter
+        )
+        binding.textViewState.text = getString(R.string.orderStateNoState)
+        binding.textViewState.isSelected = false
+    }
+    //---------------------------------------------------------------------------------------------- resetStateFilter
+
+
     //---------------------------------------------------------------------------------------------- resetVisitorFilter
     private fun resetVisitorFilter() {
         resetFilterView(
@@ -335,6 +384,21 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     //---------------------------------------------------------------------------------------------- selectDateFilter
 
 
+    //---------------------------------------------------------------------------------------------- selectStateFilter
+    private fun selectStateFilter(state: Int) {
+        val stateString = resources.getStringArray(R.array.orderState)[state + 1]
+        selectFilterView(
+            binding.linearLayoutState,
+            binding.viewState,
+            binding.textViewState,
+            binding.textViewStateFilter
+        )
+        binding.textViewState.text = stateString
+        binding.textViewState.isSelected = true
+    }
+    //---------------------------------------------------------------------------------------------- selectStateFilter
+
+
     //---------------------------------------------------------------------------------------------- selectVisitorFilter
     private fun selectVisitorFilter(visitorModel: VisitorModel) {
         selectFilterView(
@@ -356,7 +420,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         if (context == null)
             return
 
-        val click = object : ConfirmOrderDialog.Click{
+        val click = object : ConfirmOrderDialog.Click {
             override fun clickYes(position: Int, description: String) {
                 requestOrderToggleState(state, position, description)
             }
@@ -373,10 +437,9 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     //---------------------------------------------------------------------------------------------- showDialogConformToChangeStatusOrders
 
 
-
     //---------------------------------------------------------------------------------------------- requestOrderToggleState
-    private fun requestOrderToggleState(state: EnumState, position: Int, description: String){
-        when(state){
+    private fun requestOrderToggleState(state: EnumState, position: Int, description: String) {
+        when (state) {
             EnumState.Reject ->
                 binding.buttonRejectFactor.startLoading(getString(R.string.bePatient))
             EnumState.Confirmed ->

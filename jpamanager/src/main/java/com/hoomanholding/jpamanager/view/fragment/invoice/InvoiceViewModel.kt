@@ -50,6 +50,10 @@ class InvoiceViewModel @Inject constructor(
         MutableLiveData<VisitorModel?>()
     }
 
+    val filterStateLiveData: MutableLiveData<Int?> by lazy {
+        MutableLiveData<Int?>()
+    }
+
     val orderLiveData: MutableLiveData<List<OrderModel>> by lazy {
         MutableLiveData<List<OrderModel>>()
     }
@@ -82,6 +86,19 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- setCustomerForFilter
 
 
+
+    //---------------------------------------------------------------------------------------------- setStateForFilter
+    fun setStateForFilter(state: Int?) {
+        filterStateLiveData.postValue(state)
+        viewModelScope.launch(IO) {
+            delay(500)
+            requestGetOrder()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setStateForFilter
+
+
+
     //---------------------------------------------------------------------------------------------- setDateForFilter
     fun setDateForFilter(date: DateFilterModel?) {
         filterDateLiveData.postValue(date)
@@ -106,7 +123,8 @@ class InvoiceViewModel @Inject constructor(
             val request = OrderRequestModel(
                 startDate, endDate,
                 filterCustomerLiveData.value?.id ?: 0,
-                filterVisitorLiveData.value?.id ?: 0
+                filterVisitorLiveData.value?.id ?: 0,
+                filterStateLiveData.value ?: 0
             )
             val response = checkResponse(orderRepository.requestGetOrder(request))
             response?.let { orderLiveData.postValue(it) }

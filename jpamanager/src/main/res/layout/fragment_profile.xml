@@ -159,6 +159,39 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@id/linearLayoutSupport2"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/drawable_login_fingerprint"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:theme="@style/switchStyle" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/yekan_bakh_medium"
+                    android:drawablePadding="@dimen/_10sdp"
+                    app:drawableEndCompat="@drawable/ic_finger_print"
+                    app:drawableTint="@color/primaryColor"
+                    android:text="@string/fingerprint"/>
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

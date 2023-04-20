@@ -9,5 +9,6 @@ data class OrderRequestModel(
     val fromDate: String,
     val toDate: String,
     val customerId: Int,
-    val visitorId: Int
+    val visitorId: Int,
+    val state: Int
 )

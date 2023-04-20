@@ -34,21 +34,21 @@ class HomeViewModel @Inject constructor(
                 val items = mutableListOf<HomeReportItemModel>()
                 items.add(
                     HomeReportItemModel(
-                        resourcesProvider.getString(R.string.invoice),
+                        resourcesProvider.getString(R.string.totalSale),
                         it.invoiceCount,
                         it.invoiceAmount
                     )
                 )
                 items.add(
                     HomeReportItemModel(
-                        resourcesProvider.getString(R.string.returnInvoice),
+                        resourcesProvider.getString(R.string.pluralReturn),
                         it.returnInvoiceCount,
                         it.returnInvoiceAmount
                     )
                 )
                 items.add(
                     HomeReportItemModel(
-                        resourcesProvider.getString(R.string.order),
+                        resourcesProvider.getString(R.string.pluralOrder),
                         it.orderCount,
                         it.orderAmount
                     )
