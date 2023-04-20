@@ -20,10 +20,8 @@ import javax.inject.Singleton
 class Providers {
 
     companion object {
-        //        const val url = "http://5.160.125.98:5081"
-//        const val url = "http://192.168.50.153:8081"
-        const val url = "http://10.252.37.12:7575"
-//        const val url = "http://192.168.70.176:8595"
+//        const val url = "http://5.202.84.244:9090" // Jpa
+        const val url = "http://10.252.37.12:7575"//Zar
     }
 
     //---------------------------------------------------------------------------------------------- provideUrl

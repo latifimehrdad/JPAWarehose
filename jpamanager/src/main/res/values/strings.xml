@@ -109,6 +109,7 @@
     <string name="fingerprint">ورود با اثر انگشت</string>
     <string name="actionIsDone">انجام شد</string>
     <string name="orderStateNoState">بدون وضعیت</string>
+    <string name="orderState">وضعیت سفارش</string>
 
 
 

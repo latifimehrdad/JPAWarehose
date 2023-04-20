@@ -146,6 +146,18 @@
                     app:setSplitter="@{@string/colon}"
                     app:setValue="@{@string/dash}"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/orderState}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.saleOrderStateText}"/>
+
             </LinearLayout>
 
         </LinearLayout>

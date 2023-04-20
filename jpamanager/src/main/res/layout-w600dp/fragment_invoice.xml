@@ -10,7 +10,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             app:layout_constraintBottom_toTopOf="@id/linearLayoutVisitor"
-            app:layout_constraintStart_toStartOf="@id/linearLayoutVisitor"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutState"
             app:layout_constraintEnd_toEndOf="@id/linearLayoutCustomer"
             android:background="@drawable/drawable_tab_selected" />
 
@@ -279,7 +279,7 @@
             android:backgroundTint="@color/rejectFactorButton"
             android:fontFamily="@font/iransans_medium"
             android:textColor="@color/rejectFactorText"
-            android:text='@string/confirmOrder' />
+            android:text='@string/rejectOrder' />
 
         <ImageView
             android:layout_width="@dimen/_15sdp"
