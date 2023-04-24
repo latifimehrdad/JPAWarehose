@@ -15,8 +15,9 @@ class HomeItemHolder(
 
 
     //---------------------------------------------------------------------------------------------- bind
-    fun bind(item: HomeReportItemModel) {
+    fun bind(item: HomeReportItemModel, currency: String) {
         binding.item = item
+        binding.currency = currency
         binding.executePendingBindings()
     }
     //---------------------------------------------------------------------------------------------- bind

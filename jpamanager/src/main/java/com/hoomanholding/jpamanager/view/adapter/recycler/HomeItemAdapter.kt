@@ -13,7 +13,8 @@ import com.hoomanholding.jpamanager.view.adapter.holder.HomeItemHolder
  */
 
 class HomeItemAdapter(
-    private val items: List<HomeReportItemModel>
+    private val items: List<HomeReportItemModel>,
+    private val currency: String
 ): RecyclerView.Adapter<HomeItemHolder>() {
 
     private var inflater: LayoutInflater? = null
@@ -31,7 +32,7 @@ class HomeItemAdapter(
 
     //---------------------------------------------------------------------------------------------- onBindViewHolder
     override fun onBindViewHolder(holder: HomeItemHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], currency)
     }
     //---------------------------------------------------------------------------------------------- onBindViewHolder
 

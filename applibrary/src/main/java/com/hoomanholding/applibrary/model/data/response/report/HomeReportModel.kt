@@ -13,5 +13,7 @@ data class HomeReportModel(
     val orderAmount: Long,
     val orderCount: Int,
     val bouncedCheckAmount: Long,
-    val bouncedCheckCount: Int
+    val bouncedCheckCount: Int,
+    val wareHouseStocks: Int,
+    val wareHouseStocksAmount: Long
 )

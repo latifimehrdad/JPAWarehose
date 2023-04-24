@@ -18,13 +18,19 @@ class OrderHolder(
 
     interface Click {
         fun orderDetail(item: OrderModel)
+        fun customerFinancialDetail(customerId: Int)
     }
 
 
     //---------------------------------------------------------------------------------------------- bind
     fun bind(item: OrderModel) {
         binding.item = item
-        binding.buttonDetail.setOnClickListener { click.orderDetail(item) }
+        binding.textViewDetail.setOnClickListener {
+            click.orderDetail(item)
+        }
+        binding.textViewCustomerFinancial.setOnClickListener {
+            click.customerFinancialDetail(item.customerId)
+        }
         checkSelected(item)
         binding.root.setOnClickListener {
             item.select = !item.select

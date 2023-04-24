@@ -165,7 +165,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/buttonDetail"
+            android:id="@+id/textViewDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/linearLayoutParent"
@@ -175,11 +175,28 @@
             android:background="@drawable/drawable_list_button"
             android:textSize="@dimen/_6sdp"
             android:paddingHorizontal="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:paddingVertical="@dimen/_3sdp"
             android:fontFamily="@font/iransans_medium"
             android:textColor="@color/primaryColorVariant"
             android:text='@string/showDetail' />
+
+        <TextView
+            android:id="@+id/textViewCustomerFinancial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutParent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutParent"
+            app:layout_constraintBottom_toBottomOf="@id/linearLayoutParent"
+            app:backgroundTint="@null"
+            android:background="@drawable/drawable_list_button"
+            android:textSize="@dimen/_6sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/primaryColorVariant"
+            android:text='@string/customerFinancialState' />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

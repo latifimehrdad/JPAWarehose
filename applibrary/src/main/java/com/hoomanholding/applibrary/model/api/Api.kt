@@ -9,6 +9,7 @@ import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
 import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
 import com.hoomanholding.applibrary.model.data.request.OrderToggleStateRequest
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
+import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
@@ -91,6 +92,12 @@ interface Api {
     suspend fun requestGetLocations(
         @Header("Authorization") token : String
     ) : Response<GeneralResponse<List<LocationEntity>?>>
+
+    @GET("$baseData/basedata-get-currency")
+    suspend fun requestGetCurrency(
+        @Header("Authorization") token : String
+    ): Response<GeneralResponse<List<CurrencyModel>?>>
+
     //---------------------------------------------------------------------------------------------- baseData
 
 
@@ -106,7 +113,7 @@ interface Api {
     suspend fun requestOrderDetail(
         @Query("orderId") orderId: Int,
         @Header("Authorization") token : String
-    ): Response<GeneralResponse<List<DetailOrderModel>?>>
+    ): Response<GeneralResponse<OrderModel?>>
 
     @POST("$saleOrders/managerApp-OrderValidation-Order-ToggleState")
     suspend fun requestOrderToggleState(
@@ -170,6 +177,7 @@ interface Api {
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
     @GET("$report/managerapp-get-firstPageReport")
     suspend fun requestFirstPageReport(
+        @Query("currencyTypeId") currencyTypeId: Int,
         @Header("Authorization") token : String
     ): Response<GeneralResponse<HomeReportModel?>>
     //---------------------------------------------------------------------------------------------- requestFirstPageReport

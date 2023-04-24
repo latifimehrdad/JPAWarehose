@@ -53,7 +53,7 @@
 
         </LinearLayout>
 
-        <Spinner
+        <com.skydoves.powerspinner.PowerSpinnerView
             android:id="@+id/spinnerOrderState"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -61,10 +61,23 @@
             app:layout_constraintStart_toStartOf="@id/linearLayoutState"
             app:layout_constraintBottom_toBottomOf="@id/linearLayoutState"
             app:layout_constraintEnd_toEndOf="@id/linearLayoutState"
-            android:drawSelectorOnTop="true"
-            android:entries="@array/orderState"
+            android:fontFamily="@font/yekan_bakh_medium"
+            android:gravity="center"
+            android:hint="@string/orderState"
+            android:padding="@dimen/_3sdp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/dismiss"
             android:textSize="@dimen/_7sdp"
+            app:spinner_arrow_show="false"
+            app:spinner_divider_color="@color/dismiss"
+            app:spinner_divider_show="true"
+            app:spinner_divider_size="0.4dp"
+            app:spinner_popup_background="@drawable/drawable_spinner_background"
+            app:spinner_popup_height="@dimen/_70sdp"
+            app:spinner_popup_animation="dropdown"
+            app:spinner_popup_elevation="5dp"
             android:visibility="gone"/>
+
 
         <LinearLayout
             android:id="@+id/linearLayoutVisitor"
@@ -259,7 +272,8 @@
             android:textSize="@dimen/_10sdp"
             app:cornerRadius="@dimen/_7sdp"
             android:shadowRadius="@integer/material_motion_duration_long_2"
-            android:backgroundTint="@color/confirmFactorButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/drawable_confirm_button"
             android:fontFamily="@font/iransans_medium"
             android:textColor="@color/confirmFactorText"
             android:text='@string/confirmOrder' />
@@ -275,7 +289,8 @@
             app:cornerRadius="@dimen/_7sdp"
             android:shadowRadius="@integer/material_motion_duration_long_2"
             android:layout_marginStart="@dimen/_10sdp"
-            android:backgroundTint="@color/rejectFactorButton"
+            app:backgroundTint="@null"
+            android:background="@drawable/drawable_reject_button"
             android:fontFamily="@font/iransans_medium"
             android:textColor="@color/rejectFactorText"
             android:text='@string/rejectOrder' />

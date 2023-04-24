@@ -23,10 +23,41 @@
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:id="@+id/powerSpinnerCurrency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/yekan_bakh_medium"
+            android:background="@drawable/drawable_border_curve_light"
+            android:gravity="center"
+            android:hint="@string/chooseCurrency"
+            android:padding="@dimen/_3sdp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/dismiss"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.4"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:spinner_arrow_gravity="start"
+            app:spinner_arrow_padding="8dp"
+            app:spinner_arrow_tint="@color/primaryColor"
+            app:spinner_divider_color="@color/dismiss"
+            app:spinner_divider_show="true"
+            app:spinner_divider_size="0.4dp"
+            app:spinner_popup_background="@drawable/drawable_spinner_background"
+            app:spinner_popup_height="@dimen/_80sdp"
+            app:spinner_popup_animation="dropdown"
+            app:spinner_popup_elevation="14dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerItem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@id/powerSpinnerCurrency"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

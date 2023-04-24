@@ -6,12 +6,11 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:name="com.hoomanholding.jpamanager.view.fragment.splash.SplashFragment">
 
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/LoginFragment"
+            app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
@@ -19,7 +18,7 @@
 
         <action
             android:id="@+id/action_splashFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment"
+            app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
@@ -28,35 +27,28 @@
     </fragment>
 
     <fragment
-        android:id="@+id/LoginFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.login.LoginFragment"
-        android:label="LoginFragment"/>
-
+        android:id="@+id/loginFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.login.LoginFragment"/>
 
     <fragment
-        android:id="@+id/HomeFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.home.HomeFragment"
-        android:label="HomeFragment"/>
-
+        android:id="@+id/homeFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.home.HomeFragment"/>
 
     <fragment
-        android:id="@+id/ReportFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.report.ReportFragment"
-        android:label="ReportFragment"/>
+        android:id="@+id/reportFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.report.ReportFragment"/>
 
     <fragment
-        android:id="@+id/ProfileFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.profile.ProfileFragment"
-        android:label="ProfileFragment"/>
+        android:id="@+id/profileFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.profile.ProfileFragment"/>
 
     <fragment
-        android:id="@+id/CardBoardFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.cardboard.CardBoardFragment"
-        android:label="CardBoardFragment">
+        android:id="@+id/cardBoardFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.cardboard.CardBoardFragment">
 
         <action
             android:id="@+id/action_splashFragment_to_InvoiceFragment"
-            app:destination="@id/InvoiceFragment"
+            app:destination="@id/invoiceFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
@@ -64,15 +56,21 @@
 
     </fragment>
 
-
     <fragment
-        android:id="@+id/InvoiceFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.invoice.InvoiceFragment"
-        android:label="InvoiceFragment">
+        android:id="@+id/invoiceFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.invoice.InvoiceFragment">
 
         <action
             android:id="@+id/action_InvoiceFragment_to_InvoiceFragmentDetail"
-            app:destination="@id/InvoiceFragmentDetail"
+            app:destination="@id/invoiceFragmentDetail"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
+        <action
+            android:id="@+id/action_InvoiceFragment_to_customerFinancialFragment"
+            app:destination="@id/customerFinancialFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
@@ -81,13 +79,12 @@
     </fragment>
 
     <fragment
-        android:id="@+id/InvoiceFragmentDetail"
-        android:name="com.hoomanholding.jpamanager.view.fragment.invoice.detail.InvoiceFragmentDetail"
-        android:label="InvoiceFragmentDetail">
+        android:id="@+id/invoiceFragmentDetail"
+        android:name="com.hoomanholding.jpamanager.view.fragment.invoice.detail.InvoiceDetailFragment">
 
         <action
             android:id="@+id/action_InvoiceFragmentDetail_to_CustomerFinancialFragment"
-            app:destination="@id/CustomerFinancialFragment"
+            app:destination="@id/customerFinancialFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
@@ -95,11 +92,9 @@
 
     </fragment>
 
-
     <fragment
-        android:id="@+id/CustomerFinancialFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.customer.CustomerFinancialFragment"
-        android:label="CustomerFinancialFragment"/>
+        android:id="@+id/customerFinancialFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.customer.CustomerFinancialFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"
@@ -113,41 +108,42 @@
 
     <action
         android:id="@+id/action_goto_HomeFragment"
-        app:destination="@id/HomeFragment"
+        app:destination="@id/homeFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
-        app:popUpTo="@id/HomeFragment"
+        app:popUpTo="@id/homeFragment"
         app:launchSingleTop="true"/>
 
     <action
         android:id="@+id/action_goto_ReportFragment"
-        app:destination="@id/ReportFragment"
+        app:destination="@id/reportFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
-        app:popUpTo="@id/ReportFragment"
+        app:popUpTo="@id/reportFragment"
         app:launchSingleTop="true"/>
 
     <action
         android:id="@+id/action_goto_ProfileFragment"
-        app:destination="@id/ProfileFragment"
+        app:destination="@id/profileFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
-        app:popUpTo="@id/ProfileFragment"
+        app:popUpTo="@id/profileFragment"
         app:launchSingleTop="true"/>
+
     <action
         android:id="@+id/action_goto_CardBoardFragment"
-        app:destination="@id/CardBoardFragment"
+        app:destination="@id/cardBoardFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
-        app:popUpTo="@id/CardBoardFragment"
+        app:popUpTo="@id/cardBoardFragment"
         app:launchSingleTop="true"/>
 
 </navigation>

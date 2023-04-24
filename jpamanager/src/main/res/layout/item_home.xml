@@ -6,6 +6,9 @@
         <variable
             name="item"
             type="com.hoomanholding.jpamanager.model.data.other.HomeReportItemModel" />
+        <variable
+            name="currency"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,7 +69,7 @@
             android:textSize="@dimen/_9sdp"
             android:textColor="@color/hint"
             app:setCustomerFinancial="@{item.amount}"
-            app:setLastTest="@{@string/toman}"/>
+            app:setLastTest="@{currency}"/>
 
 
         <TextView

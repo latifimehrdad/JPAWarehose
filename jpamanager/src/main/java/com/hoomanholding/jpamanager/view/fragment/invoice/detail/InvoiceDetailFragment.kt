@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class InvoiceFragmentDetail(override var layout: Int = R.layout.fragment_invoice_detail) :
+class InvoiceDetailFragment(override var layout: Int = R.layout.fragment_invoice_detail) :
     JpaFragment<FragmentInvoiceDetailBinding>() {
 
     private val viewModel: InvoiceDetailViewModel by viewModels()
@@ -46,17 +46,16 @@ class InvoiceFragmentDetail(override var layout: Int = R.layout.fragment_invoice
     //---------------------------------------------------------------------------------------------- getOrderModerFromBundle
     private fun getOrderModerFromBundle() {
         arguments?.let { bundle ->
-            val invoice = bundle.parcelable<OrderModel>(CompanionValues.SHARE_MODEL)
+            val orderId = bundle.getInt(CompanionValues.ORDER_IR,0)
             val customerId = bundle.getInt(CompanionValues.CUSTOMER_ID,0)
-            if (customerId == 0){
+            if (customerId == 0 || orderId == 0){
                 activity?.onBackPressedDispatcher?.onBackPressed()
                 return
             }
             viewModel.customerId = customerId
-            invoice?.let {
-                binding.shimmerViewContainer.startLoading()
-                viewModel.setOrderModel(it)
-            } ?: run { activity?.onBackPressedDispatcher?.onBackPressed() }
+            viewModel.orderId = orderId
+            binding.shimmerViewContainer.startLoading()
+            viewModel.requestOrderDetail()
         } ?: run { activity?.onBackPressedDispatcher?.onBackPressed() }
     }
     //---------------------------------------------------------------------------------------------- getOrderModerFromBundle

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
+import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentHomeBinding
@@ -15,6 +16,11 @@ import com.hoomanholding.jpamanager.view.adapter.recycler.HomeItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.model.data.other.HomeReportItemModel
+import com.hoomanholding.jpamanager.view.adapter.StringSpinnerAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /**
@@ -34,7 +40,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         binding.shimmerViewContainer.config(getShimmerBuild())
         observeLiveData()
         getUserInfoInActivity()
-        getHomeReport()
+        getCurrency()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -59,12 +65,12 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
 
 
-    //---------------------------------------------------------------------------------------------- getHomeReport
-    private fun getHomeReport() {
+    //---------------------------------------------------------------------------------------------- getCurrency
+    private fun getCurrency() {
         binding.shimmerViewContainer.startLoading()
-        viewModel.requestFirstPageReport()
+        viewModel.requestGetCurrency()
     }
-    //---------------------------------------------------------------------------------------------- getHomeReport
+    //---------------------------------------------------------------------------------------------- getCurrency
 
 
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -79,15 +85,38 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             setAdapter(it)
         }
 
+        viewModel.currencyLiveData.observe(viewLifecycleOwner){
+            setSpinnerCurrencyItems(it)
+        }
+
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
+
+
+
+    //---------------------------------------------------------------------------------------------- setSpinnerCurrencyItems
+    private fun setSpinnerCurrencyItems(items: List<CurrencyModel>){
+        val stringArray = items.map { it.value }
+        binding.powerSpinnerCurrency.apply {
+            setSpinnerAdapter(StringSpinnerAdapter(this))
+            setItems(stringArray)
+            getSpinnerRecyclerView().layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            setOnSpinnerItemSelectedListener<String> { _, _, newIndex, _ ->
+                getHomeReport(newIndex)
+            }
+        }
+        binding.powerSpinnerCurrency.selectItemByIndex(0)
+    }
+    //---------------------------------------------------------------------------------------------- setSpinnerCurrencyItems
+
 
 
     //---------------------------------------------------------------------------------------------- setAdapter
     private fun setAdapter(items: List<HomeReportItemModel>) {
         if (context == null)
             return
-        val adapter = HomeItemAdapter(items)
+        val adapter = HomeItemAdapter(items, viewModel.currencyTypeText)
         val manager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
         )
@@ -95,6 +124,15 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         binding.recyclerItem.adapter = adapter
     }
     //---------------------------------------------------------------------------------------------- setAdapter
+
+
+
+    //---------------------------------------------------------------------------------------------- getHomeReport
+    private fun getHomeReport(currencyPosition: Int) {
+        binding.shimmerViewContainer.startLoading()
+        viewModel.requestFirstPageReport(currencyPosition)
+    }
+    //---------------------------------------------------------------------------------------------- getHomeReport
 
 
 }

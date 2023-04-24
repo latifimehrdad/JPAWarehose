@@ -15,7 +15,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.ActivityMainBinding
-import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -68,8 +67,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
         navController = navHostFragment?.navController
         navController?.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.label != null)
-                showAndHideBottomNavigationMenu(destination.label.toString())
+            showAndHideBottomNavigationMenu(destination.id)
         }
 
         binding.menuHome.setOnClickListener {
@@ -88,57 +86,49 @@ class MainActivity : AppCompatActivity() {
             gotoFragment(R.id.action_goto_ProfileFragment)
         }
 
-        binding.textViewLogOut.setOnClickListener {
-            val click = object : ConfirmDialog.Click {
-                override fun clickYes() {
-                    gotoFirstFragment()
-                }
-            }
-            ConfirmDialog(
-                this,
-                getString(R.string.doYouWantToExitAccount),
-                click
-            ).show()
+        binding.imageViewBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
-    private fun showAndHideBottomNavigationMenu(fragmentLabel: String) {
+    private fun showAndHideBottomNavigationMenu(fragmentId: Int) {
         resetMenuColor()
-        when (fragmentLabel) {
-            "SplashFragment",
-            "LoginFragment" -> {
+        when (fragmentId) {
+            R.id.splashFragment,
+            R.id.loginFragment -> {
                 binding.menuHome.visibility = View.GONE
                 binding.menuCardboard.visibility = View.GONE
                 binding.menuReport.visibility = View.GONE
                 binding.menuProfile.visibility = View.GONE
                 binding.textViewUser.visibility = View.GONE
-                binding.textViewLogOut.visibility = View.GONE
+                binding.imageViewBack.visibility = View.GONE
             }
-            "HomeFragment" -> {
+            R.id.homeFragment -> {
                 if (!binding.menuHome.isSelectedMenu()) {
                     resetMenuColor()
+                    binding.imageViewBack.visibility = View.GONE
                     binding.menuHome.selected()
                 }
             }
-            "ReportFragment" -> {
+            R.id.reportFragment -> {
                 if (!binding.menuReport.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuReport.selected()
                 }
             }
-            "ProfileFragment" -> {
+            R.id.profileFragment -> {
                 if (!binding.menuProfile.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuProfile.selected()
                 }
             }
-            "CardBoardFragment",
-            "InvoiceFragment",
-            "InvoiceFragmentDetail",
-            "CustomerFinancialFragment" -> {
+            R.id.cardBoardFragment,
+            R.id.invoiceFragment,
+            R.id.invoiceFragmentDetail,
+            R.id.customerFinancialFragment -> {
                 if (!binding.menuCardboard.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuCardboard.selected()
@@ -152,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- resetMenuColor
     private fun resetMenuColor() {
         binding.textViewUser.visibility = View.VISIBLE
-        binding.textViewLogOut.visibility = View.VISIBLE
+        binding.imageViewBack.visibility = View.VISIBLE
         binding.menuHome.visibility = View.VISIBLE
         binding.menuCardboard.visibility = View.VISIBLE
         binding.menuReport.visibility = View.VISIBLE
@@ -215,7 +205,6 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getUserInfo()
     }
     //---------------------------------------------------------------------------------------------- getUserInfo
-
 
 
     //---------------------------------------------------------------------------------------------- hideFragmentContainer

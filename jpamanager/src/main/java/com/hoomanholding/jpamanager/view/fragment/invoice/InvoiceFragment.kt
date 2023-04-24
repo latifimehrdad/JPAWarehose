@@ -14,6 +14,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumPeopleType
 import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
+import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -22,6 +23,8 @@ import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
 import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
 import com.hoomanholding.jpamanager.view.activity.MainActivity
+import com.hoomanholding.jpamanager.view.adapter.ReasonSpinnerAdapter
+import com.hoomanholding.jpamanager.view.adapter.StringSpinnerAdapter
 import com.hoomanholding.jpamanager.view.adapter.holder.OrderHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.OrderAdapter
 import com.hoomanholding.jpamanager.view.dialog.ConfirmOrderDialog
@@ -85,7 +88,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
         binding.linearLayoutState.setOnClickListener {
             if (viewModel.filterStateLiveData.value == null) {
-                binding.spinnerOrderState.visibility = View.VISIBLE
+                showSpinnerOrderStatus()
             } else viewModel.setStateForFilter(null)
         }
 
@@ -116,7 +119,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
             showDialogConformToChangeStatusOrders(EnumState.Reject)
         }
 
-        binding.spinnerOrderState.onItemSelectedListener =
+/*        binding.spinnerOrderState.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -131,10 +134,29 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
+            }*/
 
     }
     //---------------------------------------------------------------------------------------------- setListener
+
+
+    //---------------------------------------------------------------------------------------------- showSpinnerOrderStatus
+    private fun showSpinnerOrderStatus() {
+        val stringArray = resources.getStringArray(R.array.orderState).toList()
+        binding.spinnerOrderState.apply {
+            setSpinnerAdapter(StringSpinnerAdapter(this))
+            setItems(stringArray)
+            getSpinnerRecyclerView().layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            setOnSpinnerItemSelectedListener<String> { _, _, newIndex, _ ->
+                binding.spinnerOrderState.visibility = View.GONE
+                viewModel.setStateForFilter(newIndex)
+            }
+        }
+        binding.spinnerOrderState.visibility = View.VISIBLE
+        binding.spinnerOrderState.show()
+    }
+    //---------------------------------------------------------------------------------------------- showSpinnerOrderStatus
 
 
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -209,10 +231,17 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         val detail = object : OrderHolder.Click {
             override fun orderDetail(item: OrderModel) {
                 val bundle = Bundle()
-                bundle.putParcelable(CompanionValues.SHARE_MODEL, item)
+                bundle.putInt(CompanionValues.ORDER_IR, item.id)
                 bundle.putInt(CompanionValues.CUSTOMER_ID, item.customerId)
                 findNavController()
                     .navigate(R.id.action_InvoiceFragment_to_InvoiceFragmentDetail, bundle)
+            }
+
+            override fun customerFinancialDetail(customerId: Int) {
+                val bundle = Bundle()
+                bundle.putInt(CompanionValues.CUSTOMER_ID, customerId)
+                findNavController()
+                    .navigate(R.id.action_InvoiceFragment_to_customerFinancialFragment, bundle)
             }
         }
         adapter = OrderAdapter(items, detail)
@@ -386,7 +415,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
     //---------------------------------------------------------------------------------------------- selectStateFilter
     private fun selectStateFilter(state: Int) {
-        val stateString = resources.getStringArray(R.array.orderState)[state + 1]
+        val stateString = resources.getStringArray(R.array.orderState)[state]
         selectFilterView(
             binding.linearLayoutState,
             binding.viewState,

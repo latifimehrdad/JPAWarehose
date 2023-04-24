@@ -12,7 +12,7 @@ class CompanionValues {
         const val biometric = "biometric"
         const val userName = "userName"
         const val password = "password"
-        const val SHARE_MODEL = "share_model"
+        const val ORDER_IR = "order_ir"
         const val CUSTOMER_ID = "customer_id"
     }
 }

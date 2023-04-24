@@ -10,6 +10,7 @@ import com.hoomanholding.jpamanager.databinding.FragmentProfileBinding
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
+import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
 import com.zar.core.tools.BiometricTools
 import javax.inject.Inject
 
@@ -19,8 +20,8 @@ import javax.inject.Inject
  */
 
 @AndroidEntryPoint
-class ProfileFragment(override var layout: Int = R.layout.fragment_profile):
-    JpaFragment<FragmentProfileBinding>(){
+class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
+    JpaFragment<FragmentProfileBinding>() {
 
     private val viewModel: ProfileViewModel by viewModels()
 
@@ -39,7 +40,6 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile):
     //---------------------------------------------------------------------------------------------- onViewCreated
 
 
-
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
@@ -47,7 +47,6 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile):
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
-
 
 
     //---------------------------------------------------------------------------------------------- showMessage
@@ -59,13 +58,28 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile):
     //---------------------------------------------------------------------------------------------- showMessage
 
 
-
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.switchActive.setOnClickListener { showBiometricDialog() }
+
+        binding.linearLayoutSignOut.setOnClickListener {
+            if (context == null)
+                return@setOnClickListener
+            val click = object : ConfirmDialog.Click {
+                override fun clickYes() {
+                    if (activity == null)
+                        return
+                    (activity as MainActivity).gotoFirstFragment()
+                }
+            }
+            ConfirmDialog(
+                requireContext(),
+                getString(R.string.doYouWantToExitAccount),
+                click
+            ).show()
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
-
 
 
     //---------------------------------------------------------------------------------------------- showBiometricDialog

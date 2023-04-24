@@ -78,6 +78,7 @@
     <string name="notRegisteredCheck">چک ثبت نشده</string>
     <string name="notRegisteredCheckAmount">مبلغ چک ثبت نشده</string>
     <string name="notRegisteredCheckCount">تعداد چک ثبت نشده</string>
+    <string name="wareHouseStocks">موجودی انبار</string>
     <string name="bouncedCheck">چک برگشتی</string>
     <string name="bouncedCheckAmount">مبلغ چک برگشتی</string>
     <string name="bouncedCheckCount">تعداد چک برگشتی</string>
@@ -110,6 +111,8 @@
     <string name="actionIsDone">انجام شد</string>
     <string name="orderStateNoState">بدون وضعیت</string>
     <string name="orderState">وضعیت سفارش</string>
+    <string name="chooseCurrency">انتخاب نوع ارز</string>
+    <string name="signOut">خروج از حساب کاربری</string>
 
 
 
@@ -125,7 +128,6 @@
     <string name="space"> </string>
 
     <string-array name="orderState">
-        <item>انتخاب کنید</item>
         <item>بدون وضعیت</item>
         <item>تایید شده</item>
         <item>عدم تایید</item>

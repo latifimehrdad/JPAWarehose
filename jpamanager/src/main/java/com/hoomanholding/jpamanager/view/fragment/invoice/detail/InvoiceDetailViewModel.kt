@@ -23,6 +23,7 @@ class InvoiceDetailViewModel @Inject constructor(
 ) : JpaViewModel() {
 
     var customerId: Int = 0
+    var orderId: Int = 0
 
     val invoiceLiveData: MutableLiveData<OrderModel> by lazy {
         MutableLiveData<OrderModel>()
@@ -33,19 +34,17 @@ class InvoiceDetailViewModel @Inject constructor(
         MutableLiveData<List<DetailOrderModel>>()
     }
 
-    //---------------------------------------------------------------------------------------------- setOrderModel
-    fun setOrderModel(model: OrderModel){
-        invoiceLiveData.postValue(model)
-        requestOrderDetail(model.id)
-    }
-    //---------------------------------------------------------------------------------------------- setOrderModel
-
 
     //---------------------------------------------------------------------------------------------- requestOrderDetail
-    private fun requestOrderDetail(orderId: Int) {
+    fun requestOrderDetail() {
         viewModelScope.launch(IO + exceptionHandler()){
             val response = checkResponse(orderRepository.requestOrderDetail(orderId))
-            response?.let { detailOrderLiveData.postValue(it) }
+            response?.let {order ->
+                invoiceLiveData.postValue(order)
+                order.saleOrderDetails?.let {
+                    detailOrderLiveData.postValue(it)
+                }
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- requestOrderDetail

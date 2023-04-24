@@ -17,8 +17,8 @@ class ReportRepository @Inject constructor(
 ) {
 
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
-    suspend fun requestFirstPageReport() =
-        apiCall { api.requestFirstPageReport(tokenRepository.getBearerToken()) }
+    suspend fun requestFirstPageReport(currencyTypeId: Int) =
+        apiCall { api.requestFirstPageReport(currencyTypeId, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 }
