@@ -23,5 +23,7 @@ data class OrderModel(
     val saleOrderState: Int,
     val saleOrderStateText: String?,
     val saleOrderDetails: List<DetailOrderModel>?,
+    val storeName: String?,
+    val routeName: String?,
     var select : Boolean = false
 )

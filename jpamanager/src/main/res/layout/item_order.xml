@@ -132,7 +132,7 @@
                     android:lines="1"
                     app:setTitle="@{@string/shopName}"
                     app:setSplitter="@{@string/colon}"
-                    app:setValue="@{@string/dash}"/>
+                    app:setValue="@{item.storeName}"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -144,7 +144,7 @@
                     android:lines="1"
                     app:setTitle="@{@string/routeName}"
                     app:setSplitter="@{@string/colon}"
-                    app:setValue="@{@string/dash}"/>
+                    app:setValue="@{item.routeName}"/>
 
                 <TextView
                     android:layout_width="match_parent"

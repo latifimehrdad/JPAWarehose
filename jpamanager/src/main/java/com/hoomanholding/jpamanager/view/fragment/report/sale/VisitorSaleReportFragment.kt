@@ -3,6 +3,7 @@ package com.hoomanholding.jpamanager.view.fragment.report.sale
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.github.mikephil.charting.charts.CombinedChart.DrawOrder
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -11,7 +12,7 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
+import com.hoomanholding.applibrary.model.data.response.report.VisitorSalesReportModel
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentReportVisitorSaleBinding
@@ -24,16 +25,17 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_report_visitor_sale)
-    :JpaFragment<FragmentReportVisitorSaleBinding>(){
+class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_report_visitor_sale) :
+    JpaFragment<FragmentReportVisitorSaleBinding>() {
 
-    private val count = 12
-    private val months = listOf("jan","feb","mar","apr","may","jun","jul","aug","sep","okt","nov","dec")
+    private val viewModel: VisitorSaleReportViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setChart()
+        observeLiveData()
+        viewModel.requestVisitorSalesReport()
+//        setChart()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -47,8 +49,21 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
     //---------------------------------------------------------------------------------------------- showMessage
 
 
+    //---------------------------------------------------------------------------------------------- observeLiveData
+    private fun observeLiveData() {
+        viewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            showMessage(it.message)
+        }
 
-    private fun setChart() {
+        viewModel.visitorSaleReportLiveData.observe(viewLifecycleOwner){
+            setChart(it)
+        }
+
+    }
+    //---------------------------------------------------------------------------------------------- observeLiveData
+
+
+    private fun setChart(items: List<VisitorSalesReportModel>) {
 
         binding.chart.description.isEnabled = false
         binding.chart.setBackgroundColor(requireContext().getColor(R.color.primaryColorVariant))
@@ -84,16 +99,17 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
         xAxis.textColor = Color.WHITE
         xAxis.axisMinimum = 0f
         xAxis.granularity = 1f
-        xAxis.labelCount = 12
+        xAxis.labelCount = items.size
         xAxis.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return months[value.toInt() % months.size]
+                val position = value.toInt() % items.size
+                return items[position].visitorName ?: ""
             }
         }
 
         val data = CombinedData()
-        data.setData(generateLineData())
-        data.setData(generateBarData())
+        data.setData(generateLineData(items))
+        data.setData(generateBarData(items))
 //        data.setData(generateBubbleData())
 //        data.setData(generateScatterData())
 //        data.setData(generateCandleData())
@@ -105,12 +121,11 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
     }
 
 
-    private fun generateLineData(): LineData {
+    private fun generateLineData(items: List<VisitorSalesReportModel>): LineData {
         val d = LineData()
         val entries = mutableListOf<Entry>()
-        for (index in 0 until count)
-            entries.add(Entry(index.toFloat(), (5..15).random().toFloat())
-        )
+        for (index in items.indices)
+            entries.add(Entry(index.toFloat(), items[index].salesAmount.toFloat()))
         val set = LineDataSet(entries, "نمودار فروش")
         set.color = Color.rgb(240, 238, 70)
         set.lineWidth = 2.5f
@@ -127,11 +142,11 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
     }
 
 
-    private fun generateBarData(): BarData {
+    private fun generateBarData(items: List<VisitorSalesReportModel>): BarData {
         val entries1: ArrayList<BarEntry> = ArrayList()
 //        val entries2: ArrayList<BarEntry> = ArrayList()
-        for (index in 0 until count) {
-            entries1.add(BarEntry(index.toFloat(), (15.. 25).random().toFloat()))
+        for (index in items.indices) {
+            entries1.add(BarEntry(index.toFloat(), items[index].expectedSales.toFloat()))
 
             // stacked
 /*            entries2.add(BarEntry(0f, floatArrayOf((10..25).random().toFloat(),
@@ -141,7 +156,7 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
         val set1 = BarDataSet(entries1, "نمودار هدف")
         set1.color = Color.rgb(60, 220, 78)
         set1.valueTextColor = Color.rgb(60, 220, 78)
-        set1.valueTextSize = 10f
+        set1.valueTextSize = 8f
         set1.axisDependency = YAxis.AxisDependency.LEFT
 /*        val set2 = BarDataSet(entries2, "")
         set2.stackLabels = arrayOf("Stack 1", "Stack 2")
@@ -149,8 +164,8 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
         set2.valueTextColor = Color.rgb(61, 165, 255)
         set2.valueTextSize = 10f
         set2.axisDependency = YAxis.AxisDependency.LEFT*/
-        val groupSpace = 0.06f
-        val barSpace = 0.02f // x2 dataset
+//        val groupSpace = 0.06f
+//        val barSpace = 0.02f // x2 dataset
 //        val barWidth = 0.45f // x2 dataset
         // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 //        val d = BarData(set2)
@@ -167,6 +182,7 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
     }
 
 
+/*
     private fun generateScatterData(): ScatterData {
         val d = ScatterData()
         val entries = mutableListOf<Entry>()
@@ -221,5 +237,6 @@ class VisitorSaleReportFragment(override var layout: Int = R.layout.fragment_rep
         bd.addDataSet(set)
         return bd
     }
+*/
 
 }
