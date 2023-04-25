@@ -44,7 +44,17 @@
 
     <fragment
         android:id="@+id/reportFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.report.ReportFragment"/>
+        android:name="com.hoomanholding.jpamanager.view.fragment.report.ReportFragment">
+
+        <action
+            android:id="@+id/action_reportFragment_to_visitorSaleReportFragment"
+            app:destination="@id/visitorSaleReportFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
@@ -107,6 +117,10 @@
     <fragment
         android:id="@+id/downloadFragment"
         android:name="com.hoomanholding.applibrary.view.fragment.download.DownloadFragment"/>
+
+    <fragment
+        android:id="@+id/visitorSaleReportFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.report.sale.VisitorSaleReportFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

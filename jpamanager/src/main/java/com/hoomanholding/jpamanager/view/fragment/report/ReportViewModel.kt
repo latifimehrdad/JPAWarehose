@@ -20,53 +20,44 @@ class ReportViewModel @Inject constructor(): JpaViewModel() {
     }
 
     //---------------------------------------------------------------------------------------------- setItems
-    fun setItems() {
+    fun setItems(tabPosition: Int) {
+        when(tabPosition){
+            0 -> setHrReportItem()
+            1 -> setSaleReportItem()
+            2 -> setFinancialReportItem()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setItems
+
+
+    //---------------------------------------------------------------------------------------------- setSaleReportItem
+    private fun setSaleReportItem() {
         val items: MutableList<CardBoardItemModel> = mutableListOf()
         items.add(
             CardBoardItemModel(
-                R.drawable.ic_indebtedness,
-                resourcesProvider.getString(R.string.indebtedness),
-                0
-            )
-        )
-        items.add(
-            CardBoardItemModel(
                 R.drawable.ic_sales_amount,
                 resourcesProvider.getString(R.string.salesAmount),
-                0
+                R.id.action_reportFragment_to_visitorSaleReportFragment
             )
         )
-        items.add(
-            CardBoardItemModel(
-                R.drawable.ic_creditor,
-                resourcesProvider.getString(R.string.creditor),
-                0
-            )
-        )
-        items.add(
-            CardBoardItemModel(
-                R.drawable.ic_indebtedness,
-                resourcesProvider.getString(R.string.indebtedness),
-                0
-            )
-        )
-        items.add(
-            CardBoardItemModel(
-                R.drawable.ic_sales_amount,
-                resourcesProvider.getString(R.string.salesAmount),
-                0
-            )
-        )
-        items.add(
-            CardBoardItemModel(
-                R.drawable.ic_creditor,
-                resourcesProvider.getString(R.string.creditor),
-                0
-            )
-        )
-
-
         itemLiveData.postValue(items)
     }
-    //---------------------------------------------------------------------------------------------- setItems
+    //---------------------------------------------------------------------------------------------- setSaleReportItem
+
+
+
+    //---------------------------------------------------------------------------------------------- setHrReportItem
+    private fun setHrReportItem() {
+
+    }
+    //---------------------------------------------------------------------------------------------- setHrReportItem
+
+
+
+    //---------------------------------------------------------------------------------------------- setFinancialReportItem
+    private fun setFinancialReportItem() {
+
+    }
+    //---------------------------------------------------------------------------------------------- setFinancialReportItem
+
 }

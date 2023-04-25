@@ -34,22 +34,26 @@
             app:tabTextAppearance="@style/CustomTabTextAppearance">
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemHR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hr" />
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemSale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sale" />
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemFinancial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/financial" />
 
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItemHr2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hr" />
@@ -81,23 +85,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/jpaButtonReport"
-                android:layout_marginBottom="@dimen/_10sdp"/>
-
-
-            <com.hoomanholding.applibrary.view.custom.JpaButton
-                android:id="@+id/jpaButtonReport"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintHeight_percent="0.17"
-                android:background="@drawable/drawable_button_wave"
-                android:layout_margin="@dimen/_10sdp"
-                app:backgroundTint="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/iransans_bold"
-                android:text="@string/comparativeReport"/>
+                android:layout_marginBottom="@dimen/_10sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

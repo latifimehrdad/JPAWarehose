@@ -3,6 +3,7 @@ package com.hoomanholding.jpamanager.view.fragment.report
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.hoomanholding.jpamanager.R
@@ -19,8 +20,8 @@ import com.hoomanholding.applibrary.view.fragment.JpaFragment
  */
 
 @AndroidEntryPoint
-class ReportFragment(override var layout: Int = R.layout.fragment_report):
-    JpaFragment<FragmentReportBinding>(){
+class ReportFragment(override var layout: Int = R.layout.fragment_report) :
+    JpaFragment<FragmentReportBinding>() {
 
     private val viewModel: ReportViewModel by viewModels()
 
@@ -28,11 +29,9 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report):
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeLiveData()
-        viewModel.setItems()
         setListener()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
-
 
 
     //---------------------------------------------------------------------------------------------- showMessage
@@ -42,7 +41,6 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report):
         }
     }
     //---------------------------------------------------------------------------------------------- showMessage
-
 
 
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -59,19 +57,21 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report):
     //---------------------------------------------------------------------------------------------- observeLiveData
 
 
-
-
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val width = tab?.view?.width ?: 0
+                if (tab == null)
+                    return
+                val width = tab.view.width
                 if (width == 0)
                     return
                 val percent = width * 25 / 100
                 val arr = IntArray(2)
-                tab?.view?.getLocationOnScreen(arr)
+                tab.view.getLocationOnScreen(arr)
                 binding.viewTab.x = (arr[0] + width - percent).toFloat()
+                binding.recyclerItem.adapter = null
+                viewModel.setItems(tab.position)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -84,12 +84,12 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report):
     //---------------------------------------------------------------------------------------------- setListener
 
 
-
     //---------------------------------------------------------------------------------------------- setItemAdapter
     private fun setItemAdapter(items: List<CardBoardItemModel>) {
-        val click = object: CardBoardItemHolder.Click{
+        val click = object : CardBoardItemHolder.Click {
             override fun itemClick(action: Int) {
-
+                if (action != 0)
+                    findNavController().navigate(action)
             }
         }
         val adapter = CardBoardItemAdapter(items, click)

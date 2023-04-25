@@ -13,6 +13,7 @@ import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.report.HomeReportModel
+import com.hoomanholding.applibrary.model.data.response.report.VisitorSalesReportModel
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import okhttp3.ResponseBody
@@ -177,6 +178,11 @@ interface Api {
         @Query("currencyTypeId") currencyTypeId: Int,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<HomeReportModel?>>
+
+    @GET("$report/managerapp-report-visitorSalesReport")
+    suspend fun requestVisitorSalesReport(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<VisitorSalesReportModel>?>>
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 

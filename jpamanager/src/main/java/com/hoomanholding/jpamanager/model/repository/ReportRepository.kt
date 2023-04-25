@@ -21,4 +21,10 @@ class ReportRepository @Inject constructor(
         apiCall { api.requestFirstPageReport(currencyTypeId, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
+
+    //---------------------------------------------------------------------------------------------- requestVisitorSalesReport
+    suspend fun requestVisitorSalesReport() =
+        apiCall { api.requestVisitorSalesReport(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestVisitorSalesReport
+
 }
