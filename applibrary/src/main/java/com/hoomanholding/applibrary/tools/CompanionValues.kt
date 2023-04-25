@@ -14,5 +14,6 @@ class CompanionValues {
         const val password = "password"
         const val ORDER_IR = "order_ir"
         const val CUSTOMER_ID = "customer_id"
+        const val DOWNLOAD_URL = "download_url"
     }
 }

@@ -1,9 +1,13 @@
 package com.hoomanholding.applibrary.view.fragment
 
+import android.os.Environment
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
+import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
+import com.hoomanholding.applibrary.model.repository.AppUpdateRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
+import com.zar.core.tools.manager.DeviceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -11,23 +15,67 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val appUpdateRepository: AppUpdateRepository,
+    private val deviceManager: DeviceManager
 ) : JpaViewModel() {
 
+    private var destinationFile: File
     val successLiveData = SingleLiveEvent<Boolean>()
+    val userIsEnteredLiveData = SingleLiveEvent<Boolean>()
+    val downloadVersionLiveData = SingleLiveEvent<String>()
+
+
+    //---------------------------------------------------------------------------------------------- init
+    init {
+        val downloadFolder =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        destinationFile = File(downloadFolder.absolutePath, "test.apk")
+
+    }
+    //---------------------------------------------------------------------------------------------- init
+
 
     //---------------------------------------------------------------------------------------------- userIsEntered
-    fun userIsEntered() = userRepository.isEntered()
+    private fun userIsEntered() {
+        userIsEnteredLiveData.postValue(userRepository.isEntered())
+    }
     //---------------------------------------------------------------------------------------------- userIsEntered
+
+
+    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+    fun requestGetAppVersion(appName: String) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val response = checkResponse(appUpdateRepository.requestGetAppVersion(appName))
+            response?.let {
+                checkAppVersion(it)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+
+
+    //---------------------------------------------------------------------------------------------- checkAppVersion
+    private fun checkAppVersion(appVersionModel: AppVersionModel) {
+        val currentVersion = deviceManager.appVersionCode()
+        if (currentVersion < appVersionModel.currentVersion) {
+            appVersionModel.fileName?.let {
+                downloadVersionLiveData.postValue(it)
+            }
+        } else
+            userIsEntered()
+    }
+    //---------------------------------------------------------------------------------------------- checkAppVersion
 
 
     //---------------------------------------------------------------------------------------------- requestGetData
     fun requestGetData() {
-        viewModelScope.launch(IO){
+        viewModelScope.launch(IO + exceptionHandler()) {
             requestUserInfo().join()
             requestUserPermission().join()
             getAllData().join()
@@ -52,7 +100,7 @@ class SplashViewModel @Inject constructor(
         return CoroutineScope(IO + exceptionHandler()).launch {
             delay(500)
             val response = checkResponse(userRepository.requestUserPermission())
-            response?.let {permissions ->
+            response?.let { permissions ->
                 val roles: List<RoleEntity> = permissions.map { RoleEntity(it) }
                 userRepository.insertUserRole(roles)
             }

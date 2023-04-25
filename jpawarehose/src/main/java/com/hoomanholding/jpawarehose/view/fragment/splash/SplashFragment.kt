@@ -57,10 +57,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     private fun checkUserIsLogged() {
         if (binding.buttonReTry.isLoading)
             return
-        if (splashViewModel.userIsEntered())
+/*        if (splashViewModel.userIsEntered())
             gotoFragmentHome()
         else
-            gotoFragmentLogin()
+            gotoFragmentLogin()*/
     }
     //---------------------------------------------------------------------------------------------- checkUserIsLogged
 

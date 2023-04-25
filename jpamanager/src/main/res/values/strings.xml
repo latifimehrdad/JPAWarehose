@@ -13,6 +13,7 @@
     <string name="ipIsIncorrect">آدرس وارد شده اشتباه است</string>
     <string name="bePatient">شکیبا باشید…</string>
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
+    <string name="doYouWantToUpdateApp">نسخه جدید برنامه در دسترس است،آیا برای دانلود آن مطمئن هستید؟</string>
     <string name="newIp">new ip</string>
     <string name="ipPassword">ip password</string>
     <string name="comfortableSpace">فضایی راحت</string>

@@ -98,7 +98,8 @@ class MainActivity : AppCompatActivity() {
         resetMenuColor()
         when (fragmentId) {
             R.id.splashFragment,
-            R.id.loginFragment -> {
+            R.id.loginFragment,
+            R.id.downloadFragment -> {
                 binding.menuHome.visibility = View.GONE
                 binding.menuCardboard.visibility = View.GONE
                 binding.menuReport.visibility = View.GONE

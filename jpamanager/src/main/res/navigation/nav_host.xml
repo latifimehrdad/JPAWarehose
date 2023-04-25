@@ -24,6 +24,14 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
 
+        <action
+            android:id="@+id/action_splashFragment_to_DownloadFragment"
+            app:destination="@id/downloadFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
     </fragment>
 
     <fragment
@@ -95,6 +103,10 @@
     <fragment
         android:id="@+id/customerFinancialFragment"
         android:name="com.hoomanholding.jpamanager.view.fragment.customer.CustomerFinancialFragment"/>
+
+    <fragment
+        android:id="@+id/downloadFragment"
+        android:name="com.hoomanholding.applibrary.view.fragment.download.DownloadFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

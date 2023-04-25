@@ -5,6 +5,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentSplashBinding
@@ -16,6 +17,7 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.hoomanholding.applibrary.view.fragment.SplashViewModel
+import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
 
 
 /**
@@ -34,9 +36,11 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         super.onViewCreated(view, savedInstanceState)
         binding.imageViewManegerApp.visibility = View.INVISIBLE
         binding.materialButtonLogin.visibility = View.INVISIBLE
+        observeLiveDate()
         setListener()
         startAnimation()
-        checkUserIsLogged()
+        requestGetAppVersion()
+//        checkUserIsLogged()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -51,11 +55,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- showMessage
 
 
-
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.materialButtonLogin.setOnClickListener {
-            checkUserIsLogged()
+            requestGetAppVersion()
         }
 
         binding.imageViewManegerApp.setOnClickListener {
@@ -63,7 +66,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
-
 
 
     //---------------------------------------------------------------------------------------------- startAnimation
@@ -99,34 +101,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- startAnimation
 
 
-    //---------------------------------------------------------------------------------------------- checkUserIsLogged
-    private fun checkUserIsLogged() {
-        if (splashViewModel.userIsEntered())
-            gotoFragmentHome()
-        else
-            gotoFragmentLogin()
-    }
-    //---------------------------------------------------------------------------------------------- checkUserIsLogged
-
-
-    //---------------------------------------------------------------------------------------------- gotoFragmentLogin
-    private fun gotoFragmentLogin() {
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-    }
-    //---------------------------------------------------------------------------------------------- gotoFragmentLogin
-
-
-    //---------------------------------------------------------------------------------------------- gotoFragmentHome
-    private fun gotoFragmentHome() {
-        if (binding.materialButtonLogin.isLoading)
-            return
-        observeLiveDate()
-        binding.materialButtonLogin.startLoading(getString(R.string.bePatient))
-        splashViewModel.requestGetData()
-    }
-    //---------------------------------------------------------------------------------------------- gotoFragmentHome
-
-
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         splashViewModel.errorLiveDate.observe(viewLifecycleOwner) {
@@ -142,8 +116,70 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             if (it)
                 findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
         }
+
+        splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
+            if (it)
+                gotoFragmentHome()
+            else
+                gotoFragmentLogin()
+        }
+
+        splashViewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
+            showDialogUpdateAppVersion(it)
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
+
+
+    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+    private fun requestGetAppVersion() {
+        splashViewModel.requestGetAppVersion("ManagerApp")
+    }
+    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+
+
+    //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
+    private fun showDialogUpdateAppVersion(fileName: String) {
+        if (context == null)
+            return
+        ConfirmDialog(
+            requireContext(),
+            getString(R.string.doYouWantToUpdateApp),
+            object : ConfirmDialog.Click {
+                override fun clickYes() {
+                    gotoFragmentDownload(fileName)
+                }
+            }
+        ).show()
+    }
+    //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
+
+
+    //---------------------------------------------------------------------------------------------- gotoFragmentDownload
+    private fun gotoFragmentDownload(fileName: String) {
+        val bundle = Bundle()
+        bundle.putString(CompanionValues.DOWNLOAD_URL, fileName)
+        findNavController()
+            .navigate(R.id.action_splashFragment_to_DownloadFragment, bundle)
+    }
+    //---------------------------------------------------------------------------------------------- gotoFragmentDownload
+
+
+    //---------------------------------------------------------------------------------------------- gotoFragmentLogin
+    private fun gotoFragmentLogin() {
+        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+    }
+    //---------------------------------------------------------------------------------------------- gotoFragmentLogin
+
+
+    //---------------------------------------------------------------------------------------------- gotoFragmentHome
+    private fun gotoFragmentHome() {
+        if (binding.materialButtonLogin.isLoading)
+            return
+        binding.materialButtonLogin.startLoading(getString(R.string.bePatient))
+        splashViewModel.requestGetData()
+    }
+    //---------------------------------------------------------------------------------------------- gotoFragmentHome
 
 
 }
