@@ -32,6 +32,7 @@
                 android:contentDescription="@string/logoDescription" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constarintProfile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -77,7 +78,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_back" />
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="@string/closeDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                 binding.menuProfile.visibility = View.GONE
                 binding.textViewUser.visibility = View.GONE
                 binding.imageViewBack.visibility = View.GONE
+                binding.constarintProfile.visibility = View.INVISIBLE
             }
             R.id.homeFragment -> {
                 if (!binding.menuHome.isSelectedMenu()) {
@@ -143,6 +144,7 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- resetMenuColor
     private fun resetMenuColor() {
+        binding.constarintProfile.visibility = View.VISIBLE
         binding.textViewUser.visibility = View.VISIBLE
         binding.imageViewBack.visibility = View.VISIBLE
         binding.menuHome.visibility = View.VISIBLE
