@@ -139,7 +139,7 @@ class VisitorCustomerCombineChart(
         set2.valueTextSize = 7f
         set2.axisDependency = YAxis.AxisDependency.LEFT
 
-        val set3 = BarDataSet(entries3, "تعداد مشتری فعال")
+        val set3 = BarDataSet(entries3, "نرخ پوشش")
         set3.color = Color.rgb(255, 84, 84)
         set3.valueTextColor = Color.rgb(255, 84, 84)
         set3.valueTextSize = 7f
