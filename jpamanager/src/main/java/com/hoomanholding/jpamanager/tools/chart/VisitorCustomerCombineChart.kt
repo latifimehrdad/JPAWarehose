@@ -128,20 +128,20 @@ class VisitorCustomerCombineChart(
         }
 
         val set1 = BarDataSet(entries1, "تعداد مشتری")
-        set1.color = Color.rgb(60, 220, 78)
-        set1.valueTextColor = Color.rgb(60, 220, 78)
+        set1.color = Color.rgb(248, 187, 208)
+        set1.valueTextColor = Color.rgb(248, 187, 208)
         set1.valueTextSize = 7f
         set1.axisDependency = YAxis.AxisDependency.LEFT
 
         val set2 = BarDataSet(entries2, "تعداد مشتری فعال")
-        set2.color = Color.rgb(23, 197, 255)
-        set2.valueTextColor = Color.rgb(23, 197, 255)
+        set2.color = Color.rgb(128, 203, 196)
+        set2.valueTextColor = Color.rgb(128, 203, 196)
         set2.valueTextSize = 7f
         set2.axisDependency = YAxis.AxisDependency.LEFT
 
-        val set3 = BarDataSet(entries3, "نرخ پوشش")
-        set3.color = Color.rgb(255, 84, 84)
-        set3.valueTextColor = Color.rgb(255, 84, 84)
+        val set3 = BarDataSet(entries3, "نرخ پوشش %")
+        set3.color = Color.rgb(255, 236, 179)
+        set3.valueTextColor = Color.rgb(255, 236, 179)
         set3.valueTextSize = 7f
         set3.axisDependency = YAxis.AxisDependency.LEFT
 

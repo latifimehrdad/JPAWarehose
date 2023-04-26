@@ -143,8 +143,8 @@ class VisitorSaleCombineChart(
             entries1.add(BarEntry(index.toFloat(), items[index].expectedSales.toFloat()))
         }
         val set1 = BarDataSet(entries1, "نمودار هدف")
-        set1.color = Color.rgb(255, 84, 84)
-        set1.valueTextColor = Color.rgb(255, 84, 84)
+        set1.color = Color.rgb(248, 187, 208)
+        set1.valueTextColor = Color.rgb(248, 187, 208)
         set1.valueTextSize = 7f
         set1.axisDependency = YAxis.AxisDependency.LEFT
         val dataSets: ArrayList<IBarDataSet> = ArrayList()
