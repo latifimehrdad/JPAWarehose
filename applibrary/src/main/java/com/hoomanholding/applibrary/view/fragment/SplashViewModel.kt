@@ -1,5 +1,6 @@
 package com.hoomanholding.applibrary.view.fragment
 
+import android.content.SharedPreferences
 import android.os.Environment
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
@@ -7,6 +8,7 @@ import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.repository.AppUpdateRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.zar.core.tools.manager.DeviceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +26,9 @@ class SplashViewModel @Inject constructor(
     private val appUpdateRepository: AppUpdateRepository,
     private val deviceManager: DeviceManager
 ) : JpaViewModel() {
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     private var destinationFile: File
     val successLiveData = SingleLiveEvent<Boolean>()
@@ -116,5 +121,15 @@ class SplashViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getAllData
+
+
+    //---------------------------------------------------------------------------------------------- saveNewIp
+    fun saveNewIp(ip: String?) {
+        sharedPreferences
+            .edit()
+            .putString(CompanionValues.URL, ip)
+            .apply()
+    }
+    //---------------------------------------------------------------------------------------------- saveNewIp
 
 }

@@ -1,10 +1,14 @@
 package com.hoomanholding.jpamanager.view.fragment.splash
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
+import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.R
@@ -18,6 +22,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
+import com.zar.core.tools.manager.DialogManager
 
 
 /**
@@ -63,6 +68,47 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
         binding.imageViewManegerApp.setOnClickListener {
             findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
+        }
+
+        binding.frameLayoutLogo.setOnLongClickListener {
+            if (context != null) {
+                val dialog = DialogManager().createDialogHeightWrapContent(
+                    requireContext(),
+                    R.layout.dialog_confirm_ip,
+                    Gravity.CENTER,
+                    0
+                )
+
+                val textInputEditTextIp =
+                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIp)
+
+                val textInputEditTextIpPassword =
+                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIpPassword)
+
+                val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
+                buttonNo.setOnClickListener { dialog.dismiss() }
+
+                val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
+                buttonYes.setOnClickListener {
+
+                    if (textInputEditTextIp.text.toString().isIP()) {
+                        if (textInputEditTextIpPassword.text.toString() != "holeshdaf"){
+                            textInputEditTextIpPassword.error = getString(R.string.passwordIsInCorrect)
+                            return@setOnClickListener
+                        }
+                        splashViewModel.saveNewIp(textInputEditTextIp.text.toString())
+                        showMessage(getString(R.string.updateIsSuccess))
+                        CoroutineScope(Main).launch {
+                            delay(1500)
+                            (activity as MainActivity).finish()
+                        }
+                    } else {
+                        textInputEditTextIp.error = getString(R.string.ipIsIncorrect)
+                    }
+                }
+                dialog.show()
+            }
+            return@setOnLongClickListener true
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
