@@ -61,7 +61,7 @@
                     android:paddingVertical="@dimen/_1sdp"
                     android:fontFamily="@font/iransans_light"
                     android:lines="1"
-                    app:setTitle="@{@string/factorNumber}"
+                    app:setTitle="@{@string/orderNumber}"
                     app:setSplitter="@{@string/colon}"
                     app:setValue="@{item.orderNumber}"/>
 
@@ -85,7 +85,7 @@
                     android:paddingVertical="@dimen/_1sdp"
                     android:fontFamily="@font/iransans_light"
                     android:lines="1"
-                    app:setTitle="@{@string/factorAmount}"
+                    app:setTitle="@{@string/orderAmount}"
                     app:setSplitter="@{@string/colon}"
                     app:setValue="@{item.orderFinaleAmount}"
                     app:setLastTest="@{@string/rial}"/>

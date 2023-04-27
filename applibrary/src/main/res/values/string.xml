@@ -4,6 +4,6 @@
     <string name="dataSendingIsEmpty">اطلاعات ارسالی خالی است</string>
     <string name="userNameIsEmpty">نام کاربری را وارد نمایید</string>
     <string name="passcodeIsEmpty">رمز ورود را وارد نمایید</string>
-    <string name="fileIsDownload">فایل در حال دانلود است</string>
+    <string name="fileIsDownload">فایل در حال دانلود است، لطفا شکیبا باشید، فایل در پس زمینه در حال دانلود میباشد</string>
     <string name="setPercent">میزان دانلود : %1$s</string>
 </resources>

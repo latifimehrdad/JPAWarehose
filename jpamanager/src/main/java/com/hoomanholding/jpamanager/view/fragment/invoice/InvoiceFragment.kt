@@ -2,7 +2,6 @@ package com.hoomanholding.jpamanager.view.fragment.invoice
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
@@ -14,7 +13,6 @@ import com.hoomanholding.applibrary.model.data.enums.EnumPeopleType
 import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
-import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -23,7 +21,6 @@ import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentInvoiceBinding
 import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
 import com.hoomanholding.jpamanager.view.activity.MainActivity
-import com.hoomanholding.jpamanager.view.adapter.ReasonSpinnerAdapter
 import com.hoomanholding.jpamanager.view.adapter.StringSpinnerAdapter
 import com.hoomanholding.jpamanager.view.adapter.holder.OrderHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.OrderAdapter

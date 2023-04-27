@@ -47,8 +47,8 @@
     <string name="routeName">نام مسیر</string>
     <string name="supportNumber">026–6565635</string>
     <string name="date">تاریخ</string>
-    <string name="factorNumber">شماره فاکتور</string>
-    <string name="factorAmount">مبلغ فاکتور</string>
+    <string name="orderNumber">شماره سفارش</string>
+    <string name="orderAmount">مبلغ سفارش</string>
     <string name="customerCode">کد مشتری</string>
     <string name="shopName">نام فروشگاه</string>
     <string name="rial">ریال</string>
@@ -58,7 +58,7 @@
     <string name="products">لیست کالاها</string>
     <string name="confirmOrder">تایید سفارش</string>
     <string name="rejectOrder">عدم تایید سفارش</string>
-    <string name="factorCount">تعداد فاکتور</string>
+    <string name="orderCount">تعداد سفارش</string>
     <string name="productName">نام محصول</string>
     <string name="fi">قیمت واحد</string>
     <string name="count">تعداد</string>
@@ -69,6 +69,7 @@
     <string name="chooseReason">انتخاب دلیل</string>
     <string name="description">توضیحات</string>
     <string name="orderSelectedIsEmpty">هیچ سفارشی انتخاب نشده</string>
+    <string name="disApprovalReasonIsEmpty">دلایل رد شدن سفارش خالی است</string>
     <string name="setDateFrom">از %1$s - تا %2$s</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از اکانت مطمئن هستید؟</string>
     <string name="amountOfDebt">میزان بدهی</string>

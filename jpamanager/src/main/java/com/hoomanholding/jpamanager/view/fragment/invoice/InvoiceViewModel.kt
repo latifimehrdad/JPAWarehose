@@ -7,7 +7,6 @@ import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.model.repository.OrderRepository
 import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.request.OrderToggleStateRequest
-import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
@@ -155,10 +154,17 @@ class InvoiceViewModel @Inject constructor(
             if (orders.isNullOrEmpty())
                 setMessage(resourcesProvider.getString(R.string.orderSelectedIsEmpty))
             else{
-                val reason = disApprovalReasonModel?.get(positionReason) ?: return@launch
-                val request = OrderToggleStateRequest(state, description, orders, reason.id)
-                val response = checkResponse(orderRepository.requestOrderToggleState(request))
-                response?.let { orderToggleStateLiveData.postValue(it) }
+                if (disApprovalReasonModel == null){
+                    setMessage(resourcesProvider.getString(R.string.disApprovalReasonIsEmpty))
+                } else {
+                    val reasonId = when (state) {
+                        EnumState.Confirmed -> null
+                        EnumState.Reject -> disApprovalReasonModel?.get(positionReason)?.id
+                    }
+                    val request = OrderToggleStateRequest(state, description, orders, reasonId)
+                    val response = checkResponse(orderRepository.requestOrderToggleState(request))
+                    response?.let { orderToggleStateLiveData.postValue(it) }
+                }
             }
         }
     }

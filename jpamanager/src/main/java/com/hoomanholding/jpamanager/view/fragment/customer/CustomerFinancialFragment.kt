@@ -114,7 +114,7 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
         )
         detailList.add(
             CustomerFinancialItemModel(
-                getString(R.string.factorCount),
+                getString(R.string.orderCount),
                 item.billingCount, null,
                 getString(R.string.space)
             )

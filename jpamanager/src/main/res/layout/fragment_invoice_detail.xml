@@ -70,7 +70,7 @@
                         android:paddingVertical="@dimen/_2sdp"
                         android:fontFamily="@font/iransans_light"
                         android:lines="1"
-                        app:setTitle="@{@string/factorNumber}"
+                        app:setTitle="@{@string/orderNumber}"
                         app:setSplitter="@{@string/colon}"
                         app:setValue="@{viewModel.invoiceLiveData.orderNumber}"/>
 
@@ -94,7 +94,7 @@
                         android:paddingVertical="@dimen/_2sdp"
                         android:fontFamily="@font/iransans_light"
                         android:lines="1"
-                        app:setTitle="@{@string/factorAmount}"
+                        app:setTitle="@{@string/orderAmount}"
                         app:setSplitter="@{@string/colon}"
                         app:setValue="@{viewModel.invoiceLiveData.orderFinaleAmount}"
                         app:setLastTest="@{@string/rial}"/>

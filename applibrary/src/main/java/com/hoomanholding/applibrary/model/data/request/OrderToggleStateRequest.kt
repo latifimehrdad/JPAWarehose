@@ -11,5 +11,5 @@ data class OrderToggleStateRequest(
     val state: EnumState,
     val description: String?,
     val orderIds: List<Int>,
-    val rejectReasonId: Int
+    val rejectReasonId: Int?
 )
