@@ -3,7 +3,6 @@ package com.hoomanholding.applibrary.view.fragment.download
 import android.os.Environment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hoomanholding.applibrary.model.data.request.DownloadFileRequestModel
 import com.hoomanholding.applibrary.model.repository.DownloadFileRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DownloadViewModel @Inject constructor(
     private val downloadFileRepository: DownloadFileRepository
-): JpaViewModel() {
+) : JpaViewModel() {
 
     private var destinationFile: File
 
@@ -36,13 +35,15 @@ class DownloadViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- downloadLastVersion
-    fun downloadLastVersion(fileName: String) {
+    fun downloadLastVersion(fileName: String, appName: String) {
         viewModelScope.launch(IO + exceptionHandler()) {
             delay(2000)
             if (destinationFile.exists())
                 destinationFile.delete()
-            val request = DownloadFileRequestModel("ManagerApp", fileName)
-            val response = downloadFileRepository.downloadFile(request)
+            val response = downloadFileRepository.downloadApkFile(
+                appName,
+                fileName
+            )
             response.body()?.saveFile()?.collect { downloadState ->
                 when (downloadState) {
                     is DownloadState.Downloading -> {

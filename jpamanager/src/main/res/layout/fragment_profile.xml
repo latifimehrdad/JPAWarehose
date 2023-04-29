@@ -6,6 +6,7 @@
         <variable
             name="viewModel"
             type="com.hoomanholding.jpamanager.view.fragment.profile.ProfileViewModel" />
+
     </data>
 
     <ScrollView
@@ -20,16 +21,26 @@
             android:background="@drawable/drawable_border_curve"
             android:layout_marginTop="@dimen/_15sdp">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/imageViewProfile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.35"
-                app:layout_constraintDimensionRatio="H,1:1"
-                android:background="@drawable/drawable_border_curve_light"
-                android:contentDescription="@string/profileDescription" />
+                app:layout_constraintDimensionRatio="H,1:1" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/profileDescription"
+                    android:scaleType="fitXY"
+                    app:loadImage="@{viewModel.userInfoLiveData.profileImageName}"
+                    app:SystemType="@{viewModel.userInfoLiveData.systemType}"
+                    app:setEntityType="@{viewModel.entityType}"
+                    app:bearerToken="@{viewModel.bearerToken}"/>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/textViewMobile"

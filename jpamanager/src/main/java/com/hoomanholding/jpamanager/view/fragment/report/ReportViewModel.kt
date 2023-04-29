@@ -56,7 +56,15 @@ class ReportViewModel @Inject constructor(): JpaViewModel() {
 
     //---------------------------------------------------------------------------------------------- setFinancialReportItem
     private fun setFinancialReportItem() {
-
+        val items: MutableList<CardBoardItemModel> = mutableListOf()
+        items.add(
+            CardBoardItemModel(
+                R.drawable.ic_creditor,
+                resourcesProvider.getString(R.string.financialReport),
+                R.id.action_reportFragment_to_customerBalanceFragment
+            )
+        )
+        itemLiveData.postValue(items)
     }
     //---------------------------------------------------------------------------------------------- setFinancialReportItem
 

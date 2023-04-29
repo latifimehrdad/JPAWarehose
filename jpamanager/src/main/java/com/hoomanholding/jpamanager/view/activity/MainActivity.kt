@@ -12,7 +12,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
+import com.hoomanholding.applibrary.ext.downloadImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
+import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +54,12 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.colon)
                 )
                 binding.textViewUser.text = it.fullName
+                binding.imageViewProfile.downloadImage(
+                    it.profileImageName,
+                    it.systemType,
+                    EnumEntityType.ProfileImage.name,
+                    mainViewModel.getBearerToke()
+                )
             } ?: run {
                 binding.textViewPersonnelCode.text = ""
                 binding.textViewUser.text = ""
@@ -116,7 +124,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             R.id.reportFragment,
-            R.id.visitorSaleReportFragment -> {
+            R.id.visitorSaleReportFragment,
+            R.id.customerBalanceFragment -> {
                 if (!binding.menuReport.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuReport.selected()

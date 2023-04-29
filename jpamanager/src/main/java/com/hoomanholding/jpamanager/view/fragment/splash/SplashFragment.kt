@@ -179,7 +179,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
     private fun requestGetAppVersion() {
-        splashViewModel.requestGetAppVersion("ManagerApp")
+        splashViewModel.requestGetAppVersion(CompanionValues.MANAGER_APP)
     }
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
 
@@ -195,7 +195,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                 override fun clickYes() {
                     gotoFragmentDownload(fileName)
                 }
-            }
+            }, true
         ).show()
     }
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
@@ -205,6 +205,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     private fun gotoFragmentDownload(fileName: String) {
         val bundle = Bundle()
         bundle.putString(CompanionValues.DOWNLOAD_URL, fileName)
+        bundle.putString(CompanionValues.APP_NAME, CompanionValues.MANAGER_APP)
         findNavController()
             .navigate(R.id.action_splashFragment_to_DownloadFragment, bundle)
     }

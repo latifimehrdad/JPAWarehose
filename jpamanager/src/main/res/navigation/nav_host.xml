@@ -54,6 +54,14 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
 
+        <action
+            android:id="@+id/action_reportFragment_to_customerBalanceFragment"
+            app:destination="@id/customerBalanceFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
     </fragment>
 
     <fragment
@@ -121,6 +129,24 @@
     <fragment
         android:id="@+id/visitorSaleReportFragment"
         android:name="com.hoomanholding.jpamanager.view.fragment.report.sale.VisitorSaleReportFragment"/>
+
+    <fragment
+        android:id="@+id/customerBalanceFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.report.customerbalance.CustomerBalanceFragment">
+
+        <action
+            android:id="@+id/action_customerBalanceFragment_to_customerBalanceDetailFragment"
+            app:destination="@id/customerBalanceDetailFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/customerBalanceDetailFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.report.customerbalance.detail.CustomerBalanceDetailFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

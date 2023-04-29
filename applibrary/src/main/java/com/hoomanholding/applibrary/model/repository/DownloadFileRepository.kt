@@ -1,9 +1,8 @@
 package com.hoomanholding.applibrary.model.repository
 
 import com.hoomanholding.applibrary.model.api.Api
-import com.hoomanholding.applibrary.model.data.request.DownloadFileRequestModel
+import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import javax.inject.Inject
-import javax.inject.Named
 
 
 /**
@@ -14,9 +13,9 @@ class DownloadFileRepository @Inject constructor(
     private val api: Api
 ) {
 
-    //---------------------------------------------------------------------------------------------- downloadFile
-    suspend fun downloadFile(request: DownloadFileRequestModel) =
-        api.downloadFile(request)
-    //---------------------------------------------------------------------------------------------- downloadFile
+    //---------------------------------------------------------------------------------------------- downloadApkFile
+    suspend fun downloadApkFile(systemType: String, fileName: String) =
+        api.downloadApkFile(systemType, EnumEntityType.APK, fileName)
+    //---------------------------------------------------------------------------------------------- downloadApkFile
 
 }

@@ -4,6 +4,7 @@ import com.hoomanholding.applibrary.model.data.database.entity.*
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
+import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.request.*
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
@@ -12,6 +13,8 @@ import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinanci
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
+import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
+import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportModel
 import com.hoomanholding.applibrary.model.data.response.report.HomeReportModel
 import com.hoomanholding.applibrary.model.data.response.report.VisitorSalesReportModel
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
@@ -183,20 +186,33 @@ interface Api {
     suspend fun requestVisitorSalesReport(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<VisitorSalesReportModel>?>>
+
+    @GET("$report/managerapp-report-customerBalanceReport")
+    suspend fun requestCustomerBalance(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CustomerBalanceReportModel>?>>
+
+    @GET("$report/managerapp-report-customerBalanceDetailsReport")
+    suspend fun requestCustomerBalanceDetail(
+        @Query("CustomerId") customerId: Int,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CustomerBalanceReportDetailModel>?>>
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 
-    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+    //---------------------------------------------------------------------------------------------- downloadApkFile
     @GET("$files/files-get-appVersion")
     suspend fun requestGetAppVersion(
         @Query("app") app: String
     ): Response<GeneralResponse<AppVersionModel?>>
 
     @Streaming
-    @POST("$files/files-get-file")
-    suspend fun downloadFile(
-        @Body request: DownloadFileRequestModel
+    @GET("$files/files-get-apk")
+    suspend fun downloadApkFile(
+        @Query("SystemType") SystemType: String,
+        @Query("EntityType") EntityType: EnumEntityType,
+        @Query("FileName") FileName: String
     ): Response<ResponseBody>
-    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+    //---------------------------------------------------------------------------------------------- downloadApkFile
 
 }

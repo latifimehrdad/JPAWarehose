@@ -24,25 +24,25 @@ class CardboardViewModel @Inject constructor(): JpaViewModel() {
         val items: MutableList<CardBoardItemModel> = mutableListOf()
         items.add(
             CardBoardItemModel(
-                R.drawable.ic_credit_card,
-                resourcesProvider.getString(R.string.pinCard),
-                0
-            )
-        )
-        items.add(
-            CardBoardItemModel(
                 R.drawable.ic_invoice,
                 resourcesProvider.getString(R.string.invoice),
                 R.id.action_splashFragment_to_InvoiceFragment
             )
         )
-        items.add(
+/*        items.add(
+            CardBoardItemModel(
+                R.drawable.ic_credit_card,
+                resourcesProvider.getString(R.string.pinCard),
+                0
+            )
+        )*/
+/*        items.add(
             CardBoardItemModel(
                 R.drawable.ic_ckeck,
                 resourcesProvider.getString(R.string.check),
                 0
             )
-        )
+        )*/
         itemLiveData.postValue(items)
     }
     //---------------------------------------------------------------------------------------------- setItems

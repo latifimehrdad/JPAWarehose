@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"
+            android:background="@drawable/drawable_border_curve_light"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_15sdp"
+            android:baselineAligned="false">
+
+            <TextView
+                android:id="@+id/textViewCustomerCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textViewCustomerName"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/customerCode}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.customerCode}"/>
+
+            <TextView
+                android:id="@+id/textViewCustomerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewCustomerCode"
+                app:layout_constraintWidth_percent="0.55"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/customerName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.customerName}"/>
+
+            <TextView
+                android:id="@+id/textViewStoreName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewCustomerName"
+                app:layout_constraintStart_toStartOf="@id/textViewCustomerName"
+                app:layout_constraintEnd_toEndOf="@id/textViewCustomerName"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/shopName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.storeName}"/>
+
+            <TextView
+                android:id="@+id/textViewVisitorName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewStoreName"
+                app:layout_constraintStart_toStartOf="@id/textViewCustomerName"
+                app:layout_constraintEnd_toEndOf="@id/textViewCustomerName"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                android:paddingVertical="@dimen/_2sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/visitorName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.visitorName}"/>
+
+            <TextView
+                android:id="@+id/textViewBalance"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/textViewCustomerCode"
+                app:layout_constraintStart_toStartOf="@id/textViewCustomerCode"
+                app:layout_constraintEnd_toEndOf="@id/textViewCustomerCode"
+                app:layout_constraintBottom_toBottomOf="@id/textViewVisitorName"
+                android:background="@drawable/drawable_border_curve_light"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_9sdp"
+                android:padding="@dimen/_2sdp"
+                android:fontFamily="@font/iransans_light"
+                android:maxLines="2"
+                android:gravity="center"
+                app:setTitle="@{@string/remained}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.balance}"
+                app:setLastTest="@{@string/rial}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textViewDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutParent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutParent"
+            app:layout_constraintBottom_toBottomOf="@id/linearLayoutParent"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutParent"
+            app:layout_constraintWidth_percent="0.8"
+            app:backgroundTint="@null"
+            android:background="@drawable/drawable_list_button"
+            android:textSize="@dimen/_8sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:gravity="center"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/primaryColorVariant"
+            android:text='@string/showDetail' />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

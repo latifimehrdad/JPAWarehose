@@ -3,6 +3,8 @@ package com.hoomanholding.jpamanager.view.fragment.profile
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
+import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,8 @@ import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val tokenRepository: TokenRepository
 ): JpaViewModel() {
 
     @Inject
@@ -26,6 +29,9 @@ class ProfileViewModel @Inject constructor(
     val userInfoLiveData: MutableLiveData<UserInfoEntity> by lazy {
         MutableLiveData<UserInfoEntity>()
     }
+
+    val entityType = EnumEntityType.ProfileImage.name
+    var bearerToken = tokenRepository.getBearerToken()
 
 
     //---------------------------------------------------------------------------------------------- getUserInfo

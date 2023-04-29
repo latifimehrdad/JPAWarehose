@@ -52,8 +52,9 @@ class DownloadFragment(override var layout: Int = R.layout.fragment_download) :
     private fun getFileNameFromArgument() {
         arguments?.let { bundle ->
             val file = bundle.getString(CompanionValues.DOWNLOAD_URL, null)
+            val appName = bundle.getString(CompanionValues.APP_NAME, "")
             file?.let {
-                viewModel.downloadLastVersion(it)
+                viewModel.downloadLastVersion(it, appName)
             }
         }
     }

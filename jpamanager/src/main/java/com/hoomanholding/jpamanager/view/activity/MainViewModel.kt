@@ -1,17 +1,16 @@
 package com.hoomanholding.jpamanager.view.activity
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
-import com.hoomanholding.applibrary.tools.CompanionValues
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferences,
+    private val tokenRepository: TokenRepository,
     private val userRepository: UserRepository
 ) : JpaViewModel() {
 
@@ -35,5 +34,9 @@ class MainViewModel @Inject constructor(
     }
     //---------------------------------------------------------------------------------------------- getUserInfo
 
+
+    //---------------------------------------------------------------------------------------------- getBearerToke
+    fun getBearerToke() = tokenRepository.getBearerToken()
+    //---------------------------------------------------------------------------------------------- getBearerToke
 
 }

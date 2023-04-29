@@ -36,8 +36,9 @@
     <string name="financial">مالی</string>
     <string name="indebtedness">بدهکاری</string>
     <string name="salesAmount">مقدار فروش</string>
-    <string name="creditor">بستانکاری</string>
+    <string name="creditor">بستانکار</string>
     <string name="comparativeReport">گزارش مقایسه ای</string>
+    <string name="financialReport">گزارش مالی</string>
     <string name="exit">خروج</string>
     <string name="filterBy">فیلتر بر اساس</string>
     <string name="visitorName">نام ویزیتور</string>
@@ -53,6 +54,7 @@
     <string name="shopName">نام فروشگاه</string>
     <string name="rial">ریال</string>
     <string name="toman">تومان</string>
+    <string name="remained">مانده</string>
     <string name="address">آدرس</string>
     <string name="customerFinancialState">وضعیت مالی مشتری</string>
     <string name="products">لیست کالاها</string>
@@ -115,6 +117,7 @@
     <string name="orderState">وضعیت سفارش</string>
     <string name="chooseCurrency">انتخاب نوع ارز</string>
     <string name="signOut">خروج از حساب کاربری</string>
+    <string name="debit">بدهکار</string>
 
 
 

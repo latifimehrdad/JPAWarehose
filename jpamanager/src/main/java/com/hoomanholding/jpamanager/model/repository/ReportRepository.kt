@@ -27,4 +27,16 @@ class ReportRepository @Inject constructor(
         apiCall { api.requestVisitorSalesReport(tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestVisitorSalesReport
 
+
+    //---------------------------------------------------------------------------------------------- requestCustomerBalance
+    suspend fun requestCustomerBalance() =
+        apiCall { api.requestCustomerBalance(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestCustomerBalance
+
+
+    //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail
+    suspend fun requestCustomerBalanceDetail(customerId: Int) =
+        apiCall { api.requestCustomerBalanceDetail(customerId, tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail
+
 }

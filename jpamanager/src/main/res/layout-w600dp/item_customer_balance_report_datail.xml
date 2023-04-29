@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:background="@drawable/drawable_border_curve_light"
+            android:paddingHorizontal="@dimen/_3sdp"
+            android:paddingTop="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            android:baselineAligned="false">
+
+            <TextView
+                android:id="@+id/textViewCreditor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textViewDebit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:fontFamily="@font/iransans_light"
+                android:gravity="end"
+                app:setTitle="@{@string/creditor}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.credit}"
+                app:setLastTest="@{@string/rial}"/>
+
+            <TextView
+                android:id="@+id/textViewDebit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewCreditor"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:fontFamily="@font/iransans_light"
+                app:setTitle="@{@string/debit}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.debit}"
+                app:setLastTest="@{@string/rial}"/>
+
+            <TextView
+                android:id="@+id/textViewDecsription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewDebit"
+                app:layout_constraintStart_toStartOf="@id/textViewCreditor"
+                app:layout_constraintEnd_toEndOf="@id/textViewDebit"
+                android:background="@drawable/drawable_border_curve_light"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:fontFamily="@font/iransans_light"
+                android:padding="@dimen/_3sdp"
+                app:setTitle="@{@string/description}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.description}"/>
+
+
+            <TextView
+                android:id="@+id/textViewBalance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewDecsription"
+                app:layout_constraintStart_toStartOf="@id/textViewCreditor"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:textColor="@color/rejectFactorText"
+                android:textSize="@dimen/_7sdp"
+                android:lines="1"
+                android:fontFamily="@font/iransans_bold"
+                app:setTitle="@{@string/remained}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.balance}"
+                app:setLastTest="@{@string/rial}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/linearLayoutParent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/linearLayoutParent"
+            app:layout_constraintWidth_percent="0.6"
+            app:backgroundTint="@null"
+            android:background="@drawable/drawable_list_button"
+            android:textSize="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_3sdp"
+            android:gravity="center"
+            android:lines="1"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/primaryColorVariant"
+            app:setTitle="@{@string/date}"
+            app:setSplitter="@{@string/colon}"
+            app:setValue="@{item.transactionDate}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

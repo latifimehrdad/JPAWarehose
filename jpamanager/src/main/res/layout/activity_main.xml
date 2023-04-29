@@ -47,11 +47,13 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageViewBack"
+                    app:layout_constraintBottom_toTopOf="@id/textViewUser"
+                    app:layout_constraintStart_toEndOf="@id/cardViewProfile"
                     android:textColor="@color/dismiss"
                     android:textSize="@dimen/_7sdp"
                     android:gravity="start"
-                    android:lines="1"
+                    android:maxLines="2"
+                    android:layout_marginStart="@dimen/_3sdp"
                     android:fontFamily="@font/iransans_light"
                     android:paddingHorizontal="@dimen/_7sdp"
                     android:paddingVertical="@dimen/_3sdp" />
@@ -62,24 +64,45 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/textViewPersonnelCode"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageViewBack"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cardViewProfile"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_bold"
                     android:gravity="start"
-                    android:lines="1"
+                    android:maxLines="2"
+                    android:layout_marginStart="@dimen/_3sdp"
                     android:paddingHorizontal="@dimen/_7sdp"
                     android:paddingVertical="@dimen/_3sdp" />
 
                 <ImageView
                     android:id="@+id/imageViewBack"
                     android:layout_width="@dimen/_17sdp"
-                    android:layout_height="@dimen/_17sdp"
+                    android:layout_height="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:src="@drawable/ic_back"
                     android:contentDescription="@string/closeDescription" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintStart_toEndOf="@id/imageViewBack"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintWidth_percent="0.35"
+                    app:layout_constraintDimensionRatio="H,1:1" >
+
+                    <ImageView
+                        android:id="@+id/imageViewProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/profileDescription"
+                        android:scaleType="fitXY" />
+
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

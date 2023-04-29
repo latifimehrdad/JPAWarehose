@@ -1,7 +1,6 @@
 package com.hoomanholding.applibrary.view.fragment
 
 import android.content.SharedPreferences
-import android.os.Environment
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
@@ -17,7 +16,6 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,20 +28,9 @@ class SplashViewModel @Inject constructor(
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    private var destinationFile: File
     val successLiveData = SingleLiveEvent<Boolean>()
     val userIsEnteredLiveData = SingleLiveEvent<Boolean>()
     val downloadVersionLiveData = SingleLiveEvent<String>()
-
-
-    //---------------------------------------------------------------------------------------------- init
-    init {
-        val downloadFolder =
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        destinationFile = File(downloadFolder.absolutePath, "test.apk")
-
-    }
-    //---------------------------------------------------------------------------------------------- init
 
 
     //---------------------------------------------------------------------------------------------- userIsEntered

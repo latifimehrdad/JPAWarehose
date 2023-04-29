@@ -13,6 +13,9 @@ data class UserInfoEntity(
     val userName : String?,
     val fullName : String?,
     val personnelNumber : String?,
+    val systemType: String?,
+    val profileImageName: String?,
+    val visitorImageName: String,
     val rolesId : List<Long>?,
 ) {
     @PrimaryKey(autoGenerate = false)
