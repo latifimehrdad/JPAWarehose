@@ -116,23 +116,6 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
             showDialogConformToChangeStatusOrders(EnumState.Reject)
         }
 
-/*        binding.spinnerOrderState.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View,
-                    position: Int,
-                    id: Long
-                ) {
-                    if (position == 0)
-                        return
-                    binding.spinnerOrderState.visibility = View.GONE
-                    viewModel.setStateForFilter(position - 1)
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }*/
-
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -256,23 +239,21 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
 
     //---------------------------------------------------------------------------------------------- resetFilterView
-    private fun resetFilterView(layout: View, view: View, text: TextView, textFilter: TextView) {
+    private fun resetFilterView(layout: View, view: View, text: TextView) {
         layout.background =
             AppCompatResources.getDrawable(requireContext(), R.drawable.tabs_selector)
         view.visibility = View.INVISIBLE
         text.setTextColor(requireContext().getColor(android.R.color.white))
-        textFilter.setTextColor(requireContext().getColor(android.R.color.white))
     }
     //---------------------------------------------------------------------------------------------- resetFilterView
 
 
     //---------------------------------------------------------------------------------------------- selectFilterView
-    private fun selectFilterView(layout: View, view: View, text: TextView, textFilter: TextView) {
+    private fun selectFilterView(layout: View, view: View, text: TextView) {
         layout.background =
             AppCompatResources.getDrawable(requireContext(), R.drawable.drawable_tab_selected)
         view.visibility = View.VISIBLE
         text.setTextColor(requireContext().getColor(android.R.color.black))
-        textFilter.setTextColor(requireContext().getColor(android.R.color.black))
     }
     //---------------------------------------------------------------------------------------------- selectFilterView
 
@@ -330,8 +311,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         resetFilterView(
             binding.linearLayoutState,
             binding.viewState,
-            binding.textViewState,
-            binding.textViewStateFilter
+            binding.textViewState
         )
         binding.textViewState.text = getString(R.string.orderStateNoState)
         binding.textViewState.isSelected = false
@@ -344,8 +324,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         resetFilterView(
             binding.linearLayoutVisitor,
             binding.viewVisitor,
-            binding.textViewVisitor,
-            binding.textViewVisitorFilter
+            binding.textViewVisitor
         )
         binding.textViewVisitor.text = getString(R.string.visitorName)
         binding.textViewVisitor.isSelected = false
@@ -358,8 +337,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         resetFilterView(
             binding.linearLayoutDate,
             binding.viewDate,
-            binding.textViewDate,
-            binding.textViewDateFilter
+            binding.textViewDate
         )
         binding.textViewDate.text = getString(R.string.startEndDate)
         binding.textViewDate.isSelected = false
@@ -372,8 +350,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         resetFilterView(
             binding.linearLayoutCustomer,
             binding.viewCustomer,
-            binding.textViewCustomer,
-            binding.textViewCustomerFilter
+            binding.textViewCustomer
         )
         binding.textViewCustomer.text = getString(R.string.customerName)
         binding.textViewCustomer.isSelected = false
@@ -386,8 +363,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         selectFilterView(
             binding.linearLayoutCustomer,
             binding.viewCustomer,
-            binding.textViewCustomer,
-            binding.textViewCustomerFilter
+            binding.textViewCustomer
         )
         binding.textViewCustomer.text = customerModel.customerName
         binding.textViewCustomer.isSelected = true
@@ -400,8 +376,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         selectFilterView(
             binding.linearLayoutDate,
             binding.viewDate,
-            binding.textViewDate,
-            binding.textViewDateFilter
+            binding.textViewDate
         )
         binding.textViewDate.text =
             getString(R.string.setDateFrom, dateFilterModel.startDate, dateFilterModel.endDate)
@@ -416,8 +391,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         selectFilterView(
             binding.linearLayoutState,
             binding.viewState,
-            binding.textViewState,
-            binding.textViewStateFilter
+            binding.textViewState
         )
         binding.textViewState.text = stateString
         binding.textViewState.isSelected = true
@@ -430,8 +404,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         selectFilterView(
             binding.linearLayoutVisitor,
             binding.viewVisitor,
-            binding.textViewVisitor,
-            binding.textViewVisitorFilter
+            binding.textViewVisitor
         )
         binding.textViewVisitor.text = visitorModel.visitorName
         binding.textViewVisitor.isSelected = true

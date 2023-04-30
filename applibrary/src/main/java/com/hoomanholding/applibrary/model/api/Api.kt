@@ -1,5 +1,6 @@
 package com.hoomanholding.applibrary.model.api
 
+import android.app.DownloadManager.Request
 import com.hoomanholding.applibrary.model.data.database.entity.*
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptEntity
@@ -19,6 +20,8 @@ import com.hoomanholding.applibrary.model.data.response.report.HomeReportModel
 import com.hoomanholding.applibrary.model.data.response.report.VisitorSalesReportModel
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -213,6 +216,17 @@ interface Api {
         @Query("EntityType") EntityType: EnumEntityType,
         @Query("FileName") FileName: String
     ): Response<ResponseBody>
+
+
+    @Multipart
+    @POST("$files/files-add-file")
+    suspend fun uploadProfileImage(
+        @Part("entityType") entityType: RequestBody,
+        @Part File: MultipartBody.Part,
+        @HeaderMap Authorization: Map<String, String>
+    ): Response<GeneralResponse<Boolean?>>
+
+
     //---------------------------------------------------------------------------------------------- downloadApkFile
 
 }

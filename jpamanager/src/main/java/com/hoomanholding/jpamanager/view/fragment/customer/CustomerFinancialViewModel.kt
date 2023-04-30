@@ -6,6 +6,8 @@ import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.hoomanholding.jpamanager.R
+import com.hoomanholding.jpamanager.model.data.other.CustomerFinancialItemModel
 import com.hoomanholding.jpamanager.model.repository.CustomerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -36,10 +38,125 @@ class CustomerFinancialViewModel @Inject constructor(
     fun requestGetCustomerFinancial() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler()) {
             val response = checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
-            response?.let { customerFinancialLiveData.postValue(it) }
+            response?.let {
+                customerFinancialLiveData.postValue(it)
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
+
+
+    //---------------------------------------------------------------------------------------------- createCustomerFinancialList
+    fun createCustomerFinancialList(item: CustomerFinancialModel): List<CustomerFinancialItemModel> {
+        val detailList = mutableListOf<CustomerFinancialItemModel>()
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.purchaseAmount),
+                item.purchaseAmount, null,
+                resourcesProvider.getString(R.string.rial)
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.orderCount),
+                item.billingCount, null,
+                ""
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.dateOfFirstPurchase),
+                item.firstBillingDate, null,
+                ""
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.dateOfLastPurchase),
+                item.lastBillingDate, null,
+                ""
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.cashDebitAmount),
+                item.cashDebitAmount, null,
+                resourcesProvider.getString(R.string.rial)
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.notRegisteredCheckAmount),
+                item.notRegisteredCheckAmount, null,
+                resourcesProvider.getString(R.string.rial)
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.notRegisteredCheckCount),
+                item.notRegisteredCheckCount, EnumCheckType.NotRegisteredCheck,
+                ""
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.bouncedCheckAmount),
+                item.bouncedCheckAmount, null,
+                resourcesProvider.getString(R.string.rial)
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.bouncedCheckCount),
+                item.bouncedCheckCount, EnumCheckType.BouncedCheck,
+                ""
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.payedCheckAmount),
+                item.payedCheckAmount, null,
+                resourcesProvider.getString(R.string.rial)
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.payedCheckCount),
+                item.payedCheckCount, null,
+                ""
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.notDueCheckAmount),
+                item.notDueCheckAmount, null,
+                resourcesProvider.getString(R.string.rial)
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.notDueCheckCount),
+                item.notDueCheckCount, EnumCheckType.NotDueCheck,
+                ""
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.guaranteeCheckAmount),
+                item.guaranteeCheckAmount, null,
+                resourcesProvider.getString(R.string.rial)
+            )
+        )
+        detailList.add(
+            CustomerFinancialItemModel(
+                resourcesProvider.getString(R.string.guaranteeCheckCount),
+                item.guaranteeCheckCount, EnumCheckType.GuaranteeCheck,
+                ""
+            )
+        )
+        return detailList
+    }
+    //---------------------------------------------------------------------------------------------- createCustomerFinancialList
 
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail

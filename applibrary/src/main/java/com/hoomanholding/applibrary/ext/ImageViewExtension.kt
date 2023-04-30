@@ -1,9 +1,11 @@
 package com.hoomanholding.applibrary.ext
 
+import android.annotation.SuppressLint
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.hoomanholding.applibrary.R
@@ -16,6 +18,8 @@ import com.hoomanholding.applibrary.model.api.Api
  */
 
 
+//-------------------------------------------------------------------------------------------------- downloadImage
+@SuppressLint("UseCompatLoadingForDrawables")
 fun ImageView.downloadImage(url: String?, systemType: String?, entityType: String, token: String) {
     if (url.isNullOrEmpty()) {
         this.setImageDrawable(context.getDrawable(R.drawable.profile_image))
@@ -30,8 +34,14 @@ fun ImageView.downloadImage(url: String?, systemType: String?, entityType: Strin
         link,
         LazyHeaders.Builder().addHeader("Authorization", token).build()
     )
-    Glide.with(this).load(glideUrl).into(this)
+    Glide
+        .with(this)
+        .load(glideUrl)
+        .skipMemoryCache(true)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
+        .into(this)
 }
+//-------------------------------------------------------------------------------------------------- downloadImage
 
 
 //-------------------------------------------------------------------------------------------------- ImageView.setItemIcon

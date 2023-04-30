@@ -1,11 +1,14 @@
 package com.hoomanholding.jpamanager.view.activity
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,7 +24,9 @@ class MainViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- deleteAllData
     fun deleteAllData() {
-        userRepository.deleteUser()
+        viewModelScope.launch(IO + exceptionHandler()) {
+            userRepository.deleteUser()
+        }
     }
     //---------------------------------------------------------------------------------------------- deleteAllData
 
@@ -29,8 +34,10 @@ class MainViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- getUserInfo
     fun getUserInfo() {
-        val userInfo = userRepository.getUser()
-        userInfoLiveData.postValue(userInfo)
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val userInfo = userRepository.getUser()
+            userInfoLiveData.postValue(userInfo)
+        }
     }
     //---------------------------------------------------------------------------------------------- getUserInfo
 

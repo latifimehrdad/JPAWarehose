@@ -79,6 +79,7 @@
     <string name="information">اطلاعات</string>
     <string name="purchaseAmount">مبلغ خرید</string>
     <string name="dateOfFirstPurchase">تاریخ اولین خرید</string>
+    <string name="dateOfLastPurchase">تاریخ آخرین خرید</string>
     <string name="notRegisteredCheck">چک ثبت نشده</string>
     <string name="notRegisteredCheckAmount">مبلغ چک ثبت نشده</string>
     <string name="notRegisteredCheckCount">تعداد چک ثبت نشده</string>
