@@ -24,6 +24,7 @@
                 android:id="@+id/cardViewProfile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.35"
@@ -39,6 +40,26 @@
                     app:SystemType="@{viewModel.userInfoLiveData.systemType}"
                     app:setEntityType="@{viewModel.entityType}"
                     app:bearerToken="@{viewModel.bearerToken}"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:background="@drawable/drawable_back_edit"
+                    android:padding="@dimen/_2sdp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_gravity="bottom"
+                    android:contentDescription="@string/edit"/>
+
+                <TextView
+                    android:id="@+id/textViewPercent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/downloadBackGround"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:fontFamily="@font/kalameh_bold"
+                    android:visibility="gone"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -187,18 +208,18 @@
                     android:id="@+id/switchActive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
                     android:theme="@style/switchStyle" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
-                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_8sdp"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/yekan_bakh_medium"
-                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawablePadding="@dimen/_5sdp"
                     app:drawableEndCompat="@drawable/ic_finger_print"
                     app:drawableTint="@color/primaryColor"
                     android:text="@string/fingerprint"/>

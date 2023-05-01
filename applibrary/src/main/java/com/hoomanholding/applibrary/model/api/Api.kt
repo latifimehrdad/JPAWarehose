@@ -1,6 +1,5 @@
 package com.hoomanholding.applibrary.model.api
 
-import android.app.DownloadManager.Request
 import com.hoomanholding.applibrary.model.data.database.entity.*
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptEntity
@@ -14,10 +13,7 @@ import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinanci
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
-import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
-import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportModel
-import com.hoomanholding.applibrary.model.data.response.report.HomeReportModel
-import com.hoomanholding.applibrary.model.data.response.report.VisitorSalesReportModel
+import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import okhttp3.MultipartBody
@@ -200,6 +196,11 @@ interface Api {
         @Query("CustomerId") customerId: Int,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CustomerBalanceReportDetailModel>?>>
+
+    @GET("$report/managerapp-report-customersBouncedCheckReport")
+    suspend fun requestCustomersBouncedCheckReport(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CustomerBounceCheckReportModel>?>>
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 

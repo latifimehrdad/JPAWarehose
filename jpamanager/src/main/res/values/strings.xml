@@ -119,6 +119,9 @@
     <string name="chooseCurrency">انتخاب نوع ارز</string>
     <string name="signOut">خروج از حساب کاربری</string>
     <string name="debit">بدهکار</string>
+    <string name="edit">ویرایش</string>
+    <string name="year">سال</string>
+    <string name="netSales">خالص فروش</string>
 
 
 

@@ -41,7 +41,8 @@ class CustomerBalanceFragment(
         binding.shimmerViewContainer.config(getShimmerBuild())
         observeLiveData()
         setListener()
-        getReport("")
+        if (viewModel.customerBalanceReport == null)
+            getReport("")
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 

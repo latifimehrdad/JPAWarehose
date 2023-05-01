@@ -85,7 +85,6 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewDecsription"
                 app:layout_constraintStart_toStartOf="@id/textViewCreditor"
                 android:layout_marginTop="@dimen/_7sdp"
-                android:textColor="@color/rejectFactorText"
                 android:textSize="@dimen/_9sdp"
                 android:lines="1"
                 android:paddingVertical="@dimen/_2sdp"

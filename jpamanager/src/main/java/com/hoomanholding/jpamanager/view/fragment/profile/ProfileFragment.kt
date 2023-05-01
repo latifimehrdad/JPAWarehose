@@ -2,6 +2,7 @@ package com.hoomanholding.jpamanager.view.fragment.profile
 
 import android.Manifest
 import android.app.Activity
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,16 +40,16 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
     @Inject
     lateinit var biometricTools: BiometricTools
 
+
+    //---------------------------------------------------------------------------------------------- launcher
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
-                val uri = it.data?.data!!
-                uri.let { galleryUri ->
-                    binding.imageViewProfile.setImageURI(galleryUri)
-                    viewModel.uploadProfileImage(galleryUri.toFile())
-                }
+                val uri = it.data?.data
+                uri?.let { uploadProfileImage(uri) }
             }
         }
+    //---------------------------------------------------------------------------------------------- launcher
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -74,6 +75,7 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
 
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
+        binding.textViewPercent.visibility = View.GONE
         activity?.let {
             (it as MainActivity).showMessage(message)
         }
@@ -149,11 +151,13 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
             )
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    ImagePicker.Companion.with(requireActivity())
+                    ImagePicker
+                        .Companion
+                        .with(requireActivity())
                         .crop()
                         .cropSquare()
                         .provider(ImageProvider.BOTH) //Or bothCameraGallery()
-                        .createIntentFromDialog{launcher.launch(it)}
+                        .createIntentFromDialog { launcher.launch(it) }
                 }
 
                 override fun onPermissionRationaleShouldBeShown(
@@ -167,5 +171,33 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
     }
     //---------------------------------------------------------------------------------------------- cameraPermission
 
+
+    //---------------------------------------------------------------------------------------------- uploadProfileImage
+    private fun uploadProfileImage(pictureUri: Uri) {
+        binding.textViewPercent.visibility = View.VISIBLE
+        binding.imageViewProfile.setImageURI(pictureUri)
+        viewModel.uploadPercentLiveData.observe(viewLifecycleOwner){
+            if (it > 100) {
+                binding.textViewPercent.visibility = View.GONE
+                viewModel.uploadPercentLiveData.removeObservers(viewLifecycleOwner)
+                getUserInfoInActivity()
+            } else {
+                val percent = "$it %"
+                binding.textViewPercent.text = percent
+            }
+        }
+        viewModel.uploadProfileImage(pictureUri.toFile())
+    }
+    //---------------------------------------------------------------------------------------------- uploadProfileImage
+
+
+
+    //---------------------------------------------------------------------------------------------- getUserInfoInActivity
+    private fun getUserInfoInActivity() {
+        activity?.let {
+            (it as MainActivity).getUserInfo()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getUserInfoInActivity
 
 }

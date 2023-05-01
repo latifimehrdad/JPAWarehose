@@ -22,5 +22,7 @@ data class CustomerFinancialDetailModel(
     val checkBankName: String?,
     val checkBranchName: String?,
     val checkAccountNumber: String?,
-    val checkOwnerName: String?
+    val checkOwnerName: String?,
+    val year: Int,
+    val ordersAmount: Long
 )

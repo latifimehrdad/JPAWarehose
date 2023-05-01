@@ -10,5 +10,6 @@ enum class EnumCheckType {
     BouncedCheck,
     PayedCheck,
     NotDueCheck,
-    GuaranteeCheck
+    GuaranteeCheck,
+    OrderDetails
 }

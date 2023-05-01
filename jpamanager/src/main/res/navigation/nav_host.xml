@@ -62,6 +62,14 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
 
+        <action
+            android:id="@+id/action_reportFragment_to_customerBounceCheckFragment"
+            app:destination="@id/customerBounceCheckFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
     </fragment>
 
     <fragment
@@ -120,7 +128,17 @@
 
     <fragment
         android:id="@+id/customerFinancialFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.customer.CustomerFinancialFragment"/>
+        android:name="com.hoomanholding.jpamanager.view.fragment.customer.CustomerFinancialFragment">
+
+        <action
+            android:id="@+id/action_customerFinancialFragment_to_customerBalanceDetailFragment"
+            app:destination="@id/customerBalanceDetailFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/downloadFragment"
@@ -147,6 +165,11 @@
     <fragment
         android:id="@+id/customerBalanceDetailFragment"
         android:name="com.hoomanholding.jpamanager.view.fragment.report.customerbalance.detail.CustomerBalanceDetailFragment"/>
+
+
+    <fragment
+        android:id="@+id/customerBounceCheckFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.report.customer.check.CustomerBounceCheckFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

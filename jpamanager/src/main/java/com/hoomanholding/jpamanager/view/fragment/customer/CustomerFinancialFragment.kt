@@ -3,9 +3,11 @@ package com.hoomanholding.jpamanager.view.fragment.customer
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
+import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -13,7 +15,6 @@ import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentCustomerFinancialBinding
-import com.hoomanholding.jpamanager.model.data.other.CustomerFinancialItemModel
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.CustomerFinancialDetailHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.CustomerFinancialAdapter
@@ -52,10 +53,18 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         binding.shimmerViewContainer.config(getShimmerBuild())
+        setListener()
         observeLiveData()
         getCustomerIdFromArgument()
     }
     //---------------------------------------------------------------------------------------------- initView
+
+
+    //---------------------------------------------------------------------------------------------- setListener
+    private fun setListener() {
+        binding.textViewAmountOfDebt.setOnClickListener { gotoCustomerBalanceDetail() }
+    }
+    //---------------------------------------------------------------------------------------------- setListener
 
 
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -65,6 +74,7 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
         }
 
         viewModel.customerFinancialLiveData.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainer.stopLoading()
             setCustomerFinancialModel(it)
         }
     }
@@ -98,20 +108,25 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
 
     //---------------------------------------------------------------------------------------------- setCustomerFinancialModel
     private fun setCustomerFinancialModel(item: CustomerFinancialModel) {
-        binding.shimmerViewContainer.stopShimmer()
         if (context == null)
             return
         binding.item = item
         binding.textViewCustomerName.isSelected = true
         binding.textViewAmountOfDebt.isSelected = true
-        val click = object : CustomerFinancialDetailHolder.Click{
+        if (item.debitAmount > 0)
+            binding.textViewAmountOfDebt
+                .setTextColor(requireContext().getColor(R.color.rejectFactorText))
+        else
+            binding.textViewAmountOfDebt
+                .setTextColor(requireContext().getColor(R.color.confirmFactorText))
+        val click = object : CustomerFinancialDetailHolder.Click {
             override fun moreDetail(type: EnumCheckType?) {
                 showMoreDialog(type)
             }
         }
         val adapter = CustomerFinancialAdapter(viewModel.createCustomerFinancialList(item), click)
         val manager = LinearLayoutManager(
-            requireContext(),LinearLayoutManager.VERTICAL, false
+            requireContext(), LinearLayoutManager.VERTICAL, false
         )
         binding.recyclerViewItem.adapter = adapter
         binding.recyclerViewItem.layoutManager = manager
@@ -120,11 +135,29 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
 
 
     //---------------------------------------------------------------------------------------------- showMoreDialog
-    private fun showMoreDialog(type: EnumCheckType?){
+    private fun showMoreDialog(type: EnumCheckType?) {
         if (type == null)
             return
         CustomerHyperLinkDialog(viewModel.customerId, type).show(childFragmentManager, "dialog")
     }
     //---------------------------------------------------------------------------------------------- showMoreDialog
+
+
+    //---------------------------------------------------------------------------------------------- gotoCustomerBalanceDetail
+    private fun gotoCustomerBalanceDetail() {
+        val item = viewModel.customerFinancialLiveData.value
+        item?.let {
+            val bundle = Bundle()
+            bundle.putInt(CompanionValues.CUSTOMER_ID, item.customerId)
+            bundle.putString(CompanionValues.CUSTOMER_NAME, item.customerName)
+            bundle.putString(CompanionValues.CUSTOMER_CODE, item.customerCode)
+            findNavController().navigate(
+                R.id.action_customerFinancialFragment_to_customerBalanceDetailFragment,
+                bundle
+            )
+        }
+    }
+    //---------------------------------------------------------------------------------------------- gotoCustomerBalanceDetail
+
 
 }

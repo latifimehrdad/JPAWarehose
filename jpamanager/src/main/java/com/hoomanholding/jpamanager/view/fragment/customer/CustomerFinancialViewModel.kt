@@ -10,7 +10,7 @@ import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.other.CustomerFinancialItemModel
 import com.hoomanholding.jpamanager.model.repository.CustomerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,12 +36,14 @@ class CustomerFinancialViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
     fun requestGetCustomerFinancial() {
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler()) {
-            val response = checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
-            response?.let {
-                customerFinancialLiveData.postValue(it)
+        if (customerFinancialLiveData.value == null)
+            viewModelScope.launch(IO + exceptionHandler()) {
+                val response =
+                    checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
+                response?.let {
+                    customerFinancialLiveData.postValue(it)
+                }
             }
-        }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
 
@@ -52,7 +54,7 @@ class CustomerFinancialViewModel @Inject constructor(
         detailList.add(
             CustomerFinancialItemModel(
                 resourcesProvider.getString(R.string.purchaseAmount),
-                item.purchaseAmount, null,
+                item.purchaseAmount, EnumCheckType.OrderDetails,
                 resourcesProvider.getString(R.string.rial)
             )
         )
@@ -161,7 +163,7 @@ class CustomerFinancialViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
     fun requestGetCustomerFinancialDetail(checkType: EnumCheckType) {
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler()) {
+        viewModelScope.launch(IO + exceptionHandler()) {
             val response = checkResponse(
                 customerRepository.requestGetCustomerFinancialDetail(customerId, checkType)
             )

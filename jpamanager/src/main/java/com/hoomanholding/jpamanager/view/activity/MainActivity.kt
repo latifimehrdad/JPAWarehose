@@ -125,7 +125,9 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.reportFragment,
             R.id.visitorSaleReportFragment,
-            R.id.customerBalanceFragment -> {
+            R.id.customerBalanceFragment,
+            R.id.customerBalanceDetailFragment,
+            R.id.customerBounceCheckFragment -> {
                 if (!binding.menuReport.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuReport.selected()

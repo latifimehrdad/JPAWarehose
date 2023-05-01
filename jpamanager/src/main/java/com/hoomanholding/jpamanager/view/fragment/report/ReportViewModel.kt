@@ -64,6 +64,14 @@ class ReportViewModel @Inject constructor(): JpaViewModel() {
                 R.id.action_reportFragment_to_customerBalanceFragment
             )
         )
+
+        items.add(
+            CardBoardItemModel(
+                R.drawable.ic_ckeck,
+                resourcesProvider.getString(R.string.bouncedCheck),
+                R.id.action_reportFragment_to_customerBounceCheckFragment
+            )
+        )
         itemLiveData.postValue(items)
     }
     //---------------------------------------------------------------------------------------------- setFinancialReportItem

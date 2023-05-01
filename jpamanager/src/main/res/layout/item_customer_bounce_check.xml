@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.report.CustomerBounceCheckReportModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_back_receipt_detail"
+        android:layout_marginHorizontal="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/textViewCheckNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:maxHeight="@dimen/_15sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9sdp"
+            android:fontFamily="@font/kalameh_medium"
+            app:setTitle="@{@string/checkNumber}"
+            app:setSplitter="@{@string/colon}"
+            app:setValue="@{item.checkNumber}"
+            app:drawableEndCompat="@drawable/ic_payment"
+            android:drawablePadding="@dimen/_5sdp"
+            app:drawableTint="@color/black" />
+        
+        
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewCheckNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/linearLayout2"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:paddingHorizontal="0.2dp"
+            android:orientation="vertical"
+            android:background="@drawable/drawable_border_curve_light_gray">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/checkAmount}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.amount}"
+                app:setLastTest="@{@string/rial}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/shopName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.storeName}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/reasonForTheBouncedCheck}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.reason}" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/linearLayout1"
+            app:layout_constraintBottom_toBottomOf="@id/linearLayout1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/linearLayout1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:paddingHorizontal="0.2dp"
+            android:orientation="vertical"
+            android:background="@drawable/drawable_border_curve_light_gray">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/receiveDate}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.dateReceived}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/dueDate}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.dueDate}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/customerName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.customerName}" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

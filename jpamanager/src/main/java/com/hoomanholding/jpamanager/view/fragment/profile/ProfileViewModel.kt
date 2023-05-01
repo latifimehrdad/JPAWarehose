@@ -1,7 +1,6 @@
 package com.hoomanholding.jpamanager.view.fragment.profile
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
@@ -9,6 +8,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
@@ -40,6 +40,8 @@ class ProfileViewModel @Inject constructor(
     val userInfoLiveData: MutableLiveData<UserInfoEntity> by lazy {
         MutableLiveData<UserInfoEntity>()
     }
+
+    val uploadPercentLiveData = SingleLiveEvent<Int>()
 
     val entityType = EnumEntityType.ProfileImage.name
     var bearerToken = tokenRepository.getBearerToken()
@@ -75,7 +77,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch(IO + exceptionHandler()) {
             val body = ProgressRequestBodyManager(file, "image", object : UploadCallBack {
                 override fun onUploadPercent(percent: Int) {
-                    Log.e("meri", "progress = $percent")
+                    uploadPercentLiveData.postValue(percent)
                 }
             })
             val entityType = EnumEntityType
@@ -83,7 +85,7 @@ class ProfileViewModel @Inject constructor(
             val image = MultipartBody.Part.createFormData("File", file.name, body)
             val response = checkResponse(uploadFileRepository.uploadProfileImage(entityType, image))
             response?.let {
-                Log.e("meri", "upload")
+                uploadPercentLiveData.postValue(101)
             }
         }
     }

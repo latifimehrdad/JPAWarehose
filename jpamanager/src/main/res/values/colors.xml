@@ -27,6 +27,8 @@
     <color name="recyclerLoadingShadow">#E6FFFFFF</color>
     <color name="recyclerLoadingBack">#33FFFFFF</color>
 
+    <color name="downloadBackGround">#99000000</color>
+
     <color name="confirmFactorButton">#e1fff0</color>
     <color name="confirmFactorText">#04c565</color>
 

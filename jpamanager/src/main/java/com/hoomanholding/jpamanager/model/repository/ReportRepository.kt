@@ -39,4 +39,9 @@ class ReportRepository @Inject constructor(
         apiCall { api.requestCustomerBalanceDetail(customerId, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail
 
+
+    //---------------------------------------------------------------------------------------------- requestCustomersBouncedCheckReport
+    suspend fun requestCustomersBouncedCheckReport() =
+        apiCall { api.requestCustomersBouncedCheckReport(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestCustomersBouncedCheckReport
 }

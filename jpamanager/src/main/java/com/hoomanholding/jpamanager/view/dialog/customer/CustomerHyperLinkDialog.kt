@@ -86,6 +86,9 @@ class CustomerHyperLinkDialog(
                 binding.textviewTitle.text = getString(R.string.payedCheck)
             EnumCheckType.NotDueCheck ->
                 binding.textviewTitle.text = getString(R.string.notDueCheck)
+            EnumCheckType.OrderDetails ->
+                getString(R.string.netSales)
+
         }
         getCustomerFinancialDetail()
     }
@@ -135,7 +138,7 @@ class CustomerHyperLinkDialog(
 
     //---------------------------------------------------------------------------------------------- setAdapter
     private fun setAdapter(it: List<CustomerFinancialDetailModel>) {
-        val adapter = CustomerHyperLinkAdapter(it)
+        val adapter = CustomerHyperLinkAdapter(it, type)
         val manager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerItem.adapter = adapter
         binding.recyclerItem.layoutManager = manager
