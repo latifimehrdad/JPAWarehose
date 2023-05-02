@@ -144,6 +144,8 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
 
     //---------------------------------------------------------------------------------------------- cameraPermission
     private fun cameraPermission() {
+        if (context == null)
+            return
         Dexter.withContext(requireContext())
             .withPermissions(
                 Manifest.permission.CAMERA,

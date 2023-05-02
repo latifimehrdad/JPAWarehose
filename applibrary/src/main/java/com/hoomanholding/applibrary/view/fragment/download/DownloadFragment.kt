@@ -35,6 +35,11 @@ class DownloadFragment(override var layout: Int = R.layout.fragment_download) :
 
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
+        viewModel.errorLiveDate.observe(viewLifecycleOwner){
+            binding.textViewPercent.text = it.message
+        }
+
+
         viewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
             installApp(it)
         }

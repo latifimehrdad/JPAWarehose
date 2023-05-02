@@ -1,5 +1,6 @@
 package com.hoomanholding.jpamanager.view.fragment.splash
 
+import android.Manifest
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -22,6 +23,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.tools.manager.DialogManager
 
 
@@ -171,7 +177,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
 
         splashViewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
-            showDialogUpdateAppVersion(it)
+            storagePermission(it)
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -182,6 +188,34 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         splashViewModel.requestGetAppVersion(CompanionValues.MANAGER_APP)
     }
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
+
+
+
+    //---------------------------------------------------------------------------------------------- cameraPermission
+    private fun storagePermission(fileName: String) {
+        if (context == null)
+            return
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    showDialogUpdateAppVersion(fileName)
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?
+                ) {
+
+                }
+
+            }).check()
+    }
+    //---------------------------------------------------------------------------------------------- cameraPermission
+
 
 
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
@@ -199,6 +233,11 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         ).show()
     }
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
+
+
+
+
+
 
 
     //---------------------------------------------------------------------------------------------- gotoFragmentDownload

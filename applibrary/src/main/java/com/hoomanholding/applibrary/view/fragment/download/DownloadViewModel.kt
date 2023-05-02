@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,16 +30,23 @@ class DownloadViewModel @Inject constructor(
     init {
         val downloadFolder =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        destinationFile = File(downloadFolder.absolutePath, "JpaManager.apk")
+        destinationFile = File(downloadFolder.absolutePath, "JpaManager_${getNewFileName()}.apk")
 
     }
     //---------------------------------------------------------------------------------------------- init
 
 
+    //______________________________________________________________________________________________ getNewFileName
+    private fun getNewFileName(): String? {
+        return SimpleDateFormat("yyyy_MM_dd__HH_mm_ss", Locale.getDefault()).format(Date())
+    }
+    //______________________________________________________________________________________________ getNewFileName
+
+
     //---------------------------------------------------------------------------------------------- downloadLastVersion
     fun downloadLastVersion(fileName: String, appName: String) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            delay(2000)
+            delay(1000)
             if (destinationFile.exists())
                 destinationFile.delete()
             val response = downloadFileRepository.downloadApkFile(
@@ -50,7 +59,7 @@ class DownloadViewModel @Inject constructor(
                         downloadProgress.postValue(downloadState.progress)
                     }
                     is DownloadState.Failed -> {
-
+                        setMessage(downloadState.error?.message?:"Failed Download!")
                     }
                     DownloadState.Finished -> {
                         downloadSuccessLiveData.postValue(destinationFile)
