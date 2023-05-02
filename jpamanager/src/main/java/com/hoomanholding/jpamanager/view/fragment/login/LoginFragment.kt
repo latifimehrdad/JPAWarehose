@@ -126,10 +126,6 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
 
-        binding.textViewForgetPassword.setOnClickListener {
-
-        }
-
         binding
             .buttonLogin
             .setOnClickListener { login(false) }

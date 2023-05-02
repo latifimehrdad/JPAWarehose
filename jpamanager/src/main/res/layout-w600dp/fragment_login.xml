@@ -112,14 +112,14 @@
 
                 <com.hoomanholding.applibrary.view.custom.JpaButton
                     android:id="@+id/buttonLogin"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/cardViewFingerPrint"
-                    app:layout_constraintEnd_toEndOf="@id/cardViewFingerPrint"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textInputLayoutPasscode"
                     android:layout_marginTop="@dimen/_15sdp"
                     app:backgroundTint="@null"
                     android:background="@drawable/drawable_button"
+                    android:hint="@string/bePatient"
                     android:textSize="@dimen/_8sdp"
                     android:paddingTop="@dimen/_2sdp"
                     android:paddingBottom="@dimen/_2sdp"
@@ -128,26 +128,13 @@
                     android:text='@string/enter' />
 
 
-                <TextView
-                    android:id="@+id/textViewForgetPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@id/textInputLayoutPasscode"
-                    app:layout_constraintTop_toTopOf="@id/buttonLogin"
-                    app:layout_constraintBottom_toBottomOf="@id/buttonLogin"
-                    android:textSize="@dimen/_8sdp"
-                    android:text="@string/forgetPassword"
-                    android:textColor="@color/hint"
-                    android:fontFamily="@font/iransans_medium"/>
-
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cardViewFingerPrint"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"
-                    app:layout_constraintTop_toBottomOf="@id/buttonLogin"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@id/buttonLogin"
+                    app:layout_constraintBottom_toBottomOf="@id/buttonLogin"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/drawable_login_fingerprint">
 
                     <ImageView

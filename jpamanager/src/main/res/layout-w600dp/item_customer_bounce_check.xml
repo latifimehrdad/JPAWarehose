@@ -69,9 +69,9 @@
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/drawable_border_text_light_gray"
-                app:setTitle="@{@string/shopName}"
+                app:setTitle="@{@string/customerName}"
                 app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.storeName}" />
+                app:setValue="@{item.customerName}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,9 +81,9 @@
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/drawable_border_text_light_gray"
-                app:setTitle="@{@string/reasonForTheBouncedCheck}"
+                app:setTitle="@{@string/shopName}"
                 app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.reason}" />
+                app:setValue="@{item.storeName}" />
 
         </LinearLayout>
 
@@ -134,9 +134,9 @@
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/drawable_border_text_light_gray"
-                app:setTitle="@{@string/customerName}"
+                app:setTitle="@{@string/reasonForTheBouncedCheck}"
                 app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.customerName}" />
+                app:setValue="@{item.reason}" />
 
         </LinearLayout>
 
