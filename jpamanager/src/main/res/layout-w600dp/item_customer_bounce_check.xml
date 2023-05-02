@@ -69,6 +69,18 @@
                 android:gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/customerCode}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.customerCode}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/drawable_border_text_light_gray"
                 app:setTitle="@{@string/customerName}"
                 app:setSplitter="@{@string/colon}"
                 app:setValue="@{item.customerName}" />
@@ -125,6 +137,18 @@
                 app:setTitle="@{@string/dueDate}"
                 app:setSplitter="@{@string/colon}"
                 app:setValue="@{item.dueDate}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/hint"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/drawable_border_text_light_gray"
+                app:setTitle="@{@string/visitorName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.visitorName}" />
 
             <TextView
                 android:layout_width="match_parent"

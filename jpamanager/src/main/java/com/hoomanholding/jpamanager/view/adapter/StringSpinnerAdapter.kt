@@ -67,7 +67,7 @@ class StringSpinnerAdapter(
         spinnerView.compoundDrawablePadding = spinnerView.compoundDrawablePadding
         val oldIndex = this.index
         this.index = index
-        this.spinnerView.notifyItemSelected(index, item ?: "")
+        this.spinnerView.notifyItemSelected(index, item)
         this.onSpinnerItemSelectedListener?.onItemSelected(
             oldIndex = oldIndex,
             oldItem = oldIndex.takeIf { it != NO_SELECTED_INDEX }?.let { spinnerItems[oldIndex] },

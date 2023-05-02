@@ -20,20 +20,49 @@ class CustomerBounceCheckViewModel @Inject constructor(
     private val reportRepository: ReportRepository
 ): JpaViewModel(){
 
+    var customerBounceReport: List<CustomerBounceCheckReportModel>? = null
     val itemLiveData: MutableLiveData<List<CustomerBounceCheckReportModel>> by lazy {
         MutableLiveData<List<CustomerBounceCheckReportModel>>()
     }
 
 
     //---------------------------------------------------------------------------------------------- requestCustomersBouncedCheckReport
-    fun requestCustomersBouncedCheckReport() {
+    fun requestCustomersBouncedCheckReport(search: String) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(reportRepository.requestCustomersBouncedCheckReport())
-            response?.let {
-                itemLiveData.postValue(it)
+            customerBounceReport?.let {
+                searchICustomerBounce(search)
+            } ?: run {
+                val response = checkResponse(reportRepository.requestCustomersBouncedCheckReport())
+                response?.let {
+                    customerBounceReport = it
+                    itemLiveData.postValue(it)
+                }
             }
         }
     }
     //---------------------------------------------------------------------------------------------- requestCustomersBouncedCheckReport
+
+
+    //---------------------------------------------------------------------------------------------- searchICustomerBounce
+    private fun searchICustomerBounce(search: String) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            customerBounceReport?.let {list ->
+                if (search.isNotEmpty()) {
+                    val searchList = list.filter {
+                        if (it.customerName?.contains(search) == true)
+                            true
+                        else if (it.customerCode?.contains(search) == true)
+                            true
+                        else if(it.checkNumber?.contains(search) == true)
+                            true
+                        else it.storeName?.contains(search) == true
+                    }
+                    itemLiveData.postValue(searchList)
+                } else
+                    itemLiveData.postValue(list)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- searchICustomerBounce
 
 }

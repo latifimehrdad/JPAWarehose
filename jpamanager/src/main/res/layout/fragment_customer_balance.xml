@@ -57,7 +57,7 @@
                 android:textSize="@dimen/_11sdp"
                 android:hint="@string/search"
                 android:autofillHints="null"
-                android:text="@={viewModel.searchLiveData}"/>
+                android:inputType="text" />
 
             <ImageView
                 android:id="@+id/imageviewSearchDelete"

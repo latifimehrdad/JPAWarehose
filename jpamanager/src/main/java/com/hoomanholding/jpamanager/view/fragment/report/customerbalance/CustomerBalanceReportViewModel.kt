@@ -21,7 +21,6 @@ class CustomerBalanceReportViewModel @Inject constructor(
 ): JpaViewModel() {
 
     var customerBalanceReport: List<CustomerBalanceReportModel>? = null
-    val searchLiveData = MutableLiveData<String>()
     val customerBalanceReportLiveData: MutableLiveData<List<CustomerBalanceReportModel>> by lazy {
         MutableLiveData<List<CustomerBalanceReportModel>>()
     }
