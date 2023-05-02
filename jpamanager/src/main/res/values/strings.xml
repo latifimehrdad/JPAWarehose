@@ -122,6 +122,8 @@
     <string name="edit">ویرایش</string>
     <string name="year">سال</string>
     <string name="netSales">خالص فروش</string>
+    <string name="cartType">نوع سبد</string>
+    <string name="orderType">نوع سفارش</string>
 
 
 

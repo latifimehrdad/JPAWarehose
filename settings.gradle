@@ -17,3 +17,4 @@ rootProject.name = "JPAWarehose"
 include ':jpawarehose'
 include ':applibrary'
 include ':jpamanager'
+include ':jpacustomer'

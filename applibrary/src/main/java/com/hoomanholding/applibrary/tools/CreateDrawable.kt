@@ -8,7 +8,7 @@ import top.defaults.drawabletoolbox.DrawableBuilder
 /**
  * Create by Mehrdad on 1/27/2023
  */
-class CreateDrawableByBrand {
+class CreateDrawable {
 
     //---------------------------------------------------------------------------------------------- getRounded
     fun getCornerRadius(color : Int): Drawable = DrawableBuilder()
@@ -34,4 +34,6 @@ class CreateDrawableByBrand {
         .strokeColor(color)
         .build()
     //---------------------------------------------------------------------------------------------- getRounded
+
+
 }

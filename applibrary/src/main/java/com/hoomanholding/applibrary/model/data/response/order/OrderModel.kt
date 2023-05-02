@@ -25,5 +25,7 @@ data class OrderModel(
     val saleOrderDetails: List<DetailOrderModel>?,
     val storeName: String?,
     val routeName: String?,
+    val cart: String?,
+    val orderState: String?,
     var select : Boolean = false
 )

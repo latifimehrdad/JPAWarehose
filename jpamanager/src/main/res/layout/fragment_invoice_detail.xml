@@ -52,7 +52,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -64,7 +64,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -76,7 +76,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -88,7 +88,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -98,6 +98,18 @@
                         app:setSplitter="@{@string/colon}"
                         app:setValue="@{viewModel.invoiceLiveData.orderFinaleAmount}"
                         app:setLastTest="@{@string/rial}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:fontFamily="@font/iransans_light"
+                        android:lines="1"
+                        app:setTitle="@{@string/orderType}"
+                        app:setSplitter="@{@string/colon}"
+                        app:setValue="@{viewModel.invoiceLiveData.orderState}"/>
 
                 </LinearLayout>
 
@@ -109,7 +121,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -121,7 +133,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -133,7 +145,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -141,11 +153,11 @@
                         android:lines="1"
                         app:setTitle="@{@string/shopName}"
                         app:setSplitter="@{@string/colon}"
-                        app:setValue="@{@string/dash}"/>
+                        app:setValue="@{viewModel.invoiceLiveData.storeName}"/>
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_7sdp"
                         android:paddingVertical="@dimen/_2sdp"
@@ -153,7 +165,19 @@
                         android:lines="1"
                         app:setTitle="@{@string/routeName}"
                         app:setSplitter="@{@string/colon}"
-                        app:setValue="@{@string/dash}"/>
+                        app:setValue="@{viewModel.invoiceLiveData.routeName}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_2sdp"
+                        android:fontFamily="@font/iransans_light"
+                        android:lines="1"
+                        app:setTitle="@{@string/cartType}"
+                        app:setSplitter="@{@string/colon}"
+                        app:setValue="@{viewModel.invoiceLiveData.cart}"/>
 
                 </LinearLayout>
 

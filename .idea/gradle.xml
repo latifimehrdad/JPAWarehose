@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/applibrary" />
+            <option value="$PROJECT_DIR$/jpacustomer" />
             <option value="$PROJECT_DIR$/jpamanager" />
             <option value="$PROJECT_DIR$/jpawarehose" />
           </set>

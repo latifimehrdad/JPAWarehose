@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace 'com.hoomanholding.jpawarehose'
+    namespace 'com.zarholding.jpacustomer'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.hoomanholding.jpawarehose"
+        applicationId "com.zarholding.jpacustomer"
         minSdk 26
         targetSdk 33
         versionCode 1
-        versionName "0.0.1"
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,13 +48,4 @@ dependencies {
     //Hilt
     implementation 'com.google.dagger:hilt-android:2.45'
     kapt 'com.google.dagger:hilt-android-compiler:2.45'
-
-    //Room DB
-    implementation "androidx.room:room-runtime:2.5.1"
-    kapt "androidx.room:room-compiler:2.5.1"
-
-}
-
-kapt {
-    correctErrorTypes true
 }

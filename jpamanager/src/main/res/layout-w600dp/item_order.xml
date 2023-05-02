@@ -22,23 +22,23 @@
             app:layout_constraintEnd_toEndOf="@id/linearLayoutParent"
             android:background="@drawable/drawable_select_item"/>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayoutParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            android:orientation="horizontal"
-            android:background="@drawable/drawable_border_curve_light"
             android:paddingHorizontal="@dimen/_5sdp"
             android:paddingTop="@dimen/_2sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:baselineAligned="false">
 
             <LinearLayout
+                android:id="@+id/linearLayoutLeft"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/linearLayoutRight"
                 android:orientation="vertical">
 
                 <TextView
@@ -90,12 +90,27 @@
                     app:setValue="@{item.orderFinaleAmount}"
                     app:setLastTest="@{@string/rial}"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_6sdp"
+                    android:paddingVertical="@dimen/_1sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:lines="1"
+                    app:setTitle="@{@string/orderType}"
+                    app:setSplitter="@{@string/colon}"
+                    app:setValue="@{item.orderState}" />
+
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayoutRight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/linearLayoutLeft"
                 android:orientation="vertical">
 
 
@@ -149,26 +164,40 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_6sdp"
                     android:paddingVertical="@dimen/_1sdp"
                     android:fontFamily="@font/iransans_light"
                     android:lines="1"
-                    app:setTitle="@{@string/orderState}"
+                    app:setTitle="@{@string/cartType}"
                     app:setSplitter="@{@string/colon}"
-                    app:setValue="@{item.saleOrderStateText}"/>
+                    app:setValue="@{item.cart}"/>
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/linearLayoutLeft"
+                app:layout_constraintStart_toStartOf="@id/linearLayoutLeft"
+                app:layout_constraintEnd_toEndOf="@id/linearLayoutRight"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_1sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/description}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.visitorDescription}"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textViewDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/linearLayoutParent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutParent"
             app:layout_constraintBottom_toBottomOf="@id/linearLayoutParent"
             app:backgroundTint="@null"
@@ -185,7 +214,7 @@
             android:id="@+id/textViewCustomerFinancial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/linearLayoutParent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayoutParent"
             app:layout_constraintBottom_toBottomOf="@id/linearLayoutParent"
             app:backgroundTint="@null"

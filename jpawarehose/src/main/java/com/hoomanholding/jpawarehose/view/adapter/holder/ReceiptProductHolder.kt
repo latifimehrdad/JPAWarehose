@@ -10,7 +10,7 @@ import com.hoomanholding.jpawarehose.databinding.ItemReceiptProductBinding
 import com.hoomanholding.applibrary.model.data.database.entity.BrandEntity
 import com.hoomanholding.applibrary.model.data.database.join.LocationWithAmount
 import com.hoomanholding.applibrary.model.data.database.join.ReceiptWithProduct
-import com.hoomanholding.applibrary.tools.CreateDrawableByBrand
+import com.hoomanholding.applibrary.tools.CreateDrawable
 import com.hoomanholding.jpawarehose.view.adapter.ReceiptLocationAdapter
 
 
@@ -45,13 +45,13 @@ class ReceiptProductHolder(
         }
 
         binding.constraintLayoutContent.background =
-            CreateDrawableByBrand().getCornerRadius(color)
+            CreateDrawable().getCornerRadius(color)
 
         binding.textViewTotal.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
 
         binding.textViewRemaining.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
 
         binding.materialButtonAdd.backgroundTintList = ColorStateList.valueOf(color)
         binding.executePendingBindings()

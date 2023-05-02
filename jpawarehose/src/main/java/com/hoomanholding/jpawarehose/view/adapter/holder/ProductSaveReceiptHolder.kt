@@ -13,7 +13,7 @@ import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.ItemProductSaveReceiptBinding
 import com.hoomanholding.applibrary.model.data.database.join.ProductAmountModel
 import com.hoomanholding.applibrary.ext.hideKeyboard
-import com.hoomanholding.applibrary.tools.CreateDrawableByBrand
+import com.hoomanholding.applibrary.tools.CreateDrawable
 import com.zar.core.tools.manager.DialogManager
 
 
@@ -66,9 +66,9 @@ class ProductSaveReceiptHolder(
         }
 
         binding.constraintLayoutContent.background =
-            CreateDrawableByBrand().getCornerRadius(color)
+            CreateDrawable().getCornerRadius(color)
         binding.textViewTotal.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
         binding.textViewTotal.setTextColor(color)
 
         setCartonColor(color)
@@ -121,12 +121,12 @@ class ProductSaveReceiptHolder(
     private fun setCartonColor(color: Int) {
         val context = binding.root.context
         binding.constraintLayoutCarton.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
         binding.textViewCartonAdd.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
         binding.textViewCartonAdd.setTextColor(color)
         binding.textViewCartonMinus.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
         binding.textViewCartonMinus.setTextColor(color)
     }
     //---------------------------------------------------------------------------------------------- setCartonColor
@@ -136,12 +136,12 @@ class ProductSaveReceiptHolder(
     private fun setPacketColor(color: Int) {
         val context = binding.root.context
         binding.constraintLayoutPacket.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
         binding.textViewPacketAdd.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
         binding.textViewPacketAdd.setTextColor(color)
         binding.textViewPacketMinus.background =
-            CreateDrawableByBrand().getRounded(context, color)
+            CreateDrawable().getRounded(context, color)
         binding.textViewPacketMinus.setTextColor(color)
     }
     //---------------------------------------------------------------------------------------------- setPacketColor
