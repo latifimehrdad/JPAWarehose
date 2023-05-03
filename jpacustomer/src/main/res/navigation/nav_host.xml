@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/verifyCodeFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.splash.SplashFragment"
+        android:label="SplashFragment">
+
+        <action
+            android:id="@+id/action_splashFragment_to_DownloadFragment"
+            app:destination="@id/downloadFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.login.LoginFragment">
+
+        <action
+            android:id="@+id/action_loginFragment_to_verifyCodeFragment"
+            app:destination="@id/verifyCodeFragment"/>
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/verifyCodeFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.verify.VerifyCodeFragment"/>
+
+
+    <fragment
+        android:id="@+id/downloadFragment"
+        android:name="com.hoomanholding.applibrary.view.fragment.download.DownloadFragment"/>
+
+    <action
+        android:id="@+id/action_goto_SplashFragment"
+        app:destination="@id/splashFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/splashFragment"
+        app:launchSingleTop="true"/>
+
+
+</navigation>

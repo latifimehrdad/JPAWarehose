@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.R
+import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -33,7 +34,7 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- login
-    fun login(fromFingerPrint: Boolean, androidId: String, systemType: String) {
+    fun login(fromFingerPrint: Boolean, androidId: String, systemType: EnumSystemType) {
         if (fromFingerPrint)
             setUserNamePasswordFromSharePreferences()
         var valueIsEmpty = false
@@ -52,7 +53,7 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestLogin
-    private fun requestLogin(androidId: String, systemType: String) {
+    private fun requestLogin(androidId: String, systemType: EnumSystemType) {
         viewModelScope.launch(IO + exceptionHandler()) {
             if (userName.value.isNullOrEmpty() || password.value.isNullOrEmpty())
                 setMessage(

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Jpa Customer</string>
+
+    <string name="logo">لوگو</string>
+    <string name="quickAndEasy">آنی و سریع</string>
+    <string name="powerInYourHand">قدرت دست توست!</string>
+    <string name="login">ورود به اپلیکیشن</string>
+    <string name="onAuthenticationError">اثر انگشت شما تایید نشد</string>
+    <string name="bePatient">شکیبا باشید …</string>
+    <string name="userName">نام کاربری</string>
+    <string name="password">رمز عبور</string>
+    <string name="savePasswordAndFingerPrint">برای ذخیره ی رمز عبور و نام کاربری و ورود با اثر انگشت لطفا این گزینه را  فعال نمایید</string>
+    <string name="receiveCode">دریافت کد تایید</string>
+    <string name="dismiss">بستن</string>
+
+    <string name="lovorm">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت \n چاپ، و با استفاده از طراحان گرافیک است،</string>
+
 </resources>

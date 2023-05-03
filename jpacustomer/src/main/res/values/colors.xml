@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primaryColor">#292d32</color>
+
+    <color name="primaryGradientStart">#f2f2f2</color>
+    <color name="primaryGradientEnd">#cecfd3</color>
+    <color name="textColor">@color/primaryColor</color>
+    <color name="textColorNormal">#535353</color>
+    <color name="iconNormalColor">#292d32</color>
+    <color name="cardViewColor">#d2d2d2</color>
+
+    <color name="bottomTextColor">#FFFFFF</color>
+    <color name="strokeEditTextTime">#A8A8A8</color>
+    <color name="backTimerColor">#DCDCDC</color>
+
 </resources>

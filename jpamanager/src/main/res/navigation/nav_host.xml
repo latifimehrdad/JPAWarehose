@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.splash.SplashFragment">
+        android:name="com.zarholding.jpacustomer.view.fragment.splash.SplashFragment">
 
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.hoomanholding.jpamanager.view.fragment.login.LoginFragment"/>
+        android:name="com.zarholding.jpacustomer.view.fragment.login.LoginFragment"/>
 
     <fragment
         android:id="@+id/homeFragment"

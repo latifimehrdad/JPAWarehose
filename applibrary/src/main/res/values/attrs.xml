@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MLAnimationTime">
+        <attr name="at_back" format="reference|color"/>
+        <attr name="at_textSize" format="dimension"/>
+        <attr name="android:textColor"/>
+        <attr name="at_gravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="fill_vertical" value="0x70" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="fill_horizontal" value="0x07" />
+            <flag name="center" value="0x11" />
+            <flag name="fill" value="0x77" />
+            <flag name="clip_vertical" value="0x80" />
+            <flag name="clip_horizontal" value="0x08" />
+            <flag name="start" value="0x00800003" />
+            <flag name="end" value="0x00800005" />
+        </attr>
+        <attr name="fontFamily"/>
+        <attr name="at_second" format="integer"/>
+        <attr name="at_elapseTime" format="boolean"/>
+        <attr name="at_separatorTimeColor" format="color"/>
+        <attr name="at_showing">
+            <enum name="second" value="0" />
+            <enum name="minute_second" value="1" />
+            <enum name="hour_minute_second" value="2" />
+        </attr>
+
+    </declare-styleable>
+
+</resources>

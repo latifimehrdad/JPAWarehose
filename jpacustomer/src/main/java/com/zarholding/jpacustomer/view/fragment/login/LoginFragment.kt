@@ -1,33 +1,24 @@
-package com.hoomanholding.jpamanager.view.fragment.login
+package com.zarholding.jpacustomer.view.fragment.login
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.provider.Settings
-import android.view.Gravity
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
-import com.hoomanholding.jpamanager.R
-import com.hoomanholding.jpamanager.databinding.FragmentLoginBinding
+import androidx.navigation.fragment.findNavController
 import com.hoomanholding.applibrary.ext.hideKeyboard
-import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
-import com.hoomanholding.jpamanager.view.activity.MainActivity
-import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
 import com.zar.core.tools.BiometricTools
-import com.zar.core.tools.manager.DialogManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.applibrary.view.fragment.LoginViewModel
+import com.zarholding.jpacustomer.R
+import com.zarholding.jpacustomer.databinding.FragmentLoginBinding
+import com.zarholding.jpacustomer.view.activity.MainActivity
 
 /**
  * Created by m-latifi on 11/9/2022.
@@ -47,14 +38,14 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     private val backClick = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             context?.let {
-                ConfirmDialog(
+/*                ConfirmDialog(
                     it,
                     getString(R.string.doYouWantToExitApp),
                     object : ConfirmDialog.Click {
                         override fun clickYes() {
                             activity?.finish()
                         }
-                    }).show()
+                    }).show()*/
             }
         }
     }
@@ -76,11 +67,11 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     private fun initView() {
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         activity?.let { (it as MainActivity).deleteAllData() }
-        if (loginViewModel.isBiometricEnable()) {
+/*        if (loginViewModel.isBiometricEnable()) {
             binding.cardViewFingerPrint.visibility = View.VISIBLE
         } else {
             binding.cardViewFingerPrint.visibility = View.INVISIBLE
-        }
+        }*/
         observeLiveDate()
     }
     //---------------------------------------------------------------------------------------------- initView
@@ -94,17 +85,19 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         }
 
         loginViewModel.loginLiveDate.observe(viewLifecycleOwner) {
-            backClick.isEnabled = false
-            activity?.onBackPressedDispatcher?.onBackPressed()
+            it?.let {
+                findNavController()
+                    .navigate(R.id.action_loginFragment_to_verifyCodeFragment)
+            }
         }
 
         loginViewModel.userNameError.observe(viewLifecycleOwner) {
-            binding.textInputLayoutUserName.error = it
+            binding.editTextUserName.error = it
             stopLoading()
         }
 
         loginViewModel.passwordError.observe(viewLifecycleOwner) {
-            binding.textInputLayoutPasscode.error = it
+            binding.editTextPassword.error = it
             stopLoading()
         }
 
@@ -131,50 +124,9 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             .buttonLogin
             .setOnClickListener { login(false) }
 
-        binding
+/*        binding
             .cardViewFingerPrint
-            .setOnClickListener { showBiometricDialog() }
-
-        binding.imageViewWave.setOnLongClickListener {
-            if (context != null) {
-                val dialog = DialogManager().createDialogHeightWrapContent(
-                    requireContext(),
-                    R.layout.dialog_confirm_ip,
-                    Gravity.CENTER,
-                    0
-                )
-
-                val textInputEditTextIp =
-                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIp)
-
-                val textInputEditTextIpPassword =
-                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIpPassword)
-
-                val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
-                buttonNo.setOnClickListener { dialog.dismiss() }
-
-                val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
-                buttonYes.setOnClickListener {
-
-                    if (textInputEditTextIp.text.toString().isIP()) {
-                        if (textInputEditTextIpPassword.text.toString() != "holeshdaf"){
-                            textInputEditTextIpPassword.error = getString(R.string.passwordIsInCorrect)
-                            return@setOnClickListener
-                        }
-                        loginViewModel.saveNewIp(textInputEditTextIp.text.toString())
-                        showMessage(getString(R.string.updateIsSuccess))
-                        CoroutineScope(Main).launch {
-                            delay(1500)
-                            (activity as MainActivity).finish()
-                        }
-                    } else {
-                        textInputEditTextIp.error = getString(R.string.ipIsIncorrect)
-                    }
-                }
-                dialog.show()
-            }
-            return@setOnLongClickListener true
-        }
+            .setOnClickListener { showBiometricDialog() }*/
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -218,7 +170,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         startLoading()
         val androidId =
             Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
-        loginViewModel.login(fromFingerPrint, androidId, EnumSystemType.ManagerApp)
+        loginViewModel.login(fromFingerPrint, androidId, EnumSystemType.Customers)
     }
     //---------------------------------------------------------------------------------------------- login
 
@@ -227,10 +179,10 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     //---------------------------------------------------------------------------------------------- startLoading
     private fun startLoading() {
         hideKeyboard()
-        binding.textInputLayoutUserName.error = null
-        binding.textInputLayoutPasscode.error = null
-        binding.textInputEditTextUserName.isEnabled = false
-        binding.textInputEditTextPasscode.isEnabled = false
+        binding.editTextUserName.error = null
+        binding.editTextPassword.error = null
+        binding.editTextUserName.isEnabled = false
+        binding.editTextPassword.isEnabled = false
         binding.buttonLogin.startLoading(getString(R.string.bePatient))
     }
     //---------------------------------------------------------------------------------------------- startLoading
@@ -238,8 +190,8 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
 
     //---------------------------------------------------------------------------------------------- stopLoading
     private fun stopLoading() {
-        binding.textInputEditTextUserName.isEnabled = true
-        binding.textInputEditTextPasscode.isEnabled = true
+        binding.editTextUserName.isEnabled = true
+        binding.editTextPassword.isEnabled = true
         binding.buttonLogin.stopLoading()
     }
     //---------------------------------------------------------------------------------------------- stopLoading
