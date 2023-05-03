@@ -3,6 +3,7 @@ package com.hoomanholding.applibrary.view.fragment.download
 import android.os.Environment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.di.ApplicationInfoProvider
 import com.hoomanholding.applibrary.model.repository.DownloadFileRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DownloadViewModel @Inject constructor(
-    private val downloadFileRepository: DownloadFileRepository
+    private val downloadFileRepository: DownloadFileRepository,
+    applicationInfoProvider: ApplicationInfoProvider
 ) : JpaViewModel() {
 
     private var destinationFile: File
@@ -30,7 +32,11 @@ class DownloadViewModel @Inject constructor(
     init {
         val downloadFolder =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        destinationFile = File(downloadFolder.absolutePath, "JpaManager_${getNewFileName()}.apk")
+        val destinationDir = File(downloadFolder.absolutePath, "Jpa")
+        if (!destinationDir.exists())
+            destinationDir.mkdir()
+        destinationFile = File(destinationDir.absolutePath,
+            "${applicationInfoProvider.getAppLabel()}_${getNewFileName()}.apk")
 
     }
     //---------------------------------------------------------------------------------------------- init
@@ -41,6 +47,7 @@ class DownloadViewModel @Inject constructor(
         return SimpleDateFormat("yyyy_MM_dd__HH_mm_ss", Locale.getDefault()).format(Date())
     }
     //______________________________________________________________________________________________ getNewFileName
+
 
 
     //---------------------------------------------------------------------------------------------- downloadLastVersion
