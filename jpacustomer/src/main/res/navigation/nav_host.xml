@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_host"
-    app:startDestination="@id/verifyCodeFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -37,7 +37,18 @@
 
     <fragment
         android:id="@+id/verifyCodeFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.verify.VerifyCodeFragment"/>
+        android:name="com.zarholding.jpacustomer.view.fragment.verify.VerifyCodeFragment">
+
+        <action
+            android:id="@+id/action_verifyCodeFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.changepassword.ChangePasswordFragment"/>
 
 
     <fragment

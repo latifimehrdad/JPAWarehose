@@ -15,6 +15,7 @@ import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
+import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -58,6 +59,20 @@ interface Api {
     suspend fun requestUserPermission(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<String>?>>
+
+
+    @GET("$user/login-customers-isVerificationCodeCorrect")
+    suspend fun requestVerifyCode(
+        @Query("verificationCode") verificationCode: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<VerifyCodeModel?>>
+
+    @GET("$user/login-ChangePassword")
+    suspend fun requestChangePassword(
+        @Query("password") password: String,
+        @Query("newPassword") newPassword: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
     //---------------------------------------------------------------------------------------------- user
 
 

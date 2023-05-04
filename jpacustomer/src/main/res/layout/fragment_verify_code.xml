@@ -177,6 +177,38 @@
                     android:textColor="@color/textColorNormal"
                     />
 
+                <TextView
+                    android:id="@+id/textViewRemaining"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/mlAnimationTimer"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_7sdp"
+                    android:gravity="center"
+                    android:text="@string/remainingUntilResend"
+                    android:textColor="@color/textColorNormal"
+                    android:fontFamily="@font/iransans_light"
+                    />
+
+                <com.hoomanholding.applibrary.view.custom.JpaButton
+                    android:id="@+id/buttonReceiveAgain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/mlAnimationTimer"
+                    app:layout_constraintTop_toBottomOf="@id/mlAnimationTimer"
+                    app:layout_constraintEnd_toEndOf="@id/mlAnimationTimer"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:backgroundTint="@color/primaryColor"
+                    android:hint="@string/bePatient"
+                    app:cornerRadius="@dimen/_7sdp"
+                    android:textSize="@dimen/_9sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    android:textColor="@color/bottomTextColor"
+                    android:text='@string/receiveAgainCode' />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

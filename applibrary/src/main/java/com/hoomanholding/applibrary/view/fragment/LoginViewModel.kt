@@ -69,7 +69,9 @@ class LoginViewModel @Inject constructor(
                     androidId
                 )
                 val response = checkResponse(repository.requestLogin(request))
-                response?.let { saveUserNameAndPassword(it) }
+                response?.let {
+                    saveUserNameAndPassword(it, systemType)
+                }
             }
         }
     }
@@ -90,13 +92,14 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
-    private fun saveUserNameAndPassword(token: String?) {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.TOKEN, token)
-            .putString(CompanionValues.userName, userName.value)
-            .putString(CompanionValues.password, password.value)
-            .apply()
+    private fun saveUserNameAndPassword(token: String?, systemType: EnumSystemType) {
+        if (systemType != EnumSystemType.Customers)
+            sharedPreferences
+                .edit()
+                .putString(CompanionValues.TOKEN, token)
+                .putString(CompanionValues.userName, userName.value)
+                .putString(CompanionValues.password, password.value)
+                .apply()
         loginLiveDate.postValue(token)
     }
     //---------------------------------------------------------------------------------------------- saveUserNameAndPassword

@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- onCreate
 
 
-
     //---------------------------------------------------------------------------------------------- showMessage
     fun showMessage(message: String) {
         val snack = Snackbar.make(binding.constraintLayoutParent, message, 5 * 1000)
@@ -78,7 +77,6 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- initView
 
 
-
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         val navHostFragment =
@@ -91,7 +89,6 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- setListener
 
 
-
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
     private fun showAndHideBottomNavigationMenu(fragmentId: Int) {
 
@@ -99,10 +96,10 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
 
 
-
     //---------------------------------------------------------------------------------------------- gotoFirstFragment
-    fun gotoFirstFragment() {
-        deleteAllData()
+    fun gotoFirstFragment(deleteUser: Boolean = true) {
+        if (deleteUser)
+            deleteAllData()
         CoroutineScope(Dispatchers.IO).launch {
             delay(500)
             withContext(Dispatchers.Main) {
@@ -113,13 +110,11 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- gotoFirstFragment
 
 
-
     //---------------------------------------------------------------------------------------------- deleteAllData
     fun deleteAllData() {
         mainViewModel.deleteAllData()
     }
     //---------------------------------------------------------------------------------------------- deleteAllData
-
 
 
     //---------------------------------------------------------------------------------------------- gotoFragment
@@ -129,14 +124,11 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- gotoFragment
 
 
-
-
     //---------------------------------------------------------------------------------------------- getUserInfo
     fun getUserInfo() {
         mainViewModel.getUserInfo()
     }
     //---------------------------------------------------------------------------------------------- getUserInfo
-
 
 
     //---------------------------------------------------------------------------------------------- hideFragmentContainer

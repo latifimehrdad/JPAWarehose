@@ -22,9 +22,8 @@ class UserRepository @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- requestUserInfo
     suspend fun requestUserInfo() =
-        apiCall{ api.requestGetUserInfo(tokenRepository.getBearerToken()) }
+        apiCall { api.requestGetUserInfo(tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestUserInfo
-
 
 
     //---------------------------------------------------------------------------------------------- insertUserInfo
@@ -34,12 +33,24 @@ class UserRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- insertUserInfo
 
 
-
     //---------------------------------------------------------------------------------------------- requestUserPermission
     suspend fun requestUserPermission() =
-        apiCall{ api.requestUserPermission(tokenRepository.getBearerToken()) }
+        apiCall { api.requestUserPermission(tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestUserPermission
 
+
+    //---------------------------------------------------------------------------------------------- requestVerifyCode
+    suspend fun requestVerifyCode(verificationCode: String, token: String) =
+        apiCall { api.requestVerifyCode(verificationCode, token) }
+    //---------------------------------------------------------------------------------------------- requestVerifyCode
+
+
+    //---------------------------------------------------------------------------------------------- requestChangePassword
+    suspend fun requestChangePassword(password: String, newPassword: String, token: String) =
+        apiCall {
+            api.requestChangePassword(password, newPassword, token)
+        }
+    //---------------------------------------------------------------------------------------------- requestChangePassword
 
 
     //---------------------------------------------------------------------------------------------- getUser
@@ -65,7 +76,6 @@ class UserRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- deleteUser
 
 
-
     //---------------------------------------------------------------------------------------------- isEntered
     fun isEntered() = tokenRepository.getToken()?.let {
         true
@@ -79,6 +89,6 @@ class UserRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- getPermission
-    fun getPermission(permission : String) = roleDao.getPermission(permission)
+    fun getPermission(permission: String) = roleDao.getPermission(permission)
     //---------------------------------------------------------------------------------------------- getPermission
 }

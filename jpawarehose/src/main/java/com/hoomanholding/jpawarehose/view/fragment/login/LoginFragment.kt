@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.applibrary.ext.hideKeyboard
 import com.hoomanholding.applibrary.ext.isIP
+import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.view.fragment.LoginViewModel
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentLoginBinding
@@ -221,7 +222,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         startLoading()
         val androidId =
             Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
-        loginViewModel.login(fromFingerPrint, androidId, "logistic")
+        loginViewModel.login(fromFingerPrint, androidId, EnumSystemType.WareHouse)
     }
     //---------------------------------------------------------------------------------------------- login
 

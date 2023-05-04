@@ -72,7 +72,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
 
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
-
+            showMessage("$it")
         }
 
         splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
