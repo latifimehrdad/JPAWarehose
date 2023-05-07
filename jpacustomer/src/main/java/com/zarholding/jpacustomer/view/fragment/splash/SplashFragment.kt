@@ -72,7 +72,9 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
 
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
-            showMessage("$it")
+            showMessage(getString(R.string.loginIsSuccess))
+            if (it)
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
         }
 
         splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {

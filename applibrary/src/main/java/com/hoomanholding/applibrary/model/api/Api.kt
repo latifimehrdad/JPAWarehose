@@ -73,6 +73,11 @@ interface Api {
         @Query("newPassword") newPassword: String,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$user/login-Resend-VerificationCode")
+    suspend fun requestResendVerificationCode(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
     //---------------------------------------------------------------------------------------------- user
 
 

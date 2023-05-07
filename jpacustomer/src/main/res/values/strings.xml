@@ -17,6 +17,10 @@
     <string name="remainingUntilResend">مانده تا اراسل مجدد</string>
     <string name="oldPassword">رمز عبور قدیم</string>
     <string name="changePassword">تغییر رمز</string>
+    <string name="loginIsSuccess">ورود با موفقیت انجام شد</string>
+    <string name="back">برگشت</string>
+    <string name="orderTracking">پیگیری سفارش</string>
+    <string name="orderNumber">شماره سفارش</string>
 
     <string name="lovorm">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت \n چاپ، و با استفاده از طراحان گرافیک است،</string>
 

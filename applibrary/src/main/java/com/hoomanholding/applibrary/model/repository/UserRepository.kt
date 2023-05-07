@@ -45,6 +45,16 @@ class UserRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestVerifyCode
 
 
+    //---------------------------------------------------------------------------------------------- requestResendVerificationCode
+    suspend fun requestResendVerificationCode(token: String) =
+        apiCall { api.requestResendVerificationCode(token) }
+    //---------------------------------------------------------------------------------------------- requestResendVerificationCode
+
+
+
+
+
+
     //---------------------------------------------------------------------------------------------- requestChangePassword
     suspend fun requestChangePassword(password: String, newPassword: String, token: String) =
         apiCall {

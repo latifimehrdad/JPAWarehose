@@ -1,12 +1,21 @@
 package com.zarholding.jpacustomer.view.fragment.verify
 
+import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.gms.common.api.Status
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
@@ -30,6 +39,19 @@ class VerifyCodeFragment(
 ) : JpaFragment<FragmentVerifyCodeBinding>() {
 
     private val viewModel: VerifyCodeViewModel by viewModels()
+    private var smsVerificationReceiver: BroadcastReceiver? = null
+
+
+    //---------------------------------------------------------------------------------------------- smsLauncher
+    private val smsLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val message = it.data?.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE)
+            splitVerifyCodeFromSms(message)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- smsLauncher
+
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +59,7 @@ class VerifyCodeFragment(
         binding.viewModel = viewModel
         initView()
         setListener()
+        receiveSms()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -68,15 +91,16 @@ class VerifyCodeFragment(
         }
 
         viewModel.resendLiveData.observe(viewLifecycleOwner) {
+            receiveSms()
             startTimer()
         }
 
         viewModel.verifyCodeLiveData.observe(viewLifecycleOwner) {
-//            if (it.isforceChangePassword) {
+            if (it.isforceChangePassword) {
                 gotoChangePassword()
-/*            } else {
+            } else {
                 (activity as MainActivity).gotoFirstFragment(false)
-            }*/
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -171,6 +195,7 @@ class VerifyCodeFragment(
         binding.textViewRemaining.visibility = View.GONE
         binding.buttonReceiveAgain.visibility = View.VISIBLE
         binding.buttonReceiveAgain.stopLoading()
+        unregisterReceiverSMS()
         resetEditTextsVerifyCode()
     }
     //---------------------------------------------------------------------------------------------- resendRequestForSms
@@ -219,7 +244,7 @@ class VerifyCodeFragment(
     //---------------------------------------------------------------------------------------------- startAnimationEditText
     private fun startAnimationEditText() {
         CoroutineScope(Dispatchers.Main).launch {
-            delay(500)
+            delay(300)
             if (context != null) {
                 val alpha1 =
                     AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
@@ -259,11 +284,68 @@ class VerifyCodeFragment(
 
     //---------------------------------------------------------------------------------------------- gotoChangePassword
     private fun gotoChangePassword() {
+        resetEditTextsVerifyCode()
         val bundle = Bundle()
         bundle.putString(CompanionValues.TOKEN, viewModel.token)
         findNavController()
             .navigate(R.id.action_verifyCodeFragment_to_changePasswordFragment, bundle)
     }
     //---------------------------------------------------------------------------------------------- gotoChangePassword
+
+
+    //______________________________________________________________________________________________ splitVerifyCodeFromSms
+    private fun splitVerifyCodeFromSms(sms: String?) {
+        val numberOnly = sms?.replace("[^0-9]".toRegex(), "")
+        if (numberOnly?.length == 5) {
+            binding.editTextCode1.setText(numberOnly.substring(0))
+            binding.editTextCode2.setText(numberOnly.substring(1))
+            binding.editTextCode3.setText(numberOnly.substring(2))
+            binding.editTextCode4.setText(numberOnly.substring(3))
+            binding.editTextCode5.setText(numberOnly.substring(4))
+        }
+    }
+    //______________________________________________________________________________________________ splitVerifyCodeFromSms
+
+
+    //______________________________________________________________________________________________ recieveSms
+    private fun receiveSms() {
+        if (context == null)
+            return
+        SmsRetriever.getClient(requireContext()).startSmsUserConsent(null)
+        smsVerificationReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                if (SmsRetriever.SMS_RETRIEVED_ACTION == intent.action) {
+                    val extras = intent.extras
+                    val smsRetrieverStatus = extras?.get(SmsRetriever.EXTRA_STATUS) as Status
+                    when (smsRetrieverStatus.statusCode) {
+                        CommonStatusCodes.SUCCESS -> {
+                            val consentIntent =
+                                extras.getParcelable<Intent>(SmsRetriever.EXTRA_CONSENT_INTENT)
+                            try {
+                                smsLauncher.launch(consentIntent)
+                            } catch (_: Exception) {}
+                        }
+                        CommonStatusCodes.TIMEOUT -> {
+
+                        }
+                    }
+                }
+            }
+        }
+        val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
+        requireContext().registerReceiver(smsVerificationReceiver, intentFilter)
+    }
+    //______________________________________________________________________________________________ recieveSms
+
+
+    //______________________________________________________________________________________________ unregisterReceiverSMS
+    private fun unregisterReceiverSMS() {
+        if (smsVerificationReceiver != null && context != null) {
+            requireContext().unregisterReceiver(smsVerificationReceiver)
+            smsVerificationReceiver = null
+        }
+    }
+    //______________________________________________________________________________________________ unregisterReceiverSMS
+
 
 }

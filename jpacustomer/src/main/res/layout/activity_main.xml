@@ -8,15 +8,110 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.activity.MainActivity"
-        android:layoutDirection="ltr">
+        android:layoutDirection="ltr"
+        android:background="@drawable/drawable_main_gradient">
+
+        <ImageView
+            android:id="@+id/imageViewBack"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:contentDescription="@string/back" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewProfile"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_30sdp"
+            app:cardBackgroundColor="@color/cardViewColor">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/logo" />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardViewProfile"
+            app:layout_constraintBottom_toTopOf="@id/cardViewMenu"
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_host" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewMenu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/cardViewMenuColor"
+            app:cardCornerRadius="@dimen/_15sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_20sdp">
+
+                <com.zarholding.jpacustomer.view.custom.CustomMenu
+                    android:id="@+id/customMenuReport"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/customMenuProduct"
+                    app:layout_constraintDimensionRatio="W,1:1"
+                    app:menu_icon="@drawable/ic_report" />
+
+                <com.zarholding.jpacustomer.view.custom.CustomMenu
+                    android:id="@+id/customMenuProduct"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/customMenuReport"
+                    app:layout_constraintEnd_toStartOf="@id/customMenuHome"
+                    app:layout_constraintDimensionRatio="W,1:1"
+                    app:menu_icon="@drawable/ic_product" />
+
+                <com.zarholding.jpacustomer.view.custom.CustomMenu
+                    android:id="@+id/customMenuHome"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/customMenuProduct"
+                    app:layout_constraintEnd_toStartOf="@id/customMenuProfile"
+                    app:layout_constraintDimensionRatio="W,1:1"
+                    app:menu_icon="@drawable/ic_home" />
+
+                <com.zarholding.jpacustomer.view.custom.CustomMenu
+                    android:id="@+id/customMenuProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/customMenuHome"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintDimensionRatio="W,1:1"
+                    app:menu_icon="@drawable/ic_profile" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

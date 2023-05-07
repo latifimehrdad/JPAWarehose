@@ -2,22 +2,14 @@ package com.zarholding.jpacustomer.view.fragment.changepassword
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
-import androidx.core.text.isDigitsOnly
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentChangePasswordBinding
-import com.zarholding.jpacustomer.databinding.FragmentVerifyCodeBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 /**

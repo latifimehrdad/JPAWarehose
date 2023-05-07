@@ -12,8 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/drawable_main_gradient">
+        android:layout_height="match_parent">
 
 
         <ImageView

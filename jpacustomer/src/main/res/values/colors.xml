@@ -15,10 +15,15 @@
     <color name="textColor">@color/primaryColor</color>
     <color name="textColorNormal">#535353</color>
     <color name="iconNormalColor">#292d32</color>
+    <color name="iconDisableColor">#d2d2d2</color>
     <color name="cardViewColor">#d2d2d2</color>
+    <color name="cardViewColor2">#FFFFFF</color>
+    <color name="cardViewMenuColor">#f3f6ff</color>
 
     <color name="bottomTextColor">#FFFFFF</color>
     <color name="strokeEditTextTime">#A8A8A8</color>
     <color name="backTimerColor">#DCDCDC</color>
+
+    <color name="stepSelect">#9cecac</color>
 
 </resources>

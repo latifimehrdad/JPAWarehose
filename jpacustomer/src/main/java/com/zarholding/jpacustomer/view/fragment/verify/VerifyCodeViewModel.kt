@@ -1,13 +1,9 @@
 package com.zarholding.jpacustomer.view.fragment.verify
 
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
 import com.hoomanholding.applibrary.model.repository.UserRepository
-import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -22,8 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VerifyCodeViewModel @Inject constructor(
-    private val userRepository: UserRepository,
-    private val sharedPreferences: SharedPreferences
+    private val userRepository: UserRepository
 ) : JpaViewModel() {
 
     var token: String? = null
@@ -37,9 +32,9 @@ class VerifyCodeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- viewModelScope
     fun startTimer() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            repeat(120) {
+            repeat(30) {
                 delay(1000)
-                timerLiveData.postValue(119 - it)
+                timerLiveData.postValue(29 - it)
             }
             timerLiveData.postValue(-1)
         }
@@ -50,11 +45,16 @@ class VerifyCodeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestResendVerifyCode
     fun requestResendVerifyCode() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            delay(2000)
-            resendLiveData.postValue(true)
+            if (token == null) {
+                setMessage("Token is empty")
+                return@launch
+            }
+            val response = checkResponse(userRepository.requestResendVerificationCode(token!!))
+            response?.let { resendLiveData.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestResendVerifyCode
+
 
 
     //---------------------------------------------------------------------------------------------- requestVerifyCode
@@ -64,6 +64,7 @@ class VerifyCodeViewModel @Inject constructor(
                 setMessage("Token is empty")
                 return@launch
             }
+            delay(2000)
             val response =
                 checkResponse(userRepository.requestVerifyCode(verificationCode, token!!))
             response?.let {
@@ -72,5 +73,9 @@ class VerifyCodeViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- requestVerifyCode
+
+
+
+
 
 }

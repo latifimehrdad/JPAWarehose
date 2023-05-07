@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomMenu">
+        <attr name="menu_icon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomStep">
+        <attr name="step_icon" format="reference"/>
+        <attr name="step_title" format="string"/>
+    </declare-styleable>
+
+</resources>

@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         setListener()
+        resetMenuColor()
 /*        mainViewModel.userInfoLiveData.observe(this) { user ->
             user?.let {
                 binding.textViewPersonnelCode.setTitleAndValue(
@@ -91,7 +93,21 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
     private fun showAndHideBottomNavigationMenu(fragmentId: Int) {
-
+        resetMenuColor()
+        when (fragmentId) {
+            R.id.splashFragment,
+            R.id.loginFragment,
+            R.id.downloadFragment -> { binding.cardViewMenu.visibility = View.GONE }
+            R.id.homeFragment -> {
+                if (!binding.customMenuHome.isSelectedMenu()) {
+                    resetMenuColor()
+                    binding.cardViewMenu.visibility = View.VISIBLE
+                    binding.imageViewBack.visibility = View.VISIBLE
+                    binding.cardViewProfile.visibility = View.VISIBLE
+                    binding.customMenuHome.selected()
+                }
+            }
+        }
     }
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
 
@@ -143,6 +159,19 @@ class MainActivity : AppCompatActivity() {
         binding.navHostFragment.alpha = 1f
     }
     //---------------------------------------------------------------------------------------------- showFragmentContainer
+
+
+
+    //---------------------------------------------------------------------------------------------- resetMenuColor
+    private fun resetMenuColor() {
+        binding.imageViewBack.visibility = View.GONE
+        binding.cardViewProfile.visibility = View.GONE
+        binding.customMenuHome.clearSelected()
+        binding.customMenuProduct.clearSelected()
+        binding.customMenuProfile.clearSelected()
+        binding.customMenuReport.clearSelected()
+    }
+    //---------------------------------------------------------------------------------------------- resetMenuColor
 
 
 }
