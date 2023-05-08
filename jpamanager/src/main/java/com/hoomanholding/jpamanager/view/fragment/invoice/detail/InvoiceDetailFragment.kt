@@ -46,9 +46,9 @@ class InvoiceDetailFragment(override var layout: Int = R.layout.fragment_invoice
     //---------------------------------------------------------------------------------------------- getOrderModerFromBundle
     private fun getOrderModerFromBundle() {
         arguments?.let { bundle ->
-            val orderId = bundle.getInt(CompanionValues.ORDER_IR,0)
+            val orderId = bundle.getLong(CompanionValues.ORDER_IR,0)
             val customerId = bundle.getInt(CompanionValues.CUSTOMER_ID,0)
-            if (customerId == 0 || orderId == 0){
+            if (customerId == 0 || orderId == 0L){
                 activity?.onBackPressedDispatcher?.onBackPressed()
                 return
             }

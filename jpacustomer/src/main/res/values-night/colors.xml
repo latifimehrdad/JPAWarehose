@@ -14,6 +14,7 @@
     <color name="primaryGradientEnd">#212225</color>
     <color name="textColor">@color/primaryColor</color>
     <color name="textColorNormal">#ACACAC</color>
+    <color name="textColorDisable">#ACACAC</color>
 
     <color name="iconNormalColor">#B9BCC1</color>
     <color name="iconDisableColor">#212225</color>

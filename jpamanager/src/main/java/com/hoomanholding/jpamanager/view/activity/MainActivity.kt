@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
-import com.hoomanholding.applibrary.ext.downloadImage
+import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.jpamanager.R
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.colon)
                 )
                 binding.textViewUser.text = it.fullName
-                binding.imageViewProfile.downloadImage(
+                binding.imageViewProfile.downloadProfileImage(
                     it.profileImageName,
                     it.systemType,
                     EnumEntityType.ProfileImage.name,

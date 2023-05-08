@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewParent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardBackgroundColor="@color/cardViewMenuColor">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintDimensionRatio="4.5:6"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    android:id="@+id/textViewNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/iransans_bold"
+                    android:gravity="end"
+                    app:setIntValue="@{item.orderNumber}"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/textViewNumber"
+                    app:layout_constraintEnd_toEndOf="@id/textViewNumber"
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/textColorDisable"
+                    android:fontFamily="@font/iransans_light"
+                    android:text="@string/orderNumber"/>
+
+                <com.hoomanholding.applibrary.view.custom.JpaButton
+                    android:id="@+id/buttonShowOrderDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:backgroundTint="@color/primaryColor"
+                    app:cornerRadius="@dimen/_7sdp"
+                    android:textSize="@dimen/_6sdp"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:textColor="@color/bottomTextColor"
+                    android:text='@string/showOrderDetail' />
+
+
+                <ImageView
+                    android:id="@+id/imageViewShopping"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/ic_shopping"
+                    android:contentDescription="@string/logo" />
+
+                <TextView
+                    android:id="@+id/textViewAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/imageViewShopping"
+                    app:layout_constraintBottom_toBottomOf="@id/imageViewShopping"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageViewShopping"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/textColorDisable"
+                    android:fontFamily="@font/iransans_light"
+                    app:setAmount="@{item.orderAmount}"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textViewAmount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/textColorDisable"
+                    android:fontFamily="@font/iransans_light"
+                    android:text="@string/rial"/>
+
+
+                <TextView
+                    android:id="@+id/textViewDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/buttonShowOrderDetail"
+                    app:layout_constraintStart_toStartOf="@id/buttonShowOrderDetail"
+                    app:layout_constraintEnd_toEndOf="@id/buttonShowOrderDetail"
+                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/textColorDisable"
+                    android:fontFamily="@font/iransans_light"
+                    android:gravity="center"
+                    android:text="@{item.orderDate}"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>

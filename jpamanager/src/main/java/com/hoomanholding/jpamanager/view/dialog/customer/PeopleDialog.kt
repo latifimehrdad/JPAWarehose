@@ -62,8 +62,7 @@ class PeopleDialog(
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (activity != null)
-            (activity as MainActivity).hideFragmentContainer()
+        (activity as MainActivity?)?.hideFragmentContainer()
         val lp = WindowManager.LayoutParams()
         val window = dialog?.window
         val back = ColorDrawable(Color.TRANSPARENT)
@@ -181,8 +180,7 @@ class PeopleDialog(
     override fun dismiss() {
         super.dismiss()
         job?.cancel()
-        if (activity != null)
-            (activity as MainActivity).showFragmentContainer()
+        (activity as MainActivity?)?.showFragmentContainer()
     }
     //---------------------------------------------------------------------------------------------- dismiss
 }

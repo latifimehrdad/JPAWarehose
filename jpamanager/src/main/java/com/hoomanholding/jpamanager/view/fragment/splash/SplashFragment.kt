@@ -104,7 +104,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                         showMessage(getString(R.string.updateIsSuccess))
                         CoroutineScope(Main).launch {
                             delay(1500)
-                            (activity as MainActivity).finish()
+                            (activity as MainActivity?)?.finish()
                         }
                     } else {
                         textInputEditTextIp.error = getString(R.string.ipIsIncorrect)

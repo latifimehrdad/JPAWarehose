@@ -18,9 +18,9 @@ import com.hoomanholding.applibrary.model.api.Api
  */
 
 
-//-------------------------------------------------------------------------------------------------- downloadImage
+//-------------------------------------------------------------------------------------------------- downloadProfileImage
 @SuppressLint("UseCompatLoadingForDrawables")
-fun ImageView.downloadImage(url: String?, systemType: String?, entityType: String, token: String) {
+fun ImageView.downloadProfileImage(url: String?, systemType: String?, entityType: String, token: String) {
     if (url.isNullOrEmpty()) {
         this.setImageDrawable(context.getDrawable(R.drawable.profile_image))
         return
@@ -41,7 +41,7 @@ fun ImageView.downloadImage(url: String?, systemType: String?, entityType: Strin
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .into(this)
 }
-//-------------------------------------------------------------------------------------------------- downloadImage
+//-------------------------------------------------------------------------------------------------- downloadProfileImage
 
 
 //-------------------------------------------------------------------------------------------------- ImageView.setItemIcon
@@ -55,7 +55,7 @@ fun ImageView.setItemIcon(icon: Int) {
 //-------------------------------------------------------------------------------------------------- loadImage
 @BindingAdapter("loadImage", "SystemType", "setEntityType", "bearerToken")
 fun ImageView.loadImage(url: String?, systemType: String?, entityType: String, token: String) {
-    this.downloadImage(url,systemType,entityType, token)
+    this.downloadProfileImage(url,systemType,entityType, token)
 }
 //-------------------------------------------------------------------------------------------------- loadImage
 

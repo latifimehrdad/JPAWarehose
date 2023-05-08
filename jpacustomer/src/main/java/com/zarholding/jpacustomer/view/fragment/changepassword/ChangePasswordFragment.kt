@@ -68,7 +68,7 @@ class ChangePasswordFragment(
         }
 
         viewModel.passwordChangeLiveData.observe(viewLifecycleOwner) {
-            (activity as MainActivity).gotoFirstFragment(false)
+            (activity as MainActivity?)?.gotoFirstFragment(false)
         }
 
     }

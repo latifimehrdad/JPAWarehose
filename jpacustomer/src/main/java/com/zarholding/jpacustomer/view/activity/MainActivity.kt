@@ -12,6 +12,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.snackbar.Snackbar
+import com.hoomanholding.applibrary.ext.downloadProfileImage
+import com.hoomanholding.applibrary.ext.setTitleAndValue
+import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,25 +59,23 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         setListener()
         resetMenuColor()
-/*        mainViewModel.userInfoLiveData.observe(this) { user ->
+        mainViewModel.userInfoLiveData.observe(this) { user ->
             user?.let {
-                binding.textViewPersonnelCode.setTitleAndValue(
-                    getString(R.string.personnelNumber),
+                binding.textViewUserName.setTitleAndValue(
+                    it.fullName,
                     it.personnelNumber,
-                    getString(R.string.colon)
+                    getString(R.string.enterChar)
                 )
-                binding.textViewUser.text = it.fullName
-                binding.imageViewProfile.downloadImage(
+                binding.imageViewProfiel.downloadProfileImage(
                     it.profileImageName,
                     it.systemType,
                     EnumEntityType.ProfileImage.name,
                     mainViewModel.getBearerToke()
                 )
             } ?: run {
-                binding.textViewPersonnelCode.text = ""
-                binding.textViewUser.text = ""
+                binding.textViewUserName.text = ""
             }
-        }*/
+        }
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -97,7 +98,9 @@ class MainActivity : AppCompatActivity() {
         when (fragmentId) {
             R.id.splashFragment,
             R.id.loginFragment,
-            R.id.downloadFragment -> { binding.cardViewMenu.visibility = View.GONE }
+            R.id.downloadFragment -> {
+                binding.cardViewMenu.visibility = View.GONE
+            }
             R.id.homeFragment -> {
                 if (!binding.customMenuHome.isSelectedMenu()) {
                     resetMenuColor()
@@ -159,7 +162,6 @@ class MainActivity : AppCompatActivity() {
         binding.navHostFragment.alpha = 1f
     }
     //---------------------------------------------------------------------------------------------- showFragmentContainer
-
 
 
     //---------------------------------------------------------------------------------------------- resetMenuColor

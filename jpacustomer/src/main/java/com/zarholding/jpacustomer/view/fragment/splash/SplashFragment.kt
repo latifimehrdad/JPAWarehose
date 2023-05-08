@@ -163,9 +163,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
     private fun gotoFragmentHome() {
-/*        if (binding.materialButtonLogin.isLoading)
-            return
-        binding.materialButtonLogin.startLoading(getString(R.string.bePatient))*/
+        binding.textViewLogin.text = getString(R.string.bePatient)
         splashViewModel.requestGetData()
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentHome

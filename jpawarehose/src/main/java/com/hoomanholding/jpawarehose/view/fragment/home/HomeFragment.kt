@@ -59,7 +59,7 @@ class HomeFragment(override var layout: Int  = R.layout.fragment_home) :
         }
 
         homeViewModel.userLogOut.observe(viewLifecycleOwner) {
-            (activity as MainActivity).gotoFirstFragment()
+            (activity as MainActivity?)?.gotoFirstFragment()
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData

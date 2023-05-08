@@ -96,9 +96,7 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
                 return@setOnClickListener
             val click = object : ConfirmDialog.Click {
                 override fun clickYes() {
-                    if (activity == null)
-                        return
-                    (activity as MainActivity).gotoFirstFragment()
+                    (activity as MainActivity?)?.gotoFirstFragment()
                 }
             }
             ConfirmDialog(

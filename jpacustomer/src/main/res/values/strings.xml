@@ -21,6 +21,23 @@
     <string name="back">برگشت</string>
     <string name="orderTracking">پیگیری سفارش</string>
     <string name="orderNumber">شماره سفارش</string>
+    <string name="showOrderDetail">نمایش جزئیات سفارش</string>
+    <string name="currentStep">مرحله ی فعلی</string>
+    <string name="oldOrder">سفارشات قبلی</string>
+    <string name="showAll">نمایش همه</string>
+    <string name="productCallForPrice">استعلام قیمت کالاها</string>
+    <string name="name">نام</string>
+    <string name="none">در حال بررسی</string>
+    <string name="rejected">رد شده</string>
+    <string name="confirmed">تایید شده</string>
+    <string name="packing">در حال آماده سازی</string>
+    <string name="billing">فاکتور شده</string>
+    <string name="loading">در حال ارسال</string>
+    <string name="sent">ارسال شده</string>
+    <string name="rial">ریال</string>
+
+    <string name="colon">:</string>
+    <string name="enterChar">\n</string>
 
     <string name="lovorm">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت \n چاپ، و با استفاده از طراحان گرافیک است،</string>
 

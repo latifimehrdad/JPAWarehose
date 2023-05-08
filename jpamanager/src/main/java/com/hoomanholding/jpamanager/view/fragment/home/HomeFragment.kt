@@ -17,10 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.model.data.other.HomeReportItemModel
 import com.hoomanholding.jpamanager.view.adapter.StringSpinnerAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 /**

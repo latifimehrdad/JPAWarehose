@@ -95,11 +95,11 @@ class VerifyCodeFragment(
             startTimer()
         }
 
-        viewModel.verifyCodeLiveData.observe(viewLifecycleOwner) {
-            if (it.isforceChangePassword) {
+        viewModel.forceChanePasswordLiveData.observe(viewLifecycleOwner) {
+            if (it) {
                 gotoChangePassword()
             } else {
-                (activity as MainActivity).gotoFirstFragment(false)
+                (activity as MainActivity?)?.gotoFirstFragment(false)
             }
         }
     }

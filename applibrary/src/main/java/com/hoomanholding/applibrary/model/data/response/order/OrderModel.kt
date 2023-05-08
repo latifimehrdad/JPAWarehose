@@ -5,7 +5,7 @@ package com.hoomanholding.applibrary.model.data.response.order
  */
 
 data class OrderModel(
-    val id: Int,
+    val id: Long,
     val orderDate: String?,
     val orderNumber: Int,
     val customerId: Int,

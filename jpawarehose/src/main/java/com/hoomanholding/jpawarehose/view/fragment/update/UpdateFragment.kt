@@ -35,7 +35,7 @@ class UpdateFragment(override var layout: Int = R.layout.fragment_update) :
             binding.buttonDoUpdate.stopLoading()
             binding.gifImageView.visibility = View.GONE
             binding.textViewPercent.visibility = View.GONE
-            (activity as MainActivity).showMessage(it)
+            (activity as MainActivity?)?.showMessage(it)
         }
 
         updateViewModel.percentUpdatingLiveData.observe(viewLifecycleOwner) {

@@ -16,7 +16,7 @@ import java.time.LocalDateTime
 
 //-------------------------------------------------------------------------------------------------- setTitleAndValue
 @BindingAdapter("setTitle","setValue", "setSplitter")
-fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String){
+fun TextView.setTitleAndValue(title : String?, value : Any?, splitter: String){
     val temp = value?.let {
         when(value){
             is String -> "$title $splitter $value"
@@ -94,6 +94,26 @@ fun TextView.setTitleAndValue(title : String, value : Any?, splitter: String, la
     text = temp
 }
 //-------------------------------------------------------------------------------------------------- setTitleAndValue
+
+
+
+//-------------------------------------------------------------------------------------------------- setAmount
+@BindingAdapter("setAmount")
+fun TextView.setAmount(value : Long){
+    text = value.split()
+}
+//-------------------------------------------------------------------------------------------------- setAmount
+
+
+
+//-------------------------------------------------------------------------------------------------- setIntValue
+@BindingAdapter("setIntValue")
+fun TextView.setIntValue(value : Int){
+    text = value.toString()
+}
+//-------------------------------------------------------------------------------------------------- setIntValue
+
+
 
 
 //-------------------------------------------------------------------------------------------------- setAmount

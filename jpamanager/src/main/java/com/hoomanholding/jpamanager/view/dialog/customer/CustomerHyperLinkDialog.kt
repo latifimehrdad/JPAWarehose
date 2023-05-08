@@ -55,8 +55,7 @@ class CustomerHyperLinkDialog(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.shimmerViewContainer.config(getShimmerBuild())
-        if (activity != null)
-            (activity as MainActivity).hideFragmentContainer()
+        (activity as MainActivity?)?.hideFragmentContainer()
         viewModel.customerId = customerId
         val lp = WindowManager.LayoutParams()
         val window = dialog?.window
@@ -149,8 +148,7 @@ class CustomerHyperLinkDialog(
     //---------------------------------------------------------------------------------------------- onDismiss
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        if (activity != null)
-            (activity as MainActivity).showFragmentContainer()
+        (activity as MainActivity?)?.showFragmentContainer()
     }
     //---------------------------------------------------------------------------------------------- onDismiss
 

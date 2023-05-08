@@ -211,7 +211,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         val detail = object : OrderHolder.Click {
             override fun orderDetail(item: OrderModel) {
                 val bundle = Bundle()
-                bundle.putInt(CompanionValues.ORDER_IR, item.id)
+                bundle.putLong(CompanionValues.ORDER_IR, item.id)
                 bundle.putInt(CompanionValues.CUSTOMER_ID, item.customerId)
                 findNavController()
                     .navigate(R.id.action_InvoiceFragment_to_InvoiceFragmentDetail, bundle)

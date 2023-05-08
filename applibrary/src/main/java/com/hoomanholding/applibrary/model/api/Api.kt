@@ -11,6 +11,7 @@ import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.report.*
@@ -40,6 +41,7 @@ interface Api {
         const val warehouseReceipt = "$v1/WarehouseReceipt"
         const val report = "$v1/report"
         const val files = "$v1/Files"
+        const val customerApp = "/customerApp"
     }
 
     //---------------------------------------------------------------------------------------------- user
@@ -132,7 +134,7 @@ interface Api {
 
     @GET("$saleOrders/managerApp-OrderValidation-OrderDetails-View")
     suspend fun requestOrderDetail(
-        @Query("orderId") orderId: Int,
+        @Query("orderId") orderId: Long,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<OrderModel?>>
 
@@ -141,6 +143,11 @@ interface Api {
         @Body request: OrderToggleStateRequest,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$saleOrders$customerApp-Orders-View")
+    suspend fun requestCustomerGetOrder(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CustomerOrderModel>?>>
     //---------------------------------------------------------------------------------------------- saleOrders
 
 
