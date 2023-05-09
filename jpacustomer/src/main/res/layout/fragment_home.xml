@@ -63,7 +63,7 @@
                 app:spinner_arrow_padding="8dp"
                 app:spinner_arrow_drawable="@drawable/ic_play"
                 app:spinner_arrow_tint="@color/primaryColor"
-                app:spinner_divider_color="@color/strokeEditTextTime"
+                app:spinner_divider_color="@color/dividerColor"
                 app:spinner_divider_show="true"
                 app:spinner_divider_size="0.4dp"
                 app:spinner_popup_background="@drawable/drawable_back_edit"

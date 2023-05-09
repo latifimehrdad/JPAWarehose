@@ -20,7 +20,7 @@
             android:layout_height="1dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
@@ -36,7 +36,7 @@
 
         <ImageView
             android:layout_width="@dimen/_300sdp"
-            android:layout_height="@dimen/_600sdp"
+            android:layout_height="@dimen/_400sdp"
             android:src="@drawable/vehicle"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -78,9 +78,9 @@
                         android:maxLength="1"
                         android:maxLines="1"
                         android:background="@drawable/drawabel_edittext_timer"
-                        android:minHeight="@dimen/_35sdp"
+                        android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor" />
@@ -96,9 +96,9 @@
                         android:maxLength="1"
                         android:maxLines="1"
                         android:background="@drawable/drawabel_edittext_timer"
-                        android:minHeight="@dimen/_35sdp"
+                        android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
@@ -114,9 +114,9 @@
                         android:maxLength="1"
                         android:maxLines="1"
                         android:background="@drawable/drawabel_edittext_timer"
-                        android:minHeight="@dimen/_35sdp"
+                        android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
@@ -132,9 +132,9 @@
                         android:maxLength="1"
                         android:maxLines="1"
                         android:background="@drawable/drawabel_edittext_timer"
-                        android:minHeight="@dimen/_35sdp"
+                        android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
@@ -150,9 +150,9 @@
                         android:maxLength="1"
                         android:maxLines="1"
                         android:background="@drawable/drawabel_edittext_timer"
-                        android:minHeight="@dimen/_35sdp"
+                        android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
@@ -161,13 +161,13 @@
 
                 <com.hoomanholding.applibrary.view.custom.MLAnimationTime
                     android:id="@+id/mlAnimationTimer"
-                    android:layout_width="@dimen/_80sdp"
+                    android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/linearLayoutVerify"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/_10sdp"
-                    app:at_textSize="@dimen/_11sdp"
+                    app:at_textSize="@dimen/_8sdp"
                     app:at_gravity="center"
                     app:at_showing="minute_second"
                     app:fontFamily="@font/iransans_medium"
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/mlAnimationTimer"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_7sdp"
+                    android:textSize="@dimen/_6sdp"
                     android:gravity="center"
                     android:text="@string/remainingUntilResend"
                     android:textColor="@color/textColorNormal"
@@ -200,7 +200,7 @@
                     android:backgroundTint="@color/primaryColor"
                     android:hint="@string/bePatient"
                     app:cornerRadius="@dimen/_7sdp"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
                     android:paddingHorizontal="@dimen/_15sdp"

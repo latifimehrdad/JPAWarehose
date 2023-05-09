@@ -88,6 +88,14 @@ class MainActivity : AppCompatActivity() {
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             showAndHideBottomNavigationMenu(destination.id)
         }
+
+        binding.customMenuHome.setOnClickListener {
+            gotoFragment(R.id.action_goto_homeFragment)
+        }
+
+        binding.customMenuProduct.setOnClickListener {
+            gotoFragment(R.id.action_goto_productFragment)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -101,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             R.id.downloadFragment -> {
                 binding.cardViewMenu.visibility = View.GONE
             }
-            R.id.homeFragment -> {
+            R.id.homeFragment ->
                 if (!binding.customMenuHome.isSelectedMenu()) {
                     resetMenuColor()
                     binding.cardViewMenu.visibility = View.VISIBLE
@@ -109,6 +117,12 @@ class MainActivity : AppCompatActivity() {
                     binding.cardViewProfile.visibility = View.VISIBLE
                     binding.customMenuHome.selected()
                 }
+            R.id.productFragment -> if (!binding.customMenuProduct.isSelectedMenu()){
+                resetMenuColor()
+                binding.cardViewMenu.visibility = View.VISIBLE
+                binding.imageViewBack.visibility = View.VISIBLE
+                binding.cardViewProfile.visibility = View.VISIBLE
+                binding.customMenuProduct.selected()
             }
         }
     }

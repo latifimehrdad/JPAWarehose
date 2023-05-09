@@ -26,6 +26,7 @@
     <string name="oldOrder">سفارشات قبلی</string>
     <string name="showAll">نمایش همه</string>
     <string name="productCallForPrice">استعلام قیمت کالاها</string>
+    <string name="callForPrice">استعلام قیمت</string>
     <string name="name">نام</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
@@ -35,6 +36,7 @@
     <string name="loading">در حال ارسال</string>
     <string name="sent">ارسال شده</string>
     <string name="rial">ریال</string>
+    <string name="search">جستجو</string>
 
     <string name="colon">:</string>
     <string name="enterChar">\n</string>

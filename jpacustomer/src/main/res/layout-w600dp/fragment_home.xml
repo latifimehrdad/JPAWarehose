@@ -15,7 +15,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:textColor="@color/textColorNormal"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_7sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/orderTracking"/>
 
@@ -35,8 +35,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="@dimen/_8sdp"
-                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_6sdp"
+                android:padding="@dimen/_3sdp"
                 android:fontFamily="@font/iransans_light"
                 android:textColor="@color/textColorNormal"
                 android:text="@string/orderNumber"
@@ -58,14 +58,14 @@
                 android:padding="@dimen/_3sdp"
                 android:textColor="@color/primaryColor"
                 android:textColorHint="@color/strokeEditTextTime"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_6sdp"
                 app:spinner_arrow_gravity="start"
                 app:spinner_arrow_padding="8dp"
                 app:spinner_arrow_drawable="@drawable/ic_play"
                 app:spinner_arrow_tint="@color/primaryColor"
-                app:spinner_divider_color="@color/strokeEditTextTime"
+                app:spinner_divider_color="@color/dividerColor"
                 app:spinner_divider_show="true"
-                app:spinner_divider_size="0.4dp"
+                app:spinner_divider_size="0.1dp"
                 app:spinner_popup_background="@drawable/drawable_back_edit"
                 app:spinner_popup_height="@dimen/_50sdp"
                 app:spinner_popup_animation="dropdown"
@@ -80,7 +80,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/stepLoading"
                 app:layout_constraintDimensionRatio="H,1:1"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:step_icon="@drawable/ic_step_send"
                 app:step_title="@string/sent"/>
 
@@ -160,11 +160,11 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/primaryColor"
                 android:hint="@string/bePatient"
-                app:cornerRadius="@dimen/_7sdp"
-                android:textSize="@dimen/_9sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:paddingHorizontal="@dimen/_15sdp"
+                app:cornerRadius="@dimen/_5sdp"
+                android:textSize="@dimen/_6sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:textColor="@color/bottomTextColor"
                 android:text='@string/showOrderDetail' />
@@ -177,7 +177,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/buttonShowOrderDetail"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_6sdp"
                 android:textColor="@color/textColorNormal"
                 android:fontFamily="@font/iransans_bold"
                 />
@@ -187,7 +187,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/textViewStep"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/_6sdp"
                 android:layout_marginBottom="@dimen/_3sdp"
                 android:textColor="@color/textColor"
                 android:fontFamily="@font/iransans_light"
@@ -203,8 +203,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/constraintLayoutStep"
             app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:textSize="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_7sdp"
             android:textColor="@color/textColorNormal"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/oldOrder"/>
@@ -230,8 +230,7 @@
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/textViewOldOrder"
             android:layout_marginTop="@dimen/_5sdp"
-            app:layout_constraintHeight_percent="0.25"
-            android:background="@color/primaryGradientEnd"/>
+            app:layout_constraintHeight_percent="0.27" />
 
         <TextView
             android:id="@+id/textViewCallForPrice"
@@ -239,11 +238,11 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/recyclerViewOldOrder"
             app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:textSize="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_7sdp"
             android:textColor="@color/textColorNormal"
             android:fontFamily="@font/iransans_bold"
-            android:text="@string/oldOrder"/>
+            android:text="@string/callForPrice"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"

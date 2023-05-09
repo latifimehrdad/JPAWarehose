@@ -23,10 +23,9 @@ import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentVerifyCodeBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 
 
 /**
@@ -38,6 +37,7 @@ class VerifyCodeFragment(
     override var layout: Int = R.layout.fragment_verify_code
 ) : JpaFragment<FragmentVerifyCodeBinding>() {
 
+    private var job: Job? = null
     private val viewModel: VerifyCodeViewModel by viewModels()
     private var smsVerificationReceiver: BroadcastReceiver? = null
 
@@ -45,11 +45,11 @@ class VerifyCodeFragment(
     //---------------------------------------------------------------------------------------------- smsLauncher
     private val smsLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == Activity.RESULT_OK) {
-            val message = it.data?.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE)
-            splitVerifyCodeFromSms(message)
+            if (it.resultCode == Activity.RESULT_OK) {
+                val message = it.data?.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE)
+                splitVerifyCodeFromSms(message)
+            }
         }
-    }
     //---------------------------------------------------------------------------------------------- smsLauncher
 
 
@@ -83,12 +83,6 @@ class VerifyCodeFragment(
             }
         }
 
-        viewModel.timerLiveData.observe(viewLifecycleOwner) {
-            if (it < 0)
-                resendRequestForSms()
-            else
-                binding.mlAnimationTimer.changeTime(it)
-        }
 
         viewModel.resendLiveData.observe(viewLifecycleOwner) {
             receiveSms()
@@ -96,11 +90,10 @@ class VerifyCodeFragment(
         }
 
         viewModel.forceChanePasswordLiveData.observe(viewLifecycleOwner) {
-            if (it) {
+            if (it)
                 gotoChangePassword()
-            } else {
+            else
                 (activity as MainActivity?)?.gotoFirstFragment(false)
-            }
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -183,10 +176,23 @@ class VerifyCodeFragment(
         binding.mlAnimationTimer.visibility = View.VISIBLE
         binding.textViewRemaining.visibility = View.VISIBLE
         binding.buttonReceiveAgain.visibility = View.GONE
-        viewModel.startTimer()
+        startCoroutineRepeat()
         resetEditTextsVerifyCode()
     }
     //---------------------------------------------------------------------------------------------- startTimer
+
+
+    //---------------------------------------------------------------------------------------------- startCoroutineRepeat
+    private fun startCoroutineRepeat() {
+        job = CoroutineScope(IO).launch {
+            repeat(30) {
+                delay(1000)
+                withContext(Main) { binding.mlAnimationTimer.changeTime(29 - it) }
+            }
+            withContext(Main) { resendRequestForSms() }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- startCoroutineRepeat
 
 
     //---------------------------------------------------------------------------------------------- resendRequestForSms
@@ -243,7 +249,7 @@ class VerifyCodeFragment(
 
     //---------------------------------------------------------------------------------------------- startAnimationEditText
     private fun startAnimationEditText() {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Main).launch {
             delay(300)
             if (context != null) {
                 val alpha1 =
@@ -323,7 +329,8 @@ class VerifyCodeFragment(
                                 extras.getParcelable<Intent>(SmsRetriever.EXTRA_CONSENT_INTENT)
                             try {
                                 smsLauncher.launch(consentIntent)
-                            } catch (_: Exception) {}
+                            } catch (_: Exception) {
+                            }
                         }
                         CommonStatusCodes.TIMEOUT -> {
 
@@ -348,4 +355,12 @@ class VerifyCodeFragment(
     //______________________________________________________________________________________________ unregisterReceiverSMS
 
 
+    //---------------------------------------------------------------------------------------------- onDestroyView
+    override fun onDestroyView() {
+        super.onDestroyView()
+        job?.cancel()
+        binding.mlAnimationTimer.changeTime(0)
+        resendRequestForSms()
+    }
+    //---------------------------------------------------------------------------------------------- onDestroyView
 }

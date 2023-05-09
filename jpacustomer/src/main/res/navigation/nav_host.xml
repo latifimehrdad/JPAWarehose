@@ -67,9 +67,34 @@
         android:id="@+id/homeFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.home.HomeFragment"/>
 
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.product.ProductFragment"/>
+
     <action
         android:id="@+id/action_goto_SplashFragment"
         app:destination="@id/splashFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/splashFragment"
+        app:launchSingleTop="true"/>
+
+
+    <action
+        android:id="@+id/action_goto_homeFragment"
+        app:destination="@id/homeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/splashFragment"
+        app:launchSingleTop="true"/>
+
+    <action
+        android:id="@+id/action_goto_productFragment"
+        app:destination="@id/productFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
