@@ -1,6 +1,7 @@
 package com.hoomanholding.applibrary.ext
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -16,6 +17,31 @@ import com.hoomanholding.applibrary.model.api.Api
 /**
  * create by m-latifi on 3/6/2023
  */
+
+
+//-------------------------------------------------------------------------------------------------- downloadProfileImage
+@SuppressLint("UseCompatLoadingForDrawables")
+@BindingAdapter("setDownloadImage", "setImagePlaceholder")
+fun ImageView.downloadImage(url: String?, placeholder: Drawable?) {
+    if (url.isNullOrEmpty()) {
+        this.setImageDrawable(context.getDrawable(R.drawable.profile_image))
+        return
+    }
+    val circularProgressDrawable = CircularProgressDrawable(this.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
+    val link = "${Providers.url}$url"
+    Glide
+        .with(this)
+        .load(link)
+        .skipMemoryCache(true)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
+        .placeholder(placeholder)
+        .into(this)
+}
+//-------------------------------------------------------------------------------------------------- downloadProfileImage
+
 
 
 //-------------------------------------------------------------------------------------------------- downloadProfileImage

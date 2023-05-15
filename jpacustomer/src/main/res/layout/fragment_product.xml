@@ -6,7 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <EditText
+            android:id="@+id/editTextSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
@@ -24,7 +26,74 @@
             android:drawableEnd="@drawable/ic__search"
             android:drawableStart="@drawable/ic_subtraction"
             android:drawablePadding="@dimen/_5sdp"
-            android:autofillHints="none" />
+            android:autofillHints="none"/>
+
+
+        <com.hoomanholding.applibrary.view.custom.JpaButton
+            android:id="@+id/buttonNewProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/editTextSearch"
+            app:layout_constraintTop_toBottomOf="@id/editTextSearch"
+            app:layout_constraintEnd_toStartOf="@id/buttonAllProduct"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:backgroundTint="@color/buttonDisable"
+            android:hint="@string/bePatient"
+            app:cornerRadius="@dimen/_7sdp"
+            android:textSize="@dimen/_9sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/bottomTextColor"
+            android:text='@string/newProductList' />
+
+        <com.hoomanholding.applibrary.view.custom.JpaButton
+            android:id="@+id/buttonAllProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/editTextSearch"
+            app:layout_constraintTop_toTopOf="@id/buttonNewProduct"
+            app:layout_constraintStart_toEndOf="@id/buttonNewProduct"
+            android:backgroundTint="@color/primaryColor"
+            android:hint="@string/bePatient"
+            app:cornerRadius="@dimen/_7sdp"
+            android:textSize="@dimen/_9sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/bottomTextColor"
+            android:text='@string/allProductList' />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewProduct"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/buttonAllProduct"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/editTextSearch"
+            app:layout_constraintEnd_toEndOf="@id/editTextSearch"
+            android:layout_marginTop="@dimen/_5sdp"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/recyclerViewProduct"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerViewProduct"
+            app:layout_constraintStart_toStartOf="@id/recyclerViewProduct"
+            app:layout_constraintEnd_toEndOf="@id/recyclerViewProduct">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/recyclerLoadingBack"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

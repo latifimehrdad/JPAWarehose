@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.product.ProductModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/drawable_home_step"
+        android:padding="@dimen/_5sdp">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewRial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_light"
+                android:text="@string/rial"
+                android:textColor="@color/textColorNormal"
+                android:textSize="@dimen/_6sdp" />
+
+            <TextView
+                android:id="@+id/textViewPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_bold"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_10sdp"
+                app:setAmount="@{item.price}" />
+
+            <com.hoomanholding.applibrary.view.custom.JpaButton
+                android:id="@+id/buttonShowDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:backgroundTint="@color/primaryColor"
+                android:fontFamily="@font/iransans_light"
+                android:text='@string/detailProduct'
+                android:textColor="@color/bottomTextColor"
+                android:textSize="@dimen/_7sdp"
+                app:cornerRadius="@dimen/_7sdp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textViewCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_7sdp"
+            android:fontFamily="@font/iransans_light"
+            android:gravity="start"
+            android:textColor="@color/textColorNormal"
+            android:textSize="@dimen/_7sdp"
+            app:layout_constraintBottom_toTopOf="@id/textViewName"
+            app:layout_constraintEnd_toStartOf="@id/imageViewPicture"
+            app:layout_constraintStart_toEndOf="@id/linearLayoutPrice"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setSplitter="@{@string/colon}"
+            app:setTitle="@{@string/productCode}"
+            app:setValue="@{item.productCode}" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iransans_medium"
+            android:gravity="start"
+            android:text="@{item.productName}"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textViewCode"
+            app:layout_constraintStart_toStartOf="@id/textViewCode"
+            app:layout_constraintTop_toBottomOf="@id/textViewCode" />
+
+        <ImageView
+            android:id="@+id/imageViewPicture"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_7sdp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintBottom_toBottomOf="@id/linearLayoutPrice"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/linearLayoutPrice"
+            app:setDownloadImage="@{item.productThumbnailImageName}"
+            app:setImagePlaceholder="@{@drawable/ic_logo}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

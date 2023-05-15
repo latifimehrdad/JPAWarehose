@@ -22,6 +22,7 @@
     <string name="orderTracking">پیگیری سفارش</string>
     <string name="orderNumber">شماره سفارش</string>
     <string name="showOrderDetail">نمایش جزئیات سفارش</string>
+    <string name="detailProduct">جزییات کالا</string>
     <string name="currentStep">مرحله ی فعلی</string>
     <string name="oldOrder">سفارشات قبلی</string>
     <string name="showAll">نمایش همه</string>
@@ -37,6 +38,10 @@
     <string name="sent">ارسال شده</string>
     <string name="rial">ریال</string>
     <string name="search">جستجو</string>
+    <string name="category">دسته بندی</string>
+    <string name="newProductList">لیست کالاهای جدید</string>
+    <string name="allProductList">لیست همه ی کالاها</string>
+    <string name="productCode">کد کالا</string>
 
     <string name="colon">:</string>
     <string name="enterChar">\n</string>

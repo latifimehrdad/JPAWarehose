@@ -22,6 +22,7 @@
     <color name="cardViewColor2">#4C4C4C</color>
     <color name="cardViewMenuColor">#6C6C6C</color>
 
+    <color name="buttonDisable">#454545</color>
     <color name="bottomTextColor">#000000</color>
     <color name="strokeEditTextTime">#686868</color>
     <color name="dividerColor">#474646</color>
@@ -29,5 +30,7 @@
 
     <color name="stepSelect">#9cecac</color>
     <color name="editTextColor">#000000</color>
+
+    <color name="recyclerLoadingBack">#33FFFFFF</color>
 
 </resources>

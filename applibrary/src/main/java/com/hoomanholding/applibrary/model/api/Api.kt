@@ -13,6 +13,7 @@ import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinanci
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
+import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
@@ -121,6 +122,10 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CurrencyModel>?>>
 
+    @GET("$baseData/basedata-get-customerproductlist")
+    suspend fun requestGetCustomerProducts(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<ProductModel>?>>
     //---------------------------------------------------------------------------------------------- baseData
 
 
