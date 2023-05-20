@@ -52,7 +52,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         setListener()
         startAnimation()
         requestGetAppVersion()
-//        checkUserIsLogged()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -231,10 +230,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         ).show()
     }
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
-
-
-
-
 
 
 

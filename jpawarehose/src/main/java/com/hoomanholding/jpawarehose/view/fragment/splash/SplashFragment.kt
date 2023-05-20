@@ -1,14 +1,23 @@
 package com.hoomanholding.jpawarehose.view.fragment.splash
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSplashBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
+import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -31,8 +40,8 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setListener()
-        checkUserIsLogged()
+        initView()
+
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -46,23 +55,30 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- showMessage
 
 
+
+    //---------------------------------------------------------------------------------------------- initView
+    private fun initView() {
+        observeLiveDate()
+        setListener()
+        requestGetAppVersion()
+    }
+    //---------------------------------------------------------------------------------------------- initView
+
+
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
-        binding.buttonReTry.setOnClickListener { checkUserIsLogged() }
+        binding.buttonReTry.setOnClickListener { requestGetAppVersion() }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
-    //---------------------------------------------------------------------------------------------- checkUserIsLogged
-    private fun checkUserIsLogged() {
-        if (binding.buttonReTry.isLoading)
-            return
-/*        if (splashViewModel.userIsEntered())
-            gotoFragmentHome()
-        else
-            gotoFragmentLogin()*/
+
+    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+    private fun requestGetAppVersion() {
+        splashViewModel.requestGetAppVersion(EnumSystemType.WareHouse.name)
     }
-    //---------------------------------------------------------------------------------------------- checkUserIsLogged
+    //---------------------------------------------------------------------------------------------- requestGetAppVersion
+
 
 
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
@@ -79,8 +95,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
     private fun gotoFragmentHome() {
-        observeErrorLiveDate()
-        observeSuccessLiveDataLiveData()
         startLoading()
         splashViewModel.requestGetData()
     }
@@ -88,7 +102,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
 
     //---------------------------------------------------------------------------------------------- observeLoginLiveDate
-    private fun observeErrorLiveDate() {
+    private fun observeLiveDate() {
         splashViewModel.errorLiveDate.observe(viewLifecycleOwner) {
             stopLoading()
             showMessage(it.message)
@@ -97,12 +111,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                 else -> {}
             }
         }
-    }
-    //---------------------------------------------------------------------------------------------- observeLoginLiveDate
 
-
-    //---------------------------------------------------------------------------------------------- observeSuccessLiveDataLiveData
-    private fun observeSuccessLiveDataLiveData() {
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
             activity?.let {main->
                 (main as MainActivity).showImageViewReceiptAction()
@@ -110,9 +119,19 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             if (it)
                 findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
         }
-    }
-    //---------------------------------------------------------------------------------------------- observeSuccessLiveDataLiveData
 
+        splashViewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
+            storagePermission(it)
+        }
+
+        splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
+            if (it)
+                gotoFragmentHome()
+            else
+                gotoFragmentLogin()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- observeLoginLiveDate
 
 
     //---------------------------------------------------------------------------------------------- startLoading
@@ -129,5 +148,61 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         binding.buttonReTry.visibility = View.VISIBLE
     }
     //---------------------------------------------------------------------------------------------- stopLoading
+
+
+    //---------------------------------------------------------------------------------------------- cameraPermission
+    private fun storagePermission(fileName: String) {
+        if (context == null)
+            return
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    showDialogUpdateAppVersion(fileName)
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?
+                ) {
+
+                }
+
+            }).check()
+    }
+    //---------------------------------------------------------------------------------------------- cameraPermission
+
+
+
+    //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
+    private fun showDialogUpdateAppVersion(fileName: String) {
+        if (context == null)
+            return
+        ConfirmDialog(
+            requireContext(),
+            getString(R.string.doYouWantToUpdateApp),
+            object : ConfirmDialog.Click {
+                override fun clickYes() {
+                    gotoFragmentDownload(fileName)
+                }
+            }, true
+        ).show()
+    }
+    //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
+
+
+
+    //---------------------------------------------------------------------------------------------- gotoFragmentDownload
+    private fun gotoFragmentDownload(fileName: String) {
+        val bundle = Bundle()
+        bundle.putString(CompanionValues.DOWNLOAD_URL, fileName)
+        bundle.putString(CompanionValues.APP_NAME, EnumSystemType.WareHouse.name)
+        findNavController()
+            .navigate(R.id.action_splashFragment_to_DownloadFragment, bundle)
+    }
+    //---------------------------------------------------------------------------------------------- gotoFragmentDownload
 
 }

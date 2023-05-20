@@ -72,6 +72,8 @@ class DownloadViewModel @Inject constructor(
                         downloadSuccessLiveData.postValue(destinationFile)
                     }
                 }
+            } ?: run {
+                setMessage(response.errorBody()?.string() ?: "")
             }
         }
     }

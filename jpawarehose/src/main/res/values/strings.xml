@@ -10,6 +10,7 @@
     <string name="enter">ورود</string>
     <string name="welcome">خوش آمدید.</string>
     <string name="loginDescription">اپلیکیشن هومن هلدینگ ابزاری برای آسانتر شدن تمامی فرآیندهایتان</string>
+    <string name="doYouWantToUpdateApp">نسخه جدید برنامه در دسترس است،آیا برای دانلود آن مطمئن هستید؟</string>
     <string name="loginByBiometric">ورود با اثر انگشت</string>
     <string name="update">بروزرسانی اطلاعات</string>
     <string name="updateOn">بروزرسانی براساس :</string>

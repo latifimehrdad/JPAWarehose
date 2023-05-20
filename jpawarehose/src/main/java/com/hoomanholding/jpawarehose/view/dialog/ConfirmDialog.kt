@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
@@ -14,7 +15,8 @@ import com.hoomanholding.jpawarehose.R
 class ConfirmDialog(
     context: Context,
     private val title: String,
-    private val click: Click
+    private val click: Click,
+    private val force: Boolean = false
 ) : Dialog(context) {
 
 
@@ -56,6 +58,11 @@ class ConfirmDialog(
         val textViewTitle = this.findViewById<TextView>(R.id.textViewTitle)
         val buttonYes = this.findViewById<MaterialButton>(R.id.buttonYes)
         val buttonNo = this.findViewById<MaterialButton>(R.id.buttonNo)
+
+        if (force)
+            buttonNo.visibility = View.INVISIBLE
+        else
+            buttonNo.visibility = View.VISIBLE
 
         textViewTitle.text = title
 
