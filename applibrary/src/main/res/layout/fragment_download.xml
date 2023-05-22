@@ -7,8 +7,27 @@
         android:keepScreenOn="true"
         android:background="@color/primaryColorVariant">
 
+        <FrameLayout
+            android:id="@+id/frameLayoutLogo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintBottom_toTopOf="@id/textViewFailed"
+            android:layout_marginBottom="@dimen/_15sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/jpa_logo"
+                android:contentDescription="@string/logo" />
+
+        </FrameLayout>
+
         <TextView
-            android:id="@+id/textViewPercent"
+            android:id="@+id/textViewFailed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -20,17 +39,21 @@
             android:gravity="center"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/textViewPercent"
+        <com.mackhartley.roundedprogressbar.RoundedProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            app:layout_constraintTop_toBottomOf="@id/textViewFailed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:textSize="15sp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:text="@string/fileIsDownload"/>
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:rpbBackgroundColor="@color/progressColorBack"
+            app:rpbBackgroundTextColor="@color/progressColor"
+            app:rpbCornerRadius="@dimen/_6sdp"
+            app:rpbProgressColor="@color/progressColor"
+            app:rpbProgressTextColor="@color/progressColorBack"
+            app:rpbTextSize="@dimen/_12sdp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -63,6 +63,8 @@ dependencies {
     api 'net.orandja.shadowlayout:shadowlayout:1.0.1'
 
     api 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+
+    implementation 'com.github.MackHartley:RoundedProgressBar:3.0.0'
 }
 
 kapt {

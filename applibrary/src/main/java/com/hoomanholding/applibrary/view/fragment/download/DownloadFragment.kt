@@ -36,7 +36,7 @@ class DownloadFragment(override var layout: Int = R.layout.fragment_download) :
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner){
-            binding.textViewPercent.text = it.message
+            binding.textViewFailed.text = it.message
         }
 
 
@@ -45,8 +45,7 @@ class DownloadFragment(override var layout: Int = R.layout.fragment_download) :
         }
 
         viewModel.downloadProgress.observe(viewLifecycleOwner){
-            val text = getString(R.string.setPercent, it.toString()) + "%"
-            binding.textViewPercent.text = text
+            binding.progressBar.setProgressPercentage(it.toDouble(), true)
         }
 
     }

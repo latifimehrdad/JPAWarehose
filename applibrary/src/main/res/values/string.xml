@@ -7,4 +7,5 @@
     <string name="fileIsDownload">فایل در حال دانلود است، لطفا شکیبا باشید، فایل در پس زمینه در حال دانلود میباشد</string>
     <string name="setPercent">میزان دانلود : %1$s</string>
     <string name="rePasswordIsNotEqual">تکرار رمز ورد اشتباه است</string>
+    <string name="logo">لوگو</string>
 </resources>

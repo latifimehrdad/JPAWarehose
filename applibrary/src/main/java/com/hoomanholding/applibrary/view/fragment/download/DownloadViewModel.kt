@@ -80,37 +80,6 @@ class DownloadViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- downloadLastVersion
 
 
-/*
-    //---------------------------------------------------------------------------------------------- saveFile
-    private fun saveFile(body: ResponseBody?, fileName: String) {
-        if (body == null)
-            return
-        val downloadFolder =
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val destinationFile = File(downloadFolder.absolutePath, fileName)
-        var input: InputStream? = null
-        try {
-            input = body.byteStream()
-            val fos = FileOutputStream(destinationFile)
-            fos.use { output ->
-                val buffer = ByteArray(4 * 1024) // or other buffer size
-                var read: Int
-                while (input.read(buffer).also { read = it } != -1) {
-                    output.write(buffer, 0, read)
-                    Log.e("meri", "read $read")
-                }
-                output.flush()
-            }
-            downloadSuccessLiveData.postValue(destinationFile.absolutePath)
-        } catch (e: Exception) {
-            Log.e("saveFile", e.toString())
-        } finally {
-            input?.close()
-        }
-    }
-    //---------------------------------------------------------------------------------------------- saveFile
-*/
-
 
     //---------------------------------------------------------------------------------------------- DownloadState
     private sealed class DownloadState {

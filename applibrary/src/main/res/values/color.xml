@@ -3,4 +3,6 @@
     <color name="locationAmount">#00e22d</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primaryColorVariant">#061420</color>
+    <color name="progressColorBack">#1F2F3C</color>
+    <color name="progressColor">#80DEEA</color>
 </resources>
