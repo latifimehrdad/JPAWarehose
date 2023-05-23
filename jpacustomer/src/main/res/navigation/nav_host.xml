@@ -26,11 +26,12 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment" />
 
     </fragment>
-
 
     <fragment
         android:id="@+id/loginFragment"
@@ -38,10 +39,9 @@
 
         <action
             android:id="@+id/action_loginFragment_to_verifyCodeFragment"
-            app:destination="@id/verifyCodeFragment"/>
+            app:destination="@id/verifyCodeFragment" />
 
     </fragment>
-
 
     <fragment
         android:id="@+id/verifyCodeFragment"
@@ -53,54 +53,64 @@
 
     </fragment>
 
-
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.changepassword.ChangePasswordFragment"/>
-
+        android:name="com.zarholding.jpacustomer.view.fragment.changepassword.ChangePasswordFragment" />
 
     <fragment
         android:id="@+id/downloadFragment"
-        android:name="com.hoomanholding.applibrary.view.fragment.download.DownloadFragment"/>
+        android:name="com.hoomanholding.applibrary.view.fragment.download.DownloadFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.home.HomeFragment"/>
+        android:name="com.zarholding.jpacustomer.view.fragment.home.HomeFragment" />
 
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.product.ProductFragment"/>
+        android:name="com.zarholding.jpacustomer.view.fragment.product.ProductFragment" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.profile.ProfileFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"
         app:destination="@id/splashFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
-        app:popUpTo="@id/splashFragment"
-        app:launchSingleTop="true"/>
-
+        app:popUpTo="@id/splashFragment" />
 
     <action
         android:id="@+id/action_goto_homeFragment"
         app:destination="@id/homeFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
-        app:popUpTo="@id/splashFragment"
-        app:launchSingleTop="true"/>
+        app:popUpTo="@id/homeFragment" />
 
     <action
         android:id="@+id/action_goto_productFragment"
         app:destination="@id/productFragment"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
-        app:popUpTo="@id/splashFragment"
-        app:launchSingleTop="true"/>
+        app:popUpTo="@id/productFragment" />
 
+    <action
+        android:id="@+id/action_goto_profileFragment"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/profileFragment" />
 
 </navigation>

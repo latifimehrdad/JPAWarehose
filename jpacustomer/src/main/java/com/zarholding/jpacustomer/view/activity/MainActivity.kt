@@ -1,5 +1,6 @@
 package com.zarholding.jpacustomer.view.activity
 
+import android.content.res.Configuration
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        setAppTheme()
         setListener()
         resetMenuColor()
         mainViewModel.userInfoLiveData.observe(this) { user ->
@@ -80,6 +83,18 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- initView
 
 
+    //______________________________________________________________________________________________ setAppTheme
+    private fun setAppTheme() {
+        when (mainViewModel.applicationTheme()) {
+            Configuration.UI_MODE_NIGHT_YES ->
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            Configuration.UI_MODE_NIGHT_NO ->
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+    //______________________________________________________________________________________________ setAppTheme
+
+
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         val navHostFragment =
@@ -96,6 +111,10 @@ class MainActivity : AppCompatActivity() {
         binding.customMenuProduct.setOnClickListener {
             gotoFragment(R.id.action_goto_productFragment)
         }
+
+        binding.customMenuProfile.setOnClickListener {
+            gotoFragment(R.id.action_goto_profileFragment)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -109,20 +128,26 @@ class MainActivity : AppCompatActivity() {
             R.id.downloadFragment -> {
                 binding.cardViewMenu.visibility = View.GONE
             }
-            R.id.homeFragment ->
-                if (!binding.customMenuHome.isSelectedMenu()) {
-                    resetMenuColor()
-                    binding.cardViewMenu.visibility = View.VISIBLE
-                    binding.imageViewBack.visibility = View.VISIBLE
-                    binding.cardViewProfile.visibility = View.VISIBLE
-                    binding.customMenuHome.selected()
-                }
-            R.id.productFragment -> if (!binding.customMenuProduct.isSelectedMenu()){
+            R.id.homeFragment -> if (!binding.customMenuHome.isSelectedMenu()) {
+                resetMenuColor()
+                binding.cardViewMenu.visibility = View.VISIBLE
+                binding.imageViewBack.visibility = View.VISIBLE
+                binding.cardViewProfile.visibility = View.VISIBLE
+                binding.customMenuHome.selected()
+            }
+            R.id.productFragment -> if (!binding.customMenuProduct.isSelectedMenu()) {
                 resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.customMenuProduct.selected()
+            }
+            R.id.profileFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
+                resetMenuColor()
+                binding.cardViewMenu.visibility = View.VISIBLE
+                binding.imageViewBack.visibility = View.VISIBLE
+                binding.cardViewProfile.visibility = View.VISIBLE
+                binding.customMenuProfile.selected()
             }
         }
     }

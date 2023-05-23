@@ -64,6 +64,7 @@ fun ImageView.downloadProfileImage(url: String?, systemType: String?, entityType
         .with(this)
         .load(glideUrl)
         .skipMemoryCache(true)
+        .placeholder(R.drawable.profile_image)
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .into(this)
 }

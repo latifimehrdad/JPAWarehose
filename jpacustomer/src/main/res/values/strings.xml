@@ -42,6 +42,16 @@
     <string name="newProductList">لیست کالاهای جدید</string>
     <string name="allProductList">لیست همه ی کالاها</string>
     <string name="productCode">کد کالا</string>
+    <string name="profile">ناحیه کاربری</string>
+    <string name="showMyState">نمایش وضعیت من</string>
+    <string name="shopName">نام فروشگاه</string>
+    <string name="customerCode">کد مشتری</string>
+    <string name="salesExpert">کارشناس فروش</string>
+    <string name="signOut">خروج از حساب</string>
+    <string name="activeDarkTheme">فعال سازی تم تاریک</string>
+    <string name="setting">تنظیمات</string>
+    <string name="contactUs">ارتباط با ما</string>
+    <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
 
     <string name="colon">:</string>
     <string name="enterChar">\n</string>

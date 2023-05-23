@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zarholding.jpacustomer.view.fragment.profile.ProfileViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/textColorNormal"
+            android:textSize="@dimen/_7sdp"
+            android:fontFamily="@font/iransans_bold"
+            android:text="@string/profile"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewProfileHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/primaryColor">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_wave"
+                android:padding="@dimen/_10sdp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.25"
+                    app:layout_constraintDimensionRatio="H,1:1"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/cardViewColor2">
+
+                    <ImageView
+                        android:id="@+id/imageViewProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/profile"
+                        app:loadImage="@{viewModel.userInfoLiveData.profileImageName}"
+                        app:SystemType="@{viewModel.userInfoLiveData.systemType}"
+                        app:setEntityType="@{viewModel.entityType}"
+                        app:bearerToken="@{viewModel.bearerToken}"/>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:id="@+id/textViewMyState"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewProfile"
+                    app:layout_constraintStart_toStartOf="@id/cardViewProfile"
+                    app:layout_constraintEnd_toEndOf="@id/cardViewProfile"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_6sdp"
+                    android:text="@string/showMyState"
+                    android:fontFamily="@font/iransans_light"
+                    android:background="@drawable/drawable_profile_my_state"/>
+
+                <TextView
+                    android:id="@+id/textViewShopName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/textViewMyState"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/textViewMyState"
+                    app:layout_constraintBottom_toTopOf="@id/textViewShopAddress"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_5sdp"
+                    android:fontFamily="@font/iransans_light"
+                    app:setTitle="@{@string/shopName}"
+                    app:setValue="@{@string/shopName}"
+                    app:setSplitter="@{@string/colon}"/>
+
+                <TextView
+                    android:id="@+id/textViewShopAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textViewShopName"
+                    app:layout_constraintStart_toStartOf="@id/textViewShopName"
+                    app:layout_constraintEnd_toEndOf="@id/textViewShopName"
+                    app:layout_constraintBottom_toBottomOf="@id/textViewMyState"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_5sdp"
+                    android:fontFamily="@font/iransans_light"
+                    app:setTitle="@{@string/shopName}"
+                    app:setValue="@{@string/shopName}"
+                    app:setSplitter="@{@string/colon}"/>
+
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/cardViewProfile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
+                    app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_light"
+                    android:text="@{viewModel.userInfoLiveData.fullName}"/>
+
+                <TextView
+                    android:id="@+id/textViewUserCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textViewName"
+                    app:layout_constraintStart_toStartOf="@id/textViewName"
+                    app:layout_constraintEnd_toEndOf="@id/textViewName"
+                    app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_6sdp"
+                    android:fontFamily="@font/iransans_bold"
+                    app:setTitle="@{@string/customerCode}"
+                    app:setValue="@{viewModel.userInfoLiveData.personnelNumber}"
+                    app:setSplitter="@{@string/colon}" />
+
+                <TextView
+                    android:id="@+id/textViewUserMobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textViewUserCode"
+                    app:layout_constraintStart_toStartOf="@id/textViewName"
+                    app:layout_constraintEnd_toEndOf="@id/textViewName"
+                    app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_6sdp"
+                    android:fontFamily="@font/iransans_bold"
+                    app:setTitle="@{@string/customerCode}"
+                    app:setValue="@{viewModel.userInfoLiveData.personnelNumber}"
+                    app:setSplitter="@{@string/colon}" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewSalesExpert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/textColorNormal"
+            android:textSize="@dimen/_7sdp"
+            android:fontFamily="@font/iransans_bold"
+            android:text="@string/salesExpert"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardViewSalesExpert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewSalesExpert"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            android:background="@drawable/drawable_back_edit_white"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewVisitorProfile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_percent="0.2"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="@dimen/_100sdp"
+                app:cardBackgroundColor="@color/cardViewColor2"
+                android:layout_margin="@dimen/_2sdp"
+                app:cardElevation="3dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/profile"
+                    app:loadImage="@{viewModel.userInfoLiveData.profileImageName}"
+                    app:SystemType="@{viewModel.userInfoLiveData.systemType}"
+                    app:setEntityType="@{viewModel.entityType}"
+                    app:bearerToken="@{viewModel.bearerToken}"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textViewVisitorName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/cardViewVisitorProfile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cardViewVisitorProfile"
+                app:layout_constraintBottom_toTopOf="@id/textViewVisitorMobile"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/_7sdp"
+                android:fontFamily="@font/iransans_bold"
+                android:text="@{viewModel.userInfoLiveData.fullName}"/>
+
+            <TextView
+                android:id="@+id/textViewVisitorMobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewVisitorName"
+                app:layout_constraintStart_toStartOf="@id/textViewVisitorName"
+                app:layout_constraintEnd_toEndOf="@id/textViewVisitorName"
+                app:layout_constraintBottom_toBottomOf="@id/cardViewVisitorProfile"
+                android:textColor="@color/textColorNormal"
+                android:textSize="@dimen/_6sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:text="@{viewModel.userInfoLiveData.fullName}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textViewAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cardViewSalesExpert"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/textColorNormal"
+            android:textSize="@dimen/_7sdp"
+            android:fontFamily="@font/iransans_bold"
+            android:text="@string/salesExpert"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewAbout"
+            app:layout_constraintBottom_toTopOf="@id/textViewSetting"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/textViewContactUs"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textViewHistory"
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/primaryColor"
+                android:fontFamily="@font/iransans_medium"
+                android:text="@string/contactUs"
+                android:gravity="center"
+                android:background="@drawable/drawable_back_profile_white"
+                app:drawableBottomCompat="@drawable/ic_phone_incoming"
+                android:paddingVertical="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/textViewHistory"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewContactUs"
+                app:layout_constraintEnd_toStartOf="@id/textViewVideo"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/primaryColor"
+                android:fontFamily="@font/iransans_medium"
+                android:text="@string/contactUs"
+                android:gravity="center"
+                android:background="@drawable/drawable_back_profile_white"
+                app:drawableBottomCompat="@drawable/ic_phone_incoming"
+                android:paddingVertical="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/textViewVideo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewHistory"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/primaryColor"
+                android:fontFamily="@font/iransans_medium"
+                android:text="@string/contactUs"
+                android:gravity="center"
+                android:background="@drawable/drawable_back_profile_white"
+                app:drawableBottomCompat="@drawable/ic_phone_incoming"
+                android:paddingVertical="@dimen/_10sdp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textViewSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/cardViewTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textColor="@color/textColorNormal"
+            android:textSize="@dimen/_7sdp"
+            android:fontFamily="@font/iransans_bold"
+            android:text="@string/setting"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewTheme"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25sdp"
+            app:layout_constraintBottom_toTopOf="@id/cardViewSingOut"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/primaryColor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bottomTextColor"
+                android:textSize="@dimen/_7sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:text="@string/activeDarkTheme"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="@dimen/_7sdp"
+                />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:theme="@style/switchStyle"
+                android:layout_gravity="center_vertical"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewSingOut"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/primaryColor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bottomTextColor"
+                android:textSize="@dimen/_7sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:text="@string/signOut"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="@dimen/_7sdp"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:src="@drawable/ic_login"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
