@@ -2,13 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="item"
-            type="com.hoomanholding.applibrary.model.data.response.product.ProductModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_bold"
                 android:textColor="@color/textColor"
-                android:textSize="@dimen/_10sdp"
-                app:setAmount="@{item.price}" />
+                android:textSize="@dimen/_10sdp"/>
 
             <com.hoomanholding.applibrary.view.custom.JpaButton
                 android:id="@+id/buttonShowDetail"
@@ -69,10 +61,7 @@
             app:layout_constraintBottom_toTopOf="@id/textViewName"
             app:layout_constraintEnd_toStartOf="@id/imageViewPicture"
             app:layout_constraintStart_toEndOf="@id/linearLayoutPrice"
-            app:layout_constraintTop_toTopOf="parent"
-            app:setSplitter="@{@string/colon}"
-            app:setTitle="@{@string/productCode}"
-            app:setValue="@{item.productCode}" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/textViewName"
@@ -80,7 +69,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/iransans_medium"
             android:gravity="start"
-            android:text="@{item.productName}"
             android:textColor="@color/textColor"
             android:textSize="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -97,9 +85,7 @@
             app:layout_constraintBottom_toBottomOf="@id/linearLayoutPrice"
             app:layout_constraintDimensionRatio="W,1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/linearLayoutPrice"
-            app:setDownloadImage="@{item.productThumbnailImageName}"
-            app:setImagePlaceholder="@{@drawable/ic_logo}" />
+            app:layout_constraintTop_toTopOf="@id/linearLayoutPrice" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

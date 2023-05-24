@@ -5,7 +5,7 @@ import com.hoomanholding.jpawarehose.databinding.ItemReceiptDetailBinding
 import com.hoomanholding.applibrary.model.data.database.join.ReceiptAmountWhitProductModel
 
 /**
- * Created by zar on 2/20/2023.
+ * Created by m-latifi on 2/20/2023.
  */
 
 class SaveReceiptDetailHolder(

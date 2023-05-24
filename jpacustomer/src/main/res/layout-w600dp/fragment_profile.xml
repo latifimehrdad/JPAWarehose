@@ -2,13 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.zarholding.jpacustomer.view.fragment.profile.ProfileViewModel" />
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,11 +50,7 @@
                         android:id="@+id/imageViewProfile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="@string/profile"
-                        app:loadImage="@{viewModel.userInfoLiveData.profileImageName}"
-                        app:SystemType="@{viewModel.userInfoLiveData.systemType}"
-                        app:setEntityType="@{viewModel.entityType}"
-                        app:bearerToken="@{viewModel.bearerToken}"/>
+                        android:contentDescription="@string/profile" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -93,10 +82,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textColor="@color/bottomTextColor"
                     android:textSize="@dimen/_5sdp"
-                    android:fontFamily="@font/iransans_light"
-                    app:setTitle="@{@string/shopName}"
-                    app:setValue="@{@string/shopName}"
-                    app:setSplitter="@{@string/colon}"/>
+                    android:fontFamily="@font/iransans_light"/>
 
                 <TextView
                     android:id="@+id/textViewShopAddress"
@@ -108,10 +94,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/textViewMyState"
                     android:textColor="@color/bottomTextColor"
                     android:textSize="@dimen/_5sdp"
-                    android:fontFamily="@font/iransans_light"
-                    app:setTitle="@{@string/shopName}"
-                    app:setValue="@{@string/shopName}"
-                    app:setSplitter="@{@string/colon}"/>
+                    android:fontFamily="@font/iransans_light"/>
 
                 <TextView
                     android:id="@+id/textViewName"
@@ -124,8 +107,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textColor="@color/bottomTextColor"
                     android:textSize="@dimen/_7sdp"
-                    android:fontFamily="@font/iransans_light"
-                    android:text="@{viewModel.userInfoLiveData.fullName}"/>
+                    android:fontFamily="@font/iransans_light"/>
 
                 <TextView
                     android:id="@+id/textViewUserCode"
@@ -137,10 +119,7 @@
                     app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
                     android:textColor="@color/bottomTextColor"
                     android:textSize="@dimen/_6sdp"
-                    android:fontFamily="@font/iransans_bold"
-                    app:setTitle="@{@string/customerCode}"
-                    app:setValue="@{viewModel.userInfoLiveData.personnelNumber}"
-                    app:setSplitter="@{@string/colon}" />
+                    android:fontFamily="@font/iransans_bold"/>
 
                 <TextView
                     android:id="@+id/textViewUserMobile"
@@ -152,10 +131,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
                     android:textColor="@color/bottomTextColor"
                     android:textSize="@dimen/_6sdp"
-                    android:fontFamily="@font/iransans_bold"
-                    app:setTitle="@{@string/customerCode}"
-                    app:setValue="@{viewModel.userInfoLiveData.personnelNumber}"
-                    app:setSplitter="@{@string/colon}" />
+                    android:fontFamily="@font/iransans_bold" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -199,13 +175,10 @@
                 app:cardElevation="3dp">
 
                 <ImageView
+                    android:id="@+id/imageViewVisitorImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="@string/profile"
-                    app:loadImage="@{viewModel.userInfoLiveData.profileImageName}"
-                    app:SystemType="@{viewModel.userInfoLiveData.systemType}"
-                    app:setEntityType="@{viewModel.entityType}"
-                    app:bearerToken="@{viewModel.bearerToken}"/>
+                    android:contentDescription="@string/profile"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -220,8 +193,7 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="@color/primaryColor"
                 android:textSize="@dimen/_7sdp"
-                android:fontFamily="@font/iransans_bold"
-                android:text="@{viewModel.userInfoLiveData.fullName}"/>
+                android:fontFamily="@font/iransans_bold"/>
 
             <TextView
                 android:id="@+id/textViewVisitorMobile"
@@ -233,8 +205,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/cardViewVisitorProfile"
                 android:textColor="@color/textColorNormal"
                 android:textSize="@dimen/_6sdp"
-                android:fontFamily="@font/iransans_medium"
-                android:text="@{viewModel.userInfoLiveData.fullName}"/>
+                android:fontFamily="@font/iransans_medium"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -385,7 +356,8 @@
                 android:layout_height="@dimen/_12sdp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:src="@drawable/ic_login"/>
+                android:src="@drawable/ic_login"
+                android:contentDescription="@string/signOut"/>
 
         </androidx.cardview.widget.CardView>
 

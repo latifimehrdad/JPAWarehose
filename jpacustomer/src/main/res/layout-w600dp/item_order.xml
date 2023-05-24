@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="item"
-            type="com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel" />
-    </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewParent"
@@ -39,8 +34,7 @@
                     android:textColor="@color/primaryColor"
                     android:textSize="@dimen/_6sdp"
                     android:fontFamily="@font/iransans_bold"
-                    android:gravity="end"
-                    app:setIntValue="@{item.orderNumber}"/>
+                    android:gravity="end"/>
 
 
                 <TextView
@@ -87,8 +81,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textSize="@dimen/_5sdp"
                     android:textColor="@color/textColorDisable"
-                    android:fontFamily="@font/iransans_light"
-                    app:setAmount="@{item.orderAmount}"/>
+                    android:fontFamily="@font/iransans_light"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -112,8 +105,7 @@
                     android:textSize="@dimen/_6sdp"
                     android:textColor="@color/textColorDisable"
                     android:fontFamily="@font/iransans_light"
-                    android:gravity="center"
-                    android:text="@{item.orderDate}"/>
+                    android:gravity="center"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

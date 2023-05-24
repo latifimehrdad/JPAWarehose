@@ -19,6 +19,7 @@ import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentSplashBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
+import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 
 
 /**
@@ -130,7 +131,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     private fun showDialogUpdateAppVersion(fileName: String) {
         if (context == null)
             return
-/*        ConfirmDialog(
+        ConfirmDialog(
             requireContext(),
             getString(R.string.doYouWantToUpdateApp),
             object : ConfirmDialog.Click {
@@ -138,7 +139,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                     gotoFragmentDownload(fileName)
                 }
             }, true
-        ).show()*/
+        ).show()
     }
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
 

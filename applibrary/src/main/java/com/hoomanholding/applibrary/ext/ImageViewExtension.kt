@@ -12,6 +12,7 @@ import com.bumptech.glide.load.model.LazyHeaders
 import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.di.Providers
 import com.hoomanholding.applibrary.model.api.Api
+import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 
 
 /**
@@ -21,7 +22,6 @@ import com.hoomanholding.applibrary.model.api.Api
 
 //-------------------------------------------------------------------------------------------------- downloadProfileImage
 @SuppressLint("UseCompatLoadingForDrawables")
-@BindingAdapter("setDownloadImage", "setImagePlaceholder")
 fun ImageView.downloadImage(url: String?, placeholder: Drawable?) {
     if (url.isNullOrEmpty()) {
         this.setImageDrawable(context.getDrawable(R.drawable.profile_image))
@@ -46,7 +46,11 @@ fun ImageView.downloadImage(url: String?, placeholder: Drawable?) {
 
 //-------------------------------------------------------------------------------------------------- downloadProfileImage
 @SuppressLint("UseCompatLoadingForDrawables")
-fun ImageView.downloadProfileImage(url: String?, systemType: String?, entityType: String, token: String) {
+fun ImageView.downloadProfileImage(
+    url: String?,
+    systemType: String?,
+    entityType: String = EnumEntityType.ProfileImage.name,
+    token: String) {
     if (url.isNullOrEmpty()) {
         this.setImageDrawable(context.getDrawable(R.drawable.profile_image))
         return

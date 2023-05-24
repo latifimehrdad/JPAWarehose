@@ -8,7 +8,7 @@ import com.hoomanholding.applibrary.model.data.database.join.ReceiptAmountWhitPr
 import com.hoomanholding.jpawarehose.view.adapter.holder.SaveReceiptDetailHolder
 
 /**
- * Created by zar on 2/20/2023.
+ * Created by m-latifi on 2/20/2023.
  */
 
 class SaveReceiptDetailAdapter(

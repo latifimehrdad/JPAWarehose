@@ -7,7 +7,7 @@ import com.hoomanholding.applibrary.model.data.database.join.HistorySaveReceiptW
 import com.hoomanholding.jpawarehose.view.adapter.HistorySaveReceiptDetailAdapter
 
 /**
- * Created by zar on 2/20/2023.
+ * Created by m-latifi on 2/20/2023.
  */
 
 class HistorySaveReceiptHolder(

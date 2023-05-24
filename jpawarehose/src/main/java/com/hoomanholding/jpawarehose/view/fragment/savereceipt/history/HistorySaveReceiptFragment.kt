@@ -17,7 +17,7 @@ import com.hoomanholding.jpawarehose.view.adapter.HistorySaveReceiptAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Created by zar on 2/20/2023.
+ * Created by m-latifi on 2/20/2023.
  */
 
 @AndroidEntryPoint

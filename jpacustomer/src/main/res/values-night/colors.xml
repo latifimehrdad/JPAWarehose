@@ -33,4 +33,7 @@
 
     <color name="recyclerLoadingBack">#33FFFFFF</color>
 
+    <color name="ratingColorBack">#000000</color>
+    <color name="ratingColor">#D39404</color>
+
 </resources>

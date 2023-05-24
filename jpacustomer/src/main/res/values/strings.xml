@@ -44,6 +44,7 @@
     <string name="productCode">کد کالا</string>
     <string name="profile">ناحیه کاربری</string>
     <string name="showMyState">نمایش وضعیت من</string>
+    <string name="myState">وضعیت من</string>
     <string name="shopName">نام فروشگاه</string>
     <string name="customerCode">کد مشتری</string>
     <string name="salesExpert">کارشناس فروش</string>
@@ -52,6 +53,11 @@
     <string name="setting">تنظیمات</string>
     <string name="contactUs">ارتباط با ما</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
+    <string name="doYouWantToUpdateApp">نسخه جدید برنامه دردسترس است، لطفا بروزرسانی را انجام دهید</string>
+    <string name="purchaseAmountToDate">مقدار خرید تا امروز</string>
+    <string name="discountAmount">مقدار تخفیف</string>
+    <string name="amountOwed">مبلغ بدهکاری</string>
+    <string name="creditAmount">مبلغ بستانکار</string>
 
     <string name="colon">:</string>
     <string name="enterChar">\n</string>

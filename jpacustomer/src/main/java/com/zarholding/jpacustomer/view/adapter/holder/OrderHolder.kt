@@ -3,6 +3,7 @@ package com.zarholding.jpacustomer.view.adapter.holder
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
+import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ItemOrderBinding
 import com.zarholding.jpacustomer.view.adapter.recycler.OrderAdapter
@@ -27,17 +28,33 @@ class OrderHolder(
 
     //---------------------------------------------------------------------------------------------- bind
     fun bind(item: CustomerOrderModel, position: Int) {
-        binding.item = item
+        setValueToXml(item)
+        setListener(item, position)
+        setItemSelected(position)
+        binding.executePendingBindings()
+    }
+    //---------------------------------------------------------------------------------------------- bind
+
+
+
+    //---------------------------------------------------------------------------------------------- setValueToXml
+    private fun setValueToXml(item: CustomerOrderModel) {
+        binding.textViewNumber.text = item.orderNumber.toString()
+        binding.textViewAmount.text = item.orderAmount.split()
+        binding.textViewDate.text = item.orderDate
+    }
+    //---------------------------------------------------------------------------------------------- setValueToXml
+
+
+    //--------------
+    private fun setListener(item: CustomerOrderModel, position: Int) {
         binding.root.setOnClickListener {
             click.click(position, item)
         }
         binding.buttonShowOrderDetail.setOnClickListener {
             click.clickDetail(item)
         }
-        setItemSelected(position)
-        binding.executePendingBindings()
     }
-    //---------------------------------------------------------------------------------------------- bind
 
 
     //---------------------------------------------------------------------------------------------- setItemSelected

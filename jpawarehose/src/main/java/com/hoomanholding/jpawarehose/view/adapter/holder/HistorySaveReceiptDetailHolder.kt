@@ -5,7 +5,7 @@ import com.hoomanholding.jpawarehose.databinding.ItemHistoryReceiptDetailBinding
 import com.hoomanholding.applibrary.model.data.database.join.ProductWithHistoryReceipt
 
 /**
- * Created by zar on 2/20/2023.
+ * Created by m-latifi on 2/20/2023.
  */
 
 class HistorySaveReceiptDetailHolder(

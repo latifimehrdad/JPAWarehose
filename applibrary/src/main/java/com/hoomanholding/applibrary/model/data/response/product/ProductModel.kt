@@ -1,7 +1,7 @@
 package com.hoomanholding.applibrary.model.data.response.product
 
 /**
- * Created by zar on 5/14/2023.
+ * Created by m-latifi on 5/14/2023.
  */
 
 data class ProductModel(

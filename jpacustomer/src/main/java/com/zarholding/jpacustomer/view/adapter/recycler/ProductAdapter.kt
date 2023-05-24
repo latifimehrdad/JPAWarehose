@@ -8,7 +8,7 @@ import com.zarholding.jpacustomer.databinding.ItemProductBinding
 import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
 
 /**
- * Created by zar on 5/14/2023.
+ * Created by m-latifi on 5/14/2023.
  */
 
 class ProductAdapter(

@@ -71,7 +71,23 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.profile.ProfileFragment"/>
+        android:name="com.zarholding.jpacustomer.view.fragment.profile.ProfileFragment">
+
+        <action
+            android:id="@+id/action_profileFragment_to_myStateFragment"
+            app:destination="@id/myStateFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/myStateFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/myStateFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.mystate.MyStateFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"
