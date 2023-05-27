@@ -143,7 +143,8 @@ class MainActivity : AppCompatActivity() {
                 binding.customMenuProduct.selected()
             }
             R.id.profileFragment,
-            R.id.myStateFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
+            R.id.myStateFragment,
+            R.id.videoFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
                 resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE

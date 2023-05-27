@@ -83,11 +83,26 @@
             app:popExitAnim="@anim/slide_out_left"
             app:popUpTo="@id/myStateFragment" />
 
+        <action
+            android:id="@+id/action_profileFragment_to_videoFragment"
+            app:destination="@id/videoFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/videoFragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/myStateFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.mystate.MyStateFragment"/>
+
+
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.video.VideoFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

@@ -244,8 +244,8 @@
                 android:text="@string/contactUs"
                 android:gravity="center"
                 android:background="@drawable/drawable_back_profile_white"
-                app:drawableBottomCompat="@drawable/ic_phone_incoming"
-                android:paddingVertical="@dimen/_10sdp"/>
+                app:drawableBottomCompat="@drawable/ic_item_phone"
+                android:paddingVertical="@dimen/_5sdp" />
 
             <TextView
                 android:id="@+id/textViewHistory"
@@ -259,11 +259,11 @@
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/primaryColor"
                 android:fontFamily="@font/iransans_medium"
-                android:text="@string/contactUs"
+                android:text="@string/historyOfCompany"
                 android:gravity="center"
                 android:background="@drawable/drawable_back_profile_white"
-                app:drawableBottomCompat="@drawable/ic_phone_incoming"
-                android:paddingVertical="@dimen/_10sdp"/>
+                app:drawableBottomCompat="@drawable/ic_item_history"
+                android:paddingVertical="@dimen/_5sdp"/>
 
             <TextView
                 android:id="@+id/textViewVideo"
@@ -276,11 +276,11 @@
                 android:textSize="@dimen/_8sdp"
                 android:textColor="@color/primaryColor"
                 android:fontFamily="@font/iransans_medium"
-                android:text="@string/contactUs"
+                android:text="@string/collectionVideos"
                 android:gravity="center"
                 android:background="@drawable/drawable_back_profile_white"
-                app:drawableBottomCompat="@drawable/ic_phone_incoming"
-                android:paddingVertical="@dimen/_10sdp"/>
+                app:drawableBottomCompat="@drawable/ic_item_video"
+                android:paddingVertical="@dimen/_5sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -319,13 +319,23 @@
                 android:layout_margin="@dimen/_7sdp"
                 />
 
+            <ma.apps.widgets.daynightswitch.DayNightSwitch
+                android:id="@+id/dayNightSwitch"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_gravity="center_vertical"
+                app:sliderColor="#F49044"
+                app:sliderPadding="5dp" />
+
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switchActive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:theme="@style/switchStyle"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"/>
 
         </androidx.cardview.widget.CardView>
 

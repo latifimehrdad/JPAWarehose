@@ -18,9 +18,11 @@ import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -88,11 +90,11 @@ class ProfileFragment(
         CoroutineScope(Main).launch {
             delay(300)
             when (themeManagers.applicationTheme()) {
-                Configuration.UI_MODE_NIGHT_YES -> binding.switchActive.isChecked =
-                    true
+                Configuration.UI_MODE_NIGHT_YES ->
+                    binding.dayNightSwitch.setDayChecked(false,animated = true)
 
-                Configuration.UI_MODE_NIGHT_NO -> binding.switchActive.isChecked =
-                    false
+                Configuration.UI_MODE_NIGHT_NO ->
+                    binding.dayNightSwitch.setDayChecked(true,animated = true)
             }
         }
     }
@@ -101,10 +103,16 @@ class ProfileFragment(
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
+        binding.dayNightSwitch.setOnSwitchListener { dayNightSwitch, b ->
+            changeAppTheme()
+        }
         binding.switchActive.setOnClickListener { changeAppTheme() }
         binding.cardViewSingOut.setOnClickListener { signOut() }
         binding.textViewMyState.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_myStateFragment)
+        }
+        binding.textViewVideo.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_videoFragment)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -130,10 +138,15 @@ class ProfileFragment(
 
     //---------------------------------------------------------------------------------------------- changeAppTheme
     private fun changeAppTheme() {
-        if (binding.switchActive.isChecked)
-            themeManagers.changeApplicationTheme(Configuration.UI_MODE_NIGHT_YES)
-        else
-            themeManagers.changeApplicationTheme(Configuration.UI_MODE_NIGHT_NO)
+        CoroutineScope(IO).launch{
+            delay(300)
+            withContext(Main) {
+                if (!binding.dayNightSwitch.isDayChecked())
+                    themeManagers.changeApplicationTheme(Configuration.UI_MODE_NIGHT_YES)
+                else
+                    themeManagers.changeApplicationTheme(Configuration.UI_MODE_NIGHT_NO)
+            }
+        }
     }
     //---------------------------------------------------------------------------------------------- changeAppTheme
 

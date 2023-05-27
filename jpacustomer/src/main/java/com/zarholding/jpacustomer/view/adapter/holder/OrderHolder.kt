@@ -46,7 +46,7 @@ class OrderHolder(
     //---------------------------------------------------------------------------------------------- setValueToXml
 
 
-    //--------------
+    //---------------------------------------------------------------------------------------------- setListener
     private fun setListener(item: CustomerOrderModel, position: Int) {
         binding.root.setOnClickListener {
             click.click(position, item)
@@ -55,6 +55,7 @@ class OrderHolder(
             click.clickDetail(item)
         }
     }
+    //---------------------------------------------------------------------------------------------- setListener
 
 
     //---------------------------------------------------------------------------------------------- setItemSelected
