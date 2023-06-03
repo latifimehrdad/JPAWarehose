@@ -35,4 +35,7 @@
     <color name="ratingColorBack">#FFFFFF</color>
     <color name="ratingColor">#FFB300</color>
 
+    <color name="red">#EF5350</color>
+    <color name="green">#81C784</color>
+
 </resources>

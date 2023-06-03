@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- showMessage
     fun showMessage(message: String) {
+        Log.e("meri", message)
         val snack = Snackbar.make(binding.constraintLayoutParent, message, 5 * 1000)
         val view = snack.view
         val textView = (view).findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
@@ -102,6 +104,10 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment?.navController
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             showAndHideBottomNavigationMenu(destination.id)
+        }
+
+        binding.imageViewBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
 
         binding.customMenuHome.setOnClickListener {

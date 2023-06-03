@@ -11,6 +11,7 @@ import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
+import com.hoomanholding.applibrary.model.data.response.customer.CustomerStateModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
@@ -38,7 +39,7 @@ interface Api {
         const val user = "$v1/User"
         const val baseData = "$v1/BaseData"
         const val saleOrders = "$v1/SaleOrders"
-        const val customer = "$v1/Customers"
+        const val customers = "$v1/Customers"
         const val warehouseReceipt = "$v1/WarehouseReceipt"
         const val report = "$v1/report"
         const val files = "$v1/Files"
@@ -157,25 +158,30 @@ interface Api {
 
 
     //---------------------------------------------------------------------------------------------- Customers
-    @GET("$customer/basedata-get-customers")
+    @GET("$customers/basedata-get-customers")
     suspend fun requestGetCustomer(
         @Query("VisitorId") visitorId: Int,
         @Query("strFilter") strFilter: String,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CustomerModel>?>>
 
-    @GET("$customer/financial-get-details")
+    @GET("$customers/financial-get-details")
     suspend fun requestGetCustomerFinancial(
         @Query("CustomerId") customerId: Int,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<CustomerFinancialModel?>>
 
-    @GET("$customer/financial-get-check-details")
+    @GET("$customers/financial-get-check-details")
     suspend fun requestGetCustomerFinancialDetail(
         @Query("CustomerId") customerId: Int,
         @Query("checktype") checktype: EnumCheckType,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CustomerFinancialDetailModel>?>>
+
+    @GET("$customers/get-customer-state")
+    suspend fun requestGetCustomerState(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<CustomerStateModel?>>
     //---------------------------------------------------------------------------------------------- Customers
 
 

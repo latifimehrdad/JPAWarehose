@@ -154,13 +154,39 @@ class ProfileFragment(
     //---------------------------------------------------------------------------------------------- setUserInfo
     private fun setUserInfo(userInfo: UserInfoEntity) {
         binding.textViewName.text = userInfo.fullName
+        binding.textViewVisitorName.text = userInfo.visitorName
         binding.textViewUserCode.setTitleAndValue(
             title = getString(R.string.customerCode),
             splitter = getString(R.string.colon),
             value = userInfo.personnelNumber
         )
+        binding.textViewUserMobile.setTitleAndValue(
+            title = getString(R.string.mobileNumber),
+            splitter = getString(R.string.colon),
+            value = userInfo.mobileNumber
+        )
+        binding.textViewVisitorMobile.setTitleAndValue(
+            title = getString(R.string.mobileNumber),
+            splitter = getString(R.string.colon),
+            value = userInfo.visitorMobile
+        )
+        binding.textViewShopName.setTitleAndValue(
+            title = getString(R.string.shopName),
+            splitter = getString(R.string.colon),
+            value = userInfo.storeName
+        )
+        binding.textViewShopAddress.setTitleAndValue(
+            title = getString(R.string.shopAddress),
+            splitter = getString(R.string.colon),
+            value = userInfo.address
+        )
         binding.imageViewProfile.downloadProfileImage(
             url = userInfo.profileImageName,
+            systemType = userInfo.systemType,
+            token = viewModel.getBearerToken()
+        )
+        binding.imageViewVisitorImage.downloadProfileImage(
+            url = userInfo.visitorImageName,
             systemType = userInfo.systemType,
             token = viewModel.getBearerToken()
         )

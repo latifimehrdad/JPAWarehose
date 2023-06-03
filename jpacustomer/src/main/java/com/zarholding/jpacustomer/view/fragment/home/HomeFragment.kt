@@ -2,6 +2,7 @@ package com.zarholding.jpacustomer.view.fragment.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
@@ -15,6 +16,7 @@ import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.IntSpinnerAdapter
 import com.zarholding.jpacustomer.view.adapter.holder.OrderHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.OrderAdapter
+import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 
 
 /**
@@ -28,6 +30,26 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     private val viewModel: HomeViewModel by viewModels()
     private var adapter: OrderAdapter? = null
+
+
+    //---------------------------------------------------------------------------------------------- OnBackPressedCallback
+    private val backClick = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            context?.let {
+                ConfirmDialog(
+                    it,
+                    getString(R.string.doYouWantToExitApp),
+                    object : ConfirmDialog.Click {
+                        override fun clickYes() {
+                            activity?.finish()
+                        }
+                    }).show()
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- OnBackPressedCallback
+
+
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +68,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         observeLiveDate()
         resetSteps()
         setListener()

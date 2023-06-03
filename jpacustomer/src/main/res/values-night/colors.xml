@@ -36,4 +36,7 @@
     <color name="ratingColorBack">#000000</color>
     <color name="ratingColor">#D39404</color>
 
+    <color name="red">#EF5350</color>
+    <color name="green">#81C784</color>
+
 </resources>
