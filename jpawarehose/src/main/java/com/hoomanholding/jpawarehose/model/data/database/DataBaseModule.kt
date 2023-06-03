@@ -2,6 +2,8 @@ package com.hoomanholding.jpawarehose.model.data.database
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -117,11 +119,24 @@ class DataBaseModule {
     //---------------------------------------------------------------------------------------------- provideAppDatabase
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
-        context,
-        AppDatabase::class.java,
-        "jpa"
-    ).allowMainThreadQueries().build()
-    //---------------------------------------------------------------------------------------------- provideAppDatabase
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
 
+        val migration1to2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN mobileNumber TEXT")
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN storeName TEXT")
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN address TEXT")
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN visitorId INTEGER DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN visitorName TEXT")
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN visitorMobile TEXT")
+            }
+        }
+
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "jpa"
+        ).addMigrations(migration1to2).allowMainThreadQueries().build()
+    }
+    //---------------------------------------------------------------------------------------------- provideAppDatabase
 }
