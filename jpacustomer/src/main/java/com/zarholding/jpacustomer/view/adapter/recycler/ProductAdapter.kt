@@ -12,7 +12,8 @@ import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
  */
 
 class ProductAdapter(
-    private val items: List<ProductModel>
+    private val items: List<ProductModel>,
+    private val click: ProductHolder.Click
 ): RecyclerView.Adapter<ProductHolder>() {
 
     private var inflater: LayoutInflater? = null
@@ -22,7 +23,7 @@ class ProductAdapter(
         if (inflater == null)
             inflater = LayoutInflater.from(parent.context)
         return ProductHolder(
-            ItemProductBinding.inflate(inflater!!, parent, false)
+            ItemProductBinding.inflate(inflater!!, parent, false), click
         )
     }
     //---------------------------------------------------------------------------------------------- getItemCount

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,9 +23,11 @@ class CustomMenu @JvmOverloads constructor(
 
     private lateinit var iconImage: ImageView
     private lateinit var cardView: CardView
+    private lateinit var textViewBadge: TextView
     private val defaultColor = R.color.iconDisableColor
     private val selectedColor = R.color.iconNormalColor
     private var selectedMenu = false
+    private var badgeCount = 0
 
     //---------------------------------------------------------------------------------------------- init
     init {
@@ -36,10 +39,12 @@ class CustomMenu @JvmOverloads constructor(
     //---------------------------------------------------------------------------------------------- init
     private fun init(attrs: AttributeSet?) {
         View.inflate(context, R.layout.layout_main_menu, this)
-
+        badgeCount = 0
         iconImage = findViewById(R.id.imageViewIcon)
         cardView = findViewById(R.id.cardView)
+        textViewBadge = findViewById(R.id.textViewBadge)
 
+        textViewBadge.visibility = View.GONE
         val ta = context.obtainStyledAttributes(attrs, R.styleable.CustomMenu)
         try {
             val drawableId = ta.getResourceId(R.styleable.CustomMenu_menu_icon, 0)
@@ -86,5 +91,18 @@ class CustomMenu @JvmOverloads constructor(
         )
     }
     //---------------------------------------------------------------------------------------------- clearSelected
+
+
+    //---------------------------------------------------------------------------------------------- setBadgeCount
+    fun setBadgeCount(count: Int) {
+        badgeCount += count
+        if (badgeCount == 0)
+            textViewBadge.visibility = View.GONE
+        else {
+            textViewBadge.text = badgeCount.toString()
+            textViewBadge.visibility = View.VISIBLE
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setBadgeCount
 
 }

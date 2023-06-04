@@ -12,7 +12,6 @@ import com.zar.core.tools.manager.DeviceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -103,8 +102,9 @@ class SplashViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- getAllData
     private fun getAllData(): Job {
-        return CoroutineScope(Main).launch {
-            successLiveData.value = true
+        return viewModelScope.launch(IO + exceptionHandler()){
+            delay(1000)
+            successLiveData.postValue(true)
         }
     }
     //---------------------------------------------------------------------------------------------- getAllData

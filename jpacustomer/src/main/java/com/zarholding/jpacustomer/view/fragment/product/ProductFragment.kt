@@ -1,7 +1,9 @@
 package com.zarholding.jpacustomer.view.fragment.product
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,11 +14,14 @@ import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
+import com.zarholding.jpacustomer.CircleAnimationUtil
 import dagger.hilt.android.AndroidEntryPoint
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProductBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
+import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.ProductAdapter
+import com.zarholding.jpacustomer.view.dialog.product.ProductDetailDialog
 
 
 /**
@@ -125,7 +130,12 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         if (context == null)
             return
         binding.recyclerViewProduct.adapter = null
-        val adapter = ProductAdapter(items)
+        val click = object : ProductHolder.Click {
+            override fun selectProduct(item: ProductModel, imageView: ImageView) {
+                showProductDetailDialog(item, imageView)
+            }
+        }
+        val adapter = ProductAdapter(items, click)
         val manager = LinearLayoutManager(
             requireContext(),LinearLayoutManager.VERTICAL, false
         )
@@ -133,4 +143,53 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         binding.recyclerViewProduct.layoutManager = manager
     }
     //---------------------------------------------------------------------------------------------- setProductAdapter
+
+
+
+    //---------------------------------------------------------------------------------------------- showProductDetailDialog
+    private fun showProductDetailDialog(item: ProductModel, imageView: ImageView) {
+        val select = object : ProductDetailDialog.Click{
+            override fun select(count: Int) {
+                animationToCart(imageView, count)
+            }
+        }
+        ProductDetailDialog(select, item).show(childFragmentManager, "product")
+    }
+    //---------------------------------------------------------------------------------------------- showProductDetailDialog
+
+
+    //---------------------------------------------------------------------------------------------- animationToCart
+    private fun animationToCart(imageView: ImageView, count: Int) {
+
+        if (activity == null)
+            return
+
+        val destView = (activity as MainActivity).getCartView()
+        CircleAnimationUtil()
+            .attachActivity(requireActivity())
+            .setTargetView(imageView)
+            .setDestView(destView)
+            .setMoveDuration(500)
+            .setCircleDuration(800)
+            .setAnimationListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {
+
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+                    (activity as MainActivity).setCartBadge(count)
+
+                }
+
+                override fun onAnimationCancel(animation: Animator) {
+
+                }
+
+                override fun onAnimationRepeat(animation: Animator) {
+
+                }
+            }).startAnimation()
+    }
+    //---------------------------------------------------------------------------------------------- animationToCart
+
 }

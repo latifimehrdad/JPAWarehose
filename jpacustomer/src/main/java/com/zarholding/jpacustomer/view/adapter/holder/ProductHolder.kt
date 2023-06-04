@@ -1,5 +1,6 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
+import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.downloadImage
@@ -14,13 +15,22 @@ import com.zarholding.jpacustomer.databinding.ItemProductBinding
  */
 
 class ProductHolder(
-    private val binding: ItemProductBinding
+    private val binding: ItemProductBinding,
+    private val click: Click
 ) : RecyclerView.ViewHolder(binding.root) {
+
+
+    //---------------------------------------------------------------------------------------------- Click
+    interface Click {
+        fun selectProduct(item: ProductModel, imageView: ImageView)
+    }
+    //---------------------------------------------------------------------------------------------- Click
 
 
     //---------------------------------------------------------------------------------------------- bind
     fun bind(item: ProductModel) {
         setValueToXml(item)
+        setListener(item)
         binding.executePendingBindings()
     }
     //---------------------------------------------------------------------------------------------- bind
@@ -43,4 +53,12 @@ class ProductHolder(
     }
     //---------------------------------------------------------------------------------------------- setValueToXml
 
+
+    //---------------------------------------------------------------------------------------------- setListener
+    private fun setListener(item: ProductModel) {
+        binding.root.setOnClickListener {
+            click.selectProduct(item, binding.imageViewPicture)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setListener
 }

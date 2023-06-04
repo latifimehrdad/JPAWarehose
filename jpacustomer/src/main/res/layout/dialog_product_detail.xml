@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardBackgroundColor="@color/cardViewColor">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp">
+
+            <com.hoomanholding.applibrary.view.custom.TouchImageView
+                android:id="@+id/touchImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.85"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/logo" />
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:gravity="start"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_9sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                app:layout_constraintEnd_toEndOf="@id/touchImageView"
+                app:layout_constraintStart_toStartOf="@id/touchImageView"
+                app:layout_constraintTop_toBottomOf="@id/touchImageView" />
+
+            <TextView
+                android:id="@+id/textViewPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_bold"
+                android:gravity="start"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_9sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                app:layout_constraintEnd_toEndOf="@id/textViewName"
+                app:layout_constraintStart_toStartOf="@id/textViewName"
+                app:layout_constraintTop_toBottomOf="@id/textViewName" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textViewPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageViewMinus"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/ic_minus"
+                    android:contentDescription="@string/minus" />
+
+                <EditText
+                    android:id="@+id/editTextCount"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/cardViewColor"
+                    android:textColor="@color/textColor"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:textSize="@dimen/_15sdp"
+                    android:maxLength="3"
+                    android:fontFamily="@font/iransans_bold"
+                    android:gravity="center"
+                    android:autofillHints="none"
+                    android:inputType="number"
+                    android:hint="@string/zero"/>
+
+                <ImageView
+                    android:id="@+id/imageViewPlus"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/ic_plus"
+                    android:contentDescription="@string/plus" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayoutCount"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/buttonNo"
+                android:backgroundTint="@color/primaryColor"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:minWidth="@dimen/_90sdp"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/yekan_bakh_bold"
+                app:cornerRadius="@dimen/_5sdp"
+                android:textColor="@color/bottomTextColor"
+                android:text='@string/confirm' />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/buttonYes"
+                app:layout_constraintBottom_toBottomOf="@id/buttonYes"
+                app:layout_constraintStart_toEndOf="@id/buttonYes"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:minWidth="@dimen/_90sdp"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/yekan_bakh_bold"
+                app:cornerRadius="@dimen/_5sdp"
+                android:backgroundTint="@color/buttonDisable"
+                android:textColor="@color/primaryColorVariant"
+                android:text='@string/cancel' />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>

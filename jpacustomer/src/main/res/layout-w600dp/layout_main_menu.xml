@@ -17,6 +17,21 @@
         app:layout_constraintDimensionRatio="H,1:1"
         android:contentDescription="@string/logo" />
 
+    <TextView
+        android:id="@+id/textViewBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingHorizontal="4dp"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintStart_toStartOf="@id/imageViewIcon"
+        app:layout_constraintEnd_toStartOf="@id/imageViewIcon"
+        app:layout_constraintTop_toTopOf="@id/imageViewIcon"
+        app:layout_constraintBottom_toTopOf="@id/imageViewIcon"
+        android:background="@drawable/drawable_back_curve_primary"
+        android:textColor="@color/bottomTextColor"
+        android:gravity="center"
+        android:textSize="@dimen/_8sdp" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"

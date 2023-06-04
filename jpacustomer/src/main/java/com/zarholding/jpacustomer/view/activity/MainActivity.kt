@@ -219,8 +219,20 @@ class MainActivity : AppCompatActivity() {
         binding.customMenuProduct.clearSelected()
         binding.customMenuProfile.clearSelected()
         binding.customMenuReport.clearSelected()
+        binding.customMenuCart.clearSelected()
     }
     //---------------------------------------------------------------------------------------------- resetMenuColor
 
+
+    //---------------------------------------------------------------------------------------------- getCartView
+    fun getCartView() = binding.customMenuCart
+    //---------------------------------------------------------------------------------------------- getCartView
+
+
+    //---------------------------------------------------------------------------------------------- setCartBadge
+    fun setCartBadge(count: Int) {
+        binding.customMenuCart.setBadgeCount(count)
+    }
+    //---------------------------------------------------------------------------------------------- setCartBadge
 
 }

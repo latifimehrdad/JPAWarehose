@@ -43,23 +43,25 @@ fun ImageView.downloadImage(url: String?, placeholder: Drawable?) {
 //-------------------------------------------------------------------------------------------------- downloadProfileImage
 
 
-
 //-------------------------------------------------------------------------------------------------- downloadProfileImage
 @SuppressLint("UseCompatLoadingForDrawables")
 fun ImageView.downloadProfileImage(
     url: String?,
     systemType: String?,
     entityType: String = EnumEntityType.ProfileImage.name,
-    token: String) {
+    token: String,
+    placeholder: Int = R.drawable.profile_image
+) {
     if (url.isNullOrEmpty()) {
-        this.setImageDrawable(context.getDrawable(R.drawable.profile_image))
+        this.setImageDrawable(context.getDrawable(placeholder))
         return
     }
     val circularProgressDrawable = CircularProgressDrawable(this.context)
     circularProgressDrawable.strokeWidth = 5f
     circularProgressDrawable.centerRadius = 30f
     circularProgressDrawable.start()
-    val link = "${Providers.url}${Api.v1}/Files/files-get-file?SystemType=$systemType&EntityType=$entityType&FileName=$url"
+    val link =
+        "${Providers.url}${Api.v1}/Files/files-get-file?SystemType=$systemType&EntityType=$entityType&FileName=$url"
     val glideUrl = GlideUrl(
         link,
         LazyHeaders.Builder().addHeader("Authorization", token).build()
@@ -68,7 +70,7 @@ fun ImageView.downloadProfileImage(
         .with(this)
         .load(glideUrl)
         .skipMemoryCache(true)
-        .placeholder(R.drawable.profile_image)
+        .placeholder(placeholder)
         .diskCacheStrategy(DiskCacheStrategy.NONE)
         .into(this)
 }
@@ -85,8 +87,13 @@ fun ImageView.setItemIcon(icon: Int) {
 
 //-------------------------------------------------------------------------------------------------- loadImage
 @BindingAdapter("loadImage", "SystemType", "setEntityType", "bearerToken")
-fun ImageView.loadImage(url: String?, systemType: String?, entityType: String, token: String) {
-    this.downloadProfileImage(url,systemType,entityType, token)
+fun ImageView.loadImage(
+    url: String?,
+    systemType: String?,
+    entityType: String,
+    token: String,
+) {
+    this.downloadProfileImage(url, systemType, entityType, token)
 }
 //-------------------------------------------------------------------------------------------------- loadImage
 

@@ -19,6 +19,9 @@
     <string name="changePassword">تغییر رمز</string>
     <string name="loginIsSuccess">ورود با موفقیت انجام شد</string>
     <string name="back">برگشت</string>
+    <string name="minus">منها کردن</string>
+    <string name="zero">0</string>
+    <string name="plus">اضافه کردن</string>
     <string name="orderTracking">پیگیری سفارش</string>
     <string name="orderNumber">شماره سفارش</string>
     <string name="showOrderDetail">نمایش جزئیات سفارش</string>
@@ -29,6 +32,7 @@
     <string name="showAll">نمایش همه</string>
     <string name="productCallForPrice">استعلام قیمت کالاها</string>
     <string name="callForPrice">استعلام قیمت</string>
+    <string name="price">قیمت</string>
     <string name="name">نام</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
