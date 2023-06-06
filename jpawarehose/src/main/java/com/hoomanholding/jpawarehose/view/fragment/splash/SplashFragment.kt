@@ -4,7 +4,6 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
@@ -86,7 +85,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         job = CoroutineScope(IO).launch {
             delay(3000)
             withContext(Main) {
-                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                gotoFragment(R.id.action_splashFragment_to_loginFragment)
             }
         }
     }
@@ -117,7 +116,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                 (main as MainActivity).showImageViewReceiptAction()
             }
             if (it)
-                findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
+                gotoFragment(R.id.action_splashFragment_to_HomeFragment)
         }
 
         splashViewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
@@ -200,8 +199,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         val bundle = Bundle()
         bundle.putString(CompanionValues.DOWNLOAD_URL, fileName)
         bundle.putString(CompanionValues.APP_NAME, EnumSystemType.WareHouse.name)
-        findNavController()
-            .navigate(R.id.action_splashFragment_to_DownloadFragment, bundle)
+        gotoFragment(R.id.action_splashFragment_to_DownloadFragment, bundle)
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentDownload
 

@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
@@ -109,10 +108,10 @@ class ProfileFragment(
         binding.switchActive.setOnClickListener { changeAppTheme() }
         binding.cardViewSingOut.setOnClickListener { signOut() }
         binding.textViewMyState.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_myStateFragment)
+            gotoFragment(R.id.action_profileFragment_to_myStateFragment)
         }
         binding.textViewVideo.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_videoFragment)
+            gotoFragment(R.id.action_profileFragment_to_videoFragment)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener

@@ -3,13 +3,11 @@ package com.hoomanholding.jpamanager.view.fragment.invoice.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.response.order.DetailOrderModel
-import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
@@ -106,8 +104,7 @@ class InvoiceDetailFragment(override var layout: Int = R.layout.fragment_invoice
             val customer = viewModel.customerId
             val bundle = Bundle()
             bundle.putInt(CompanionValues.CUSTOMER_ID, customer)
-            findNavController()
-                .navigate(R.id.action_InvoiceFragmentDetail_to_CustomerFinancialFragment, bundle)
+            gotoFragment(R.id.action_InvoiceFragmentDetail_to_CustomerFinancialFragment, bundle)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener

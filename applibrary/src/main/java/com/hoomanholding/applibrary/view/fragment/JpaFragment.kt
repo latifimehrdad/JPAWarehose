@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 /**
  * Created by m-latifi on 10/8/2022.
@@ -39,5 +40,14 @@ abstract class JpaFragment<DB : ViewDataBinding> : Fragment() {
         else -> @Suppress("DEPRECATION") getParcelable(key) as? T
     }
     //---------------------------------------------------------------------------------------------- parcelable
+
+
+    //---------------------------------------------------------------------------------------------- gotoFragment
+    fun gotoFragment(fragment: Int, bundle: Bundle? = null) {
+        try {
+            findNavController().navigate(fragment, bundle)
+        }catch (_: Exception) { }
+    }
+    //---------------------------------------------------------------------------------------------- gotoFragment
 
 }

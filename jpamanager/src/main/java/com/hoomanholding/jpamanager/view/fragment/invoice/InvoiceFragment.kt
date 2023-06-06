@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.stopLoading
@@ -213,15 +212,13 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
                 val bundle = Bundle()
                 bundle.putLong(CompanionValues.ORDER_IR, item.id)
                 bundle.putInt(CompanionValues.CUSTOMER_ID, item.customerId)
-                findNavController()
-                    .navigate(R.id.action_InvoiceFragment_to_InvoiceFragmentDetail, bundle)
+                gotoFragment(R.id.action_InvoiceFragment_to_InvoiceFragmentDetail, bundle)
             }
 
             override fun customerFinancialDetail(customerId: Int) {
                 val bundle = Bundle()
                 bundle.putInt(CompanionValues.CUSTOMER_ID, customerId)
-                findNavController()
-                    .navigate(R.id.action_InvoiceFragment_to_customerFinancialFragment, bundle)
+                gotoFragment(R.id.action_InvoiceFragment_to_customerFinancialFragment, bundle)
             }
         }
         adapter = OrderAdapter(items, detail)

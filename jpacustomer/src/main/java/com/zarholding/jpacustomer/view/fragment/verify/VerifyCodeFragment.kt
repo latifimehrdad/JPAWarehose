@@ -12,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
@@ -293,8 +292,7 @@ class VerifyCodeFragment(
         resetEditTextsVerifyCode()
         val bundle = Bundle()
         bundle.putString(CompanionValues.TOKEN, viewModel.token)
-        findNavController()
-            .navigate(R.id.action_verifyCodeFragment_to_changePasswordFragment, bundle)
+        gotoFragment(R.id.action_verifyCodeFragment_to_changePasswordFragment, bundle)
     }
     //---------------------------------------------------------------------------------------------- gotoChangePassword
 

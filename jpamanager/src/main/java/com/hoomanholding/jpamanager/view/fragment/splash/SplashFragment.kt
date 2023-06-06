@@ -6,7 +6,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.applibrary.ext.isIP
@@ -163,7 +162,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
             binding.materialButtonLogin.stopLoading()
             if (it)
-                findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
+                gotoFragment(R.id.action_splashFragment_to_HomeFragment)
         }
 
         splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
@@ -238,15 +237,14 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         val bundle = Bundle()
         bundle.putString(CompanionValues.DOWNLOAD_URL, fileName)
         bundle.putString(CompanionValues.APP_NAME, EnumSystemType.ManagerApp.name)
-        findNavController()
-            .navigate(R.id.action_splashFragment_to_DownloadFragment, bundle)
+        gotoFragment(R.id.action_splashFragment_to_DownloadFragment, bundle)
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentDownload
 
 
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
     private fun gotoFragmentLogin() {
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+        gotoFragment(R.id.action_splashFragment_to_loginFragment)
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
 

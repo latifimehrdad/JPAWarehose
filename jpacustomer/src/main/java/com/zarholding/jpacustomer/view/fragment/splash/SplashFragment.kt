@@ -4,7 +4,6 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
@@ -32,13 +31,12 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     JpaFragment<FragmentSplashBinding>() {
 
     private val splashViewModel: SplashViewModel by viewModels()
+//    var job: Job? = null
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeLiveDate()
-        setListener()
-        requestGetAppVersion()
+        initView()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -50,6 +48,18 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
     }
     //---------------------------------------------------------------------------------------------- showMessage
+
+
+    //---------------------------------------------------------------------------------------------- initView
+    private fun initView() {
+        observeLiveDate()
+        setListener()
+        requestGetAppVersion()
+/*        job = CoroutineScope(Main).launch {
+            delay(500)
+        }*/
+    }
+    //---------------------------------------------------------------------------------------------- initView
 
 
     //---------------------------------------------------------------------------------------------- setListener
@@ -75,7 +85,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
             showMessage(getString(R.string.loginIsSuccess))
             if (it)
-                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                gotoFragment(R.id.action_splashFragment_to_homeFragment)
         }
 
         splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
@@ -149,15 +159,14 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         val bundle = Bundle()
         bundle.putString(CompanionValues.DOWNLOAD_URL, fileName)
         bundle.putString(CompanionValues.APP_NAME, EnumSystemType.Customers.name)
-        findNavController()
-            .navigate(R.id.action_splashFragment_to_DownloadFragment, bundle)
+        gotoFragment(R.id.action_splashFragment_to_DownloadFragment, bundle)
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentDownload
 
 
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
     private fun gotoFragmentLogin() {
-        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+        gotoFragment(R.id.action_splashFragment_to_loginFragment)
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
 
@@ -170,4 +179,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
 
 
+/*    //---------------------------------------------------------------------------------------------- onDestroyView
+    override fun onDestroyView() {
+        super.onDestroyView()
+        job?.cancel()
+    }
+    //---------------------------------------------------------------------------------------------- onDestroyView*/
 }

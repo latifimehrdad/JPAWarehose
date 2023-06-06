@@ -9,6 +9,7 @@ import com.hoomanholding.applibrary.model.repository.AppUpdateRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.zar.core.tools.manager.DeviceManager
+import com.zar.core.tools.manager.ThemeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO

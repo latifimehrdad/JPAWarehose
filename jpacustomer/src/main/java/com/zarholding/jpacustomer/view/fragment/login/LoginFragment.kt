@@ -8,7 +8,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.hoomanholding.applibrary.ext.hideKeyboard
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -89,8 +88,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             it?.let {
                 val bundle = Bundle()
                 bundle.putString(CompanionValues.TOKEN, it)
-                findNavController()
-                    .navigate(R.id.action_loginFragment_to_verifyCodeFragment, bundle)
+                gotoFragment(R.id.action_loginFragment_to_verifyCodeFragment, bundle)
             }
         }
 

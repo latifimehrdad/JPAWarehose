@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
@@ -112,10 +111,8 @@ class CustomerBalanceFragment(
                 bundle.putInt(CompanionValues.CUSTOMER_ID, item.customerId)
                 bundle.putString(CompanionValues.CUSTOMER_NAME, item.customerName)
                 bundle.putString(CompanionValues.CUSTOMER_CODE, item.customerCode)
-                findNavController().navigate(
-                    R.id.action_customerBalanceFragment_to_customerBalanceDetailFragment,
-                    bundle
-                )
+                gotoFragment(R.id.action_customerBalanceFragment_to_customerBalanceDetailFragment,
+                    bundle)
             }
         }
         val adapter = CustomerBalanceAdapter(items, click)

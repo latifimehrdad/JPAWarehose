@@ -3,7 +3,6 @@ package com.hoomanholding.jpamanager.view.fragment.cardboard
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.R
@@ -62,7 +61,7 @@ class CardBoardFragment(override var layout: Int = R.layout.fragment_cardboard) 
         val click = object : CardBoardItemHolder.Click {
             override fun itemClick(action: Int) {
                 if (action != 0)
-                    findNavController().navigate(action)
+                    gotoFragment(action)
             }
         }
         val adapter = CardBoardItemAdapter(items, click)
