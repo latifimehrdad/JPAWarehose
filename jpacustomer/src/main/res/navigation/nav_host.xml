@@ -104,6 +104,10 @@
         android:id="@+id/videoFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.video.VideoFragment"/>
 
+    <fragment
+        android:id="@+id/basketFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.basket.BasketFragment"/>
+
     <action
         android:id="@+id/action_goto_SplashFragment"
         app:destination="@id/splashFragment"
@@ -143,5 +147,16 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/profileFragment" />
+
+
+    <action
+        android:id="@+id/action_goto_basketFragment"
+        app:destination="@id/basketFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/basketFragment" />
 
 </navigation>

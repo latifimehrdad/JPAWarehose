@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.customMenuHome.setOnClickListener {
-            gotoFragment(R.id.action_goto_homeFragment)
+            gotoHomeFragment()
         }
 
         binding.customMenuProduct.setOnClickListener {
@@ -120,6 +120,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.customMenuProfile.setOnClickListener {
             gotoFragment(R.id.action_goto_profileFragment)
+        }
+
+        binding.customMenuCart.setOnClickListener {
+            gotoFragment(R.id.action_goto_basketFragment)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -156,6 +160,13 @@ class MainActivity : AppCompatActivity() {
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.customMenuProfile.selected()
+            }
+            R.id.basketFragment -> if (!binding.customMenuCart.isSelectedMenu()){
+                resetMenuColor()
+                binding.cardViewMenu.visibility = View.VISIBLE
+                binding.imageViewBack.visibility = View.VISIBLE
+                binding.cardViewProfile.visibility = View.VISIBLE
+                binding.customMenuCart.selected()
             }
         }
     }
@@ -234,5 +245,12 @@ class MainActivity : AppCompatActivity() {
         binding.customMenuCart.setBadgeCount(count)
     }
     //---------------------------------------------------------------------------------------------- setCartBadge
+
+
+    //---------------------------------------------------------------------------------------------- gotoHomeFragment
+    fun gotoHomeFragment() {
+        gotoFragment(R.id.action_goto_homeFragment)
+    }
+    //---------------------------------------------------------------------------------------------- gotoHomeFragment
 
 }

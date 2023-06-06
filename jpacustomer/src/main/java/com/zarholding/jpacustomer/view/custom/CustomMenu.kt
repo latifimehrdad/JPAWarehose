@@ -27,7 +27,6 @@ class CustomMenu @JvmOverloads constructor(
     private val defaultColor = R.color.iconDisableColor
     private val selectedColor = R.color.iconNormalColor
     private var selectedMenu = false
-    private var badgeCount = 0
 
     //---------------------------------------------------------------------------------------------- init
     init {
@@ -39,7 +38,6 @@ class CustomMenu @JvmOverloads constructor(
     //---------------------------------------------------------------------------------------------- init
     private fun init(attrs: AttributeSet?) {
         View.inflate(context, R.layout.layout_main_menu, this)
-        badgeCount = 0
         iconImage = findViewById(R.id.imageViewIcon)
         cardView = findViewById(R.id.cardView)
         textViewBadge = findViewById(R.id.textViewBadge)
@@ -95,11 +93,10 @@ class CustomMenu @JvmOverloads constructor(
 
     //---------------------------------------------------------------------------------------------- setBadgeCount
     fun setBadgeCount(count: Int) {
-        badgeCount += count
-        if (badgeCount == 0)
+        if (count == 0)
             textViewBadge.visibility = View.GONE
         else {
-            textViewBadge.text = badgeCount.toString()
+            textViewBadge.text = count.toString()
             textViewBadge.visibility = View.VISIBLE
         }
     }

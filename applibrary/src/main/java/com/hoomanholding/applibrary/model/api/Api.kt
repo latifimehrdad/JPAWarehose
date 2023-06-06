@@ -7,6 +7,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.request.*
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
+import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
 import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
@@ -44,6 +45,7 @@ interface Api {
         const val report = "$v1/report"
         const val files = "$v1/Files"
         const val customerApp = "/customerApp"
+        const val basket = "$v1/Basket"
     }
 
     //---------------------------------------------------------------------------------------------- user
@@ -183,6 +185,38 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<CustomerStateModel?>>
     //---------------------------------------------------------------------------------------------- Customers
+
+
+    //---------------------------------------------------------------------------------------------- basket
+    @GET("$basket/basket-details")
+    suspend fun requestGetDetailBasket(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<BasketModel?>>
+
+    @POST("$basket/basket-add")
+    suspend fun requestAddToBasket(
+        @Body request: AddToBasket,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$basket/basket-details_count")
+    suspend fun requestGetBasketCount(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Int?>>
+
+    @GET("$basket/basket-delete")
+    suspend fun requestDeleteBasket(
+        @Query("productId") productId: Int,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$basket/basket-submit")
+    suspend fun requestSubmitBasket(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Long?>>
+    //---------------------------------------------------------------------------------------------- basket
+
+
 
 
     //---------------------------------------------------------------------------------------------- warehouseReceipt

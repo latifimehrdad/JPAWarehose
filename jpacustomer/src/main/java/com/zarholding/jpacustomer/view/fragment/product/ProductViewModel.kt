@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.zarholding.jpacustomer.model.repository.BasketRepository
 import com.zarholding.jpacustomer.model.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val basketRepository: BasketRepository
 ) : JpaViewModel() {
 
     private var productsList: List<ProductModel>? = null
@@ -27,6 +29,7 @@ class ProductViewModel @Inject constructor(
     val productLiveData: MutableLiveData<List<ProductModel>> by lazy {
         MutableLiveData<List<ProductModel>>()
     }
+    val basketCountLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
     //---------------------------------------------------------------------------------------------- getProduct
     fun getProduct() {
@@ -101,4 +104,13 @@ class ProductViewModel @Inject constructor(
     }
     //---------------------------------------------------------------------------------------------- findWordInProductName
 
+
+    //---------------------------------------------------------------------------------------------- getBasketCount
+    fun getBasketCount() {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val response = checkResponse(basketRepository.requestGetBasketCount())
+            response?.let { basketCountLiveData.postValue(it) }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getBasketCount
 }

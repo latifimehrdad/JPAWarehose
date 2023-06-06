@@ -96,7 +96,7 @@
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
+            <com.hoomanholding.applibrary.view.custom.JpaButton
                 android:id="@+id/buttonYes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                 android:fontFamily="@font/yekan_bakh_bold"
                 app:cornerRadius="@dimen/_5sdp"
                 android:textColor="@color/bottomTextColor"
-                android:text='@string/confirm' />
+                android:text='@string/addToBasket' />
 
 
             <com.google.android.material.button.MaterialButton

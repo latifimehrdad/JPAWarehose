@@ -117,6 +117,7 @@ fun TextView.setIntValue(value : Int){
 
 
 //-------------------------------------------------------------------------------------------------- setAmount
+@BindingAdapter("setCustomerFinancial", "setLastTest")
 fun TextView.setAmount(value : Any?, last: String){
     val temp = value?.let {
         when(value){

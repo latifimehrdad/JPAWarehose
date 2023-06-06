@@ -34,6 +34,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     JpaFragment<FragmentProductBinding>() {
 
     private val viewModel: ProductViewModel by viewModels()
+    private var imageViewSelect: ImageView? = null
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,6 +93,10 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             binding.shimmerViewContainer.stopLoading()
             setProductAdapter(it)
         }
+
+        viewModel.basketCountLiveData.observe(viewLifecycleOwner) {
+            animationToCart(imageViewSelect, it)
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
@@ -149,8 +154,9 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- showProductDetailDialog
     private fun showProductDetailDialog(item: ProductModel, imageView: ImageView) {
         val select = object : ProductDetailDialog.Click{
-            override fun select(count: Int) {
-                animationToCart(imageView, count)
+            override fun select() {
+                imageViewSelect = imageView
+                viewModel.getBasketCount()
             }
         }
         ProductDetailDialog(select, item).show(childFragmentManager, "product")
@@ -159,9 +165,9 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
 
     //---------------------------------------------------------------------------------------------- animationToCart
-    private fun animationToCart(imageView: ImageView, count: Int) {
+    private fun animationToCart(imageView: ImageView?, count: Int) {
 
-        if (activity == null)
+        if (activity == null && imageView == null)
             return
 
         val destView = (activity as MainActivity).getCartView()
@@ -169,7 +175,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             .attachActivity(requireActivity())
             .setTargetView(imageView)
             .setDestView(destView)
-            .setMoveDuration(500)
+            .setMoveDuration(800)
             .setCircleDuration(800)
             .setAnimationListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator) {
@@ -177,7 +183,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
                 }
 
                 override fun onAnimationEnd(animation: Animator) {
-                    (activity as MainActivity).setCartBadge(count)
+                    (activity as MainActivity?)?.setCartBadge(count)
 
                 }
 

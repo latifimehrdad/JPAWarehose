@@ -103,7 +103,6 @@ class SplashViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getAllData
     private fun getAllData(): Job {
         return viewModelScope.launch(IO + exceptionHandler()){
-            delay(1000)
             successLiveData.postValue(true)
         }
     }

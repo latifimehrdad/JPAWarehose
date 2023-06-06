@@ -92,6 +92,10 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             resetSteps()
             setOrderAdapter(it)
         }
+
+        viewModel.basketCountLiveData.observe(viewLifecycleOwner) {
+            (activity as MainActivity?)?.setCartBadge(it)
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
 

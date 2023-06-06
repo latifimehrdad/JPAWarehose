@@ -9,16 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.ImageView
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.hoomanholding.applibrary.ext.downloadProfileImage
-import com.hoomanholding.applibrary.ext.loadImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
+import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.DialogProductDetailBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
@@ -40,7 +40,7 @@ class ProductDetailDialog(
 
     //---------------------------------------------------------------------------------------------- Click
     interface Click {
-        fun select(count: Int)
+        fun select()
     }
     //---------------------------------------------------------------------------------------------- Click
 
@@ -68,9 +68,8 @@ class ProductDetailDialog(
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT
         window?.attributes = lp
-        activity?.let {
-            (it as MainActivity).hideFragmentContainer()
-        }
+        (activity as MainActivity?)?.hideFragmentContainer()
+        observeLiveData()
         getValueToXml()
         setListener()
     }
@@ -98,6 +97,28 @@ class ProductDetailDialog(
     //---------------------------------------------------------------------------------------------- getValueToXml
 
 
+    //---------------------------------------------------------------------------------------------- observeLiveData
+    private fun observeLiveData() {
+        viewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            (activity as MainActivity?)?.showMessage(it.message)
+            binding.buttonYes.stopLoading()
+            when (it.type) {
+                EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
+                else -> {}
+            }
+        }
+
+
+        viewModel.addToBasketLiveData.observe(viewLifecycleOwner) {
+            binding.buttonYes.stopLoading()
+            click.select()
+            dismiss()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- observeLiveData
+
+
+
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.imageViewMinus.setOnClickListener {
@@ -114,10 +135,15 @@ class ProductDetailDialog(
 
         binding.buttonYes.setOnClickListener {
             val count = getEditTextCount()
-            if (count > 0) {
-                click.select(count)
-                dismiss()
-            }
+            if (count == 0 && binding.buttonYes.isLoading)
+                return@setOnClickListener
+            val request = AddToBasket(
+                ProductId = product.id,
+                Price = product.price,
+                Count = count
+            )
+            binding.buttonYes.startLoading(getString(R.string.bePatient))
+            viewModel.requestAddToBasket(request)
         }
 
         binding.buttonNo.setOnClickListener { dismiss() }
