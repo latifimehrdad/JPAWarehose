@@ -113,6 +113,9 @@ class ProfileFragment(
         binding.textViewVideo.setOnClickListener {
             gotoFragment(R.id.action_profileFragment_to_videoFragment)
         }
+        binding.textViewContactUs.setOnClickListener {
+            gotoFragment(R.id.action_profileFragment_to_aboutFragment)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 

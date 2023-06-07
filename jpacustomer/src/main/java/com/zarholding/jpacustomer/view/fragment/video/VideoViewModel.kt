@@ -1,8 +1,15 @@
 package com.zarholding.jpacustomer.view.fragment.video
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.di.Providers
+import com.hoomanholding.applibrary.model.data.response.video.VideoCategoryModel
+import com.hoomanholding.applibrary.model.data.response.video.VideoModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.zarholding.jpacustomer.model.repository.VideoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -10,18 +17,65 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class VideoViewModel @Inject constructor(): JpaViewModel() {
+class VideoViewModel @Inject constructor(
+    private val videoRepository: VideoRepository
+) : JpaViewModel() {
 
-    val categoryLiveData: MutableLiveData<List<String>> by lazy {
-        MutableLiveData<List<String>>()
+    val selectVideoLiveData: MutableLiveData<VideoModel> by lazy {
+        MutableLiveData<VideoModel>()
+    }
+    val categoryLiveData: MutableLiveData<List<VideoCategoryModel>> by lazy {
+        MutableLiveData<List<VideoCategoryModel>>()
+    }
+    val videoLiveData: MutableLiveData<List<VideoModel>> by lazy {
+        MutableLiveData<List<VideoModel>>()
     }
 
 
     //---------------------------------------------------------------------------------------------- getCategory
     fun getCategory() {
-        val item = mutableListOf("مدیران", "محصولات", "پرسنل", "کارمندان", "شرکت", "ماکارونی", "روغن")
-        categoryLiveData.postValue(item)
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val response = checkResponse(videoRepository.getVideoCategory())
+            response?.let {
+                categoryLiveData.postValue(it)
+                if (it.isNotEmpty())
+                    getVideo(it[0].id)
+            }
+        }
     }
     //---------------------------------------------------------------------------------------------- getCategory
+
+
+    //---------------------------------------------------------------------------------------------- getCategory
+    fun getVideo(videoGroupId: Int) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val response = checkResponse(videoRepository.getVideo(videoGroupId))
+            response?.let {
+                videoLiveData.postValue(it)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getCategory
+
+
+    //---------------------------------------------------------------------------------------------- selectVideo
+    fun selectVideo(position: Int) {
+        if (videoLiveData.value.isNullOrEmpty())
+            return
+        selectVideoLiveData.postValue(videoLiveData.value!![position])
+    }
+    //---------------------------------------------------------------------------------------------- selectVideo
+
+
+
+    //---------------------------------------------------------------------------------------------- getVideoLink
+    fun getVideoLink(): String? {
+        selectVideoLiveData.value?.videoFileName?.let {
+            return "${Providers.url}$it"
+        } ?: run {
+            return null
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getVideoLink
 
 }

@@ -35,7 +35,12 @@
     <color name="ratingColorBack">#FFFFFF</color>
     <color name="ratingColor">#FFB300</color>
 
+    <color name="textViewAlphaColor">#80A6A6A6</color>
+
     <color name="red">#EF5350</color>
     <color name="green">#81C784</color>
+
+    <color name="credit">#4CAF50</color>
+    <color name="debit">#F44336</color>
 
 </resources>

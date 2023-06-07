@@ -9,9 +9,8 @@ import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.other.HomeReportItemModel
 import com.hoomanholding.jpamanager.model.repository.CurrencyRepository
-import com.hoomanholding.jpamanager.model.repository.ReportRepository
+import com.hoomanholding.applibrary.model.repository.ReportRepository
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 

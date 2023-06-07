@@ -1,6 +1,10 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
+import com.hoomanholding.applibrary.ext.downloadImage
+import com.hoomanholding.applibrary.model.data.response.video.VideoModel
+import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ItemVideoBinding
 
 /**
@@ -18,25 +22,24 @@ class VideoHolder(
 
 
     //---------------------------------------------------------------------------------------------- bind
-    fun bind(item: String, position: Int) {
+    fun bind(item: VideoModel, position: Int) {
         setValueToXml(item)
-        setItemSelected(position)
         setListener(position)
     }
     //---------------------------------------------------------------------------------------------- bind
 
 
     //---------------------------------------------------------------------------------------------- setValueToXml
-    private fun setValueToXml(item: String) {
+    private fun setValueToXml(item: VideoModel) {
+        binding.textViewTitle.text = item.videoTitle
+        binding.textViewDescription.text = item.videoDescription
+        binding.imageViewThumbnail.downloadImage(
+            url = item.thumbnailNameAddress,
+            placeholder = AppCompatResources
+                .getDrawable(binding.imageViewThumbnail.context, R.drawable.ic_logo)
+        )
     }
     //---------------------------------------------------------------------------------------------- setValueToXml
-
-
-    //---------------------------------------------------------------------------------------------- setItemSelected
-    private fun setItemSelected(position: Int) {
-
-    }
-    //---------------------------------------------------------------------------------------------- setItemSelected
 
 
 

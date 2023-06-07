@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
-import com.hoomanholding.jpamanager.model.repository.ReportRepository
+import com.hoomanholding.applibrary.model.repository.ReportRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -42,13 +42,13 @@ class CustomerBalanceReportDetailViewModel @Inject constructor(
         val id = bundle.getInt(CompanionValues.CUSTOMER_ID)
         customerCodeLiveData.postValue(code)
         customerNameLiveData.postValue(name)
-        requestCustomerBalanceDetail(id)
+        requestCustomerBalanceDetail(id.toLong())
     }
     //---------------------------------------------------------------------------------------------- setValueFromArgument
 
 
     //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail
-    private fun requestCustomerBalanceDetail(customerId : Int){
+    private fun requestCustomerBalanceDetail(customerId : Long){
         viewModelScope.launch(IO + exceptionHandler()) {
             val response = checkResponse(reportRepository.requestCustomerBalanceDetail(customerId))
             response?.let {

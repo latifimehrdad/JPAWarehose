@@ -54,6 +54,10 @@ dependencies {
     implementation "androidx.room:room-runtime:2.5.1"
     kapt "androidx.room:room-compiler:2.5.1"
 
+    //Open Street Map
+    implementation 'org.osmdroid:osmdroid-android:6.1.14'
+    implementation 'com.github.MKergall:osmbonuspack:6.9.0'
+
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
 

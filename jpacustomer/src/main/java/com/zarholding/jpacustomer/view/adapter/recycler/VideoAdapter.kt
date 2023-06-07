@@ -3,6 +3,7 @@ package com.zarholding.jpacustomer.view.adapter.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.hoomanholding.applibrary.model.data.response.video.VideoModel
 import com.zarholding.jpacustomer.databinding.ItemVideoBinding
 import com.zarholding.jpacustomer.view.adapter.holder.VideoHolder
 
@@ -11,7 +12,7 @@ import com.zarholding.jpacustomer.view.adapter.holder.VideoHolder
  */
 
 class VideoAdapter(
-    private val items: List<String>,
+    private val items: List<VideoModel>,
     private val click: VideoHolder.Click
 ): RecyclerView.Adapter<VideoHolder>() {
 

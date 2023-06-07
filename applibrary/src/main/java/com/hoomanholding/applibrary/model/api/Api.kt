@@ -7,6 +7,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.request.*
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
+import com.hoomanholding.applibrary.model.data.response.about.AboutModel
 import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
 import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
@@ -20,6 +21,8 @@ import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReason
 import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
+import com.hoomanholding.applibrary.model.data.response.video.VideoCategoryModel
+import com.hoomanholding.applibrary.model.data.response.video.VideoModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -46,6 +49,8 @@ interface Api {
         const val files = "$v1/Files"
         const val customerApp = "/customerApp"
         const val basket = "$v1/Basket"
+        const val video = "$v1/Video"
+        const val about = "$v1/AboutUs"
     }
 
     //---------------------------------------------------------------------------------------------- user
@@ -265,7 +270,7 @@ interface Api {
 
     @GET("$report/managerapp-report-customerBalanceDetailsReport")
     suspend fun requestCustomerBalanceDetail(
-        @Query("CustomerId") customerId: Int,
+        @Query("CustomerId") customerId: Long,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CustomerBalanceReportDetailModel>?>>
 
@@ -298,8 +303,31 @@ interface Api {
         @Part File: MultipartBody.Part,
         @HeaderMap Authorization: Map<String, String>
     ): Response<GeneralResponse<Boolean?>>
-
-
     //---------------------------------------------------------------------------------------------- downloadApkFile
+
+
+    //---------------------------------------------------------------------------------------------- video
+    @GET("$video/get-videoGroups")
+    suspend fun getVideoCategory(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<VideoCategoryModel>?>>
+
+    @GET("$video/get-videos")
+    suspend fun getVideo(
+        @Query("videoGroupId") videoGroupId: Int,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<VideoModel>?>>
+    //---------------------------------------------------------------------------------------------- video
+
+
+    //---------------------------------------------------------------------------------------------- about
+    @GET("$about/get-aboutUs")
+    suspend fun getAbout(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<AboutModel?>>
+    //---------------------------------------------------------------------------------------------- about
+
+
+
 
 }

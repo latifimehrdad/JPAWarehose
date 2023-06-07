@@ -1,6 +1,7 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
 import androidx.recyclerview.widget.RecyclerView
+import com.hoomanholding.applibrary.model.data.response.video.VideoCategoryModel
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ItemVideoCategoryBinding
 import com.zarholding.jpacustomer.view.adapter.recycler.VideoCategoryAdapter
@@ -15,22 +16,22 @@ class VideoCategoryHolder(
 ): RecyclerView.ViewHolder(binding.root) {
 
     interface Click{
-        fun click(position: Int)
+        fun click(item: VideoCategoryModel, position: Int)
     }
 
 
     //---------------------------------------------------------------------------------------------- bind
-    fun bind(item: String, position: Int) {
+    fun bind(item: VideoCategoryModel, position: Int) {
         setValueToXml(item)
         setItemSelected(position)
-        setListener(position)
+        setListener(item, position)
     }
     //---------------------------------------------------------------------------------------------- bind
 
 
     //---------------------------------------------------------------------------------------------- setValueToXml
-    private fun setValueToXml(item: String) {
-        binding.textViewTitle.text = item
+    private fun setValueToXml(item: VideoCategoryModel) {
+        binding.textViewTitle.text = item.videoGroupTitle
     }
     //---------------------------------------------------------------------------------------------- setValueToXml
 
@@ -54,9 +55,9 @@ class VideoCategoryHolder(
 
 
     //---------------------------------------------------------------------------------------------- setListener
-    private fun setListener(position: Int) {
+    private fun setListener(item: VideoCategoryModel, position: Int) {
         binding.root.setOnClickListener {
-            click.click(position)
+            click.click(item, position)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener

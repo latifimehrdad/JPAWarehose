@@ -126,6 +126,10 @@ class MainActivity : AppCompatActivity() {
         binding.customMenuCart.setOnClickListener {
             gotoFragment(R.id.action_goto_basketFragment)
         }
+
+        binding.customMenuReport.setOnClickListener {
+            gotoFragment(R.id.action_goto_reportFragment)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -155,7 +159,8 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.profileFragment,
             R.id.myStateFragment,
-            R.id.videoFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
+            R.id.videoFragment,
+            R.id.aboutFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
                 resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
@@ -168,6 +173,14 @@ class MainActivity : AppCompatActivity() {
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.customMenuCart.selected()
+            }
+
+            R.id.reportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
+                resetMenuColor()
+                binding.cardViewMenu.visibility = View.VISIBLE
+                binding.imageViewBack.visibility = View.VISIBLE
+                binding.cardViewProfile.visibility = View.VISIBLE
+                binding.customMenuReport.selected()
             }
         }
     }

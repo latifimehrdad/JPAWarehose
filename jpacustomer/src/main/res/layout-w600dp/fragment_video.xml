@@ -61,7 +61,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/textViewInit"
+                    android:id="@+id/textViewTitleVideo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/cardViewVideo"
@@ -76,7 +76,7 @@
                     android:id="@+id/textViewInitDescription"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:layout_constraintTop_toBottomOf="@id/textViewInit"
+                    app:layout_constraintTop_toBottomOf="@id/textViewTitleVideo"
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="@dimen/_5sdp"

@@ -1,4 +1,4 @@
-package com.hoomanholding.jpamanager.model.repository
+package com.hoomanholding.applibrary.model.repository
 
 import com.hoomanholding.applibrary.model.api.Api
 import com.hoomanholding.applibrary.model.repository.TokenRepository
@@ -35,7 +35,7 @@ class ReportRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail
-    suspend fun requestCustomerBalanceDetail(customerId: Int) =
+    suspend fun requestCustomerBalanceDetail(customerId: Long) =
         apiCall { api.requestCustomerBalanceDetail(customerId, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail
 

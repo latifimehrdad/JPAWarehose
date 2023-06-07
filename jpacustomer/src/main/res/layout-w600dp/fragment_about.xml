@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/textColorNormal"
+            android:textSize="@dimen/_10sdp"
+            android:fontFamily="@font/iransans_bold"
+            android:text="@string/aboutUs"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewProfileHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/primaryColor">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_wave"
+                android:padding="@dimen/_5sdp">
+
+                <TextView
+                    android:id="@+id/textViewCompanyName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageViewLogo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_9sdp"
+                    android:fontFamily="@font/iransans_medium"/>
+
+                <TextView
+                    android:id="@+id/textViewAboutUs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/textViewCompanyName"
+                    app:layout_constraintStart_toStartOf="@id/textViewCompanyName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/bottomTextColor"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_light"/>
+
+                <ImageView
+                    android:id="@+id/imageViewLogo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@id/textViewCompanyName"
+                    app:layout_constraintBottom_toBottomOf="@id/textViewAboutUs"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintDimensionRatio="W,1:1"
+                    android:background="@drawable/drawable_back_edit_white"
+                    android:contentDescription="@string/logo"
+                    android:padding="@dimen/_3sdp"
+                    android:src="@drawable/ic_logo"/>
+
+
+                <ImageView
+                    android:id="@+id/imageviewCall"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:layout_constraintTop_toBottomOf="@id/textViewAboutUs"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:contentDescription="@string/logo"
+                    android:src="@drawable/ic_tell"/>
+
+                <TextView
+                    android:id="@+id/textViewCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/imageviewCall"
+                    app:layout_constraintEnd_toStartOf="@id/imageviewCall"
+                    app:layout_constraintBottom_toBottomOf="@id/imageviewCall"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_9sdp"
+                    android:fontFamily="@font/iransans_light"/>
+
+                <ImageView
+                    android:id="@+id/imageviewAddress"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:layout_constraintTop_toBottomOf="@id/imageviewCall"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:contentDescription="@string/logo"
+                    android:src="@drawable/ic_tell"/>
+
+                <TextView
+                    android:id="@+id/textViewAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/imageviewAddress"
+                    app:layout_constraintEnd_toStartOf="@id/imageviewAddress"
+                    app:layout_constraintBottom_toBottomOf="@id/imageviewAddress"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/bottomTextColor"
+                    android:textSize="@dimen/_9sdp"
+                    android:fontFamily="@font/iransans_light"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewVideo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            app:layout_constraintDimensionRatio="H,2:1"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/cardViewColor2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/play" />
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_video_play"
+                android:contentDescription="@string/play" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewMap"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardViewVideo"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/cardViewColor2">
+
+            <org.osmdroid.views.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/cardViewProfileHeader"
+            app:layout_constraintBottom_toBottomOf="@id/cardViewMap"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/recyclerLoadingBack"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

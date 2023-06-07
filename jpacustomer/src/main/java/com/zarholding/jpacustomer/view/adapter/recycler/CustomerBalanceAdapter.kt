@@ -3,45 +3,39 @@ package com.zarholding.jpacustomer.view.adapter.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.hoomanholding.applibrary.model.data.response.video.VideoCategoryModel
-import com.zarholding.jpacustomer.databinding.ItemVideoCategoryBinding
-import com.zarholding.jpacustomer.view.adapter.holder.VideoCategoryHolder
+import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
+import com.zarholding.jpacustomer.databinding.ItemReportCustomerBalanceBinding
+import com.zarholding.jpacustomer.view.adapter.holder.CustomerBalanceHolder
 
 /**
- * Created by m-latifi on 5/27/2023.
+ * Created by m-latifi on 6/7/2023.
  */
 
-class VideoCategoryAdapter(
-    private val items: List<VideoCategoryModel>,
-    private val click: VideoCategoryHolder.Click
-): RecyclerView.Adapter<VideoCategoryHolder>() {
-
-    companion object{
-        var selectedPosition: Int = 0
-    }
+class CustomerBalanceAdapter(
+    private val items: List<CustomerBalanceReportDetailModel>
+): RecyclerView.Adapter<CustomerBalanceHolder>() {
 
     private var inflater: LayoutInflater? = null
 
     //---------------------------------------------------------------------------------------------- onCreateViewHolder
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoCategoryHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerBalanceHolder {
         if (inflater == null)
             inflater = LayoutInflater.from(parent.context)
-        return VideoCategoryHolder(
-            ItemVideoCategoryBinding.inflate(inflater!!, parent, false), click
+        return CustomerBalanceHolder(
+            ItemReportCustomerBalanceBinding.inflate(inflater!!, parent, false)
         )
     }
     //---------------------------------------------------------------------------------------------- onCreateViewHolder
 
 
     //---------------------------------------------------------------------------------------------- onBindViewHolder
-    override fun onBindViewHolder(holder: VideoCategoryHolder, position: Int) {
-        holder.bind(items[position], position)
+    override fun onBindViewHolder(holder: CustomerBalanceHolder, position: Int) {
+        holder.bind(items[position])
     }
     //---------------------------------------------------------------------------------------------- onBindViewHolder
 
 
     //---------------------------------------------------------------------------------------------- getItemCount
-    override fun getItemCount(): Int  = items.size
+    override fun getItemCount() = items.size
     //---------------------------------------------------------------------------------------------- getItemCount
-
 }
