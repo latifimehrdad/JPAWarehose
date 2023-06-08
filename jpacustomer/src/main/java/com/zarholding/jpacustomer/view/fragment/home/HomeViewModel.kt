@@ -2,7 +2,6 @@ package com.zarholding.jpacustomer.view.fragment.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zarholding.jpacustomer.model.repository.BasketRepository
@@ -29,9 +28,10 @@ class HomeViewModel @Inject constructor(
 
     val basketCountLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
+
     //---------------------------------------------------------------------------------------------- getCustomerOrders
-    fun getCustomerOrders() {
-        if (orderLiveData.value.isNullOrEmpty())
+    fun getCustomerOrders(checkEmptyOrder: Boolean = true) {
+        if (orderLiveData.value.isNullOrEmpty() || !checkEmptyOrder)
             viewModelScope.launch(IO + exceptionHandler()) {
                 val response = checkResponse(orderRepository.requestCustomerGetOrder())
                 response?.let {

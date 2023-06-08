@@ -5,8 +5,12 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hoomanholding.applibrary.ext.config
+import com.hoomanholding.applibrary.ext.startLoading
+import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
+import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,11 +73,17 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
+        binding.shimmerViewContainer.config(getShimmerBuild())
+        binding.swipeContainer.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light)
         observeLiveDate()
         resetSteps()
         setListener()
         (activity as MainActivity?)?.getUserInfo()
-        viewModel.getCustomerOrders()
+        getCustomerOrders()
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -81,6 +91,8 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainer.stopLoading()
+            binding.swipeContainer.isRefreshing = false
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -89,6 +101,8 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         }
 
         viewModel.orderLiveData.observe(viewLifecycleOwner) {
+            binding.swipeContainer.isRefreshing = false
+            binding.shimmerViewContainer.stopLoading()
             resetSteps()
             setOrderAdapter(it)
         }
@@ -100,11 +114,20 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
 
+    //---------------------------------------------------------------------------------------------- getCustomerOrders
+    private fun getCustomerOrders(checkEmptyOrder: Boolean = true) {
+        binding.shimmerViewContainer.startLoading()
+        viewModel.getCustomerOrders(checkEmptyOrder)
+    }
+    //---------------------------------------------------------------------------------------------- getCustomerOrders
+
+
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.constraintLayoutStep.setOnClickListener {
             binding.spinnerChooseChart.dismiss()
         }
+        binding.swipeContainer.setOnRefreshListener { getCustomerOrders(false) }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
