@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val params = view.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.TOP
         snack.setBackgroundTint(resources.getColor(R.color.primaryColor, theme))
-        snack.setTextColor(resources.getColor(R.color.bottomTextColor, theme))
+        snack.setTextColor(resources.getColor(R.color.buttonTextColor, theme))
         snack.setAction(getString(R.string.dismiss)) { snack.dismiss() }
         snack.setActionTextColor(resources.getColor(R.color.primaryGradientEnd, theme))
         snack.show()
@@ -175,7 +175,8 @@ class MainActivity : AppCompatActivity() {
                 binding.customMenuCart.selected()
             }
 
-            R.id.reportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
+            R.id.reportFragment,
+            R.id.billingReturnReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
                 resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE

@@ -57,7 +57,7 @@
                     android:textSize="@dimen/_6sdp"
                     android:paddingHorizontal="@dimen/_15sdp"
                     android:fontFamily="@font/iransans_light"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:text='@string/showOrderDetail' />
 
 

@@ -70,7 +70,7 @@
                         android:textSize="@dimen/_12sdp"
                         android:fontFamily="@font/yekan_bakh_bold"
                         app:cornerRadius="@dimen/_5sdp"
-                        android:textColor="@color/bottomTextColor"
+                        android:textColor="@color/buttonTextColor"
                         android:text='@string/confirm' />
 
 

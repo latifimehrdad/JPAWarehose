@@ -23,7 +23,7 @@
     <color name="cardViewMenuColor">#6C6C6C</color>
 
     <color name="buttonDisable">#454545</color>
-    <color name="bottomTextColor">#000000</color>
+    <color name="buttonTextColor">#000000</color>
     <color name="strokeEditTextTime">#686868</color>
     <color name="dividerColor">#474646</color>
     <color name="backTimerColor">#5E5E5E</color>
@@ -37,6 +37,10 @@
     <color name="ratingColor">#D39404</color>
 
     <color name="textViewAlphaColor">#804C4C4C</color>
+
+    <color name="datePickerConfirmButtonBackColor">#051b46</color>
+    <color name="datePickerDateBackColor">#051b46</color>
+    <color name="datePickerRangeColor">#73B3EA</color>
 
     <color name="red">#EF5350</color>
     <color name="green">#81C784</color>

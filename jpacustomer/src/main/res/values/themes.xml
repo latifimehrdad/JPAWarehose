@@ -21,7 +21,7 @@
     </style>
 
     <style name="switchStyle" parent="Base.Theme.AppCompat">
-        <item name="colorAccent">@color/bottomTextColor</item>
+        <item name="colorAccent">@color/buttonTextColor</item>
         <item name="android:colorForeground">@color/primaryGradientEnd</item>
     </style>
 

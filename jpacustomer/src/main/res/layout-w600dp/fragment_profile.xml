@@ -80,7 +80,7 @@
                     app:layout_constraintEnd_toStartOf="@id/textViewMyState"
                     app:layout_constraintBottom_toTopOf="@id/textViewShopAddress"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -92,7 +92,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewShopName"
                     app:layout_constraintEnd_toEndOf="@id/textViewShopName"
                     app:layout_constraintBottom_toBottomOf="@id/textViewMyState"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -105,7 +105,7 @@
                     app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -117,7 +117,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_6sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
@@ -129,7 +129,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_6sdp"
                     android:fontFamily="@font/iransans_bold" />
 
@@ -330,7 +330,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bottomTextColor"
+                android:textColor="@color/buttonTextColor"
                 android:textSize="@dimen/_7sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/activeDarkTheme"
@@ -372,7 +372,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/bottomTextColor"
+                android:textColor="@color/buttonTextColor"
                 android:textSize="@dimen/_7sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/signOut"

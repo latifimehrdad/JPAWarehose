@@ -42,7 +42,7 @@
                 android:backgroundTint="@color/primaryColor"
                 android:fontFamily="@font/iransans_light"
                 android:text='@string/detailProduct'
-                android:textColor="@color/bottomTextColor"
+                android:textColor="@color/buttonTextColor"
                 android:textSize="@dimen/_7sdp"
                 app:cornerRadius="@dimen/_7sdp" />
 

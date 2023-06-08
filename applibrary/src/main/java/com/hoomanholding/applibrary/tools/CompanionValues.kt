@@ -18,5 +18,6 @@ class CompanionValues {
         const val CUSTOMER_NAME = "customer_name"
         const val CUSTOMER_CODE = "customer_code"
         const val DOWNLOAD_URL = "download_url"
+        const val REPORT_TYPE = "reportType"
     }
 }

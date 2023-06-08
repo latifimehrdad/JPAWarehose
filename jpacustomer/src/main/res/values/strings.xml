@@ -92,6 +92,16 @@
     <string name="factorReport">گزارش فاکتور</string>
     <string name="customerBalanceReport">دفتر مشتری</string>
     <string name="date">تاریخ</string>
+    <string name="chooseDate">انتخاب تاریخ</string>
+    <string name="orderDate">تاریخ سفارش</string>
+    <string name="until">تا</string>
+    <string name="from">از</string>
+    <string name="dateFilter">فیلتر تاریخ :</string>
+    <string name="pleaseChooseDateFrom">لطفا تاریخ شروع را انتخاب نمایید</string>
+    <string name="pleaseChooseDateTo">لطفا تاریخ پایان را انتخاب نمایید</string>
+    <string name="finalPrice">قیمت نهایی فاکتور</string>
+    <string name="detailFactor">جزییات فاکتور</string>
+    <string name="pieces">عدد</string>
 
     <string name="colon">:</string>
     <string name="enterChar">\n</string>

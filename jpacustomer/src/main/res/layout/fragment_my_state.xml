@@ -63,7 +63,7 @@
                     app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -75,7 +75,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
@@ -87,7 +87,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_bold"/>
 

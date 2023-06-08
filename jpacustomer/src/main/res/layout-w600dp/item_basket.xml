@@ -147,7 +147,7 @@
                 android:fontFamily="@font/yekan_bakh_medium"
                 android:minWidth="@dimen/_90sdp"
                 android:text='@string/saveChange'
-                android:textColor="@color/bottomTextColor"
+                android:textColor="@color/buttonTextColor"
                 android:textSize="@dimen/_10sdp"
                 app:cornerRadius="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="@id/linearLayoutCount"

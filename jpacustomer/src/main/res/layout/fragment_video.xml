@@ -68,7 +68,7 @@
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textSize="11sp"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:fontFamily="@font/iransans_bold"
                     android:text="@string/introductionOfTheCollection"/>
 
@@ -82,7 +82,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textSize="11sp"
                     android:scrollbars="vertical"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/lovorm"/>
 

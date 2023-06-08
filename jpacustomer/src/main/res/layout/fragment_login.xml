@@ -143,7 +143,7 @@
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
             android:fontFamily="@font/iransans_bold"
-            android:textColor="@color/bottomTextColor"
+            android:textColor="@color/buttonTextColor"
             android:text='@string/receiveCode' />
 
 

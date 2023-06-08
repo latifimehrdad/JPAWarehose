@@ -278,6 +278,20 @@ interface Api {
     suspend fun requestCustomersBouncedCheckReport(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CustomerBounceCheckReportModel>?>>
+
+    @GET("$report/customers-report-customersBillingReport")
+    suspend fun requestCustomerBillingReport(
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<BillingAndReturnReportModel>?>>
+
+    @GET("$report/customers-report-customersReturnReport")
+    suspend fun requestCustomerReturnReport(
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<BillingAndReturnReportModel>?>>
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 

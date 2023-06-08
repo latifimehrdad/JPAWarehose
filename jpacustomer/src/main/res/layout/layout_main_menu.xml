@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@id/imageViewIcon"
         app:layout_constraintBottom_toTopOf="@id/imageViewIcon"
         android:background="@drawable/drawable_back_curve_primary"
-        android:textColor="@color/bottomTextColor"
+        android:textColor="@color/buttonTextColor"
         android:gravity="center"
         android:textSize="@dimen/_9sdp" />
 

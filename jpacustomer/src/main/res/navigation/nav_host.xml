@@ -137,12 +137,26 @@
             app:popExitAnim="@anim/slide_out_left"
             app:popUpTo="@id/customerBalanceReportFragment" />
 
+        <action
+            android:id="@+id/action_profileFragment_to_billingReturnReportFragment"
+            app:destination="@id/billingReturnReportFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/billingReturnReportFragment" />
+
     </fragment>
 
 
     <fragment
         android:id="@+id/customerBalanceReportFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.report.balance.CustomerBalanceReportFragment"/>
+
+    <fragment
+        android:id="@+id/billingReturnReportFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.report.billing_return.BillingReturnReportFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

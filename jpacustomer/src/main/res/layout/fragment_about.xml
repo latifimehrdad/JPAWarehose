@@ -42,7 +42,7 @@
                     app:layout_constraintStart_toEndOf="@id/imageViewLogo"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_medium"/>
 
@@ -53,7 +53,7 @@
                     app:layout_constraintTop_toBottomOf="@id/textViewCompanyName"
                     app:layout_constraintStart_toStartOf="@id/textViewCompanyName"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_light"/>
@@ -90,7 +90,7 @@
                     app:layout_constraintEnd_toStartOf="@id/imageviewCall"
                     app:layout_constraintBottom_toBottomOf="@id/imageviewCall"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -113,7 +113,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/imageviewAddress"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_light"/>
 

@@ -205,7 +205,7 @@
                     android:paddingBottom="@dimen/_5sdp"
                     android:paddingHorizontal="@dimen/_15sdp"
                     android:fontFamily="@font/iransans_medium"
-                    android:textColor="@color/bottomTextColor"
+                    android:textColor="@color/buttonTextColor"
                     android:text='@string/receiveAgainCode' />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

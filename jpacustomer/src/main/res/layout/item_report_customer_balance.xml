@@ -111,7 +111,7 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/drawable_back_curve_primary"
             android:textSize="@dimen/_9sdp"
-            android:textColor="@color/bottomTextColor"
+            android:textColor="@color/buttonTextColor"
             android:gravity="center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
