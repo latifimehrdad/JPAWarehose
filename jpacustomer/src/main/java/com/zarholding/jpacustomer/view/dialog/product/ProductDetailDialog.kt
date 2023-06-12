@@ -81,7 +81,7 @@ class ProductDetailDialog(
         binding.editTextCount.setText("0")
         binding.textViewName.text = product.productName
         binding.touchImageView.downloadProfileImage(
-            url = product.productCode,
+            url = "${product.productCode}.PNG",
             systemType = EnumSystemType.Customers.name,
             entityType = EnumEntityType.ProductImage.name,
             token = viewModel.getBearerToken(),

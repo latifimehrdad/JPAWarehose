@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
+import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 binding.imageViewProfiel.downloadProfileImage(
                     it.profileImageName,
-                    it.systemType,
+                    EnumSystemType.Customers.name,
                     EnumEntityType.ProfileImage.name,
                     mainViewModel.getBearerToke()
                 )

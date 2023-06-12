@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
+import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.manager.ThemeManager
@@ -184,13 +186,14 @@ class ProfileFragment(
         )
         binding.imageViewProfile.downloadProfileImage(
             url = userInfo.profileImageName,
-            systemType = userInfo.systemType,
+            systemType = EnumSystemType.Customers.name,
             token = viewModel.getBearerToken()
         )
         binding.imageViewVisitorImage.downloadProfileImage(
             url = userInfo.visitorImageName,
-            systemType = userInfo.systemType,
-            token = viewModel.getBearerToken()
+            systemType = EnumSystemType.Customers.name,
+            token = viewModel.getBearerToken(),
+            entityType = EnumEntityType.VisitorImage.name
         )
     }
     //---------------------------------------------------------------------------------------------- setUserInfo
