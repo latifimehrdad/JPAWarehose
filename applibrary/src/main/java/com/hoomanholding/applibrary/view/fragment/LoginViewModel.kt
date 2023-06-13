@@ -70,7 +70,7 @@ class LoginViewModel @Inject constructor(
                 )
                 val response = checkResponse(repository.requestLogin(request))
                 response?.let {
-                    saveUserNameAndPassword(it, systemType)
+                    saveUserNameAndPassword(it)
                 }
             }
         }
@@ -92,14 +92,13 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
-    private fun saveUserNameAndPassword(token: String?, systemType: EnumSystemType) {
-        if (systemType != EnumSystemType.Customers)
-            sharedPreferences
-                .edit()
-                .putString(CompanionValues.TOKEN, token)
-                .putString(CompanionValues.userName, userName.value)
-                .putString(CompanionValues.password, password.value)
-                .apply()
+    private fun saveUserNameAndPassword(token: String?) {
+        sharedPreferences
+            .edit()
+            .putString(CompanionValues.TOKEN, token)
+            .putString(CompanionValues.userName, userName.value)
+            .putString(CompanionValues.password, password.value)
+            .apply()
         loginLiveDate.postValue(token)
     }
     //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
@@ -113,5 +112,14 @@ class LoginViewModel @Inject constructor(
             .apply()
     }
     //---------------------------------------------------------------------------------------------- saveNewIp
+
+
+    //---------------------------------------------------------------------------------------------- changeBiometricEnable
+    fun changeBiometricEnable(enable: Boolean) {
+        sharedPreferences.edit()
+            .putBoolean(CompanionValues.biometric, enable)
+            .apply()
+    }
+    //---------------------------------------------------------------------------------------------- changeBiometricEnable
 
 }

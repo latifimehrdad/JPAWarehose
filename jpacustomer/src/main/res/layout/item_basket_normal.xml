@@ -27,8 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageViewDelete"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:visibility="gone">
+            android:layout_marginTop="@dimen/_3sdp">
 
             <TextView
                 android:id="@+id/textViewCode"
@@ -156,61 +155,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!--        normal show-->
-
-
-        <!--        list show-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageViewDelete"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/textViewListCode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_7sdp"
-                android:fontFamily="@font/iransans_light"
-                android:gravity="start"
-                android:textColor="@color/textColorNormal"
-                android:textSize="@dimen/_7sdp"
-                app:layout_constraintStart_toEndOf="@id/textViewListCount"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textViewListCount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_7sdp"
-                android:fontFamily="@font/iransans_bold"
-                android:gravity="end"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/_9sdp"
-                app:layout_constraintEnd_toStartOf="@id/textViewListCode"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textViewListName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/iransans_medium"
-                android:gravity="start"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/_8sdp"
-                app:layout_constraintEnd_toEndOf="@id/textViewListCode"
-                app:layout_constraintStart_toStartOf="@id/textViewListCount"
-                app:layout_constraintTop_toBottomOf="@id/textViewListCount" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <!--        list show-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

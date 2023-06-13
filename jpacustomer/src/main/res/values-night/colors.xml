@@ -15,7 +15,7 @@
     <color name="textColor">@color/primaryColor</color>
     <color name="textColorNormal">#ACACAC</color>
     <color name="textColorDisable">#ACACAC</color>
-
+    <color name="downloadBackGround">#99FFFFFF</color>
     <color name="iconNormalColor">#B9BCC1</color>
     <color name="iconDisableColor">#212225</color>
     <color name="cardViewColor">#4C4C4C</color>

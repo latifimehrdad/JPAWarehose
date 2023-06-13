@@ -18,7 +18,7 @@ import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentBasketBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
-import com.zarholding.jpacustomer.view.adapter.holder.BasketHolder
+import com.zarholding.jpacustomer.view.adapter.holder.BasketHolderNormal
 import com.zarholding.jpacustomer.view.adapter.recycler.BasketAdapter
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -169,7 +169,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         if (context == null)
             return
         binding.recyclerViewProduct.adapter = null
-        val click = object : BasketHolder.Click {
+        val click = object : BasketHolderNormal.Click {
             override fun click(item: DetailBasketModel, button: JpaButton, position: Int, count: Int) {
                 if (button.isLoading)
                     return

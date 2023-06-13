@@ -19,6 +19,7 @@ import com.hoomanholding.applibrary.view.fragment.LoginViewModel
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentLoginBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
+import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 
 /**
  * Created by m-latifi on 11/9/2022.
@@ -38,19 +39,18 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     private val backClick = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             context?.let {
-/*                ConfirmDialog(
+                ConfirmDialog(
                     it,
                     getString(R.string.doYouWantToExitApp),
                     object : ConfirmDialog.Click {
                         override fun clickYes() {
                             activity?.finish()
                         }
-                    }).show()*/
+                    }).show()
             }
         }
     }
     //---------------------------------------------------------------------------------------------- OnBackPressedCallback
-
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -67,11 +67,10 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     private fun initView() {
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         activity?.let { (it as MainActivity).deleteAllData() }
-/*        if (loginViewModel.isBiometricEnable()) {
-            binding.cardViewFingerPrint.visibility = View.VISIBLE
-        } else {
-            binding.cardViewFingerPrint.visibility = View.INVISIBLE
-        }*/
+        if (loginViewModel.isBiometricEnable()) {
+            showBiometricDialog()
+        }
+        binding.checkBoxSave.isChecked = loginViewModel.isBiometricEnable()
         observeLiveDate()
     }
     //---------------------------------------------------------------------------------------------- initView
@@ -106,8 +105,6 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
 
-
-
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
         activity?.let {
@@ -125,9 +122,13 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             .buttonLogin
             .setOnClickListener { login(false) }
 
-/*        binding
-            .cardViewFingerPrint
-            .setOnClickListener { showBiometricDialog() }*/
+        binding.checkBoxSave.setOnClickListener {
+            loginViewModel.changeBiometricEnable(binding.checkBoxSave.isChecked)
+        }
+
+        /*        binding
+                    .cardViewFingerPrint
+                    .setOnClickListener { showBiometricDialog() }*/
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -174,7 +175,6 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         loginViewModel.login(fromFingerPrint, androidId, EnumSystemType.Customers)
     }
     //---------------------------------------------------------------------------------------------- login
-
 
 
     //---------------------------------------------------------------------------------------------- startLoading

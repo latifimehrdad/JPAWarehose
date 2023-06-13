@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/drawable_home_step"
+        android:padding="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/imageViewDelete"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/deleteBasket"
+            android:src="@drawable/ic_delete"/>
+
+        <!--        list show-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewDelete"
+            android:layout_marginTop="@dimen/_3sdp">
+
+            <TextView
+                android:id="@+id/textViewListCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_7sdp"
+                android:fontFamily="@font/iransans_light"
+                android:gravity="start"
+                android:textColor="@color/textColorNormal"
+                android:textSize="@dimen/_7sdp"
+                app:layout_constraintStart_toEndOf="@id/textViewListCount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewListCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_7sdp"
+                android:fontFamily="@font/iransans_bold"
+                android:gravity="end"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_9sdp"
+                app:layout_constraintEnd_toStartOf="@id/textViewListCode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewListName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:gravity="start"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="@id/textViewListCode"
+                app:layout_constraintStart_toStartOf="@id/textViewListCount"
+                app:layout_constraintTop_toBottomOf="@id/textViewListCount" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        list show-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

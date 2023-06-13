@@ -1,16 +1,28 @@
 package com.zarholding.jpacustomer.view.fragment.profile
 
+import android.Manifest
+import android.app.Activity
 import android.content.SharedPreferences
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toFile
 import androidx.fragment.app.viewModels
+import com.github.drjacky.imagepicker.ImagePicker
+import com.github.drjacky.imagepicker.constant.ImageProvider
 import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.manager.ThemeManager
 import com.zarholding.jpacustomer.R
@@ -42,6 +54,19 @@ class ProfileFragment(
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
+
+
+    //---------------------------------------------------------------------------------------------- launcher
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val uri = it.data?.data
+                uri?.let { uploadProfileImage(uri) }
+            }
+        }
+    //---------------------------------------------------------------------------------------------- launcher
+
+
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -117,6 +142,14 @@ class ProfileFragment(
         }
         binding.textViewContactUs.setOnClickListener {
             gotoFragment(R.id.action_profileFragment_to_aboutFragment)
+        }
+
+        binding.cardViewProfile.setOnClickListener {
+            cameraPermission()
+        }
+
+        binding.cardViewVisitorProfile.setOnClickListener {
+
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -197,6 +230,66 @@ class ProfileFragment(
         )
     }
     //---------------------------------------------------------------------------------------------- setUserInfo
+
+
+    //---------------------------------------------------------------------------------------------- cameraPermission
+    private fun cameraPermission() {
+        if (context == null)
+            return
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    ImagePicker
+                        .Companion
+                        .with(requireActivity())
+                        .crop()
+                        .cropSquare()
+                        .provider(ImageProvider.BOTH) //Or bothCameraGallery()
+                        .createIntentFromDialog { launcher.launch(it) }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?
+                ) {
+
+                }
+
+            }).check()
+    }
+    //---------------------------------------------------------------------------------------------- cameraPermission
+
+
+    //---------------------------------------------------------------------------------------------- uploadProfileImage
+    private fun uploadProfileImage(pictureUri: Uri) {
+        binding.textViewPercent.visibility = View.VISIBLE
+        binding.imageViewProfile.setImageURI(pictureUri)
+        viewModel.uploadPercentLiveData.observe(viewLifecycleOwner){
+            if (it > 100) {
+                binding.textViewPercent.visibility = View.GONE
+                viewModel.uploadPercentLiveData.removeObservers(viewLifecycleOwner)
+                getUserInfoInActivity()
+            } else {
+                val percent = "$it %"
+                binding.textViewPercent.text = percent
+            }
+        }
+        viewModel.uploadProfileImage(pictureUri.toFile())
+    }
+    //---------------------------------------------------------------------------------------------- uploadProfileImage
+
+
+    //---------------------------------------------------------------------------------------------- getUserInfoInActivity
+    private fun getUserInfoInActivity() {
+        activity?.let {
+            (it as MainActivity).getUserInfo()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getUserInfoInActivity
 
 
 }

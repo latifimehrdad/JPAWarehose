@@ -52,6 +52,17 @@
                         android:layout_height="match_parent"
                         android:contentDescription="@string/profile" />
 
+                    <TextView
+                        android:id="@+id/textViewPercent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/downloadBackGround"
+                        android:textSize="@dimen/_9sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:fontFamily="@font/kalameh_bold"
+                        android:visibility="gone"/>
+
                 </androidx.cardview.widget.CardView>
 
 

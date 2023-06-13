@@ -1,4 +1,4 @@
-package com.hoomanholding.jpamanager.model.repository
+package com.zarholding.jpacustomer.model.repository
 
 import com.hoomanholding.applibrary.model.api.Api
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
