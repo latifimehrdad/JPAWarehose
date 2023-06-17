@@ -26,8 +26,8 @@ class CustomStep @JvmOverloads constructor(
     private lateinit var iconImage: ImageView
     private lateinit var cardView: CardView
     private lateinit var titleView: TextView
-    private val defaultColor = R.color.cardViewColor
-    private val selectedColor = R.color.stepSelect
+    private val defaultColor = R.color.a_orderStepUnselect
+    private val selectedColor = R.color.a_orderStepSelect
 
     //---------------------------------------------------------------------------------------------- init
     init {

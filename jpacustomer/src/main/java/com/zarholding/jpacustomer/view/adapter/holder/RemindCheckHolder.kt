@@ -54,14 +54,14 @@ class RemindCheckHolder(
     private fun setItemSelected(position: Int) {
         if (RemindCheckAdapter.selectedPosition == position){
             binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.primaryColor))
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_pageTitle))
             binding.textViewTitle
-                .setTextColor(binding.textViewTitle.context.getColor(R.color.cardViewMenuColor))
+                .setTextColor(binding.textViewTitle.context.getColor(R.color.a_textButton))
         } else {
             binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.cardViewMenuColor))
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_buttonUnselect))
             binding.textViewTitle
-                .setTextColor(binding.textViewTitle.context.getColor(R.color.primaryColor))
+                .setTextColor(binding.textViewTitle.context.getColor(R.color.a_textHint))
         }
     }
     //---------------------------------------------------------------------------------------------- setItemSelected

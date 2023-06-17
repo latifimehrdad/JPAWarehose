@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.setAmount
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
-import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ItemReportCustomerBalanceBinding
 import kotlin.math.abs
@@ -66,11 +65,11 @@ class CustomerBalanceHolder(
         val color = if (item.balance > 0)
             ResourcesCompat.getColor(
                 binding.textViewTotal.context.resources,
-                R.color.debit, binding.textViewTotal.context.theme
+                R.color.a_debit, binding.textViewTotal.context.theme
             )
         else ResourcesCompat.getColor(
             binding.textViewTotal.context.resources,
-            R.color.credit, binding.textViewTotal.context.theme
+            R.color.a_credit, binding.textViewTotal.context.theme
         )
         binding.textViewTotalTitle.text = if (item.balance > 0)
             binding.textViewTotalTitle.context.getString(R.string.totalDebit)

@@ -119,9 +119,9 @@ class BillingReturnReportFragment(
         datePickerDialog.headerTextColor =
             resources.getColor(R.color.white, requireContext().theme)
         datePickerDialog.weekColor =
-            resources.getColor(R.color.textColorDisable, requireContext().theme)
+            resources.getColor(R.color.a_textHint, requireContext().theme)
         datePickerDialog.disableDateColor =
-            resources.getColor(R.color.textColorDisable, requireContext().theme)
+            resources.getColor(R.color.a_textHint, requireContext().theme)
         datePickerDialog.defaultDateColor =
             resources.getColor(R.color.datePickerDateBackColor, requireContext().theme)
         datePickerDialog.selectedDateCircleColor =

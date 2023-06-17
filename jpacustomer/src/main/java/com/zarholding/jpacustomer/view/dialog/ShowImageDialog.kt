@@ -58,7 +58,7 @@ class ShowImageDialog(
             systemType = EnumSystemType.Customers.name,
             entityType = EnumEntityType.ProductImage.name,
             token = item.token,
-            placeholder = R.drawable.ic_logo)
+            placeholder = R.drawable.a_ic_logo)
         imageViewClose.setOnClickListener {
             dismiss()
         }

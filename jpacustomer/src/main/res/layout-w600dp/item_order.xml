@@ -9,7 +9,7 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginVertical="@dimen/_3sdp"
         app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/cardViewMenuColor">
+        app:cardBackgroundColor="@color/a_cardView5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textColor="@color/primaryColor"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_8sdp"
                     android:fontFamily="@font/iransans_bold"
                     android:gravity="end"/>
 
@@ -42,8 +42,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@id/textViewNumber"
                     app:layout_constraintEnd_toEndOf="@id/textViewNumber"
-                    android:textSize="@dimen/_5sdp"
-                    android:textColor="@color/textColorDisable"
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/orderNumber"/>
 
@@ -53,21 +53,21 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:backgroundTint="@color/primaryColor"
-                    app:cornerRadius="@dimen/_5sdp"
-                    android:textSize="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_3sdp"
+                    app:cornerRadius="@dimen/_7sdp"
+                    android:textSize="@dimen/_6sdp"
+                    android:paddingHorizontal="@dimen/_15sdp"
                     android:fontFamily="@font/iransans_light"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/a_textButton"
                     android:text='@string/showOrderDetail' />
 
 
                 <ImageView
                     android:id="@+id/imageViewShopping"
-                    android:layout_width="@dimen/_13sdp"
-                    android:layout_height="@dimen/_13sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:src="@drawable/ic_shopping"
+                    android:src="@drawable/a_ic_shopping"
                     android:contentDescription="@string/logo" />
 
                 <TextView
@@ -79,8 +79,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/imageViewShopping"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_5sdp"
-                    android:textColor="@color/textColorDisable"
+                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -89,8 +89,8 @@
                     app:layout_constraintTop_toBottomOf="@id/textViewAmount"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_5sdp"
-                    android:textColor="@color/textColorDisable"
+                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/rial"/>
 
@@ -102,8 +102,8 @@
                     app:layout_constraintBottom_toTopOf="@id/buttonShowOrderDetail"
                     app:layout_constraintStart_toStartOf="@id/buttonShowOrderDetail"
                     app:layout_constraintEnd_toEndOf="@id/buttonShowOrderDetail"
-                    android:textSize="@dimen/_6sdp"
-                    android:textColor="@color/textColorDisable"
+                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"
                     android:gravity="center"/>
 

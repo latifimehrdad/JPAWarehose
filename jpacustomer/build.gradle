@@ -66,4 +66,5 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation 'com.github.Drjacky:ImagePicker:2.3.22'
+
 }

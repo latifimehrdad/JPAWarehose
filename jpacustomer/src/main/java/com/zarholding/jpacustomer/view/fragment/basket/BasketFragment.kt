@@ -61,7 +61,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         binding.shimmerViewContainer.config(getShimmerBuild())
         binding.cardViewCalculateBasket.visibility = View.GONE
         binding.buttonList.backgroundTintList =
-            requireContext().getColorStateList(R.color.buttonDisable)
+            requireContext().getColorStateList(R.color.a_buttonUnselect)
         binding.buttonList.backgroundTintList =
             requireContext().getColorStateList(R.color.primaryColor)
         observeLiveDate()
@@ -143,10 +143,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     private fun checkShowListType() {
         if (viewModel.productShowListType) {
             binding.buttonList.backgroundTintList =
-                requireContext().getColorStateList(R.color.primaryColor)
+                requireContext().getColorStateList(R.color.a_menuIconSelect)
         } else {
             binding.buttonList.backgroundTintList =
-                requireContext().getColorStateList(R.color.buttonDisable)
+                requireContext().getColorStateList(R.color.a_menuIconUnselect)
         }
         adapter?.productShowListType = viewModel.productShowListType
         adapter?.notifyItemRangeChanged(0, adapter?.itemCount ?: 0)

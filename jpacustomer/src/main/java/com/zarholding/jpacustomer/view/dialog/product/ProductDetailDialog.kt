@@ -85,7 +85,7 @@ class ProductDetailDialog(
             systemType = EnumSystemType.Customers.name,
             entityType = EnumEntityType.ProductImage.name,
             token = viewModel.getBearerToken(),
-            placeholder = R.drawable.ic_logo
+            placeholder = R.drawable.a_ic_logo
         )
         binding.textViewPrice.setTitleAndValue(
             title = getString(R.string.price),

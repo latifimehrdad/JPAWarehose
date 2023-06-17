@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/cardViewColor">
+        app:cardBackgroundColor="@color/a_cardView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="start"
-                android:textColor="@color/textColor"
+                android:textColor="@color/a_textViewPrimary"
                 android:textSize="@dimen/_9sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="@id/touchImageView"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_bold"
                 android:gravity="start"
-                android:textColor="@color/textColor"
+                android:textColor="@color/a_textViewPrimary"
                 android:textSize="@dimen/_9sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="@id/textViewName"
@@ -67,15 +67,15 @@
                     android:layout_height="@dimen/_25sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/ic_minus"
+                    android:src="@drawable/a_ic_minus"
                     android:contentDescription="@string/minus" />
 
                 <EditText
                     android:id="@+id/editTextCount"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="wrap_content"
-                    android:background="@color/cardViewColor"
-                    android:textColor="@color/textColor"
+                    android:background="@color/a_cardView2"
+                    android:textColor="@color/a_textViewPrimary"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:textSize="@dimen/_15sdp"
                     android:maxLength="3"
@@ -91,7 +91,7 @@
                     android:layout_height="@dimen/_25sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/ic_plus"
+                    android:src="@drawable/a_ic_plus"
                     android:contentDescription="@string/plus" />
 
             </LinearLayout>
@@ -111,7 +111,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/yekan_bakh_bold"
                 app:cornerRadius="@dimen/_5sdp"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/a_textButton"
                 android:text='@string/addToBasket' />
 
 
@@ -127,8 +127,8 @@
                 android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/yekan_bakh_bold"
                 app:cornerRadius="@dimen/_5sdp"
-                android:backgroundTint="@color/buttonDisable"
-                android:textColor="@color/primaryColorVariant"
+                android:backgroundTint="@color/a_buttonUnselect"
+                android:textColor="@color/a_textViewPrimary"
                 android:text='@string/cancel' />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

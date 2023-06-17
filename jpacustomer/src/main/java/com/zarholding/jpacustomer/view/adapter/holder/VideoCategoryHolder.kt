@@ -42,10 +42,10 @@ class VideoCategoryHolder(
             binding.cardViewParent
                 .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.primaryColor))
             binding.textViewTitle
-                .setTextColor(binding.textViewTitle.context.getColor(R.color.cardViewMenuColor))
+                .setTextColor(binding.textViewTitle.context.getColor(R.color.a_textButton))
         } else {
             binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.cardViewMenuColor))
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_textButton))
             binding.textViewTitle
                 .setTextColor(binding.textViewTitle.context.getColor(R.color.primaryColor))
         }

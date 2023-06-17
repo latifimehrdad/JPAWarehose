@@ -14,7 +14,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/textColorNormal"
+            android:textColor="@color/a_pageTitle"
             android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/profile"/>
@@ -27,12 +27,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/primaryColor">
+            app:cardBackgroundColor="@color/a_cardView3">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_wave"
+                android:background="@drawable/a_ic_wave"
                 android:padding="@dimen/_10sdp">
 
                 <androidx.cardview.widget.CardView
@@ -44,7 +44,7 @@
                     app:layout_constraintWidth_percent="0.3"
                     app:layout_constraintDimensionRatio="H,1:1"
                     app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/cardViewColor2">
+                    app:cardBackgroundColor="@color/a_cardView2">
 
                     <ImageView
                         android:id="@+id/imageViewProfile"
@@ -63,7 +63,7 @@
                     app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -75,7 +75,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
@@ -87,7 +87,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_7sdp"
-                    android:background="@drawable/drawable_back_profile_white">
+                    android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
                         android:id="@+id/textViewPurchaseAmountToDate"
@@ -136,7 +136,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewPurchaseAmountToDate"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/textViewPurchaseAmount"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/iransans_light"
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_7sdp"
-                    android:background="@drawable/drawable_back_profile_white">
+                    android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
                         android:id="@+id/textViewDiscountAmountTitle"
@@ -182,7 +182,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewDiscountAmountTitle"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
@@ -194,7 +194,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/textViewDiscountAmount"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/iransans_light"
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_7sdp"
-                    android:background="@drawable/drawable_back_profile_white">
+                    android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
                         android:id="@+id/textViewAmountOwedTitle"
@@ -228,7 +228,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewAmountOwedTitle"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
@@ -240,7 +240,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/textViewAmountOwed"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/iransans_light"
@@ -253,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_7sdp"
-                    android:background="@drawable/drawable_back_profile_white">
+                    android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
                         android:id="@+id/textViewAmountCreditTitle"
@@ -274,7 +274,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewAmountCreditTitle"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
@@ -286,7 +286,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/textViewAmountCredit"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:textColor="@color/textColorDisable"
+                        android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/iransans_light"
@@ -300,7 +300,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_7sdp"
-                    android:background="@drawable/drawable_back_profile_white">
+                    android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
                         android:id="@+id/textViewRemindCheck"

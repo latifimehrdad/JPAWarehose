@@ -6,7 +6,6 @@
         android:id="@+id/cardViewParent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/cardViewColor2"
         android:minWidth="@dimen/_50sdp"
         android:layout_margin="@dimen/_5sdp"
         app:cardCornerRadius="@dimen/_7sdp">
@@ -22,5 +21,4 @@
             android:fontFamily="@font/iransans_medium" />
 
     </androidx.cardview.widget.CardView>
-
 </layout>

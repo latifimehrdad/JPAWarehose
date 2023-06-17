@@ -14,7 +14,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/textColorNormal"
+            android:textColor="@color/a_pageTitle"
             android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/profile"/>
@@ -27,12 +27,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/primaryColor">
+            app:cardBackgroundColor="@color/a_cardView3">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_wave"
+                android:background="@drawable/a_ic_wave"
                 android:padding="@dimen/_10sdp">
 
                 <androidx.cardview.widget.CardView
@@ -44,7 +44,7 @@
                     app:layout_constraintWidth_percent="0.3"
                     app:layout_constraintDimensionRatio="H,1:1"
                     app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/cardViewColor2">
+                    app:cardBackgroundColor="@color/a_cardView2">
 
                     <ImageView
                         android:id="@+id/imageViewProfile"
@@ -56,7 +56,7 @@
                         android:id="@+id/textViewPercent"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/downloadBackGround"
+                        android:background="@color/a_uploadImage"
                         android:textSize="@dimen/_9sdp"
                         android:textColor="@color/white"
                         android:gravity="center"
@@ -76,11 +76,11 @@
                     android:paddingVertical="@dimen/_4sdp"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/a_cardView3"
                     android:textSize="@dimen/_7sdp"
                     android:text="@string/showMyState"
                     android:fontFamily="@font/iransans_light"
-                    android:background="@drawable/drawable_profile_my_state"/>
+                    android:background="@drawable/a_drawable_back_edit2"/>
                 
                 <TextView
                     android:id="@+id/textViewShopName"
@@ -91,7 +91,7 @@
                     app:layout_constraintEnd_toStartOf="@id/textViewMyState"
                     app:layout_constraintBottom_toTopOf="@id/textViewShopAddress"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/a_textHint"
                     android:textSize="@dimen/_6sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -103,7 +103,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewShopName"
                     app:layout_constraintEnd_toEndOf="@id/textViewShopName"
                     app:layout_constraintBottom_toBottomOf="@id/textViewMyState"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/a_textHint"
                     android:textSize="@dimen/_6sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -116,7 +116,7 @@
                     app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -128,7 +128,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
@@ -140,7 +140,7 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
@@ -155,7 +155,7 @@
             app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_15sdp"
-            android:textColor="@color/textColorNormal"
+            android:textColor="@color/a_pageTitle"
             android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/salesExpert"/>
@@ -167,7 +167,7 @@
             app:layout_constraintTop_toBottomOf="@id/textViewSalesExpert"
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
-            android:background="@drawable/drawable_back_edit_white"
+            android:background="@drawable/a_drawable_back_edit"
             android:layout_marginTop="@dimen/_5sdp"
             android:padding="@dimen/_5sdp">
 
@@ -181,7 +181,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:cardCornerRadius="@dimen/_100sdp"
-                app:cardBackgroundColor="@color/cardViewColor2"
+                app:cardBackgroundColor="@color/a_cardView2"
                 android:layout_margin="@dimen/_2sdp"
                 app:cardElevation="3dp">
 
@@ -214,7 +214,7 @@
                 app:layout_constraintStart_toStartOf="@id/textViewVisitorName"
                 app:layout_constraintEnd_toEndOf="@id/textViewVisitorName"
                 app:layout_constraintBottom_toBottomOf="@id/cardViewVisitorProfile"
-                android:textColor="@color/textColorNormal"
+                android:textColor="@color/primaryColor"
                 android:textSize="@dimen/_8sdp"
                 android:fontFamily="@font/iransans_medium"/>
 
@@ -227,7 +227,7 @@
             app:layout_constraintTop_toBottomOf="@id/cardViewSalesExpert"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_15sdp"
-            android:textColor="@color/textColorNormal"
+            android:textColor="@color/a_pageTitle"
             android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/salesExpert"/>
@@ -254,8 +254,8 @@
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/suggestions"
                 android:gravity="center"
-                android:background="@drawable/drawable_back_profile_white"
-                app:drawableBottomCompat="@drawable/ic_item_phone"
+                android:background="@drawable/a_drawable_back_edit"
+                app:drawableBottomCompat="@drawable/a_ic_item_phone"
                 android:paddingVertical="@dimen/_5sdp" />
 
             <TextView
@@ -272,8 +272,8 @@
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/contactUs"
                 android:gravity="center"
-                android:background="@drawable/drawable_back_profile_white"
-                app:drawableBottomCompat="@drawable/ic_item_phone"
+                android:background="@drawable/a_drawable_back_edit"
+                app:drawableBottomCompat="@drawable/a_ic_item_phone"
                 android:paddingVertical="@dimen/_5sdp" />
 
             <TextView
@@ -290,8 +290,8 @@
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/historyOfCompany"
                 android:gravity="center"
-                android:background="@drawable/drawable_back_profile_white"
-                app:drawableBottomCompat="@drawable/ic_item_history"
+                android:background="@drawable/a_drawable_back_edit"
+                app:drawableBottomCompat="@drawable/a_ic_item_history"
                 android:paddingVertical="@dimen/_5sdp"/>
 
             <TextView
@@ -308,8 +308,8 @@
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/collectionVideos"
                 android:gravity="center"
-                android:background="@drawable/drawable_back_profile_white"
-                app:drawableBottomCompat="@drawable/ic_item_video"
+                android:background="@drawable/a_drawable_back_edit"
+                app:drawableBottomCompat="@drawable/a_ic_item_video"
                 android:paddingVertical="@dimen/_5sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -321,7 +321,7 @@
             app:layout_constraintBottom_toTopOf="@id/cardViewTheme"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:textColor="@color/textColorNormal"
+            android:textColor="@color/a_pageTitle"
             android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/setting"/>
@@ -336,12 +336,12 @@
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             android:layout_marginBottom="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/primaryColor">
+            app:cardBackgroundColor="@color/a_cardView8">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_9sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/activeDarkTheme"
@@ -378,12 +378,12 @@
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             android:layout_marginBottom="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/primaryColor">
+            app:cardBackgroundColor="@color/a_cardView8">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/a_textView1"
                 android:textSize="@dimen/_9sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/signOut"
@@ -396,7 +396,7 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:src="@drawable/ic_login"
+                android:src="@drawable/a_ic_login"
                 android:contentDescription="@string/signOut" />
 
         </androidx.cardview.widget.CardView>

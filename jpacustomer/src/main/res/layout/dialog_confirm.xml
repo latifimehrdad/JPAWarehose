@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/cardViewColor">
+                android:background="@color/a_cardView2">
 
                 <TextView
                     android:id="@+id/textViewTitle"
@@ -40,7 +40,7 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginHorizontal="@dimen/_7sdp"
-                    android:textColor="@color/primaryColor"
+                    android:textColor="@color/a_textViewPrimary"
                     android:textSize="@dimen/_11sdp"
                     android:fontFamily="@font/yekan_bakh_medium"
                     android:textStyle="bold"
@@ -71,7 +71,7 @@
                         android:textSize="@dimen/_12sdp"
                         android:fontFamily="@font/yekan_bakh_bold"
                         app:cornerRadius="@dimen/_5sdp"
-                        android:textColor="@color/buttonTextColor"
+                        android:textColor="@color/a_textButton"
                         android:text='@string/confirm' />
 
 
@@ -87,7 +87,7 @@
                         android:textSize="@dimen/_12sdp"
                         android:fontFamily="@font/yekan_bakh_bold"
                         app:cornerRadius="@dimen/_5sdp"
-                        android:backgroundTint="@color/buttonDisable"
+                        android:backgroundTint="@color/a_buttonUnselect"
                         android:textColor="@color/primaryColorVariant"
                         android:text='@string/cancel' />
 

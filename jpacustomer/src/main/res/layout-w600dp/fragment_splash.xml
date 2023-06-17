@@ -17,7 +17,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_20sdp"
-            android:src="@drawable/ic_logo"
+            android:src="@drawable/a_ic_logo"
             android:contentDescription="@string/logo" />
 
 
@@ -32,7 +32,7 @@
             android:text="@string/quickAndEasy"
             android:textSize="@dimen/_9sdp"
             android:fontFamily="@font/iransans_light"
-            android:textColor="@color/textColorNormal"/>
+            android:textColor="@color/a_textView1"/>
 
         <TextView
             android:id="@+id/textViewPower"
@@ -45,7 +45,7 @@
             android:text="@string/powerInYourHand"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/iransans_bold"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/a_textViewPrimary"/>
 
         <TextView
             android:id="@+id/textViewComment"
@@ -58,7 +58,7 @@
             android:text="@string/lovorm"
             android:textSize="@dimen/_7sdp"
             android:fontFamily="@font/iransans_light"
-            android:textColor="@color/textColorNormal"/>
+            android:textColor="@color/a_textView1"/>
 
 
         <androidx.cardview.widget.CardView
@@ -70,29 +70,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="@dimen/_20sdp"
-            app:cardBackgroundColor="@color/cardViewColor">
+            app:cardBackgroundColor="@color/a_cardView1">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_20sdp"
                 android:paddingVertical="@dimen/_10sdp"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:src="@drawable/ic_lock"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/a_ic_lock"
                     android:contentDescription="@string/logo" />
 
                 <TextView
                     android:id="@+id/textViewLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/textColorNormal"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/a_textView1"
+                    android:textSize="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/login"
                     android:fontFamily="@font/iransans_light"/>

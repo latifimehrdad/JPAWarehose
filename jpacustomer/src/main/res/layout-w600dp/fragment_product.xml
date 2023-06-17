@@ -18,12 +18,13 @@
             android:padding="@dimen/_5sdp"
             android:textSize="@dimen/_9sdp"
             android:fontFamily="@font/iransans_light"
-            android:background="@drawable/drawable_back_edit_white"
+            android:background="@drawable/a_drawable_back_edit2"
             android:inputType="text"
-            android:textColor="@color/textColor"
+            android:textColor="@color/a_cardView3"
             android:hint="@string/search"
-            android:drawableEnd="@drawable/ic__search"
-            android:drawableStart="@drawable/ic_subtraction"
+            android:textColorHint="@color/a_textHint"
+            android:drawableEnd="@drawable/a_ic_search"
+            android:drawableStart="@drawable/a_ic_subtraction"
             android:drawablePadding="@dimen/_5sdp"
             android:autofillHints="none"/>
 
@@ -37,7 +38,7 @@
             app:layout_constraintEnd_toStartOf="@id/buttonAllProduct"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:backgroundTint="@color/buttonDisable"
+            android:backgroundTint="@color/a_buttonUnselect"
             android:hint="@string/bePatient"
             app:cornerRadius="@dimen/_7sdp"
             android:textSize="@dimen/_9sdp"
@@ -45,7 +46,7 @@
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
             android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/buttonTextColor"
+            android:textColor="@color/a_editBack2"
             android:text='@string/newProductList' />
 
         <com.hoomanholding.applibrary.view.custom.JpaButton
@@ -63,7 +64,7 @@
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
             android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/buttonTextColor"
+            android:textColor="@color/a_textButton"
             android:text='@string/allProductList' />
 
         <androidx.recyclerview.widget.RecyclerView

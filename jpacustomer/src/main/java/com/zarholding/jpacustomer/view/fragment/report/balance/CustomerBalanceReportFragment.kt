@@ -140,7 +140,7 @@ class CustomerBalanceReportFragment(
         if (items.isNotEmpty()) {
             val item  = items.last()
             if (item.balance > 0) {
-                binding.textViewTotal.setTextColor(requireContext().getColor(R.color.debit))
+                binding.textViewTotal.setTextColor(requireContext().getColor(R.color.a_debit))
                 binding.textViewTotal.setTitleAndValue(
                     title = getString(R.string.totalDebit),
                     splitter = getString(R.string.colon),
@@ -148,7 +148,7 @@ class CustomerBalanceReportFragment(
                     value = item.balance
                 )
             } else {
-                binding.textViewTotal.setTextColor(requireContext().getColor(R.color.debit))
+                binding.textViewTotal.setTextColor(requireContext().getColor(R.color.a_debit))
                 binding.textViewTotal.setTitleAndValue(
                     title = getString(R.string.totalCredit),
                     splitter = getString(R.string.colon),

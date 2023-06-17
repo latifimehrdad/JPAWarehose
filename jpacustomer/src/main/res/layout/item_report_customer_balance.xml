@@ -12,7 +12,7 @@
             android:id="@+id/constraintLayoutParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/drawable_home_step"
+            android:background="@drawable/a_drawable_home_step"
             app:layout_constraintTop_toTopOf="@id/textViewDate"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textSize="@dimen/_8sdp"
                 android:fontFamily="@font/iransans_medium"
-                android:textColor="@color/textColor"/>
+                android:textColor="@color/a_textViewPrimary"/>
 
 
 
@@ -75,7 +75,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:padding="@dimen/_5sdp"
-                android:background="@drawable/drawable_back_edit"
+                android:background="@drawable/a_drawable_back_edit"
                 android:orientation="horizontal">
 
                 <TextView
@@ -109,9 +109,9 @@
             android:paddingVertical="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:background="@drawable/drawable_back_curve_primary"
+            android:background="@drawable/a_drawable_back_curve_primary"
             android:textSize="@dimen/_9sdp"
-            android:textColor="@color/buttonTextColor"
+            android:textColor="@color/a_textButton"
             android:gravity="center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

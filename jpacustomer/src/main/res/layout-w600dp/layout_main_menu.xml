@@ -27,17 +27,17 @@
         app:layout_constraintEnd_toStartOf="@id/imageViewIcon"
         app:layout_constraintTop_toTopOf="@id/imageViewIcon"
         app:layout_constraintBottom_toTopOf="@id/imageViewIcon"
-        android:background="@drawable/drawable_back_curve_primary"
-        android:textColor="@color/buttonTextColor"
+        android:background="@drawable/a_drawable_back_curve_primary"
+        android:textColor="@color/a_textButton"
         android:gravity="center"
-        android:textSize="@dimen/_8sdp" />
+        android:textSize="@dimen/_9sdp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_3sdp"
+        android:layout_height="@dimen/_4sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_2sdp"
         app:cardBackgroundColor="@color/black"
         app:cardCornerRadius="@dimen/_5sdp"/>

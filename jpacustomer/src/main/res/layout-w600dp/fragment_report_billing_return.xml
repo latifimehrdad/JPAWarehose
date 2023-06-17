@@ -13,7 +13,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/textColorNormal"
+            android:textColor="@color/a_pageTitle"
             android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/factorReport"/>
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toBottomOf="@id/textViewTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/drawable_back_curve_primary">
+            android:background="@drawable/a_drawable_back_curve_primary">
 
             <TextView
                 android:id="@+id/textViewDateTo"
@@ -36,22 +36,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="@dimen/_9sdp"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_light"
                 android:hint="@string/chooseDate"
-                android:textColorHint="@color/buttonTextColor"
+                android:textColorHint="@color/a_textButton"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
                 android:hint="@string/until"
-                android:textColorHint="@color/buttonTextColor"
+                android:textColorHint="@color/a_textButton"
                 />
 
             <TextView
@@ -60,34 +60,34 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="@dimen/_9sdp"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_light"
                 android:hint="@string/chooseDate"
-                android:textColorHint="@color/buttonTextColor"
+                android:textColorHint="@color/a_textButton"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
                 android:hint="@string/from"
-                android:textColorHint="@color/buttonTextColor"
+                android:textColorHint="@color/a_textButton"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
-                android:textColor="@color/buttonTextColor"
+                android:textColor="@color/a_textButton"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
                 android:hint="@string/dateFilter"
-                android:textColorHint="@color/buttonTextColor"
+                android:textColorHint="@color/a_textButton"
                 />
 
         </LinearLayout>

@@ -36,7 +36,7 @@ class VideoHolder(
         binding.imageViewThumbnail.downloadImage(
             url = item.thumbnailNameAddress,
             placeholder = AppCompatResources
-                .getDrawable(binding.imageViewThumbnail.context, R.drawable.ic_logo)
+                .getDrawable(binding.imageViewThumbnail.context, R.drawable.a_ic_logo)
         )
     }
     //---------------------------------------------------------------------------------------------- setValueToXml

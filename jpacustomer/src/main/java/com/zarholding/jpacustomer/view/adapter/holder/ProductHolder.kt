@@ -48,7 +48,7 @@ class ProductHolder(
         binding.imageViewPicture.downloadImage(
             url = item.productThumbnailImageName,
             placeholder = AppCompatResources
-                .getDrawable(binding.imageViewPicture.context, R.drawable.ic_logo)
+                .getDrawable(binding.imageViewPicture.context, R.drawable.a_ic_logo)
         )
     }
     //---------------------------------------------------------------------------------------------- setValueToXml

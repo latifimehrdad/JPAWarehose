@@ -52,7 +52,7 @@ class BasketHolderNormal(
         binding.imageViewPicture.downloadImage(
             url = item.productThumbnailImageName,
             placeholder = AppCompatResources
-                .getDrawable(binding.imageViewPicture.context, R.drawable.ic_logo)
+                .getDrawable(binding.imageViewPicture.context, R.drawable.a_ic_logo)
         )
         binding.editTextCount.addTextChangedListener {
             binding.buttonSaveChange.visibility = View.VISIBLE

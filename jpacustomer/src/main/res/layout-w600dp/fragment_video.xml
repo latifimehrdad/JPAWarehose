@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -11,12 +11,12 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:textColor="@color/textColorNormal"
-            android:textSize="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/a_pageTitle"
+            android:textSize="11sp"
             android:fontFamily="@font/iransans_bold"
-            android:text="@string/profile"/>
+            android:text="@string/collectionVideos"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewProfileHeader"
@@ -28,12 +28,12 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             app:layout_constraintDimensionRatio="H,1:1"
             app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/primaryColor">
+            app:cardBackgroundColor="@color/a_cardView3">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/ic_wave2"
+                android:background="@drawable/a_ic_wave2"
                 android:padding="@dimen/_10sdp">
 
                 <androidx.cardview.widget.CardView
@@ -52,10 +52,10 @@
                         android:contentDescription="@string/play" />
 
                     <ImageView
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_video_play"
+                        android:src="@drawable/a_ic_play"
                         android:contentDescription="@string/play" />
 
                 </androidx.cardview.widget.CardView>
@@ -66,9 +66,9 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/cardViewVideo"
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_7sdp"
-                    android:textColor="@color/buttonTextColor"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="11sp"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/iransans_bold"
                     android:text="@string/introductionOfTheCollection"/>
 
@@ -79,10 +79,10 @@
                     app:layout_constraintTop_toBottomOf="@id/textViewTitleVideo"
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="11sp"
                     android:scrollbars="vertical"
-                    android:textColor="@color/buttonTextColor"
+                    android:textColor="@color/white"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/lovorm"/>
 
@@ -97,24 +97,6 @@
             app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
             android:layout_marginTop="@dimen/_10sdp"/>
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_view_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="@id/recyclerViewCategory"
-            app:layout_constraintBottom_toBottomOf="@id/recyclerViewCategory"
-            app:layout_constraintStart_toStartOf="@id/recyclerViewCategory"
-            app:layout_constraintEnd_toEndOf="@id/recyclerViewCategory">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:background="@color/recyclerLoadingBack"/>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewVideo"
@@ -125,6 +107,26 @@
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginVertical="@dimen/_5sdp"/>
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/recyclerViewVideo"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerViewVideo"
+            app:layout_constraintStart_toStartOf="@id/recyclerViewVideo"
+            app:layout_constraintEnd_toEndOf="@id/recyclerViewVideo"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/recyclerLoadingBack"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

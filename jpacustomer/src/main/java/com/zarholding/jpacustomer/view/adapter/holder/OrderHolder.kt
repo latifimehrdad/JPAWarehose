@@ -62,23 +62,23 @@ class OrderHolder(
     private fun setItemSelected(position: Int) {
         if (OrderAdapter.selectedPosition == position){
             binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.primaryColor))
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_cardView4))
             binding.buttonShowOrderDetail.backgroundTintList =
-                binding.buttonShowOrderDetail.context.getColorStateList(R.color.cardViewMenuColor)
+                binding.buttonShowOrderDetail.context.getColorStateList(R.color.a_orderButtonSelect)
             binding.buttonShowOrderDetail
-                .setTextColor(binding.buttonShowOrderDetail.context.getColor(R.color.primaryColor))
+                .setTextColor(binding.buttonShowOrderDetail.context.getColor(R.color.a_cardView4))
             binding.imageViewShopping.setColorFilter(
-                ContextCompat.getColor(binding.imageViewShopping.context, R.color.cardViewMenuColor),
+                ContextCompat.getColor(binding.imageViewShopping.context, R.color.white),
                 android.graphics.PorterDuff.Mode.SRC_IN)
             binding.textViewNumber
-                .setTextColor(binding.textViewNumber.context.getColor(R.color.cardViewMenuColor))
+                .setTextColor(binding.textViewNumber.context.getColor(R.color.white))
         } else {
             binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.cardViewMenuColor))
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_cardView5))
             binding.buttonShowOrderDetail.backgroundTintList =
-                binding.buttonShowOrderDetail.context.getColorStateList(R.color.primaryColor)
+                binding.buttonShowOrderDetail.context.getColorStateList(R.color.a_cardView3)
             binding.buttonShowOrderDetail
-                .setTextColor(binding.buttonShowOrderDetail.context.getColor(R.color.cardViewMenuColor))
+                .setTextColor(binding.buttonShowOrderDetail.context.getColor(R.color.a_cardView5))
             binding.imageViewShopping.setColorFilter(
                 ContextCompat.getColor(binding.imageViewShopping.context, R.color.primaryColor),
                 android.graphics.PorterDuff.Mode.SRC_IN)
