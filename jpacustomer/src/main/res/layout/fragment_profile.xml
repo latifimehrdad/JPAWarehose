@@ -383,7 +383,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/a_textView1"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_9sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/signOut"

@@ -32,7 +32,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:textColor="@color/primaryColor"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_bold"
                     android:gravity="end"/>
 
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@id/textViewNumber"
                     app:layout_constraintEnd_toEndOf="@id/textViewNumber"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/orderNumber"/>
@@ -54,7 +54,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:backgroundTint="@color/primaryColor"
                     app:cornerRadius="@dimen/_7sdp"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     android:paddingHorizontal="@dimen/_15sdp"
                     android:fontFamily="@font/iransans_light"
                     android:textColor="@color/a_textButton"
@@ -63,8 +63,8 @@
 
                 <ImageView
                     android:id="@+id/imageViewShopping"
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:src="@drawable/a_ic_shopping"
@@ -79,7 +79,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/imageViewShopping"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_7sdp"
+                    android:textSize="@dimen/_6sdp"
                     android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"/>
 
@@ -89,7 +89,7 @@
                     app:layout_constraintTop_toBottomOf="@id/textViewAmount"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/rial"/>
@@ -102,7 +102,7 @@
                     app:layout_constraintBottom_toTopOf="@id/buttonShowOrderDetail"
                     app:layout_constraintStart_toStartOf="@id/buttonShowOrderDetail"
                     app:layout_constraintEnd_toEndOf="@id/buttonShowOrderDetail"
-                    android:textSize="@dimen/_7sdp"
+                    android:textSize="@dimen/_6sdp"
                     android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"
                     android:gravity="center"/>

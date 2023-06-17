@@ -44,7 +44,7 @@
         <TextView
             android:id="@+id/textViewUserName"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/cardViewProfile"
             app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
             app:layout_constraintEnd_toStartOf="@id/cardViewProfile"

@@ -226,7 +226,7 @@
                 android:textColor="@color/a_textView1"
                 android:fontFamily="@font/iransans_light"
                 android:text="@string/showAll"
-                />
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewOldOrder"

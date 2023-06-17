@@ -18,11 +18,10 @@
                 android:id="@+id/cardViewThumbnail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="@dimen/_5sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.3"
+                app:layout_constraintWidth_percent="0.2"
                 app:layout_constraintDimensionRatio="H,1.5:1"
                 app:cardCornerRadius="@dimen/_10sdp">
 
@@ -42,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/cardViewThumbnail"
                 android:layout_marginHorizontal="@dimen/_5sdp"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_7sdp"
                 android:fontFamily="@font/iransans_bold"
                 android:textStyle="bold"
                 android:textColor="@color/a_textViewPrimary"/>
@@ -57,7 +56,7 @@
                 app:layout_constraintEnd_toEndOf="@id/textViewTitle"
                 app:layout_constraintBottom_toBottomOf="@id/cardViewThumbnail"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_6sdp"
                 android:fontFamily="@font/iransans_light"
                 android:textStyle="bold"
                 android:textColor="@color/a_textHint"/>

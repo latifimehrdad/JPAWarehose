@@ -14,7 +14,7 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_7sdp"
             android:fontFamily="@font/kalameh_medium"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_5sdp"

@@ -14,7 +14,7 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/a_pageTitle"
-            android:textSize="11sp"
+            android:textSize="@dimen/_8sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/collectionVideos"/>
 
@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintHeight_percent="0.5"
             app:cardCornerRadius="20dp"
             app:cardBackgroundColor="@color/a_cardView3">
 
@@ -43,7 +43,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintHeight_percent="0.6"
                     app:cardCornerRadius="@dimen/_10sdp">
 
                     <ImageView
@@ -52,8 +52,8 @@
                         android:contentDescription="@string/play" />
 
                     <ImageView
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="center"
                         android:src="@drawable/a_ic_play"
                         android:contentDescription="@string/play" />
@@ -67,7 +67,7 @@
                     app:layout_constraintTop_toBottomOf="@id/cardViewVideo"
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_8sdp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/iransans_bold"
                     android:text="@string/introductionOfTheCollection"/>
@@ -80,7 +80,7 @@
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_6sdp"
                     android:scrollbars="vertical"
                     android:textColor="@color/white"
                     android:fontFamily="@font/iransans_light"
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
-            android:layout_marginTop="@dimen/_10sdp"/>
+            android:layout_marginTop="@dimen/_5sdp"/>
 
 
         <androidx.recyclerview.widget.RecyclerView

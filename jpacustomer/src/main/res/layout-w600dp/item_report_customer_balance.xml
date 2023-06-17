@@ -36,7 +36,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_medium"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:gravity="end"
                     android:textColor="@color/green" />
 
@@ -48,7 +48,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_medium"
                     android:gravity="end"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:textColor="@color/red"/>
 
             </LinearLayout>
@@ -60,8 +60,8 @@
                 app:layout_constraintTop_toBottomOf="@id/linearLayoutAmount"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_6sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:textColor="@color/a_textViewPrimary"/>
 
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewDescription"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:padding="@dimen/_5sdp"
                 android:background="@drawable/a_drawable_back_edit"
                 android:orientation="horizontal">
@@ -85,14 +85,14 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:fontFamily="@font/iransans_medium"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_7sdp" />
 
                 <TextView
                     android:id="@+id/textViewTotalTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_medium"
                     />
 
@@ -108,9 +108,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingVertical="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:background="@drawable/a_drawable_back_curve_primary"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_7sdp"
             android:textColor="@color/a_textButton"
             android:gravity="center" />
 

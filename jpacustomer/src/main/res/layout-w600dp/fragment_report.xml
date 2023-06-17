@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
                 android:textColor="@color/a_textViewPrimary"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
                 android:textColor="@color/a_textViewPrimary"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_9sdp"
                 android:textColor="@color/a_textViewPrimary"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"

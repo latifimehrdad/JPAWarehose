@@ -15,7 +15,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_8sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/profile"/>
 
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/a_ic_wave"
-                android:padding="@dimen/_10sdp">
+                android:padding="@dimen/_5sdp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardViewProfile"
@@ -41,7 +41,7 @@
                     android:layout_height="0dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintWidth_percent="0.3"
+                    app:layout_constraintWidth_percent="0.2"
                     app:layout_constraintDimensionRatio="H,1:1"
                     app:cardCornerRadius="@dimen/_10sdp"
                     app:cardBackgroundColor="@color/a_cardView2">
@@ -64,7 +64,7 @@
                     app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -76,7 +76,7 @@
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
                 <TextView
@@ -88,7 +88,7 @@
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_bold"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -113,8 +113,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
@@ -124,7 +124,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_7sdp"
                         android:fontFamily="@font/iransans_medium"
                         android:text="@string/purchaseAmountToDate"
                         />
@@ -137,7 +137,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewPurchaseAmountToDate"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
+                        android:textSize="@dimen/_6sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
                         />
@@ -149,8 +149,8 @@
                         app:layout_constraintTop_toBottomOf="@id/textViewPurchaseAmount"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/iransans_light"
                         />
 
@@ -159,8 +159,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
@@ -170,7 +170,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_7sdp"
                         android:fontFamily="@font/iransans_medium"
                         android:text="@string/discountAmount"
                         />
@@ -183,7 +183,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewDiscountAmountTitle"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
+                        android:textSize="@dimen/_6sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
                         />
@@ -195,8 +195,8 @@
                         app:layout_constraintTop_toBottomOf="@id/textViewDiscountAmount"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/iransans_light"
                         />
 
@@ -205,8 +205,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
@@ -216,7 +216,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_7sdp"
                         android:fontFamily="@font/iransans_medium"
                         android:text="@string/amountOwed"
                         />
@@ -229,7 +229,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewAmountOwedTitle"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
+                        android:textSize="@dimen/_6sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
                         />
@@ -241,8 +241,8 @@
                         app:layout_constraintTop_toBottomOf="@id/textViewAmountOwed"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/iransans_light"
                         />
 
@@ -251,8 +251,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
@@ -262,7 +262,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/primaryColor"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_7sdp"
                         android:fontFamily="@font/iransans_medium"
                         android:text="@string/check"
                         />
@@ -275,7 +275,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewAmountCreditTitle"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
+                        android:textSize="@dimen/_6sdp"
                         android:gravity="end"
                         android:fontFamily="@font/iransans_light"
                         />
@@ -287,8 +287,8 @@
                         app:layout_constraintTop_toBottomOf="@id/textViewAmountCredit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/iransans_light"
                         />
 
@@ -298,8 +298,8 @@
                     android:id="@+id/constraintLayoutRemindCheck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/a_drawable_menu_curve">
 
                     <TextView
@@ -309,7 +309,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="#ff0000"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_6sdp"
                         android:fontFamily="@font/iransans_medium"
                         />
 

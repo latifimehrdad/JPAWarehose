@@ -14,14 +14,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp">
 
-            <ImageView
-                android:id="@+id/imageViewDelete"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="@string/deleteBasket"
-                android:src="@drawable/a_ic_delete" />
 
             <!--        normal show-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +23,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewDelete"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="@dimen/_3sdp">
 
                 <TextView
@@ -42,7 +34,7 @@
                     android:fontFamily="@font/iransans_light"
                     android:gravity="start"
                     android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_7sdp"
+                    android:textSize="@dimen/_6sdp"
                     app:layout_constraintEnd_toStartOf="@id/imageViewPicture"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/imageViewPicture" />
@@ -55,7 +47,7 @@
                     android:fontFamily="@font/iransans_medium"
                     android:gravity="start"
                     android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     app:layout_constraintEnd_toEndOf="@id/textViewCode"
                     app:layout_constraintStart_toStartOf="@id/textViewCode"
                     app:layout_constraintTop_toBottomOf="@id/textViewCode" />
@@ -68,7 +60,7 @@
                     android:fontFamily="@font/iransans_medium"
                     android:gravity="start"
                     android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     app:layout_constraintEnd_toEndOf="@id/textViewCode"
                     app:layout_constraintTop_toBottomOf="@id/textViewName" />
 
@@ -80,7 +72,7 @@
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/rial"
                     android:textColor="@color/a_textHint"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     app:layout_constraintBottom_toBottomOf="@id/textViewPrice"
                     app:layout_constraintEnd_toStartOf="@id/textViewPrice"
                     app:layout_constraintTop_toTopOf="@id/textViewPrice" />
@@ -94,13 +86,13 @@
                     app:layout_constraintDimensionRatio="W,1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.25" />
+                    app:layout_constraintWidth_percent="0.2" />
 
                 <LinearLayout
                     android:id="@+id/linearLayoutCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="@id/textViewPrice"
@@ -109,8 +101,8 @@
 
                     <ImageView
                         android:id="@+id/imageViewMinus"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:contentDescription="@string/minus"
                         android:src="@drawable/a_ic_minus"
                         app:layout_constraintStart_toStartOf="parent"
@@ -129,12 +121,12 @@
                         android:inputType="number"
                         android:maxLength="3"
                         android:textColor="@color/a_textViewPrimary"
-                        android:textSize="@dimen/_15sdp" />
+                        android:textSize="@dimen/_11sdp" />
 
                     <ImageView
                         android:id="@+id/imageViewPlus"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:contentDescription="@string/plus"
                         android:src="@drawable/a_ic_plus"
                         app:layout_constraintStart_toStartOf="parent"
@@ -146,13 +138,13 @@
                     android:id="@+id/buttonSaveChange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:backgroundTint="@color/primaryColor"
                     android:fontFamily="@font/yekan_bakh_medium"
                     android:minWidth="@dimen/_90sdp"
                     android:text='@string/saveChange'
                     android:textColor="@color/a_textButton"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_9sdp"
                     app:cornerRadius="@dimen/_5sdp"
                     app:layout_constraintEnd_toEndOf="@id/linearLayoutCount"
                     app:layout_constraintStart_toStartOf="@id/linearLayoutCount"
@@ -160,6 +152,15 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!--        normal show-->
+
+            <ImageView
+                android:id="@+id/imageViewDelete"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/deleteBasket"
+                android:src="@drawable/a_ic_delete" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

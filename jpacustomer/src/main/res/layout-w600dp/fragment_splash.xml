@@ -11,8 +11,8 @@
 
         <ImageView
             android:id="@+id/imageViewLogo"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/quickAndEasy"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_7sdp"
             android:fontFamily="@font/iransans_light"
             android:textColor="@color/a_textView1"/>
 
@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/powerInYourHand"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_9sdp"
             android:fontFamily="@font/iransans_bold"
             android:textColor="@color/a_textViewPrimary"/>
 
@@ -56,7 +56,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/lovorm"
-            android:textSize="@dimen/_7sdp"
+            android:textSize="@dimen/_6sdp"
             android:fontFamily="@font/iransans_light"
             android:textColor="@color/a_textView1"/>
 
@@ -82,8 +82,8 @@
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:src="@drawable/a_ic_lock"
                     android:contentDescription="@string/logo" />
 
@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/a_textView1"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/login"
                     android:fontFamily="@font/iransans_light"/>

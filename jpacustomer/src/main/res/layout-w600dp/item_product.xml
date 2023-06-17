@@ -30,7 +30,7 @@
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/rial"
                     android:textColor="@color/a_textHint"
-                    android:textSize="@dimen/_6sdp" />
+                    android:textSize="@dimen/_5sdp" />
 
                 <TextView
                     android:id="@+id/textViewPrice"
@@ -38,17 +38,17 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans_bold"
                     android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_10sdp"/>
+                    android:textSize="@dimen/_7sdp"/>
 
                 <com.hoomanholding.applibrary.view.custom.JpaButton
                     android:id="@+id/buttonShowDetail"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:backgroundTint="@color/primaryColor"
                     android:fontFamily="@font/iransans_light"
                     android:text='@string/detailProduct'
                     android:textColor="@color/a_textButton"
-                    android:textSize="@dimen/_7sdp"
+                    android:textSize="@dimen/_5sdp"
                     app:cornerRadius="@dimen/_7sdp" />
 
             </LinearLayout>
@@ -58,11 +58,11 @@
                 android:id="@+id/textViewCode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
                 android:fontFamily="@font/iransans_light"
                 android:gravity="start"
                 android:textColor="@color/a_textHint"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/_6sdp"
                 app:layout_constraintBottom_toTopOf="@id/textViewName"
                 app:layout_constraintEnd_toStartOf="@id/imageViewPicture"
                 app:layout_constraintStart_toEndOf="@id/linearLayoutPrice"
@@ -75,7 +75,7 @@
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="start"
                 android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_6sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/textViewCode"
                 app:layout_constraintStart_toStartOf="@id/textViewCode"

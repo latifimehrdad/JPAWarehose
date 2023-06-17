@@ -30,12 +30,12 @@
         android:background="@drawable/a_drawable_back_curve_primary"
         android:textColor="@color/a_textButton"
         android:gravity="center"
-        android:textSize="@dimen/_9sdp" />
+        android:textSize="@dimen/_5sdp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_4sdp"
+        android:layout_height="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_2sdp"

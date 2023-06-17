@@ -20,7 +20,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="@color/a_pageTitle"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:fontFamily="@font/iransans_bold"
                 android:text="@string/orderTracking"/>
 
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:padding="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_light"
                     android:textColor="@color/a_menuIconSelect"
@@ -63,7 +63,7 @@
                     android:padding="@dimen/_3sdp"
                     android:textColor="@color/a_menuIconSelect"
                     android:textColorHint="@color/a_textHint"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_7sdp"
                     app:spinner_arrow_gravity="start"
                     app:spinner_arrow_padding="8dp"
                     app:spinner_arrow_drawable="@drawable/a_ic_play"
@@ -85,7 +85,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/stepLoading"
                     app:layout_constraintDimensionRatio="H,1:1"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:step_icon="@drawable/a_ic_step_send"
                     app:step_title="@string/sent"/>
 
@@ -166,7 +166,7 @@
                     android:backgroundTint="@color/primaryColor"
                     android:hint="@string/bePatient"
                     app:cornerRadius="@dimen/_7sdp"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_6sdp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
                     android:paddingHorizontal="@dimen/_15sdp"
@@ -182,7 +182,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/buttonShowOrderDetail"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:textColor="@color/primaryColor"
                     android:fontFamily="@font/iransans_bold" />
 
@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@id/textViewStep"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textSize="@dimen/_7sdp"
+                    android:textSize="@dimen/_6sdp"
                     android:layout_marginBottom="@dimen/_3sdp"
                     android:textColor="@color/a_textView1"
                     android:fontFamily="@font/iransans_light"
@@ -207,8 +207,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/constraintLayoutStep"
                 app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/a_pageTitle"
                 android:fontFamily="@font/iransans_bold"
                 android:text="@string/oldOrder"/>
@@ -226,6 +226,7 @@
                 android:textColor="@color/a_textView1"
                 android:fontFamily="@font/iransans_light"
                 android:text="@string/showAll"
+                android:visibility="gone"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -234,7 +235,7 @@
                 android:layout_height="0dp"
                 app:layout_constraintTop_toBottomOf="@id/textViewOldOrder"
                 android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintHeight_percent="0.3" />
+                app:layout_constraintHeight_percent="0.28" />
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmer_view_container"
@@ -261,8 +262,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/recyclerViewOldOrder"
                 app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/a_pageTitle"
                 android:fontFamily="@font/iransans_bold"
                 android:text="@string/oldOrder"/>
@@ -275,7 +276,7 @@
                 app:layout_constraintStart_toStartOf="@id/constraintLayoutStep"
                 app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginVertical="@dimen/_15sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardBackgroundColor="@color/a_cardView3">
 
@@ -287,7 +288,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:textColor="@color/white"
                     android:text="@string/productCallForPrice"
                     android:fontFamily="@font/iransans_bold"

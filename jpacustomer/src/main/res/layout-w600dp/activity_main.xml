@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imageViewBack"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/a_ic_arrow_left"
@@ -24,8 +24,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewProfile"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
@@ -44,7 +44,7 @@
         <TextView
             android:id="@+id/textViewUserName"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/cardViewProfile"
             app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
             app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
@@ -54,7 +54,7 @@
             android:gravity="center_vertical|right"
             android:textColor="@color/a_pageTitle"
             android:fontFamily="@font/iransans_medium"
-            android:textSize="@dimen/_8sdp"/>
+            android:textSize="@dimen/_6sdp"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -68,18 +68,20 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewMenu"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.7"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
             app:cardBackgroundColor="@color/a_menuBack"
-            app:cardCornerRadius="@dimen/_15sdp">
+            app:cardCornerRadius="@dimen/_10sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/_20sdp">
+                android:layout_marginHorizontal="@dimen/_10sdp">
 
                 <com.zarholding.jpacustomer.view.custom.CustomMenu
                     android:id="@+id/customMenuReport"

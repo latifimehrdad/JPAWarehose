@@ -14,7 +14,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
             android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_8sdp"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/factorReport"/>
 
@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_7sdp"
                 android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_light"
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_7sdp"
                 android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_light"
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/a_textButton"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:gravity="center"
