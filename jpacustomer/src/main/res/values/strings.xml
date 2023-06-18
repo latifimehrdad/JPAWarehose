@@ -73,6 +73,7 @@
     <string name="doYouWantToSubmitBasket">آیا برای ثبت سفارش مطمئن هستید؟</string>
     <string name="purchaseAmountToDate">مقدار خرید تا امروز</string>
     <string name="discountAmount">مقدار تخفیف</string>
+    <string name="discount">تخفیف</string>
     <string name="amountOwed">مبلغ بدهکاری</string>
     <string name="creditAmount">مبلغ بستانکاری</string>
     <string name="credit">بستانکار</string>
@@ -99,9 +100,13 @@
     <string name="dateFilter">فیلتر تاریخ :</string>
     <string name="pleaseChooseDateFrom">لطفا تاریخ شروع را انتخاب نمایید</string>
     <string name="pleaseChooseDateTo">لطفا تاریخ پایان را انتخاب نمایید</string>
-    <string name="finalPrice">قیمت نهایی فاکتور</string>
+    <string name="finalPrice">قیمت نهایی</string>
     <string name="detailFactor">جزییات فاکتور</string>
     <string name="pieces">عدد</string>
+    <string name="createPDF">دریافت PDF</string>
+    <string name="reportFromTo">گزارش از تاریخ %1$s تا تاریخ %2$s</string>
+    <string name="description">توضیحات</string>
+    <string name="remain">مانده</string>
 
     <string name="colon">:</string>
     <string name="enterChar">\n</string>

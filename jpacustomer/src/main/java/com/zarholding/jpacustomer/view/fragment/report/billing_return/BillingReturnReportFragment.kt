@@ -1,5 +1,6 @@
 package com.zarholding.jpacustomer.view.fragment.report.billing_return
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -8,8 +9,14 @@ import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
 import com.zar.core.view.picker.date.customviews.DateRangeCalendarView
 import com.zar.core.view.picker.date.dialog.DatePickerDialog
@@ -46,6 +53,7 @@ class BillingReturnReportFragment(
 
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
+        binding.shimmerViewContainer.stopLoading()
         activity?.let { (it as MainActivity).showMessage(message) }
     }
     //---------------------------------------------------------------------------------------------- showMessage
@@ -101,8 +109,46 @@ class BillingReturnReportFragment(
                 showMessage(getString(R.string.pleaseChooseDateFrom))
             else showDatePickerDialog(DateType.DateTo)
         }
+
+        binding.textViewReport.setOnClickListener {
+            permissionForBitmap()
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
+
+
+    //______________________________________________________________________________________________ permissionForBitmap
+    private fun permissionForBitmap() {
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ).withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    val bundle = Bundle()
+                    bundle.putString(
+                        CompanionValues.REPORT_START_DATE,
+                        viewModel.dateFromLiveData.value
+                    )
+                    bundle.putString(
+                        CompanionValues.REPORT_END_DATE,
+                        viewModel.dateToLiveData.value
+                    )
+                    bundle.putString(CompanionValues.REPORT_TYPE, viewModel.getReportTypeString())
+                    gotoFragment(
+                        R.id.action_billingReturnReportFragment_to_reportPDFFragment,
+                        bundle
+                    )
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?
+                ) {
+                }
+            }).check()
+    }
+    //______________________________________________________________________________________________ permissionForBitmap
 
 
     //---------------------------------------------------------------------------------------------- showDatePickerDialog

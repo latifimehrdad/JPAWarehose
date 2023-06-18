@@ -8,8 +8,6 @@ import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnR
 import com.hoomanholding.applibrary.model.repository.ReportRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
-import com.zar.core.enums.EnumApiError
-import com.zar.core.models.ErrorApiModel
 import com.zarholding.jpacustomer.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -33,6 +31,17 @@ class BillingReturnViewModel @Inject constructor(
     val reportLiveData: MutableLiveData<List<BillingAndReturnReportModel>> by lazy {
         MutableLiveData<List<BillingAndReturnReportModel>>()
     }
+
+    //---------------------------------------------------------------------------------------------- getReportTypeString
+    fun getReportTypeString() = reportType.name
+    //---------------------------------------------------------------------------------------------- getReportTypeString
+
+
+    //---------------------------------------------------------------------------------------------- setReportType
+    fun setReportType(type: EnumReportType) {
+        reportType = type
+    }
+    //---------------------------------------------------------------------------------------------- setReportType
 
 
     //---------------------------------------------------------------------------------------------- setDateFrom
@@ -90,6 +99,7 @@ class BillingReturnViewModel @Inject constructor(
                             dateToLiveData.value!!
                         )
                 )
+                else -> null
             }
             response?.let {
                 reportLiveData.postValue(it)
@@ -97,5 +107,7 @@ class BillingReturnViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getReport
+
+
 
 }

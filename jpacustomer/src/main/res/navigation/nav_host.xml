@@ -152,11 +152,40 @@
 
     <fragment
         android:id="@+id/customerBalanceReportFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.report.balance.CustomerBalanceReportFragment"/>
+        android:name="com.zarholding.jpacustomer.view.fragment.report.balance.CustomerBalanceReportFragment">
+
+        <action
+            android:id="@+id/action_customerBalanceReportFragment_to_reportPDFFragment"
+            app:destination="@id/reportPDFFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/reportPDFFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/billingReturnReportFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.report.billing_return.BillingReturnReportFragment"/>
+        android:name="com.zarholding.jpacustomer.view.fragment.report.billing_return.BillingReturnReportFragment">
+
+        <action
+            android:id="@+id/action_billingReturnReportFragment_to_reportPDFFragment"
+            app:destination="@id/reportPDFFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/reportPDFFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/reportPDFFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.report.pdf.ReportPDFFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

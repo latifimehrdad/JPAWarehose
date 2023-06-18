@@ -1,5 +1,6 @@
 package com.zarholding.jpacustomer.view.fragment.report.balance
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,9 +11,16 @@ import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.model.data.enums.EnumReportType
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentReportBalanceBinding
@@ -45,6 +53,7 @@ class CustomerBalanceReportFragment(
 
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
+        binding.shimmerViewContainer.stopLoading()
         activity?.let { (it as MainActivity).showMessage(message) }
     }
     //---------------------------------------------------------------------------------------------- showMessage
@@ -87,7 +96,9 @@ class CustomerBalanceReportFragment(
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
-
+        binding.textViewReport.setOnClickListener {
+            permissionForBitmap()
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -159,4 +170,32 @@ class CustomerBalanceReportFragment(
         }
     }
     //---------------------------------------------------------------------------------------------- setAdapter
+
+
+
+    //______________________________________________________________________________________________ permissionForBitmap
+    private fun permissionForBitmap() {
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ).withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    val bundle = Bundle()
+                    bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.Balance.name)
+                    gotoFragment(
+                        R.id.action_customerBalanceReportFragment_to_reportPDFFragment,
+                        bundle
+                    )
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?
+                ) {
+                }
+            }).check()
+    }
+    //______________________________________________________________________________________________ permissionForBitmap
+
 }

@@ -19,5 +19,7 @@ class CompanionValues {
         const val CUSTOMER_CODE = "customer_code"
         const val DOWNLOAD_URL = "download_url"
         const val REPORT_TYPE = "reportType"
+        const val REPORT_START_DATE = "reportStartDate"
+        const val REPORT_END_DATE = "reportEndDate"
     }
 }

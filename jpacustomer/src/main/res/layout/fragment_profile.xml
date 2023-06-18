@@ -256,7 +256,8 @@
                 android:gravity="center"
                 android:background="@drawable/a_drawable_back_edit"
                 app:drawableBottomCompat="@drawable/a_ic_item_phone"
-                android:paddingVertical="@dimen/_5sdp" />
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp" />
 
             <TextView
                 android:id="@+id/textViewContactUs"
@@ -274,7 +275,8 @@
                 android:gravity="center"
                 android:background="@drawable/a_drawable_back_edit"
                 app:drawableBottomCompat="@drawable/a_ic_item_phone"
-                android:paddingVertical="@dimen/_5sdp" />
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp" />
 
             <TextView
                 android:id="@+id/textViewHistory"
@@ -292,7 +294,8 @@
                 android:gravity="center"
                 android:background="@drawable/a_drawable_back_edit"
                 app:drawableBottomCompat="@drawable/a_ic_item_history"
-                android:paddingVertical="@dimen/_5sdp"/>
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/textViewVideo"
@@ -310,7 +313,8 @@
                 android:gravity="center"
                 android:background="@drawable/a_drawable_back_edit"
                 app:drawableBottomCompat="@drawable/a_ic_item_video"
-                android:paddingVertical="@dimen/_5sdp"/>
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -351,8 +355,8 @@
 
             <ma.apps.widgets.daynightswitch.DayNightSwitch
                 android:id="@+id/dayNightSwitch"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_gravity="center_vertical"
                 app:sliderColor="#F49044"

@@ -18,6 +18,20 @@
             android:fontFamily="@font/iransans_bold"
             android:text="@string/factorReport"/>
 
+        <TextView
+            android:id="@+id/textViewReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/a_textButton"
+            android:background="@drawable/a_drawable_back_primary_curve_light"
+            android:textSize="@dimen/_8sdp"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="5dp"
+            android:fontFamily="@font/iransans_light"
+            android:text="@string/createPDF"/>
+
         <LinearLayout
             android:id="@+id/linearLayoutFilter"
             android:layout_width="match_parent"
@@ -25,7 +39,7 @@
             android:orientation="horizontal"
             android:padding="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintTop_toBottomOf="@id/textViewReport"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/a_drawable_back_curve_primary">
