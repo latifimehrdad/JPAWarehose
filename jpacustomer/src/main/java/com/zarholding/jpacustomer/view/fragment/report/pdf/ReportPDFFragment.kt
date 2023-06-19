@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
+import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
@@ -155,6 +156,15 @@ class ReportPDFFragment(
     private fun setBalanceAdapter(items: List<CustomerBalanceReportDetailModel>) {
         binding.constraintLayoutBillingReturnTitle.visibility = View.GONE
         binding.constraintLayoutBalanceTitle.visibility = View.VISIBLE
+        if (items.isNotEmpty()) {
+            val item = items.last()
+            binding.textViewTotal.setTitleAndValue(
+                title = getString(R.string.totalDebit),
+                splitter = getString(R.string.colon),
+                last = getString(R.string.rial),
+                value = item.balance
+            )
+        }
         val adapter = BalancePDFAdapter(items)
         val manager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false
@@ -173,6 +183,7 @@ class ReportPDFFragment(
     private fun setBillingReturnAdapter(items: List<BillingAndReturnReportModel>) {
         binding.constraintLayoutBillingReturnTitle.visibility = View.VISIBLE
         binding.constraintLayoutBalanceTitle.visibility = View.GONE
+        binding.textViewTotal.visibility = View.GONE
         val adapter = BillingReturnPDFAdapter(items)
         val manager = LinearLayoutManager(
             requireContext(), LinearLayoutManager.VERTICAL, false

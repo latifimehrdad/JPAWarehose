@@ -12,6 +12,7 @@ import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
+import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -129,7 +130,7 @@ class CustomerBalanceReportFragment(
         )
         binding.imageViewProfile.downloadProfileImage(
             url = userInfo.profileImageName,
-            systemType = userInfo.systemType,
+            systemType = EnumSystemType.Customers.name,
             token = viewModel.getBearerToken()
         )
     }

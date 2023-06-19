@@ -1,7 +1,9 @@
 package com.zarholding.jpacustomer.view.activity
 
+import android.Manifest
 import android.content.res.Configuration
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -19,6 +21,11 @@ import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        checkNotificationPermission()
         initView()
     }
     //---------------------------------------------------------------------------------------------- onCreate
@@ -66,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         setAppTheme()
         setListener()
         resetMenuColor()
+        mainViewModel.fireBaseToken()
         mainViewModel.userInfoLiveData.observe(this) { user ->
             user?.let {
                 binding.textViewUserName.setTitleAndValue(
@@ -92,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         when (mainViewModel.applicationTheme()) {
             Configuration.UI_MODE_NIGHT_YES ->
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
             Configuration.UI_MODE_NIGHT_NO ->
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
@@ -141,9 +151,11 @@ class MainActivity : AppCompatActivity() {
         when (fragmentId) {
             R.id.splashFragment,
             R.id.loginFragment,
-            R.id.downloadFragment -> {
+            R.id.downloadFragment,
+            -> {
                 binding.cardViewMenu.visibility = View.GONE
             }
+
             R.id.homeFragment -> if (!binding.customMenuHome.isSelectedMenu()) {
                 resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
@@ -152,6 +164,7 @@ class MainActivity : AppCompatActivity() {
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuHome.selected()
             }
+
             R.id.productFragment -> if (!binding.customMenuProduct.isSelectedMenu()) {
                 resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
@@ -160,8 +173,17 @@ class MainActivity : AppCompatActivity() {
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuProduct.selected()
             }
+
             R.id.profileFragment,
-            R.id.myStateFragment,
+            R.id.myStateFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
+                resetMenuColor()
+                binding.cardViewMenu.visibility = View.VISIBLE
+                binding.imageViewBack.visibility = View.GONE
+                binding.cardViewProfile.visibility = View.GONE
+                binding.textViewUserName.visibility = View.GONE
+                binding.customMenuProfile.selected()
+            }
+
             R.id.videoFragment,
             R.id.aboutFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
                 resetMenuColor()
@@ -171,7 +193,8 @@ class MainActivity : AppCompatActivity() {
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuProfile.selected()
             }
-            R.id.basketFragment -> if (!binding.customMenuCart.isSelectedMenu()){
+
+            R.id.basketFragment -> if (!binding.customMenuCart.isSelectedMenu()) {
                 resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
@@ -189,6 +212,7 @@ class MainActivity : AppCompatActivity() {
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuReport.selected()
             }
+
             R.id.customerBalanceReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
                 resetMenuColor()
                 binding.customMenuReport.selected()
@@ -278,5 +302,29 @@ class MainActivity : AppCompatActivity() {
         gotoFragment(R.id.action_goto_homeFragment)
     }
     //---------------------------------------------------------------------------------------------- gotoHomeFragment
+
+
+    //---------------------------------------------------------------------------------------------- checkNotificationPermission
+    private fun checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permission = mutableListOf(Manifest.permission.POST_NOTIFICATIONS)
+            Dexter.withContext(this)
+                .withPermissions(permission)
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        p0: MutableList<PermissionRequest>?,
+                        p1: PermissionToken?
+                    ) {
+
+                    }
+                })
+                .check()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- checkNotificationPermission
 
 }

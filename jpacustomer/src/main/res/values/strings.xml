@@ -78,8 +78,8 @@
     <string name="creditAmount">مبلغ بستانکاری</string>
     <string name="credit">بستانکار</string>
     <string name="debit">بدهکار</string>
-    <string name="totalCredit">جمع بستانکاری:</string>
-    <string name="totalDebit">جمع بدهکاری:</string>
+    <string name="totalCredit">جمع بستانکاری</string>
+    <string name="totalDebit">جمع بدهکاری</string>
     <string name="totalAmount">مبلغ کل</string>
     <string name="historyOfCompany">تاریخچه مجموعه</string>
     <string name="collectionVideos">ویدیوهای مجموعه</string>
@@ -107,6 +107,10 @@
     <string name="reportFromTo">گزارش از تاریخ %1$s تا تاریخ %2$s</string>
     <string name="description">توضیحات</string>
     <string name="remain">مانده</string>
+    <string name="processToPDF">در حال ذخیره فایل pdf …</string>
+    <string name="default_notification_channel_id">jpa</string>
+
+
 
     <string name="colon">:</string>
     <string name="enterChar">\n</string>

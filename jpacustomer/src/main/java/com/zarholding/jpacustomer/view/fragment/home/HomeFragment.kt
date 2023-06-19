@@ -147,8 +147,11 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- setOrderAdapter
     private fun setOrderAdapter(items: List<CustomerOrderModel>) {
-        if (items.isEmpty())
+        if (items.isEmpty()) {
+            binding.constraintLayoutStep.visibility = View.GONE
             return
+        }
+        binding.constraintLayoutStep.visibility = View.VISIBLE
         setOrderNumberSpinner(items)
         selectOrder(0, items[0])
         if (context == null)

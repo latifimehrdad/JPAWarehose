@@ -43,8 +43,8 @@
     <color name="a_credit">#81C784</color>
     <color name="a_debit">#EF5350</color>
     <color name="recyclerLoadingBack">#33FFFFFF</color>
-    <color name="datePickerConfirmButtonBackColor">#051b46</color>
-    <color name="datePickerDateBackColor">#051b46</color>
+    <color name="datePickerConfirmButtonBackColor">@color/primaryColor</color>
+    <color name="datePickerDateBackColor">@color/primaryColor</color>
     <color name="datePickerRangeColor">#73B3EA</color>
     <color name="red">#EF5350</color>
     <color name="green">#81C784</color>

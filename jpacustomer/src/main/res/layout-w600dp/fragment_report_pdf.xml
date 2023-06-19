@@ -299,14 +299,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
+                <TextView
+                    android:id="@+id/textViewTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:textSize="@dimen/_9sdp"
+                    android:textColor="@color/a_textButton"
+                    android:fontFamily="@font/iransans_medium"
+                    android:background="@drawable/a_drawable_back_primary_curve_light"
+                    android:gravity="center"/>
+
             </LinearLayout>
 
         </ScrollView>
 
-        <View
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/a_cardView2"/>
+            android:textColor="@color/a_textViewPrimary"
+            android:textSize="@dimen/_10sdp"
+            android:fontFamily="@font/iransans_medium"
+            android:gravity="center"
+            android:text="@string/processToPDF"
+            android:background="@color/a_gradiantEnd" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_view_container"

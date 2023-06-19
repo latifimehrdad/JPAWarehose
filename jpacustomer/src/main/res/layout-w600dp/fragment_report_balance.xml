@@ -19,25 +19,12 @@
             android:fontFamily="@font/iransans_bold"
             android:text="@string/reports"/>
 
-        <TextView
-            android:id="@+id/textViewReport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/textViewTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/a_textButton"
-            android:background="@drawable/a_drawable_back_primary_curve_light"
-            android:textSize="@dimen/_8sdp"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:paddingVertical="5dp"
-            android:fontFamily="@font/iransans_light"
-            android:text="@string/createPDF"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewProfileHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/textViewReport"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
@@ -148,11 +135,25 @@
             android:fontFamily="@font/iransans_bold"
             android:text="@string/customerBalanceReport"/>
 
+        <TextView
+            android:id="@+id/textViewReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/textViewCustomerBalanceReport"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/a_textButton"
+            android:background="@drawable/a_drawable_back_primary_curve_light"
+            android:textSize="@dimen/_8sdp"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="5dp"
+            android:fontFamily="@font/iransans_light"
+            android:text="@string/createPDF"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReport"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/textViewCustomerBalanceReport"
+            app:layout_constraintTop_toBottomOf="@id/textViewReport"
             app:layout_constraintBottom_toTopOf="@id/cardViewTotal"
             android:layout_marginVertical="@dimen/_5sdp"/>
 

@@ -11,6 +11,7 @@ import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerStateModel
 import com.hoomanholding.applibrary.model.data.response.customer.NotDueCheckModel
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -118,7 +119,7 @@ class MyStateFragment(
         )
         binding.imageViewProfile.downloadProfileImage(
             url = userInfo.profileImageName,
-            systemType = userInfo.systemType,
+            systemType = EnumSystemType.Customers.name,
             token = viewModel.getBearerToken()
         )
     }
