@@ -9,7 +9,6 @@ import com.hoomanholding.applibrary.model.repository.AppUpdateRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.zar.core.tools.manager.DeviceManager
-import com.zar.core.tools.manager.ThemeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -81,7 +80,9 @@ class SplashViewModel @Inject constructor(
         return CoroutineScope(IO + exceptionHandler()).launch {
             delay(500)
             val response = checkResponse(userRepository.requestUserInfo())
-            response?.let { userRepository.insertUserInfo(it) }
+            response?.let {
+                userRepository.insertUserInfo(it)
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- requestUserInfo
@@ -103,7 +104,7 @@ class SplashViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- getAllData
     private fun getAllData(): Job {
-        return viewModelScope.launch(IO + exceptionHandler()){
+        return viewModelScope.launch(IO + exceptionHandler()) {
             successLiveData.postValue(true)
         }
     }

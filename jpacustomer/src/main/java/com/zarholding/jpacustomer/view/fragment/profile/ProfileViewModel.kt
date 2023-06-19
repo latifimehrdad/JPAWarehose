@@ -1,11 +1,13 @@
 package com.zarholding.jpacustomer.view.fragment.profile
 
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zar.core.tools.api.ProgressRequestBodyManager
@@ -28,7 +30,8 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val tokenRepository: TokenRepository,
-    private val uploadFileRepository: UploadFileRepository
+    private val uploadFileRepository: UploadFileRepository,
+    private val sharedPreferences: SharedPreferences
 ) : JpaViewModel(){
 
     val uploadPercentLiveData = SingleLiveEvent<Int>()
@@ -70,5 +73,20 @@ class ProfileViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- uploadProfileImage
+
+
+    //---------------------------------------------------------------------------------------------- changeBiometricEnable
+    fun changeBiometricEnable() {
+        val biometric = !isBiometricEnable()
+        sharedPreferences.edit()
+            .putBoolean(CompanionValues.biometric, biometric)
+            .apply()
+    }
+    //---------------------------------------------------------------------------------------------- changeBiometricEnable
+
+
+    //---------------------------------------------------------------------------------------------- isBiometricEnable
+    fun isBiometricEnable() = sharedPreferences.getBoolean(CompanionValues.biometric, false)
+    //---------------------------------------------------------------------------------------------- isBiometricEnable
 
 }

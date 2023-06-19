@@ -21,7 +21,7 @@
     </style>
 
     <style name="switchStyle" parent="Base.Theme.AppCompat">
-        <item name="colorAccent">@color/a_textButton</item>
+        <item name="colorAccent">#FFB300</item>
         <item name="android:colorForeground">@color/a_gradiantEnd</item>
     </style>
 

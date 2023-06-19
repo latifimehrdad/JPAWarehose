@@ -47,11 +47,17 @@ class DataBaseModule {
             }
         }
 
+        val migration2to3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN userTopicstr TEXT")
+            }
+        }
+
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             "jpa"
-        ).addMigrations(migration1to2).allowMainThreadQueries().build()
+        ).addMigrations(migration1to2,migration2to3).allowMainThreadQueries().build()
     }
     //---------------------------------------------------------------------------------------------- provideAppDatabase
 

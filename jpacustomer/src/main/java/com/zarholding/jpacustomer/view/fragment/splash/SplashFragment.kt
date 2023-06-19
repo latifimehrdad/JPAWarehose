@@ -31,6 +31,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     JpaFragment<FragmentSplashBinding>() {
 
     private val splashViewModel: SplashViewModel by viewModels()
+    private val customerSplashViewModel: CustomerSplashViewModel by viewModels()
 //    var job: Job? = null
 
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -55,9 +56,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         observeLiveDate()
         setListener()
         requestGetAppVersion()
-/*        job = CoroutineScope(Main).launch {
-            delay(500)
-        }*/
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -83,9 +81,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
 
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
-            showMessage(getString(R.string.loginIsSuccess))
-            if (it)
-                gotoFragment(R.id.action_splashFragment_to_homeFragment)
+            customerSplashViewModel.fireBaseToken()
         }
 
         splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
@@ -97,6 +93,12 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
         splashViewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
             storagePermission(it)
+        }
+
+        customerSplashViewModel.subscribeToTopic.observe(viewLifecycleOwner) {
+            showMessage(getString(R.string.loginIsSuccess))
+            if (it)
+                gotoFragment(R.id.action_splashFragment_to_homeFragment)
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate

@@ -45,10 +45,7 @@
                     android:fontFamily="@font/yekan_bakh_medium"
                     android:textStyle="bold"
                     android:shadowColor="@color/primaryColor"
-                    android:gravity="center"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="2" />
+                    android:gravity="center" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

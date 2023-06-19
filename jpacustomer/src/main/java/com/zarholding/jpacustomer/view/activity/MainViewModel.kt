@@ -1,12 +1,7 @@
 package com.zarholding.jpacustomer.view.activity
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.ktx.messaging
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
@@ -14,7 +9,6 @@ import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zar.core.tools.manager.ThemeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -61,26 +55,14 @@ class MainViewModel @Inject constructor(
 
 
 
+/*
     //---------------------------------------------------------------------------------------------- fireBaseToken
     fun fireBaseToken() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            FirebaseMessaging.getInstance().deleteToken()
-            delay(3000)
-            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    return@OnCompleteListener
-                }
-                Firebase.messaging.subscribeToTopic("amir")
-                    .addOnCompleteListener {
-                        var msg = "Subscribed"
-                        if (!task.isSuccessful) {
-                            msg = "Subscribe failed"
-                        }
-                        Log.d("meri", msg)
-                    }
-            })
+//            FirebaseMessaging.getInstance().deleteToken()
         }
     }
     //---------------------------------------------------------------------------------------------- fireBaseToken
+*/
 
 }

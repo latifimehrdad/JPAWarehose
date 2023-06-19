@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         setAppTheme()
         setListener()
         resetMenuColor()
-        mainViewModel.fireBaseToken()
+//        mainViewModel.fireBaseToken()
         mainViewModel.userInfoLiveData.observe(this) { user ->
             user?.let {
                 binding.textViewUserName.setTitleAndValue(
@@ -152,12 +152,11 @@ class MainActivity : AppCompatActivity() {
             R.id.splashFragment,
             R.id.loginFragment,
             R.id.downloadFragment,
-            -> {
+            R.id.reportPDFFragment -> {
                 binding.cardViewMenu.visibility = View.GONE
             }
 
             R.id.homeFragment -> if (!binding.customMenuHome.isSelectedMenu()) {
-                resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -166,7 +165,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.productFragment -> if (!binding.customMenuProduct.isSelectedMenu()) {
-                resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -176,7 +174,6 @@ class MainActivity : AppCompatActivity() {
 
             R.id.profileFragment,
             R.id.myStateFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
-                resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.GONE
                 binding.cardViewProfile.visibility = View.GONE
@@ -186,7 +183,6 @@ class MainActivity : AppCompatActivity() {
 
             R.id.videoFragment,
             R.id.aboutFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
-                resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -195,7 +191,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.basketFragment -> if (!binding.customMenuCart.isSelectedMenu()) {
-                resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -205,7 +200,6 @@ class MainActivity : AppCompatActivity() {
 
             R.id.reportFragment,
             R.id.billingReturnReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
-                resetMenuColor()
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -214,7 +208,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.customerBalanceReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
-                resetMenuColor()
                 binding.customMenuReport.selected()
             }
         }

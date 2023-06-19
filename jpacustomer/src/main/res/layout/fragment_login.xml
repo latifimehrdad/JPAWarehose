@@ -125,16 +125,17 @@
             android:text="@string/savePasswordAndFingerPrint"
             android:layout_marginTop="@dimen/_5sdp"
             android:layoutDirection="rtl"
-            android:fontFamily="@font/iransans_light"/>
+            android:fontFamily="@font/iransans_light"
+            android:visibility="gone"/>
 
         <com.hoomanholding.applibrary.view.custom.JpaButton
             android:id="@+id/buttonLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/checkBoxSave"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxSave"
-            app:layout_constraintEnd_toEndOf="@id/checkBoxSave"
-            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="@id/cardViewPassword"
+            app:layout_constraintTop_toBottomOf="@id/cardViewPassword"
+            app:layout_constraintEnd_toEndOf="@id/cardViewPassword"
+            android:layout_marginTop="@dimen/_10sdp"
             android:backgroundTint="@color/primaryColor"
             android:hint="@string/bePatient"
             app:cornerRadius="@dimen/_7sdp"

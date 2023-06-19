@@ -21,6 +21,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.view.activity.MainActivity
+import kotlin.random.Random
 
 /**
  * Created by m-latifi on 6/19/2023.
@@ -99,14 +100,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         )
         val icon = BitmapFactory.decodeResource(
             this.resources,
-            R.drawable.a_ic_logo
+            R.drawable.ic_launcher
         )
         val vibrate: LongArray = longArrayOf(1000L, 1000L, 1000L, 1000L, 1000L)
         val notifyManager = NotificationManagerCompat.from(this)
         val notificationBuilder = NotificationCompat
             .Builder(this, CompanionValues.CHANNEL_ID)
         val notification = notificationBuilder
-            .setSmallIcon(R.drawable.a_ic_logo)
+            .setSmallIcon(R.drawable.ic_launcher)
             .setLargeIcon(icon)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
@@ -121,7 +122,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         ) {
             return
         }
-        notifyManager.notify(CompanionValues.NOTIFICATION_ID, notification.build())
+        val id = Random.nextInt(1, 7126)
+        notifyManager.notify(id, notification.build())
     }
     //---------------------------------------------------------------------------------------------- showNotification
 

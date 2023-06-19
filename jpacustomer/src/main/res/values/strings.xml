@@ -6,6 +6,8 @@
     <string name="powerInYourHand">قدرت دست توست!</string>
     <string name="login">ورود به اپلیکیشن</string>
     <string name="onAuthenticationError">اثر انگشت شما تایید نشد</string>
+    <string name="enterByFingerPrint">ورود با اثر انگشت</string>
+    <string name="actionIsDone">انجام شد</string>
     <string name="bePatient">شکیبا باشید …</string>
     <string name="userName">نام کاربری</string>
     <string name="password">رمز عبور</string>
@@ -14,7 +16,7 @@
     <string name="receiveCode">دریافت کد تایید</string>
     <string name="receiveAgainCode">دریافت دوباره کد تایید</string>
     <string name="dismiss">بستن</string>
-    <string name="remainingUntilResend">مانده تا اراسل مجدد</string>
+    <string name="remainingUntilResend">مانده تا ارسال مجدد</string>
     <string name="oldPassword">رمز عبور قدیم</string>
     <string name="changePassword">تغییر رمز</string>
     <string name="loginIsSuccess">ورود با موفقیت انجام شد</string>
@@ -65,7 +67,7 @@
     <string name="customerCode">کد مشتری</string>
     <string name="salesExpert">کارشناس فروش</string>
     <string name="signOut">خروج از حساب</string>
-    <string name="activeDarkTheme">فعال سازی تم تاریک</string>
+    <string name="activeDarkTheme">نوع تم نرم افزار</string>
     <string name="setting">تنظیمات</string>
     <string name="contactUs">ارتباط با ما</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
