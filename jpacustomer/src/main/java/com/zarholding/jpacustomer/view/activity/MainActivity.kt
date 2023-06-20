@@ -221,8 +221,7 @@ class MainActivity : AppCompatActivity() {
                 binding.customMenuReport.clearSelected()
             }
 
-            R.id.reportFragment,
-            R.id.billingReturnReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
+            R.id.reportFragment -> {
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -234,7 +233,8 @@ class MainActivity : AppCompatActivity() {
                 binding.customMenuCart.clearSelected()
             }
 
-            R.id.customerBalanceReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
+            R.id.customerBalanceReportFragment,
+            R.id.billingReturnReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.customMenuReport.selected()
                 binding.customMenuHome.clearSelected()

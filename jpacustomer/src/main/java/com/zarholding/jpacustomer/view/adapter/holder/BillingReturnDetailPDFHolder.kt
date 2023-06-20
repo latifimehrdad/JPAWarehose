@@ -24,8 +24,8 @@ class BillingReturnDetailPDFHolder(
 
     //---------------------------------------------------------------------------------------------- setValueToXml
     private fun setValueToXml(item: CustomerOrderDetailItemModel) {
-        binding.textViewTotalAmount.text = item.price.split()
-        binding.textViewPrice.text = item.productAmount.split()
+        binding.textViewTotalAmount.text = item.productAmount.split()
+        binding.textViewPrice.text = item.price.split()
         binding.textViewCount.text = item.count.split()
         binding.textViewProductName.text = item.productName
         binding.textViewProductCode.text = item.productCode

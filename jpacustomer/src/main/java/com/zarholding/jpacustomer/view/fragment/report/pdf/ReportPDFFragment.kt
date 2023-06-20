@@ -1,8 +1,10 @@
 package com.zarholding.jpacustomer.view.fragment.report.pdf
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
@@ -318,6 +320,18 @@ class ReportPDFFragment(
     //---------------------------------------------------------------------------------------------- onDestroyView
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.destinationFile?.let {
+            val fileURI = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().applicationContext.packageName + ".provider",
+                it
+            )
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(fileURI, "application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            requireContext().startActivity(intent)
+        }
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
     }
     //---------------------------------------------------------------------------------------------- onDestroyView

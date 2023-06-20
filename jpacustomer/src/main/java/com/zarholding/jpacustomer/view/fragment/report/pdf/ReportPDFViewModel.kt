@@ -34,6 +34,7 @@ class ReportPDFViewModel @Inject constructor(
     val a4Height = 1754
     val a4With = 1240
     val mutableLiveData = MutableLiveData<Boolean>()
+    var destinationFile: File? = null
 
     //______________________________________________________________________________________________ createPdf
     fun createPdf(v: View) {
@@ -80,7 +81,7 @@ class ReportPDFViewModel @Inject constructor(
             val destinationDir = File(downloadFolder.absolutePath, "Jpa")
             if (!destinationDir.exists())
                 destinationDir.mkdir()
-            val destinationFile = File(
+            destinationFile = File(
                 destinationDir.absolutePath,
                 "${getNewFileName()}.pdf"
             )
