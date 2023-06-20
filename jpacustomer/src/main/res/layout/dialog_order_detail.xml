@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardBackgroundColor="@color/a_cardView2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:background="@drawable/a_drawable_menu_curve"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/a_textViewPrimary"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/orderDetail"
+                    app:drawableEndCompat="@drawable/a_ic_cart"
+                    app:drawableTint="@color/a_textViewPrimary"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orderDetailDate"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/date"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewOrder"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/linearLayoutTitle"
+                app:layout_constraintBottom_toTopOf="@id/constraintLayoutFooter"/>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/recyclerViewOrder"
+                app:layout_constraintBottom_toBottomOf="@id/recyclerViewOrder"
+                app:layout_constraintStart_toStartOf="@id/recyclerViewOrder"
+                app:layout_constraintEnd_toEndOf="@id/recyclerViewOrder"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/recyclerLoadingBack"/>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutFooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:background="@drawable/a_drawable_menu_curve">
+
+                <TextView
+                    android:id="@+id/textviewPriceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/a_textViewPrimary"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/total"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/textviewPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/a_textViewPrimary"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    app:layout_constraintTop_toTopOf="@id/textviewPriceTitle"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textviewDiscountTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/a_textViewPrimary"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/discount"
+                    app:layout_constraintTop_toBottomOf="@id/textviewPriceTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/textviewDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/a_textViewPrimary"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    app:layout_constraintTop_toTopOf="@id/textviewDiscountTitle"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <View
+                    android:id="@+id/viewLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintTop_toBottomOf="@id/textviewDiscount"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@color/a_textHint"/>
+
+                <TextView
+                    android:id="@+id/textviewTotalTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orderDetailDate"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/totalAmount"
+                    app:layout_constraintTop_toBottomOf="@id/viewLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/textviewTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orderDetailDate"
+                    android:textSize="@dimen/_7sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    app:layout_constraintTop_toTopOf="@id/textviewTotalTitle"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

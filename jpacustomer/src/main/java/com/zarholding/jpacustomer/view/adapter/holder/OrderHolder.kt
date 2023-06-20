@@ -20,10 +20,7 @@ class OrderHolder(
 
 
     interface Click{
-
         fun click(position: Int, item: CustomerOrderModel)
-        fun clickDetail(item: CustomerOrderModel)
-
     }
 
     //---------------------------------------------------------------------------------------------- bind
@@ -51,9 +48,6 @@ class OrderHolder(
         binding.root.setOnClickListener {
             click.click(position, item)
         }
-        binding.buttonShowOrderDetail.setOnClickListener {
-            click.clickDetail(item)
-        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -63,10 +57,6 @@ class OrderHolder(
         if (OrderAdapter.selectedPosition == position){
             binding.cardViewParent
                 .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_cardView4))
-            binding.buttonShowOrderDetail.backgroundTintList =
-                binding.buttonShowOrderDetail.context.getColorStateList(R.color.a_orderButtonSelect)
-            binding.buttonShowOrderDetail
-                .setTextColor(binding.buttonShowOrderDetail.context.getColor(R.color.a_cardView4))
             binding.imageViewShopping.setColorFilter(
                 ContextCompat.getColor(binding.imageViewShopping.context, R.color.white),
                 android.graphics.PorterDuff.Mode.SRC_IN)
@@ -75,10 +65,6 @@ class OrderHolder(
         } else {
             binding.cardViewParent
                 .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_cardView5))
-            binding.buttonShowOrderDetail.backgroundTintList =
-                binding.buttonShowOrderDetail.context.getColorStateList(R.color.a_cardView3)
-            binding.buttonShowOrderDetail
-                .setTextColor(binding.buttonShowOrderDetail.context.getColor(R.color.a_cardView5))
             binding.imageViewShopping.setColorFilter(
                 ContextCompat.getColor(binding.imageViewShopping.context, R.color.primaryColor),
                 android.graphics.PorterDuff.Mode.SRC_IN)

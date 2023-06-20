@@ -57,242 +57,26 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayoutBillingReturnTitle"
+                <include layout="@layout/layout_report_pdf_bill_return"
+                    android:id="@+id/layoutBillReturnTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/a_drawable_report_pdf_back"
-                    android:visibility="gone">
+                    android:visibility="gone"/>
 
-                    <TextView
-                        android:id="@+id/textViewFinalPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textViewPrimary"
-                        android:textSize="@dimen/_6sdp"
-                        android:paddingVertical="@dimen/_5sdp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/textViewDiscountPrice"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:lines="1"
-                        android:text="@string/finalPrice"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        app:layout_constraintStart_toEndOf="@id/textViewFinalPrice"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewDiscountPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textViewPrimary"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewFinalPrice"
-                        app:layout_constraintEnd_toStartOf="@id/textViewAmountPrice"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        android:lines="1"
-                        android:text="@string/discount"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        app:layout_constraintStart_toEndOf="@id/textViewDiscountPrice"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewAmountPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textViewPrimary"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewDiscountPrice"
-                        app:layout_constraintEnd_toStartOf="@id/textViewDate"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        android:lines="1"
-                        android:text="@string/totalAmount"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        app:layout_constraintStart_toEndOf="@id/textViewAmountPrice"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewDate"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textViewPrimary"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewAmountPrice"
-                        app:layout_constraintEnd_toStartOf="@id/textViewNumber"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        android:lines="1"
-                        android:text="@string/date"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        app:layout_constraintStart_toEndOf="@id/textViewDate"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewNumber"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textViewPrimary"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewDate"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
-                        android:lines="1"
-                        android:text="@string/orderNumber"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayoutBalanceTitle"
+                <include layout="@layout/layout_report_pdf_balance_title"
+                    android:id="@+id/layoutBalanceTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/a_drawable_report_pdf_back"
-                    android:visibility="gone">
+                    android:visibility="gone"/>
 
-                    <TextView
-                        android:id="@+id/textViewBalance"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textButton"
-                        android:textSize="@dimen/_6sdp"
-                        android:paddingVertical="@dimen/_5sdp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/textViewCredit"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:lines="1"
-                        android:text="@string/remain"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        app:layout_constraintStart_toEndOf="@id/textViewBalance"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewCredit"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textButton"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewBalance"
-                        app:layout_constraintEnd_toStartOf="@id/textViewDebit"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        android:lines="1"
-                        android:text="@string/debit"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        app:layout_constraintStart_toEndOf="@id/textViewCredit"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewDebit"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textButton"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewCredit"
-                        app:layout_constraintEnd_toStartOf="@id/textViewDescriptionHeader"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        android:lines="1"
-                        android:text="@string/credit"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        app:layout_constraintStart_toEndOf="@id/textViewDebit"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewDescriptionHeader"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textButton"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewDebit"
-                        app:layout_constraintEnd_toStartOf="@id/textViewDateHeader"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        android:lines="1"
-                        android:text="@string/description"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        app:layout_constraintStart_toEndOf="@id/textViewDescriptionHeader"
-                        android:background="@color/a_textViewPrimary"/>
-
-                    <TextView
-                        android:id="@+id/textViewDateHeader"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:fontFamily="@font/iransans_medium"
-                        android:gravity="center"
-                        android:textColor="@color/a_textButton"
-                        android:textSize="@dimen/_6sdp"
-                        android:hint="8888/88/88"
-                        android:padding="@dimen/_3sdp"
-                        app:layout_constraintStart_toEndOf="@id/textViewDescriptionHeader"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/textViewBalance"
-                        app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
-                        android:lines="1"
-                        android:text="@string/date"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <include layout="@layout/layout_report_pdf_bill_return_detail"
+                    android:id="@+id/layoutBillReturnDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:visibility="gone"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewReport"
@@ -310,7 +94,61 @@
                     android:textColor="@color/a_textButton"
                     android:fontFamily="@font/iransans_medium"
                     android:background="@drawable/a_drawable_back_primary_curve_light"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:visibility="gone"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutTotalAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textViewTotalPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintWidth_percent="0.35"
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/iransans_bold"
+                        android:gravity="center"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:background="@drawable/a_drawable_report_pdf_back"
+                        android:lines="1"/>
+
+                    <TextView
+                        android:id="@+id/textViewDiscount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/textViewTotalPrice"
+                        app:layout_constraintStart_toStartOf="@id/textViewTotalPrice"
+                        app:layout_constraintEnd_toEndOf="@id/textViewTotalPrice"
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="@color/a_textViewPrimary"
+                        android:fontFamily="@font/iransans_bold"
+                        android:gravity="center"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:background="@drawable/a_drawable_report_pdf_back"
+                        android:lines="1"/>
+
+                    <TextView
+                        android:id="@+id/textViewFinalAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/textViewDiscount"
+                        app:layout_constraintStart_toStartOf="@id/textViewTotalPrice"
+                        app:layout_constraintEnd_toEndOf="@id/textViewTotalPrice"
+                        android:textSize="@dimen/_7sdp"
+                        android:textColor="@color/a_textViewPrimary"
+                        android:fontFamily="@font/iransans_bold"
+                        android:gravity="center"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:background="@drawable/a_drawable_report_pdf_back"
+                        android:lines="1"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 

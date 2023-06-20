@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
+import com.hoomanholding.applibrary.model.data.enums.EnumReportType
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -23,6 +24,7 @@ import com.zar.core.view.picker.date.dialog.DatePickerDialog
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentReportBillingReturnBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
+import com.zarholding.jpacustomer.view.adapter.holder.BillingReturnHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.BillingReturnAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -117,40 +119,6 @@ class BillingReturnReportFragment(
     //---------------------------------------------------------------------------------------------- setListener
 
 
-    //______________________________________________________________________________________________ permissionForBitmap
-    private fun permissionForBitmap() {
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ).withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    val bundle = Bundle()
-                    bundle.putString(
-                        CompanionValues.REPORT_START_DATE,
-                        viewModel.dateFromLiveData.value
-                    )
-                    bundle.putString(
-                        CompanionValues.REPORT_END_DATE,
-                        viewModel.dateToLiveData.value
-                    )
-                    bundle.putString(CompanionValues.REPORT_TYPE, viewModel.getReportTypeString())
-                    gotoFragment(
-                        R.id.action_billingReturnReportFragment_to_reportPDFFragment,
-                        bundle
-                    )
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
-                }
-            }).check()
-    }
-    //______________________________________________________________________________________________ permissionForBitmap
-
-
     //---------------------------------------------------------------------------------------------- showDatePickerDialog
     private fun showDatePickerDialog(dateType: DateType) {
         if (context == null)
@@ -205,7 +173,24 @@ class BillingReturnReportFragment(
     private fun setAdapter(items: List<BillingAndReturnReportModel>) {
         if (context == null)
             return
-        val adapter = BillingReturnAdapter(items)
+        val click = object : BillingReturnHolder.Click{
+            override fun detailPdf(id: Long) {
+                val bundle = Bundle()
+                bundle.putLong(CompanionValues.ORDER_ID, id)
+                when(viewModel.getReportType()){
+                    EnumReportType.Return ->
+                        bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.ReturnItem.name)
+                    EnumReportType.Billing ->
+                        bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.BillingItem.name)
+                    else -> {}
+                }
+                gotoFragment(
+                    R.id.action_billingReturnReportFragment_to_reportPDFFragment,
+                    bundle
+                )
+            }
+        }
+        val adapter = BillingReturnAdapter(items, click)
         val manager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
@@ -215,5 +200,39 @@ class BillingReturnReportFragment(
         binding.recyclerViewReport.layoutManager = manager
     }
     //---------------------------------------------------------------------------------------------- setAdapter
+
+
+
+    //______________________________________________________________________________________________ permissionForBitmap
+    private fun permissionForBitmap() {
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ).withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                    val bundle = Bundle()
+                    bundle.putString(
+                        CompanionValues.REPORT_START_DATE,
+                        viewModel.dateFromLiveData.value
+                    )
+                    bundle.putString(
+                        CompanionValues.REPORT_END_DATE,
+                        viewModel.dateToLiveData.value
+                    )
+                    bundle.putString(CompanionValues.REPORT_TYPE, viewModel.getReportTypeString())
+                    gotoFragment(
+                        R.id.action_billingReturnReportFragment_to_reportPDFFragment,
+                        bundle
+                    )
+                }
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: MutableList<PermissionRequest>?,
+                    p1: PermissionToken?
+                ) {
+                }
+            }).check()
+    }
+    //______________________________________________________________________________________________ permissionForBitmap
 
 }

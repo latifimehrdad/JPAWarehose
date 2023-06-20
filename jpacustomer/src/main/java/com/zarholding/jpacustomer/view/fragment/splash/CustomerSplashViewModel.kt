@@ -1,14 +1,12 @@
 package com.zarholding.jpacustomer.view.fragment.splash
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.ktx.messaging
-import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
-import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
@@ -20,9 +18,7 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class CustomerSplashViewModel @Inject constructor(
-    private val userRepository: UserRepository
-) : JpaViewModel() {
+class CustomerSplashViewModel @Inject constructor() : SplashViewModel() {
 
     val subscribeToTopic = SingleLiveEvent<Boolean>()
 
@@ -50,12 +46,11 @@ class CustomerSplashViewModel @Inject constructor(
             list.forEach { topic ->
                 delay(500)
                 Firebase.messaging.subscribeToTopic(topic.trimStart().trimEnd())
-                    .addOnCompleteListener {task ->
-                        var msg = "Subscribed $topic"
+                    .addOnCompleteListener {
+/*                        var msg = "Subscribed $topic"
                         if (!task.isSuccessful) {
                             msg = "Subscribe failed  $topic"
-                        }
-                        Log.d("meri", msg)
+                        }*/
                     }
             }
             delay(1000)

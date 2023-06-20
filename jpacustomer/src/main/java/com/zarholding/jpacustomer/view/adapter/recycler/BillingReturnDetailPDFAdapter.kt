@@ -3,35 +3,33 @@ package com.zarholding.jpacustomer.view.adapter.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
-import com.zarholding.jpacustomer.databinding.ItemReportCustomerBillingReturnBinding
-import com.zarholding.jpacustomer.view.adapter.holder.BillingReturnHolder
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailItemModel
+import com.zarholding.jpacustomer.databinding.ItemReportPdfBillReturnDetailBinding
+import com.zarholding.jpacustomer.view.adapter.holder.BillingReturnDetailPDFHolder
 
 /**
  * Created by m-latifi on 6/8/2023.
  */
 
-class BillingReturnAdapter(
-    private val items: List<BillingAndReturnReportModel>,
-    private val click: BillingReturnHolder.Click
-): RecyclerView.Adapter<BillingReturnHolder>() {
+class BillingReturnDetailPDFAdapter(
+    private val items: List<CustomerOrderDetailItemModel>
+): RecyclerView.Adapter<BillingReturnDetailPDFHolder>() {
 
     private var inflater: LayoutInflater? = null
 
     //---------------------------------------------------------------------------------------------- onCreateViewHolder
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BillingReturnHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BillingReturnDetailPDFHolder {
         if (inflater == null)
             inflater = LayoutInflater.from(parent.context)
-        return BillingReturnHolder(
-            ItemReportCustomerBillingReturnBinding.inflate(inflater!!, parent, false),
-            click
+        return BillingReturnDetailPDFHolder(
+            ItemReportPdfBillReturnDetailBinding.inflate(inflater!!, parent, false)
         )
     }
     //---------------------------------------------------------------------------------------------- onCreateViewHolder
 
 
     //---------------------------------------------------------------------------------------------- onBindViewHolder
-    override fun onBindViewHolder(holder: BillingReturnHolder, position: Int) {
+    override fun onBindViewHolder(holder: BillingReturnDetailPDFHolder, position: Int) {
         holder.bind(items[position])
     }
     //---------------------------------------------------------------------------------------------- onBindViewHolder

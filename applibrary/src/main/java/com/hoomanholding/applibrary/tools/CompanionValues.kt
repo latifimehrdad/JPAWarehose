@@ -14,6 +14,7 @@ class CompanionValues {
         const val userName = "userName"
         const val password = "password"
         const val ORDER_IR = "order_ir"
+        const val ORDER_ID = "order_id"
         const val CUSTOMER_ID = "customer_id"
         const val CUSTOMER_NAME = "customer_name"
         const val CUSTOMER_CODE = "customer_code"

@@ -1,7 +1,6 @@
 package com.hoomanholding.applibrary.model.repository
 
 import com.hoomanholding.applibrary.model.api.Api
-import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.zar.core.tools.api.apiCall
 import javax.inject.Inject
 
@@ -61,11 +60,19 @@ class ReportRepository @Inject constructor(
     suspend fun requestCustomerReturnReport(fromDate: String, toDate: String) =
         apiCall {
             api.requestCustomerReturnReport(
-                fromDate, toDate,
-                tokenRepository.getBearerToken()
+                fromDate, toDate, tokenRepository.getBearerToken()
             )
         }
     //---------------------------------------------------------------------------------------------- requestCustomerReturnReport
 
+
+    //---------------------------------------------------------------------------------------------- requestCustomersBillingPDF
+    suspend fun requestCustomersBillingPDF(billingId: Long, type: String) =
+        apiCall {
+            api.requestCustomersBillingPDF(
+                billingId, type, tokenRepository.getBearerToken()
+            )
+        }
+    //---------------------------------------------------------------------------------------------- requestCustomersBillingPDF
 
 }

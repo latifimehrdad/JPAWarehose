@@ -70,6 +70,7 @@ class CustomMenu @JvmOverloads constructor(
     //---------------------------------------------------------------------------------------------- selected
     fun selected() {
         if (!selectedMenu) {
+            selectedMenu = true
             cardView.visibility = View.VISIBLE
             iconImage.setColorFilter(
                 ContextCompat.getColor(context, selectedColor),
@@ -82,6 +83,7 @@ class CustomMenu @JvmOverloads constructor(
 
     //---------------------------------------------------------------------------------------------- clearSelected
     fun clearSelected() {
+        selectedMenu = false
         cardView.visibility = View.GONE
         iconImage.setColorFilter(
             ContextCompat.getColor(context, defaultColor),

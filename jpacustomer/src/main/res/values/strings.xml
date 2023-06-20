@@ -11,6 +11,8 @@
     <string name="bePatient">شکیبا باشید …</string>
     <string name="userName">نام کاربری</string>
     <string name="password">رمز عبور</string>
+    <string name="visitorName">نام ویزیتور</string>
+    <string name="buyerName">نام مشتری</string>
     <string name="rePassword">تکرار رمز عبور</string>
     <string name="savePasswordAndFingerPrint">برای ذخیره ی رمز عبور و نام کاربری و ورود با اثر انگشت لطفا این گزینه را  فعال نمایید</string>
     <string name="receiveCode">دریافت کد تایید</string>
@@ -27,6 +29,7 @@
     <string name="orderTracking">پیگیری سفارش</string>
     <string name="orderNumber">شماره سفارش</string>
     <string name="showOrderDetail">نمایش جزئیات سفارش</string>
+    <string name="orderDetail">جزئیات سفارش</string>
     <string name="detailProduct">جزییات کالا</string>
     <string name="currentStep">مرحله ی فعلی</string>
     <string name="oldOrder">سفارشات قبلی</string>
@@ -57,6 +60,7 @@
     <string name="showFactorList">مشاهده فاکتور لیستی</string>
     <string name="saveOrder">ثبت سفارش</string>
     <string name="productCode">کد کالا</string>
+    <string name="productName">نام کالا</string>
     <string name="profile">ناحیه کاربری</string>
     <string name="aboutUs">درباره ما</string>
     <string name="showMyState">نمایش وضعیت من</string>
@@ -80,9 +84,11 @@
     <string name="creditAmount">مبلغ بستانکاری</string>
     <string name="credit">بستانکار</string>
     <string name="debit">بدهکار</string>
+    <string name="total">جمع کل</string>
     <string name="totalCredit">جمع بستانکاری</string>
     <string name="totalDebit">جمع بدهکاری</string>
     <string name="totalAmount">مبلغ کل</string>
+    <string name="fi">مبلغ واحد</string>
     <string name="historyOfCompany">تاریخچه مجموعه</string>
     <string name="collectionVideos">ویدیوهای مجموعه</string>
     <string name="play">پخش</string>
@@ -94,6 +100,7 @@
     <string name="feedbackReport">گزارش مرجوعی</string>
     <string name="factorReport">گزارش فاکتور</string>
     <string name="customerBalanceReport">دفتر مشتری</string>
+    <string name="billOfSale">صورتحساب فروش کالا و خدمات</string>
     <string name="date">تاریخ</string>
     <string name="chooseDate">انتخاب تاریخ</string>
     <string name="orderDate">تاریخ سفارش</string>
@@ -102,7 +109,7 @@
     <string name="dateFilter">فیلتر تاریخ :</string>
     <string name="pleaseChooseDateFrom">لطفا تاریخ شروع را انتخاب نمایید</string>
     <string name="pleaseChooseDateTo">لطفا تاریخ پایان را انتخاب نمایید</string>
-    <string name="finalPrice">قیمت نهایی</string>
+    <string name="finalPrice">مبلغ نهایی</string>
     <string name="detailFactor">جزییات فاکتور</string>
     <string name="pieces">عدد</string>
     <string name="createPDF">دریافت PDF</string>
@@ -111,6 +118,8 @@
     <string name="remain">مانده</string>
     <string name="processToPDF">در حال ذخیره فایل pdf …</string>
     <string name="default_notification_channel_id">jpa</string>
+    <string name="seller">فروشنده</string>
+    <string name="buyer">خریدار</string>
 
 
 

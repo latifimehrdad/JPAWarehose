@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.model.repository.ReportRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -31,6 +32,14 @@ class BillingReturnViewModel @Inject constructor(
     val reportLiveData: MutableLiveData<List<BillingAndReturnReportModel>> by lazy {
         MutableLiveData<List<BillingAndReturnReportModel>>()
     }
+    val reportDetailLiveData: MutableLiveData<CustomerOrderDetailModel> by lazy {
+        MutableLiveData<CustomerOrderDetailModel>()
+    }
+
+    //---------------------------------------------------------------------------------------------- getReportType
+    fun getReportType() = reportType
+    //---------------------------------------------------------------------------------------------- getReportType
+
 
     //---------------------------------------------------------------------------------------------- getReportTypeString
     fun getReportTypeString() = reportType.name
@@ -99,6 +108,7 @@ class BillingReturnViewModel @Inject constructor(
                             dateToLiveData.value!!
                         )
                 )
+
                 else -> null
             }
             response?.let {
@@ -108,6 +118,19 @@ class BillingReturnViewModel @Inject constructor(
     }
     //---------------------------------------------------------------------------------------------- getReport
 
+
+
+    //---------------------------------------------------------------------------------------------- getBillingReturnDetail
+    fun getBillingReturnDetail(billingId: Long, type: String) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val response =
+                checkResponse(reportRepository.requestCustomersBillingPDF(billingId, type))
+            response?.let {
+                reportDetailLiveData.postValue(it)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getBillingReturnDetail
 
 
 }

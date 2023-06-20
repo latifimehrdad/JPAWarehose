@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
@@ -52,7 +51,6 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- showMessage
     fun showMessage(message: String) {
-        Log.e("meri", message)
         val snack = Snackbar.make(binding.constraintLayoutParent, message, 5 * 1000)
         val view = snack.view
         val textView = (view).findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
@@ -73,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         setAppTheme()
         setListener()
-        resetMenuColor()
+        hideProfileView()
 //        mainViewModel.fireBaseToken()
         mainViewModel.userInfoLiveData.observe(this) { user ->
             user?.let {
@@ -147,13 +145,18 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
     private fun showAndHideBottomNavigationMenu(fragmentId: Int) {
-        resetMenuColor()
+        hideProfileView()
         when (fragmentId) {
             R.id.splashFragment,
             R.id.loginFragment,
             R.id.downloadFragment,
             R.id.reportPDFFragment -> {
                 binding.cardViewMenu.visibility = View.GONE
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuProfile.clearSelected()
+                binding.customMenuReport.clearSelected()
+                binding.customMenuCart.clearSelected()
             }
 
             R.id.homeFragment -> if (!binding.customMenuHome.isSelectedMenu()) {
@@ -162,6 +165,10 @@ class MainActivity : AppCompatActivity() {
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuHome.selected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuProfile.clearSelected()
+                binding.customMenuReport.clearSelected()
+                binding.customMenuCart.clearSelected()
             }
 
             R.id.productFragment -> if (!binding.customMenuProduct.isSelectedMenu()) {
@@ -170,6 +177,10 @@ class MainActivity : AppCompatActivity() {
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuProduct.selected()
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProfile.clearSelected()
+                binding.customMenuReport.clearSelected()
+                binding.customMenuCart.clearSelected()
             }
 
             R.id.profileFragment,
@@ -179,6 +190,10 @@ class MainActivity : AppCompatActivity() {
                 binding.cardViewProfile.visibility = View.GONE
                 binding.textViewUserName.visibility = View.GONE
                 binding.customMenuProfile.selected()
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuReport.clearSelected()
+                binding.customMenuCart.clearSelected()
             }
 
             R.id.videoFragment,
@@ -188,6 +203,10 @@ class MainActivity : AppCompatActivity() {
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuProfile.selected()
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuReport.clearSelected()
+                binding.customMenuCart.clearSelected()
             }
 
             R.id.basketFragment -> if (!binding.customMenuCart.isSelectedMenu()) {
@@ -196,6 +215,10 @@ class MainActivity : AppCompatActivity() {
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuCart.selected()
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuProfile.clearSelected()
+                binding.customMenuReport.clearSelected()
             }
 
             R.id.reportFragment,
@@ -205,10 +228,19 @@ class MainActivity : AppCompatActivity() {
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuReport.selected()
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuProfile.clearSelected()
+                binding.customMenuCart.clearSelected()
             }
 
             R.id.customerBalanceReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
+                binding.cardViewMenu.visibility = View.VISIBLE
                 binding.customMenuReport.selected()
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuProfile.clearSelected()
+                binding.customMenuCart.clearSelected()
             }
         }
     }
@@ -252,30 +284,25 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- hideFragmentContainer
     fun hideFragmentContainer() {
-        binding.navHostFragment.alpha = 0.2f
+        binding.constraintLayoutParent.alpha = 0.1f
     }
     //---------------------------------------------------------------------------------------------- hideFragmentContainer
 
 
     //---------------------------------------------------------------------------------------------- showFragmentContainer
     fun showFragmentContainer() {
-        binding.navHostFragment.alpha = 1f
+        binding.constraintLayoutParent.alpha = 1f
     }
     //---------------------------------------------------------------------------------------------- showFragmentContainer
 
 
-    //---------------------------------------------------------------------------------------------- resetMenuColor
-    private fun resetMenuColor() {
+    //---------------------------------------------------------------------------------------------- hideProfileView
+    private fun hideProfileView() {
         binding.imageViewBack.visibility = View.GONE
         binding.cardViewProfile.visibility = View.GONE
-        binding.customMenuHome.clearSelected()
-        binding.customMenuProduct.clearSelected()
-        binding.customMenuProfile.clearSelected()
-        binding.customMenuReport.clearSelected()
-        binding.customMenuCart.clearSelected()
         binding.textViewUserName.visibility = View.GONE
     }
-    //---------------------------------------------------------------------------------------------- resetMenuColor
+    //---------------------------------------------------------------------------------------------- hideProfileView
 
 
     //---------------------------------------------------------------------------------------------- getCartView

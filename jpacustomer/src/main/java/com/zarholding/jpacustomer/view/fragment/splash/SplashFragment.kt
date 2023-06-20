@@ -8,7 +8,6 @@ import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import dagger.hilt.android.AndroidEntryPoint
-import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -30,9 +29,7 @@ import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     JpaFragment<FragmentSplashBinding>() {
 
-    private val splashViewModel: SplashViewModel by viewModels()
-    private val customerSplashViewModel: CustomerSplashViewModel by viewModels()
-//    var job: Job? = null
+    private val viewModel: CustomerSplashViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,7 +69,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
-        splashViewModel.errorLiveDate.observe(viewLifecycleOwner) {
+        viewModel.errorLiveDate.observe(viewLifecycleOwner) {
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -80,22 +77,22 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             }
         }
 
-        splashViewModel.successLiveData.observe(viewLifecycleOwner) {
-            customerSplashViewModel.fireBaseToken()
+        viewModel.successLiveData.observe(viewLifecycleOwner) {
+            viewModel.fireBaseToken()
         }
 
-        splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
+        viewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
             if (it)
                 gotoFragmentHome()
             else
                 gotoFragmentLogin()
         }
 
-        splashViewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
+        viewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
             storagePermission(it)
         }
 
-        customerSplashViewModel.subscribeToTopic.observe(viewLifecycleOwner) {
+        viewModel.subscribeToTopic.observe(viewLifecycleOwner) {
             showMessage(getString(R.string.loginIsSuccess))
             if (it)
                 gotoFragment(R.id.action_splashFragment_to_homeFragment)
@@ -106,7 +103,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
     private fun requestGetAppVersion() {
-        splashViewModel.requestGetAppVersion(EnumSystemType.Customers.name)
+        viewModel.requestGetAppVersion(EnumSystemType.Customers.name)
     }
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
 
@@ -176,7 +173,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
     private fun gotoFragmentHome() {
         binding.textViewLogin.text = getString(R.string.bePatient)
-        splashViewModel.requestGetData()
+        viewModel.requestGetData()
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
 

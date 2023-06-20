@@ -47,20 +47,6 @@
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/orderNumber"/>
 
-                <com.hoomanholding.applibrary.view.custom.JpaButton
-                    android:id="@+id/buttonShowOrderDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:backgroundTint="@color/primaryColor"
-                    app:cornerRadius="@dimen/_7sdp"
-                    android:textSize="@dimen/_6sdp"
-                    android:paddingHorizontal="@dimen/_15sdp"
-                    android:fontFamily="@font/iransans_light"
-                    android:textColor="@color/a_textButton"
-                    android:text='@string/showOrderDetail' />
-
-
                 <ImageView
                     android:id="@+id/imageViewShopping"
                     android:layout_width="@dimen/_18sdp"
@@ -99,9 +85,9 @@
                     android:id="@+id/textViewDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@id/buttonShowOrderDetail"
-                    app:layout_constraintStart_toStartOf="@id/buttonShowOrderDetail"
-                    app:layout_constraintEnd_toEndOf="@id/buttonShowOrderDetail"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:textSize="@dimen/_7sdp"
                     android:textColor="@color/a_textHint"
                     android:fontFamily="@font/iransans_light"

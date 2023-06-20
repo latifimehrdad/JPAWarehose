@@ -21,6 +21,7 @@ import com.zarholding.jpacustomer.view.adapter.IntSpinnerAdapter
 import com.zarholding.jpacustomer.view.adapter.holder.OrderHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.OrderAdapter
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
+import com.zarholding.jpacustomer.view.dialog.order.OrderDetailDialog
 
 
 /**
@@ -128,6 +129,10 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             binding.spinnerChooseChart.dismiss()
         }
         binding.swipeContainer.setOnRefreshListener { getCustomerOrders(false) }
+
+        binding.buttonShowOrderDetail.setOnClickListener {
+            OrderDetailDialog().show(childFragmentManager, "order")
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -159,9 +164,6 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         val click = object : OrderHolder.Click{
             override fun click(position: Int, item: CustomerOrderModel) {
                 selectOrder(position, item)
-            }
-            override fun clickDetail(item: CustomerOrderModel) {
-
             }
         }
         adapter = OrderAdapter(items, click)

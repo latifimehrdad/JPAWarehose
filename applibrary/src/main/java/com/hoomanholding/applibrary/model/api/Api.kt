@@ -14,6 +14,7 @@ import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinanci
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerStateModel
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
@@ -292,6 +293,13 @@ interface Api {
         @Query("toDate") toDate: String,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<BillingAndReturnReportModel>?>>
+
+    @GET("$report/customers-report-customersBillingPDF")
+    suspend fun requestCustomersBillingPDF(
+        @Query("billingId") billingId: Long,
+        @Query("type") type: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<CustomerOrderDetailModel?>>
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 

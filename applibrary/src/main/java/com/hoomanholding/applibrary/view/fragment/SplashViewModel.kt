@@ -18,14 +18,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(
-    private val userRepository: UserRepository,
-    private val appUpdateRepository: AppUpdateRepository,
-    private val deviceManager: DeviceManager
-) : JpaViewModel() {
+open class SplashViewModel @Inject constructor() : JpaViewModel() {
 
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    @Inject lateinit var sharedPreferences: SharedPreferences
+    @Inject lateinit var userRepository: UserRepository
+    @Inject lateinit var appUpdateRepository: AppUpdateRepository
+    @Inject lateinit var deviceManager: DeviceManager
+
 
     val successLiveData = SingleLiveEvent<Boolean>()
     val userIsEnteredLiveData = SingleLiveEvent<Boolean>()

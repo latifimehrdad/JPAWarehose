@@ -18,9 +18,13 @@ import com.zarholding.jpacustomer.view.adapter.recycler.BillingReturnDetailAdapt
  */
 
 class BillingReturnHolder(
-    private val binding: ItemReportCustomerBillingReturnBinding
+    private val binding: ItemReportCustomerBillingReturnBinding,
+    private val click: Click
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    interface Click {
+        fun detailPdf(id: Long)
+    }
 
     //---------------------------------------------------------------------------------------------- bind
     fun bind(item: BillingAndReturnReportModel) {
@@ -52,9 +56,9 @@ class BillingReturnHolder(
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener(item: BillingAndReturnReportModel) {
-
         binding.imageViewMore.setOnClickListener { clickShowMore(item) }
         binding.textViewShowMore.setOnClickListener { clickShowMore(item) }
+        binding.textViewReport.setOnClickListener { click.detailPdf(item.id) }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
