@@ -71,13 +71,14 @@
     <string name="customerCode">کد مشتری</string>
     <string name="salesExpert">کارشناس فروش</string>
     <string name="signOut">خروج از حساب</string>
-    <string name="activeDarkTheme">نوع تم نرم افزار</string>
+    <string name="activeDarkTheme">انتخاب تم نرم افزار</string>
+    <string name="chooseStoreLocation">انتخاب لوکیشن فروشگاه</string>
     <string name="setting">تنظیمات</string>
     <string name="contactUs">ارتباط با ما</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
     <string name="doYouWantToUpdateApp">نسخه جدید برنامه دردسترس است، لطفا بروزرسانی را انجام دهید</string>
     <string name="doYouWantToSubmitBasket">آیا برای ثبت سفارش مطمئن هستید؟</string>
-    <string name="purchaseAmountToDate">مقدار خرید تا امروز</string>
+    <string name="purchaseAmountToDate">مبلغ خرید امسال</string>
     <string name="discountAmount">مقدار تخفیف</string>
     <string name="discount">تخفیف</string>
     <string name="amountOwed">مبلغ بدهکاری</string>
@@ -93,11 +94,13 @@
     <string name="collectionVideos">ویدیوهای مجموعه</string>
     <string name="play">پخش</string>
     <string name="check">چک</string>
+    <string name="dependentCheck">چک سررسید نشده</string>
     <string name="introductionOfTheCollection">معرفی مجموعه</string>
     <string name="suggestions">انتقادات و پیشنهادات</string>
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
     <string name="reports">گزارشات</string>
     <string name="feedbackReport">گزارش مرجوعی</string>
+    <string name="returnAmount">مبلغ مرجوعی امسال</string>
     <string name="factorReport">گزارش فاکتور</string>
     <string name="customerBalanceReport">دفتر مشتری</string>
     <string name="billOfSale">صورتحساب فروش کالا و خدمات</string>
@@ -120,6 +123,11 @@
     <string name="default_notification_channel_id">jpa</string>
     <string name="seller">فروشنده</string>
     <string name="buyer">خریدار</string>
+    <string name="newIp">newIp</string>
+    <string name="ipPassword">password</string>
+    <string name="passwordIsInCorrect">رمز وارد شده اشتباه است</string>
+    <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
+    <string name="ipIsIncorrect">آدرس وارد شده صحیح نمیباشد</string>
 
 
 

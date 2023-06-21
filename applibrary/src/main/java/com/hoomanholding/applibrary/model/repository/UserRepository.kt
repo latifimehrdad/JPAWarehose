@@ -21,8 +21,8 @@ class UserRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestUserInfo
-    suspend fun requestUserInfo() =
-        apiCall { api.requestGetUserInfo(tokenRepository.getBearerToken()) }
+    suspend fun requestUserInfo(fireBaseToken: String?) =
+        apiCall { api.requestGetUserInfo(fireBaseToken, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestUserInfo
 
 

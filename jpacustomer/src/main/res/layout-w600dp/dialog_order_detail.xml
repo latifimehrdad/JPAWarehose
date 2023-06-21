@@ -17,6 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/imageViewClose"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/ic_close"/>
+
             <LinearLayout
                 android:id="@+id/linearLayoutTitle"
                 android:layout_width="wrap_content"
@@ -38,12 +48,25 @@
                     android:textSize="@dimen/_6sdp"
                     android:fontFamily="@font/iransans_medium"
                     android:text="@string/orderDetail"
-                    app:drawableEndCompat="@drawable/a_ic_cart"
+                    app:drawableEndCompat="@drawable/a_drawable_basket"
                     app:drawableTint="@color/a_textViewPrimary"
                     android:drawablePadding="@dimen/_5sdp"
                     android:gravity="center"/>
 
                 <TextView
+                    android:id="@+id/textViewNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orderDetailDate"
+                    android:textSize="@dimen/_6sdp"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/orderNumber"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/textViewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/orderDetailDate"
@@ -88,60 +111,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingVertical="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:background="@drawable/a_drawable_menu_curve">
-
-                <TextView
-                    android:id="@+id/textviewPriceTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_6sdp"
-                    android:fontFamily="@font/iransans_medium"
-                    android:text="@string/total"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <TextView
-                    android:id="@+id/textviewPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_6sdp"
-                    android:fontFamily="@font/iransans_medium"
-                    app:layout_constraintTop_toTopOf="@id/textviewPriceTitle"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <TextView
-                    android:id="@+id/textviewDiscountTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_6sdp"
-                    android:fontFamily="@font/iransans_medium"
-                    android:text="@string/discount"
-                    app:layout_constraintTop_toBottomOf="@id/textviewPriceTitle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_5sdp"/>
-
-                <TextView
-                    android:id="@+id/textviewDiscount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_6sdp"
-                    android:fontFamily="@font/iransans_medium"
-                    app:layout_constraintTop_toTopOf="@id/textviewDiscountTitle"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <View
-                    android:id="@+id/viewLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    app:layout_constraintTop_toBottomOf="@id/textviewDiscount"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@color/a_textHint"/>
 
                 <TextView
                     android:id="@+id/textviewTotalTitle"
@@ -151,9 +123,8 @@
                     android:textSize="@dimen/_6sdp"
                     android:fontFamily="@font/iransans_medium"
                     android:text="@string/totalAmount"
-                    app:layout_constraintTop_toBottomOf="@id/viewLine"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_5sdp"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/textviewTotal"

@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
@@ -32,6 +33,7 @@ import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProfileBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
+import com.zarholding.jpacustomer.view.dialog.location.EditLocationDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -92,6 +94,9 @@ class ProfileFragment(
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
+        val alpha =
+            AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
+        binding.imageViewLocation.startAnimation(alpha)
         checkTheme()
         observeLiveDate()
         setListener()
@@ -138,7 +143,7 @@ class ProfileFragment(
     private fun setListener() {
         binding.switchFingerPrint.setOnClickListener { showBiometricDialog() }
 
-        binding.dayNightSwitch.setOnSwitchListener { dayNightSwitch, b ->
+        binding.dayNightSwitch.setOnSwitchListener { _, _ ->
             changeAppTheme()
         }
         binding.switchActive.setOnClickListener { changeAppTheme() }
@@ -155,6 +160,10 @@ class ProfileFragment(
 
         binding.cardViewProfile.setOnClickListener {
             cameraPermission()
+        }
+
+        binding.imageViewLocation.setOnClickListener {
+            EditLocationDialog().show(childFragmentManager, "location")
         }
 
         binding.cardViewVisitorProfile.setOnClickListener {

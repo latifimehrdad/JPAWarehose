@@ -93,6 +93,11 @@ class ProductDetailDialog(
             last = getString(R.string.rial),
             value = product.price
         )
+        binding.textViewCode.setTitleAndValue(
+            title = getString(R.string.productCode),
+            splitter = getString(R.string.colon),
+            value = product.productCode
+        )
     }
     //---------------------------------------------------------------------------------------------- getValueToXml
 

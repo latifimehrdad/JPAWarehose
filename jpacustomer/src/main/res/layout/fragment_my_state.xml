@@ -172,7 +172,7 @@
                         android:textColor="@color/primaryColor"
                         android:textSize="@dimen/_9sdp"
                         android:fontFamily="@font/iransans_medium"
-                        android:text="@string/discountAmount"
+                        android:text="@string/returnAmount"
                         />
 
                     <TextView
@@ -264,7 +264,7 @@
                         android:textColor="@color/primaryColor"
                         android:textSize="@dimen/_9sdp"
                         android:fontFamily="@font/iransans_medium"
-                        android:text="@string/check"
+                        android:text="@string/dependentCheck"
                         />
 
                     <TextView

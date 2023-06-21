@@ -12,7 +12,7 @@ import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
-import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailPDFModel
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -226,7 +226,7 @@ class ReportPDFFragment(
 
 
     //---------------------------------------------------------------------------------------------- setBillingReturnDetail
-    private fun setBillingReturnDetail(item: CustomerOrderDetailModel){
+    private fun setBillingReturnDetail(item: CustomerOrderDetailPDFModel){
         binding.layoutBillReturnDetailTitle.root.visibility = View.VISIBLE
         binding.constraintLayoutTotalAmount.visibility = View.VISIBLE
         val manager = LinearLayoutManager(
@@ -332,7 +332,7 @@ class ReportPDFFragment(
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             requireContext().startActivity(intent)
         }
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
     //---------------------------------------------------------------------------------------------- onDestroyView
 

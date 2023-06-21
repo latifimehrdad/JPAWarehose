@@ -2,8 +2,12 @@ package com.zarholding.jpacustomer.view.fragment.splash
 
 import android.Manifest
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
+import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
@@ -14,10 +18,15 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
+import com.zar.core.tools.manager.DialogManager
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentSplashBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /**
@@ -62,6 +71,48 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         binding.cardViewLogin.setOnClickListener {
             requestGetAppVersion()
         }
+
+        binding.imageViewLogo.setOnLongClickListener {
+            if (context != null) {
+                val dialog = DialogManager().createDialogHeightWrapContent(
+                    requireContext(),
+                    R.layout.dialog_confirm_ip,
+                    Gravity.CENTER,
+                    0
+                )
+
+                val textInputEditTextIp =
+                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIp)
+
+                val textInputEditTextIpPassword =
+                    dialog.findViewById<TextInputEditText>(R.id.textInputEditTextIpPassword)
+
+                val buttonNo = dialog.findViewById<MaterialButton>(R.id.buttonNo)
+                buttonNo.setOnClickListener { dialog.dismiss() }
+
+                val buttonYes = dialog.findViewById<MaterialButton>(R.id.buttonYes)
+                buttonYes.setOnClickListener {
+
+                    if (textInputEditTextIp.text.toString().isIP()) {
+                        if (textInputEditTextIpPassword.text.toString() != "holeshdaf"){
+                            textInputEditTextIpPassword.error = getString(R.string.passwordIsInCorrect)
+                            return@setOnClickListener
+                        }
+                        viewModel.saveNewIp(textInputEditTextIp.text.toString())
+                        showMessage(getString(R.string.updateIsSuccess))
+                        CoroutineScope(Dispatchers.Main).launch {
+                            delay(1500)
+                            (activity as MainActivity?)?.finish()
+                        }
+                    } else {
+                        textInputEditTextIp.error = getString(R.string.ipIsIncorrect)
+                    }
+                }
+                dialog.show()
+            }
+            return@setOnLongClickListener true
+        }
+
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -78,12 +129,12 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
 
         viewModel.successLiveData.observe(viewLifecycleOwner) {
-            viewModel.fireBaseToken()
+            viewModel.subscribeToTopic()
         }
 
         viewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
             if (it)
-                gotoFragmentHome()
+                getFireBaseToken()
             else
                 gotoFragmentLogin()
         }
@@ -96,6 +147,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             showMessage(getString(R.string.loginIsSuccess))
             if (it)
                 gotoFragment(R.id.action_splashFragment_to_homeFragment)
+        }
+
+        viewModel.fireBaseTokenLiveData.observe(viewLifecycleOwner) {
+            viewModel.requestGetData()
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -170,12 +225,12 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
 
 
-    //---------------------------------------------------------------------------------------------- gotoFragmentHome
-    private fun gotoFragmentHome() {
+    //---------------------------------------------------------------------------------------------- getFireBaseToken
+    private fun getFireBaseToken() {
         binding.textViewLogin.text = getString(R.string.bePatient)
-        viewModel.requestGetData()
+        viewModel.fireBaseToken()
     }
-    //---------------------------------------------------------------------------------------------- gotoFragmentHome
+    //---------------------------------------------------------------------------------------------- getFireBaseToken
 
 
 /*    //---------------------------------------------------------------------------------------------- onDestroyView

@@ -4,7 +4,7 @@ package com.hoomanholding.applibrary.model.data.response.order
  * Created by m-latifi on 6/20/2023.
  */
 
-data class CustomerOrderDetailItemModel(
+data class CustomerOrderDetailItemPDFModel(
     val id: Long,
     val billingId: Long,
     val productCode: String?,

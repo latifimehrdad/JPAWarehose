@@ -20,4 +20,11 @@ class CustomerRepository @Inject constructor(
         apiCall { api.requestGetCustomerState(tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestGetCustomerState
 
+
+
+    //---------------------------------------------------------------------------------------------- requestEditCustomerLocation
+    suspend fun requestEditCustomerLocation(lat: Double, long: Double) =
+        apiCall { api.requestEditCustomerLocation(lat,long, tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestEditCustomerLocation
+
 }

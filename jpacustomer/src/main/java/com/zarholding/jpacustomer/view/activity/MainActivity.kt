@@ -221,21 +221,13 @@ class MainActivity : AppCompatActivity() {
                 binding.customMenuReport.clearSelected()
             }
 
-            R.id.reportFragment -> {
+            R.id.reportFragment,
+            R.id.customerBalanceReportFragment,
+            R.id.billingReturnReportFragment -> {
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.textViewUserName.visibility = View.VISIBLE
-                binding.customMenuReport.selected()
-                binding.customMenuHome.clearSelected()
-                binding.customMenuProduct.clearSelected()
-                binding.customMenuProfile.clearSelected()
-                binding.customMenuCart.clearSelected()
-            }
-
-            R.id.customerBalanceReportFragment,
-            R.id.billingReturnReportFragment -> if (!binding.customMenuReport.isSelectedMenu()) {
-                binding.cardViewMenu.visibility = View.VISIBLE
                 binding.customMenuReport.selected()
                 binding.customMenuHome.clearSelected()
                 binding.customMenuProduct.clearSelected()

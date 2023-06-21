@@ -1,4 +1,4 @@
-package com.zarholding.jpacustomer.view.dialog.order
+package com.zarholding.jpacustomer.view.dialog.location
 
 import android.content.DialogInterface
 import android.graphics.Color
@@ -11,34 +11,29 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.hoomanholding.applibrary.ext.config
-import com.hoomanholding.applibrary.ext.setAmount
-import com.hoomanholding.applibrary.ext.setTitleAndValue
-import com.hoomanholding.applibrary.ext.startLoading
-import com.hoomanholding.applibrary.ext.stopLoading
-import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
-import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.zar.core.enums.EnumApiError
+import com.zar.core.tools.manager.ThemeManager
 import com.zarholding.jpacustomer.R
-import com.zarholding.jpacustomer.databinding.DialogOrderDetailBinding
+import com.zarholding.jpacustomer.databinding.DialogChooseLocationBinding
+import com.zarholding.jpacustomer.tools.OsmManager
 import com.zarholding.jpacustomer.view.activity.MainActivity
-import com.zarholding.jpacustomer.view.adapter.recycler.OrderDetailAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import org.osmdroid.util.GeoPoint
+import javax.inject.Inject
 
 /**
  * Created by m-latifi on 5/27/2023.
  */
 
 @AndroidEntryPoint
-class OrderDetailDialog(
-    private val orderId: Long,
-    private val orderAmount: Long
-) : DialogFragment() {
+class EditLocationDialog() : DialogFragment() {
 
 
-    private val viewModel: OrderDetailViewModel by viewModels()
-    private lateinit var binding: DialogOrderDetailBinding
+    private val viewModel: EditLocationViewModel by viewModels()
+    private lateinit var binding: DialogChooseLocationBinding
+    private lateinit var osmManager: OsmManager
+    @Inject
+    lateinit var themeManagers: ThemeManager
 
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onCreateView(
@@ -46,7 +41,7 @@ class OrderDetailDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DialogOrderDetailBinding.inflate(inflater, container, false)
+        binding = DialogChooseLocationBinding.inflate(inflater, container, false)
         return binding.root
     }
     //---------------------------------------------------------------------------------------------- onCreateView
@@ -64,9 +59,9 @@ class OrderDetailDialog(
         lp.height = WindowManager.LayoutParams.MATCH_PARENT
         window?.attributes = lp
         (activity as MainActivity?)?.hideFragmentContainer()
-        binding.shimmerViewContainer.config(getShimmerBuild())
+        osmManager = OsmManager(binding.mapView)
+        osmManager.mapInitialize(themeManagers.applicationTheme())
         observeLiveDate()
-        getOrderDetail()
         setListener()
     }
     //---------------------------------------------------------------------------------------------- onCreateView
@@ -80,13 +75,6 @@ class OrderDetailDialog(
     //---------------------------------------------------------------------------------------------- showMessage
 
 
-    //---------------------------------------------------------------------------------------------- setListener
-    private fun setListener() {
-        binding.imageViewClose.setOnClickListener { dismiss() }
-    }
-    //---------------------------------------------------------------------------------------------- setListener
-
-
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
@@ -98,53 +86,30 @@ class OrderDetailDialog(
             dismiss()
         }
 
-        viewModel.orderDetailLiveData.observe(viewLifecycleOwner) {
-            binding.shimmerViewContainer.stopLoading()
-            setAdapter(it)
+        viewModel.editLiveData.observe(viewLifecycleOwner) {
+            dismiss()
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
 
 
-    //---------------------------------------------------------------------------------------------- getOrderDetail
-    private fun getOrderDetail() {
-        binding.shimmerViewContainer.startLoading()
-        viewModel.getCustomerOrderDetail(orderId)
+    //---------------------------------------------------------------------------------------------- setListener
+    private fun setListener() {
+        binding.buttonChoose.setOnClickListener {
+            if (binding.buttonChoose.isLoading)
+                return@setOnClickListener
+            binding.buttonChoose.startLoading(getString(R.string.bePatient))
+            val center =
+                GeoPoint(binding.mapView.mapCenter.latitude, binding.mapView.mapCenter.longitude)
+            viewModel.requestEditCustomerLocation(center.latitude, center.longitude)
+        }
+
+        binding.imageViewClose.setOnClickListener {
+            dismiss()
+        }
     }
-    //---------------------------------------------------------------------------------------------- getOrderDetail
-
-
-
-    //---------------------------------------------------------------------------------------------- setAdapter
-    private fun setAdapter(items: List<CustomerOrderDetailModel>) {
-        if (context == null && items.isEmpty())
-            return
-        val first = items.first()
-        binding.textViewNumber.setTitleAndValue(
-            title = getString(R.string.orderNumber),
-            splitter = getString(R.string.colon),
-            value = first.billingNumber
-        )
-        binding.textViewDate.setTitleAndValue(
-            title = getString(R.string.date),
-            splitter = getString(R.string.colon),
-            value = first.billingDate
-        )
-        binding.textviewTotal.setAmount(
-            value = orderAmount,
-            getString(R.string.rial)
-        )
-        val adapter = OrderDetailAdapter(items)
-        val manager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        binding.recyclerViewOrder.layoutManager = manager
-        binding.recyclerViewOrder.adapter = adapter
-    }
-    //---------------------------------------------------------------------------------------------- setAdapter
+    //---------------------------------------------------------------------------------------------- setListener
 
 
 

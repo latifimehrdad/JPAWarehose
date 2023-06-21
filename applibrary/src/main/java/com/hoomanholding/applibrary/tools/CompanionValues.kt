@@ -10,6 +10,7 @@ class CompanionValues {
         const val APP_NAME = "app_name"
         const val URL = "newUrl"
         const val TOKEN = "token"
+        const val FIREBASE_TOKEN = "firebase_token"
         const val biometric = "biometric"
         const val userName = "userName"
         const val password = "password"

@@ -1,7 +1,13 @@
 package com.zarholding.jpacustomer.view.dialog.order
 
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.zarholding.jpacustomer.model.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -9,6 +15,27 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class OrderDetailViewModel @Inject constructor(): JpaViewModel() {
+class OrderDetailViewModel @Inject constructor(
+    private val orderRepository: OrderRepository
+): JpaViewModel() {
+
+
+    val orderDetailLiveData: MutableLiveData<List<CustomerOrderDetailModel>> by lazy {
+        MutableLiveData<List<CustomerOrderDetailModel>>()
+    }
+
+
+    //---------------------------------------------------------------------------------------------- getCustomerOrderDetail
+    fun getCustomerOrderDetail(orderId: Long) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val response = checkResponse(orderRepository.requestGetCustomerOrderDetail(orderId))
+            response?.let {
+                orderDetailLiveData.postValue(it)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getCustomerOrderDetail
+
+
 
 }

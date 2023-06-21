@@ -20,7 +20,7 @@
     </style>
 
     <style name="switchStyle" parent="Base.Theme.AppCompat">
-        <item name="colorAccent">#FFB300</item>
+        <item name="colorAccent">@color/yellow</item>
         <item name="android:colorForeground">@color/a_gradiantEnd</item>
     </style>
 

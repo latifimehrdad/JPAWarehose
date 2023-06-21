@@ -4,6 +4,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -45,23 +46,10 @@
             android:padding="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@id/textViewTitle">
 
-            <TextView
-                android:id="@+id/textViewOrderNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/a_drawable_back_edit"
-                android:fontFamily="@font/iransans_light"
-                android:padding="@dimen/_5sdp"
-                android:text="@string/orderNumber"
-                android:textColor="@color/a_menuIconSelect"
-                android:textSize="@dimen/_8sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <com.skydoves.powerspinner.PowerSpinnerView
                 android:id="@+id/spinnerChooseChart"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:background="@drawable/a_drawable_back_edit"
                 android:fontFamily="@font/iransans_medium"
@@ -71,10 +59,9 @@
                 android:textColor="@color/a_menuIconSelect"
                 android:textColorHint="@color/a_textHint"
                 android:textSize="@dimen/_9sdp"
-                app:layout_constraintBottom_toBottomOf="@id/textViewOrderNumber"
-                app:layout_constraintEnd_toStartOf="@id/textViewOrderNumber"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/textViewOrderNumber"
                 app:spinner_arrow_drawable="@drawable/a_ic_play"
                 app:spinner_arrow_gravity="start"
                 app:spinner_arrow_padding="8dp"
@@ -96,7 +83,7 @@
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintEnd_toStartOf="@id/stepLoading"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewOrderNumber"
+                app:layout_constraintTop_toBottomOf="@id/spinnerChooseChart"
                 app:step_icon="@drawable/a_ic_step_send"
                 app:step_title="@string/sent" />
 

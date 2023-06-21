@@ -55,6 +55,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        binding.imageViewClearText.visibility = View.GONE
         observeLiveDate()
         setListener()
         getProduct()
@@ -104,6 +105,10 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
 
+        binding.imageViewClearText.setOnClickListener {
+            binding.editTextSearch.setText("")
+        }
+
         binding.buttonAllProduct.setOnClickListener {
             viewModel.setFilterByProductNew(false)
         }
@@ -114,6 +119,10 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
         binding.editTextSearch.addTextChangedListener {
             val text = it.toString()
+            if (text.isEmpty())
+                binding.imageViewClearText.visibility = View.GONE
+            else
+                binding.imageViewClearText.visibility = View.VISIBLE
             viewModel.setFilterByProductName(text)
         }
     }

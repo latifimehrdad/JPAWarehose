@@ -1,23 +1,18 @@
 package com.hoomanholding.applibrary.model.data.response.order
 
 /**
- * Created by m-latifi on 6/20/2023.
+ * Created by m-latifi on 6/21/2023.
  */
 
 data class CustomerOrderDetailModel(
-    val id: Long,
-    val billingNumber: Long,
+    val orderId: Long,
     val billingDate: String?,
-    val visitorName: String?,
-    val salerAddress: String?,
-    val customerName: String?,
-    val customerCode: String?,
-    val storeName: String?,
-    val customerMobile: String?,
-    val customerPhone: String?,
-    val customerAddress: String?,
-    val amount: Long,
-    val discount: Long,
-    val finalAmount: Long,
-    val items: List<CustomerOrderDetailItemModel>?
+    val billingNumber: String?,
+    val rowNumber: Int,
+    val productCode: String?,
+    val productName: String?,
+    val price: Long,
+    val count: Int,
+    val productAmount: Long,
+    val productThumbnailImageName: String
 )

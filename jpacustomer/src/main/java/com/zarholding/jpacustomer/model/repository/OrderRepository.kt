@@ -1,8 +1,6 @@
 package com.zarholding.jpacustomer.model.repository
 
 import com.hoomanholding.applibrary.model.api.Api
-import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
-import com.hoomanholding.applibrary.model.data.request.OrderToggleStateRequest
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.zar.core.tools.api.apiCall
 import javax.inject.Inject
@@ -21,5 +19,12 @@ class OrderRepository @Inject constructor(
     suspend fun requestCustomerGetOrder() =
         apiCall { api.requestCustomerGetOrder(tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestCustomerGetOrder
+
+
+
+    //---------------------------------------------------------------------------------------------- requestGetCustomerOrderDetail
+    suspend fun requestGetCustomerOrderDetail(orderId: Long) =
+        apiCall { api.requestGetCustomerOrderDetail(orderId, tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestGetCustomerOrderDetail
 
 }

@@ -66,7 +66,8 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
     //---------------------------------------------------------------------------------------------- requestGetData
     fun requestGetData() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            requestUserInfo().join()
+            val fbToken = sharedPreferences.getString(CompanionValues.FIREBASE_TOKEN, "")
+            requestUserInfo(fbToken).join()
             requestUserPermission().join()
             getAllData().join()
         }
@@ -75,10 +76,10 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
 
 
     //---------------------------------------------------------------------------------------------- requestUserInfo
-    private fun requestUserInfo(): Job {
+    private fun requestUserInfo(fireBaseToken: String?): Job {
         return CoroutineScope(IO + exceptionHandler()).launch {
             delay(500)
-            val response = checkResponse(userRepository.requestUserInfo())
+            val response = checkResponse(userRepository.requestUserInfo(fireBaseToken))
             response?.let {
                 userRepository.insertUserInfo(it)
             }

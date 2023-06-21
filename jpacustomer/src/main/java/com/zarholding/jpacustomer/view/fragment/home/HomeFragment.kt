@@ -55,7 +55,6 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     //---------------------------------------------------------------------------------------------- OnBackPressedCallback
 
 
-
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -79,7 +78,8 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             android.R.color.holo_blue_bright,
             android.R.color.holo_green_light,
             android.R.color.holo_orange_light,
-            android.R.color.holo_red_light)
+            android.R.color.holo_red_light
+        )
         observeLiveDate()
         resetSteps()
         setListener()
@@ -125,13 +125,18 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
+        binding.constraintLayoutPrimary.setOnClickListener {
+            binding.spinnerChooseChart.dismiss()
+        }
         binding.constraintLayoutStep.setOnClickListener {
             binding.spinnerChooseChart.dismiss()
         }
         binding.swipeContainer.setOnRefreshListener { getCustomerOrders(false) }
 
         binding.buttonShowOrderDetail.setOnClickListener {
-            OrderDetailDialog().show(childFragmentManager, "order")
+            viewModel.selectedOrder?.let {
+                OrderDetailDialog(it.orderId, it.finalAmount).show(childFragmentManager, "order")
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -161,7 +166,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         selectOrder(0, items[0])
         if (context == null)
             return
-        val click = object : OrderHolder.Click{
+        val click = object : OrderHolder.Click {
             override fun click(position: Int, item: CustomerOrderModel) {
                 selectOrder(position, item)
             }
@@ -183,9 +188,11 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     //---------------------------------------------------------------------------------------------- selectOrder
     private fun selectOrder(position: Int, item: CustomerOrderModel) {
         resetSteps()
+        viewModel.selectedOrder = item
         setStep(item.orderStates)
         OrderAdapter.selectedPosition = position
-        adapter?.notifyItemRangeChanged(0, adapter?.itemCount?:0)
+        binding.spinnerChooseChart.selectItemByIndex(position)
+        adapter?.notifyItemRangeChanged(0, adapter?.itemCount ?: 0)
     }
     //---------------------------------------------------------------------------------------------- selectOrder
 
@@ -200,18 +207,21 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
                 binding.stepConfirmed.visibility = View.VISIBLE
                 binding.stepNone.selected()
             }
+
             EnumOrderState.Rejected -> {
                 binding.textViewStep.text = getString(R.string.rejected)
                 binding.stepRejected.visibility = View.VISIBLE
                 binding.stepNone.selected()
                 binding.stepRejected.selected()
             }
+
             EnumOrderState.Confirmed -> {
                 binding.textViewStep.text = getString(R.string.confirmed)
                 binding.stepConfirmed.visibility = View.VISIBLE
                 binding.stepNone.selected()
                 binding.stepConfirmed.selected()
             }
+
             EnumOrderState.Packing -> {
                 binding.textViewStep.text = getString(R.string.packing)
                 binding.stepConfirmed.visibility = View.VISIBLE
@@ -219,6 +229,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
                 binding.stepConfirmed.selected()
                 binding.stepPacking.selected()
             }
+
             EnumOrderState.Billing -> {
                 binding.textViewStep.text = getString(R.string.billing)
                 binding.stepConfirmed.visibility = View.VISIBLE
@@ -227,6 +238,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
                 binding.stepPacking.selected()
                 binding.stepBilling.selected()
             }
+
             EnumOrderState.Loading -> {
                 binding.textViewStep.text = getString(R.string.loading)
                 binding.stepConfirmed.visibility = View.VISIBLE
@@ -236,6 +248,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
                 binding.stepBilling.selected()
                 binding.stepLoading.selected()
             }
+
             EnumOrderState.Sent -> {
                 binding.textViewStep.text = getString(R.string.sent)
                 binding.stepConfirmed.visibility = View.VISIBLE
@@ -259,11 +272,19 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             setItems(orderNumbers)
             getSpinnerRecyclerView().layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            setOnSpinnerItemSelectedListener<Int> { _, _, newIndex, _ ->
-                selectOrder(newIndex, items[newIndex])
+            setOnSpinnerItemSelectedListener<Int> { oldIndex, _, newIndex, _ ->
+                if (oldIndex != newIndex)
+                    selectOrder(newIndex, items[newIndex])
             }
         }
     }
     //---------------------------------------------------------------------------------------------- setOrderNumberSpinner
 
+
+    //---------------------------------------------------------------------------------------------- onDestroyView
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.spinnerChooseChart.dismiss()
+    }
+    //---------------------------------------------------------------------------------------------- onDestroyView
 }

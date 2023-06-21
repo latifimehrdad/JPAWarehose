@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
-import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailPDFModel
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.model.repository.ReportRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -32,8 +32,8 @@ class BillingReturnViewModel @Inject constructor(
     val reportLiveData: MutableLiveData<List<BillingAndReturnReportModel>> by lazy {
         MutableLiveData<List<BillingAndReturnReportModel>>()
     }
-    val reportDetailLiveData: MutableLiveData<CustomerOrderDetailModel> by lazy {
-        MutableLiveData<CustomerOrderDetailModel>()
+    val reportDetailLiveData: MutableLiveData<CustomerOrderDetailPDFModel> by lazy {
+        MutableLiveData<CustomerOrderDetailPDFModel>()
     }
 
     //---------------------------------------------------------------------------------------------- getReportType

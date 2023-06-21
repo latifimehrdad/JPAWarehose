@@ -28,6 +28,18 @@
             android:drawablePadding="@dimen/_5sdp"
             android:autofillHints="none"/>
 
+        <ImageView
+            android:id="@+id/imageViewClearText"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            app:layout_constraintTop_toTopOf="@id/editTextSearch"
+            app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
+            app:layout_constraintEnd_toEndOf="@id/editTextSearch"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:background="@drawable/a_drawable_back_edit2"
+            android:src="@drawable/a_ic_delete"
+            android:contentDescription="@string/deleteBasket" />
+
 
         <com.hoomanholding.applibrary.view.custom.JpaButton
             android:id="@+id/buttonNewProduct"

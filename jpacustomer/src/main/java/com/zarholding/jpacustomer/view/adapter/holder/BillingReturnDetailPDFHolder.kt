@@ -1,7 +1,7 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailItemModel
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailItemPDFModel
 import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.databinding.ItemReportPdfBillReturnDetailBinding
 
@@ -15,7 +15,7 @@ class BillingReturnDetailPDFHolder(
 
 
     //---------------------------------------------------------------------------------------------- bind
-    fun bind(item: CustomerOrderDetailItemModel) {
+    fun bind(item: CustomerOrderDetailItemPDFModel) {
         setValueToXml(item)
         binding.executePendingBindings()
     }
@@ -23,7 +23,7 @@ class BillingReturnDetailPDFHolder(
 
 
     //---------------------------------------------------------------------------------------------- setValueToXml
-    private fun setValueToXml(item: CustomerOrderDetailItemModel) {
+    private fun setValueToXml(item: CustomerOrderDetailItemPDFModel) {
         binding.textViewTotalAmount.text = item.productAmount.split()
         binding.textViewPrice.text = item.price.split()
         binding.textViewCount.text = item.count.split()

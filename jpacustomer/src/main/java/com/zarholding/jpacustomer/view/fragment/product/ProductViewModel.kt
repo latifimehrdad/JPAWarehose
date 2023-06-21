@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.zar.core.tools.extensions.persianNumberToEnglishNumber
 import com.zarholding.jpacustomer.model.repository.BasketRepository
 import com.zarholding.jpacustomer.model.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -71,6 +72,7 @@ class ProductViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- searchProduct
     private fun searchProduct(items: List<ProductModel>) {
         val new = productNewLiveData.value ?: false
+        productSearch = productSearch.persianNumberToEnglishNumber()
         val words = productSearch.split(" ")
         val list = if (new)
             if (words.isEmpty())

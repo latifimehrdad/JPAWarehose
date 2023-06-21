@@ -101,20 +101,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/customMenuReport"
-                    app:layout_constraintEnd_toStartOf="@id/customMenuProduct"
-                    app:layout_constraintDimensionRatio="W,1:1"
-                    app:menu_icon="@drawable/a_ic_cart" />
-
-                <com.zarholding.jpacustomer.view.custom.CustomMenu
-                    android:id="@+id/customMenuProduct"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/customMenuCart"
                     app:layout_constraintEnd_toStartOf="@id/customMenuHome"
                     app:layout_constraintDimensionRatio="W,1:1"
-                    app:menu_icon="@drawable/a_ic_product" />
+                    app:menu_icon="@drawable/a_ic_cart" />
 
                 <com.zarholding.jpacustomer.view.custom.CustomMenu
                     android:id="@+id/customMenuHome"
@@ -122,10 +111,22 @@
                     android:layout_height="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/customMenuProduct"
-                    app:layout_constraintEnd_toStartOf="@id/customMenuProfile"
+                    app:layout_constraintStart_toEndOf="@id/customMenuCart"
+                    app:layout_constraintEnd_toStartOf="@id/customMenuProduct"
                     app:layout_constraintDimensionRatio="W,1:1"
                     app:menu_icon="@drawable/a_ic_home" />
+
+                <com.zarholding.jpacustomer.view.custom.CustomMenu
+                    android:id="@+id/customMenuProduct"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/customMenuHome"
+                    app:layout_constraintEnd_toStartOf="@id/customMenuProfile"
+                    app:layout_constraintDimensionRatio="W,1:1"
+                    app:menu_icon="@drawable/a_ic_product" />
+
 
                 <com.zarholding.jpacustomer.view.custom.CustomMenu
                     android:id="@+id/customMenuProfile"
@@ -133,7 +134,7 @@
                     android:layout_height="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/customMenuHome"
+                    app:layout_constraintStart_toEndOf="@id/customMenuProduct"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintDimensionRatio="W,1:1"
                     app:menu_icon="@drawable/a_ic_profile" />

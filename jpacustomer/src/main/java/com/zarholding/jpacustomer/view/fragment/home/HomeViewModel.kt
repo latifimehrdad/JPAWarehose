@@ -26,6 +26,8 @@ class HomeViewModel @Inject constructor(
         MutableLiveData<List<CustomerOrderModel>>()
     }
 
+    var selectedOrder: CustomerOrderModel? = null
+
     val basketCountLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
 
@@ -51,5 +53,6 @@ class HomeViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getBasketCount
+
 
 }

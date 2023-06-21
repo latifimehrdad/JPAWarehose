@@ -8,7 +8,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
  */
 
 data class CustomerOrderModel(
-    val orderId: Int,
+    val orderId: Long,
     val orderNumber: Int,
     val orderDate: String?,
     val orderStates: EnumOrderState,

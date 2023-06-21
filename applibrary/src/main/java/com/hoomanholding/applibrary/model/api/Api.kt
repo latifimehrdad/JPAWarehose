@@ -15,6 +15,7 @@ import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinanci
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerStateModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailPDFModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
@@ -63,6 +64,7 @@ interface Api {
 
     @GET("$user/login-userInfo")
     suspend fun requestGetUserInfo(
+        @Query("UserToken") fireBaseToken: String?,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<UserInfoEntity?>>
 
@@ -162,6 +164,12 @@ interface Api {
     suspend fun requestCustomerGetOrder(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CustomerOrderModel>?>>
+
+    @GET("$saleOrders$customerApp-Order-Details-View")
+    suspend fun requestGetCustomerOrderDetail(
+        @Query("orderId") orderId: Long,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CustomerOrderDetailModel>?>>
     //---------------------------------------------------------------------------------------------- saleOrders
 
 
@@ -190,6 +198,13 @@ interface Api {
     suspend fun requestGetCustomerState(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<CustomerStateModel?>>
+
+    @GET("$customers/Edit-customer-Location")
+    suspend fun requestEditCustomerLocation(
+        @Query("x") lat: Double,
+        @Query("y") long: Double,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
     //---------------------------------------------------------------------------------------------- Customers
 
 
@@ -299,7 +314,7 @@ interface Api {
         @Query("billingId") billingId: Long,
         @Query("type") type: String,
         @Header("Authorization") token: String
-    ): Response<GeneralResponse<CustomerOrderDetailModel?>>
+    ): Response<GeneralResponse<CustomerOrderDetailPDFModel?>>
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 
@@ -348,6 +363,9 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<AboutModel?>>
     //---------------------------------------------------------------------------------------------- about
+
+
+
 
 
 
