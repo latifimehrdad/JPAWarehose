@@ -332,6 +332,7 @@ class ReportPDFFragment(
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             requireContext().startActivity(intent)
         }
+        // چون در pdf گزارش مرجوعی و فاکتور قابلیت دریافت تکی هم وجود داره که جهت جا شدن آیتم ها صفحه LANDSCAPE میشود
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
     //---------------------------------------------------------------------------------------------- onDestroyView
