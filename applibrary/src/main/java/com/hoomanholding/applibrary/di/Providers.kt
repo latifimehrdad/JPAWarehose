@@ -20,8 +20,8 @@ import javax.inject.Singleton
 class Providers {
 
     companion object {
-//        const val url = "http://5.202.84.244:9090" // Jpa
-        const val url = "http://10.252.37.37:7575"//Zar
+        var url = "http://192.168.70.176:9090" // Jpa
+//        var url = "http://10.252.37.37:7575"//Zar
     }
 
     //---------------------------------------------------------------------------------------------- provideUrl
@@ -30,6 +30,7 @@ class Providers {
     fun provideUrl(@ApplicationContext appContext: Context): String {
         val share = appContext.getSharedPreferences("secret_shared_prefs", Context.MODE_PRIVATE)
         val ip = share.getString(URL, null)
+        ip?.let { url = ip }
         return ip ?: run { url }
     }
     //---------------------------------------------------------------------------------------------- provideUrl

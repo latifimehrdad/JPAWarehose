@@ -31,7 +31,7 @@
                 android:paddingStart="@dimen/_25sdp"
                 android:paddingEnd="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
-                android:text="شسیتناسشنتانشستاین"/>
+                android:text="لطفا جهت دسترسی سریع و آسان همکاران توزیع و پخش ما ، لوکیشن فروشگاه خود را با دقت و صحیح انتخاب نمایید. با تشکر"/>
 
             <ImageView
                 android:id="@+id/imageViewClose"
