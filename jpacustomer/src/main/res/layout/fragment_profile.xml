@@ -103,8 +103,8 @@
                     app:layout_constraintBottom_toTopOf="@id/textViewShopAddress"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:textColor="@color/a_textHint"
-                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -115,8 +115,8 @@
                     app:layout_constraintStart_toStartOf="@id/textViewShopName"
                     app:layout_constraintEnd_toEndOf="@id/textViewShopName"
                     app:layout_constraintBottom_toBottomOf="@id/textViewMyState"
-                    android:textColor="@color/a_textHint"
-                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView

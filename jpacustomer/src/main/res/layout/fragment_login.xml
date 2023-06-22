@@ -64,7 +64,7 @@
                 android:drawableTop="@drawable/a_ic_user"
                 android:gravity="center"
                 android:hint="@string/userName"
-                android:inputType="none"
+                android:inputType="number"
                 android:maxLength="20"
                 android:singleLine="true"
                 android:textColorHint="@color/a_textView1"

@@ -19,6 +19,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.zar.core.enums.EnumApiError
+import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.DialogProductDetailBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
@@ -98,6 +99,11 @@ class ProductDetailDialog(
             splitter = getString(R.string.colon),
             value = product.productCode
         )
+        binding.textViewCount.text = getString(
+            R.string.countInBoxAndPackage,
+            product.productCountinPackage.split(),
+            product.productCountinBox.split()
+        )
     }
     //---------------------------------------------------------------------------------------------- getValueToXml
 
@@ -121,7 +127,6 @@ class ProductDetailDialog(
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
-
 
 
     //---------------------------------------------------------------------------------------------- setListener

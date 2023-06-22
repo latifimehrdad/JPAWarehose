@@ -16,9 +16,10 @@
 
             <LinearLayout
                 android:id="@+id/linearLayoutPrice"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                app:layout_constraintWidth_percent="0.25"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -34,22 +35,32 @@
 
                 <TextView
                     android:id="@+id/textViewPrice"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans_bold"
                     android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_10sdp"/>
+                    android:textSize="@dimen/_9sdp"/>
 
-                <com.hoomanholding.applibrary.view.custom.JpaButton
-                    android:id="@+id/buttonShowDetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"
-                    android:backgroundTint="@color/primaryColor"
+                <TextView
+                    android:id="@+id/textViewCountInPackage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
                     android:fontFamily="@font/iransans_light"
-                    android:text='@string/detailProduct'
-                    android:textColor="@color/a_textButton"
-                    android:textSize="@dimen/_7sdp"
-                    app:cornerRadius="@dimen/_7sdp" />
+                    android:textColor="@color/a_textViewPrimary"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:textSize="@dimen/_7sdp"/>
+
+                <TextView
+                    android:id="@+id/textViewCountInBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/iransans_light"
+                    android:textColor="@color/a_textViewPrimary"
+                    android:gravity="end"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:textSize="@dimen/_7sdp"/>
+
 
             </LinearLayout>
 

@@ -45,6 +45,16 @@ class ProductHolder(
             splitter = binding.textViewCode.context.getString(R.string.colon),
             value = item.productCode
         )
+        binding.textViewCountInBox.setTitleAndValue(
+            title = binding.textViewCountInBox.context.getString(R.string.countInBox),
+            splitter = binding.textViewCountInBox.context.getString(R.string.colon),
+            value = item.productCountinBox.split()
+        )
+        binding.textViewCountInPackage.setTitleAndValue(
+            title = binding.textViewCountInPackage.context.getString(R.string.countInPackage),
+            splitter = binding.textViewCountInPackage.context.getString(R.string.colon),
+            value = item.productCountinPackage.split()
+        )
         binding.imageViewPicture.downloadImage(
             url = item.productThumbnailImageName,
             placeholder = AppCompatResources

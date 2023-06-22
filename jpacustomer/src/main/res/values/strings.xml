@@ -128,6 +128,9 @@
     <string name="passwordIsInCorrect">رمز وارد شده اشتباه است</string>
     <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
     <string name="ipIsIncorrect">آدرس وارد شده صحیح نمیباشد</string>
+    <string name="countInBox">تعداد در کارتن</string>
+    <string name="countInPackage">تعداد در بسته</string>
+    <string name="countInBoxAndPackage">تعداد در بسته : %1$s - تعداد در کارتن : %2$s</string>
 
 
 
