@@ -31,8 +31,10 @@ import com.zar.core.tools.BiometricTools
 import com.zar.core.tools.manager.ThemeManager
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProfileBinding
+import com.zarholding.jpacustomer.model.ShowImageModel
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
+import com.zarholding.jpacustomer.view.dialog.ShowImageDialog
 import com.zarholding.jpacustomer.view.dialog.location.EditLocationDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -73,7 +75,6 @@ class ProfileFragment(
             }
         }
     //---------------------------------------------------------------------------------------------- launcher
-
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -129,10 +130,10 @@ class ProfileFragment(
             delay(300)
             when (themeManagers.applicationTheme()) {
                 Configuration.UI_MODE_NIGHT_YES ->
-                    binding.dayNightSwitch.setDayChecked(false,animated = true)
+                    binding.dayNightSwitch.setDayChecked(false, animated = true)
 
                 Configuration.UI_MODE_NIGHT_NO ->
-                    binding.dayNightSwitch.setDayChecked(true,animated = true)
+                    binding.dayNightSwitch.setDayChecked(true, animated = true)
             }
         }
     }
@@ -166,9 +167,14 @@ class ProfileFragment(
             EditLocationDialog().show(childFragmentManager, "location")
         }
 
-        binding.cardViewVisitorProfile.setOnClickListener {
-
+        binding.textViewSuggestions.setOnClickListener {
+            showMessage(getString(R.string.disableFeature))
         }
+
+        binding.textViewHistory.setOnClickListener {
+            showMessage(getString(R.string.disableFeature))
+        }
+
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -193,7 +199,7 @@ class ProfileFragment(
 
     //---------------------------------------------------------------------------------------------- changeAppTheme
     private fun changeAppTheme() {
-        CoroutineScope(IO).launch{
+        CoroutineScope(IO).launch {
             delay(300)
             withContext(Main) {
                 if (!binding.dayNightSwitch.isDayChecked())
@@ -246,6 +252,16 @@ class ProfileFragment(
             token = viewModel.getBearerToken(),
             entityType = EnumEntityType.VisitorImage.name
         )
+        binding.cardViewVisitorProfile.setOnClickListener {
+            if (context == null)
+                return@setOnClickListener
+            val model = ShowImageModel(
+                userInfo.visitorImageName,
+                EnumEntityType.VisitorImage.name,
+                viewModel.getBearerToken()
+            )
+            ShowImageDialog(requireContext(), model).show()
+        }
     }
     //---------------------------------------------------------------------------------------------- setUserInfo
 
@@ -286,7 +302,7 @@ class ProfileFragment(
     private fun uploadProfileImage(pictureUri: Uri) {
         binding.textViewPercent.visibility = View.VISIBLE
         binding.imageViewProfile.setImageURI(pictureUri)
-        viewModel.uploadPercentLiveData.observe(viewLifecycleOwner){
+        viewModel.uploadPercentLiveData.observe(viewLifecycleOwner) {
             if (it > 100) {
                 binding.textViewPercent.visibility = View.GONE
                 viewModel.uploadPercentLiveData.removeObservers(viewLifecycleOwner)
@@ -320,18 +336,18 @@ class ProfileFragment(
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
                     showMessage(getString(R.string.onAuthenticationError))
-                    binding.switchActive.isChecked = viewModel.isBiometricEnable()
+                    binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
                 }
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
-                    binding.switchActive.isChecked = viewModel.isBiometricEnable()
+                    binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
                 }
 
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-                    binding.switchActive.isChecked = !viewModel.isBiometricEnable()
+                    binding.switchFingerPrint.isChecked = !viewModel.isBiometricEnable()
                     viewModel.changeBiometricEnable()
                     showMessage(getString(R.string.actionIsDone))
                 }

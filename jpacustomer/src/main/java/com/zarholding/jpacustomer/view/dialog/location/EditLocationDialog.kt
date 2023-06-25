@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.tools.JpaLocationManager
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.manager.ThemeManager
 import com.zarholding.jpacustomer.R
@@ -32,6 +35,7 @@ class EditLocationDialog() : DialogFragment() {
     private val viewModel: EditLocationViewModel by viewModels()
     private lateinit var binding: DialogChooseLocationBinding
     private lateinit var osmManager: OsmManager
+
     @Inject
     lateinit var themeManagers: ThemeManager
 
@@ -62,10 +66,10 @@ class EditLocationDialog() : DialogFragment() {
         osmManager = OsmManager(binding.mapView)
         osmManager.mapInitialize(themeManagers.applicationTheme())
         observeLiveDate()
+        viewModel.getUserInfo()
         setListener()
     }
     //---------------------------------------------------------------------------------------------- onCreateView
-
 
 
     //---------------------------------------------------------------------------------------------- showMessage
@@ -86,12 +90,15 @@ class EditLocationDialog() : DialogFragment() {
             dismiss()
         }
 
+        viewModel.userLiveData.observe(viewLifecycleOwner) {
+            setUserLocationOnMap(it)
+        }
+
         viewModel.editLiveData.observe(viewLifecycleOwner) {
             dismiss()
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
-
 
 
     //---------------------------------------------------------------------------------------------- setListener
@@ -108,8 +115,47 @@ class EditLocationDialog() : DialogFragment() {
         binding.imageViewClose.setOnClickListener {
             dismiss()
         }
+
+        binding.imageViewCurrentLocation.setOnClickListener {
+            findMyLocation()
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
+
+
+    //---------------------------------------------------------------------------------------------- setUserLocationOnMap
+    private fun setUserLocationOnMap(userInfo: UserInfoEntity) {
+        val x = userInfo.x
+        val y = userInfo.y
+        if (x.compareTo(0) != 0 || y.compareTo(0) != 0){
+            val point = GeoPoint(x, y)
+            osmManager.moveCamera(point)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setUserLocationOnMap
+
+
+
+
+    //---------------------------------------------------------------------------------------------- findMyLocation
+    private fun findMyLocation() {
+        if (context == null)
+            return
+        JpaLocationManager(
+            context = requireContext(),
+            currentLocation = object : JpaLocationManager.CurrentLocation {
+                override fun findCurrentLocation(location: Location) {
+                    val current = GeoPoint(location.latitude, location.longitude)
+                    osmManager.moveCamera(current)
+                }
+
+                override fun failedMessage(message: String) {
+                    showMessage(message)
+                }
+            }
+        ).getCurrentLocation()
+    }
+    //---------------------------------------------------------------------------------------------- findMyLocation
 
 
 

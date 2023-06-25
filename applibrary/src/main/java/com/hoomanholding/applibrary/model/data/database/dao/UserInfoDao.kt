@@ -19,4 +19,8 @@ interface UserInfoDao {
     @Query("DELETE FROM userinfo")
     fun deleteAll()
 
+
+    @Query("UPDATE UserInfo SET x = :x, y = :y")
+    fun updateXY(x: Double, y: Double)
+
 }

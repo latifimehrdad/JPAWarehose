@@ -16,7 +16,7 @@
             app:layout_constraintDimensionRatio="H,1:1"
             android:layout_margin="@dimen/_5sdp"
             app:cardBackgroundColor="@color/a_cardView3"
-            app:cardCornerRadius="@dimen/_5sdp">
+            app:cardCornerRadius="@dimen/_15sdp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -48,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="@id/cardViewCustomerBalanceReport"
             android:layout_marginHorizontal="@dimen/_5sdp"
             app:cardBackgroundColor="@color/a_cardView3"
-            app:cardCornerRadius="@dimen/_5sdp">
+            app:cardCornerRadius="@dimen/_15sdp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             app:layout_constraintBottom_toBottomOf="@id/cardViewCustomerBalanceReport"
             android:layout_marginHorizontal="@dimen/_5sdp"
             app:cardBackgroundColor="@color/a_cardView3"
-            app:cardCornerRadius="@dimen/_5sdp">
+            app:cardCornerRadius="@dimen/_15sdp">
 
             <ImageView
                 android:layout_width="match_parent"

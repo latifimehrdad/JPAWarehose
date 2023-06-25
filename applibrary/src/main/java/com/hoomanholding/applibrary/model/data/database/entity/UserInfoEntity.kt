@@ -23,7 +23,9 @@ data class UserInfoEntity(
     val visitorId: Int,
     val visitorName: String?,
     val visitorMobile: String?,
-    val userTopicstr: String?
+    val userTopicstr: String?,
+    val x: Double,
+    val y: Double
 ) {
     @PrimaryKey(autoGenerate = false)
     var id : Long = 0

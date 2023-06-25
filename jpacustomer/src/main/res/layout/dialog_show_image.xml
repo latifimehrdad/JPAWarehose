@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="@dimen/_10sdp"
     android:layout_marginVertical="@dimen/_10sdp"
+    android:layoutDirection="ltr"
     android:maxHeight="@dimen/_200sdp"
     app:cardCornerRadius="@dimen/_10sdp"
     app:cardBackgroundColor="@color/a_cardView2">
@@ -25,7 +26,7 @@
             android:src="@drawable/ic_close"
             android:padding="@dimen/_5sdp"
             android:scaleType="fitEnd"
-            app:tint="@color/header_color"
+            app:tint="@color/white"
             android:contentDescription="@string/logo"
             tools:ignore="RtlSymmetry"
             android:background="@color/primaryColor"/>

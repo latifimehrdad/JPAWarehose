@@ -47,7 +47,7 @@
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
     <string name="confirmed">تایید شده</string>
-    <string name="packing">در حال آماده سازی</string>
+    <string name="packing">در حال جمع آوری</string>
     <string name="billing">فاکتور شده</string>
     <string name="loading">در حال ارسال</string>
     <string name="sent">ارسال شده</string>
@@ -78,7 +78,7 @@
     <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
     <string name="doYouWantToUpdateApp">نسخه جدید برنامه دردسترس است، لطفا بروزرسانی را انجام دهید</string>
     <string name="doYouWantToSubmitBasket">آیا برای ثبت سفارش مطمئن هستید؟</string>
-    <string name="purchaseAmountToDate">مبلغ خرید امسال</string>
+    <string name="purchaseCountToDate">تعداد خرید امسال</string>
     <string name="discountAmount">مقدار تخفیف</string>
     <string name="discount">تخفیف</string>
     <string name="amountOwed">مبلغ بدهکاری</string>
@@ -100,7 +100,7 @@
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
     <string name="reports">گزارشات</string>
     <string name="feedbackReport">گزارش مرجوعی</string>
-    <string name="returnAmount">مبلغ مرجوعی امسال</string>
+    <string name="returnCount">تعداد مرجوعی امسال</string>
     <string name="factorReport">گزارش فاکتور</string>
     <string name="customerBalanceReport">دفتر مشتری</string>
     <string name="billOfSale">صورتحساب فروش کالا و خدمات</string>
@@ -131,6 +131,7 @@
     <string name="countInBox">تعداد در کارتن</string>
     <string name="countInPackage">تعداد در بسته</string>
     <string name="countInBoxAndPackage">تعداد در بسته : %1$s - تعداد در کارتن : %2$s</string>
+    <string name="disableFeature">این قابلیت بزودی راه اندازی میشود</string>
 
 
 

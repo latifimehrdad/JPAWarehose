@@ -35,7 +35,7 @@ import com.hoomanholding.applibrary.model.data.database.entity.receipt.save.Save
         LocationAmountEntity::class,
         HistorySaveReceiptEntity::class,
         HistorySaveReceiptAmountEntity::class],
-    version = 3
+    version = 4
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

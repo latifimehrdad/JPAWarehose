@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import com.hoomanholding.applibrary.ext.downloadProfileImage
-import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.view.custom.TouchImageView
 import com.zarholding.jpacustomer.R
@@ -54,9 +53,9 @@ class ShowImageDialog(
         val imageViewClose = this.findViewById<ImageView>(R.id.imageViewClose)
         val touchImageView = this.findViewById<TouchImageView>(R.id.touchImageView)
         touchImageView.downloadProfileImage(
-            url = "${item.imageName}.PNG",
+            url = item.imageName,
             systemType = EnumSystemType.Customers.name,
-            entityType = EnumEntityType.ProductImage.name,
+            entityType = item.entityType,
             token = item.token,
             placeholder = R.drawable.a_ic_logo)
         imageViewClose.setOnClickListener {

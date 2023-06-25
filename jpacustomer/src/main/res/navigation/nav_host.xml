@@ -63,7 +63,20 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.zarholding.jpacustomer.view.fragment.home.HomeFragment" />
+        android:name="com.zarholding.jpacustomer.view.fragment.home.HomeFragment" >
+
+        <action
+            android:id="@+id/action_homeFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/productFragment" />
+
+
+    </fragment>
 
     <fragment
         android:id="@+id/productFragment"

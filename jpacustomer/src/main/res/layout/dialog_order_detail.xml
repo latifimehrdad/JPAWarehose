@@ -9,6 +9,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layoutDirection="ltr"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="@dimen/_10sdp"
         app:cardBackgroundColor="@color/a_cardView2">
@@ -120,8 +121,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/orderDetailDate"
-                    android:textSize="@dimen/_7sdp"
-                    android:fontFamily="@font/iransans_medium"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/iransans_bold"
                     android:text="@string/totalAmount"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -131,8 +132,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/orderDetailDate"
-                    android:textSize="@dimen/_7sdp"
-                    android:fontFamily="@font/iransans_medium"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/iransans_bold"
                     app:layout_constraintTop_toTopOf="@id/textviewTotalTitle"
                     app:layout_constraintStart_toStartOf="parent"/>
 

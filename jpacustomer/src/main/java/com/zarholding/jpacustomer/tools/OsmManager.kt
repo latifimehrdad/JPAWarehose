@@ -68,7 +68,7 @@ class OsmManager(private val map: MapView) {
 
 
     //---------------------------------------------------------------------------------------------- moveCamera
-    private fun moveCamera(geoPoint: GeoPoint) {
+    fun moveCamera(geoPoint: GeoPoint) {
         val mapController: IMapController = map.controller
         mapController.animateTo(geoPoint, 17.0, 1000)
     }

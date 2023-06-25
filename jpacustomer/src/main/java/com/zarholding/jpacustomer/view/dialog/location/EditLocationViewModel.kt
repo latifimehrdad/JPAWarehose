@@ -2,10 +2,13 @@ package com.zarholding.jpacustomer.view.dialog.location
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
+import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zarholding.jpacustomer.model.repository.CustomerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,12 +18,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditLocationViewModel @Inject constructor(
-    private val customerRepository: CustomerRepository
+    private val customerRepository: CustomerRepository,
+    private val userRepository: UserRepository
 ): JpaViewModel() {
 
 
     val editLiveData: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
+    }
+
+    val userLiveData: MutableLiveData<UserInfoEntity> by lazy {
+        MutableLiveData<UserInfoEntity>()
     }
 
 
@@ -29,11 +37,23 @@ class EditLocationViewModel @Inject constructor(
         viewModelScope.launch(IO + exceptionHandler()) {
             val response = checkResponse(customerRepository.requestEditCustomerLocation(lat, long))
             response?.let {
+                userRepository.updateXY(lat, long)
+                delay(500)
                 editLiveData.postValue(it)
             }
         }
     }
     //---------------------------------------------------------------------------------------------- requestEditCustomerLocation
 
+
+
+    //---------------------------------------------------------------------------------------------- getUserInfo
+    fun getUserInfo() {
+        val user = userRepository.getUser()
+        user?.let {
+            userLiveData.postValue(it)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getUserInfo
 
 }

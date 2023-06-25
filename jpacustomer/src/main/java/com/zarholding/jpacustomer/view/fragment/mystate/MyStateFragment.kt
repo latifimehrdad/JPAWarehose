@@ -128,18 +128,10 @@ class MyStateFragment(
 
     //---------------------------------------------------------------------------------------------- setCustomerStateToXml
     private fun setCustomerStateToXml(customerStateModel: CustomerStateModel) {
-        binding.textViewPurchaseAmount.setAmount(
-            value = customerStateModel.billingAmount,
-            getString(R.string.rial)
-        )
         binding.textViewPurchaseAmountText.setTitleAndValue(
             title = "تعداد",
             value = customerStateModel.billingCount,
             splitter = getString(R.string.space)
-        )
-        binding.textViewDiscountAmount.setAmount(
-            value = customerStateModel.returnAmount,
-            getString(R.string.rial)
         )
         binding.textViewDiscountAmountText.setTitleAndValue(
             title = "تعداد",

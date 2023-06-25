@@ -138,6 +138,10 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
                 OrderDetailDialog(it.orderId, it.finalAmount).show(childFragmentManager, "order")
             }
         }
+
+        binding.cardViewPriceInquiry.setOnClickListener {
+            gotoFragment(R.id.action_homeFragment_to_productFragment)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 

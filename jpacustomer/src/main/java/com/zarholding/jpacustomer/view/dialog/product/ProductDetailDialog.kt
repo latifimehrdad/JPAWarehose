@@ -145,7 +145,7 @@ class ProductDetailDialog(
 
         binding.buttonYes.setOnClickListener {
             val count = getEditTextCount()
-            if (count == 0 && binding.buttonYes.isLoading)
+            if (count == 0 || binding.buttonYes.isLoading)
                 return@setOnClickListener
             val request = AddToBasket(
                 ProductId = product.id,

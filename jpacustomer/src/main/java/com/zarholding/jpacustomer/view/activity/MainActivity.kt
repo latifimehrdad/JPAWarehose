@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- showMessage
     fun showMessage(message: String) {
-        val snack = Snackbar.make(binding.constraintLayoutParent, message, 5 * 1000)
+        val snack = Snackbar.make(binding.constraintLayoutParent, message, 3 * 1000)
         val view = snack.view
         val textView = (view).findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
         val font = Typeface.createFromAsset(assets, "font/yekan_bakh_medium.ttf")

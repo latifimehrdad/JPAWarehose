@@ -126,31 +126,20 @@
                         android:textColor="@color/primaryColor"
                         android:textSize="@dimen/_9sdp"
                         android:fontFamily="@font/iransans_medium"
-                        android:text="@string/purchaseAmountToDate"
-                        />
-
-                    <TextView
-                        android:id="@+id/textViewPurchaseAmount"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/textViewPurchaseAmountToDate"
-                        android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
-                        android:gravity="end"
-                        android:fontFamily="@font/iransans_light"
+                        android:text="@string/purchaseCountToDate"
                         />
 
                     <TextView
                         android:id="@+id/textViewPurchaseAmountText"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/textViewPurchaseAmount"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/textViewPurchaseAmountToDate"
                         android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="end"
                         android:fontFamily="@font/iransans_light"
                         />
 
@@ -172,15 +161,16 @@
                         android:textColor="@color/primaryColor"
                         android:textSize="@dimen/_9sdp"
                         android:fontFamily="@font/iransans_medium"
-                        android:text="@string/returnAmount"
+                        android:text="@string/returnCount"
                         />
 
                     <TextView
-                        android:id="@+id/textViewDiscountAmount"
+                        android:id="@+id/textViewDiscountAmountText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/textViewDiscountAmountTitle"
                         android:textColor="@color/a_textHint"
                         android:textSize="@dimen/_8sdp"
@@ -188,17 +178,6 @@
                         android:fontFamily="@font/iransans_light"
                         />
 
-                    <TextView
-                        android:id="@+id/textViewDiscountAmountText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/textViewDiscountAmount"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:textColor="@color/a_textHint"
-                        android:textSize="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/iransans_light"
-                        />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

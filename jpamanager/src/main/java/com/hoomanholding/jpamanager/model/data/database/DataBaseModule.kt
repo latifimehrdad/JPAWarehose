@@ -53,11 +53,18 @@ class DataBaseModule {
             }
         }
 
+        val migration3to4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN x REAL DEFAULT 0 NOT NULL")
+                database.execSQL("ALTER TABLE UserInfo ADD COLUMN y REAL DEFAULT 0 NOT NULL")
+            }
+        }
+
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             "jpa"
-        ).addMigrations(migration1to2,migration2to3).allowMainThreadQueries().build()
+        ).addMigrations(migration1to2,migration2to3, migration3to4).allowMainThreadQueries().build()
     }
     //---------------------------------------------------------------------------------------------- provideAppDatabase
 

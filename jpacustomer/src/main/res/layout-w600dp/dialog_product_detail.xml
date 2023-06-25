@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_10sdp"
+        android:layoutDirection="ltr"
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/a_cardView5">
 
