@@ -119,7 +119,7 @@ class AboutFragment(
         binding.cardViewVideo.visibility = View.VISIBLE
         binding.cardViewProfileHeader.visibility = View.VISIBLE
         binding.textViewCompanyName.text = item.companyName
-        binding.textViewAboutUs.text = item.aboutUs
+        binding.textViewAbout.text = item.aboutUs
         binding.textViewCall.setTitleAndValue(
             title = getString(R.string.phoneNumber),
             splitter = getString(R.string.colon),

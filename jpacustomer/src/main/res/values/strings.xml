@@ -117,6 +117,7 @@
     <string name="pieces">عدد</string>
     <string name="createPDF">دریافت PDF</string>
     <string name="reportFromTo">گزارش از تاریخ %1$s تا تاریخ %2$s</string>
+    <string name="customerCode2">کد مشتری : %1$s</string>
     <string name="description">توضیحات</string>
     <string name="remain">مانده</string>
     <string name="processToPDF">در حال ذخیره فایل pdf …</string>

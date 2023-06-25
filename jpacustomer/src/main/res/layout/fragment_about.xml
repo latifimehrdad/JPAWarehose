@@ -18,13 +18,85 @@
             android:fontFamily="@font/iransans_bold"
             android:text="@string/aboutUs"/>
 
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/logo"
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/a_ic_logo"/>
+
+        <TextView
+            android:id="@+id/textViewCompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+            app:layout_constraintStart_toStartOf="@id/imageViewLogo"
+            app:layout_constraintEnd_toEndOf="@id/imageViewLogo"
+            android:textColor="@color/a_textViewPrimary"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_10sdp"
+            android:fontFamily="@font/iransans_bold"/>
+
+        <TextView
+            android:id="@+id/textViewAbout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewCompanyName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/a_textViewPrimary"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_9sdp"
+            android:fontFamily="@font/iransans_light"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewVideo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewAbout"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            app:layout_constraintDimensionRatio="H,2:1"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_2sdp"
+            app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="@color/a_cardView8">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="@color/a_cardView2"
+                android:layout_margin="@dimen/_10sdp"
+                app:cardCornerRadius="15dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/play" />
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/a_ic_play2"
+                    android:contentDescription="@string/play" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewProfileHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintTop_toBottomOf="@id/cardViewVideo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
             app:cardCornerRadius="20dp"
             app:cardBackgroundColor="@color/a_cardView3">
 
@@ -32,63 +104,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/a_ic_wave"
-                android:padding="@dimen/_5sdp">
-
-                <TextView
-                    android:id="@+id/textViewCompanyName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageViewLogo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
-                    android:fontFamily="@font/iransans_medium"/>
-
-                <TextView
-                    android:id="@+id/textViewAboutUs"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/textViewCompanyName"
-                    app:layout_constraintStart_toStartOf="@id/textViewCompanyName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_7sdp"
-                    android:fontFamily="@font/iransans_light"/>
-
-                <ImageView
-                    android:id="@+id/imageViewLogo"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="@id/textViewCompanyName"
-                    app:layout_constraintBottom_toBottomOf="@id/textViewAboutUs"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintDimensionRatio="W,1:1"
-                    android:background="@drawable/a_drawable_back_edit2"
-                    android:contentDescription="@string/logo"
-                    android:padding="@dimen/_3sdp"
-                    android:src="@drawable/a_ic_logo"/>
-
+                android:padding="@dimen/_7sdp">
 
                 <ImageView
                     android:id="@+id/imageviewCall"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    app:layout_constraintTop_toBottomOf="@id/textViewAboutUs"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:contentDescription="@string/logo"
                     android:src="@drawable/a_ic_tell"/>
 
                 <TextView
                     android:id="@+id/textViewCall"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="@id/imageviewCall"
                     app:layout_constraintEnd_toStartOf="@id/imageviewCall"
                     app:layout_constraintBottom_toBottomOf="@id/imageviewCall"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
@@ -102,7 +136,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:contentDescription="@string/logo"
-                    android:src="@drawable/a_ic_tell"/>
+                    android:src="@drawable/a_ic_location"/>
 
                 <TextView
                     android:id="@+id/textViewAddress"
@@ -122,49 +156,31 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewVideo"
+            android:id="@+id/cardViewMap"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
-            app:layout_constraintDimensionRatio="H,2:1"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_2sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView2">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/play" />
-
-            <ImageView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/a_ic_play2"
-                android:contentDescription="@string/play" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewMap"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/cardViewVideo"
-            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
-            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginVertical="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_2sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView2">
+            app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="@color/a_cardView8">
 
-            <org.osmdroid.views.MapView
-                android:id="@+id/mapView"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="@color/a_cardView2">
+
+                <org.osmdroid.views.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.cardview.widget.CardView>
 

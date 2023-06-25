@@ -8,5 +8,6 @@ package com.hoomanholding.applibrary.model.data.response.update
 data class AppVersionModel(
     val id: Int,
     val currentVersion: Long,
-    val fileName: String?
+    val fileName: String?,
+    val appDescription: String?
 )

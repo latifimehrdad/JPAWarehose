@@ -152,6 +152,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         viewModel.fireBaseTokenLiveData.observe(viewLifecycleOwner) {
             viewModel.requestGetData()
         }
+
+        viewModel.appDescriptionLiveData.observe(viewLifecycleOwner) {
+            binding.textViewComment.text = it
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
 

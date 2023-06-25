@@ -51,7 +51,7 @@
             app:layout_constraintStart_toEndOf="@id/imageViewBack"
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_marginVertical="@dimen/_5sdp"
-            android:gravity="center_vertical|right"
+            android:gravity="center_vertical|start"
             android:textColor="@color/a_pageTitle"
             android:fontFamily="@font/iransans_medium"
             android:textSize="@dimen/_6sdp"/>
@@ -103,7 +103,7 @@
                     app:layout_constraintStart_toEndOf="@id/customMenuReport"
                     app:layout_constraintEnd_toStartOf="@id/customMenuHome"
                     app:layout_constraintDimensionRatio="W,1:1"
-                    app:menu_icon="@drawable/a_ic_cart" />
+                    app:menu_icon="@drawable/a_ic_shopping_bag" />
 
                 <com.zarholding.jpacustomer.view.custom.CustomMenu
                     android:id="@+id/customMenuHome"

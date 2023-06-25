@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'com.hoomanholding.jpamanager'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.hoomanholding.jpamanager"
         minSdk 26
-        targetSdk 34
+        targetSdk 33
         versionCode 11
         versionName "0.1.1"
 

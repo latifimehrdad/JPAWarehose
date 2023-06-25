@@ -29,6 +29,7 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
     val successLiveData = SingleLiveEvent<Boolean>()
     val userIsEnteredLiveData = SingleLiveEvent<Boolean>()
     val downloadVersionLiveData = SingleLiveEvent<String>()
+    val appDescriptionLiveData = SingleLiveEvent<String?>()
 
 
     //---------------------------------------------------------------------------------------------- userIsEntered
@@ -43,6 +44,7 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
         viewModelScope.launch(IO + exceptionHandler()) {
             val response = checkResponse(appUpdateRepository.requestGetAppVersion(appName))
             response?.let {
+                appDescriptionLiveData.postValue(it.appDescription)
                 checkAppVersion(it)
             }
         }

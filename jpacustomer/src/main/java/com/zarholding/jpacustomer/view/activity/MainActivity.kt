@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             user?.let {
                 binding.textViewUserName.setTitleAndValue(
                     it.fullName,
-                    it.personnelNumber,
+                    getString(R.string.customerCode2, it.personnelNumber),
                     getString(R.string.enterChar)
                 )
                 binding.imageViewProfiel.downloadProfileImage(

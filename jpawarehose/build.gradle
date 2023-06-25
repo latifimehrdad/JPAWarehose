@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'com.hoomanholding.jpawarehose'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.hoomanholding.jpawarehose"
         minSdk 26
-        targetSdk 34
+        targetSdk 33
         versionCode 3
         versionName "0.0.3"
 
