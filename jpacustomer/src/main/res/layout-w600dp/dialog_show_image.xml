@@ -10,7 +10,7 @@
     android:layoutDirection="ltr"
     android:maxHeight="@dimen/_200sdp"
     app:cardCornerRadius="@dimen/_10sdp"
-    app:cardBackgroundColor="@color/a_cardView2">
+    app:cardBackgroundColor="@color/color1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,13 +20,13 @@
         <ImageView
             android:id="@+id/imageViewClose"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_20sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/ic_close"
             android:padding="@dimen/_5sdp"
             android:scaleType="fitEnd"
-            app:tint="@color/white"
+            app:tint="@color/buttonTextColor"
             android:contentDescription="@string/logo"
             tools:ignore="RtlSymmetry"
             android:background="@color/primaryColor"/>

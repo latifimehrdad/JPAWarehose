@@ -184,7 +184,7 @@ class VerifyCodeFragment(
     //---------------------------------------------------------------------------------------------- startCoroutineRepeat
     private fun startCoroutineRepeat() {
         job = CoroutineScope(IO).launch {
-            repeat(30) {
+            repeat(60) {
                 delay(1000)
                 withContext(Main) { binding.mlAnimationTimer.changeTime(29 - it) }
             }
@@ -358,6 +358,8 @@ class VerifyCodeFragment(
         super.onDestroyView()
         job?.cancel()
         binding.mlAnimationTimer.changeTime(0)
+        if (!viewModel.isVerificationCorrect)
+            viewModel.deleteToken()
         resendRequestForSms()
     }
     //---------------------------------------------------------------------------------------------- onDestroyView

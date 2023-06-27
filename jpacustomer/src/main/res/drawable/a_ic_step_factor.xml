@@ -9,7 +9,7 @@
   <path
       android:pathData="M9.3,4.697a0.548,0.548 0,0 1,0.547 0.547v3.368a2.452,2.452 0,0 1,-2.734 2.734L2.734,11.346A2.452,2.452 0,0 1,0 8.612v-3.368a0.548,0.548 0,0 1,0.547 -0.547z"
       android:strokeAlpha="0.4"
-      android:fillColor="@color/a_icon2"
+      android:fillColor="#292d32"
       android:fillAlpha="0.4"/>
   <path
       android:fillColor="@color/black"

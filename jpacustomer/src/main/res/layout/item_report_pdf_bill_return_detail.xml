@@ -14,8 +14,8 @@
             android:fontFamily="@font/iransans_medium"
             android:gravity="center"
             app:layout_constraintWidth_percent="0.2"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH6"
             android:paddingVertical="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/textViewPrice"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
             app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
             app:layout_constraintStart_toEndOf="@id/textViewTotalAmount"
-            android:background="@color/a_textViewPrimary"/>
+            android:background="@color/textColor"/>
 
         <TextView
             android:id="@+id/textViewPrice"
@@ -37,8 +37,8 @@
             android:fontFamily="@font/iransans_medium"
             android:gravity="center"
             app:layout_constraintWidth_percent="0.15"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH6"
             app:layout_constraintStart_toEndOf="@id/textViewTotalAmount"
             app:layout_constraintEnd_toStartOf="@id/textViewCount"
             app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
@@ -51,7 +51,7 @@
             app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
             app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
             app:layout_constraintStart_toEndOf="@id/textViewPrice"
-            android:background="@color/a_textViewPrimary"/>
+            android:background="@color/textColor"/>
 
         <TextView
             android:id="@+id/textViewCount"
@@ -60,8 +60,8 @@
             android:fontFamily="@font/iransans_medium"
             android:gravity="center"
             app:layout_constraintWidth_percent="0.1"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH6"
             app:layout_constraintStart_toEndOf="@id/textViewPrice"
             app:layout_constraintEnd_toStartOf="@id/textViewProductName"
             app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
@@ -74,7 +74,7 @@
             app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
             app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
             app:layout_constraintStart_toEndOf="@id/textViewCount"
-            android:background="@color/a_textViewPrimary"/>
+            android:background="@color/textColor"/>
 
         <TextView
             android:id="@+id/textViewProductName"
@@ -82,8 +82,8 @@
             android:layout_height="0dp"
             android:fontFamily="@font/iransans_medium"
             android:gravity="center"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH6"
             app:layout_constraintStart_toEndOf="@id/textViewCount"
             app:layout_constraintEnd_toStartOf="@id/textViewProductCode"
             app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
@@ -96,7 +96,7 @@
             app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
             app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
             app:layout_constraintStart_toEndOf="@id/textViewProductName"
-            android:background="@color/a_textViewPrimary"/>
+            android:background="@color/textColor"/>
 
         <TextView
             android:id="@+id/textViewProductCode"
@@ -105,8 +105,8 @@
             android:fontFamily="@font/iransans_medium"
             android:gravity="center"
             app:layout_constraintWidth_percent="0.1"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_6sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH6"
             android:padding="@dimen/_3sdp"
             app:layout_constraintStart_toEndOf="@id/textViewProductName"
             app:layout_constraintEnd_toEndOf="parent"

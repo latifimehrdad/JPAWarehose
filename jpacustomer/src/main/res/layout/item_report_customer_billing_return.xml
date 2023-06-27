@@ -32,7 +32,7 @@
             android:id="@+id/constraintLayoutParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/a_drawable_home_step"
+            android:background="@drawable/drawable_color4_curve"
             android:padding="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +45,8 @@
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="end"
                 android:text="@string/finalPrice"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
                 app:layout_constraintEnd_toStartOf="@id/textViewDate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,8 +57,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/finalPrice"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -68,8 +68,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textViewDate"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -81,8 +81,8 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/iransans_light"
                 android:text="@string/rial"
-                android:textColor="@color/a_textHint"
-                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/textHintColor"
+                android:textSize="@dimen/textSizeH5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewFinalPriceTitle" />
 
@@ -92,8 +92,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="end"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewRial" />
 
@@ -105,8 +105,8 @@
                 android:fontFamily="@font/iransans_light"
                 android:gravity="end"
                 android:text="@string/detailFactor"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textViewFinalPrice" />
 
@@ -132,7 +132,7 @@
                 android:textColor="@color/a_textButton"
                 android:gravity="center"
                 android:background="@drawable/a_drawable_back_primary_curve_light"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/textSizeH5"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:fontFamily="@font/iransans_light"

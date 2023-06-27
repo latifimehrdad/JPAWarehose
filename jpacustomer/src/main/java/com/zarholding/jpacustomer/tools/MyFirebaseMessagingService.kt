@@ -105,7 +105,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val vibrate: LongArray = longArrayOf(1000L, 1000L, 1000L, 1000L, 1000L)
         val notifyManager = NotificationManagerCompat.from(this)
         val notificationBuilder = NotificationCompat
-            .Builder(this, CompanionValues.CHANNEL_ID)
+            .Builder(this, CompanionValues.APP_ID)
         val notification = notificationBuilder
             .setSmallIcon(R.drawable.ic_launcher)
             .setLargeIcon(icon)

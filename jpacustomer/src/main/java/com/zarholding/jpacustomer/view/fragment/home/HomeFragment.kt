@@ -162,7 +162,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     //---------------------------------------------------------------------------------------------- setOrderAdapter
     private fun setOrderAdapter(items: List<CustomerOrderModel>) {
         if (items.isEmpty()) {
-            binding.constraintLayoutStep.visibility = View.GONE
+            binding.constraintLayoutStep.visibility = View.INVISIBLE
             return
         }
         binding.constraintLayoutStep.visibility = View.VISIBLE

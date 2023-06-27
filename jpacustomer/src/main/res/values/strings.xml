@@ -29,7 +29,6 @@
     <string name="orderNumber">شماره سفارش</string>
     <string name="showOrderDetail">نمایش جزئیات سفارش</string>
     <string name="orderDetail">جزئیات سفارش</string>
-    <string name="detailProduct">جزییات کالا</string>
     <string name="currentStep">مرحله ی فعلی</string>
     <string name="oldOrder">سفارشات قبلی</string>
     <string name="mobileNumber">شماره موبایل</string>
@@ -42,7 +41,6 @@
     <string name="deleteBasket">حذف از سبد</string>
     <string name="addToBasket">اضافه کردن به سبد</string>
     <string name="doYouWantToBasketDelete">آیا برای حذف ( %1$s ) مطمئن هستید؟</string>
-    <string name="name">نام</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
     <string name="confirmed">تایید شده</string>
@@ -53,7 +51,6 @@
     <string name="saveChange">ثبت تغییرات</string>
     <string name="rial">ریال</string>
     <string name="search">جستجو</string>
-    <string name="category">دسته بندی</string>
     <string name="newProductList">لیست کالاهای جدید</string>
     <string name="allProductList">لیست همه ی کالاها</string>
     <string name="showFactorList">مشاهده فاکتور لیستی</string>
@@ -63,7 +60,6 @@
     <string name="profile">ناحیه کاربری</string>
     <string name="aboutUs">درباره ما</string>
     <string name="showMyState">نمایش وضعیت من</string>
-    <string name="myState">وضعیت من</string>
     <string name="shopName">نام فروشگاه</string>
     <string name="address">آدرس</string>
     <string name="shopAddress">آدرس فروشگاه</string>
@@ -71,7 +67,7 @@
     <string name="salesExpert">کارشناس فروش</string>
     <string name="signOut">خروج از حساب</string>
     <string name="activeDarkTheme">انتخاب تم نرم افزار</string>
-    <string name="chooseStoreLocation">انتخاب لوکیشن فروشگاه</string>
+    <string name="chooseStoreLocation">برای انتخاب لوکیشن کلیک کنید</string>
     <string name="setting">تنظیمات</string>
     <string name="contactUs">ارتباط با ما</string>
     <string name="doYouWantToExitAccount">آیا برای خروج از حساب کاربری مطمئن هستید؟</string>
@@ -84,7 +80,6 @@
     <string name="creditAmount">مبلغ بستانکاری</string>
     <string name="credit">بستانکار</string>
     <string name="debit">بدهکار</string>
-    <string name="total">جمع کل</string>
     <string name="totalCredit">جمع بستانکاری</string>
     <string name="totalDebit">جمع بدهکاری</string>
     <string name="totalAmount">مبلغ کل</string>
@@ -97,7 +92,6 @@
     <string name="introductionOfTheCollection">معرفی مجموعه</string>
     <string name="suggestions">انتقادات و پیشنهادات</string>
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
-    <string name="reports">گزارشات</string>
     <string name="feedbackReport">گزارش مرجوعی</string>
     <string name="returnCount">تعداد مرجوعی امسال</string>
     <string name="factorReport">گزارش فاکتور</string>

@@ -23,6 +23,7 @@ class VerifyCodeViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : JpaViewModel() {
 
+    var isVerificationCorrect = false
     var token: String? = null
     val resendLiveData: SingleLiveEvent<Boolean> by lazy { SingleLiveEvent<Boolean>() }
     val forceChanePasswordLiveData: SingleLiveEvent<Boolean> by lazy { SingleLiveEvent<Boolean>() }
@@ -53,25 +54,23 @@ class VerifyCodeViewModel @Inject constructor(
             val response =
                 checkResponse(userRepository.requestVerifyCode(verificationCode, token!!))
             response?.let {
-                if (it.isforceChangePassword)
-                    forceChanePasswordLiveData.postValue(true)
-                else
-                    saveUserNameAndPassword()
+                isVerificationCorrect = it.isVerificationCorrect
+                if (it.isVerificationCorrect)
+                    forceChanePasswordLiveData.postValue(it.isforceChangePassword)
             }
         }
     }
     //---------------------------------------------------------------------------------------------- requestVerifyCode
 
 
-    //---------------------------------------------------------------------------------------------- saveToken
-    private fun saveUserNameAndPassword() {
+    //---------------------------------------------------------------------------------------------- deleteToken
+    fun deleteToken() {
         sharedPreferences
             .edit()
-            .putString(CompanionValues.TOKEN, token)
+            .putString(CompanionValues.TOKEN, null)
             .apply()
         forceChanePasswordLiveData.postValue(false)
     }
-    //---------------------------------------------------------------------------------------------- saveToken
-
+    //---------------------------------------------------------------------------------------------- deleteToken
 
 }

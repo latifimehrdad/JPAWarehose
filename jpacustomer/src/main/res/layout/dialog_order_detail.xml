@@ -12,7 +12,7 @@
         android:layoutDirection="ltr"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/a_cardView2">
+        app:cardBackgroundColor="@color/color1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_margin="@dimen/_5sdp"
                 android:contentDescription="@string/logo"
                 android:src="@drawable/ic_close"/>
@@ -38,19 +38,19 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:paddingVertical="@dimen/_5sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
-                android:background="@drawable/a_drawable_menu_curve"
+                android:background="@drawable/drawable_menu_curve"
                 android:orientation="vertical"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_medium"
                     android:text="@string/orderDetail"
                     app:drawableEndCompat="@drawable/a_drawable_basket"
-                    app:drawableTint="@color/a_textViewPrimary"
+                    app:drawableTint="@color/textColor"
                     android:drawablePadding="@dimen/_5sdp"
                     android:gravity="center"/>
 
@@ -58,8 +58,8 @@
                     android:id="@+id/textViewNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/orderDetailDate"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_medium"
                     android:text="@string/orderNumber"
                     android:drawablePadding="@dimen/_5sdp"
@@ -70,8 +70,8 @@
                     android:id="@+id/textViewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/orderDetailDate"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_medium"
                     android:text="@string/date"
                     android:drawablePadding="@dimen/_5sdp"
@@ -114,14 +114,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
-                android:background="@drawable/a_drawable_menu_curve">
+                android:background="@drawable/a_drawable_back_curve_primary">
 
                 <TextView
                     android:id="@+id/textviewTotalTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/orderDetailDate"
-                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH4"
                     android:fontFamily="@font/iransans_bold"
                     android:text="@string/totalAmount"
                     app:layout_constraintTop_toTopOf="parent"
@@ -131,8 +131,8 @@
                     android:id="@+id/textviewTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/orderDetailDate"
-                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH4"
                     android:fontFamily="@font/iransans_bold"
                     app:layout_constraintTop_toTopOf="@id/textviewTotalTitle"
                     app:layout_constraintStart_toStartOf="parent"/>

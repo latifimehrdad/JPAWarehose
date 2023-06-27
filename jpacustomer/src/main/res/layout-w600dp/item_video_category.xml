@@ -7,8 +7,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="@dimen/_50sdp"
-        android:layout_margin="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_7sdp">
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/radius2">
 
         <TextView
             android:id="@+id/textViewTitle"
@@ -17,7 +18,7 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginVertical="@dimen/_4sdp"
             android:layout_gravity="center"
-            android:textSize="@dimen/_6sdp"
+            android:textSize="@dimen/textSizeH4"
             android:fontFamily="@font/iransans_medium" />
 
     </androidx.cardview.widget.CardView>

@@ -24,8 +24,8 @@ class CustomMenu @JvmOverloads constructor(
     private lateinit var iconImage: ImageView
     private lateinit var cardView: CardView
     private lateinit var textViewBadge: TextView
-    private val defaultColor = R.color.a_menuIconUnselect
-    private val selectedColor = R.color.a_menuIconSelect
+    private val defaultColor = R.color.menuDefault
+    private val selectedColor = R.color.primaryColor
     private var selectedMenu = false
 
     //---------------------------------------------------------------------------------------------- init

@@ -49,10 +49,10 @@
             app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/viewCenter"
-            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_60sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView1">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/color3">
 
             <EditText
                 android:id="@+id/editTextUserName"
@@ -67,13 +67,13 @@
                 android:inputType="number"
                 android:maxLength="20"
                 android:singleLine="true"
-                android:textColorHint="@color/a_textView1"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_7sdp"
+                android:textColorHint="@color/primaryColor"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/editTextSize"
                 android:text="@={viewModel.userName}"
                 android:fontFamily="@font/iransans_medium"
                 android:drawablePadding="@dimen/_5sdp"
-                android:background="@color/a_cardView1"
+                android:background="@color/color3"
                 android:autofillHints="username" />
 
         </androidx.cardview.widget.CardView>
@@ -86,8 +86,8 @@
             app:layout_constraintStart_toStartOf="@id/cardViewUserName"
             app:layout_constraintEnd_toEndOf="@id/cardViewUserName"
             android:layout_marginTop="@dimen/_15sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView1">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/color3">
 
             <EditText
                 android:id="@+id/editTextPassword"
@@ -104,11 +104,11 @@
                 android:singleLine="true"
                 android:textColorHint="@color/a_textView1"
                 android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/editTextSize"
                 android:text="@={viewModel.password}"
                 android:fontFamily="@font/iransans_medium"
                 android:drawablePadding="@dimen/_5sdp"
-                android:background="@color/a_cardView1"
+                android:background="@color/color3"
                 android:autofillHints="password" />
 
         </androidx.cardview.widget.CardView>
@@ -120,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@id/cardViewPassword"
             app:layout_constraintStart_toStartOf="@id/cardViewPassword"
             app:layout_constraintEnd_toEndOf="@id/cardViewPassword"
-            android:textColor="@color/a_textView1"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_6sdp"
             android:text="@string/savePasswordAndFingerPrint"
             android:layout_marginTop="@dimen/_5sdp"
@@ -138,13 +138,13 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:backgroundTint="@color/primaryColor"
             android:hint="@string/bePatient"
-            app:cornerRadius="@dimen/_7sdp"
-            android:textSize="@dimen/_7sdp"
+            app:cornerRadius="@dimen/radius1"
+            android:textSize="@dimen/buttonTextSize"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
             android:fontFamily="@font/iransans_bold"
-            android:textColor="@color/a_textButton"
+            android:textColor="@color/buttonTextColor"
             android:text='@string/receiveCode' />
 
 

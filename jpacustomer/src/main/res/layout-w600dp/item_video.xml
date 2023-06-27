@@ -6,8 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/a_cardView7">
+        app:cardCornerRadius="@dimen/radius0"
+        app:cardBackgroundColor="@color/color4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintWidth_percent="0.2"
                 app:layout_constraintDimensionRatio="H,1.5:1"
-                app:cardCornerRadius="@dimen/_10sdp">
+                app:cardCornerRadius="@dimen/radius0">
 
                 <ImageView
                     android:id="@+id/imageViewThumbnail"
@@ -41,10 +41,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/cardViewThumbnail"
                 android:layout_marginHorizontal="@dimen/_5sdp"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/textSizeH3"
                 android:fontFamily="@font/iransans_bold"
                 android:textStyle="bold"
-                android:textColor="@color/a_textViewPrimary"/>
+                android:textColor="@color/textColor"/>
 
 
             <TextView
@@ -56,10 +56,10 @@
                 app:layout_constraintEnd_toEndOf="@id/textViewTitle"
                 app:layout_constraintBottom_toBottomOf="@id/cardViewThumbnail"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_6sdp"
+                android:textSize="@dimen/textSizeH5"
                 android:fontFamily="@font/iransans_light"
                 android:textStyle="bold"
-                android:textColor="@color/a_textHint"/>
+                android:textColor="@color/textHintColor"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

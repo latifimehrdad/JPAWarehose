@@ -352,7 +352,11 @@ class ProfileFragment(
                     showMessage(getString(R.string.actionIsDone))
                 }
             })
-        biometricTools.checkDeviceHasBiometric(biometricPrompt)
+        val error = biometricTools.checkDeviceHasBiometric(biometricPrompt)
+        if (!error.isNullOrEmpty()) {
+            showMessage(error)
+            binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
+        }
     }
     //---------------------------------------------------------------------------------------------- showBiometricDialog
 

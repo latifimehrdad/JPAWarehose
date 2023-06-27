@@ -14,7 +14,10 @@ import com.zar.core.tools.api.ProgressRequestBodyManager
 import com.zar.core.tools.api.interfaces.UploadCallBack
 import com.zarholding.jpacustomer.model.repository.UploadFileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -68,7 +71,8 @@ class ProfileViewModel @Inject constructor(
             val image = MultipartBody.Part.createFormData("File", file.name, body)
             val response = checkResponse(uploadFileRepository.uploadProfileImage(entityType, image))
             response?.let {
-                uploadPercentLiveData.postValue(101)
+                val fireBase = sharedPreferences.getString(CompanionValues.FIREBASE_TOKEN, null)
+                requestUserInfo(fireBase)
             }
         }
     }
@@ -88,5 +92,19 @@ class ProfileViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- isBiometricEnable
     fun isBiometricEnable() = sharedPreferences.getBoolean(CompanionValues.biometric, false)
     //---------------------------------------------------------------------------------------------- isBiometricEnable
+
+
+    //---------------------------------------------------------------------------------------------- requestUserInfo
+    private fun requestUserInfo(fireBaseToken: String?): Job {
+        return CoroutineScope(Dispatchers.IO + exceptionHandler()).launch {
+            delay(500)
+            val response = checkResponse(userRepository.requestUserInfo(fireBaseToken))
+            response?.let {
+                userRepository.insertUserInfo(it)
+                uploadPercentLiveData.postValue(101)
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestUserInfo
 
 }

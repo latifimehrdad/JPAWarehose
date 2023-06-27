@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraintLayoutBalanceTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/a_drawable_report_pdf_title">
@@ -12,8 +11,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         android:paddingVertical="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textViewCredit"
@@ -27,7 +26,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewBalance"
         app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
         app:layout_constraintStart_toEndOf="@id/textViewBalance"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewCredit"
@@ -35,8 +34,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewBalance"
         app:layout_constraintEnd_toStartOf="@id/textViewDebit"
         app:layout_constraintTop_toTopOf="@id/textViewBalance"
@@ -50,7 +49,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewBalance"
         app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
         app:layout_constraintStart_toEndOf="@id/textViewCredit"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewDebit"
@@ -58,8 +57,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewCredit"
         app:layout_constraintEnd_toStartOf="@id/textViewDescriptionHeader"
         app:layout_constraintTop_toTopOf="@id/textViewBalance"
@@ -73,7 +72,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewBalance"
         app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
         app:layout_constraintStart_toEndOf="@id/textViewDebit"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewDescriptionHeader"
@@ -81,8 +80,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewDebit"
         app:layout_constraintEnd_toStartOf="@id/textViewDateHeader"
         app:layout_constraintTop_toTopOf="@id/textViewBalance"
@@ -96,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewBalance"
         app:layout_constraintBottom_toBottomOf="@id/textViewBalance"
         app:layout_constraintStart_toEndOf="@id/textViewDescriptionHeader"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewDateHeader"
@@ -104,8 +103,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         android:hint="8888/88/88"
         android:padding="@dimen/_3sdp"
         app:layout_constraintStart_toEndOf="@id/textViewDescriptionHeader"

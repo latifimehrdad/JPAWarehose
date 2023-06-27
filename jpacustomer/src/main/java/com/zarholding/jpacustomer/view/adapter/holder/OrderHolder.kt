@@ -1,6 +1,5 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
-import android.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.setAmount
@@ -69,23 +68,28 @@ class OrderHolder(
     private fun setItemSelected(position: Int) {
         if (OrderAdapter.selectedPosition == position){
             binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_cardView4))
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.primaryColor))
             binding.imageViewShopping.setColorFilter(
-                ContextCompat.getColor(binding.imageViewShopping.context, R.color.white),
+                ContextCompat.getColor(binding.imageViewShopping.context, R.color.buttonTextColor),
                 android.graphics.PorterDuff.Mode.SRC_IN)
-            binding.textViewAmount.setTextColor(Color.WHITE)
-            binding.textViewDiscount.setTextColor(Color.WHITE)
-            binding.textViewFinal.setTextColor(Color.WHITE)
-        } else {
-            binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_cardView5))
-            binding.imageViewShopping.setColorFilter(
-                ContextCompat.getColor(binding.imageViewShopping.context, R.color.primaryColor),
-                android.graphics.PorterDuff.Mode.SRC_IN)
-            val color = binding.textViewAmount.context.getColor(R.color.primaryColor)
+            val color = binding.textViewAmount.context.getColor(R.color.buttonTextColor)
+            binding.textViewOrderNumber.setTextColor(color)
             binding.textViewAmount.setTextColor(color)
             binding.textViewDiscount.setTextColor(color)
             binding.textViewFinal.setTextColor(color)
+            binding.textViewDate.setTextColor(color)
+        } else {
+            binding.cardViewParent
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.color4))
+            binding.imageViewShopping.setColorFilter(
+                ContextCompat.getColor(binding.imageViewShopping.context, R.color.textColor),
+                android.graphics.PorterDuff.Mode.SRC_IN)
+            val color = binding.textViewAmount.context.getColor(R.color.textColor)
+            binding.textViewOrderNumber.setTextColor(color)
+            binding.textViewAmount.setTextColor(color)
+            binding.textViewDiscount.setTextColor(color)
+            binding.textViewFinal.setTextColor(color)
+            binding.textViewDate.setTextColor(color)
         }
     }
     //---------------------------------------------------------------------------------------------- setItemSelected

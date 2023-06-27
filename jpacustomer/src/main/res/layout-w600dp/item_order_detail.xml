@@ -14,11 +14,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/a_drawable_menu_curve"
+            android:background="@drawable/drawable_card"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_5sdp">
 
 
@@ -29,8 +29,8 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="start"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -39,15 +39,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintWidth_percent="0.35"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="center"
-                android:textColor="@color/a_textButton"
-                android:textSize="@dimen/_5sdp"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/textSizeH4"
                 app:layout_constraintTop_toBottomOf="@id/textViewCount"
                 app:layout_constraintStart_toStartOf="parent"
                 android:paddingHorizontal="@dimen/_5sdp"
-                android:paddingVertical="@dimen/_2sdp"
+                android:paddingVertical="@dimen/_3sdp"
                 android:background="@drawable/a_drawable_back_curve_primary" />
 
             <ImageView
@@ -69,8 +69,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/textViewPrice"
                 android:fontFamily="@font/iransans_light"
                 android:gravity="start"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_5sdp" />
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH5" />
 
             <TextView
                 android:id="@+id/textViewName"
@@ -82,8 +82,8 @@
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="start"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_6sdp" />
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4" />
 
             <TextView
                 android:id="@+id/textViewPrice"
@@ -94,8 +94,8 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/iransans_light"
                 android:gravity="start"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_5sdp" />
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -106,7 +106,7 @@
             app:layout_constraintBottom_toBottomOf="@id/textViewPosition"
             app:layout_constraintStart_toStartOf="@id/textViewPosition"
             app:layout_constraintEnd_toEndOf="@id/textViewPosition"
-            android:src="@color/a_cardView1"
+            android:src="@drawable/ic_path"
             android:contentDescription="@string/logo" />
 
         <TextView
@@ -117,8 +117,8 @@
             app:layout_constraintBottom_toTopOf="@id/cardViewParent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH3"
             android:paddingHorizontal="@dimen/_2sdp"
             android:gravity="center" />
 

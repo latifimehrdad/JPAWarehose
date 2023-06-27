@@ -14,7 +14,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.applibrary.ext.hideKeyboard
 import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
-import com.hoomanholding.applibrary.tools.CompanionValues
 import com.zar.core.tools.BiometricTools
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -93,11 +92,12 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         }
 
         loginViewModel.loginLiveDate.observe(viewLifecycleOwner) {
-            it?.let {
+            (activity as MainActivity?)?.gotoFirstFragment(false)
+/*            it?.let {
                 val bundle = Bundle()
                 bundle.putString(CompanionValues.TOKEN, it)
                 gotoFragment(R.id.action_loginFragment_to_verifyCodeFragment, bundle)
-            }
+            }*/
         }
 
         loginViewModel.userNameError.observe(viewLifecycleOwner) {

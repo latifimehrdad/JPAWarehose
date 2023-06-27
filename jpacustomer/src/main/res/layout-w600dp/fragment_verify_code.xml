@@ -52,7 +52,7 @@
             app:layout_constraintStart_toEndOf="@id/viewCenter"
             android:layout_marginTop="@dimen/_80sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/radius1"
             app:cardBackgroundColor="@color/a_cardView1">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,11 +60,22 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp">
 
+                <ImageView
+                    android:id="@+id/imageViewCheck"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="@string/logo"
+                    android:src="@drawable/a_ic_check_badge"/>
+
                 <LinearLayout
                     android:id="@+id/linearLayoutVerify"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewCheck"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -77,11 +88,11 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:maxLines="1"
-                        android:background="@drawable/a_drawable_edittext_timer"
+                        android:background="@drawable/drawable_edittext_timer"
                         android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_8sdp"
-                        android:textColor="@color/a_textViewPrimary"
+                        android:textSize="@dimen/buttonTextSize"
+                        android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor" />
 
@@ -95,11 +106,11 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:maxLines="1"
-                        android:background="@drawable/a_drawable_edittext_timer"
+                        android:background="@drawable/drawable_edittext_timer"
                         android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_8sdp"
-                        android:textColor="@color/a_textViewPrimary"
+                        android:textSize="@dimen/buttonTextSize"
+                        android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
 
@@ -113,11 +124,11 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:maxLines="1"
-                        android:background="@drawable/a_drawable_edittext_timer"
+                        android:background="@drawable/drawable_edittext_timer"
                         android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_8sdp"
-                        android:textColor="@color/a_textViewPrimary"
+                        android:textSize="@dimen/buttonTextSize"
+                        android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
 
@@ -131,11 +142,11 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:maxLines="1"
-                        android:background="@drawable/a_drawable_edittext_timer"
+                        android:background="@drawable/drawable_edittext_timer"
                         android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_8sdp"
-                        android:textColor="@color/a_textViewPrimary"
+                        android:textSize="@dimen/buttonTextSize"
+                        android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
 
@@ -149,11 +160,11 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:maxLines="1"
-                        android:background="@drawable/a_drawable_edittext_timer"
+                        android:background="@drawable/drawable_edittext_timer"
                         android:minHeight="@dimen/_30sdp"
                         android:padding="@dimen/_2sdp"
-                        android:textSize="@dimen/_8sdp"
-                        android:textColor="@color/a_textViewPrimary"
+                        android:textSize="@dimen/buttonTextSize"
+                        android:textColor="@color/textColor"
                         android:autofillHints="none"
                         tools:ignore="LabelFor"/>
 
@@ -167,13 +178,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/_10sdp"
-                    app:at_textSize="@dimen/_8sdp"
+                    app:at_textSize="@dimen/textSizeH1"
                     app:at_gravity="center"
                     app:at_showing="minute_second"
                     app:fontFamily="@font/iransans_medium"
                     app:at_elapseTime="true"
-                    app:at_back="@drawable/a_drawable_back_timer"
-                    android:textColor="@color/a_textView1"
+                    app:at_back="@drawable/drawable_back_timer"
+                    android:textColor="@color/textColor"
                     />
 
                 <TextView
@@ -182,10 +193,10 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/mlAnimationTimer"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/textSizeH5"
                     android:gravity="center"
                     android:text="@string/remainingUntilResend"
-                    android:textColor="@color/a_textView1"
+                    android:textColor="@color/textColor"
                     android:fontFamily="@font/iransans_light"
                     />
 
@@ -199,8 +210,8 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:backgroundTint="@color/primaryColor"
                     android:hint="@string/bePatient"
-                    app:cornerRadius="@dimen/_7sdp"
-                    android:textSize="@dimen/_6sdp"
+                    app:cornerRadius="@dimen/radius1"
+                    android:textSize="@dimen/buttonTextSize"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
                     android:paddingHorizontal="@dimen/_15sdp"

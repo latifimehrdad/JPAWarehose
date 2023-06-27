@@ -12,7 +12,7 @@
             android:id="@+id/constraintLayoutParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/a_drawable_home_step"
+            android:background="@drawable/drawable_color4_curve"
             app:layout_constraintTop_toTopOf="@id/textViewDate"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_medium"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/textSizeH4"
                     android:gravity="end"
                     android:textColor="@color/green" />
 
@@ -48,7 +48,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_medium"
                     android:gravity="end"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/textSizeH4"
                     android:textColor="@color/red"/>
 
             </LinearLayout>
@@ -61,10 +61,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/textSizeH4"
                 android:fontFamily="@font/iransans_medium"
-                android:textColor="@color/a_textViewPrimary"/>
-
+                android:textColor="@color/textColor"/>
 
 
             <LinearLayout
@@ -75,7 +74,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:padding="@dimen/_5sdp"
-                android:background="@drawable/a_drawable_back_edit"
+                android:background="@drawable/drawable_menu_curve"
                 android:orientation="horizontal">
 
                 <TextView
@@ -85,14 +84,14 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:fontFamily="@font/iransans_medium"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/textSizeH2" />
 
                 <TextView
                     android:id="@+id/textViewTotalTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/textSizeH2"
                     android:fontFamily="@font/iransans_medium"
                     />
 
@@ -110,8 +109,8 @@
             android:paddingHorizontal="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:background="@drawable/a_drawable_back_curve_primary"
-            android:textSize="@dimen/_9sdp"
-            android:textColor="@color/a_textButton"
+            android:textSize="@dimen/textSizeH3"
+            android:textColor="@color/buttonTextColor"
             android:gravity="center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

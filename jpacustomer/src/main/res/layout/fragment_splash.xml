@@ -32,7 +32,7 @@
             android:text="@string/quickAndEasy"
             android:textSize="@dimen/_9sdp"
             android:fontFamily="@font/iransans_light"
-            android:textColor="@color/a_textView1"/>
+            android:textColor="@color/primaryColor"/>
 
         <TextView
             android:id="@+id/textViewPower"
@@ -45,7 +45,7 @@
             android:text="@string/powerInYourHand"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/iransans_bold"
-            android:textColor="@color/a_textViewPrimary"/>
+            android:textColor="@color/textColor"/>
 
         <TextView
             android:id="@+id/textViewComment"
@@ -57,7 +57,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:textSize="@dimen/_9sdp"
             android:fontFamily="@font/iransans_light"
-            android:textColor="@color/a_textView1"/>
+            android:textColor="@color/primaryColor"/>
 
 
         <androidx.cardview.widget.CardView
@@ -69,7 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:cardCornerRadius="@dimen/_20sdp"
-            app:cardBackgroundColor="@color/a_cardView1">
+            app:cardBackgroundColor="@color/color3">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                     android:id="@+id/textViewLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/a_textView1"
+                    android:textColor="@color/primaryColor"
                     android:textSize="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="@string/login"

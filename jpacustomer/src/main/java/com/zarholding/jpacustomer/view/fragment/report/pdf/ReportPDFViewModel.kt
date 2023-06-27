@@ -8,6 +8,7 @@ import android.os.Environment
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zarholding.jpacustomer.model.PDFModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -77,12 +78,15 @@ class ReportPDFViewModel @Inject constructor(
             }
 
             val downloadFolder =
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-            val destinationDir = File(downloadFolder.absolutePath, "Jpa")
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val destinationDir = File(downloadFolder.absolutePath, CompanionValues.APP_ID)
             if (!destinationDir.exists())
                 destinationDir.mkdir()
+            val destinationReport = File(downloadFolder.absolutePath, "pdf")
+            if (!destinationReport.exists())
+                destinationReport.mkdir()
             destinationFile = File(
-                destinationDir.absolutePath,
+                destinationReport.absolutePath,
                 "${getNewFileName()}.pdf"
             )
             try {

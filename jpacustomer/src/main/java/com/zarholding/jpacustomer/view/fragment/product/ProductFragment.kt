@@ -78,12 +78,12 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
                 return@observe
             if (it){
                 binding.buttonAllProduct.backgroundTintList =
-                    requireContext().getColorStateList(R.color.a_buttonUnselect)
+                    requireContext().getColorStateList(R.color.color3)
                 binding.buttonNewProduct.backgroundTintList =
                     requireContext().getColorStateList(R.color.primaryColor)
             } else {
                 binding.buttonNewProduct.backgroundTintList =
-                    requireContext().getColorStateList(R.color.a_buttonUnselect)
+                    requireContext().getColorStateList(R.color.color3)
                 binding.buttonAllProduct.backgroundTintList =
                     requireContext().getColorStateList(R.color.primaryColor)
             }

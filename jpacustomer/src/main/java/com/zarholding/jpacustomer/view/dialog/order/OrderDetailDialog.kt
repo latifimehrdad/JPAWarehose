@@ -118,7 +118,7 @@ class OrderDetailDialog(
 
     //---------------------------------------------------------------------------------------------- setAdapter
     private fun setAdapter(items: List<CustomerOrderDetailModel>) {
-        if (context == null && items.isEmpty())
+        if (context == null || items.isEmpty())
             return
         val first = items.first()
         binding.textViewNumber.setTitleAndValue(

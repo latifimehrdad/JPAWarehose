@@ -13,8 +13,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/a_pageTitle"
-            android:textSize="11sp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/collectionVideos"/>
 
@@ -27,8 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="@dimen/_10sdp"
             app:layout_constraintDimensionRatio="H,1:1"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/a_cardView3">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.5"
-                    app:cardCornerRadius="@dimen/_10sdp">
+                    app:cardCornerRadius="@dimen/radius1">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -67,8 +67,8 @@
                     app:layout_constraintTop_toBottomOf="@id/cardViewVideo"
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:textSize="11sp"
-                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizeH3"
+                    android:textColor="@color/buttonTextColor"
                     android:fontFamily="@font/iransans_bold"
                     android:text="@string/introductionOfTheCollection"/>
 
@@ -80,9 +80,9 @@
                     app:layout_constraintEnd_toEndOf="@id/cardViewVideo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:textSize="11sp"
                     android:scrollbars="vertical"
-                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizeH4"
+                    android:textColor="@color/buttonTextColor"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/lovorm"/>
 
@@ -94,8 +94,7 @@
             android:id="@+id/recyclerViewCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
-            android:layout_marginTop="@dimen/_10sdp"/>
+            app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -105,8 +104,7 @@
             app:layout_constraintTop_toBottomOf="@id/recyclerViewCategory"
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginVertical="@dimen/_5sdp"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
         <com.facebook.shimmer.ShimmerFrameLayout

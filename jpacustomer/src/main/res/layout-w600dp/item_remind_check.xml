@@ -8,13 +8,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginVertical="@dimen/_3sdp"
-        app:cardCornerRadius="@dimen/_10sdp">
+        app:cardCornerRadius="@dimen/radius1">
 
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_7sdp"
+            android:textSize="@dimen/textSizeH2"
             android:fontFamily="@font/kalameh_medium"
             android:gravity="center"
             android:paddingHorizontal="@dimen/_5sdp"

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.di.ApplicationInfoProvider
 import com.hoomanholding.applibrary.model.repository.DownloadFileRepository
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -32,10 +33,13 @@ class DownloadViewModel @Inject constructor(
     init {
         val downloadFolder =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        val destinationDir = File(downloadFolder.absolutePath, "Jpa")
+        val destinationDir = File(downloadFolder.absolutePath, CompanionValues.APP_ID)
         if (!destinationDir.exists())
             destinationDir.mkdir()
-        destinationFile = File(destinationDir.absolutePath,
+        val destinationApk = File(destinationDir.absolutePath, "apk")
+        if (!destinationApk.exists())
+            destinationApk.mkdir()
+        destinationFile = File(destinationApk.absolutePath,
             "${applicationInfoProvider.getAppLabel()}_${getNewFileName()}.apk")
 
     }

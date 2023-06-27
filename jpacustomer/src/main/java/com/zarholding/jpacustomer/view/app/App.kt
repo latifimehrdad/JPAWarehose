@@ -5,8 +5,18 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.graphics.Color
+import android.os.Environment
+import com.elvishew.xlog.LogConfiguration
+import com.elvishew.xlog.LogLevel
+import com.elvishew.xlog.XLog
+import com.elvishew.xlog.printer.AndroidPrinter
+import com.elvishew.xlog.printer.Printer
+import com.elvishew.xlog.printer.file.FilePrinter
+import com.elvishew.xlog.printer.file.backup.NeverBackupStrategy
+import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator
 import com.hoomanholding.applibrary.tools.CompanionValues
 import dagger.hilt.android.HiltAndroidApp
+import java.io.File
 
 
 /**
@@ -21,6 +31,7 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
+        initXLog()
     }
     //---------------------------------------------------------------------------------------------- onCreate
 
@@ -31,7 +42,7 @@ class App: Application() {
         val vibrate: LongArray = longArrayOf(1000L, 1000L, 1000L, 1000L, 1000L)
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel(
-            CompanionValues.CHANNEL_ID,
+            CompanionValues.APP_ID,
             CompanionValues.CHANNEL_Name,
             importance
         )
@@ -45,4 +56,39 @@ class App: Application() {
     }
     //---------------------------------------------------------------------------------------------- createNotificationChannel
 
+
+
+
+    //---------------------------------------------------------------------------------------------- initXLog
+    private fun initXLog() {
+        val downloadFolder =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val destinationDir = File(downloadFolder.absolutePath, CompanionValues.APP_ID)
+        if (!destinationDir.exists())
+            destinationDir.mkdir()
+
+        val destinationFile = File(destinationDir.absolutePath, "log")
+        val config: LogConfiguration = LogConfiguration.Builder()
+            .logLevel(LogLevel.ALL)
+            .tag("X-LOG")
+            .enableStackTrace(1)
+            .build()
+
+        val androidPrinter: Printer = AndroidPrinter(true)
+
+//        val consolePrinter: Printer = ConsolePrinter()
+
+        val filePrinter: Printer =
+            FilePrinter.Builder(destinationFile.absolutePath)
+                .fileNameGenerator(DateFileNameGenerator())
+                .backupStrategy(NeverBackupStrategy())
+                .build()
+
+        XLog.init(
+            config,
+            androidPrinter,
+            filePrinter
+        )
+    }
+    //---------------------------------------------------------------------------------------------- initXLog
 }

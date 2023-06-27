@@ -143,10 +143,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     private fun checkShowListType() {
         if (viewModel.productShowListType) {
             binding.buttonList.backgroundTintList =
-                requireContext().getColorStateList(R.color.a_menuIconSelect)
+                requireContext().getColorStateList(R.color.primaryColor)
         } else {
             binding.buttonList.backgroundTintList =
-                requireContext().getColorStateList(R.color.a_menuIconUnselect)
+                requireContext().getColorStateList(R.color.color3)
         }
         adapter?.productShowListType = viewModel.productShowListType
         adapter?.notifyItemRangeChanged(0, adapter?.itemCount ?: 0)

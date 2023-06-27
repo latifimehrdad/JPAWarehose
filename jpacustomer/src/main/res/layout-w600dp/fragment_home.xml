@@ -7,6 +7,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/textViewOldOrder">
+            <!-- باید حتما یک ویو داشته باشه وگرنه کرش میکنه! -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
@@ -15,8 +28,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/orderTracking"/>
 
@@ -25,9 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:background="@drawable/a_drawable_home_step"
+            android:background="@drawable/drawable_home_step"
             android:padding="@dimen/_5sdp">
 
             <com.skydoves.powerspinner.PowerSpinnerView
@@ -37,20 +50,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:background="@drawable/a_drawable_back_edit"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
                 android:hint="@string/orderNumber"
                 android:padding="@dimen/_3sdp"
-                android:textColor="@color/a_menuIconSelect"
-                android:textColorHint="@color/a_textHint"
-                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/primaryColor"
+                android:textSize="@dimen/textSizeH4"
                 app:spinner_arrow_gravity="start"
                 app:spinner_arrow_padding="8dp"
-                app:spinner_arrow_drawable="@drawable/a_ic_play"
-                app:spinner_arrow_tint="@color/a_menuIconSelect"
-                app:spinner_divider_color="@color/a_menuIconSelect"
+                app:spinner_arrow_drawable="@drawable/ic_play"
+                app:spinner_arrow_tint="@color/textColor"
+                app:spinner_divider_color="@color/textColor"
                 app:spinner_divider_show="true"
                 app:spinner_divider_size="0.4dp"
                 app:spinner_popup_background="@drawable/a_drawable_back_edit"
@@ -58,6 +70,17 @@
                 app:spinner_popup_animation="dropdown"
                 app:spinner_popup_elevation="5dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/spinnerChooseChart"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerChooseChart"
+                app:layout_constraintEnd_toEndOf="@id/spinnerChooseChart"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:text="@string/orderNumber"
+                android:textSize="@dimen/textSizeH5"
+                android:textColor="@color/textHintColor"
+                android:fontFamily="@font/iransans_light"/>
 
             <com.zarholding.jpacustomer.view.custom.CustomStep
                 android:id="@+id/stepSent"
@@ -67,7 +90,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/stepLoading"
                 app:layout_constraintDimensionRatio="H,1:1"
-                android:layout_marginTop="@dimen/_5sdp"
                 app:step_icon="@drawable/a_ic_step_send"
                 app:step_title="@string/sent"/>
 
@@ -144,15 +166,15 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/stepSent"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:cornerRadius="@dimen/_7sdp"
-                android:textSize="@dimen/_6sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:paddingHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/iransans_medium"
-                android:textColor="@color/a_textButton"
-                android:text='@string/showOrderDetail' />
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                android:text='@string/showOrderDetail'
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/textSizeH4"
+                app:cornerRadius="@dimen/radius2"/>
 
             <TextView
                 android:id="@+id/textViewStep"
@@ -162,8 +184,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/buttonShowOrderDetail"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_7sdp"
-                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/textSizeH3"
+                android:textColor="@color/textColor"
                 android:fontFamily="@font/iransans_bold" />
 
             <TextView
@@ -171,9 +193,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/textViewStep"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="@dimen/_6sdp"
+                android:textSize="@dimen/textSizeH5"
                 android:layout_marginBottom="@dimen/_3sdp"
-                android:textColor="@color/a_textView1"
+                android:textColor="@color/primaryColor"
                 android:fontFamily="@font/iransans_light"
                 android:text="@string/currentStep"
                 />
@@ -188,23 +210,11 @@
             app:layout_constraintTop_toBottomOf="@id/constraintLayoutStep"
             app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
             android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_8sdp"
-            android:textColor="@color/a_pageTitle"
+            android:textSize="@dimen/buttonTextSize"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/oldOrder"/>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeContainer"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/textViewOldOrder">
-            <!-- باید حتما یک ویو داشته باشه وگرنه کرش میکنه! -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <TextView
             android:id="@+id/textViewAllOrder"
@@ -215,7 +225,7 @@
             app:layout_constraintStart_toStartOf="@id/constraintLayoutStep"
             android:textSize="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_3sdp"
-            android:textColor="@color/a_textView1"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/iransans_light"
             android:text="@string/showAll"
             android:visibility="gone"
@@ -226,8 +236,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/textViewOldOrder"
-            android:layout_marginTop="@dimen/_5sdp"
-            app:layout_constraintHeight_percent="0.28" />
+            android:layout_marginTop="@dimen/_2sdp"
+            app:layout_constraintHeight_percent="0.3" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_view_container"
@@ -254,9 +264,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/recyclerViewOldOrder"
             app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:textSize="@dimen/_8sdp"
-            android:textColor="@color/a_pageTitle"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/buttonTextSize"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/callForPrice"/>
 
@@ -268,10 +278,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/constraintLayoutStep"
             app:layout_constraintEnd_toEndOf="@id/constraintLayoutStep"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginVertical="@dimen/_10sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView3">
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/color5">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -283,7 +293,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/textSizeH4"
                 android:textColor="@color/white"
                 android:text="@string/productCallForPrice"
                 android:fontFamily="@font/iransans_bold"

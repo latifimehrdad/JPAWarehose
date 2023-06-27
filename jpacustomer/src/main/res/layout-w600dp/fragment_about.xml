@@ -13,16 +13,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_8sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/aboutUs"/>
 
         <ImageView
             android:id="@+id/imageViewLogo"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            app:layout_constraintTop_toTopOf="@id/textViewTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:contentDescription="@string/logo"
@@ -36,9 +36,9 @@
             app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
             app:layout_constraintStart_toStartOf="@id/imageViewLogo"
             app:layout_constraintEnd_toEndOf="@id/imageViewLogo"
-            android:textColor="@color/a_textViewPrimary"
+            android:textColor="@color/textColor"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textSize="@dimen/_8sdp"
+            android:textSize="@dimen/textSizeH3"
             android:fontFamily="@font/iransans_bold"/>
 
         <TextView
@@ -48,9 +48,9 @@
             app:layout_constraintTop_toBottomOf="@id/textViewCompanyName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/a_textViewPrimary"
+            android:textColor="@color/textColor"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textSize="@dimen/_8sdp"
+            android:textSize="@dimen/textSizeH4"
             android:fontFamily="@font/iransans_light"/>
 
         <androidx.cardview.widget.CardView
@@ -60,18 +60,17 @@
             app:layout_constraintTop_toBottomOf="@id/textViewAbout"
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
-            app:layout_constraintDimensionRatio="H,2:1"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_2sdp"
-            app:cardCornerRadius="15dp"
-            app:cardBackgroundColor="@color/a_cardView8">
+            app:layout_constraintDimensionRatio="H,2.5:1"
+            android:layout_marginTop="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardBackgroundColor="@color/a_cardView2"
                 android:layout_margin="@dimen/_10sdp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="@dimen/radius1">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -79,8 +78,8 @@
                     android:contentDescription="@string/play" />
 
                 <ImageView
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/a_ic_play2"
                     android:contentDescription="@string/play" />
@@ -98,19 +97,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/a_cardView3">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/a_ic_wave"
-                android:padding="@dimen/_7sdp">
+                android:padding="@dimen/_5sdp">
 
                 <ImageView
                     android:id="@+id/imageviewCall"
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:contentDescription="@string/logo"
@@ -125,17 +124,17 @@
                     app:layout_constraintBottom_toBottomOf="@id/imageviewCall"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH4"
                     android:fontFamily="@font/iransans_light"/>
 
                 <ImageView
                     android:id="@+id/imageviewAddress"
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     app:layout_constraintTop_toBottomOf="@id/imageviewCall"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:contentDescription="@string/logo"
                     android:src="@drawable/a_ic_location"/>
 
@@ -148,8 +147,8 @@
                     app:layout_constraintBottom_toBottomOf="@id/imageviewAddress"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_light"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -165,17 +164,15 @@
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_2sdp"
-            app:cardCornerRadius="15dp"
-            app:cardBackgroundColor="@color/a_cardView8">
+            android:layout_marginVertical="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
-                app:cardCornerRadius="15dp"
-                app:cardBackgroundColor="@color/a_cardView2">
+                android:layout_margin="1dp"
+                app:cardCornerRadius="@dimen/radius1">
 
                 <org.osmdroid.views.MapView
                     android:id="@+id/mapView"

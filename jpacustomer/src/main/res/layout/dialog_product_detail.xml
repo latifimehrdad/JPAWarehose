@@ -7,8 +7,8 @@
         android:layout_height="wrap_content"
         app:cardUseCompatPadding="true"
         android:layoutDirection="ltr"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/a_cardView5">
+        app:cardCornerRadius="@dimen/radius1"
+        app:cardBackgroundColor="@color/color4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -21,11 +21,11 @@
                 android:layout_height="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintDimensionRatio="H,1:0.8"
                 app:layout_constraintTop_toTopOf="parent"
-                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/radius1"
                 app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/a_cardView2">
+                app:cardBackgroundColor="@color/color1">
 
                 <com.hoomanholding.applibrary.view.custom.TouchImageView
                     android:id="@+id/touchImageView"
@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="center"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH3"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="@id/cardImage"
@@ -57,8 +57,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="center"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH3"
                 android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="@id/textViewCode"
                 app:layout_constraintStart_toStartOf="@id/textViewCode"
@@ -66,13 +66,15 @@
 
             <TextView
                 android:id="@+id/textViewPrice"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_bold"
                 android:gravity="center"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/textSizeH2"
                 android:layout_marginTop="@dimen/_3sdp"
+                android:padding="@dimen/_3sdp"
+                android:background="@drawable/a_drawable_back_curve_primary"
                 app:layout_constraintEnd_toEndOf="@id/textViewCode"
                 app:layout_constraintStart_toStartOf="@id/textViewCode"
                 app:layout_constraintTop_toBottomOf="@id/textViewName" />
@@ -83,8 +85,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="center"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH3"
                 android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="@id/textViewCode"
                 app:layout_constraintStart_toStartOf="@id/textViewCode"
@@ -112,12 +114,12 @@
 
                 <EditText
                     android:id="@+id/editTextCount"
-                    android:layout_width="@dimen/_50sdp"
+                    android:layout_width="@dimen/_40sdp"
                     android:layout_height="wrap_content"
                     android:background="@color/a_cardView5"
                     android:textColor="@color/a_textViewPrimary"
                     android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/textSizeH1"
                     android:maxLength="3"
                     android:fontFamily="@font/iransans_bold"
                     android:gravity="center"
@@ -145,13 +147,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/buttonNo"
                 android:backgroundTint="@color/primaryColor"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:minWidth="@dimen/_90sdp"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/buttonTextSize"
                 android:fontFamily="@font/yekan_bakh_bold"
-                app:cornerRadius="@dimen/_5sdp"
-                android:textColor="@color/a_textButton"
+                app:cornerRadius="@dimen/radius3"
+                android:textColor="@color/buttonTextColor"
                 android:text='@string/addToBasket' />
 
 
@@ -164,11 +166,11 @@
                 app:layout_constraintStart_toEndOf="@id/buttonYes"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:minWidth="@dimen/_90sdp"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/buttonTextSize"
                 android:fontFamily="@font/yekan_bakh_bold"
-                app:cornerRadius="@dimen/_5sdp"
-                android:backgroundTint="@color/a_buttonUnselect"
-                android:textColor="@color/a_textViewPrimary"
+                app:cornerRadius="@dimen/radius3"
+                android:backgroundTint="@color/color3"
+                android:textColor="@color/textColor"
                 android:text='@string/cancel' />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

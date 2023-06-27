@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraintLayoutBillingReturnTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/a_drawable_report_pdf_title">
@@ -12,8 +11,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         android:paddingVertical="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textViewDiscountPrice"
@@ -27,7 +26,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
         app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
         app:layout_constraintStart_toEndOf="@id/textViewFinalPrice"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewDiscountPrice"
@@ -35,8 +34,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewFinalPrice"
         app:layout_constraintEnd_toStartOf="@id/textViewAmountPrice"
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
@@ -50,7 +49,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
         app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
         app:layout_constraintStart_toEndOf="@id/textViewDiscountPrice"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewAmountPrice"
@@ -58,8 +57,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewDiscountPrice"
         app:layout_constraintEnd_toStartOf="@id/textViewDate"
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
@@ -73,7 +72,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
         app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
         app:layout_constraintStart_toEndOf="@id/textViewAmountPrice"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewDate"
@@ -81,8 +80,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewAmountPrice"
         app:layout_constraintEnd_toStartOf="@id/textViewNumber"
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
@@ -96,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"
         app:layout_constraintBottom_toBottomOf="@id/textViewFinalPrice"
         app:layout_constraintStart_toEndOf="@id/textViewDate"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewNumber"
@@ -104,8 +103,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textButton"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/buttonTextColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/textViewFinalPrice"

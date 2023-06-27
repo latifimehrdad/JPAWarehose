@@ -16,7 +16,7 @@
             android:id="@+id/itemDefaultText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_8sdp"
+            android:textSize="@dimen/textSizeH4"
             android:textColor="@color/primaryColor"
             android:fontFamily="@font/yekan_bakh_medium"
             android:gravity="center"

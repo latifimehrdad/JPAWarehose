@@ -7,7 +7,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/a_menuBack">
+        app:cardBackgroundColor="@color/color4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,16 +30,16 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/rial"
-                    android:textColor="@color/a_textHint"
-                    android:textSize="@dimen/_5sdp" />
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/textSizeH6"/>
 
                 <TextView
                     android:id="@+id/textViewPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans_bold"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_7sdp"/>
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/textSizeH3"/>
 
                 <TextView
                     android:id="@+id/textViewCountInPackage"
@@ -47,9 +47,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans_light"
                     android:gravity="end"
-                    android:textColor="@color/a_textViewPrimary"
+                    android:textColor="@color/textHintColor"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:textSize="@dimen/_6sdp"/>
+                    android:textSize="@dimen/textSizeH5"/>
 
                 <TextView
                     android:id="@+id/textViewCountInBox"
@@ -57,9 +57,9 @@
                     android:layout_height="match_parent"
                     android:gravity="end"
                     android:fontFamily="@font/iransans_light"
-                    android:textColor="@color/a_textViewPrimary"
+                    android:textColor="@color/textHintColor"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:textSize="@dimen/_6sdp"/>
+                    android:textSize="@dimen/textSizeH5"/>
 
 
 
@@ -73,8 +73,8 @@
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:fontFamily="@font/iransans_light"
                 android:gravity="start"
-                android:textColor="@color/a_textHint"
-                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/textHintColor"
+                android:textSize="@dimen/textSizeH5"
                 app:layout_constraintBottom_toTopOf="@id/textViewName"
                 app:layout_constraintEnd_toStartOf="@id/imageViewPicture"
                 app:layout_constraintStart_toEndOf="@id/linearLayoutPrice"
@@ -86,8 +86,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_medium"
                 android:gravity="start"
-                android:textColor="@color/a_textViewPrimary"
-                android:textSize="@dimen/_6sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/textViewCode"
                 app:layout_constraintStart_toStartOf="@id/textViewCode"

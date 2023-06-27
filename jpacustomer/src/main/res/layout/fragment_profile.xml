@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/_10sdp">
+        android:paddingHorizontal="@dimen/_5sdp">
 
         <TextView
             android:id="@+id/textViewTitle"
@@ -14,8 +14,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/profile"/>
 
@@ -26,8 +26,8 @@
             app:layout_constraintTop_toBottomOf="@id/textViewTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/a_cardView3">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -43,8 +43,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintWidth_percent="0.3"
                     app:layout_constraintDimensionRatio="H,1:1"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/a_cardView2">
+                    app:cardCornerRadius="@dimen/radius1"
+                    app:cardBackgroundColor="@color/color1">
 
                     <ImageView
                         android:id="@+id/imageViewProfile"
@@ -56,7 +56,7 @@
                         android:id="@+id/textViewPercent"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/a_uploadImage"
+                        android:background="@color/uploadImage"
                         android:textSize="@dimen/_9sdp"
                         android:textColor="@color/white"
                         android:gravity="center"
@@ -76,11 +76,11 @@
                     android:paddingVertical="@dimen/_4sdp"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:textColor="@color/a_cardView3"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/textSizeH5"
                     android:text="@string/showMyState"
                     android:fontFamily="@font/iransans_light"
-                    android:background="@drawable/a_drawable_back_state"/>
+                    android:background="@drawable/drawable_back_state"/>
 
 
                 <ImageView
@@ -103,8 +103,8 @@
                     app:layout_constraintBottom_toTopOf="@id/textViewShopAddress"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -115,8 +115,8 @@
                     app:layout_constraintStart_toStartOf="@id/textViewShopName"
                     app:layout_constraintEnd_toEndOf="@id/textViewShopName"
                     app:layout_constraintBottom_toBottomOf="@id/textViewMyState"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_7sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -128,8 +128,8 @@
                     app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH3"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -140,8 +140,8 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserMobile"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH3"
                     android:fontFamily="@font/iransans_bold"/>
 
                 <TextView
@@ -152,8 +152,8 @@
                     app:layout_constraintStart_toStartOf="@id/textViewName"
                     app:layout_constraintEnd_toEndOf="@id/textViewName"
                     app:layout_constraintBottom_toBottomOf="@id/cardViewProfile"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH3"
                     android:fontFamily="@font/iransans_bold"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -166,9 +166,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_15sdp"
-            android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/salesExpert"/>
 
@@ -179,7 +179,7 @@
             app:layout_constraintTop_toBottomOf="@id/textViewSalesExpert"
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
-            android:background="@drawable/a_drawable_back_edit"
+            android:background="@drawable/drawable_color1_curve"
             android:layout_marginTop="@dimen/_5sdp"
             android:padding="@dimen/_5sdp">
 
@@ -214,8 +214,8 @@
                 app:layout_constraintEnd_toStartOf="@id/cardViewVisitorProfile"
                 app:layout_constraintBottom_toTopOf="@id/textViewVisitorMobile"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:textColor="@color/primaryColor"
-                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH2"
                 android:fontFamily="@font/iransans_bold"/>
 
             <TextView
@@ -226,8 +226,8 @@
                 app:layout_constraintStart_toStartOf="@id/textViewVisitorName"
                 app:layout_constraintEnd_toEndOf="@id/textViewVisitorName"
                 app:layout_constraintBottom_toBottomOf="@id/cardViewVisitorProfile"
-                android:textColor="@color/primaryColor"
-                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/textHintColor"
+                android:textSize="@dimen/textSizeH4"
                 android:fontFamily="@font/iransans_medium"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -239,8 +239,8 @@
             app:layout_constraintTop_toBottomOf="@id/cardViewSalesExpert"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_15sdp"
-            android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/salesExpert"/>
 
@@ -261,12 +261,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textViewContactUs"
-                android:textSize="@dimen/_8sdp"
-                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/textSizeH4"
+                android:textColor="@color/textColor"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/suggestions"
                 android:gravity="center"
-                android:background="@drawable/a_drawable_back_edit"
+                android:background="@drawable/drawable_color1_curve"
                 app:drawableBottomCompat="@drawable/a_drawable_suggestion"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:paddingVertical="@dimen/_10sdp" />
@@ -279,13 +279,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textViewSuggestions"
                 app:layout_constraintEnd_toStartOf="@id/textViewHistory"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/textSizeH4"
+                android:textColor="@color/textColor"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:textColor="@color/primaryColor"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/contactUs"
                 android:gravity="center"
-                android:background="@drawable/a_drawable_back_edit"
+                android:background="@drawable/drawable_color1_curve"
                 app:drawableBottomCompat="@drawable/a_ic_item_phone"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:paddingVertical="@dimen/_10sdp" />
@@ -299,12 +299,12 @@
                 app:layout_constraintStart_toEndOf="@id/textViewContactUs"
                 app:layout_constraintEnd_toStartOf="@id/textViewVideo"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:textSize="@dimen/_8sdp"
-                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/textSizeH4"
+                android:textColor="@color/textColor"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/historyOfCompany"
                 android:gravity="center"
-                android:background="@drawable/a_drawable_back_edit"
+                android:background="@drawable/drawable_color1_curve"
                 app:drawableBottomCompat="@drawable/a_ic_item_history"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:paddingVertical="@dimen/_10sdp"/>
@@ -317,13 +317,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textViewHistory"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/textSizeH4"
+                android:textColor="@color/textColor"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:textColor="@color/primaryColor"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/collectionVideos"
                 android:gravity="center"
-                android:background="@drawable/a_drawable_back_edit"
+                android:background="@drawable/drawable_color1_curve"
                 app:drawableBottomCompat="@drawable/a_ic_item_video"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:paddingVertical="@dimen/_10sdp"/>
@@ -337,8 +337,8 @@
             app:layout_constraintBottom_toTopOf="@id/cardViewTheme"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:textColor="@color/a_pageTitle"
-            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
             android:fontFamily="@font/iransans_bold"
             android:text="@string/setting"/>
 
@@ -350,18 +350,18 @@
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             android:layout_marginBottom="@dimen/_10sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView8">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/textSizeH3"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/activeDarkTheme"
                 android:layout_gravity="end|center_vertical"
-                android:layout_margin="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_7sdp"
                 />
 
             <ma.apps.widgets.daynightswitch.DayNightSwitch
@@ -392,18 +392,18 @@
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             android:layout_marginBottom="@dimen/_10sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView8">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/textSizeH3"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/enterByFingerPrint"
                 android:layout_gravity="end|center_vertical"
-                android:layout_margin="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_7sdp"
                 />
 
             <androidx.appcompat.widget.SwitchCompat
@@ -419,23 +419,23 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewSingOut"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
             app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
             android:layout_marginBottom="@dimen/_10sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView8">
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_9sdp"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/textSizeH3"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/signOut"
                 android:layout_gravity="end|center_vertical"
-                android:layout_margin="@dimen/_7sdp"
+                android:layout_marginEnd="@dimen/_7sdp"
                 />
 
             <ImageView

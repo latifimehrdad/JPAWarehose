@@ -14,9 +14,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cardViewFactorReport"
             app:layout_constraintDimensionRatio="H,1:1"
-            android:layout_margin="@dimen/_5sdp"
-            app:cardBackgroundColor="@color/a_cardView3"
-            app:cardCornerRadius="@dimen/_15sdp">
+            android:layout_margin="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/primaryColor"
+            app:cardCornerRadius="@dimen/radius0">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -28,15 +28,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/white"
+                android:textSize="@dimen/buttonTextSize"
+                android:textColor="@color/buttonTextColor"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/customerBalanceReport"
                 />
 
         </androidx.cardview.widget.CardView>
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewFactorReport"
@@ -46,9 +45,9 @@
             app:layout_constraintStart_toEndOf="@id/cardViewCustomerBalanceReport"
             app:layout_constraintEnd_toStartOf="@id/cardViewFeedbackReport"
             app:layout_constraintBottom_toBottomOf="@id/cardViewCustomerBalanceReport"
-            android:layout_marginHorizontal="@dimen/_5sdp"
-            app:cardBackgroundColor="@color/a_cardView3"
-            app:cardCornerRadius="@dimen/_15sdp">
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/primaryColor"
+            app:cardCornerRadius="@dimen/radius0">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -60,8 +59,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/white"
+                android:textSize="@dimen/buttonTextSize"
+                android:textColor="@color/buttonTextColor"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/factorReport"
@@ -77,9 +76,9 @@
             app:layout_constraintStart_toEndOf="@id/cardViewFactorReport"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/cardViewCustomerBalanceReport"
-            android:layout_marginHorizontal="@dimen/_5sdp"
-            app:cardBackgroundColor="@color/a_cardView3"
-            app:cardCornerRadius="@dimen/_15sdp">
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:cardBackgroundColor="@color/primaryColor"
+            app:cardCornerRadius="@dimen/radius0">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -91,8 +90,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/white"
+                android:textSize="@dimen/buttonTextSize"
+                android:textColor="@color/buttonTextColor"
                 android:gravity="center"
                 android:fontFamily="@font/iransans_medium"
                 android:text="@string/feedbackReport"

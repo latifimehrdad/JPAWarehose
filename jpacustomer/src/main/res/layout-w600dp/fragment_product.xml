@@ -16,13 +16,13 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/_10sdp"
             android:padding="@dimen/_5sdp"
-            android:textSize="@dimen/_7sdp"
+            android:textSize="@dimen/textSizeH3"
             android:fontFamily="@font/iransans_light"
-            android:background="@drawable/a_drawable_back_edit2"
+            android:background="@drawable/drawable_back_edit"
             android:inputType="text"
-            android:textColor="@color/a_cardView3"
+            android:textColor="@color/textColor"
             android:hint="@string/search"
-            android:textColorHint="@color/a_textHint"
+            android:textColorHint="@color/textHintColor"
             android:drawableEnd="@drawable/a_ic_search"
             android:drawableStart="@drawable/a_ic_subtraction"
             android:drawablePadding="@dimen/_5sdp"
@@ -30,13 +30,13 @@
 
         <ImageView
             android:id="@+id/imageViewClearText"
-            android:layout_width="@dimen/_18sdp"
-            android:layout_height="@dimen/_18sdp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="@id/editTextSearch"
             app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
             app:layout_constraintEnd_toEndOf="@id/editTextSearch"
             android:layout_marginEnd="@dimen/_3sdp"
-            android:background="@drawable/a_drawable_back_edit2"
+            android:background="@drawable/drawable_back_edit"
             android:src="@drawable/a_ic_delete"
             android:contentDescription="@string/deleteBasket" />
 
@@ -49,15 +49,15 @@
             app:layout_constraintEnd_toStartOf="@id/buttonAllProduct"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:backgroundTint="@color/a_buttonUnselect"
+            android:backgroundTint="@color/color3"
             android:hint="@string/bePatient"
-            app:cornerRadius="@dimen/_7sdp"
-            android:textSize="@dimen/_7sdp"
+            app:cornerRadius="@dimen/radius2"
+            android:textSize="@dimen/textSizeH3"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
             android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/a_editBack2"
+            android:textColor="@color/white"
             android:text='@string/newProductList' />
 
         <com.hoomanholding.applibrary.view.custom.JpaButton
@@ -69,13 +69,13 @@
             app:layout_constraintStart_toEndOf="@id/buttonNewProduct"
             android:backgroundTint="@color/primaryColor"
             android:hint="@string/bePatient"
-            app:cornerRadius="@dimen/_7sdp"
-            android:textSize="@dimen/_7sdp"
+            app:cornerRadius="@dimen/radius2"
+            android:textSize="@dimen/textSizeH3"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
             android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/a_textButton"
+            android:textColor="@color/buttonTextColor"
             android:text='@string/allProductList' />
 
         <androidx.recyclerview.widget.RecyclerView

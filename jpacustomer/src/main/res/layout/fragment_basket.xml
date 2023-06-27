@@ -17,13 +17,13 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/_10sdp"
             android:padding="@dimen/_5sdp"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/textSizeH3"
             android:fontFamily="@font/iransans_light"
-            android:background="@drawable/a_drawable_back_edit2"
+            android:background="@drawable/drawable_back_edit"
             android:inputType="text"
-            android:textColor="@color/a_textViewPrimary"
+            android:textColor="@color/textColor"
             android:hint="@string/search"
-            android:textColorHint="@color/a_textHint"
+            android:textColorHint="@color/textHintColor"
             android:drawableEnd="@drawable/a_ic_search"
             android:drawableStart="@drawable/a_ic_subtraction"
             android:drawablePadding="@dimen/_5sdp"
@@ -37,7 +37,7 @@
             app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
             app:layout_constraintEnd_toEndOf="@id/editTextSearch"
             android:layout_marginEnd="@dimen/_3sdp"
-            android:background="@drawable/a_drawable_back_edit2"
+            android:background="@drawable/drawable_back_edit"
             android:src="@drawable/a_ic_delete"
             android:contentDescription="@string/deleteBasket" />
 
@@ -51,13 +51,13 @@
             android:backgroundTint="@color/a_menuIconSelect"
             android:layout_marginStart="@dimen/_10sdp"
             android:hint="@string/bePatient"
-            app:cornerRadius="@dimen/_7sdp"
-            android:textSize="@dimen/_9sdp"
+            app:cornerRadius="@dimen/radius3"
+            android:textSize="@dimen/textSizeH3"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:paddingHorizontal="@dimen/_15sdp"
             android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/a_textButton"
+            android:textColor="@color/white"
             android:text='@string/showFactorList' />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -96,8 +96,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_cardView6"
-            app:cardCornerRadius="@dimen/_15sdp">
+            app:cardBackgroundColor="@color/primaryColor"
+            app:cardCornerRadius="@dimen/radius0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,24 +111,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans_light"
-                    android:gravity="start"
-                    android:textColor="@color/a_cardView3"
-                    android:textSize="@dimen/_9sdp" />
+                    android:gravity="center"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH3" />
 
                 <com.hoomanholding.applibrary.view.custom.JpaButton
                     android:id="@+id/buttonSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/a_cardView3"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:backgroundTint="@color/primaryChangeColor"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:hint="@string/bePatient"
-                    app:cornerRadius="@dimen/_7sdp"
-                    android:textSize="@dimen/_9sdp"
+                    app:cornerRadius="@dimen/radius2"
+                    android:textSize="@dimen/textSizeH3"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
                     android:paddingHorizontal="@dimen/_15sdp"
                     android:fontFamily="@font/iransans_medium"
-                    android:textColor="@color/white"
+                    android:textColor="@color/textColor"
                     android:text='@string/saveOrder' />
 
             </LinearLayout>

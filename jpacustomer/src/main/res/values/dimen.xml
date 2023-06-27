@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="radius0">@dimen/_15sdp</dimen>
+    <dimen name="radius1">@dimen/_10sdp</dimen>
+    <dimen name="radius2">@dimen/_7sdp</dimen>
+    <dimen name="radius3">@dimen/_5sdp</dimen>
     <dimen name="textViewIconSize">@dimen/_20sdp</dimen>
+    <dimen name="buttonTextSize">@dimen/_10sdp</dimen>
+    <dimen name="editTextSize">@dimen/_10sdp</dimen>
+
+    <dimen name="textSizeH1">@dimen/_11sdp</dimen>
+    <dimen name="textSizeH2">@dimen/_10sdp</dimen>
+    <dimen name="textSizeH3">@dimen/_9sdp</dimen>
+    <dimen name="textSizeH4">@dimen/_8sdp</dimen>
+    <dimen name="textSizeH5">@dimen/_7sdp</dimen>
+    <dimen name="textSizeH6">@dimen/_6sdp</dimen>
 
 </resources>

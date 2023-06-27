@@ -6,11 +6,11 @@
   <path
       android:pathData="M11.948,2.847 L4.423,0.331C1.043,-0.795 -0.791,1.047 0.327,4.427L2.843,11.952c1.685,5.064 4.455,5.064 6.14,0l0.742,-2.236 2.236,-0.742c5.051,-1.677 5.051,-4.438 -0.013,-6.127z"
       android:strokeAlpha="0.4"
-      android:fillColor="@color/a_icon2"
+      android:fillColor="#292d32"
       android:fillAlpha="0.4"/>
   <path
       android:pathData="m7.773,7.575 l-3.181,-3.19z"
-      android:fillColor="@color/a_icon2"/>
+      android:fillColor="#292d32"/>
   <path
       android:pathData="M7.769,8.199a0.619,0.619 0,0 0,0.442 -0.184,0.629 0.629,0 0,0 0,-0.884l-3.17,-3.187a0.625,0.625 0,0 0,-0.884 0.884l3.17,3.187a0.655,0.655 0,0 0,0.442 0.184z"
       android:fillColor="@color/black"/>

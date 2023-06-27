@@ -6,8 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/a_cardView7">
+        app:cardCornerRadius="@dimen/radius1"
+        app:cardBackgroundColor="@color/color4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -16,8 +16,8 @@
 
             <ImageView
                 android:id="@+id/imageViewDelete"
-                android:layout_width="@dimen/_18sdp"
-                android:layout_height="@dimen/_18sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:contentDescription="@string/deleteBasket"
@@ -41,8 +41,8 @@
                     android:layout_marginHorizontal="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_light"
                     android:gravity="start"
-                    android:textColor="@color/a_textHint"
-                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/textHintColor"
+                    android:textSize="@dimen/textSizeH4"
                     app:layout_constraintStart_toEndOf="@id/textViewListCount"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -54,8 +54,8 @@
                     android:layout_marginHorizontal="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_bold"
                     android:gravity="end"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_5sdp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/textSizeH3"
                     app:layout_constraintEnd_toStartOf="@id/textViewListCode"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -67,8 +67,8 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_medium"
                     android:gravity="start"
-                    android:textColor="@color/a_textViewPrimary"
-                    android:textSize="@dimen/_6sdp"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/textSizeH4"
                     app:layout_constraintEnd_toEndOf="@id/textViewListCode"
                     app:layout_constraintStart_toStartOf="@id/textViewListCount"
                     app:layout_constraintTop_toBottomOf="@id/textViewListCount" />

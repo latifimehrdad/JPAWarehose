@@ -1,49 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primaryColor">#292d32</color>
+    <color name="primaryChangeColor">#d2d2d2</color>
+    <color name="mainGradiantStart">#f2f2f2</color>
+    <color name="mainGradiantEnd">#cecfd3</color>
+    <color name="textColor">#000000</color>
+    <color name="textHintColor">#646465</color>
+    <color name="buttonTextColor">#ffffff</color>
+    <color name="color1">#ffffff</color>
+    <color name="color3">#d2d2d2</color>
+    <color name="color4">#f3f6ff</color>
+    <color name="color5">#292d32</color>
+    <color name="uploadImage">#99000000</color>
+    <color name="buttonGradiantStart">#a6b4df</color>
+    <color name="buttonGradiantEnd">#f3f6ff</color>
+
+    <color name="red">#EF5350</color>
+    <color name="green">#81C784</color>
+    <color name="yellow">#FFB300</color>
+    <color name="menuDefault">#AEAEAE</color>
+    <color name="a_orderStepUnselect">#cecfd3</color>
+    <color name="a_orderStepSelect">#9cecac</color>
+
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primaryColor">#292d32</color>
+
     <color name="colorPrimaryVariant">#f2f2f2</color>
-    <color name="a_gradiantStart">#f2f2f2</color>
     <color name="a_gradiantEnd">#cecfd3</color>
     <color name="a_pageTitle">#292d32</color>
-    <color name="a_menuBack">#f3f6ff</color>
-    <color name="a_menuIconUnselect">#d2d2d2</color>
     <color name="a_menuIconSelect">#292d32</color>
     <color name="a_cardView1">#d2d2d2</color>
     <color name="a_cardView2">@color/white</color>
-    <color name="a_cardView3">#292d32</color>
-    <color name="a_cardView4">#292d32</color>
     <color name="a_cardView5">#f3f6ff</color>
-    <color name="a_cardView6">#d2d2d2</color>
-    <color name="a_cardView7">@color/white</color>
-    <color name="a_cardView8">#292d32</color>
     <color name="a_textViewPrimary">@color/black</color>
     <color name="a_textButton">@color/white</color>
     <color name="a_textView1">#535353</color>
     <color name="a_textHint">#8F8F8F</color>
-    <color name="a_icon1">@color/black</color>
-    <color name="a_icon2">#606060</color>
-    <color name="a_timerBorder">#292d32</color>
-    <color name="a_timerBack">#ECECEC</color>
-    <color name="a_editBack">#f2f2f2</color>
-    <color name="a_editBack2">@color/white</color>
-    <color name="a_editStroke">#E3E3E3</color>
-    <color name="a_orderStepUnselect">#cecfd3</color>
-    <color name="a_orderStepSelect">#9cecac</color>
-    <color name="a_orderButtonSelect">#f2f2f2</color>
+
     <color name="a_buttonUnselect">#bdbdbd</color>
-    <color name="a_uploadImage">#99000000</color>
+
     <color name="a_credit">#4CAF50</color>
     <color name="a_debit">#F44336</color>
     <color name="recyclerLoadingBack">#33323232</color>
     <color name="datePickerConfirmButtonBackColor">@color/primaryColor</color>
     <color name="datePickerDateBackColor">@color/primaryColor</color>
     <color name="datePickerRangeColor">#73B3EA</color>
-    <color name="red">#EF5350</color>
-    <color name="green">#81C784</color>
+
     <color name="orderDetailDate">#0030c0</color>
-    <color name="yellow">#FFB300</color>
+
 
 
 

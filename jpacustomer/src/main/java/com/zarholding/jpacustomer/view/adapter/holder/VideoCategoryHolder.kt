@@ -42,12 +42,12 @@ class VideoCategoryHolder(
             binding.cardViewParent
                 .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.primaryColor))
             binding.textViewTitle
-                .setTextColor(binding.textViewTitle.context.getColor(R.color.a_textButton))
+                .setTextColor(binding.textViewTitle.context.getColor(R.color.buttonTextColor))
         } else {
             binding.cardViewParent
-                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.a_textButton))
+                .setCardBackgroundColor(binding.cardViewParent.context.getColor(R.color.buttonTextColor))
             binding.textViewTitle
-                .setTextColor(binding.textViewTitle.context.getColor(R.color.primaryColor))
+                .setTextColor(binding.textViewTitle.context.getColor(R.color.textHintColor))
         }
     }
     //---------------------------------------------------------------------------------------------- setItemSelected

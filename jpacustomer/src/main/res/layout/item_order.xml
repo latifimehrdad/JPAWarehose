@@ -8,8 +8,7 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginVertical="@dimen/_3sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/a_cardView5">
+        app:cardCornerRadius="@dimen/radius1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -41,8 +40,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_6sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH6"
+                    android:textColor="@color/textHintColor"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/orderNumber"/>
 
@@ -54,8 +53,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/imageViewShopping"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_7sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -65,9 +63,8 @@
                     app:layout_constraintTop_toBottomOf="@id/imageViewShopping"
                     app:layout_constraintBottom_toTopOf="@id/textViewAmount"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_6sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH6"
+                    android:textColor="@color/textHintColor"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/totalAmount"/>
 
@@ -79,8 +76,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/textViewOrderAmountTitle"
                     app:layout_constraintBottom_toTopOf="@id/textViewOrderDiscountTitle"
-                    android:textSize="@dimen/_7sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -90,9 +86,8 @@
                     app:layout_constraintTop_toBottomOf="@id/textViewAmount"
                     app:layout_constraintBottom_toTopOf="@id/textViewDiscount"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:textSize="@dimen/_6sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH6"
+                    android:textColor="@color/textHintColor"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/discountAmount"/>
 
@@ -104,8 +99,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/textViewOrderDiscountTitle"
                     app:layout_constraintBottom_toTopOf="@id/textViewOrderFinalTitle"
-                    android:textSize="@dimen/_7sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_light"/>
 
                 <TextView
@@ -115,9 +109,8 @@
                     app:layout_constraintTop_toBottomOf="@id/textViewDiscount"
                     app:layout_constraintBottom_toTopOf="@id/textViewFinal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:textSize="@dimen/_6sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH6"
+                    android:textColor="@color/textHintColor"
                     android:fontFamily="@font/iransans_light"
                     android:text="@string/finalPrice"/>
 
@@ -129,16 +122,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/textViewOrderFinalTitle"
                     app:layout_constraintBottom_toTopOf="@id/textViewDate"
-                    android:textSize="@dimen/_7sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH5"
+                    android:layout_marginBottom="@dimen/textSizeH5"
                     android:fontFamily="@font/iransans_light"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     app:layout_constraintBottom_toTopOf="@id/textViewDate"
-                    android:background="@color/a_textHint"
+                    android:background="@color/textHintColor"
                     android:layout_marginBottom="@dimen/_2sdp"/>
 
                 <TextView
@@ -148,8 +140,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textSize="@dimen/_7sdp"
-                    android:textColor="@color/a_textHint"
+                    android:textSize="@dimen/textSizeH5"
+                    android:textColor="@color/textHintColor"
                     android:fontFamily="@font/iransans_light"
                     android:gravity="center"/>
 

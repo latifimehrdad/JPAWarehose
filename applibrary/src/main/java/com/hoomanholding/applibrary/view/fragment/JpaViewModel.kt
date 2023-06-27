@@ -1,7 +1,9 @@
 package com.hoomanholding.applibrary.view.fragment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.elvishew.xlog.XLog
+import com.hoomanholding.applibrary.R
+import com.hoomanholding.applibrary.di.Providers
 import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
@@ -16,22 +18,22 @@ import javax.inject.Inject
 @HiltViewModel
 open class JpaViewModel @Inject constructor() : ViewModel() {
 
-    @Inject lateinit var resourcesProvider: ResourcesProvider
+    @Inject
+    lateinit var resourcesProvider: ResourcesProvider
     val errorLiveDate = SingleLiveEvent<ErrorApiModel>()
 
     //---------------------------------------------------------------------------------------------- checkResponse
-    suspend fun <T: Any> checkResponse(response: Response<GeneralResponse<T?>>?): T?{
+    suspend fun <T : Any> checkResponse(response: Response<GeneralResponse<T?>>?): T? {
         if (response?.isSuccessful == true) {
             val body = response.body()
-            body?.let {generalResponse ->
+            body?.let { generalResponse ->
                 if (generalResponse.hasError || generalResponse.data == null)
                     setMessage(generalResponse.message)
                 else
                     return generalResponse.data
             } ?: run {
                 setMessage(
-                    resourcesProvider.getString(
-                        com.hoomanholding.applibrary.R.string.dataReceivedIsEmpty
+                    resourcesProvider.getString(R.string.dataReceivedIsEmpty
                     )
                 )
             }
@@ -42,7 +44,7 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
 
 
     //---------------------------------------------------------------------------------------------- setError
-    suspend fun setMessage(response: Response<*>?) {
+    private suspend fun setMessage(response: Response<*>?) {
         withContext(Dispatchers.Main) {
             checkResponseError(response, errorLiveDate)
         }
@@ -51,7 +53,7 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
 
 
     //---------------------------------------------------------------------------------------------- setMessage
-    suspend fun setMessage(message : String) {
+    suspend fun setMessage(message: String) {
         withContext(Dispatchers.Main) {
             errorLiveDate.value = ErrorApiModel(EnumApiError.Error, message)
         }
@@ -63,8 +65,14 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
     fun exceptionHandler() = CoroutineExceptionHandler { _, throwable ->
         CoroutineScope(Dispatchers.Main).launch {
             throwable.localizedMessage?.let {
-            Log.e("meri", it)
-                setMessage(it)
+                XLog.e(it)
+                val url = Providers.url
+                    .replace("http://","")
+                    .replace("https://","")
+                if (it.contains(url))
+                    setMessage(resourcesProvider.getString(R.string.pleaseCheckYouConnection))
+                else
+                    setMessage(it)
             }
         }
     }

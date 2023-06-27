@@ -18,7 +18,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textViewSeller"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="0.7"
@@ -27,12 +26,11 @@
             android:lines="1"
             android:paddingHorizontal="@dimen/_5sdp"
             android:text="@string/seller"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_6sdp" />
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH6" />
 
 
         <TextView
-            android:id="@+id/textViewBuyer"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -41,8 +39,8 @@
             android:lines="1"
             android:paddingHorizontal="@dimen/_5sdp"
             android:text="@string/buyer"
-            android:textColor="@color/a_textViewPrimary"
-            android:textSize="@dimen/_6sdp" />
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSizeH6" />
 
     </LinearLayout>
 
@@ -50,7 +48,7 @@
         android:id="@+id/viewLine1"
         android:layout_width="1px"
         android:layout_height="0dp"
-        android:background="@color/a_textViewPrimary"
+        android:background="@color/textColor"
         app:layout_constraintBottom_toBottomOf="@id/textViewBuyerAddress"
         app:layout_constraintEnd_toStartOf="@id/linearLayoutSeller"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,8 +61,8 @@
         android:gravity="end"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toStartOf="@id/textViewDetailPreNumber"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,8 +74,8 @@
         android:fontFamily="@font/iransans_medium"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toStartOf="@id/textViewDetailNumber"
         app:layout_constraintStart_toEndOf="@id/textViewDetailDate"
         app:layout_constraintTop_toTopOf="parent" />
@@ -89,8 +87,8 @@
         android:fontFamily="@font/iransans_medium"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toStartOf="@id/viewLine1"
         app:layout_constraintStart_toEndOf="@id/textViewDetailPreNumber"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,8 +101,8 @@
         android:gravity="center"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewDetailDate" />
 
@@ -116,8 +114,8 @@
         android:fontFamily="@font/iransans_medium"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toEndOf="@id/textViewDetailNumber"
         app:layout_constraintStart_toEndOf="@id/textViewVisitor"
         app:layout_constraintTop_toTopOf="@id/textViewVisitor" />
@@ -130,8 +128,8 @@
         android:gravity="center"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewLine2" />
 
@@ -143,8 +141,8 @@
         android:fontFamily="@font/iransans_medium"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toEndOf="@id/textViewDetailNumber"
         app:layout_constraintStart_toEndOf="@id/textViewTel"
         app:layout_constraintTop_toTopOf="@id/textViewTel" />
@@ -157,8 +155,8 @@
         android:gravity="end"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toStartOf="@id/textViewStoreName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewBuyerName" />
@@ -170,8 +168,8 @@
         android:fontFamily="@font/iransans_medium"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toStartOf="@id/textViewBuyerCode"
         app:layout_constraintStart_toEndOf="@id/textViewBuyerMobile"
         app:layout_constraintTop_toTopOf="@id/textViewBuyerMobile" />
@@ -183,8 +181,8 @@
         android:fontFamily="@font/iransans_medium"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toStartOf="@id/viewLine1"
         app:layout_constraintStart_toEndOf="@id/textViewStoreName"
         app:layout_constraintTop_toTopOf="@id/textViewBuyerMobile" />
@@ -196,8 +194,8 @@
         android:fontFamily="@font/iransans_medium"
         android:lines="1"
         android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintEnd_toStartOf="@id/viewLine1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewBuyerMobile" />
@@ -206,7 +204,7 @@
         android:id="@+id/viewLine2"
         android:layout_width="0dp"
         android:layout_height="1px"
-        android:background="@color/a_textViewPrimary"
+        android:background="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewSellerAddress" />
@@ -219,8 +217,8 @@
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
         app:layout_constraintWidth_percent="0.2"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         android:paddingVertical="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/textViewPrice"
@@ -234,7 +232,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
         app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
         app:layout_constraintStart_toEndOf="@id/textViewTotalAmount"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewPrice"
@@ -243,8 +241,8 @@
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
         app:layout_constraintWidth_percent="0.15"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewTotalAmount"
         app:layout_constraintEnd_toStartOf="@id/textViewCount"
         app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
@@ -258,7 +256,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
         app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
         app:layout_constraintStart_toEndOf="@id/textViewPrice"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewCount"
@@ -267,8 +265,8 @@
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
         app:layout_constraintWidth_percent="0.1"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewPrice"
         app:layout_constraintEnd_toStartOf="@id/textViewProductName"
         app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
@@ -282,7 +280,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
         app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
         app:layout_constraintStart_toEndOf="@id/textViewCount"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewProductName"
@@ -290,8 +288,8 @@
         android:layout_height="0dp"
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         app:layout_constraintStart_toEndOf="@id/textViewCount"
         app:layout_constraintEnd_toStartOf="@id/textViewProductCode"
         app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
@@ -305,7 +303,7 @@
         app:layout_constraintTop_toTopOf="@id/textViewTotalAmount"
         app:layout_constraintBottom_toBottomOf="@id/textViewTotalAmount"
         app:layout_constraintStart_toEndOf="@id/textViewProductName"
-        android:background="@color/a_textViewPrimary"/>
+        android:background="@color/textColor"/>
 
     <TextView
         android:id="@+id/textViewProductCode"
@@ -314,8 +312,8 @@
         android:fontFamily="@font/iransans_medium"
         android:gravity="center"
         app:layout_constraintWidth_percent="0.1"
-        android:textColor="@color/a_textViewPrimary"
-        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/textSizeH6"
         android:padding="@dimen/_3sdp"
         app:layout_constraintStart_toEndOf="@id/textViewProductName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -328,7 +326,7 @@
         android:id="@+id/viewLine3"
         android:layout_width="0dp"
         android:layout_height="1px"
-        android:background="@color/a_textViewPrimary"
+        android:background="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewBuyerAddress" />

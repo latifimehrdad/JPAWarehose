@@ -79,7 +79,7 @@ class ReportPDFFragment(
         viewModel.mutableLiveData.observe(viewLifecycleOwner) {
             binding.shimmerViewContainer.stopLoading()
             if (it)
-                showMessage("فایل در پوشه Documents ذخیره شد")
+                showMessage("فایل در پوشه Download ذخیره شد")
             else
                 showMessage("خطا در تولید فایل")
 
@@ -140,7 +140,7 @@ class ReportPDFFragment(
 
                 EnumReportType.Balance -> {
                     binding.textViewTitle.text = getString(R.string.customerBalanceReport)
-                    viewModelBalance.getUserInfo()
+                    viewModelBalance.getReport()
                 }
 
                 EnumReportType.BillingItem -> {

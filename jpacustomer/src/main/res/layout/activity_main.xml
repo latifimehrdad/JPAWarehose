@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         tools:context=".view.activity.MainActivity"
         android:layoutDirection="ltr"
-        android:background="@drawable/a_drawable_gradiant">
+        android:background="@drawable/drawable_main_gradiant">
 
         <ImageView
             android:id="@+id/imageViewBack"
@@ -31,7 +31,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             app:cardCornerRadius="@dimen/_30sdp"
-            app:cardBackgroundColor="@color/a_pageTitle">
+            app:cardBackgroundColor="@color/textColor">
 
             <ImageView
                 android:id="@+id/imageViewProfiel"
@@ -52,9 +52,9 @@
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_marginVertical="@dimen/_5sdp"
             android:gravity="center_vertical|start"
-            android:textColor="@color/a_pageTitle"
+            android:textColor="@color/textColor"
             android:fontFamily="@font/iransans_medium"
-            android:textSize="@dimen/_8sdp"/>
+            android:textSize="@dimen/textSizeH4"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
@@ -63,18 +63,19 @@
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/cardViewProfile"
             app:layout_constraintBottom_toTopOf="@id/cardViewMenu"
+            android:layout_marginBottom="@dimen/_2sdp"
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_host" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewMenu"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_45sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/a_menuBack"
-            app:cardCornerRadius="@dimen/_15sdp">
+            app:cardBackgroundColor="@color/color4"
+            app:cardCornerRadius="@dimen/radius0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
