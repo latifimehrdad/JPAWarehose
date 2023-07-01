@@ -1,17 +1,7 @@
 package com.hoomanholding.jpamanager.view.app
 
 import android.app.Application
-import android.os.Environment
-import com.elvishew.xlog.LogConfiguration
-import com.elvishew.xlog.LogLevel
-import com.elvishew.xlog.XLog
-import com.elvishew.xlog.printer.AndroidPrinter
-import com.elvishew.xlog.printer.Printer
-import com.elvishew.xlog.printer.file.FilePrinter
-import com.elvishew.xlog.printer.file.backup.NeverBackupStrategy
-import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator
 import dagger.hilt.android.HiltAndroidApp
-import java.io.File
 
 /**
  * Create by Mehrdad on 1/16/2023
@@ -20,7 +10,7 @@ import java.io.File
 @HiltAndroidApp
 class App : Application() {
 
-    //---------------------------------------------------------------------------------------------- init
+/*    //---------------------------------------------------------------------------------------------- init
     init {
         val downloadFolder =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
@@ -52,5 +42,5 @@ class App : Application() {
             filePrinter
         )
     }
-    //---------------------------------------------------------------------------------------------- init
+    //---------------------------------------------------------------------------------------------- init*/
 }
