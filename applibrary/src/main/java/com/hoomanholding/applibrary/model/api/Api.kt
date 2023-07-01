@@ -137,6 +137,12 @@ interface Api {
     suspend fun requestGetCustomerProducts(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<ProductModel>?>>
+
+    @GET("$baseData/basedata-SaveError")
+    suspend fun requestSaveError(
+        @Query("ErrorText") errorText: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
     //---------------------------------------------------------------------------------------------- baseData
 
 

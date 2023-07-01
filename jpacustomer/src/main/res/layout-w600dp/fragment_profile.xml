@@ -35,6 +35,17 @@
                 android:background="@drawable/a_ic_wave"
                 android:padding="@dimen/_5sdp">
 
+                <TextView
+                    android:id="@+id/textViewVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH5"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/version"/>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardViewProfile"
                     android:layout_width="0dp"
@@ -121,7 +132,7 @@
                     android:id="@+id/textViewName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/cardViewProfile"
+                    app:layout_constraintTop_toBottomOf="@id/textViewVersion"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/cardViewProfile"
                     app:layout_constraintBottom_toTopOf="@id/textViewUserCode"
@@ -336,7 +347,6 @@
             android:fontFamily="@font/iransans_bold"
             android:text="@string/setting"/>
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewTheme"
             android:layout_width="0dp"
@@ -396,7 +406,7 @@
                 android:textColor="@color/buttonTextColor"
                 android:textSize="@dimen/textSizeH3"
                 android:fontFamily="@font/iransans_medium"
-                android:text="@string/enterByFingerPrint"
+                android:text="@string/enterByBiometric"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="@dimen/_7sdp"
                 />

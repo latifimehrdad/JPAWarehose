@@ -5,18 +5,8 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.graphics.Color
-import android.os.Environment
-import com.elvishew.xlog.LogConfiguration
-import com.elvishew.xlog.LogLevel
-import com.elvishew.xlog.XLog
-import com.elvishew.xlog.printer.AndroidPrinter
-import com.elvishew.xlog.printer.Printer
-import com.elvishew.xlog.printer.file.FilePrinter
-import com.elvishew.xlog.printer.file.backup.NeverBackupStrategy
-import com.elvishew.xlog.printer.file.naming.DateFileNameGenerator
 import com.hoomanholding.applibrary.tools.CompanionValues
 import dagger.hilt.android.HiltAndroidApp
-import java.io.File
 
 
 /**
@@ -31,7 +21,7 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
-        initXLog()
+//        initXLog()
     }
     //---------------------------------------------------------------------------------------------- onCreate
 
@@ -59,7 +49,7 @@ class App: Application() {
 
 
 
-    //---------------------------------------------------------------------------------------------- initXLog
+/*    //---------------------------------------------------------------------------------------------- initXLog
     private fun initXLog() {
         val downloadFolder =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -91,4 +81,5 @@ class App: Application() {
         )
     }
     //---------------------------------------------------------------------------------------------- initXLog
+    */
 }

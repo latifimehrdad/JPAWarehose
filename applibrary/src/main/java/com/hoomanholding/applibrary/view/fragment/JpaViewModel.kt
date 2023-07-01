@@ -1,17 +1,19 @@
 package com.hoomanholding.applibrary.view.fragment
 
 import androidx.lifecycle.ViewModel
-import com.elvishew.xlog.XLog
+import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.di.Providers
 import com.hoomanholding.applibrary.di.ResourcesProvider
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
+import com.hoomanholding.applibrary.model.repository.LogRepository
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.zar.core.enums.EnumApiError
 import com.zar.core.models.ErrorApiModel
 import com.zar.core.tools.api.checkResponseError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -20,6 +22,10 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
+
+    @Inject
+    lateinit var logRepository: LogRepository
+
     val errorLiveDate = SingleLiveEvent<ErrorApiModel>()
 
     //---------------------------------------------------------------------------------------------- checkResponse
@@ -65,17 +71,29 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
     fun exceptionHandler() = CoroutineExceptionHandler { _, throwable ->
         CoroutineScope(Dispatchers.Main).launch {
             throwable.localizedMessage?.let {
-                XLog.e(it)
+//                XLog.e(it)
                 val url = Providers.url
                     .replace("http://","")
                     .replace("https://","")
                 if (it.contains(url))
                     setMessage(resourcesProvider.getString(R.string.pleaseCheckYouConnection))
-                else
+                else {
                     setMessage(it)
+                    sendLogToServer(it)
+                }
             }
         }
     }
     //---------------------------------------------------------------------------------------------- exceptionHandler
+
+
+
+    //---------------------------------------------------------------------------------------------- sendLogToServer
+    private fun sendLogToServer(log: String) {
+        viewModelScope.launch(IO){
+            checkResponse(logRepository.requestSaveError(log))
+        }
+    }
+    //---------------------------------------------------------------------------------------------- sendLogToServer
 
 }

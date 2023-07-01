@@ -12,6 +12,8 @@ import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zar.core.tools.api.ProgressRequestBodyManager
 import com.zar.core.tools.api.interfaces.UploadCallBack
+import com.zar.core.tools.manager.DeviceManager
+import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.model.repository.UploadFileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -35,7 +37,9 @@ class ProfileViewModel @Inject constructor(
     private val tokenRepository: TokenRepository,
     private val uploadFileRepository: UploadFileRepository,
     private val sharedPreferences: SharedPreferences
-) : JpaViewModel(){
+) : JpaViewModel() {
+
+    @Inject lateinit var deviceManager: DeviceManager
 
     val uploadPercentLiveData = SingleLiveEvent<Int>()
 
@@ -107,4 +111,10 @@ class ProfileViewModel @Inject constructor(
     }
     //---------------------------------------------------------------------------------------------- requestUserInfo
 
+
+    //---------------------------------------------------------------------------------------------- getAppVersion
+    fun getAppVersion() = resourcesProvider.getString(
+        R.string.version, deviceManager.appVersionName()
+    )
+    //---------------------------------------------------------------------------------------------- getAppVersion
 }

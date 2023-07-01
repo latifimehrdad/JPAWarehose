@@ -98,6 +98,7 @@ class ProfileFragment(
         val alpha =
             AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
         binding.imageViewLocation.startAnimation(alpha)
+        binding.textViewVersion.text = viewModel.getAppVersion()
         checkTheme()
         observeLiveDate()
         setListener()
@@ -177,6 +178,7 @@ class ProfileFragment(
 
     }
     //---------------------------------------------------------------------------------------------- setListener
+
 
 
     //---------------------------------------------------------------------------------------------- signOut

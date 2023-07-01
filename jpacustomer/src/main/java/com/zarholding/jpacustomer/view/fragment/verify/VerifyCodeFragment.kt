@@ -139,32 +139,32 @@ class VerifyCodeFragment(
             val text = it.toString()
             if (text.length == 1)
                 binding.editTextCode3.requestFocus()
-            else
-                binding.editTextCode1.requestFocus()
+//            else
+//                binding.editTextCode1.requestFocus()
         }
 
         binding.editTextCode3.addTextChangedListener {
             val text = it.toString()
             if (text.length == 1)
                 binding.editTextCode4.requestFocus()
-            else
-                binding.editTextCode2.requestFocus()
+//            else
+//                binding.editTextCode2.requestFocus()
         }
 
         binding.editTextCode4.addTextChangedListener {
             val text = it.toString()
             if (text.length == 1)
                 binding.editTextCode5.requestFocus()
-            else
-                binding.editTextCode3.requestFocus()
+//            else
+//                binding.editTextCode3.requestFocus()
         }
 
         binding.editTextCode5.addTextChangedListener {
             val text = it.toString()
             if (text.length == 1)
                 requestVerifyCode()
-            else
-                binding.editTextCode4.requestFocus()
+//            else
+//                binding.editTextCode4.requestFocus()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -186,7 +186,7 @@ class VerifyCodeFragment(
         job = CoroutineScope(IO).launch {
             repeat(60) {
                 delay(1000)
-                withContext(Main) { binding.mlAnimationTimer.changeTime(29 - it) }
+                withContext(Main) { binding.mlAnimationTimer.changeTime(59 - it) }
             }
             withContext(Main) { resendRequestForSms() }
         }
@@ -249,26 +249,26 @@ class VerifyCodeFragment(
     //---------------------------------------------------------------------------------------------- startAnimationEditText
     private fun startAnimationEditText() {
         CoroutineScope(Main).launch {
-            delay(300)
+            delay(150)
             if (context != null) {
                 val alpha1 =
-                    AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.zoom)
                 binding.editTextCode1.startAnimation(alpha1)
-                delay(300)
+                delay(150)
                 val alpha2 =
-                    AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.zoom)
                 binding.editTextCode2.startAnimation(alpha2)
-                delay(300)
+                delay(150)
                 val alpha3 =
-                    AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.zoom)
                 binding.editTextCode3.startAnimation(alpha3)
-                delay(300)
+                delay(150)
                 val alpha4 =
-                    AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.zoom)
                 binding.editTextCode4.startAnimation(alpha4)
-                delay(300)
+                delay(150)
                 val alpha5 =
-                    AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.zoom)
                 binding.editTextCode5.startAnimation(alpha5)
             }
         }
@@ -336,6 +336,7 @@ class VerifyCodeFragment(
                     }
                 }
             }
+
         }
         val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
         requireContext().registerReceiver(smsVerificationReceiver, intentFilter)
