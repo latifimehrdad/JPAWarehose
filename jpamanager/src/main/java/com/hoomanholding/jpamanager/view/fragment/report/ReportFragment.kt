@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayout
+import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentReportBinding
 import com.hoomanholding.jpamanager.model.data.other.CardBoardItemModel
@@ -12,7 +13,7 @@ import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.CardBoardItemHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.CardBoardItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import com.hoomanholding.applibrary.view.fragment.JpaFragment
+
 
 /**
  * create by m-latifi on 3/6/2023
@@ -29,6 +30,7 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report) :
         super.onViewCreated(view, savedInstanceState)
         observeLiveData()
         setListener()
+        viewModel.setItems(0)
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -52,6 +54,10 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report) :
             setItemAdapter(it)
         }
 
+        viewModel.itemPositionLiveData.observe(viewLifecycleOwner) {
+            selectTab(it)
+        }
+
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
 
@@ -62,14 +68,6 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report) :
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab == null)
                     return
-                val width = tab.view.width
-                if (width == 0)
-                    return
-                val percent = width * 25 / 100
-                val arr = IntArray(2)
-                tab.view.getLocationOnScreen(arr)
-                binding.viewTab.x = (arr[0] + width - percent).toFloat()
-                binding.recyclerItem.adapter = null
                 viewModel.setItems(tab.position)
             }
 
@@ -83,8 +81,29 @@ class ReportFragment(override var layout: Int = R.layout.fragment_report) :
     //---------------------------------------------------------------------------------------------- setListener
 
 
+
+    private fun selectTab(position: Int) {
+        binding.recyclerItem.adapter = null
+        val tab = binding.tabLayout.getTabAt(position)
+        tab?.let {
+            val width = tab.view.width
+            if (width == 0)
+                return
+            val percent = width * 25 / 100
+            val arr = IntArray(2)
+            tab.view.getLocationOnScreen(arr)
+            binding.viewTab.x = (arr[0] + width - percent).toFloat()
+            tab.select()
+        }
+    }
+
+
     //---------------------------------------------------------------------------------------------- setItemAdapter
-    private fun setItemAdapter(items: List<CardBoardItemModel>) {
+    private fun setItemAdapter(items: List<CardBoardItemModel>?) {
+        if (items.isNullOrEmpty()) {
+            binding.recyclerItem.adapter = null
+            return
+        }
         val click = object : CardBoardItemHolder.Click {
             override fun itemClick(action: Int) {
                 if (action != 0)

@@ -135,7 +135,11 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
                     showMessage(getString(R.string.actionIsDone))
                 }
             })
-        biometricTools.checkDeviceHasBiometric(biometricPrompt)
+        val error = biometricTools.checkDeviceHasBiometric(biometricPrompt)
+        if (!error.isNullOrEmpty()) {
+            showMessage(error)
+            binding.switchActive.isChecked = viewModel.isBiometricEnable()
+        }
     }
     //---------------------------------------------------------------------------------------------- showBiometricDialog
 
