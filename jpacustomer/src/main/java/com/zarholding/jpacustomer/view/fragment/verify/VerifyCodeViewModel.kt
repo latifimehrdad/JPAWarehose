@@ -69,7 +69,7 @@ class VerifyCodeViewModel @Inject constructor(
             .edit()
             .putString(CompanionValues.TOKEN, null)
             .apply()
-        forceChanePasswordLiveData.postValue(false)
+//        forceChanePasswordLiveData.postValue(false)
     }
     //---------------------------------------------------------------------------------------------- deleteToken
 
