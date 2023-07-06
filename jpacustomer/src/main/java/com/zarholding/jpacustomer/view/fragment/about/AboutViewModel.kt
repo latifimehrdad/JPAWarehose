@@ -2,6 +2,7 @@ package com.zarholding.jpacustomer.view.fragment.about
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.di.Providers
 import com.hoomanholding.applibrary.model.data.response.about.AboutModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zarholding.jpacustomer.model.repository.AboutRepository
@@ -33,6 +34,17 @@ class AboutViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getAbout
+
+
+    //---------------------------------------------------------------------------------------------- getVideoLink
+    fun getVideoLink(): String? {
+        aboutLiveData.value?.videoName?.let {
+            return "${Providers.url}$it"
+        } ?: run {
+            return null
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getVideoLink
 
 
 }
