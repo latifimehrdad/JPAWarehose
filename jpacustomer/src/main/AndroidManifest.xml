@@ -59,6 +59,13 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <receiver android:name=".tools.smsretriever.MySMSBroadcastReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

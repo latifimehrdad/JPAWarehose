@@ -2,6 +2,7 @@ package com.zarholding.jpacustomer.view.fragment.verify
 
 import android.content.SharedPreferences
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
@@ -23,11 +24,9 @@ class VerifyCodeViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : JpaViewModel() {
 
-    var isVerificationCorrect = false
     var token: String? = null
     val resendLiveData: SingleLiveEvent<Boolean> by lazy { SingleLiveEvent<Boolean>() }
     val forceChanePasswordLiveData: SingleLiveEvent<Boolean> by lazy { SingleLiveEvent<Boolean>() }
-
 
     //---------------------------------------------------------------------------------------------- requestResendVerifyCode
     fun requestResendVerifyCode() {
@@ -54,9 +53,7 @@ class VerifyCodeViewModel @Inject constructor(
             val response =
                 checkResponse(userRepository.requestVerifyCode(verificationCode, token!!))
             response?.let {
-                isVerificationCorrect = it.isVerificationCorrect
-                if (it.isVerificationCorrect)
-                    forceChanePasswordLiveData.postValue(it.isforceChangePassword)
+                saveToken(it)
             }
         }
     }
@@ -69,8 +66,20 @@ class VerifyCodeViewModel @Inject constructor(
             .edit()
             .putString(CompanionValues.TOKEN, null)
             .apply()
-//        forceChanePasswordLiveData.postValue(false)
     }
     //---------------------------------------------------------------------------------------------- deleteToken
+
+
+
+    //---------------------------------------------------------------------------------------------- saveToken
+    private fun saveToken(item: VerifyCodeModel) {
+        sharedPreferences
+            .edit()
+            .putString(CompanionValues.TOKEN, token)
+            .apply()
+        if (item.isVerificationCorrect)
+            forceChanePasswordLiveData.postValue(item.isforceChangePassword)
+    }
+    //---------------------------------------------------------------------------------------------- saveToken
 
 }

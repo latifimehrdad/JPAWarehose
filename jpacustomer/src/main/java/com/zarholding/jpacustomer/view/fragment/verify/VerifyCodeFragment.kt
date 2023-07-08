@@ -1,25 +1,18 @@
 package com.zarholding.jpacustomer.view.fragment.verify
 
-import android.app.Activity
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.android.gms.common.api.Status
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentVerifyCodeBinding
+import com.zarholding.jpacustomer.tools.smsretriever.MySMSBroadcastReceiver
+import com.zarholding.jpacustomer.tools.smsretriever.SmsClient
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -38,18 +31,6 @@ class VerifyCodeFragment(
 
     private var job: Job? = null
     private val viewModel: VerifyCodeViewModel by viewModels()
-    private var smsVerificationReceiver: BroadcastReceiver? = null
-
-
-    //---------------------------------------------------------------------------------------------- smsLauncher
-    private val smsLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val message = it.data?.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE)
-                splitVerifyCodeFromSms(message)
-            }
-        }
-    //---------------------------------------------------------------------------------------------- smsLauncher
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -65,6 +46,7 @@ class VerifyCodeFragment(
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        viewModel.deleteToken()
         observeLiveDate()
         getTokenFromArgument()
     }
@@ -200,7 +182,6 @@ class VerifyCodeFragment(
         binding.textViewRemaining.visibility = View.GONE
         binding.buttonReceiveAgain.visibility = View.VISIBLE
         binding.buttonReceiveAgain.stopLoading()
-        unregisterReceiverSMS()
         resetEditTextsVerifyCode()
     }
     //---------------------------------------------------------------------------------------------- resendRequestForSms
@@ -216,17 +197,17 @@ class VerifyCodeFragment(
 
     //---------------------------------------------------------------------------------------------- requestVerifyCode
     private fun requestVerifyCode() {
-        val verifycode =
+        val verifyCode =
             binding.editTextCode1.text.toString() + binding.editTextCode2.text.toString() +
                     binding.editTextCode3.text.toString() + binding.editTextCode4.text.toString() +
                     binding.editTextCode5.text.toString()
-        if (verifycode.length != 5)
+        if (verifyCode.length != 5)
             resetEditTextsVerifyCode()
-        else if (!verifycode.isDigitsOnly())
+        else if (!verifyCode.isDigitsOnly())
             resetEditTextsVerifyCode()
         else {
             startAnimationEditText()
-            viewModel.requestVerifyCode(verifycode)
+            viewModel.requestVerifyCode(verifyCode)
         }
     }
     //---------------------------------------------------------------------------------------------- requestVerifyCode
@@ -300,7 +281,9 @@ class VerifyCodeFragment(
     //______________________________________________________________________________________________ splitVerifyCodeFromSms
     private fun splitVerifyCodeFromSms(sms: String?) {
         val numberOnly = sms?.replace("[^0-9]".toRegex(), "")
-        if (numberOnly?.length == 5) {
+        numberOnly?.let {
+            if (numberOnly.length < 5)
+                return
             binding.editTextCode1.setText(numberOnly.substring(0))
             binding.editTextCode2.setText(numberOnly.substring(1))
             binding.editTextCode3.setText(numberOnly.substring(2))
@@ -311,47 +294,17 @@ class VerifyCodeFragment(
     //______________________________________________________________________________________________ splitVerifyCodeFromSms
 
 
-    //______________________________________________________________________________________________ recieveSms
+    //______________________________________________________________________________________________ receiveSms
     private fun receiveSms() {
         if (context == null)
             return
-        SmsRetriever.getClient(requireContext()).startSmsUserConsent(null)
-        smsVerificationReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent) {
-                if (SmsRetriever.SMS_RETRIEVED_ACTION == intent.action) {
-                    val extras = intent.extras
-                    val smsRetrieverStatus = extras?.get(SmsRetriever.EXTRA_STATUS) as Status
-                    when (smsRetrieverStatus.statusCode) {
-                        CommonStatusCodes.SUCCESS -> {
-                            val consentIntent =
-                                extras.getParcelable<Intent>(SmsRetriever.EXTRA_CONSENT_INTENT)
-                            try {
-                                smsLauncher.launch(consentIntent)
-                            } catch (_: Exception) {
-                            }
-                        }
-                        CommonStatusCodes.TIMEOUT -> {
-
-                        }
-                    }
-                }
-            }
-
+        MySMSBroadcastReceiver.getSms = MySMSBroadcastReceiver.GetSms {
+            splitVerifyCodeFromSms(it)
         }
-        val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
-        requireContext().registerReceiver(smsVerificationReceiver, intentFilter)
+        SmsClient().start(requireContext())
     }
-    //______________________________________________________________________________________________ recieveSms
+    //______________________________________________________________________________________________ receiveSms
 
-
-    //______________________________________________________________________________________________ unregisterReceiverSMS
-    private fun unregisterReceiverSMS() {
-        if (smsVerificationReceiver != null && context != null) {
-            requireContext().unregisterReceiver(smsVerificationReceiver)
-            smsVerificationReceiver = null
-        }
-    }
-    //______________________________________________________________________________________________ unregisterReceiverSMS
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView
@@ -359,8 +312,6 @@ class VerifyCodeFragment(
         super.onDestroyView()
         job?.cancel()
         binding.mlAnimationTimer.changeTime(0)
-        if (!viewModel.isVerificationCorrect)
-            viewModel.deleteToken()
         resendRequestForSms()
     }
     //---------------------------------------------------------------------------------------------- onDestroyView
