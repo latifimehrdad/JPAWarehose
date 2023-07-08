@@ -108,6 +108,11 @@ class AboutFragment(
         binding.textViewAddress.setOnClickListener { openRouterApp() }
         binding.imageviewCall.setOnClickListener { openCall() }
         binding.textViewCall.setOnClickListener { openCall() }
+        binding.cardViewVideo.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(Uri.parse(viewModel.getVideoLink()), "video/mp4")
+            startActivity(intent)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
