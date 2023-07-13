@@ -1,7 +1,9 @@
 package com.zarholding.jpacustomer.view.fragment.verify
 
 import android.content.SharedPreferences
+import android.os.Bundle
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -24,9 +26,23 @@ class VerifyCodeViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : JpaViewModel() {
 
+    var verifyType: EnumVerifyType = EnumVerifyType.Login
     var token: String? = null
     val resendLiveData: SingleLiveEvent<Boolean> by lazy { SingleLiveEvent<Boolean>() }
     val forceChanePasswordLiveData: SingleLiveEvent<Boolean> by lazy { SingleLiveEvent<Boolean>() }
+
+
+    //---------------------------------------------------------------------------------------------- setVerifyTypeFromBundle
+    fun setVerifyTypeFromBundle(bundle: Bundle?) {
+        verifyType = if (bundle == null)
+            EnumVerifyType.Login
+        else {
+            val type = bundle.getString(CompanionValues.VERIFY_TYPE, EnumVerifyType.Login.name)
+            enumValueOf(type)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setVerifyTypeFromBundle
+
 
     //---------------------------------------------------------------------------------------------- requestResendVerifyCode
     fun requestResendVerifyCode() {
@@ -70,7 +86,6 @@ class VerifyCodeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- deleteToken
 
 
-
     //---------------------------------------------------------------------------------------------- saveToken
     private fun saveToken(item: VerifyCodeModel) {
         sharedPreferences
@@ -78,7 +93,10 @@ class VerifyCodeViewModel @Inject constructor(
             .putString(CompanionValues.TOKEN, token)
             .apply()
         if (item.isVerificationCorrect)
-            forceChanePasswordLiveData.postValue(item.isforceChangePassword)
+            if (item.isforceChangePassword || verifyType == EnumVerifyType.ForgetPass)
+                forceChanePasswordLiveData.postValue(true)
+            else
+                forceChanePasswordLiveData.postValue(false)
     }
     //---------------------------------------------------------------------------------------------- saveToken
 

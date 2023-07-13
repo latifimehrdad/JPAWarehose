@@ -127,6 +127,7 @@
     <string name="countInBoxAndPackage">تعداد در بسته : %1$s - تعداد در کارتن : %2$s</string>
     <string name="disableFeature">این قابلیت بزودی راه اندازی میشود</string>
     <string name="version">app version : %1$s</string>
+    <string name="doYouForgetYourPassword">رمز ورود را فراموش کرده اید؟</string>
 
 
     <string name="colon">:</string>

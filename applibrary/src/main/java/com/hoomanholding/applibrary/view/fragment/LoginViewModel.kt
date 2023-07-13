@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.R
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
+import com.hoomanholding.applibrary.model.data.request.ForgetPassModel
 import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -32,9 +34,17 @@ class LoginViewModel @Inject constructor(
     val userName: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val password: MutableLiveData<String> by lazy { MutableLiveData<String>() }
 
+    var verifyType: EnumVerifyType = EnumVerifyType.Login
+
 
     //---------------------------------------------------------------------------------------------- login
-    fun login(fromFingerPrint: Boolean, androidId: String, systemType: EnumSystemType) {
+    fun login(
+        fromFingerPrint: Boolean,
+        androidId: String,
+        systemType: EnumSystemType,
+        verifyType: EnumVerifyType = EnumVerifyType.Login
+    ) {
+        this.verifyType = verifyType
         if (fromFingerPrint)
             setUserNamePasswordFromSharePreferences()
         var valueIsEmpty = false
@@ -42,12 +52,18 @@ class LoginViewModel @Inject constructor(
             userNameError.postValue(resourcesProvider.getString(R.string.userNameIsEmpty))
             valueIsEmpty = true
         }
-        if (password.value.isNullOrEmpty()) {
-            passwordError.postValue(resourcesProvider.getString(R.string.passcodeIsEmpty))
-            valueIsEmpty = true
-        }
+        if (verifyType == EnumVerifyType.Login)
+            if (password.value.isNullOrEmpty()) {
+                passwordError.postValue(resourcesProvider.getString(R.string.passcodeIsEmpty))
+                valueIsEmpty = true
+            }
+
         if (!valueIsEmpty)
-            requestLogin(androidId, systemType)
+            when (verifyType) {
+                EnumVerifyType.Login -> requestLogin(androidId, systemType)
+                EnumVerifyType.ForgetPass -> requestForgetPassword(androidId, systemType)
+            }
+
     }
     //---------------------------------------------------------------------------------------------- login
 
@@ -76,6 +92,31 @@ class LoginViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- requestLogin
+
+
+    //---------------------------------------------------------------------------------------------- requestForgetPassword
+    private fun requestForgetPassword(androidId: String, systemType: EnumSystemType) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            if (userName.value.isNullOrEmpty())
+                setMessage(
+                    resourcesProvider.getString(
+                        R.string.dataSendingIsEmpty
+                    )
+                )
+            else {
+                val request = ForgetPassModel(
+                    systemType,
+                    userName.value!!,
+                    androidId
+                )
+                val response = checkResponse(repository.requestForgetPassword(request))
+                response?.let {
+                    loginLiveDate.postValue(it)
+                }
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestForgetPassword
 
 
     //---------------------------------------------------------------------------------------------- isBiometricEnable

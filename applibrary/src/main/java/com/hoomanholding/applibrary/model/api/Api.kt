@@ -62,6 +62,14 @@ interface Api {
     ): Response<GeneralResponse<String?>>
 
 
+    @GET("$user/login-Preapering-ForgetPassword")
+    suspend fun requestForgetPassword(
+        @Query("systemTypesEnum") systemTypesEnum: String,
+        @Query("userName") userName: String,
+        @Query("androidId") androidId: String
+    ): Response<GeneralResponse<String?>>
+
+
     @GET("$user/login-userInfo")
     suspend fun requestGetUserInfo(
         @Query("UserToken") fireBaseToken: String?,
@@ -84,6 +92,12 @@ interface Api {
     @GET("$user/login-ChangePassword")
     suspend fun requestChangePassword(
         @Query("password") password: String,
+        @Query("newPassword") newPassword: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$user/login-ChangeForgotenPassword")
+    suspend fun requestForgetChangePassword(
         @Query("newPassword") newPassword: String,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>

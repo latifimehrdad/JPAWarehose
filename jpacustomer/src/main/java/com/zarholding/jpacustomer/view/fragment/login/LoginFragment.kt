@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.applibrary.ext.hideKeyboard
 import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.zar.core.tools.BiometricTools
 import dagger.hilt.android.AndroidEntryPoint
@@ -96,6 +97,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             it?.let {
                 val bundle = Bundle()
                 bundle.putString(CompanionValues.TOKEN, it)
+                bundle.putString(CompanionValues.VERIFY_TYPE, loginViewModel.verifyType.name)
                 gotoFragment(R.id.action_loginFragment_to_verifyCodeFragment, bundle)
             }
         }
@@ -129,7 +131,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
 
         binding
             .buttonLogin
-            .setOnClickListener { login(false) }
+            .setOnClickListener { login(false, EnumVerifyType.Login) }
 
         binding.checkBoxSave.setOnClickListener {
             loginViewModel.changeBiometricEnable(binding.checkBoxSave.isChecked)
@@ -176,6 +178,11 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             return@setOnLongClickListener true
         }
 
+
+        binding.textViewForgetPassword.setOnClickListener {
+            login(fromFingerPrint = false, verifyType = EnumVerifyType.ForgetPass)
+        }
+
         /*        binding
                     .cardViewFingerPrint
                     .setOnClickListener { showBiometricDialog() }*/
@@ -207,22 +214,23 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     //---------------------------------------------------------------------------------------------- showBiometricDialog
 
 
+
     //---------------------------------------------------------------------------------------------- fingerPrintClick
     private fun fingerPrintClick() {
-        login(true)
+        login(true, EnumVerifyType.Login)
     }
     //---------------------------------------------------------------------------------------------- fingerPrintClick
 
 
     //---------------------------------------------------------------------------------------------- login
     @SuppressLint("HardwareIds")
-    private fun login(fromFingerPrint: Boolean) {
+    private fun login(fromFingerPrint: Boolean, verifyType: EnumVerifyType) {
         if (context == null || binding.buttonLogin.isLoading)
             return
         startLoading()
         val androidId =
             Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
-        loginViewModel.login(fromFingerPrint, androidId, EnumSystemType.Customers)
+        loginViewModel.login(fromFingerPrint, androidId, EnumSystemType.Customers, verifyType)
     }
     //---------------------------------------------------------------------------------------------- login
 

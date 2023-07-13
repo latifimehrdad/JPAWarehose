@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
@@ -46,6 +47,7 @@ class VerifyCodeFragment(
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        viewModel.setVerifyTypeFromBundle(arguments)
         viewModel.deleteToken()
         observeLiveDate()
         getTokenFromArgument()
@@ -189,8 +191,11 @@ class VerifyCodeFragment(
 
     //---------------------------------------------------------------------------------------------- requestResendVerifyCode
     private fun requestResendVerifyCode() {
-        binding.buttonReceiveAgain.startLoading(getString(R.string.bePatient))
-        viewModel.requestResendVerifyCode()
+        if (viewModel.verifyType == EnumVerifyType.Login) {
+            binding.buttonReceiveAgain.startLoading(getString(R.string.bePatient))
+            viewModel.requestResendVerifyCode()
+        } else
+            activity?.onBackPressedDispatcher?.onBackPressed()
     }
     //---------------------------------------------------------------------------------------------- requestResendVerifyCode
 
@@ -273,6 +278,7 @@ class VerifyCodeFragment(
         resetEditTextsVerifyCode()
         val bundle = Bundle()
         bundle.putString(CompanionValues.TOKEN, viewModel.token)
+        bundle.putString(CompanionValues.VERIFY_TYPE, viewModel.verifyType.name)
         gotoFragment(R.id.action_verifyCodeFragment_to_changePasswordFragment, bundle)
     }
     //---------------------------------------------------------------------------------------------- gotoChangePassword
@@ -304,7 +310,6 @@ class VerifyCodeFragment(
         SmsClient().start(requireContext())
     }
     //______________________________________________________________________________________________ receiveSms
-
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

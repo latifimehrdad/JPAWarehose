@@ -146,6 +146,19 @@
             android:textColor="@color/buttonTextColor"
             android:text='@string/receiveCode' />
 
+        <TextView
+            android:id="@+id/textViewForgetPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="@id/buttonLogin"
+            app:layout_constraintStart_toStartOf="@id/buttonLogin"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/textSizeH4"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/a_textViewPrimary"
+            android:text="@string/doYouForgetYourPassword"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

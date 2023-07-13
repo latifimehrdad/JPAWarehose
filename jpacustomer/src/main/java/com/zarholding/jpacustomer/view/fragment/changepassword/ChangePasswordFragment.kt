@@ -3,6 +3,7 @@ package com.zarholding.jpacustomer.view.fragment.changepassword
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
@@ -35,6 +36,11 @@ class ChangePasswordFragment(
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        viewModel.setVerifyTypeFromBundle(arguments)
+        if (viewModel.verifyType == EnumVerifyType.ForgetPass)
+            binding.cardViewOldPassword.visibility = View.INVISIBLE
+        else
+            binding.cardViewOldPassword.visibility = View.VISIBLE
         observeLiveDate()
         getTokenFromArgument()
     }
@@ -68,7 +74,7 @@ class ChangePasswordFragment(
         }
 
         viewModel.passwordChangeLiveData.observe(viewLifecycleOwner) {
-            (activity as MainActivity?)?.gotoFirstFragment(false)
+            (activity as MainActivity?)?.gotoFirstFragment(true)
         }
 
     }

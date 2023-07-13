@@ -29,14 +29,19 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
     val errorLiveDate = SingleLiveEvent<ErrorApiModel>()
 
     //---------------------------------------------------------------------------------------------- checkResponse
-    suspend fun <T : Any> checkResponse(response: Response<GeneralResponse<T?>>?): T? {
+    suspend fun <T : Any> checkResponse(
+        response: Response<GeneralResponse<T?>>?,
+        showMessageAfterSuccessResponse: Boolean = false): T? {
         if (response?.isSuccessful == true) {
             val body = response.body()
             body?.let { generalResponse ->
                 if (generalResponse.hasError || generalResponse.data == null)
                     setMessage(generalResponse.message)
-                else
+                else {
+                    if (showMessageAfterSuccessResponse)
+                        setMessage(generalResponse.message)
                     return generalResponse.data
+                }
             } ?: run {
                 setMessage(
                     resourcesProvider.getString(R.string.dataReceivedIsEmpty

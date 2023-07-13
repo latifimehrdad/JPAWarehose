@@ -1,9 +1,10 @@
 package com.zarholding.jpacustomer.view.fragment.changepassword
 
-import android.content.SharedPreferences
+import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.R
+import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
@@ -20,10 +21,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChangePasswordViewModel @Inject constructor(
-    private val userRepository: UserRepository,
-    private val sharedPreferences: SharedPreferences
+    private val userRepository: UserRepository
 ) : JpaViewModel() {
 
+    var verifyType: EnumVerifyType = EnumVerifyType.Login
     var token: String? = null
     val passwordChangeLiveData: SingleLiveEvent<Boolean> by lazy { SingleLiveEvent<Boolean>() }
     val oldPasswordError: SingleLiveEvent<String> by lazy { SingleLiveEvent<String>() }
@@ -34,14 +35,27 @@ class ChangePasswordViewModel @Inject constructor(
     val rePassword: MutableLiveData<String> by lazy { MutableLiveData<String>() }
 
 
+    //---------------------------------------------------------------------------------------------- setVerifyTypeFromBundle
+    fun setVerifyTypeFromBundle(bundle: Bundle?) {
+        verifyType = if (bundle == null)
+            EnumVerifyType.Login
+        else {
+            val type = bundle.getString(CompanionValues.VERIFY_TYPE, EnumVerifyType.Login.name)
+            enumValueOf(type)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setVerifyTypeFromBundle
+
+
     //---------------------------------------------------------------------------------------------- changePassword
     fun changePassword() {
 
         var valueIsEmpty = false
-        if (oldPassword.value.isNullOrEmpty()) {
-            oldPasswordError.postValue(resourcesProvider.getString(R.string.passcodeIsEmpty))
-            valueIsEmpty = true
-        }
+        if (verifyType == EnumVerifyType.Login)
+            if (oldPassword.value.isNullOrEmpty()) {
+                oldPasswordError.postValue(resourcesProvider.getString(R.string.passcodeIsEmpty))
+                valueIsEmpty = true
+            }
         if (password.value.isNullOrEmpty()) {
             passwordError.postValue(resourcesProvider.getString(R.string.passcodeIsEmpty))
             valueIsEmpty = true
@@ -50,13 +64,16 @@ class ChangePasswordViewModel @Inject constructor(
             rePasswordError.postValue(resourcesProvider.getString(R.string.passcodeIsEmpty))
             valueIsEmpty = true
         }
-        if (!password.value.equals(rePassword.value)){
+        if (!password.value.equals(rePassword.value)) {
             rePasswordError.postValue(resourcesProvider.getString(R.string.rePasswordIsNotEqual))
             valueIsEmpty = true
         }
 
         if (!valueIsEmpty)
-            changePasswordRequest()
+            if (verifyType == EnumVerifyType.Login)
+                changePasswordRequest()
+        else
+                forgetChangePasswordRequest()
     }
     //---------------------------------------------------------------------------------------------- changePassword
 
@@ -74,13 +91,15 @@ class ChangePasswordViewModel @Inject constructor(
                 val old = oldPassword.value!!
                 val password = password.value!!
 
-                val response = checkResponse(userRepository.requestChangePassword(
-                    old,
-                    password,
-                    "Bearer $token"
-                ))
+                val response = checkResponse(
+                    userRepository.requestChangePassword(
+                        old,
+                        password,
+                        "Bearer $token"
+                    ), true
+                )
                 response?.let {
-                    saveUserNameAndPassword(it)
+                    passwordChangeLiveData.postValue(it)
                 }
             }
         }
@@ -88,17 +107,29 @@ class ChangePasswordViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- changePasswordRequest
 
 
-
-    //---------------------------------------------------------------------------------------------- saveToken
-    private fun saveUserNameAndPassword(boolean: Boolean) {
-        if (boolean)
-            sharedPreferences
-                .edit()
-                .putString(CompanionValues.TOKEN, token)
-                .apply()
-        passwordChangeLiveData.postValue(boolean)
+    //---------------------------------------------------------------------------------------------- forgetChangePasswordRequest
+    private fun forgetChangePasswordRequest() {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            if (password.value.isNullOrEmpty())
+                setMessage(
+                    resourcesProvider.getString(
+                        R.string.dataSendingIsEmpty
+                    )
+                )
+            else {
+                val password = password.value!!
+                val response = checkResponse(
+                    userRepository.requestForgetChangePassword(
+                        password,
+                        "Bearer $token"
+                    ), true
+                )
+                response?.let {
+                    passwordChangeLiveData.postValue(it)
+                }
+            }
+        }
     }
-    //---------------------------------------------------------------------------------------------- saveToken
-
+    //---------------------------------------------------------------------------------------------- forgetChangePasswordRequest
 
 }

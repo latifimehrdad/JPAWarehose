@@ -51,16 +51,20 @@ class UserRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestResendVerificationCode
 
 
-
-
-
-
     //---------------------------------------------------------------------------------------------- requestChangePassword
     suspend fun requestChangePassword(password: String, newPassword: String, token: String) =
         apiCall {
             api.requestChangePassword(password, newPassword, token)
         }
     //---------------------------------------------------------------------------------------------- requestChangePassword
+
+
+    //---------------------------------------------------------------------------------------------- requestForgetChangePassword
+    suspend fun requestForgetChangePassword(newPassword: String, token: String) =
+        apiCall {
+            api.requestForgetChangePassword(newPassword, token)
+        }
+    //---------------------------------------------------------------------------------------------- requestForgetChangePassword
 
 
     //---------------------------------------------------------------------------------------------- getUser
@@ -84,7 +88,6 @@ class UserRepository @Inject constructor(
         tokenRepository.deleteToken()
     }
     //---------------------------------------------------------------------------------------------- deleteUser
-
 
 
     //---------------------------------------------------------------------------------------------- updateXY
