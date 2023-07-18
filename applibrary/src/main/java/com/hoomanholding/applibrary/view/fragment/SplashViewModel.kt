@@ -1,6 +1,8 @@
 package com.hoomanholding.applibrary.view.fragment
 
 import android.content.SharedPreferences
+import android.os.Environment
+import android.os.StatFs
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
@@ -121,5 +123,14 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
             .apply()
     }
     //---------------------------------------------------------------------------------------------- saveNewIp
+
+
+    //---------------------------------------------------------------------------------------------- getInternalMemoryFreeSize
+    fun getInternalMemoryFreeSize(): Long {
+        val stat = StatFs(Environment.getExternalStorageDirectory().path)
+        val bytesAvailable: Long = stat.blockSizeLong * stat.availableBlocksLong
+        return bytesAvailable / (1024 * 1024)
+    }
+    //---------------------------------------------------------------------------------------------- getInternalMemoryFreeSize
 
 }

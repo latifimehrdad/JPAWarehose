@@ -1,6 +1,7 @@
 package com.zarholding.jpacustomer.view.fragment.splash
 
 import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -61,7 +62,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     private fun initView() {
         observeLiveDate()
         setListener()
-        requestGetAppVersion()
+        checkNotificationPermission()
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -69,7 +70,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.cardViewLogin.setOnClickListener {
-            requestGetAppVersion()
+            checkNotificationPermission()
         }
 
         binding.imageViewLogo.setOnLongClickListener {
@@ -116,6 +117,32 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     }
     //---------------------------------------------------------------------------------------------- setListener
 
+
+    //---------------------------------------------------------------------------------------------- checkNotificationPermission
+    private fun checkNotificationPermission() {
+        if (context == null)
+            return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permission = mutableListOf(Manifest.permission.POST_NOTIFICATIONS)
+            Dexter.withContext(requireContext())
+                .withPermissions(permission)
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                        requestGetAppVersion()
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        p0: MutableList<PermissionRequest>?,
+                        p1: PermissionToken?
+                    ) {
+
+                    }
+                })
+                .check()
+        } else
+            requestGetAppVersion()
+    }
+    //---------------------------------------------------------------------------------------------- checkNotificationPermission
 
 
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -172,6 +199,11 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     private fun storagePermission(fileName: String) {
         if (context == null)
             return
+        val availableBlocks = viewModel.getInternalMemoryFreeSize()
+        if (availableBlocks < 200) {
+            showMessage(getString(R.string.internalMemoryIsFull))
+            return
+        }
         Dexter.withContext(requireContext())
             .withPermissions(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,

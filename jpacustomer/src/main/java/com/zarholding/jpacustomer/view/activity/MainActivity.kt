@@ -1,9 +1,7 @@
 package com.zarholding.jpacustomer.view.activity
 
-import android.Manifest
 import android.content.res.Configuration
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -20,11 +18,6 @@ import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        checkNotificationPermission()
         initView()
     }
     //---------------------------------------------------------------------------------------------- onCreate
@@ -314,29 +306,5 @@ class MainActivity : AppCompatActivity() {
         gotoFragment(R.id.action_goto_homeFragment)
     }
     //---------------------------------------------------------------------------------------------- gotoHomeFragment
-
-
-    //---------------------------------------------------------------------------------------------- checkNotificationPermission
-    private fun checkNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val permission = mutableListOf(Manifest.permission.POST_NOTIFICATIONS)
-            Dexter.withContext(this)
-                .withPermissions(permission)
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        p0: MutableList<PermissionRequest>?,
-                        p1: PermissionToken?
-                    ) {
-
-                    }
-                })
-                .check()
-        }
-    }
-    //---------------------------------------------------------------------------------------------- checkNotificationPermission
 
 }

@@ -128,6 +128,7 @@
     <string name="disableFeature">این قابلیت بزودی راه اندازی میشود</string>
     <string name="version">app version : %1$s</string>
     <string name="doYouForgetYourPassword">رمز ورود را فراموش کرده اید؟</string>
+    <string name="internalMemoryIsFull">حافظه دستگاه شما برای دانلود نسخه جدید کافی نیست</string>
 
 
     <string name="colon">:</string>

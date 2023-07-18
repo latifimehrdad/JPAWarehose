@@ -58,7 +58,7 @@ class ConfirmDialog(
         val textViewTitle = this.findViewById<TextView>(R.id.textViewTitle)
         val buttonYes = this.findViewById<MaterialButton>(R.id.buttonYes)
         val buttonNo = this.findViewById<MaterialButton>(R.id.buttonNo)
-
+        this.setCancelable(!force)
         if (force)
             buttonNo.visibility = View.INVISIBLE
         else
