@@ -65,6 +65,8 @@ class CustomerSplashViewModel @Inject constructor() : SplashViewModel() {
                 }
                 delay(1000)
                 subscribeToTopic.postValue(true)
+            } ?: run {
+                subscribeToTopic.postValue(true)
             }
         }
     }
