@@ -28,16 +28,22 @@ class CustomerSplashViewModel @Inject constructor() : SplashViewModel() {
     //---------------------------------------------------------------------------------------------- fireBaseToken
     fun fireBaseToken() {
         viewModelScope.launch(IO + exceptionHandler()) {
+//            FirebaseMessaging.getInstance().deleteToken()
+            delay(1000)
+            var newToken = ""
             FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-                val token = if (!task.isSuccessful)
+                newToken = if (!task.isSuccessful)
                     ""
                 else
                     task.result
-                sharedPreferences
-                    .edit()
-                    .putString(CompanionValues.FIREBASE_TOKEN, token)
-                    .apply()
-                fireBaseTokenLiveData.postValue(token)
+                if (newToken.isNotEmpty()) {
+                    Log.e("meri", "fireBaseToken : $newToken")
+                    sharedPreferences
+                        .edit()
+                        .putString(CompanionValues.FIREBASE_TOKEN, newToken)
+                        .apply()
+                    fireBaseTokenLiveData.postValue(newToken)
+                }
             }
         }
     }

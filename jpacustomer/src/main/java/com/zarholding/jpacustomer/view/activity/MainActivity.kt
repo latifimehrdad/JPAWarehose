@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         setAppTheme()
         setListener()
         hideProfileView()
-//        mainViewModel.fireBaseToken()
         mainViewModel.userInfoLiveData.observe(this) { user ->
             user?.let {
                 binding.textViewUserName.setTitleAndValue(

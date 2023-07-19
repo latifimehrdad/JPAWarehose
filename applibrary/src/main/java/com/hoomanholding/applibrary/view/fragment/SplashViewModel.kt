@@ -3,6 +3,7 @@ package com.hoomanholding.applibrary.view.fragment
 import android.content.SharedPreferences
 import android.os.Environment
 import android.os.StatFs
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
@@ -82,6 +83,7 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
     //---------------------------------------------------------------------------------------------- requestUserInfo
     private fun requestUserInfo(fireBaseToken: String?): Job {
         return CoroutineScope(IO + exceptionHandler()).launch {
+            Log.e("meri", "requestGetData : ${fireBaseToken.toString()}")
             delay(500)
             val response = checkResponse(userRepository.requestUserInfo(fireBaseToken))
             response?.let {

@@ -2,6 +2,7 @@ package com.zarholding.jpacustomer.view.activity
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.messaging.FirebaseMessaging
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
@@ -52,17 +53,5 @@ class MainViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- applicationTheme
     fun applicationTheme() = themeManager.applicationTheme()
     //---------------------------------------------------------------------------------------------- applicationTheme
-
-
-
-/*
-    //---------------------------------------------------------------------------------------------- fireBaseToken
-    fun fireBaseToken() {
-        viewModelScope.launch(IO + exceptionHandler()) {
-//            FirebaseMessaging.getInstance().deleteToken()
-        }
-    }
-    //---------------------------------------------------------------------------------------------- fireBaseToken
-*/
 
 }
