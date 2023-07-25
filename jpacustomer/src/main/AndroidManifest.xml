@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" tools:node="remove"/>
 
+
     <application
         android:name=".view.app.App"
         android:allowBackup="true"
