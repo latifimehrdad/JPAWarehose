@@ -1,12 +1,12 @@
 package com.zarholding.jpacustomer.view.fragment.verify
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
 import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class VerifyCodeViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferencesManager: SharedPreferencesManager
 ) : JpaViewModel() {
 
     var verifyType: EnumVerifyType = EnumVerifyType.Login
@@ -51,8 +51,10 @@ class VerifyCodeViewModel @Inject constructor(
                 setMessage("Token is empty")
                 return@launch
             }
-            val response = checkResponse(userRepository.requestResendVerificationCode(token!!))
-            response?.let { resendLiveData.postValue(it) }
+            callApi(
+                request = userRepository.requestResendVerificationCode(token!!),
+                onReceiveData = { resendLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestResendVerifyCode
@@ -66,11 +68,10 @@ class VerifyCodeViewModel @Inject constructor(
                 return@launch
             }
             delay(2000)
-            val response =
-                checkResponse(userRepository.requestVerifyCode(verificationCode, token!!))
-            response?.let {
-                saveToken(it)
-            }
+            callApi(
+                request = userRepository.requestVerifyCode(verificationCode, token!!),
+                onReceiveData = { saveToken(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestVerifyCode
@@ -78,20 +79,14 @@ class VerifyCodeViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- deleteToken
     fun deleteToken() {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.TOKEN, null)
-            .apply()
+        sharedPreferencesManager.deleteUserLogin()
     }
     //---------------------------------------------------------------------------------------------- deleteToken
 
 
     //---------------------------------------------------------------------------------------------- saveToken
     private fun saveToken(item: VerifyCodeModel) {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.TOKEN, token)
-            .apply()
+        sharedPreferencesManager.saveToken(token)
         if (item.isVerificationCorrect)
             if (item.isforceChangePassword || verifyType == EnumVerifyType.ForgetPass)
                 forceChanePasswordLiveData.postValue(true)

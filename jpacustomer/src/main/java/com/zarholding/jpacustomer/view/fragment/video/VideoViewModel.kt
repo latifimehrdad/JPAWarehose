@@ -35,12 +35,14 @@ class VideoViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getCategory
     fun getCategory() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(videoRepository.getVideoCategory())
-            response?.let {
-                categoryLiveData.postValue(it)
-                if (it.isNotEmpty())
-                    getVideo(it[0].id)
-            }
+            callApi(
+                request = videoRepository.getVideoCategory(),
+                onReceiveData = {
+                    categoryLiveData.postValue(it)
+                    if (it.isNotEmpty())
+                        getVideo(it[0].id)
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getCategory
@@ -49,10 +51,10 @@ class VideoViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getCategory
     fun getVideo(videoGroupId: Int) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(videoRepository.getVideo(videoGroupId))
-            response?.let {
-                videoLiveData.postValue(it)
-            }
+            callApi(
+                request = videoRepository.getVideo(videoGroupId),
+                onReceiveData = { videoLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getCategory

@@ -1,29 +1,28 @@
 package com.hoomanholding.applibrary.model.repository
 
-import android.content.SharedPreferences
-import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import javax.inject.Inject
 
 /**
  * Created by m-latifi on 11/22/2022.
  */
 
-class TokenRepository @Inject constructor(private val sp: SharedPreferences ) {
+class TokenRepository @Inject constructor(
+    private val sharedPreferencesManager: SharedPreferencesManager
+) {
 
     //---------------------------------------------------------------------------------------------- getBearerToken
-    fun getBearerToken() = "Bearer ${sp.getString(CompanionValues.TOKEN, null)}"
+    fun getBearerToken() = sharedPreferencesManager.getBearerToken()
     //---------------------------------------------------------------------------------------------- getBearerToken
 
     //---------------------------------------------------------------------------------------------- getToken
-    fun getToken() = sp.getString(CompanionValues.TOKEN, null)
+    fun getToken() = sharedPreferencesManager.getToken()
     //---------------------------------------------------------------------------------------------- getToken
 
 
     //---------------------------------------------------------------------------------------------- deleteToken
     fun deleteToken() {
-        sp.edit()
-            .putString(CompanionValues.TOKEN, null)
-            .apply()
+        sharedPreferencesManager.deleteUserLogin()
     }
     //---------------------------------------------------------------------------------------------- deleteToken
 }

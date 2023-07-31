@@ -31,11 +31,13 @@ class CustomerBalanceReportViewModel @Inject constructor(
             customerBalanceReport?.let {
                 searchICustomerBalanceModel(search)
             } ?: run {
-                val response = checkResponse(reportRepository.requestCustomerBalance())
-                response?.let {
-                    customerBalanceReport = it
-                    customerBalanceReportLiveData.postValue(it)
-                }
+                callApi(
+                    request = reportRepository.requestCustomerBalance(),
+                    onReceiveData = {
+                        customerBalanceReport = it
+                        customerBalanceReportLiveData.postValue(it)
+                    }
+                )
             }
         }
     }

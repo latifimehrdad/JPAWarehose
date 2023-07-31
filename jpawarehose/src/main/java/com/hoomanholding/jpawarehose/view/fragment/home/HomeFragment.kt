@@ -3,15 +3,13 @@ package com.hoomanholding.jpawarehose.view.fragment.home
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import com.hoomanholding.applibrary.tools.BiometricManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentHomeBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
-import com.zar.core.tools.BiometricTools
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,7 +24,7 @@ class HomeFragment(override var layout: Int  = R.layout.fragment_home) :
     private val homeViewModel : HomeViewModel by viewModels()
 
     @Inject
-    lateinit var biometricTools: BiometricTools
+    lateinit var biometricManager: BiometricManager
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -111,31 +109,20 @@ class HomeFragment(override var layout: Int  = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- showBiometricDialog
     private fun showBiometricDialog() {
-        val executor = ContextCompat.getMainExecutor(requireContext())
-        val biometricPrompt = BiometricPrompt(
-            requireActivity(),
-            executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                    super.onAuthenticationError(errorCode, errString)
-                    showMessage(getString(R.string.onAuthenticationError))
-                    binding.switchActive.isChecked = homeViewModel.isBiometricEnable()
-                }
-
-                override fun onAuthenticationFailed() {
-                    super.onAuthenticationFailed()
-                    binding.switchActive.isChecked = homeViewModel.isBiometricEnable()
-                }
-
-
-                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    binding.switchActive.isChecked = !homeViewModel.isBiometricEnable()
-                    homeViewModel.changeBiometricEnable()
-                    showMessage(getString(R.string.actionIsDone))
-                }
-            })
-        biometricTools.checkDeviceHasBiometric(biometricPrompt)
+        if (activity == null)
+            return
+        biometricManager.showBiometricDialog(
+            fragment = requireActivity(),
+            onAuthenticationError = {
+                showMessage(getString(R.string.onAuthenticationError))
+                binding.switchActive.isChecked = homeViewModel.isBiometricEnable()
+            },
+            onAuthenticationSucceeded = {
+                binding.switchActive.isChecked = !homeViewModel.isBiometricEnable()
+                homeViewModel.changeBiometricEnable()
+                showMessage(getString(R.string.actionIsDone))
+            }
+        )
     }
     //---------------------------------------------------------------------------------------------- showBiometricDialog
 

@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.ktx.messaging
-import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +19,8 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class CustomerSplashViewModel @Inject constructor() : SplashViewModel() {
+class CustomerSplashViewModel @Inject constructor(
+) : SplashViewModel() {
 
     val fireBaseTokenLiveData: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val subscribeToTopic = SingleLiveEvent<Boolean>()
@@ -30,18 +30,14 @@ class CustomerSplashViewModel @Inject constructor() : SplashViewModel() {
         viewModelScope.launch(IO + exceptionHandler()) {
 //            FirebaseMessaging.getInstance().deleteToken()
             delay(1000)
-            var newToken = ""
             FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-                newToken = if (!task.isSuccessful)
+                val newToken = if (!task.isSuccessful)
                     ""
                 else
                     task.result
                 if (newToken.isNotEmpty()) {
                     Log.e("meri", "fireBaseToken : $newToken")
-                    sharedPreferences
-                        .edit()
-                        .putString(CompanionValues.FIREBASE_TOKEN, newToken)
-                        .apply()
+                    sharedPreferencesManager.setFirebaseToken(newToken)
                     fireBaseTokenLiveData.postValue(newToken)
                 }
             }

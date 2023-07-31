@@ -28,10 +28,10 @@ class OrderDetailViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getCustomerOrderDetail
     fun getCustomerOrderDetail(orderId: Long) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(orderRepository.requestGetCustomerOrderDetail(orderId))
-            response?.let {
-                orderDetailLiveData.postValue(it)
-            }
+            callApi(
+                request = orderRepository.requestGetCustomerOrderDetail(orderId),
+                onReceiveData = { orderDetailLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getCustomerOrderDetail

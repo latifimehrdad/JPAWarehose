@@ -90,17 +90,13 @@ class ChangePasswordViewModel @Inject constructor(
             else {
                 val old = oldPassword.value!!
                 val password = password.value!!
-
-                val response = checkResponse(
-                    userRepository.requestChangePassword(
-                        old,
-                        password,
-                        "Bearer $token"
-                    ), true
+                callApi(
+                    request = userRepository.requestChangePassword(old, password, "Bearer $token"),
+                    showMessageAfterSuccessResponse = true,
+                    onReceiveData = {
+                        passwordChangeLiveData.postValue(it)
+                    }
                 )
-                response?.let {
-                    passwordChangeLiveData.postValue(it)
-                }
             }
         }
     }
@@ -118,15 +114,11 @@ class ChangePasswordViewModel @Inject constructor(
                 )
             else {
                 val password = password.value!!
-                val response = checkResponse(
-                    userRepository.requestForgetChangePassword(
-                        password,
-                        "Bearer $token"
-                    ), true
+                callApi(
+                    request = userRepository.requestForgetChangePassword(password, "Bearer $token"),
+                    showMessageAfterSuccessResponse = true,
+                    onReceiveData = { passwordChangeLiveData.postValue(it) }
                 )
-                response?.let {
-                    passwordChangeLiveData.postValue(it)
-                }
             }
         }
     }

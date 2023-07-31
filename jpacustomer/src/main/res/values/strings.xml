@@ -108,7 +108,7 @@
     <string name="finalPrice">مبلغ نهایی</string>
     <string name="detailFactor">جزییات فاکتور</string>
     <string name="pieces">عدد</string>
-    <string name="createPDF">دریافت PDF</string>
+    <string name="createPDF">دریافت PDF گزارش</string>
     <string name="reportFromTo">گزارش از تاریخ %1$s تا تاریخ %2$s</string>
     <string name="customerCode2">کد مشتری : %1$s</string>
     <string name="description">توضیحات</string>

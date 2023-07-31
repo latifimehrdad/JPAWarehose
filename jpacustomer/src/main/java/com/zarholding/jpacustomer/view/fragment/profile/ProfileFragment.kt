@@ -2,15 +2,12 @@ package com.zarholding.jpacustomer.view.fragment.profile
 
 import android.Manifest
 import android.app.Activity
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import androidx.fragment.app.viewModels
 import com.github.drjacky.imagepicker.ImagePicker
@@ -20,6 +17,7 @@ import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.tools.BiometricManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -27,7 +25,6 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
-import com.zar.core.tools.BiometricTools
 import com.zar.core.tools.manager.ThemeManager
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProfileBinding
@@ -60,10 +57,7 @@ class ProfileFragment(
     lateinit var themeManagers: ThemeManager
 
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
-
-    @Inject
-    lateinit var biometricTools: BiometricTools
+    lateinit var biometricManager: BiometricManager
 
 
     //---------------------------------------------------------------------------------------------- launcher
@@ -330,31 +324,23 @@ class ProfileFragment(
 
     //---------------------------------------------------------------------------------------------- showBiometricDialog
     private fun showBiometricDialog() {
-        val executor = ContextCompat.getMainExecutor(requireContext())
-        val biometricPrompt = BiometricPrompt(
-            requireActivity(),
-            executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                    super.onAuthenticationError(errorCode, errString)
-                    showMessage(getString(R.string.onAuthenticationError))
-                    binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
-                }
-
-                override fun onAuthenticationFailed() {
-                    super.onAuthenticationFailed()
-                    binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
-                }
-
-
-                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    binding.switchFingerPrint.isChecked = !viewModel.isBiometricEnable()
-                    viewModel.changeBiometricEnable()
-                    showMessage(getString(R.string.actionIsDone))
-                }
-            })
-        val error = biometricTools.checkDeviceHasBiometric(biometricPrompt)
+        if (activity == null)
+            return
+        val error = biometricManager.showBiometricDialog(
+            fragment = requireActivity(),
+            onAuthenticationError = {
+                showMessage(getString(R.string.onAuthenticationError))
+                binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
+            },
+            onAuthenticationFailed = {
+                binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()
+            },
+            onAuthenticationSucceeded = {
+                binding.switchFingerPrint.isChecked = !viewModel.isBiometricEnable()
+                viewModel.changeBiometricEnable()
+                showMessage(getString(R.string.actionIsDone))
+            }
+        )
         if (!error.isNullOrEmpty()) {
             showMessage(error)
             binding.switchFingerPrint.isChecked = viewModel.isBiometricEnable()

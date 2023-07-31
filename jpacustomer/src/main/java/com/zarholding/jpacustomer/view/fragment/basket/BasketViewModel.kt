@@ -38,11 +38,15 @@ class BasketViewModel @Inject constructor(
             productsList?.let {
                 searchProduct(it)
             } ?: run {
-                val response = checkResponse(basketRepository.requestGetDetailBasket())
-                response?.items?.let { products ->
-                    productsList = products
-                    searchProduct(products)
-                }
+                callApi(
+                    request = basketRepository.requestGetDetailBasket(),
+                    onReceiveData = {
+                        it.items?.let {products ->
+                            productsList = products
+                            searchProduct(products)
+                        }
+                    }
+                )
             }
             getBasketCount()
         }
@@ -90,11 +94,13 @@ class BasketViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddToBasket
     fun requestAddToBasket(request: AddToBasket) {
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(basketRepository.requestAddToBasket(request))
-            response?.let {
-                addToBasketLiveData.postValue(it)
-                changeCount(request.ProductId, request.Count)
-            }
+            callApi(
+                request = basketRepository.requestAddToBasket(request),
+                onReceiveData = {
+                    addToBasketLiveData.postValue(it)
+                    changeCount(request.ProductId, request.Count)
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestAddToBasket
@@ -114,12 +120,14 @@ class BasketViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestDeleteBasket
     fun requestDeleteBasket(productId: Int) {
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(basketRepository.requestDeleteBasket(productId))
-            response?.let {
-                productsList = null
-                getProduct()
-                getBasketCount()
-            }
+            callApi(
+                request = basketRepository.requestDeleteBasket(productId),
+                onReceiveData = {
+                    productsList = null
+                    getProduct()
+                    getBasketCount()
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestDeleteBasket
@@ -129,8 +137,10 @@ class BasketViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getBasketCount
     private fun getBasketCount() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(basketRepository.requestGetBasketCount())
-            response?.let { basketCountLiveData.postValue(it) }
+            callApi(
+                request = basketRepository.requestGetBasketCount(),
+                onReceiveData = { basketCountLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getBasketCount
@@ -139,10 +149,10 @@ class BasketViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
     fun requestSubmitBasket() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(basketRepository.requestSubmitBasket())
-            response?.let {
-                submitBasketLiveData.postValue(true)
-            }
+            callApi(
+                request = basketRepository.requestSubmitBasket(),
+                onReceiveData = { submitBasketLiveData.postValue(true) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestSubmitBasket

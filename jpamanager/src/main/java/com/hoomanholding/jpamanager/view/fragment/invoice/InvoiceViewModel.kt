@@ -125,8 +125,10 @@ class InvoiceViewModel @Inject constructor(
                 filterVisitorLiveData.value?.id ?: 0,
                 filterStateLiveData.value ?: 0
             )
-            val response = checkResponse(orderRepository.requestGetOrder(request))
-            response?.let { orderLiveData.postValue(it) }
+            callApi(
+                request = orderRepository.requestGetOrder(request),
+                onReceiveData = { orderLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetOrder
@@ -135,8 +137,10 @@ class InvoiceViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
     fun requestDisApprovalReasons() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(reasonRepository.requestDisApprovalReasons())
-            response?.let { disApprovalReasonModel = it }
+            callApi(
+                request = reasonRepository.requestDisApprovalReasons(),
+                onReceiveData = { disApprovalReasonModel = it }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestDisApprovalReasons
@@ -162,8 +166,10 @@ class InvoiceViewModel @Inject constructor(
                         EnumState.Reject -> disApprovalReasonModel?.get(positionReason)?.id
                     }
                     val request = OrderToggleStateRequest(state, description, orders, reasonId)
-                    val response = checkResponse(orderRepository.requestOrderToggleState(request))
-                    response?.let { orderToggleStateLiveData.postValue(it) }
+                    callApi(
+                        request = orderRepository.requestOrderToggleState(request),
+                        onReceiveData = { orderToggleStateLiveData.postValue(it) }
+                    )
                 }
             }
         }

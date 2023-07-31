@@ -21,7 +21,7 @@ class Providers {
 
     companion object {
 //        var url = "http://api.hoomanholding.com:9090" // Jpa
-        var url = "http://10.252.37.105:7575" //Zar
+        var url = "http://10.252.37.140:7575" //Zar
     }
 
     //---------------------------------------------------------------------------------------------- provideUrl

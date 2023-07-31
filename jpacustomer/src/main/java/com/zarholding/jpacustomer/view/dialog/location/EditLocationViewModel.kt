@@ -35,16 +35,25 @@ class EditLocationViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestEditCustomerLocation
     fun requestEditCustomerLocation(lat: Double, long: Double) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(customerRepository.requestEditCustomerLocation(lat, long))
-            response?.let {
-                userRepository.updateXY(lat, long)
-                delay(500)
-                editLiveData.postValue(it)
-            }
+            callApi(
+                request = customerRepository.requestEditCustomerLocation(lat, long),
+                onReceiveData = { editCustomerLocation(lat, long, it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestEditCustomerLocation
 
+
+
+    //---------------------------------------------------------------------------------------------- editCustomerLocation
+    private fun editCustomerLocation(lat: Double, long: Double, isEdit: Boolean) {
+        viewModelScope.launch(IO){
+            userRepository.updateXY(lat, long)
+            delay(500)
+            editLiveData.postValue(isEdit)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- editCustomerLocation
 
 
     //---------------------------------------------------------------------------------------------- getUserInfo

@@ -7,6 +7,7 @@ import com.hoomanholding.jpawarehose.model.repository.receipt.ReceiptRepository
 import com.hoomanholding.jpawarehose.view.adapter.holder.ReceiptProductHolder
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.applibrary.model.data.database.entity.LocationAmountEntity
+import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptDetailEntity
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.applibrary.model.data.database.join.ReceiptWithProduct
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,15 +43,24 @@ class ArrangeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetReceipts
     fun requestGetReceipts() {
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(receiptRepository.requestGetReceipts())
-            response?.let {
-                receiptRepository.insertReceipts(it)
-                delay(500)
-                receiptLiveData.postValue(it)
-            }
+            callApi(
+                request = receiptRepository.requestGetReceipts(),
+                onReceiveData = { setReceipts(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetReceipts
+
+
+    //---------------------------------------------------------------------------------------------- setReceipts
+    private fun setReceipts(items: List<ReceiptEntity>) {
+        viewModelScope.launch(IO + exceptionHandler()){
+            receiptRepository.insertReceipts(items)
+            delay(500)
+            receiptLiveData.postValue(items)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setReceipts
 
 
     //---------------------------------------------------------------------------------------------- requestGerReceiptDetail
@@ -59,15 +69,24 @@ class ArrangeViewModel @Inject constructor(
         if (receiptId == 0L)
             return
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(receiptRepository.requestGerReceiptDetail(receiptId))
-            response?.let {
-                receiptRepository.insertReceiptDetail(it)
-                delay(500)
-                receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
-            }
+            callApi(
+                request = receiptRepository.requestGerReceiptDetail(receiptId),
+                onReceiveData = { setDetailReceipt(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestGerReceiptDetail
+
+
+    //---------------------------------------------------------------------------------------------- setDetailReceipt
+    private fun setDetailReceipt(items: List<ReceiptDetailEntity>){
+        viewModelScope.launch(IO + exceptionHandler()){
+            receiptRepository.insertReceiptDetail(items)
+            delay(500)
+            receiptDetailLiveData.postValue(receiptRepository.getReceiptDetailJoin())
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setDetailReceipt
 
 
     //---------------------------------------------------------------------------------------------- findLocation
@@ -168,16 +187,16 @@ class ArrangeViewModel @Inject constructor(
                         break
                     }
                 }
-                val response = checkResponse(
-                    receiptRepository.requestConfirmReceipt(list[0].receiptDetailEntity.id)
+                callApi(
+                    request = receiptRepository.requestConfirmReceipt(list[0].receiptDetailEntity.id),
+                    onReceiveData = {
+                        if (it)
+                            sendReceiptToServer.
+                            postValue(resourcesProvider.getString(R.string.saveReceiptSuccess))
+                        else
+                            receiptRepository.deleteAllReceiptDetailAndAmount()
+                    }
                 )
-                response?.let {
-                    if (it)
-                        sendReceiptToServer.
-                        postValue(resourcesProvider.getString(R.string.saveReceiptSuccess))
-                    else
-                        receiptRepository.deleteAllReceiptDetailAndAmount()
-                }
             }
         }
     }

@@ -38,11 +38,13 @@ class ProductViewModel @Inject constructor(
             productsList?.let {
                 searchProduct(it)
             } ?: run {
-                val response = checkResponse(productRepository.requestGetCustomerProducts())
-                response?.let { products ->
-                    productsList = products
-                    searchProduct(products)
-                }
+                callApi(
+                    request = productRepository.requestGetCustomerProducts(),
+                    onReceiveData = {products ->
+                        productsList = products
+                        searchProduct(products)
+                    }
+                )
             }
         }
     }
@@ -110,8 +112,10 @@ class ProductViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getBasketCount
     fun getBasketCount() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(basketRepository.requestGetBasketCount())
-            response?.let { basketCountLiveData.postValue(it) }
+            callApi(
+                request = basketRepository.requestGetBasketCount(),
+                onReceiveData = { basketCountLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getBasketCount

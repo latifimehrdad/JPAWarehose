@@ -50,8 +50,10 @@ class PeopleViewModel @Inject constructor(
         viewModelScope.launch(IO + exceptionHandler()){
             val temp = search.persianNumberToEnglishNumber()
             val request = FilterCustomerRequest(0,temp)
-            val response = checkResponse(customerRepository.requestGetCustomer(request))
-            response?.let { customerLiveData.postValue(it) }
+            callApi(
+                request = customerRepository.requestGetCustomer(request),
+                onReceiveData = { customerLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomer
@@ -63,11 +65,13 @@ class PeopleViewModel @Inject constructor(
             visitorList?.let {
                 findVisitor(search)
             } ?: run {
-                val response = checkResponse(visitorRepository.requestGetVisitor())
-                response?.let {
-                    visitorList = it
-                    findVisitor(search)
-                }
+                callApi(
+                    request = visitorRepository.requestGetVisitor(),
+                    onReceiveData = {
+                        visitorList = it
+                        findVisitor(search)
+                    }
+                )
             }
         }
     }

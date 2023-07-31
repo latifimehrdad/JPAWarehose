@@ -3,6 +3,7 @@ package com.hoomanholding.jpamanager.view.fragment.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
+import com.hoomanholding.applibrary.model.data.response.report.HomeReportModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
@@ -36,18 +37,17 @@ class HomeViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestGetCurrency
-    fun requestGetCurrency(){
+    fun requestGetCurrency() {
         if (currencyLiveData.value != null)
             return
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(currencyRepository.requestGetCurrency())
-            response?.let {
-                currencyLiveData.postValue(it)
-            }
+            callApi(
+                request = currencyRepository.requestGetCurrency(),
+                onReceiveData = { currencyLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetCurrency
-
 
 
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
@@ -56,50 +56,58 @@ class HomeViewModel @Inject constructor(
             currencyTypeText = currencyLiveData.value?.get(currencyTypePosition)?.value ?: ""
             val id = currencyLiveData.value?.get(currencyTypePosition)?.id
             if (id != null) {
-                val response =
-                    checkResponse(reportRepository.requestFirstPageReport(id))
-                response?.let {
-                    val items = mutableListOf<HomeReportItemModel>()
-                    items.add(
-                        HomeReportItemModel(
-                            resourcesProvider.getString(R.string.totalSale),
-                            it.invoiceCount,
-                            it.invoiceAmount
-                        )
-                    )
-                    items.add(
-                        HomeReportItemModel(
-                            resourcesProvider.getString(R.string.pluralReturn),
-                            it.returnInvoiceCount,
-                            it.returnInvoiceAmount
-                        )
-                    )
-                    items.add(
-                        HomeReportItemModel(
-                            resourcesProvider.getString(R.string.pluralOrder),
-                            it.orderCount,
-                            it.orderAmount
-                        )
-                    )
-                    items.add(
-                        HomeReportItemModel(
-                            resourcesProvider.getString(R.string.bouncedCheck),
-                            it.bouncedCheckCount,
-                            it.bouncedCheckAmount
-                        )
-                    )
-                    items.add(
-                        HomeReportItemModel(
-                            resourcesProvider.getString(R.string.wareHouseStocks),
-                            it.wareHouseStocks,
-                            it.wareHouseStocksAmount
-                        )
-                    )
-                    homeReportLiveData.postValue(items)
-                }
+                callApi(
+                    request = reportRepository.requestFirstPageReport(id),
+                    onReceiveData = {
+                        setFirstPageReport(it)
+                    }
+                )
             }
         }
     }
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
+
+
+    //---------------------------------------------------------------------------------------------- setFirstPageReport
+    private fun setFirstPageReport(homeReportModel: HomeReportModel) {
+        val items = mutableListOf<HomeReportItemModel>()
+        items.add(
+            HomeReportItemModel(
+                resourcesProvider.getString(R.string.totalSale),
+                homeReportModel.invoiceCount,
+                homeReportModel.invoiceAmount
+            )
+        )
+        items.add(
+            HomeReportItemModel(
+                resourcesProvider.getString(R.string.pluralReturn),
+                homeReportModel.returnInvoiceCount,
+                homeReportModel.returnInvoiceAmount
+            )
+        )
+        items.add(
+            HomeReportItemModel(
+                resourcesProvider.getString(R.string.pluralOrder),
+                homeReportModel.orderCount,
+                homeReportModel.orderAmount
+            )
+        )
+        items.add(
+            HomeReportItemModel(
+                resourcesProvider.getString(R.string.bouncedCheck),
+                homeReportModel.bouncedCheckCount,
+                homeReportModel.bouncedCheckAmount
+            )
+        )
+        items.add(
+            HomeReportItemModel(
+                resourcesProvider.getString(R.string.wareHouseStocks),
+                homeReportModel.wareHouseStocks,
+                homeReportModel.wareHouseStocksAmount
+            )
+        )
+        homeReportLiveData.postValue(items)
+    }
+    //---------------------------------------------------------------------------------------------- setFirstPageReport
 
 }

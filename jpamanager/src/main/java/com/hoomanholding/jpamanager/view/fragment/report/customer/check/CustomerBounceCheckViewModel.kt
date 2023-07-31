@@ -32,11 +32,13 @@ class CustomerBounceCheckViewModel @Inject constructor(
             customerBounceReport?.let {
                 searchICustomerBounce(search)
             } ?: run {
-                val response = checkResponse(reportRepository.requestCustomersBouncedCheckReport())
-                response?.let {
-                    customerBounceReport = it
-                    itemLiveData.postValue(it)
-                }
+                callApi(
+                    request = reportRepository.requestCustomersBouncedCheckReport(),
+                    onReceiveData = {
+                        customerBounceReport = it
+                        itemLiveData.postValue(it)
+                    }
+                )
             }
         }
     }

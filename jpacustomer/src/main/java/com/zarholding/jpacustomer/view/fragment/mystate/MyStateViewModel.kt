@@ -35,8 +35,10 @@ class MyStateViewModel @Inject constructor(
     fun getCustomerState() {
         viewModelScope.launch(IO + exceptionHandler()) {
             if (customerStateModel.value == null) {
-                val response = checkResponse(customerRepository.requestGetCustomerState())
-                response?.let { customerStateModel.postValue(it) }
+                callApi(
+                    request = customerRepository.requestGetCustomerState(),
+                    onReceiveData = { customerStateModel.postValue(it) }
+                )
             }
         }
     }

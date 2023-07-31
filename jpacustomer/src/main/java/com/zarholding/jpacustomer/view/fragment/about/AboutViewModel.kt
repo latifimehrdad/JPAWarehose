@@ -27,10 +27,10 @@ class AboutViewModel @Inject constructor(
     fun getAbout() {
         viewModelScope.launch(IO + exceptionHandler()) {
             delay(1000)
-            val response = checkResponse(aboutRepository.getAbout())
-            response?.let {
-                aboutLiveData.postValue(it)
-            }
+            callApi(
+                request = aboutRepository.getAbout(),
+                onReceiveData = { aboutLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getAbout

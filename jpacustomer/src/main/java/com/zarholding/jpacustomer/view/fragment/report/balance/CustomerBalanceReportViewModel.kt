@@ -46,10 +46,10 @@ class CustomerBalanceReportViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail
     private fun requestCustomerBalanceDetail(customerId : Long){
         viewModelScope.launch(Dispatchers.IO + exceptionHandler()) {
-            val response = checkResponse(reportRepository.requestCustomerBalanceDetail(customerId))
-            response?.let {
-                reportDetailLiveData.postValue(it)
-            }
+            callApi(
+                request = reportRepository.requestCustomerBalanceDetail(customerId),
+                onReceiveData = { reportDetailLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestCustomerBalanceDetail

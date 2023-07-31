@@ -335,6 +335,13 @@ interface Api {
         @Query("type") type: String,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<CustomerOrderDetailPDFModel?>>
+
+
+    @GET("$report/customers-report-customerBalancePDF")
+    suspend fun requestCustomerBalancePDF(
+        @Header("Authorization") token: String
+    ): Response<ResponseBody>
+
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 
 

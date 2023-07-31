@@ -28,30 +28,33 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
 
     val errorLiveDate = SingleLiveEvent<ErrorApiModel>()
 
-    //---------------------------------------------------------------------------------------------- checkResponse
-    suspend fun <T : Any> checkResponse(
-        response: Response<GeneralResponse<T?>>?,
-        showMessageAfterSuccessResponse: Boolean = false): T? {
-        if (response?.isSuccessful == true) {
-            val body = response.body()
+
+    //---------------------------------------------------------------------------------------------- callApi
+    suspend fun <T : Any> callApi(
+        request: Response<GeneralResponse<T?>>?,
+        showMessageAfterSuccessResponse: Boolean = false,
+        onReceiveData: (T) -> Unit
+    ) {
+        if (request?.isSuccessful == true) {
+            val body = request.body()
             body?.let { generalResponse ->
                 if (generalResponse.hasError || generalResponse.data == null)
                     setMessage(generalResponse.message)
                 else {
                     if (showMessageAfterSuccessResponse)
                         setMessage(generalResponse.message)
-                    return generalResponse.data
+                    onReceiveData(generalResponse.data)
                 }
             } ?: run {
                 setMessage(
-                    resourcesProvider.getString(R.string.dataReceivedIsEmpty
+                    resourcesProvider.getString(
+                        R.string.dataReceivedIsEmpty
                     )
                 )
             }
-        } else setMessage(response)
-        return null
+        } else setMessage(request)
     }
-    //---------------------------------------------------------------------------------------------- checkResponse
+    //---------------------------------------------------------------------------------------------- callApi
 
 
     //---------------------------------------------------------------------------------------------- setError
@@ -78,8 +81,8 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
             throwable.localizedMessage?.let {
 //                XLog.e(it)
                 val url = Providers.url
-                    .replace("http://","")
-                    .replace("https://","")
+                    .replace("http://", "")
+                    .replace("https://", "")
                 if (it.contains(url))
                     setMessage(resourcesProvider.getString(R.string.pleaseCheckYouConnection))
                 else {
@@ -92,11 +95,13 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
     //---------------------------------------------------------------------------------------------- exceptionHandler
 
 
-
     //---------------------------------------------------------------------------------------------- sendLogToServer
     private fun sendLogToServer(log: String) {
-        viewModelScope.launch(IO){
-            checkResponse(logRepository.requestSaveError(log))
+        viewModelScope.launch(IO) {
+            callApi(
+                request = logRepository.requestSaveError(log),
+                onReceiveData = {}
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- sendLogToServer

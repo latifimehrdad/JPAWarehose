@@ -353,8 +353,10 @@ class SaveReceiptViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt
     private fun requestAddWarehouseReceipt(request: AddWarehouseReceipt) {
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(saveReceiptRepository.requestAddWarehouseReceipt(request))
-            response?.let { addToHistoryOfSaveReceipt(request.description) }
+            callApi(
+                request = saveReceiptRepository.requestAddWarehouseReceipt(request),
+                onReceiveData = { addToHistoryOfSaveReceipt(request.description) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestAddWarehouseReceipt

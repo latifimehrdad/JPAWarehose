@@ -140,8 +140,7 @@ class MainActivity : AppCompatActivity() {
         when (fragmentId) {
             R.id.splashFragment,
             R.id.loginFragment,
-            R.id.downloadFragment,
-            R.id.reportPDFFragment -> {
+            R.id.downloadFragment -> {
                 binding.cardViewMenu.visibility = View.GONE
                 binding.customMenuHome.clearSelected()
                 binding.customMenuProduct.clearSelected()

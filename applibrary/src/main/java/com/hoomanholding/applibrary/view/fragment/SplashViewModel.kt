@@ -1,6 +1,5 @@
 package com.hoomanholding.applibrary.view.fragment
 
-import android.content.SharedPreferences
 import android.os.Environment
 import android.os.StatFs
 import android.util.Log
@@ -10,7 +9,7 @@ import com.hoomanholding.applibrary.model.data.database.entity.RoleEntity
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.repository.AppUpdateRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
-import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import com.zar.core.tools.manager.DeviceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -23,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 open class SplashViewModel @Inject constructor() : JpaViewModel() {
 
-    @Inject lateinit var sharedPreferences: SharedPreferences
+    @Inject lateinit var sharedPreferencesManager: SharedPreferencesManager
     @Inject lateinit var userRepository: UserRepository
     @Inject lateinit var appUpdateRepository: AppUpdateRepository
     @Inject lateinit var deviceManager: DeviceManager
@@ -45,11 +44,13 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
     fun requestGetAppVersion(appName: String) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(appUpdateRepository.requestGetAppVersion(appName))
-            response?.let {
-                appDescriptionLiveData.postValue(it.appDescription)
-                checkAppVersion(it)
-            }
+            callApi(
+                request = appUpdateRepository.requestGetAppVersion(appName),
+                onReceiveData = {
+                    appDescriptionLiveData.postValue(it.appDescription)
+                    checkAppVersion(it)
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
@@ -71,8 +72,7 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
     //---------------------------------------------------------------------------------------------- requestGetData
     fun requestGetData() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val fbToken = sharedPreferences.getString(CompanionValues.FIREBASE_TOKEN, "")
-            requestUserInfo(fbToken).join()
+            requestUserInfo(sharedPreferencesManager.getFirebaseToken()).join()
             requestUserPermission().join()
             getAllData().join()
         }
@@ -85,10 +85,10 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
         return CoroutineScope(IO + exceptionHandler()).launch {
             Log.e("meri", "requestGetData : ${fireBaseToken.toString()}")
             delay(500)
-            val response = checkResponse(userRepository.requestUserInfo(fireBaseToken))
-            response?.let {
-                userRepository.insertUserInfo(it)
-            }
+            callApi(
+                request = userRepository.requestUserInfo(fireBaseToken),
+                onReceiveData = { userRepository.insertUserInfo(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestUserInfo
@@ -98,11 +98,13 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
     private fun requestUserPermission(): Job {
         return CoroutineScope(IO + exceptionHandler()).launch {
             delay(500)
-            val response = checkResponse(userRepository.requestUserPermission())
-            response?.let { permissions ->
-                val roles: List<RoleEntity> = permissions.map { RoleEntity(it) }
-                userRepository.insertUserRole(roles)
-            }
+            callApi(
+                request = userRepository.requestUserPermission(),
+                onReceiveData = { permissions ->
+                    val roles: List<RoleEntity> = permissions.map { RoleEntity(it) }
+                    userRepository.insertUserRole(roles)
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestUserPermission
@@ -119,10 +121,7 @@ open class SplashViewModel @Inject constructor() : JpaViewModel() {
 
     //---------------------------------------------------------------------------------------------- saveNewIp
     fun saveNewIp(ip: String?) {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.URL, ip)
-            .apply()
+        sharedPreferencesManager.saveNewIp(ip)
     }
     //---------------------------------------------------------------------------------------------- saveNewIp
 

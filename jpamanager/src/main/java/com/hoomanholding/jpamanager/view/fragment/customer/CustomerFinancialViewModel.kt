@@ -38,11 +38,10 @@ class CustomerFinancialViewModel @Inject constructor(
     fun requestGetCustomerFinancial() {
         if (customerFinancialLiveData.value == null)
             viewModelScope.launch(IO + exceptionHandler()) {
-                val response =
-                    checkResponse(customerRepository.requestGetCustomerFinancial(customerId))
-                response?.let {
-                    customerFinancialLiveData.postValue(it)
-                }
+                callApi(
+                    request = customerRepository.requestGetCustomerFinancial(customerId),
+                    onReceiveData = { customerFinancialLiveData.postValue(it) }
+                )
             }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
@@ -164,10 +163,10 @@ class CustomerFinancialViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail
     fun requestGetCustomerFinancialDetail(checkType: EnumCheckType) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(
-                customerRepository.requestGetCustomerFinancialDetail(customerId, checkType)
+            callApi(
+                request = customerRepository.requestGetCustomerFinancialDetail(customerId, checkType),
+                onReceiveData = { customerFinancialDetailLiveData.postValue(it) }
             )
-            response?.let { customerFinancialDetailLiveData.postValue(it) }
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancialDetail

@@ -6,8 +6,6 @@ import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -15,12 +13,12 @@ import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.applibrary.ext.hideKeyboard
 import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.tools.BiometricManager
 import com.hoomanholding.applibrary.view.fragment.LoginViewModel
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentLoginBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
-import com.zar.core.tools.BiometricTools
 import com.zar.core.tools.manager.DialogManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -38,7 +36,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     JpaFragment<FragmentLoginBinding>() {
 
     @Inject
-    lateinit var biometricTools: BiometricTools
+    lateinit var biometricManager: BiometricManager
 
     private val loginViewModel: LoginViewModel by viewModels()
 
@@ -187,22 +185,11 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     private fun showBiometricDialog() {
         if (activity == null)
             return
-        val executor = ContextCompat.getMainExecutor(requireContext())
-        val biometricPrompt = BiometricPrompt(
-            requireActivity(),
-            executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                    super.onAuthenticationError(errorCode, errString)
-                    showMessage(getString(R.string.onAuthenticationError))
-                }
-
-                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    fingerPrintClick()
-                }
-            })
-        biometricTools.checkDeviceHasBiometric(biometricPrompt)
+        biometricManager.showBiometricDialog(
+            fragment = requireActivity(),
+            onAuthenticationError = { showMessage(getString(R.string.onAuthenticationError)) },
+            onAuthenticationSucceeded = { fingerPrintClick() }
+        )
     }
     //---------------------------------------------------------------------------------------------- showBiometricDialog
 

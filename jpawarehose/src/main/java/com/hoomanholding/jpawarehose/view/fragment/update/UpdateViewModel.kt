@@ -68,11 +68,13 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             brandRepository.deleteAllBrands()
             delay(500)
-            val response = checkResponse(brandRepository.requestGetBrands())
-            response?.let {
-                brandRepository.insertBrands(it)
-                serPercentOfUpdate()
-            }
+            callApi(
+                request = brandRepository.requestGetBrands(),
+                onReceiveData = {
+                    brandRepository.insertBrands(it)
+                    serPercentOfUpdate()
+                }
+            )
         }
 
     }
@@ -85,11 +87,13 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             productRepository.deleteAllProduct()
             delay(500)
-            val response = checkResponse(productRepository.requestGetProducts())
-            response?.let {
-                productRepository.insertProducts(it)
-                serPercentOfUpdate()
-            }
+            callApi(
+                request = productRepository.requestGetProducts(),
+                onReceiveData = {
+                    productRepository.insertProducts(it)
+                    serPercentOfUpdate()
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getProducts
@@ -101,10 +105,13 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             locationsRepository.deleteAllLocations()
             delay(500)
-            val response = checkResponse(locationsRepository.requestGetLocations())
-            response?.let {
-                locationsRepository.insertLocations(it)
-                serPercentOfUpdate() }
+            callApi(
+                request = locationsRepository.requestGetLocations(),
+                onReceiveData = {
+                    locationsRepository.insertLocations(it)
+                    serPercentOfUpdate()
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getLocations
@@ -117,11 +124,13 @@ class UpdateViewModel @Inject constructor(
             delay(100)
             supplierRepository.deleteAllSuppliers()
             delay(500)
-            val response = checkResponse(supplierRepository.requestGetSuppliers())
-            response?.let {
-                supplierRepository.insertSuppliers(it)
-                serPercentOfUpdate()
-            }
+            callApi(
+                request = supplierRepository.requestGetSuppliers(),
+                onReceiveData = {
+                    supplierRepository.insertSuppliers(it)
+                    serPercentOfUpdate()
+                }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getSuppliers

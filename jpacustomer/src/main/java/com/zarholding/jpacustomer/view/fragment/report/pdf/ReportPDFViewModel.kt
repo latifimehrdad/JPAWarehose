@@ -1,23 +1,22 @@
 package com.zarholding.jpacustomer.view.fragment.report.pdf
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.pdf.PdfDocument
 import android.os.Environment
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.enums.EnumReportType
+import com.hoomanholding.applibrary.model.repository.DownloadFileRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
-import com.zarholding.jpacustomer.model.PDFModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -29,109 +28,93 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReportPDFViewModel @Inject constructor(
-
+    private val downloadFileRepository: DownloadFileRepository
 ): JpaViewModel() {
 
-    val a4Height = 1754
-    val a4With = 1240
-    val mutableLiveData = MutableLiveData<Boolean>()
-    var destinationFile: File? = null
+    val downloadProgress: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+    val downloadSuccessLiveData: MutableLiveData<File> by lazy { MutableLiveData<File>() }
 
-    //______________________________________________________________________________________________ createPdf
-    fun createPdf(v: View) {
+
+    //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
+    fun downloadCustomerBalancePDF() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val convertWidth: Int
-            var differentPercent = if (a4With > v.width) {
-                convertWidth = v.width
-                (v.width * 100) / a4With
-            } else {
-                convertWidth = a4With
-                (a4With * 100) / v.width
-            }
-
-            if (differentPercent >= 100 )
-                differentPercent -= 100
-            else
-                differentPercent = 100 - differentPercent
-
-            val convertHeight = if (a4With > v.width) {
-                v.height + ((v.height * differentPercent) / 100)
-            } else {
-                v.height - ((v.height * differentPercent) / 100)
-            }
-
-            val origin = Bitmap.createBitmap(v.width, v.height, Bitmap.Config.ARGB_8888)
-            val c = Canvas(origin)
-            c.drawColor(Color.WHITE)
-            v.draw(c)
-
-            val b = Bitmap.createScaledBitmap(origin, convertWidth, convertHeight, true)
-
-            val document = PdfDocument()
-            val pageInfo = PdfDocument.PageInfo.Builder(a4With, a4Height, 1).create()
-            val bitmaps = splitBitmap(b, convertHeight)
-            for (bitmap in bitmaps) {
-                val page = document.startPage(pageInfo)
-                val bit = Bitmap.createScaledBitmap(bitmap.bitmap, a4With, bitmap.height, true)
-                page.canvas.drawBitmap(bit, 0f, 0f, null)
-                document.finishPage(page)
-            }
-
-            val downloadFolder =
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-            val destinationDir = File(downloadFolder.absolutePath, CompanionValues.APP_ID)
-            if (!destinationDir.exists())
-                destinationDir.mkdir()
-            val destinationReport = File(downloadFolder.absolutePath, "pdf")
-            if (!destinationReport.exists())
-                destinationReport.mkdir()
-            destinationFile = File(
-                destinationReport.absolutePath,
-                "${getNewFileName()}.pdf"
-            )
-            try {
-                withContext(IO) {
-                    document.writeTo(FileOutputStream(destinationFile))
+            val file = initFile(EnumReportType.Balance)
+            delay(1000)
+            val response = downloadFileRepository.downloadCustomerBalancePDF()
+            response.body()?.saveFile(file)?.collect { downloadState ->
+                when (downloadState) {
+                    is DownloadState.Downloading -> {
+                        downloadProgress.postValue(downloadState.progress)
+                    }
+                    is DownloadState.Failed -> {
+                        setMessage(downloadState.error?.message?:"Failed Download!")
+                    }
+                    DownloadState.Finished -> {
+                        downloadSuccessLiveData.postValue(file)
+                    }
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
-                mutableLiveData.postValue(false)
-            }
-            document.close()
-            mutableLiveData.postValue(true)
-        }
-    }
-    //______________________________________________________________________________________________ createPdf
-
-
-
-    //______________________________________________________________________________________________ splitBitmap
-    private fun splitBitmap(src: Bitmap, height: Int): MutableList<PDFModel> {
-        var pageNumber = height / a4Height
-        val rem = height % a4Height
-        if (rem > 0)
-            pageNumber++
-        val bitmaps = mutableListOf<PDFModel>()
-        for (i in 0 until pageNumber) {
-            if (i + 1 < pageNumber){
-                val bit = Bitmap.createBitmap(src, 0, i * a4Height, src.width, a4Height)
-                bitmaps.add(PDFModel(a4Height, src.width, bit))
-            } else {
-                val bit = Bitmap.createBitmap(src, 0, i * a4Height, src.width, rem)
-                bitmaps.add(PDFModel(rem, src.width, bit))
+            } ?: run {
+                setMessage(response.errorBody()?.string() ?: "")
             }
         }
-        return bitmaps
     }
-    //______________________________________________________________________________________________ splitBitmap
+    //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
 
 
 
-
-    //______________________________________________________________________________________________ getNewFileName
-    private fun getNewFileName(): String? {
-        return SimpleDateFormat("yyyy_MM_dd__HH_mm_ss", Locale.getDefault()).format(Date())
+    //---------------------------------------------------------------------------------------------- initFile
+    private fun initFile(type: EnumReportType): File{
+        val time = SimpleDateFormat("yyyy_MM_dd__HH_mm_ss", Locale.getDefault()).format(Date())
+        val downloadFolder =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val destinationDir = File(downloadFolder.absolutePath, CompanionValues.APP_ID)
+        if (!destinationDir.exists())
+            destinationDir.mkdir()
+        val destinationApk = File(destinationDir.absolutePath, "pdf")
+        if (!destinationApk.exists())
+            destinationApk.mkdir()
+        return File(destinationApk.absolutePath, "${type.name}_${time}.pdf")
     }
-    //______________________________________________________________________________________________ getNewFileName
+    //---------------------------------------------------------------------------------------------- initFile
+
+
+
+    //---------------------------------------------------------------------------------------------- DownloadState
+    private sealed class DownloadState {
+        data class Downloading(val progress: Int) : DownloadState()
+        object Finished : DownloadState()
+        data class Failed(val error: Throwable? = null) : DownloadState()
+    }
+    //---------------------------------------------------------------------------------------------- DownloadState
+
+
+
+    //---------------------------------------------------------------------------------------------- saveFile
+    private fun ResponseBody.saveFile(destinationFile: File): Flow<DownloadState> {
+        return flow {
+            emit(DownloadState.Downloading(0))
+            try {
+                byteStream().use { inputStream ->
+                    destinationFile.outputStream().use { outputStream ->
+                        val totalBytes = contentLength()
+                        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+                        var progressBytes = 0L
+
+                        var bytes = inputStream.read(buffer)
+                        while (bytes >= 0) {
+                            outputStream.write(buffer, 0, bytes)
+                            progressBytes += bytes
+                            bytes = inputStream.read(buffer)
+                            emit(DownloadState.Downloading(((progressBytes * 100) / totalBytes).toInt()))
+                        }
+                    }
+                }
+                emit(DownloadState.Finished)
+            } catch (e: Exception) {
+                emit(DownloadState.Failed(e))
+            }
+        }.flowOn(IO).distinctUntilChanged()
+    }
+    //---------------------------------------------------------------------------------------------- saveFile
 
 }

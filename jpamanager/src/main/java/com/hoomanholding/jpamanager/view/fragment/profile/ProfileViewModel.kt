@@ -1,13 +1,12 @@
 package com.hoomanholding.jpamanager.view.fragment.profile
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.hoomanholding.applibrary.model.repository.UserRepository
-import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -31,11 +30,9 @@ import java.io.File
 class ProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
     tokenRepository: TokenRepository,
-    private val uploadFileRepository: UploadFileRepository
+    private val uploadFileRepository: UploadFileRepository,
+    private val sharedPreferencesManager: SharedPreferencesManager
 ) : JpaViewModel() {
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     val userInfoLiveData: MutableLiveData<UserInfoEntity> by lazy {
         MutableLiveData<UserInfoEntity>()
@@ -58,16 +55,14 @@ class ProfileViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- isBiometricEnable
-    fun isBiometricEnable() = sharedPreferences.getBoolean(CompanionValues.biometric, false)
+    fun isBiometricEnable() = sharedPreferencesManager.isBiometricEnable()
     //---------------------------------------------------------------------------------------------- isBiometricEnable
 
 
     //---------------------------------------------------------------------------------------------- changeBiometricEnable
     fun changeBiometricEnable() {
         val biometric = !isBiometricEnable()
-        sharedPreferences.edit()
-            .putBoolean(CompanionValues.biometric, biometric)
-            .apply()
+        sharedPreferencesManager.changeBiometricEnable(biometric)
     }
     //---------------------------------------------------------------------------------------------- changeBiometricEnable
 
@@ -83,10 +78,10 @@ class ProfileViewModel @Inject constructor(
             val entityType = EnumEntityType
                 .ProfileImage.name.toRequestBody("mutlipart/form-data".toMediaTypeOrNull())
             val image = MultipartBody.Part.createFormData("File", file.name, body)
-            val response = checkResponse(uploadFileRepository.uploadProfileImage(entityType, image))
-            response?.let {
-                uploadPercentLiveData.postValue(101)
-            }
+            callApi(
+                request = uploadFileRepository.uploadProfileImage(entityType, image),
+                onReceiveData = { uploadPercentLiveData.postValue(101) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- uploadProfileImage

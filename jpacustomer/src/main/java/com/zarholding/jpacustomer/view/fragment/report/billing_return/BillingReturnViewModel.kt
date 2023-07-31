@@ -92,27 +92,28 @@ class BillingReturnViewModel @Inject constructor(
                 return@launch
             }
 
-            val response = when (reportType) {
-                EnumReportType.Billing -> checkResponse(
-                    reportRepository
+            when(reportType){
+                EnumReportType.Billing -> callApi(
+                    request = reportRepository
                         .requestCustomerBillingReport(
                             dateFromLiveData.value!!,
                             dateToLiveData.value!!
-                        )
+                        ),
+                    onReceiveData = {
+                        reportLiveData.postValue(it)
+                    }
                 )
-
-                EnumReportType.Return -> checkResponse(
-                    reportRepository
+                EnumReportType.BillingItem -> callApi(
+                    request = reportRepository
                         .requestCustomerReturnReport(
                             dateFromLiveData.value!!,
                             dateToLiveData.value!!
-                        )
+                        ),
+                    onReceiveData = {
+                        reportLiveData.postValue(it)
+                    }
                 )
-
-                else -> null
-            }
-            response?.let {
-                reportLiveData.postValue(it)
+                else -> {}
             }
         }
     }
@@ -123,14 +124,16 @@ class BillingReturnViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getBillingReturnDetail
     fun getBillingReturnDetail(billingId: Long, type: String) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response =
-                checkResponse(reportRepository.requestCustomersBillingPDF(billingId, type))
-            response?.let {
-                reportDetailLiveData.postValue(it)
-            }
+            callApi(
+                request = reportRepository.requestCustomersBillingPDF(billingId, type),
+                onReceiveData = { reportDetailLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getBillingReturnDetail
+
+
+
 
 
 }

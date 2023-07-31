@@ -32,8 +32,10 @@ class ProductDetailViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddToBasket
     fun requestAddToBasket(request: AddToBasket) {
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(basketRepository.requestAddToBasket(request))
-            response?.let { addToBasketLiveData.postValue(it) }
+            callApi(
+                request = basketRepository.requestAddToBasket(request),
+                onReceiveData = { addToBasketLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestAddToBasket

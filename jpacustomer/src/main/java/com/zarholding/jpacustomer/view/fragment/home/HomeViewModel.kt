@@ -35,11 +35,13 @@ class HomeViewModel @Inject constructor(
     fun getCustomerOrders(checkEmptyOrder: Boolean = true) {
         if (orderLiveData.value.isNullOrEmpty() || !checkEmptyOrder)
             viewModelScope.launch(IO + exceptionHandler()) {
-                val response = checkResponse(orderRepository.requestCustomerGetOrder())
-                response?.let {
-                    orderLiveData.postValue(it)
-                    getBasketCount()
-                }
+                callApi(
+                    request = orderRepository.requestCustomerGetOrder(),
+                    onReceiveData = {
+                        orderLiveData.postValue(it)
+                        getBasketCount()
+                    }
+                )
             }
     }
     //---------------------------------------------------------------------------------------------- getCustomerOrders
@@ -48,8 +50,10 @@ class HomeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getBasketCount
     private fun getBasketCount() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val response = checkResponse(basketRepository.requestGetBasketCount())
-            response?.let { basketCountLiveData.postValue(it) }
+            callApi(
+                request = basketRepository.requestGetBasketCount(),
+                onReceiveData = { basketCountLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- getBasketCount

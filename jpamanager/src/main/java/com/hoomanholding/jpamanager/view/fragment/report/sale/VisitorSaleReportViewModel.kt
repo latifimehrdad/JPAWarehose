@@ -28,10 +28,10 @@ class VisitorSaleReportViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestVisitorSalesReport
     fun requestVisitorSalesReport() {
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(reportRepository.requestVisitorSalesReport())
-            response?.let {
-                visitorSaleReportLiveData.postValue(it)
-            }
+            callApi(
+                request = reportRepository.requestVisitorSalesReport(),
+                onReceiveData = { visitorSaleReportLiveData.postValue(it) }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestVisitorSalesReport

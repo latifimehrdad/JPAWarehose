@@ -38,13 +38,15 @@ class InvoiceDetailViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestOrderDetail
     fun requestOrderDetail() {
         viewModelScope.launch(IO + exceptionHandler()){
-            val response = checkResponse(orderRepository.requestOrderDetail(orderId))
-            response?.let {order ->
-                invoiceLiveData.postValue(order)
-                order.saleOrderDetails?.let {
-                    detailOrderLiveData.postValue(it)
+            callApi(
+                request = orderRepository.requestOrderDetail(orderId),
+                onReceiveData = {order ->
+                    invoiceLiveData.postValue(order)
+                    order.saleOrderDetails?.let {
+                        detailOrderLiveData.postValue(it)
+                    }
                 }
-            }
+            )
         }
     }
     //---------------------------------------------------------------------------------------------- requestOrderDetail

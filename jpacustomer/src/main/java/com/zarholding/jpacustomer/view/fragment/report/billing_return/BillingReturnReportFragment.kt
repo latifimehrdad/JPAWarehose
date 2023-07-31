@@ -184,10 +184,6 @@ class BillingReturnReportFragment(
                         bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.BillingItem.name)
                     else -> {}
                 }
-                gotoFragment(
-                    R.id.action_billingReturnReportFragment_to_reportPDFFragment,
-                    bundle
-                )
             }
         }
         val adapter = BillingReturnAdapter(items, click)
@@ -221,10 +217,6 @@ class BillingReturnReportFragment(
                         viewModel.dateToLiveData.value
                     )
                     bundle.putString(CompanionValues.REPORT_TYPE, viewModel.getReportTypeString())
-                    gotoFragment(
-                        R.id.action_billingReturnReportFragment_to_reportPDFFragment,
-                        bundle
-                    )
                 }
                 override fun onPermissionRationaleShouldBeShown(
                     p0: MutableList<PermissionRequest>?,

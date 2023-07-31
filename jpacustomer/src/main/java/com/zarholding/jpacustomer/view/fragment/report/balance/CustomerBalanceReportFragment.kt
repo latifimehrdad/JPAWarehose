@@ -1,17 +1,17 @@
 package com.zarholding.jpacustomer.view.fragment.report.balance
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
-import com.hoomanholding.applibrary.model.data.enums.EnumReportType
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
-import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.karumi.dexter.Dexter
@@ -24,6 +24,7 @@ import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentReportBalanceBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.recycler.CustomerBalanceAdapter
+import com.zarholding.jpacustomer.view.fragment.report.pdf.ReportPDFViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
@@ -31,14 +32,14 @@ import kotlin.math.abs
  * Created by m-latifi on 6/7/2023.
  */
 
+
 @AndroidEntryPoint
 class CustomerBalanceReportFragment(
     override var layout: Int = R.layout.fragment_report_balance
 ): JpaFragment<FragmentReportBalanceBinding>() {
 
-
     private val viewModel: CustomerBalanceReportViewModel by viewModels()
-
+    private val reportPDFViewModel: ReportPDFViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,6 +74,7 @@ class CustomerBalanceReportFragment(
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
             showMessage(it.message)
+            binding.textViewReport.text = getString(R.string.createPDF)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
                 else -> {}
@@ -84,6 +86,25 @@ class CustomerBalanceReportFragment(
             binding.shimmerViewContainer.stopLoading()
             setAdapter(it)
         }
+
+        reportPDFViewModel.downloadProgress.observe(viewLifecycleOwner){
+            val title = "${getString(R.string.createPDF)} - $it %"
+            binding.textViewReport.text = title
+        }
+
+        reportPDFViewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
+            binding.textViewReport.text = getString(R.string.createPDF)
+            val fileURI = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().applicationContext.packageName + ".provider",
+                it
+            )
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(fileURI, "application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            requireContext().startActivity(intent)
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
@@ -92,7 +113,7 @@ class CustomerBalanceReportFragment(
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.textViewReport.setOnClickListener {
-            permissionForBitmap()
+            permissionForPdf()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -136,20 +157,16 @@ class CustomerBalanceReportFragment(
 
 
 
-    //______________________________________________________________________________________________ permissionForBitmap
-    private fun permissionForBitmap() {
+    //______________________________________________________________________________________________ permissionForPdf
+    private fun permissionForPdf() {
         Dexter.withContext(requireContext())
             .withPermissions(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    val bundle = Bundle()
-                    bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.Balance.name)
-                    gotoFragment(
-                        R.id.action_customerBalanceReportFragment_to_reportPDFFragment,
-                        bundle
-                    )
+                    binding.textViewReport.text = getString(R.string.bePatient)
+                    reportPDFViewModel.downloadCustomerBalancePDF()
                 }
 
                 override fun onPermissionRationaleShouldBeShown(
@@ -159,6 +176,7 @@ class CustomerBalanceReportFragment(
                 }
             }).check()
     }
-    //______________________________________________________________________________________________ permissionForBitmap
+    //______________________________________________________________________________________________ permissionForPdf
+
 
 }

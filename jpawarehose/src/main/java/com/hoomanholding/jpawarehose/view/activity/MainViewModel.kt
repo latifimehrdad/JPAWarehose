@@ -1,16 +1,15 @@
 package com.hoomanholding.jpawarehose.view.activity
 
-import android.content.SharedPreferences
-import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.applibrary.model.repository.UserRepository
+import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferences,
+    private val sharedPreferencesManager: SharedPreferencesManager,
     private val userRepository: UserRepository
 ) : JpaViewModel() {
 
@@ -19,10 +18,7 @@ class MainViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- deleteAllData
     fun deleteAllData() {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.TOKEN, null)
-            .apply()
+        sharedPreferencesManager.deleteUserLogin()
     }
     //---------------------------------------------------------------------------------------------- deleteAllData
 

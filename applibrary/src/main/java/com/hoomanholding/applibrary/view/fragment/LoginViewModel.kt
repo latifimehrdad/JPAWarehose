@@ -1,6 +1,5 @@
 package com.hoomanholding.applibrary.view.fragment
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.R
@@ -9,8 +8,9 @@ import com.hoomanholding.applibrary.model.data.enums.EnumVerifyType
 import com.hoomanholding.applibrary.model.data.request.ForgetPassModel
 import com.hoomanholding.applibrary.model.data.request.LoginRequestModel
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
-import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.model.repository.LoginRepository
+import com.hoomanholding.applibrary.tools.SharedPreferencesManager
+import com.zar.core.tools.extensions.persianNumberToEnglishNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -22,11 +22,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private var repository: LoginRepository
+    private var repository: LoginRepository,
+    private val sharedPreferencesManager: SharedPreferencesManager
 ) : JpaViewModel() {
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     val loginLiveDate: SingleLiveEvent<String?> by lazy { SingleLiveEvent<String?>() }
     val userNameError: SingleLiveEvent<String> by lazy { SingleLiveEvent<String>() }
@@ -45,8 +43,10 @@ class LoginViewModel @Inject constructor(
         verifyType: EnumVerifyType = EnumVerifyType.Login
     ) {
         this.verifyType = verifyType
-        if (fromFingerPrint)
-            setUserNamePasswordFromSharePreferences()
+        if (fromFingerPrint){
+            userName.value = sharedPreferencesManager.getUserName()
+            password.value = sharedPreferencesManager.getPassword()
+        }
         var valueIsEmpty = false
         if (userName.value.isNullOrEmpty()) {
             userNameError.postValue(resourcesProvider.getString(R.string.userNameIsEmpty))
@@ -78,16 +78,27 @@ class LoginViewModel @Inject constructor(
                     )
                 )
             else {
+                val user = userName.value.persianNumberToEnglishNumber()
+                val pass = password.value.persianNumberToEnglishNumber()
+                userName.postValue(user)
+                password.postValue(pass)
                 val request = LoginRequestModel(
-                    userName.value!!,
-                    password.value!!,
+                    user,
+                    pass,
                     systemType,
                     androidId
                 )
-                val response = checkResponse(repository.requestLogin(request))
-                response?.let {
-                    saveUserNameAndPassword(it)
-                }
+                callApi(
+                    request = repository.requestLogin(request),
+                    onReceiveData = {
+                        sharedPreferencesManager.saveUserLogin(
+                            token = it,
+                            userName = user,
+                            password = pass
+                        )
+                        loginLiveDate.postValue(it)
+                    }
+                )
             }
         }
     }
@@ -109,10 +120,10 @@ class LoginViewModel @Inject constructor(
                     userName.value!!,
                     androidId
                 )
-                val response = checkResponse(repository.requestForgetPassword(request))
-                response?.let {
-                    loginLiveDate.postValue(it)
-                }
+                callApi(
+                    request = repository.requestForgetPassword(request),
+                    onReceiveData = { loginLiveDate.postValue(it) }
+                )
             }
         }
     }
@@ -120,46 +131,21 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- isBiometricEnable
-    fun isBiometricEnable() = sharedPreferences.getBoolean(CompanionValues.biometric, false)
+    fun isBiometricEnable() = sharedPreferencesManager.isBiometricEnable()
     //---------------------------------------------------------------------------------------------- isBiometricEnable
 
-
-    //---------------------------------------------------------------------------------------------- setUserNamePasswordFromSharePreferences
-    private fun setUserNamePasswordFromSharePreferences() {
-        userName.value = sharedPreferences.getString(CompanionValues.userName, "")
-        password.value = sharedPreferences.getString(CompanionValues.password, "")
-    }
-    //---------------------------------------------------------------------------------------------- setUserNamePasswordFromSharePreferences
-
-
-    //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
-    private fun saveUserNameAndPassword(token: String?) {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.TOKEN, token)
-            .putString(CompanionValues.userName, userName.value)
-            .putString(CompanionValues.password, password.value)
-            .apply()
-        loginLiveDate.postValue(token)
-    }
-    //---------------------------------------------------------------------------------------------- saveUserNameAndPassword
 
 
     //---------------------------------------------------------------------------------------------- saveNewIp
     fun saveNewIp(ip: String?) {
-        sharedPreferences
-            .edit()
-            .putString(CompanionValues.URL, ip)
-            .apply()
+        sharedPreferencesManager.saveNewIp(ip)
     }
     //---------------------------------------------------------------------------------------------- saveNewIp
 
 
     //---------------------------------------------------------------------------------------------- changeBiometricEnable
-    fun changeBiometricEnable(enable: Boolean) {
-        sharedPreferences.edit()
-            .putBoolean(CompanionValues.biometric, enable)
-            .apply()
+    fun changeBiometricEnable(biometric: Boolean) {
+        sharedPreferencesManager.changeBiometricEnable(biometric)
     }
     //---------------------------------------------------------------------------------------------- changeBiometricEnable
 

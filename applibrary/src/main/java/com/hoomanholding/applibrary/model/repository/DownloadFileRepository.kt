@@ -17,10 +17,20 @@ import javax.inject.Inject
 
 class DownloadFileRepository @Inject constructor() {
 
+    @Inject
+    lateinit var tokenRepository: TokenRepository
+
     //---------------------------------------------------------------------------------------------- downloadApkFile
     suspend fun downloadApkFile(systemType: String, fileName: String) =
         retrofit().create(Api::class.java).downloadApkFile(systemType, EnumEntityType.APK, fileName)
     //---------------------------------------------------------------------------------------------- downloadApkFile
+
+
+
+    //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
+    suspend fun downloadCustomerBalancePDF() =
+        retrofit().create(Api::class.java).requestCustomerBalancePDF(tokenRepository.getBearerToken())
+    //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
 
 
     //---------------------------------------------------------------------------------------------- retrofit
