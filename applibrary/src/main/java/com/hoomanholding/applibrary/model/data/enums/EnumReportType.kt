@@ -7,7 +7,5 @@ package com.hoomanholding.applibrary.model.data.enums
 enum class EnumReportType {
     Billing,
     Return,
-    Balance,
-    BillingItem,
-    ReturnItem
+    Balance
 }

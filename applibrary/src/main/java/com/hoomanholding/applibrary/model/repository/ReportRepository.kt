@@ -65,14 +65,4 @@ class ReportRepository @Inject constructor(
         }
     //---------------------------------------------------------------------------------------------- requestCustomerReturnReport
 
-
-    //---------------------------------------------------------------------------------------------- requestCustomersBillingPDF
-    suspend fun requestCustomersBillingPDF(billingId: Long, type: String) =
-        apiCall {
-            api.requestCustomersBillingPDF(
-                billingId, type, tokenRepository.getBearerToken()
-            )
-        }
-    //---------------------------------------------------------------------------------------------- requestCustomersBillingPDF
-
 }

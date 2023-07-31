@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
-import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailPDFModel
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.model.repository.ReportRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
@@ -32,9 +31,6 @@ class BillingReturnViewModel @Inject constructor(
     val reportLiveData: MutableLiveData<List<BillingAndReturnReportModel>> by lazy {
         MutableLiveData<List<BillingAndReturnReportModel>>()
     }
-    val reportDetailLiveData: MutableLiveData<CustomerOrderDetailPDFModel> by lazy {
-        MutableLiveData<CustomerOrderDetailPDFModel>()
-    }
 
     //---------------------------------------------------------------------------------------------- getReportType
     fun getReportType() = reportType
@@ -44,13 +40,6 @@ class BillingReturnViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getReportTypeString
     fun getReportTypeString() = reportType.name
     //---------------------------------------------------------------------------------------------- getReportTypeString
-
-
-    //---------------------------------------------------------------------------------------------- setReportType
-    fun setReportType(type: EnumReportType) {
-        reportType = type
-    }
-    //---------------------------------------------------------------------------------------------- setReportType
 
 
     //---------------------------------------------------------------------------------------------- setDateFrom
@@ -103,7 +92,7 @@ class BillingReturnViewModel @Inject constructor(
                         reportLiveData.postValue(it)
                     }
                 )
-                EnumReportType.BillingItem -> callApi(
+                EnumReportType.Return -> callApi(
                     request = reportRepository
                         .requestCustomerReturnReport(
                             dateFromLiveData.value!!,
@@ -118,22 +107,6 @@ class BillingReturnViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getReport
-
-
-
-    //---------------------------------------------------------------------------------------------- getBillingReturnDetail
-    fun getBillingReturnDetail(billingId: Long, type: String) {
-        viewModelScope.launch(IO + exceptionHandler()) {
-            callApi(
-                request = reportRepository.requestCustomersBillingPDF(billingId, type),
-                onReceiveData = { reportDetailLiveData.postValue(it) }
-            )
-        }
-    }
-    //---------------------------------------------------------------------------------------------- getBillingReturnDetail
-
-
-
 
 
 }

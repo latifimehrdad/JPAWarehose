@@ -334,7 +334,7 @@ interface Api {
         @Query("billingId") billingId: Long,
         @Query("type") type: String,
         @Header("Authorization") token: String
-    ): Response<GeneralResponse<CustomerOrderDetailPDFModel?>>
+    ): Response<ResponseBody>
 
 
     @GET("$report/customers-report-customerBalancePDF")

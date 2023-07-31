@@ -1,8 +1,11 @@
 package com.zarholding.jpacustomer.view.fragment.report.billing_return
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
@@ -26,6 +29,7 @@ import com.zarholding.jpacustomer.databinding.FragmentReportBillingReturnBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.holder.BillingReturnHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.BillingReturnAdapter
+import com.zarholding.jpacustomer.view.fragment.report.pdf.ReportPDFViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -38,6 +42,8 @@ class BillingReturnReportFragment(
 ) : JpaFragment<FragmentReportBillingReturnBinding>() {
 
     private val viewModel: BillingReturnViewModel by viewModels()
+    private val reportPDFViewModel: ReportPDFViewModel by viewModels()
+    private var textViewListPdf: TextView? = null
 
 
     private enum class DateType {
@@ -75,6 +81,7 @@ class BillingReturnReportFragment(
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
             binding.shimmerViewContainer.stopLoading()
+            textViewListPdf?.text = getString(R.string.createPDF)
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -96,6 +103,25 @@ class BillingReturnReportFragment(
         viewModel.reportLiveData.observe(viewLifecycleOwner) {
             binding.shimmerViewContainer.stopLoading()
             setAdapter(it)
+        }
+
+        reportPDFViewModel.downloadProgress.observe(viewLifecycleOwner){
+            val title = "${getString(R.string.createPDF)} - $it %"
+            textViewListPdf?.text = title
+        }
+
+        reportPDFViewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
+            textViewListPdf?.text = getString(R.string.createPDF)
+            val fileURI = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().applicationContext.packageName + ".provider",
+                it
+            )
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(fileURI, "application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            requireContext().startActivity(intent)
         }
 
     }
@@ -174,14 +200,18 @@ class BillingReturnReportFragment(
         if (context == null)
             return
         val click = object : BillingReturnHolder.Click{
-            override fun detailPdf(id: Long) {
-                val bundle = Bundle()
-                bundle.putLong(CompanionValues.ORDER_ID, id)
-                when(viewModel.getReportType()){
-                    EnumReportType.Return ->
-                        bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.ReturnItem.name)
-                    EnumReportType.Billing ->
-                        bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.BillingItem.name)
+            override fun detailPdf(id: Long, textView: TextView) {
+                textViewListPdf = textView
+
+                when(viewModel.getReportType()) {
+                    EnumReportType.Return -> {
+                        textView.text = getText(R.string.bePatient)
+                        reportPDFViewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Return.name)
+                    }
+                    EnumReportType.Billing -> {
+                        textView.text = getText(R.string.bePatient)
+                        reportPDFViewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Billing.name)
+                    }
                     else -> {}
                 }
             }

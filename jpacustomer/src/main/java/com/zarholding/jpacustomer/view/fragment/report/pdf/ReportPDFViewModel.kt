@@ -38,7 +38,7 @@ class ReportPDFViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
     fun downloadCustomerBalancePDF() {
         viewModelScope.launch(IO + exceptionHandler()) {
-            val file = initFile(EnumReportType.Balance)
+            val file = initFile(EnumReportType.Balance.name)
             delay(1000)
             val response = downloadFileRepository.downloadCustomerBalancePDF()
             response.body()?.saveFile(file)?.collect { downloadState ->
@@ -61,9 +61,35 @@ class ReportPDFViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
 
 
+    //---------------------------------------------------------------------------------------------- downloadCustomersBillingReturnPDF
+    fun downloadCustomersBillingReturnPDF(billingId: Long, type: String) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val file = initFile(type)
+            delay(1000)
+            val response = downloadFileRepository.downloadCustomersBillingPDF(billingId, type)
+            response.body()?.saveFile(file)?.collect { downloadState ->
+                when (downloadState) {
+                    is DownloadState.Downloading -> {
+                        downloadProgress.postValue(downloadState.progress)
+                    }
+                    is DownloadState.Failed -> {
+                        setMessage(downloadState.error?.message?:"Failed Download!")
+                    }
+                    DownloadState.Finished -> {
+                        downloadSuccessLiveData.postValue(file)
+                    }
+                }
+            } ?: run {
+                setMessage(response.errorBody()?.string() ?: "")
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- downloadCustomersBillingReturnPDF
+
+
 
     //---------------------------------------------------------------------------------------------- initFile
-    private fun initFile(type: EnumReportType): File{
+    private fun initFile(type: String): File{
         val time = SimpleDateFormat("yyyy_MM_dd__HH_mm_ss", Locale.getDefault()).format(Date())
         val downloadFolder =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -73,7 +99,7 @@ class ReportPDFViewModel @Inject constructor(
         val destinationApk = File(destinationDir.absolutePath, "pdf")
         if (!destinationApk.exists())
             destinationApk.mkdir()
-        return File(destinationApk.absolutePath, "${type.name}_${time}.pdf")
+        return File(destinationApk.absolutePath, "${type}_${time}.pdf")
     }
     //---------------------------------------------------------------------------------------------- initFile
 

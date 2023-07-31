@@ -3,6 +3,7 @@ package com.zarholding.jpacustomer.view.adapter.holder
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.setTitleAndValue
@@ -23,7 +24,7 @@ class BillingReturnHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     interface Click {
-        fun detailPdf(id: Long)
+        fun detailPdf(id: Long, textView: TextView)
     }
 
     //---------------------------------------------------------------------------------------------- bind
@@ -58,7 +59,7 @@ class BillingReturnHolder(
     private fun setListener(item: BillingAndReturnReportModel) {
         binding.imageViewMore.setOnClickListener { clickShowMore(item) }
         binding.textViewShowMore.setOnClickListener { clickShowMore(item) }
-        binding.textViewReport.setOnClickListener { click.detailPdf(item.id) }
+        binding.textViewReport.setOnClickListener { click.detailPdf(item.id, binding.textViewReport) }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
