@@ -7,7 +7,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumReportType
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.model.repository.ReportRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
-import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.hoomanholding.applibrary.viewmodel.JpaDownloadViewModel
 import com.zarholding.jpacustomer.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BillingReturnViewModel @Inject constructor(
     private val reportRepository: ReportRepository
-) : JpaViewModel() {
+) : JpaDownloadViewModel() {
 
 
     private var reportType: EnumReportType = EnumReportType.Billing
@@ -107,6 +107,34 @@ class BillingReturnViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getReport
+
+
+    //---------------------------------------------------------------------------------------------- downloadCustomersBillingReturnPDF
+    fun downloadCustomersBillingReturnPDF(billingId: Long, type: String) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val file = initFile(type, "pdf")
+            delay(1000)
+            val response = downloadFileRepository.downloadCustomersBillingPDF(billingId, type)
+            response.body()?.saveFile(file)?.collect { downloadState ->
+                when (downloadState) {
+                    is DownloadState.Downloading -> {
+                        downloadProgress.postValue(downloadState.progress)
+                    }
+
+                    is DownloadState.Failed -> {
+                        setMessage(downloadState.error?.message ?: "Failed Download!")
+                    }
+
+                    DownloadState.Finished -> {
+                        downloadSuccessLiveData.postValue(file)
+                    }
+                }
+            } ?: run {
+                setMessage(response.errorBody()?.string() ?: "")
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- downloadCustomersBillingReturnPDF
 
 
 }

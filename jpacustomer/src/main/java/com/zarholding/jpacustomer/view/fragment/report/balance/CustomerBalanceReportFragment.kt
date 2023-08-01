@@ -24,7 +24,6 @@ import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentReportBalanceBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.recycler.CustomerBalanceAdapter
-import com.zarholding.jpacustomer.view.fragment.report.pdf.ReportPDFViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
@@ -39,7 +38,6 @@ class CustomerBalanceReportFragment(
 ): JpaFragment<FragmentReportBalanceBinding>() {
 
     private val viewModel: CustomerBalanceReportViewModel by viewModels()
-    private val reportPDFViewModel: ReportPDFViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,12 +85,12 @@ class CustomerBalanceReportFragment(
             setAdapter(it)
         }
 
-        reportPDFViewModel.downloadProgress.observe(viewLifecycleOwner){
+        viewModel.downloadProgress.observe(viewLifecycleOwner){
             val title = "${getString(R.string.createPDF)} - $it %"
             binding.textViewReport.text = title
         }
 
-        reportPDFViewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
+        viewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
             binding.textViewReport.text = getString(R.string.createPDF)
             val fileURI = FileProvider.getUriForFile(
                 requireContext(),
@@ -166,7 +164,7 @@ class CustomerBalanceReportFragment(
             ).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
                     binding.textViewReport.text = getString(R.string.bePatient)
-                    reportPDFViewModel.downloadCustomerBalancePDF()
+                    viewModel.downloadCustomerBalancePDF()
                 }
 
                 override fun onPermissionRationaleShouldBeShown(

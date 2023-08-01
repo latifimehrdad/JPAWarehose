@@ -3,12 +3,10 @@ package com.hoomanholding.applibrary.model.repository
 import com.hoomanholding.applibrary.di.Providers
 import com.hoomanholding.applibrary.model.api.Api
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
-import com.zar.core.tools.api.apiCall
 import com.zar.core.tools.hilt.ProgressResponseBody
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -56,7 +54,9 @@ class DownloadFileRepository @Inject constructor() {
     //---------------------------------------------------------------------------------------------- httpClient
     private fun httpClient() = OkHttpClient()
         .newBuilder()
-        .connectTimeout(20, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
         .addInterceptor(interceptor())
         .build()
     //---------------------------------------------------------------------------------------------- httpClient

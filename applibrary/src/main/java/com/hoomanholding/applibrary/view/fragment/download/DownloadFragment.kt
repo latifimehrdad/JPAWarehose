@@ -21,7 +21,7 @@ import java.io.File
 class DownloadFragment(override var layout: Int = R.layout.fragment_download) :
     JpaFragment<FragmentDownloadBinding>() {
 
-    private val viewModel: DownloadViewModel by viewModels()
+    private val viewModel: AppDownloadViewModel by viewModels()
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated

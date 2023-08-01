@@ -29,7 +29,6 @@ import com.zarholding.jpacustomer.databinding.FragmentReportBillingReturnBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.holder.BillingReturnHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.BillingReturnAdapter
-import com.zarholding.jpacustomer.view.fragment.report.pdf.ReportPDFViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -42,7 +41,6 @@ class BillingReturnReportFragment(
 ) : JpaFragment<FragmentReportBillingReturnBinding>() {
 
     private val viewModel: BillingReturnViewModel by viewModels()
-    private val reportPDFViewModel: ReportPDFViewModel by viewModels()
     private var textViewListPdf: TextView? = null
 
 
@@ -105,12 +103,12 @@ class BillingReturnReportFragment(
             setAdapter(it)
         }
 
-        reportPDFViewModel.downloadProgress.observe(viewLifecycleOwner){
+        viewModel.downloadProgress.observe(viewLifecycleOwner){
             val title = "${getString(R.string.createPDF)} - $it %"
             textViewListPdf?.text = title
         }
 
-        reportPDFViewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
+        viewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
             textViewListPdf?.text = getString(R.string.createPDF)
             val fileURI = FileProvider.getUriForFile(
                 requireContext(),
@@ -206,11 +204,11 @@ class BillingReturnReportFragment(
                 when(viewModel.getReportType()) {
                     EnumReportType.Return -> {
                         textView.text = getText(R.string.bePatient)
-                        reportPDFViewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Return.name)
+                        viewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Return.name)
                     }
                     EnumReportType.Billing -> {
                         textView.text = getText(R.string.bePatient)
-                        reportPDFViewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Billing.name)
+                        viewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Billing.name)
                     }
                     else -> {}
                 }
