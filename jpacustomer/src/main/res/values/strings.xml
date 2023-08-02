@@ -112,6 +112,7 @@
     <string name="reportFromTo">گزارش از تاریخ %1$s تا تاریخ %2$s</string>
     <string name="customerCode2">کد مشتری : %1$s</string>
     <string name="description">توضیحات</string>
+    <string name="subject">موضوع</string>
     <string name="remain">مانده</string>
     <string name="processToPDF">در حال ذخیره فایل pdf …</string>
     <string name="default_notification_channel_id">jpa</string>
@@ -119,6 +120,8 @@
     <string name="buyer">خریدار</string>
     <string name="newIp">newIp</string>
     <string name="ipPassword">password</string>
+    <string name="subjectIsEmpty">موضوع را وارد کنید</string>
+    <string name="descriptionIsEmpty">توضیحات را وارد کنید</string>
     <string name="passwordIsInCorrect">رمز وارد شده اشتباه است</string>
     <string name="updateIsSuccess">بروزرسانی با موفقیت انجام شد</string>
     <string name="ipIsIncorrect">آدرس وارد شده صحیح نمیباشد</string>
@@ -129,6 +132,9 @@
     <string name="version">app version : %1$s</string>
     <string name="doYouForgetYourPassword">رمز ورود را فراموش کرده اید؟</string>
     <string name="internalMemoryIsFull">حافظه دستگاه شما برای دانلود نسخه جدید کافی نیست</string>
+    <string name="startNewMessage">شروع پیام جدید</string>
+    <string name="writeNewMessage">پیام خود را بگذارید…</string>
+    <string name="isSending">در حال ارسال پیام …</string>
 
 
     <string name="colon">:</string>

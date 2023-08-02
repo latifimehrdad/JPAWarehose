@@ -122,7 +122,6 @@
         android:id="@+id/myStateFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.mystate.MyStateFragment"/>
 
-
     <fragment
         android:id="@+id/videoFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.video.VideoFragment"/>
@@ -134,7 +133,6 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.about.AboutFragment"/>
-
 
     <fragment
         android:id="@+id/reportFragment"
@@ -162,7 +160,6 @@
 
     </fragment>
 
-
     <fragment
         android:id="@+id/customerBalanceReportFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.report.balance.CustomerBalanceReportFragment"/>
@@ -171,6 +168,13 @@
         android:id="@+id/billingReturnReportFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.report.billing_return.BillingReturnReportFragment"/>
 
+    <fragment
+        android:id="@+id/criticFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.critic.list.CriticFragment"/>
+
+    <fragment
+        android:id="@+id/criticDetailFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.critic.detail.CriticDetailFragment"/>
 
 
     <action
@@ -213,7 +217,6 @@
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/profileFragment" />
 
-
     <action
         android:id="@+id/action_goto_basketFragment"
         app:destination="@id/basketFragment"
@@ -224,7 +227,6 @@
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/basketFragment" />
 
-
     <action
         android:id="@+id/action_goto_reportFragment"
         app:destination="@id/reportFragment"
@@ -234,5 +236,25 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/reportFragment" />
+
+    <action
+        android:id="@+id/action_goto_criticFragment"
+        app:destination="@id/criticFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/criticFragment" />
+
+    <action
+        android:id="@+id/action_goto_criticDetailFragment"
+        app:destination="@id/criticDetailFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/criticDetailFragment" />
 
 </navigation>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="ltr"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="@dimen/radius1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutSubject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+                app:boxCornerRadiusTopStart="@dimen/_5sdp"
+                app:boxStrokeColor="@color/primaryColor"
+                app:hintTextColor="@color/textHintColor"
+                android:textColorHint="@color/textHintColor"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextSubject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|top"
+                    android:singleLine="true"
+                    android:hint="@string/subject"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/textSizeH2"
+                    android:fontFamily="@font/yekan_bakh_medium"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutSubject"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+                app:boxCornerRadiusTopStart="@dimen/_5sdp"
+                app:boxStrokeColor="@color/primaryColor"
+                app:hintTextColor="@color/textHintColor"
+                android:textColorHint="@color/textHintColor"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|top"
+                    android:lines="5"
+                    android:hint="@string/description"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/textSizeH2"
+                    android:fontFamily="@font/yekan_bakh_medium"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutDescription"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_15sdp">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/buttonNo"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:minWidth="@dimen/_90sdp"
+                    android:textSize="@dimen/buttonTextSize"
+                    android:fontFamily="@font/yekan_bakh_bold"
+                    app:cornerRadius="@dimen/radius3"
+                    android:textColor="@color/buttonTextColor"
+                    android:text='@string/confirm' />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/buttonYes"
+                    app:layout_constraintBottom_toBottomOf="@id/buttonYes"
+                    app:layout_constraintStart_toEndOf="@id/buttonYes"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:minWidth="@dimen/_90sdp"
+                    android:textSize="@dimen/buttonTextSize"
+                    android:fontFamily="@font/yekan_bakh_bold"
+                    app:cornerRadius="@dimen/radius3"
+                    android:textColor="@color/textColor"
+                    android:backgroundTint="@color/color3"
+                    android:text='@string/cancel' />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

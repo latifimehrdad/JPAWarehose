@@ -14,6 +14,7 @@
     <color name="uploadImage">#99FFFFFF</color>
     <color name="buttonGradiantStart">#d2d2d2</color>
     <color name="buttonGradiantEnd">#2a2e3a</color>
+    <color name="criticBack">#a6b4df</color>
 
     <color name="red">#EF5350</color>
     <color name="green">#81C784</color>
@@ -36,6 +37,7 @@
     <color name="a_textButton">@color/black</color>
     <color name="a_textView1">#d2d2d2</color>
     <color name="a_textHint">#9A9A9A</color>
+    <color name="a_newMessage">@color/primaryColor</color>
 
     <color name="a_buttonUnselect">#606060</color>
     <color name="a_credit">#81C784</color>

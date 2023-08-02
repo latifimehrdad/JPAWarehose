@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="15dp">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/buttonTextSize"
+            android:fontFamily="@font/iransans_bold"
+            android:text="@string/suggestions"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewProfileHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="25dp"
+            app:cardCornerRadius="@dimen/radius1"
+            app:cardBackgroundColor="@color/primaryColor">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/a_ic_wave"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/imageViewHeadset"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.15"
+                    app:layout_constraintDimensionRatio="H,1:1"
+                    android:src="@drawable/ic_subtraction"
+                    android:contentDescription="@string/logo" />
+
+                <TextView
+                    android:id="@+id/textViewCriticTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageViewHeadset"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/buttonTextColor"
+                    android:textSize="@dimen/textSizeH4"
+                    android:fontFamily="@font/iransans_bold"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/recyclerViewMessage"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerViewMessage"
+            app:layout_constraintStart_toStartOf="@id/recyclerViewMessage"
+            app:layout_constraintEnd_toEndOf="@id/recyclerViewMessage"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@color/recyclerLoadingBack"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMessage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cardViewProfileHeader"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayoutMessage"
+            android:layout_marginVertical="10dp"
+            android:layout_marginTop="@dimen/_5sdp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfileHeader"
+            app:layout_constraintEnd_toEndOf="@id/cardViewProfileHeader"
+            android:background="@drawable/a_drawable_new_message"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageViewSend"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/sent"
+                android:src="@drawable/a_ic_step_sending"/>
+
+            <EditText
+                android:id="@+id/editTextMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageViewSend"
+                android:layout_marginStart="10dp"
+                android:background="@color/a_newMessage"
+                android:textSize="@dimen/textSizeH3"
+                android:textColor="@color/black"
+                android:textColorHint="@color/a_textHint"
+                android:fontFamily="@font/kalameh_light"
+                android:maxLines="5"
+                android:hint="@string/writeNewMessage"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

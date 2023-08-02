@@ -9,18 +9,19 @@ import com.hoomanholding.applibrary.model.data.request.*
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.model.data.response.about.AboutModel
 import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
+import com.hoomanholding.applibrary.model.data.response.critic.CriticDetailModel
 import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerStateModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailModel
-import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetailPDFModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.report.*
+import com.hoomanholding.applibrary.model.data.response.critic.CriticModel
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
 import com.hoomanholding.applibrary.model.data.response.video.VideoCategoryModel
@@ -53,6 +54,7 @@ interface Api {
         const val basket = "$v1/Basket"
         const val video = "$v1/Video"
         const val about = "$v1/AboutUs"
+        const val critics = "$v1/Critics"
     }
 
     //---------------------------------------------------------------------------------------------- user
@@ -368,6 +370,35 @@ interface Api {
         @HeaderMap Authorization: Map<String, String>
     ): Response<GeneralResponse<Boolean?>>
     //---------------------------------------------------------------------------------------------- downloadApkFile
+
+
+
+    //---------------------------------------------------------------------------------------------- critics
+    @GET("$critics/CriticsAndOffers_Add")
+    suspend fun addNewCritic(
+        @Query("Tittle") tittle: String,
+        @Query("Message") message: String,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Int?>>
+
+    @GET("$critics/CriticsAndOffers_GetList")
+    suspend fun getCriticsList(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CriticModel>?>>
+
+    @GET("$critics/CriticsAndOffers_GetDetails")
+    suspend fun getCriticDetailList(
+        @Query("CriticsAndOffersId") criticsAndOffersId: Long,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CriticDetailModel>?>>
+
+    @GET("$critics/CriticsAndOffers_reply")
+    suspend fun sendReplyCritic(
+        @Query("Message") message: String,
+        @Query("CriticsAndOffersId") id: Long,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+    //---------------------------------------------------------------------------------------------- critics
 
 
     //---------------------------------------------------------------------------------------------- video

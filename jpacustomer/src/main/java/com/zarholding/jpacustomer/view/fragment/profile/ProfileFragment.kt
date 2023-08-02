@@ -163,7 +163,7 @@ class ProfileFragment(
         }
 
         binding.textViewSuggestions.setOnClickListener {
-            showMessage(getString(R.string.disableFeature))
+            gotoFragment(R.id.action_goto_criticFragment)
         }
 
         binding.textViewHistory.setOnClickListener {

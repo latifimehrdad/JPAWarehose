@@ -186,8 +186,7 @@ class MainActivity : AppCompatActivity() {
                 binding.customMenuCart.clearSelected()
             }
 
-            R.id.videoFragment,
-            R.id.aboutFragment -> if (!binding.customMenuProfile.isSelectedMenu()) {
+            R.id.videoFragment-> if (!binding.customMenuProfile.isSelectedMenu()) {
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -219,6 +218,20 @@ class MainActivity : AppCompatActivity() {
                 binding.cardViewProfile.visibility = View.VISIBLE
                 binding.textViewUserName.visibility = View.VISIBLE
                 binding.customMenuReport.selected()
+                binding.customMenuHome.clearSelected()
+                binding.customMenuProduct.clearSelected()
+                binding.customMenuProfile.clearSelected()
+                binding.customMenuCart.clearSelected()
+            }
+
+            R.id.criticFragment,
+            R.id.aboutFragment,
+            R.id.criticDetailFragment -> {
+                binding.cardViewMenu.visibility = View.VISIBLE
+                binding.imageViewBack.visibility = View.VISIBLE
+                binding.cardViewProfile.visibility = View.GONE
+                binding.textViewUserName.visibility = View.GONE
+                binding.customMenuReport.clearSelected()
                 binding.customMenuHome.clearSelected()
                 binding.customMenuProduct.clearSelected()
                 binding.customMenuProfile.clearSelected()
