@@ -85,20 +85,14 @@ class BasketHolderNormal(
         }
 
         binding.imageViewDelete.setOnClickListener {
-            val click = object : ConfirmDialog.Click {
-                override fun clickYes() {
-                    click.deleteItem(item)
-                }
-            }
             ConfirmDialog(
                 binding.imageViewDelete.context,
                 binding.imageViewDelete.context.getString(
                     R.string.doYouWantToBasketDelete,
                     item.productName
                 ),
-                click,
                 false
-            ).show()
+            ){ click.deleteItem(item) }.show()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener

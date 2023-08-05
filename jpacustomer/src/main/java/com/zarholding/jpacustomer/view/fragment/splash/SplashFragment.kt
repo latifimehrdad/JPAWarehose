@@ -234,12 +234,8 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         ConfirmDialog(
             requireContext(),
             getString(R.string.doYouWantToUpdateApp),
-            object : ConfirmDialog.Click {
-                override fun clickYes() {
-                    gotoFragmentDownload(fileName)
-                }
-            }, true
-        ).show()
+            true
+        ){ gotoFragmentDownload(fileName) }.show()
     }
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
 

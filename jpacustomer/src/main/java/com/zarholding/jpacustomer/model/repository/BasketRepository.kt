@@ -41,7 +41,7 @@ class BasketRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
-    suspend fun requestSubmitBasket() =
-        apiCall { api.requestSubmitBasket(tokenRepository.getBearerToken()) }
+    suspend fun requestSubmitBasket(description: String) =
+        apiCall { api.requestSubmitBasket(description, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
 }

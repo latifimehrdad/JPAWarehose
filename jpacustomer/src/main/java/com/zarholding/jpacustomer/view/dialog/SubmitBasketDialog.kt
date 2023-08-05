@@ -6,24 +6,21 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
 import com.zarholding.jpacustomer.R
 
-class ConfirmDialog(
+class SubmitBasketDialog(
     context: Context,
-    private val title: String,
-    private val force: Boolean = false,
-    private val onClick: () -> Unit
+    private val onClick: (String) -> Unit
 ) : Dialog(context) {
 
 
     //---------------------------------------------------------------------------------------------- onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_confirm)
+        setContentView(R.layout.dialog_submit_basket)
         val lp = WindowManager.LayoutParams()
         this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         this.window?.setLayout(
@@ -48,19 +45,17 @@ class ConfirmDialog(
 
     //---------------------------------------------------------------------------------------------- initDialog
     private fun initDialog() {
-        val textViewTitle = this.findViewById<TextView>(R.id.textViewTitle)
+        val textInputEditTextDescription = this.findViewById<TextView>(R.id.textInputEditTextDescription)
         val buttonYes = this.findViewById<MaterialButton>(R.id.buttonYes)
         val buttonNo = this.findViewById<MaterialButton>(R.id.buttonNo)
-        this.setCancelable(!force)
-        if (force)
-            buttonNo.visibility = View.INVISIBLE
-        else
-            buttonNo.visibility = View.VISIBLE
-
-        textViewTitle.text = title
 
         buttonYes.setOnClickListener {
-            onClick()
+            if (textInputEditTextDescription.text.isNullOrEmpty()) {
+                textInputEditTextDescription.error =
+                    context.getString(R.string.descriptionIsEmpty)
+                return@setOnClickListener
+            }
+            onClick(textInputEditTextDescription.text.toString())
             dismiss()
         }
 

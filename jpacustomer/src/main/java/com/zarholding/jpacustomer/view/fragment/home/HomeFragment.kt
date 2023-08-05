@@ -43,12 +43,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             context?.let {
                 ConfirmDialog(
                     it,
-                    getString(R.string.doYouWantToExitApp),
-                    object : ConfirmDialog.Click {
-                        override fun clickYes() {
-                            activity?.finish()
-                        }
-                    }).show()
+                    getString(R.string.doYouWantToExitApp)){ activity?.finish() }.show()
             }
         }
     }

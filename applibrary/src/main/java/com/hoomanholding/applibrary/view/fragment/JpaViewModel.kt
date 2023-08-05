@@ -80,9 +80,7 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
         CoroutineScope(Dispatchers.Main).launch {
             throwable.localizedMessage?.let {
 //                XLog.e(it)
-                val url = Providers.url
-                    .replace("http://", "")
-                    .replace("https://", "")
+                val url = Providers.url.substringAfterLast("/").substringBefore(":")
                 if (it.contains(url))
                     setMessage(resourcesProvider.getString(R.string.pleaseCheckYouConnection))
                 else {

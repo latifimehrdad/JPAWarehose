@@ -179,16 +179,10 @@ class ProfileFragment(
     private fun signOut() {
         if (context == null)
             return
-        val click = object : ConfirmDialog.Click {
-            override fun clickYes() {
-                (activity as MainActivity?)?.gotoFirstFragment()
-            }
-        }
         ConfirmDialog(
             requireContext(),
-            getString(R.string.doYouWantToExitAccount),
-            click
-        ).show()
+            getString(R.string.doYouWantToExitAccount)
+        ){ (activity as MainActivity?)?.gotoFirstFragment() }.show()
     }
     //---------------------------------------------------------------------------------------------- signOut
 

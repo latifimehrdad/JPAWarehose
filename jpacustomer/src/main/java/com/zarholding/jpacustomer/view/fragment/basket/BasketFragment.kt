@@ -20,7 +20,7 @@ import com.zarholding.jpacustomer.databinding.FragmentBasketBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.holder.BasketHolderNormal
 import com.zarholding.jpacustomer.view.adapter.recycler.BasketAdapter
-import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
+import com.zarholding.jpacustomer.view.dialog.SubmitBasketDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -224,27 +224,17 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     private fun showDialogConfirmToSubmitBasket() {
         if (context == null)
             return
-        val click = object : ConfirmDialog.Click{
-            override fun clickYes() {
-                submitBasket()
-            }
-        }
-        ConfirmDialog(
-            requireContext(),
-            getString(R.string.doYouWantToSubmitBasket),
-            click,
-            false
-        ).show()
+        SubmitBasketDialog(requireContext()) { submitBasket(it) }.show()
     }
     //---------------------------------------------------------------------------------------------- showDialogConfirmToSubmitBasket
 
 
     //---------------------------------------------------------------------------------------------- submitBasket
-    private fun submitBasket() {
+    private fun submitBasket(description: String) {
         if (binding.buttonSubmit.isLoading)
             return
         binding.buttonSubmit.startLoading(getString(R.string.bePatient))
-        viewModel.requestSubmitBasket()
+        viewModel.requestSubmitBasket(description)
     }
     //---------------------------------------------------------------------------------------------- submitBasket
 
