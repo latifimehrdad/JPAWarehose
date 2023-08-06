@@ -173,7 +173,7 @@
 
                 <com.hoomanholding.applibrary.view.custom.MLAnimationTime
                     android:id="@+id/mlAnimationTimer"
-                    android:layout_width="@dimen/_80sdp"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/linearLayoutVerify"
                     app:layout_constraintStart_toStartOf="parent"
