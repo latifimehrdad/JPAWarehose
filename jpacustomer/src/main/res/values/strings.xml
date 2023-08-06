@@ -114,6 +114,7 @@
     <string name="description">توضیحات</string>
     <string name="subject">موضوع</string>
     <string name="remain">مانده</string>
+    <string name="status">وضعیت</string>
     <string name="processToPDF">در حال ذخیره فایل pdf …</string>
     <string name="default_notification_channel_id">jpa</string>
     <string name="seller">فروشنده</string>
@@ -135,6 +136,10 @@
     <string name="startNewMessage">شروع پیام جدید</string>
     <string name="writeNewMessage">پیام خود را بگذارید…</string>
     <string name="isSending">در حال ارسال پیام …</string>
+<!--    <string name="finishStatus">بسته شده</string>-->
+<!--    <string name="replyByAdminStatus">پاسخ پشتیبان</string>-->
+<!--    <string name="replyByUser">پاسخ شما</string>-->
+<!--    <string name="saveByUser">ارسال شده توسط شما</string>-->
 
 
     <string name="colon">:</string>

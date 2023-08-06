@@ -137,4 +137,37 @@ class BillingReturnViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- downloadCustomersBillingReturnPDF
 
 
+    //---------------------------------------------------------------------------------------------- requestCustomerHeaderBillingsPDF
+    fun requestCustomerHeaderBillingsPDF() {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val file = initFile(getReportType().name, "pdf")
+            delay(1000)
+            val response = downloadFileRepository
+                .requestCustomerHeaderBillingsPDF(
+                    dateFromLiveData.value!!,
+                    dateToLiveData.value!!,
+                    getReportType().name
+                )
+            response.body()?.saveFile(file)?.collect { downloadState ->
+                when (downloadState) {
+                    is DownloadState.Downloading -> {
+                        downloadProgress.postValue(downloadState.progress)
+                    }
+
+                    is DownloadState.Failed -> {
+                        setMessage(downloadState.error?.message ?: "Failed Download!")
+                    }
+
+                    DownloadState.Finished -> {
+                        downloadSuccessLiveData.postValue(file)
+                    }
+                }
+            } ?: run {
+                setMessage(response.errorBody()?.string() ?: "")
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestCustomerHeaderBillingsPDF
+
+
 }

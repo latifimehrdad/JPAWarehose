@@ -137,7 +137,7 @@ class BillingReturnReportFragment(
         }
 
         binding.textViewReport.setOnClickListener {
-            permissionForBitmap()
+            permissionForPdf()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -226,26 +226,19 @@ class BillingReturnReportFragment(
     //---------------------------------------------------------------------------------------------- setAdapter
 
 
-
-    //______________________________________________________________________________________________ permissionForBitmap
-    private fun permissionForBitmap() {
+    //______________________________________________________________________________________________ permissionForPdf
+    private fun permissionForPdf() {
         Dexter.withContext(requireContext())
             .withPermissions(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    val bundle = Bundle()
-                    bundle.putString(
-                        CompanionValues.REPORT_START_DATE,
-                        viewModel.dateFromLiveData.value
-                    )
-                    bundle.putString(
-                        CompanionValues.REPORT_END_DATE,
-                        viewModel.dateToLiveData.value
-                    )
-                    bundle.putString(CompanionValues.REPORT_TYPE, viewModel.getReportTypeString())
+                    textViewListPdf = binding.textViewReport
+                    binding.textViewReport.text = getString(R.string.bePatient)
+                    viewModel.requestCustomerHeaderBillingsPDF()
                 }
+
                 override fun onPermissionRationaleShouldBeShown(
                     p0: MutableList<PermissionRequest>?,
                     p1: PermissionToken?
@@ -253,6 +246,7 @@ class BillingReturnReportFragment(
                 }
             }).check()
     }
-    //______________________________________________________________________________________________ permissionForBitmap
+    //______________________________________________________________________________________________ permissionForPdf
+
 
 }
