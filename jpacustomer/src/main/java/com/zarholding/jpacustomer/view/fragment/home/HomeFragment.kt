@@ -79,6 +79,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         resetSteps()
         setListener()
         (activity as MainActivity?)?.getUserInfo()
+        viewModel.checkVersionIsNew()
         getCustomerOrders()
     }
     //---------------------------------------------------------------------------------------------- initView
@@ -105,6 +106,10 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
         viewModel.basketCountLiveData.observe(viewLifecycleOwner) {
             (activity as MainActivity?)?.setCartBadge(it)
+        }
+
+        viewModel.newVersionLiveData.observe(viewLifecycleOwner) {
+            showNewFeatureDialog(it)
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -278,6 +283,21 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         }
     }
     //---------------------------------------------------------------------------------------------- setOrderNumberSpinner
+
+
+    //---------------------------------------------------------------------------------------------- showNewFeatureDialog
+    private fun showNewFeatureDialog(feature: String) {
+        if (context == null)
+            return
+        ConfirmDialog(
+            requireContext(),
+            feature,
+            true
+        ){  }.show()
+    }
+    //---------------------------------------------------------------------------------------------- showNewFeatureDialog
+
+
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

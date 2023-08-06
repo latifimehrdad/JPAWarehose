@@ -28,23 +28,11 @@
                 android:fontFamily="@font/kalameh_light"/>
 
             <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/textViewTime"
-                app:layout_constraintTop_toBottomOf="@id/textViewTime"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/a_textViewPrimary"
-                android:fontFamily="@font/kalameh_bold"
-                android:textSize="@dimen/textSizeH2"/>
-
-            <TextView
                 android:id="@+id/textViewContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewName"
+                app:layout_constraintTop_toBottomOf="@id/textViewTime"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/a_textViewPrimary"

@@ -15,6 +15,7 @@ class SharedPreferencesManager @Inject constructor(private val sp: SharedPrefere
     private val biometricKey = "biometric"
     private val urlKey = "newUrl"
     private val fireBaseTokenKey = "firebase_token"
+    private val versionApp = "version_app"
 
     //---------------------------------------------------------------------------------------------- isBiometricEnable
     fun isBiometricEnable() = sp.getBoolean(biometricKey, false)
@@ -97,4 +98,17 @@ class SharedPreferencesManager @Inject constructor(private val sp: SharedPrefere
         sp.edit().putString(fireBaseTokenKey, newToken).apply()
     }
     //---------------------------------------------------------------------------------------------- getFirebaseToken
+
+
+
+    //---------------------------------------------------------------------------------------------- getVersion
+    fun getVersion() = sp.getLong(versionApp, 0L)
+    //---------------------------------------------------------------------------------------------- getVersion
+
+
+
+    //---------------------------------------------------------------------------------------------- setVersion
+    fun setVersion(version: Long) = sp.edit().putLong(versionApp, version).apply()
+    //---------------------------------------------------------------------------------------------- setVersion
+
 }
