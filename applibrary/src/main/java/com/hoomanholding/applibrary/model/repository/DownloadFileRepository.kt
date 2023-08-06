@@ -3,6 +3,7 @@ package com.hoomanholding.applibrary.model.repository
 import com.hoomanholding.applibrary.di.Providers
 import com.hoomanholding.applibrary.model.api.Api
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
+import com.zar.core.tools.api.apiCall
 import com.zar.core.tools.hilt.ProgressResponseBody
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -40,6 +41,15 @@ class DownloadFileRepository @Inject constructor() {
             .requestCustomersBillingPDF(billingId, type, tokenRepository.getBearerToken())
 
     //---------------------------------------------------------------------------------------------- downloadCustomersBillingPDF
+
+
+
+    //---------------------------------------------------------------------------------------------- requestCustomerHeaderBillingsPDF
+    suspend fun requestCustomerHeaderBillingsPDF(fromDate: String, toDate: String, type: String) =
+            retrofit().create(Api::class.java).requestCustomerHeaderBillingsPDF(
+                fromDate, toDate, type, tokenRepository.getBearerToken()
+            )
+    //---------------------------------------------------------------------------------------------- requestCustomerHeaderBillingsPDF
 
 
 

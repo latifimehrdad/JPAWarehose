@@ -332,6 +332,15 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<BillingAndReturnReportModel>?>>
 
+    @GET("$report/customers-report-customerHeaderBillingsPDF")
+    suspend fun requestCustomerHeaderBillingsPDF(
+        @Query("fromDate") fromDate: String,
+        @Query("toDate") toDate: String,
+        @Query("type") type: String,
+        @Header("Authorization") token: String
+    ): Response<ResponseBody>
+
+
     @GET("$report/customers-report-customersBillingPDF")
     suspend fun requestCustomersBillingPDF(
         @Query("billingId") billingId: Long,
