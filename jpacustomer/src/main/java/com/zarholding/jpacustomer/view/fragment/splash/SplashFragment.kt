@@ -95,8 +95,9 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                 buttonYes.setOnClickListener {
 
                     if (textInputEditTextIp.text.toString().isIP()) {
-                        if (textInputEditTextIpPassword.text.toString() != "holeshdaf"){
-                            textInputEditTextIpPassword.error = getString(R.string.passwordIsInCorrect)
+                        if (textInputEditTextIpPassword.text.toString() != "holeshdaf") {
+                            textInputEditTextIpPassword.error =
+                                getString(R.string.passwordIsInCorrect)
                             return@setOnClickListener
                         }
                         viewModel.saveNewIp(textInputEditTextIp.text.toString())
@@ -194,7 +195,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
 
 
-
     //---------------------------------------------------------------------------------------------- cameraPermission
     private fun storagePermission(fileName: String) {
         if (context == null)
@@ -204,27 +204,29 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             showMessage(getString(R.string.internalMemoryIsFull))
             return
         }
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    showDialogUpdateAppVersion(fileName)
-                }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q)
+            Dexter.withContext(requireContext())
+                .withPermissions(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                        showDialogUpdateAppVersion(fileName)
+                    }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
+                    override fun onPermissionRationaleShouldBeShown(
+                        p0: MutableList<PermissionRequest>?,
+                        p1: PermissionToken?
+                    ) {
 
-                }
+                    }
 
-            }).check()
+                }).check()
+        else
+            showDialogUpdateAppVersion(fileName)
     }
     //---------------------------------------------------------------------------------------------- cameraPermission
-
 
 
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
@@ -235,7 +237,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             requireContext(),
             getString(R.string.doYouWantToUpdateApp),
             true
-        ){ gotoFragmentDownload(fileName) }.show()
+        ) { gotoFragmentDownload(fileName) }.show()
     }
     //---------------------------------------------------------------------------------------------- showDialogUpdateAppVersion
 
@@ -265,10 +267,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- getFireBaseToken
 
 
-/*    //---------------------------------------------------------------------------------------------- onDestroyView
-    override fun onDestroyView() {
-        super.onDestroyView()
-        job?.cancel()
-    }
-    //---------------------------------------------------------------------------------------------- onDestroyView*/
+    /*    //---------------------------------------------------------------------------------------------- onDestroyView
+        override fun onDestroyView() {
+            super.onDestroyView()
+            job?.cancel()
+        }
+        //---------------------------------------------------------------------------------------------- onDestroyView*/
 }

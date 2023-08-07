@@ -2,6 +2,7 @@ package com.zarholding.jpacustomer.view.fragment.report.balance
 
 import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.FileProvider
@@ -35,7 +36,7 @@ import kotlin.math.abs
 @AndroidEntryPoint
 class CustomerBalanceReportFragment(
     override var layout: Int = R.layout.fragment_report_balance
-): JpaFragment<FragmentReportBalanceBinding>() {
+) : JpaFragment<FragmentReportBalanceBinding>() {
 
     private val viewModel: CustomerBalanceReportViewModel by viewModels()
 
@@ -47,14 +48,12 @@ class CustomerBalanceReportFragment(
     //---------------------------------------------------------------------------------------------- onViewCreated
 
 
-
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
         binding.shimmerViewContainer.stopLoading()
         activity?.let { (it as MainActivity).showMessage(message) }
     }
     //---------------------------------------------------------------------------------------------- showMessage
-
 
 
     //---------------------------------------------------------------------------------------------- initView
@@ -85,12 +84,12 @@ class CustomerBalanceReportFragment(
             setAdapter(it)
         }
 
-        viewModel.downloadProgress.observe(viewLifecycleOwner){
+        viewModel.downloadProgress.observe(viewLifecycleOwner) {
             val title = "${getString(R.string.createPDF)} - $it %"
             binding.textViewReport.text = title
         }
 
-        viewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
+        viewModel.downloadSuccessLiveData.observe(viewLifecycleOwner) {
             binding.textViewReport.text = getString(R.string.createPDF)
             val fileURI = FileProvider.getUriForFile(
                 requireContext(),
@@ -107,7 +106,6 @@ class CustomerBalanceReportFragment(
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
 
-
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.textViewReport.setOnClickListener {
@@ -115,7 +113,6 @@ class CustomerBalanceReportFragment(
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
-
 
 
     //---------------------------------------------------------------------------------------------- setAdapter
@@ -131,7 +128,7 @@ class CustomerBalanceReportFragment(
         binding.recyclerViewReport.layoutManager = manager
         binding.recyclerViewReport.adapter = adapter
         if (items.isNotEmpty()) {
-            val item  = items.last()
+            val item = items.last()
             if (item.balance > 0) {
                 binding.textViewTotal.setTextColor(requireContext().getColor(R.color.red))
                 binding.textViewTotal.setTitleAndValue(
@@ -154,25 +151,29 @@ class CustomerBalanceReportFragment(
     //---------------------------------------------------------------------------------------------- setAdapter
 
 
-
     //______________________________________________________________________________________________ permissionForPdf
     private fun permissionForPdf() {
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ).withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    binding.textViewReport.text = getString(R.string.bePatient)
-                    viewModel.downloadCustomerBalancePDF()
-                }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q)
+            Dexter.withContext(requireContext())
+                .withPermissions(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ).withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                        binding.textViewReport.text = getString(R.string.bePatient)
+                        viewModel.downloadCustomerBalancePDF()
+                    }
 
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
-                }
-            }).check()
+                    override fun onPermissionRationaleShouldBeShown(
+                        p0: MutableList<PermissionRequest>?,
+                        p1: PermissionToken?
+                    ) {
+                    }
+                }).check()
+        else {
+            binding.textViewReport.text = getString(R.string.bePatient)
+            viewModel.downloadCustomerBalancePDF()
+        }
     }
     //______________________________________________________________________________________________ permissionForPdf
 
