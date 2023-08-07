@@ -35,16 +35,16 @@ class CustomerSplashViewModel @Inject constructor(
                     ""
                 else
                     task.result
-                if (newToken.isNotEmpty()) {
-                    Log.e("meri", "fireBaseToken : $newToken")
-                    sharedPreferencesManager.setFirebaseToken(newToken)
-                    fireBaseTokenLiveData.postValue(newToken)
-                }
+                sharedPreferencesManager.setFirebaseToken(newToken)
+                fireBaseTokenLiveData.postValue(newToken)
+            }.addOnFailureListener {
+                sharedPreferencesManager.setFirebaseToken("")
+                fireBaseTokenLiveData.postValue("")
             }
         }
     }
     //---------------------------------------------------------------------------------------------- fireBaseToken
-
+//09148600104 سپهروند
 
     //---------------------------------------------------------------------------------------------- subscribeToTopic
     fun subscribeToTopic() {
