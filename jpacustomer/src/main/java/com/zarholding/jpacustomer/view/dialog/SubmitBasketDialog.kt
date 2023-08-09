@@ -50,11 +50,8 @@ class SubmitBasketDialog(
         val buttonNo = this.findViewById<MaterialButton>(R.id.buttonNo)
 
         buttonYes.setOnClickListener {
-            if (textInputEditTextDescription.text.isNullOrEmpty()) {
-                textInputEditTextDescription.error =
-                    context.getString(R.string.descriptionIsEmpty)
-                return@setOnClickListener
-            }
+            if (textInputEditTextDescription.text.isNullOrEmpty())
+                textInputEditTextDescription.text = ""
             onClick(textInputEditTextDescription.text.toString())
             dismiss()
         }
