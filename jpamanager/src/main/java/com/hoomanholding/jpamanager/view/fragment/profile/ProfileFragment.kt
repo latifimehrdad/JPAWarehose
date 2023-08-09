@@ -16,11 +16,6 @@ import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentProfileBinding
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -136,32 +131,15 @@ class ProfileFragment(override var layout: Int = R.layout.fragment_profile) :
 
     //---------------------------------------------------------------------------------------------- cameraPermission
     private fun cameraPermission() {
-        if (context == null)
+        if (activity == null)
             return
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    ImagePicker
-                        .Companion
-                        .with(requireActivity())
-                        .crop()
-                        .cropSquare()
-                        .provider(ImageProvider.BOTH) //Or bothCameraGallery()
-                        .createIntentFromDialog { launcher.launch(it) }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
-
-                }
-
-            }).check()
+        ImagePicker
+            .Companion
+            .with(requireActivity())
+            .crop()
+            .cropSquare()
+            .provider(ImageProvider.BOTH) //Or bothCameraGallery()
+            .createIntentFromDialog { launcher.launch(it) }
     }
     //---------------------------------------------------------------------------------------------- cameraPermission
 

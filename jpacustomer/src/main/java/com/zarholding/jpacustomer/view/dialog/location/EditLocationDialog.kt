@@ -4,16 +4,17 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
-import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.tools.JpaLocationManager
+import com.hoomanholding.applibrary.tools.PermissionManager
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.manager.ThemeManager
 import com.zarholding.jpacustomer.R
@@ -38,6 +39,12 @@ class EditLocationDialog() : DialogFragment() {
 
     @Inject
     lateinit var themeManagers: ThemeManager
+
+    @Inject
+    lateinit var locationManager: JpaLocationManager
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
 
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onCreateView(
@@ -137,23 +144,32 @@ class EditLocationDialog() : DialogFragment() {
 
 
 
+    //---------------------------------------------------------------------------------------------- locationPermissionLauncher
+    private val locationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { results ->
+            permissionManager.checkPermissionResult(results) {
+                if (it)
+                    findMyLocation()
+            }
+        }
+    //---------------------------------------------------------------------------------------------- locationPermissionLauncher
+
+
+
     //---------------------------------------------------------------------------------------------- findMyLocation
     private fun findMyLocation() {
         if (context == null)
             return
-        JpaLocationManager(
-            context = requireContext(),
-            currentLocation = object : JpaLocationManager.CurrentLocation {
-                override fun findCurrentLocation(location: Location) {
-                    val current = GeoPoint(location.latitude, location.longitude)
-                    osmManager.moveCamera(current)
-                }
-
-                override fun failedMessage(message: String) {
-                    showMessage(message)
-                }
-            }
-        ).getCurrentLocation()
+        locationManager.getCurrentLocation(
+            launcher = locationPermissionLauncher,
+            onFindCurrentLocation = {
+                val current = GeoPoint(it.latitude, it.longitude)
+                osmManager.moveCamera(current)
+            },
+            onFailedMessage = { showMessage(it) }
+        )
     }
     //---------------------------------------------------------------------------------------------- findMyLocation
 

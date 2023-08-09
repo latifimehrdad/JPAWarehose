@@ -5,19 +5,16 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.applibrary.ext.isIP
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.PermissionManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import dagger.hilt.android.AndroidEntryPoint
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.manager.DialogManager
 import com.zarholding.jpacustomer.R
@@ -28,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 /**
@@ -40,6 +38,23 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     JpaFragment<FragmentSplashBinding>() {
 
     private val viewModel: CustomerSplashViewModel by viewModels()
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
+
+
+    //---------------------------------------------------------------------------------------------- notificationPermissionLauncher
+    private val notificationPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { results ->
+            permissionManager.checkPermissionResult(results) {
+                if (it)
+                    requestGetAppVersion()
+            }
+        }
+    //---------------------------------------------------------------------------------------------- notificationPermissionLauncher
+
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -124,24 +139,13 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         if (context == null)
             return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val permission = mutableListOf(Manifest.permission.POST_NOTIFICATIONS)
-            Dexter.withContext(requireContext())
-                .withPermissions(permission)
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                        requestGetAppVersion()
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        p0: MutableList<PermissionRequest>?,
-                        p1: PermissionToken?
-                    ) {
-
-                    }
-                })
-                .check()
-        } else
-            requestGetAppVersion()
+            val permission = listOf(Manifest.permission.POST_NOTIFICATIONS)
+            val check = permissionManager.isPermissionGranted(
+                permissions = permission,
+                launcher = notificationPermissionLauncher
+            )
+            if (check) requestGetAppVersion()
+        } else requestGetAppVersion()
     }
     //---------------------------------------------------------------------------------------------- checkNotificationPermission
 
@@ -195,6 +199,19 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
 
 
+    //---------------------------------------------------------------------------------------------- storagePermissionLauncher
+    private val storagePermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { results ->
+            permissionManager.checkPermissionResult(results) {
+                if (it && viewModel.downloadVersionLiveData.value != null)
+                    showDialogUpdateAppVersion(viewModel.downloadVersionLiveData.value!!)
+            }
+        }
+    //---------------------------------------------------------------------------------------------- storagePermissionLauncher
+
+
     //---------------------------------------------------------------------------------------------- cameraPermission
     private fun storagePermission(fileName: String) {
         if (context == null)
@@ -204,26 +221,17 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             showMessage(getString(R.string.internalMemoryIsFull))
             return
         }
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q)
-            Dexter.withContext(requireContext())
-                .withPermissions(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                        showDialogUpdateAppVersion(fileName)
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        p0: MutableList<PermissionRequest>?,
-                        p1: PermissionToken?
-                    ) {
-
-                    }
-
-                }).check()
-        else
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            val permissions = listOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            val check = permissionManager.isPermissionGranted(
+                permissions = permissions,
+                launcher = storagePermissionLauncher
+            )
+            if (check)
+                showDialogUpdateAppVersion(fileName)
+        } else
             showDialogUpdateAppVersion(fileName)
     }
     //---------------------------------------------------------------------------------------------- cameraPermission

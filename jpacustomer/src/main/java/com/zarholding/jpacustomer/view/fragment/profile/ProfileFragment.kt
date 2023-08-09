@@ -1,6 +1,5 @@
 package com.zarholding.jpacustomer.view.fragment.profile
 
-import android.Manifest
 import android.app.Activity
 import android.content.res.Configuration
 import android.net.Uri
@@ -19,11 +18,6 @@ import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.BiometricManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.manager.ThemeManager
 import com.zarholding.jpacustomer.R
@@ -260,30 +254,13 @@ class ProfileFragment(
     private fun cameraPermission() {
         if (context == null)
             return
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    ImagePicker
-                        .Companion
-                        .with(requireActivity())
-                        .crop()
-                        .cropSquare()
-                        .provider(ImageProvider.BOTH) //Or bothCameraGallery()
-                        .createIntentFromDialog { launcher.launch(it) }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
-
-                }
-
-            }).check()
+        ImagePicker
+            .Companion
+            .with(requireActivity())
+            .crop()
+            .cropSquare()
+            .provider(ImageProvider.BOTH) //Or bothCameraGallery()
+            .createIntentFromDialog { launcher.launch(it) }
     }
     //---------------------------------------------------------------------------------------------- cameraPermission
 

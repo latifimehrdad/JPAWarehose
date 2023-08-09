@@ -1,18 +1,20 @@
 package com.hoomanholding.jpawarehose.view.fragment.splash
 
 import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.PermissionManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import com.hoomanholding.jpawarehose.R
 import com.hoomanholding.jpawarehose.databinding.FragmentSplashBinding
 import com.hoomanholding.jpawarehose.view.activity.MainActivity
 import com.hoomanholding.jpawarehose.view.dialog.ConfirmDialog
-import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
@@ -22,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import javax.inject.Inject
 
 /**
  * Created by m-latifi on 11/8/2022.
@@ -33,6 +36,9 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     JpaFragment<FragmentSplashBinding>() {
 
     private val splashViewModel: SplashViewModel by viewModels()
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
 
     private var job: Job? = null
 
@@ -149,28 +155,35 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- stopLoading
 
 
+    //---------------------------------------------------------------------------------------------- storagePermissionLauncher
+    private val storagePermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { results ->
+            permissionManager.checkPermissionResult(results) {
+                if (it && splashViewModel.downloadVersionLiveData.value != null)
+                    showDialogUpdateAppVersion(splashViewModel.downloadVersionLiveData.value!!)
+            }
+        }
+    //---------------------------------------------------------------------------------------------- storagePermissionLauncher
+
+
     //---------------------------------------------------------------------------------------------- cameraPermission
     private fun storagePermission(fileName: String) {
         if (context == null)
             return
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            val permissions = listOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    showDialogUpdateAppVersion(fileName)
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
-
-                }
-
-            }).check()
+            val check = permissionManager.isPermissionGranted(
+                permissions = permissions,
+                launcher = storagePermissionLauncher
+            )
+            if (check)
+                showDialogUpdateAppVersion(fileName)
+        } else
+            showDialogUpdateAppVersion(fileName)
     }
     //---------------------------------------------------------------------------------------------- cameraPermission
 

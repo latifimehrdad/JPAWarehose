@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -13,73 +14,67 @@ import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.hoomanholding.applibrary.R
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 /**
  * Created by m-latifi on 5/29/2023.
  */
 
-class JpaLocationManager(
-    private val context: Context,
-    private val currentLocation: CurrentLocation
-    ) {
+class JpaLocationManager @Inject constructor(
+    @ApplicationContext val context: Context
+) {
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
 
-    interface CurrentLocation {
-        fun findCurrentLocation(location: Location)
-        fun failedMessage(message: String)
-    }
-
-
-    enum class LocationType{
-        CURRENT
-    }
+    @Inject
+    lateinit var permissionManager: PermissionManager
 
 
     //---------------------------------------------------------------------------------------------- getCurrentLocation
-    fun getCurrentLocation() {
-        requestLocationPermission(LocationType.CURRENT)
+    fun getCurrentLocation(
+        launcher: ActivityResultLauncher<Array<String>>,
+        onFindCurrentLocation: (Location) -> Unit,
+        onFailedMessage: (String) -> Unit
+    ) {
+        requestLocationPermission(
+            launcher = launcher,
+            onFindCurrentLocation = onFindCurrentLocation,
+            onFailedMessage = onFailedMessage
+        )
     }
     //---------------------------------------------------------------------------------------------- getCurrentLocation
 
 
     //---------------------------------------------------------------------------------------------- requestLocationPermission
-    private fun requestLocationPermission(type: LocationType) {
-        Dexter.withContext(context)
-            .withPermissions(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+    private fun requestLocationPermission(
+        launcher: ActivityResultLauncher<Array<String>>,
+        onFindCurrentLocation: (Location) -> Unit,
+        onFailedMessage: (String) -> Unit
+    ) {
+        val permissions = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        val check = permissionManager.isPermissionGranted(permissions, launcher)
+        if (check)
+            findCurrentLocation(
+                onFindCurrentLocation = onFindCurrentLocation,
+                onFailedMessage = onFailedMessage
             )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                    when(type){
-                        LocationType.CURRENT -> findCurrentLocation()
-                    }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    p1: PermissionToken?
-                ) {
-                }
-            })
-            .check()
     }
     //---------------------------------------------------------------------------------------------- requestLocationPermission
-
 
 
     //---------------------------------------------------------------------------------------------- findCurrentLocation
-    private fun findCurrentLocation() {
+    private fun findCurrentLocation(
+        onFindCurrentLocation: (Location) -> Unit,
+        onFailedMessage: (String) -> Unit
+    ) {
         if (ContextCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED && checkLocationEnable()
+            ) == PackageManager.PERMISSION_GRANTED && checkLocationEnable(onFailedMessage)
         ) {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
             fusedLocationClient?.getCurrentLocation(
@@ -91,23 +86,22 @@ class JpaLocationManager(
                     override fun isCancellationRequested() = false
                 })?.addOnSuccessListener { location: Location? ->
                 if (location == null)
-                    currentLocation.failedMessage(context.getString(R.string.failedGetCurrentLocation))
-                else currentLocation.findCurrentLocation(location)
+                    onFailedMessage(context.getString(R.string.failedGetCurrentLocation))
+                else onFindCurrentLocation(location)
             }
         }
     }
     //---------------------------------------------------------------------------------------------- findCurrentLocation
 
 
-
     //---------------------------------------------------------------------------------------------- checkLocationEnable
-    private fun checkLocationEnable(): Boolean {
+    private fun checkLocationEnable(onFailedMessage: (String) -> Unit): Boolean {
         val mLocationManager = context
             .getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
             true
         else {
-            currentLocation.failedMessage(context.getString(R.string.pleaseTurnOnGPS))
+            onFailedMessage(context.getString(R.string.pleaseTurnOnGPS))
             false
         }
     }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,19 +14,16 @@ import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel
+import com.hoomanholding.applibrary.tools.PermissionManager
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentReportBalanceBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.recycler.CustomerBalanceAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.math.abs
 
 /**
@@ -39,6 +37,9 @@ class CustomerBalanceReportFragment(
 ) : JpaFragment<FragmentReportBalanceBinding>() {
 
     private val viewModel: CustomerBalanceReportViewModel by viewModels()
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -150,32 +151,38 @@ class CustomerBalanceReportFragment(
     }
     //---------------------------------------------------------------------------------------------- setAdapter
 
+    //---------------------------------------------------------------------------------------------- storagePermissionLauncher
+    private val storagePermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { results ->
+            permissionManager.checkPermissionResult(results) {
+                if (it)
+                    downloadCustomerBalancePDF()
+            }
+        }
+    //---------------------------------------------------------------------------------------------- storagePermissionLauncher
+
 
     //______________________________________________________________________________________________ permissionForPdf
     private fun permissionForPdf() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q)
-            Dexter.withContext(requireContext())
-                .withPermissions(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ).withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                        binding.textViewReport.text = getString(R.string.bePatient)
-                        viewModel.downloadCustomerBalancePDF()
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        p0: MutableList<PermissionRequest>?,
-                        p1: PermissionToken?
-                    ) {
-                    }
-                }).check()
-        else {
-            binding.textViewReport.text = getString(R.string.bePatient)
-            viewModel.downloadCustomerBalancePDF()
-        }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            val permissions = listOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            val check = permissionManager.isPermissionGranted(
+                permissions,
+                storagePermissionLauncher
+            )
+            if (check)
+                downloadCustomerBalancePDF()
+        } else downloadCustomerBalancePDF()
     }
     //______________________________________________________________________________________________ permissionForPdf
 
 
+    //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
+    private fun downloadCustomerBalancePDF() {
+        binding.textViewReport.text = getString(R.string.bePatient)
+        viewModel.downloadCustomerBalancePDF()
+    }
+    //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
 }

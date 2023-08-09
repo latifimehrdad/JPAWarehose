@@ -1,5 +1,6 @@
 package com.hoomanholding.applibrary.view.fragment
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.R
@@ -80,6 +81,7 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
         CoroutineScope(Dispatchers.Main).launch {
             throwable.localizedMessage?.let {
 //                XLog.e(it)
+                Log.d("meri", it)
                 val url = Providers.url.substringAfterLast("/").substringBefore(":")
                 if (it.contains(url))
                     setMessage(resourcesProvider.getString(R.string.pleaseCheckYouConnection))
