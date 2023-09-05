@@ -77,7 +77,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             requestGetAppVersion()
         }
 
-
         binding.frameLayoutLogo.setOnLongClickListener {
             if (context != null) {
                 val dialog = DialogManager().createDialogHeightWrapContent(

@@ -27,5 +27,6 @@ data class OrderModel(
     val routeName: String?,
     val cart: String?,
     val orderState: String?,
+    val orderType: Int,
     var select : Boolean = false
 )

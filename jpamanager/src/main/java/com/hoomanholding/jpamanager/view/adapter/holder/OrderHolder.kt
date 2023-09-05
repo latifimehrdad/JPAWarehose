@@ -40,6 +40,9 @@ class OrderHolder(
             )
         }
 
+        if (item.orderType == 2)
+            binding.textviewName.setTextColor(binding.textviewName.context.getColor(R.color.confirmFactorText))
+
         binding.textViewDetail.setOnClickListener {
             click.orderDetail(item)
         }
