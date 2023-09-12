@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                 binding.constarintProfile.visibility = View.INVISIBLE
             }
             R.id.homeFragment -> {
+                binding.constraintLogo.visibility = View.VISIBLE
                 if (!binding.menuHome.isSelectedMenu()) {
                     resetMenuColor()
                     binding.imageViewBack.visibility = View.GONE
@@ -128,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             R.id.customerBalanceFragment,
             R.id.customerBalanceDetailFragment,
             R.id.customerBounceCheckFragment -> {
+                binding.constraintLogo.visibility = View.GONE
                 if (!binding.menuReport.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuReport.selected()
@@ -143,6 +145,7 @@ class MainActivity : AppCompatActivity() {
             R.id.invoiceFragment,
             R.id.invoiceFragmentDetail,
             R.id.customerFinancialFragment -> {
+                binding.constraintLogo.visibility = View.GONE
                 if (!binding.menuCardboard.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuCardboard.selected()

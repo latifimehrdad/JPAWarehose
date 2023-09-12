@@ -171,6 +171,10 @@
         android:id="@+id/customerBounceCheckFragment"
         android:name="com.hoomanholding.jpamanager.view.fragment.report.customer.check.CustomerBounceCheckFragment"/>
 
+    <fragment
+        android:id="@+id/licenseAssignmentFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.lisence.assignment.LicenseAssignmentFragment"/>
+
     <action
         android:id="@+id/action_goto_SplashFragment"
         app:destination="@id/splashFragment"
@@ -219,6 +223,17 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/cardBoardFragment"
+        app:launchSingleTop="true"/>
+
+
+    <action
+        android:id="@+id/action_goto_licenseAssignmentFragment"
+        app:destination="@id/licenseAssignmentFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/licenseAssignmentFragment"
         app:launchSingleTop="true"/>
 
 </navigation>

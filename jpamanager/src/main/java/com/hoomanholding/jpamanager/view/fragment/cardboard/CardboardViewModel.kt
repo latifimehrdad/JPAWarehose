@@ -29,6 +29,14 @@ class CardboardViewModel @Inject constructor(): JpaViewModel() {
                 R.id.action_splashFragment_to_InvoiceFragment
             )
         )
+
+        items.add(
+            CardBoardItemModel(
+                R.drawable.ic_cardboard,
+                resourcesProvider.getString(R.string.licenseAssignment),
+                R.id.action_goto_licenseAssignmentFragment
+            )
+        )
 /*        items.add(
             CardBoardItemModel(
                 R.drawable.ic_credit_card,

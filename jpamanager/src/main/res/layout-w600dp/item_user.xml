@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.hoomanholding.applibrary.model.data.response.user.UserModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/drawable_border_curve_light">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/linearLayoutRight"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_1sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/shopName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.storeName}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_1sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/routeName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.routeName}"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_3sdp"
+            app:layout_constraintStart_toEndOf="@id/linearLayoutLeft"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textviewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_1sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/customerName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.customerName}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_1sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/customerCode}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.customerCode}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_1sdp"
+                android:fontFamily="@font/iransans_light"
+                android:lines="1"
+                app:setTitle="@{@string/visitorName}"
+                app:setSplitter="@{@string/colon}"
+                app:setValue="@{item.visitorName}"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

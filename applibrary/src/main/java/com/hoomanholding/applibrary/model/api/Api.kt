@@ -23,6 +23,7 @@ import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReason
 import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.critic.CriticModel
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
+import com.hoomanholding.applibrary.model.data.response.user.UserModel
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
 import com.hoomanholding.applibrary.model.data.response.video.VideoCategoryModel
 import com.hoomanholding.applibrary.model.data.response.video.VideoModel
@@ -225,6 +226,18 @@ interface Api {
     suspend fun requestEditCustomerLocation(
         @Query("x") lat: Double,
         @Query("y") long: Double,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
+
+    @GET("$customers/basedata-get-all-customers")
+    suspend fun requestGetAllCustomers(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<UserModel>?>>
+
+    @POST("$customers/Add-customer-Licensing")
+    suspend fun requestAddCustomerLicensing(
+        @Body request: List<Long>,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
     //---------------------------------------------------------------------------------------------- Customers

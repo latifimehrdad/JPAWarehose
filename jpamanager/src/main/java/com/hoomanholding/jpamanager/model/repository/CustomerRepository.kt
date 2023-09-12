@@ -40,4 +40,17 @@ class CustomerRepository @Inject constructor(
             checkType,
             tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestGetCustomerFinancial
+
+
+    //---------------------------------------------------------------------------------------------- requestGetAllCustomers
+    suspend fun requestGetAllCustomers() =
+        apiCall { api.requestGetAllCustomers(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestGetAllCustomers
+
+
+    //---------------------------------------------------------------------------------------------- requestAddCustomerLicensing
+    suspend fun requestAddCustomerLicensing(request: List<Long>) =
+        apiCall { api.requestAddCustomerLicensing(request, tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestAddCustomerLicensing
+
 }

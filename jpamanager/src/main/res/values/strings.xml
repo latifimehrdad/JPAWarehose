@@ -26,6 +26,7 @@
     <string name="profile">پروفایل</string>
     <string name="pinCard">پین کارت</string>
     <string name="invoice">پیش فاکتور</string>
+    <string name="licenseAssignment">تخصیص مجوز</string>
     <string name="check">چک</string>
     <string name="fullName">نام و نام خانوادگی</string>
     <string name="personnelNumber">کد پرسنلی</string>
@@ -124,6 +125,7 @@
     <string name="netSales">خالص فروش</string>
     <string name="cartType">نوع سبد</string>
     <string name="orderType">نوع سفارش</string>
+    <string name="listIsEmpty">لیست خالی است</string>
 
 
 
