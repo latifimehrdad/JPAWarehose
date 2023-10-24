@@ -45,6 +45,12 @@ class ReportRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestCustomersBouncedCheckReport
 
 
+    //---------------------------------------------------------------------------------------------- requestCustomerOrderReport
+    suspend fun requestCustomerOrderReport() =
+        apiCall { api.requestCustomerOrderReport(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestCustomerOrderReport
+
+
     //---------------------------------------------------------------------------------------------- requestCustomerBillingReport
     suspend fun requestCustomerBillingReport(fromDate: String, toDate: String) =
         apiCall {

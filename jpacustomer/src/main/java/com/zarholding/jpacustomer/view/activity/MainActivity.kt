@@ -212,7 +212,8 @@ class MainActivity : AppCompatActivity() {
 
             R.id.reportFragment,
             R.id.customerBalanceReportFragment,
-            R.id.billingReturnReportFragment -> {
+            R.id.billingReturnReportFragment,
+            R.id.customerOrderReportFragment -> {
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE

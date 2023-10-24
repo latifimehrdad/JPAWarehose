@@ -93,6 +93,7 @@
     <string name="suggestions">انتقادات و پیشنهادات</string>
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
     <string name="feedbackReport">گزارش مرجوعی</string>
+    <string name="customerOrderReport">سفارش مشتری</string>
     <string name="returnCount">تعداد مرجوعی امسال</string>
     <string name="factorReport">گزارش فاکتور</string>
     <string name="customerBalanceReport">دفتر مشتری</string>
@@ -106,6 +107,7 @@
     <string name="pleaseChooseDateFrom">لطفا تاریخ شروع را انتخاب نمایید</string>
     <string name="pleaseChooseDateTo">لطفا تاریخ پایان را انتخاب نمایید</string>
     <string name="finalPrice">مبلغ نهایی</string>
+    <string name="orderAmount">مبلغ ناخالص</string>
     <string name="detailFactor">جزییات فاکتور</string>
     <string name="pieces">عدد</string>
     <string name="createPDF">دریافت PDF گزارش</string>

@@ -345,6 +345,13 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<BillingAndReturnReportModel>?>>
 
+
+    @GET("$report/customers-report-customerOrderReport")
+    suspend fun requestCustomerOrderReport(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<ReportCustomerOrderModel>?>>
+
+
     @GET("$report/customers-report-customerHeaderBillingsPDF")
     suspend fun requestCustomerHeaderBillingsPDF(
         @Query("fromDate") fromDate: String,
@@ -366,6 +373,8 @@ interface Api {
     suspend fun requestCustomerBalancePDF(
         @Header("Authorization") token: String
     ): Response<ResponseBody>
+
+
 
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
 

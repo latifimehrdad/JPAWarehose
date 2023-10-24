@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandableMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_duration="500"
+            app:el_expanded="false"
+            app:el_parallax="0.5"
+            android:layout_marginTop="-20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutParent"
+            android:background="@drawable/a_drawable_back_curve_primary"
+            android:paddingTop="30dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/drawable_color4_curve"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewAmountTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:gravity="end"
+                android:text="@string/orderAmount"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:text="@string/date"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewOrderNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textViewDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewCustomerCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintEnd_toEndOf="@id/textViewOrderNumber"
+                app:layout_constraintStart_toStartOf="@id/textViewOrderNumber"
+                app:layout_constraintTop_toBottomOf="@id/textViewOrderNumber" />
+
+
+            <TextView
+                android:id="@+id/textViewStoreName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                android:layout_marginHorizontal="5dp"
+                app:layout_constraintEnd_toStartOf="@id/textViewCustomerCode"
+                app:layout_constraintStart_toEndOf="@id/textViewRial"
+                app:layout_constraintTop_toTopOf="@id/textViewCustomerCode" />
+
+            <TextView
+                android:id="@+id/textViewRial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/iransans_light"
+                android:text="@string/rial"
+                android:textColor="@color/textHintColor"
+                android:textSize="@dimen/textSizeH5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewAmountTitle" />
+
+            <TextView
+                android:id="@+id/textViewAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:gravity="end"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewRial" />
+
+            <TextView
+                android:id="@+id/textViewCustomerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@id/textViewCustomerCode"
+                app:layout_constraintStart_toEndOf="@id/textViewAmount"
+                app:layout_constraintTop_toTopOf="@id/textViewAmount" />
+
+            <TextView
+                android:id="@+id/textViewShowMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_light"
+                android:gravity="end"
+                android:text="@string/orderDetail"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewCustomerName" />
+
+            <ImageView
+                android:id="@+id/imageViewMore"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:contentDescription="@string/detailFactor"
+                android:src="@drawable/a_ic_play_square"
+                app:layout_constraintBottom_toBottomOf="@id/textViewShowMore"
+                app:layout_constraintEnd_toStartOf="@id/textViewShowMore"
+                app:layout_constraintTop_toTopOf="@id/textViewShowMore" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

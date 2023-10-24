@@ -176,6 +176,10 @@
         android:id="@+id/criticDetailFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.critic.detail.CriticDetailFragment"/>
 
+    <fragment
+        android:id="@+id/customerOrderReportFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.report.order.CustomerOrderReportFragment"/>
+
 
     <action
         android:id="@+id/action_goto_SplashFragment"
@@ -256,5 +260,15 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/criticDetailFragment" />
+
+    <action
+        android:id="@+id/action_goto_customerOrderReportFragment"
+        app:destination="@id/customerOrderReportFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/customerOrderReportFragment" />
 
 </navigation>

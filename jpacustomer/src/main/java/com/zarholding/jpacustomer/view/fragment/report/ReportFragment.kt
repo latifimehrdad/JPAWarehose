@@ -30,6 +30,10 @@ class ReportFragment(
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
+        binding.cardViewCustomerOrderReport.setOnClickListener {
+            gotoFragment(R.id.action_goto_customerOrderReportFragment)
+        }
+
         binding.cardViewCustomerBalanceReport.setOnClickListener {
             gotoFragment(R.id.action_profileFragment_to_customerBalanceReportFragment)
         }
