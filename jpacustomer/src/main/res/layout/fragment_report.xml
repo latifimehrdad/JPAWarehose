@@ -109,7 +109,8 @@
             app:layout_constraintDimensionRatio="H,1:1"
             android:layout_marginTop="@dimen/_10sdp"
             app:cardBackgroundColor="@color/primaryColor"
-            app:cardCornerRadius="@dimen/radius0">
+            app:cardCornerRadius="@dimen/radius0"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="match_parent"
