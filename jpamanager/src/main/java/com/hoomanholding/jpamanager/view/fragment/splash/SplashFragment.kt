@@ -24,12 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.hoomanholding.applibrary.view.fragment.SplashViewModel
 import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.zar.core.tools.manager.DialogManager
 import javax.inject.Inject
 
@@ -43,7 +38,7 @@ import javax.inject.Inject
 class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     JpaFragment<FragmentSplashBinding>() {
 
-    private val splashViewModel: SplashViewModel by viewModels()
+    private val viewModel: ManagerSplashViewModel by viewModels()
 
     @Inject
     lateinit var permissionManager: PermissionManager
@@ -103,7 +98,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                             textInputEditTextIpPassword.error = getString(R.string.passwordIsInCorrect)
                             return@setOnClickListener
                         }
-                        splashViewModel.saveNewIp(textInputEditTextIp.text.toString())
+                        viewModel.saveNewIp(textInputEditTextIp.text.toString())
                         showMessage(getString(R.string.updateIsSuccess))
                         CoroutineScope(Main).launch {
                             delay(1500)
@@ -156,7 +151,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
-        splashViewModel.errorLiveDate.observe(viewLifecycleOwner) {
+        viewModel.errorLiveDate.observe(viewLifecycleOwner) {
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -164,29 +159,41 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             }
         }
 
-        splashViewModel.successLiveData.observe(viewLifecycleOwner) {
-            binding.materialButtonLogin.stopLoading()
-            if (it)
-                gotoFragment(R.id.action_splashFragment_to_HomeFragment)
+        viewModel.successLiveData.observe(viewLifecycleOwner) {
+            viewModel.subscribeToTopic()
         }
 
-        splashViewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
+        viewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
             if (it)
-                gotoFragmentHome()
+                getFireBaseToken()
             else
                 gotoFragmentLogin()
         }
 
-        splashViewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
+        viewModel.downloadVersionLiveData.observe(viewLifecycleOwner) {
             storagePermission(it)
         }
+
+        viewModel.subscribeToTopic.observe(viewLifecycleOwner) {
+            showMessage(getString(R.string.loginIsSuccess))
+            if (it)
+                gotoFragment(R.id.action_splashFragment_to_HomeFragment)
+        }
+
+        viewModel.fireBaseTokenLiveData.observe(viewLifecycleOwner) {
+            viewModel.requestGetData()
+        }
+
+/*        viewModel.appDescriptionLiveData.observe(viewLifecycleOwner) {
+            binding.textViewComment.text = it
+        }*/
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
 
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
     private fun requestGetAppVersion() {
-        splashViewModel.requestGetAppVersion(EnumSystemType.ManagerApp.name)
+        viewModel.requestGetAppVersion(EnumSystemType.ManagerApp.name)
     }
     //---------------------------------------------------------------------------------------------- requestGetAppVersion
 
@@ -197,8 +204,8 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
             ActivityResultContracts.RequestMultiplePermissions()
         ) { results ->
             permissionManager.checkPermissionResult(results) {
-                if (it && splashViewModel.downloadVersionLiveData.value != null)
-                    showDialogUpdateAppVersion(splashViewModel.downloadVersionLiveData.value!!)
+                if (it && viewModel.downloadVersionLiveData.value != null)
+                    showDialogUpdateAppVersion(viewModel.downloadVersionLiveData.value!!)
             }
         }
     //---------------------------------------------------------------------------------------------- storagePermissionLauncher
@@ -253,21 +260,20 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- gotoFragmentDownload
 
 
+    //---------------------------------------------------------------------------------------------- getFireBaseToken
+    private fun getFireBaseToken() {
+        if (binding.materialButtonLogin.isLoading)
+            return
+        binding.materialButtonLogin.startLoading(getString(R.string.bePatient))
+        viewModel.fireBaseToken()
+    }
+    //---------------------------------------------------------------------------------------------- getFireBaseToken
+
+
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
     private fun gotoFragmentLogin() {
         gotoFragment(R.id.action_splashFragment_to_loginFragment)
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
-
-
-    //---------------------------------------------------------------------------------------------- gotoFragmentHome
-    private fun gotoFragmentHome() {
-        if (binding.materialButtonLogin.isLoading)
-            return
-        binding.materialButtonLogin.startLoading(getString(R.string.bePatient))
-        splashViewModel.requestGetData()
-    }
-    //---------------------------------------------------------------------------------------------- gotoFragmentHome
-
 
 }

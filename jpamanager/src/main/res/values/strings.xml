@@ -126,6 +126,7 @@
     <string name="cartType">نوع سبد</string>
     <string name="orderType">نوع سفارش</string>
     <string name="listIsEmpty">لیست خالی است</string>
+    <string name="loginIsSuccess">ورود با موفقیت انجام شد</string>
 
 
 

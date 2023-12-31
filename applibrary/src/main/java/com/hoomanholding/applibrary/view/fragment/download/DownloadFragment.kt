@@ -79,7 +79,6 @@ class DownloadFragment(override var layout: Int = R.layout.fragment_download) :
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             requireContext().startActivity(intent)
-            requireActivity().finish()
         }
     }
     //---------------------------------------------------------------------------------------------- installApp
