@@ -33,6 +33,7 @@
     <string name="oldOrder">سفارشات قبلی</string>
     <string name="mobileNumber">شماره موبایل</string>
     <string name="showAll">نمایش همه</string>
+    <string name="sortBy">مرتب سازی بر اساس</string>
     <string name="productCallForPrice">استعلام قیمت کالاها</string>
     <string name="callForPrice">استعلام قیمت</string>
     <string name="phoneNumber">تلفن تماس</string>
@@ -138,6 +139,7 @@
     <string name="startNewMessage">شروع پیام جدید</string>
     <string name="writeNewMessage">پیام خود را بگذارید…</string>
     <string name="isSending">در حال ارسال پیام …</string>
+    <string name="exhibitionBasket">سبد نمایشگاه</string>
 <!--    <string name="finishStatus">بسته شده</string>-->
 <!--    <string name="replyByAdminStatus">پاسخ پشتیبان</string>-->
 <!--    <string name="replyByUser">پاسخ شما</string>-->

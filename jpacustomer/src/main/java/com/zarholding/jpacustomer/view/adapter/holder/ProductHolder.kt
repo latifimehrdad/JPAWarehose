@@ -1,5 +1,6 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +39,7 @@ class ProductHolder(
 
     //---------------------------------------------------------------------------------------------- setValueToXml
     private fun setValueToXml(item: ProductModel) {
+        binding.imageviewStatus.visibility = View.GONE
         binding.textViewName.text = item.productName
         binding.textViewPrice.text = item.price.split()
         binding.textViewCode.setTitleAndValue(
@@ -60,6 +62,9 @@ class ProductHolder(
             placeholder = AppCompatResources
                 .getDrawable(binding.imageViewPicture.context, R.drawable.a_ic_logo)
         )
+        if (item.isCash)
+            binding.imageviewStatus.visibility = View.VISIBLE
+
     }
     //---------------------------------------------------------------------------------------------- setValueToXml
 

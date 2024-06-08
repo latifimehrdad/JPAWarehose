@@ -137,6 +137,20 @@
                 app:layout_constraintTop_toTopOf="@id/textViewAmount" />
 
             <TextView
+                android:id="@+id/textViewState"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/textViewCustomerName"
+                app:layout_constraintStart_toStartOf="@id/textViewCustomerName"
+                app:layout_constraintTop_toBottomOf="@id/textViewCustomerName" />
+
+            <TextView
                 android:id="@+id/textViewShowMore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,7 +161,7 @@
                 android:textSize="@dimen/textSizeH4"
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewCustomerName" />
+                app:layout_constraintTop_toBottomOf="@id/textViewState" />
 
             <ImageView
                 android:id="@+id/imageViewMore"

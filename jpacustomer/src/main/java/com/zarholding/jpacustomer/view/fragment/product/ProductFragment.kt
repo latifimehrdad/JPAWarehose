@@ -10,15 +10,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
+import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
+import com.skydoves.powerspinner.IconSpinnerAdapter
+import com.skydoves.powerspinner.IconSpinnerItem
 import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.CircleAnimationUtil
 import dagger.hilt.android.AndroidEntryPoint
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProductBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
+import com.zarholding.jpacustomer.view.adapter.IntSpinnerAdapter
 import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.ProductAdapter
 import com.zarholding.jpacustomer.view.dialog.product.ProductDetailDialog
@@ -59,6 +63,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         observeLiveDate()
         setListener()
         getProduct()
+        setSortSpinner()
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -93,6 +98,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         viewModel.productLiveData.observe(viewLifecycleOwner) {
             binding.shimmerViewContainer.stopLoading()
             setProductAdapter(it)
+            binding.spinnerSort.selectItemByIndex(viewModel.getSortIndex())
         }
 
         viewModel.basketCountLiveData.observe(viewLifecycleOwner) {
@@ -127,6 +133,27 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
+
+
+    //---------------------------------------------------------------------------------------------- setSortSpinner
+    private fun setSortSpinner() {
+
+        binding.spinnerSort.apply {
+            setSpinnerAdapter(IconSpinnerAdapter(this))
+            setItems(viewModel.getItemsSort())
+            getSpinnerRecyclerView().layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            lifecycleOwner = viewLifecycleOwner
+            setOnSpinnerOutsideTouchListener { _, _ -> dismiss() }
+            setOnSpinnerItemSelectedListener<IconSpinnerItem> { oldIndex, _, newIndex, _ ->
+                if (oldIndex != newIndex)
+                    viewModel.setSortIndex(index = newIndex)
+            }
+        }
+
+        binding.spinnerSort.selectItemByIndex(viewModel.getSortIndex())
+    }
+    //---------------------------------------------------------------------------------------------- setSortSpinner
 
 
 

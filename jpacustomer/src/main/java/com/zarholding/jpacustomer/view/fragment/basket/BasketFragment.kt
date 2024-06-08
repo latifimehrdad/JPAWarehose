@@ -75,6 +75,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            binding.buttonSubmit.stopLoading()
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -215,6 +216,12 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
             last = getString(R.string.rial),
             value = amount
         )
+        binding.textViewTotalAmountOfCashProduct.setTitleAndValue(
+            title = getString(R.string.totalAmount),
+            splitter = getString(R.string.colon),
+            last = getString(R.string.rial),
+            value = amount
+        )
         binding.cardViewCalculateBasket.visibility = View.VISIBLE
     }
     //---------------------------------------------------------------------------------------------- calculateBasketAmount
@@ -234,7 +241,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         if (binding.buttonSubmit.isLoading)
             return
         binding.buttonSubmit.startLoading(getString(R.string.bePatient))
-        viewModel.requestSubmitBasket(description)
+        viewModel.requestSubmitBasket(
+            description = description,
+            exhibition = binding.checkboxExhibit.isChecked
+        )
     }
     //---------------------------------------------------------------------------------------------- submitBasket
 

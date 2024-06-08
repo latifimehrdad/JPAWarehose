@@ -1,11 +1,13 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.setTitleAndValue
+import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
 import com.hoomanholding.applibrary.model.data.response.report.ReportCustomerOrderDetailModel
 import com.hoomanholding.applibrary.model.data.response.report.ReportCustomerOrderModel
 import com.zar.core.tools.extensions.split
@@ -61,6 +63,21 @@ class ReportCustomerOrderHolder(
 
         binding.textViewAmount.text = item.orderAmount.split()
 
+        val state = when (item.orderStates) {
+            EnumOrderState.None -> binding.textViewState.context.getString(R.string.none)
+            EnumOrderState.Rejected -> binding.textViewState.context.getString(R.string.rejected)
+            EnumOrderState.Confirmed -> binding.textViewState.context.getString(R.string.confirmed)
+            EnumOrderState.Packing -> binding.textViewState.context.getString(R.string.packing)
+            EnumOrderState.Billing -> binding.textViewState.context.getString(R.string.billing)
+            EnumOrderState.Loading -> binding.textViewState.context.getString(R.string.loading)
+            EnumOrderState.Sent -> binding.textViewState.context.getString(R.string.sent)
+        }
+
+        binding.textViewState.setTitleAndValue(
+            title = binding.textViewState.context.getString(R.string.status),
+            splitter = binding.textViewState.context.getString(R.string.colon),
+            value = state
+        )
 
         if (binding.expandableMore.isExpanded)
             binding.expandableMore.collapse()

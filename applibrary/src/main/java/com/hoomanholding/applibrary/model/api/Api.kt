@@ -269,6 +269,7 @@ interface Api {
     @GET("$basket/basket-submit")
     suspend fun requestSubmitBasket(
         @Query("description") description: String,
+        @Query("exhibition") exhibition: Boolean,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Long?>>
     //---------------------------------------------------------------------------------------------- basket

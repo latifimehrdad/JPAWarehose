@@ -115,12 +115,28 @@
                     android:textColor="@color/buttonTextColor"
                     android:textSize="@dimen/textSizeH3" />
 
+                <TextView
+                    android:id="@+id/textViewTotalAmountOfCashProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans_light"
+                    android:gravity="center"
+                    android:textColor="@color/buttonTextColor"
+                    android:layout_marginTop="5dp"
+                    android:textSize="@dimen/textSizeH3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
                 <com.hoomanholding.applibrary.view.custom.JpaButton
                     android:id="@+id/buttonSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/primaryChangeColor"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:hint="@string/bePatient"
                     app:cornerRadius="@dimen/radius2"
                     android:textSize="@dimen/textSizeH3"
@@ -130,6 +146,22 @@
                     android:fontFamily="@font/iransans_medium"
                     android:textColor="@color/textColor"
                     android:text='@string/saveOrder' />
+
+                <CheckBox
+                    android:id="@+id/checkboxExhibit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSizeH3"
+                    android:fontFamily="@font/iransans_medium"
+                    android:text="@string/exhibitionBasket"
+                    android:textColor="@color/buttonTextColor"
+                    android:layoutDirection="rtl"
+                    android:layout_marginHorizontal="10dp"
+                    android:buttonTint="@color/a_credit"/>
+
+            </LinearLayout>
+
+
 
             </LinearLayout>
 

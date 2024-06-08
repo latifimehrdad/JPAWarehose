@@ -147,10 +147,13 @@ class BasketViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
-    fun requestSubmitBasket(description: String) {
+    fun requestSubmitBasket(description: String, exhibition: Boolean) {
         viewModelScope.launch(IO + exceptionHandler()) {
             callApi(
-                request = basketRepository.requestSubmitBasket(description),
+                request = basketRepository.requestSubmitBasket(
+                    description = description,
+                    exhibition = exhibition
+                ),
                 onReceiveData = { submitBasketLiveData.postValue(true) }
             )
         }
