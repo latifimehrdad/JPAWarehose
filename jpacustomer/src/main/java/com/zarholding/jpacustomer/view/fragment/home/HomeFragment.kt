@@ -10,6 +10,7 @@ import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
+import com.hoomanholding.applibrary.tools.RoleManager
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
@@ -22,6 +23,7 @@ import com.zarholding.jpacustomer.view.adapter.holder.OrderHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.OrderAdapter
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import com.zarholding.jpacustomer.view.dialog.order.OrderDetailDialog
+import javax.inject.Inject
 
 
 /**
@@ -32,6 +34,9 @@ import com.zarholding.jpacustomer.view.dialog.order.OrderDetailDialog
 @AndroidEntryPoint
 class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     JpaFragment<FragmentHomeBinding>() {
+
+    @Inject
+    lateinit var roleManager: RoleManager
 
     private val viewModel: HomeViewModel by viewModels()
     private var adapter: OrderAdapter? = null
@@ -67,6 +72,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         binding.shimmerViewContainer.config(getShimmerBuild())
         binding.swipeContainer.setColorSchemeResources(
@@ -75,6 +81,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             android.R.color.holo_orange_light,
             android.R.color.holo_red_light
         )
+        checkPermissions()
         observeLiveDate()
         resetSteps()
         setListener()
@@ -83,6 +90,16 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         getCustomerOrders()
     }
     //---------------------------------------------------------------------------------------------- initView
+
+
+    //---------------------------------------------------------------------------------------------- checkPermissions
+    private fun checkPermissions() {
+        if (roleManager.isAccessToDetailOfOrderInHome())
+            binding.buttonShowOrderDetail.visibility = View.VISIBLE
+        else
+            binding.buttonShowOrderDetail.visibility = View.INVISIBLE
+    }
+    //---------------------------------------------------------------------------------------------- checkPermissions
 
 
     //---------------------------------------------------------------------------------------------- observeLiveDate

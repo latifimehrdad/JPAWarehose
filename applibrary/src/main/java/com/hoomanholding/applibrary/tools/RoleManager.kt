@@ -17,6 +17,11 @@ class RoleManager @Inject constructor(
 ) {
 
     private val customerOrderReport = "Reports.Sales.customerOrderReport" // نمایش دکمه گزارش سفارش مشتری
+    private val detailOfOrderInHome = "123"// نمایش دکمه جزئیات سفارش صفحه اصلی
+    private val detailOfUserInProfile = "132"// نمایش دکمه وضعیت من در صفحه پروفایل
+    private val basketMenu = "123"// نمایش دکمه سبد خرید در منو
+    private val reportMenu = "123"// نمایش دکمه گزارشات در منو
+
 
 
     //---------------------------------------------------------------------------------------------- accessByRole
@@ -25,9 +30,30 @@ class RoleManager @Inject constructor(
     //---------------------------------------------------------------------------------------------- accessByRole
 
 
-    //---------------------------------------------------------------------------------------------- isAccessToAdminBus
+    //---------------------------------------------------------------------------------------------- isAccessToCustomerOrderReport
     fun isAccessToCustomerOrderReport() = accessByRole(customerOrderReport)
-    //---------------------------------------------------------------------------------------------- isAccessToAdminBus
+    //---------------------------------------------------------------------------------------------- isAccessToCustomerOrderReport
+
+
+    //---------------------------------------------------------------------------------------------- isAccessToDetailOfOrderInHome
+    fun isAccessToDetailOfOrderInHome() = accessByRole(detailOfOrderInHome)
+    //---------------------------------------------------------------------------------------------- isAccessToDetailOfOrderInHome
+
+
+
+    //---------------------------------------------------------------------------------------------- isAccessToDetailOfUserInProfile
+    fun isAccessToDetailOfUserInProfile() = accessByRole(detailOfUserInProfile)
+    //---------------------------------------------------------------------------------------------- isAccessToDetailOfUserInProfile
+
+
+    //---------------------------------------------------------------------------------------------- isAccessToBasketMenu
+    fun isAccessToBasketMenu() = accessByRole(basketMenu)
+    //---------------------------------------------------------------------------------------------- isAccessToBasketMenu
+
+
+    //---------------------------------------------------------------------------------------------- isAccessToReportMenu
+    fun isAccessToReportMenu() = accessByRole(reportMenu)
+    //---------------------------------------------------------------------------------------------- isAccessToReportMenu
 
 
 }

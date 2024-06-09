@@ -18,10 +18,12 @@ import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.tools.RoleManager
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity() {
     private var navController: NavController? = null
 
     private val mainViewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var roleManager: RoleManager
 
     //---------------------------------------------------------------------------------------------- onCreate
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        checkPermissions()
         setAppTheme()
         setListener()
         hideProfileView()
@@ -83,6 +89,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
     //---------------------------------------------------------------------------------------------- initView
+
+
+    //---------------------------------------------------------------------------------------------- checkPermissions
+    private fun checkPermissions() {
+        if (roleManager.isAccessToBasketMenu())
+            binding.customMenuCart.visibility = View.VISIBLE
+        else
+            binding.customMenuCart.visibility = View.GONE
+
+        if (roleManager.isAccessToReportMenu())
+            binding.customMenuReport.visibility = View.VISIBLE
+        else
+            binding.customMenuReport.visibility = View.GONE
+    }
+    //---------------------------------------------------------------------------------------------- checkPermissions
 
 
     //______________________________________________________________________________________________ setAppTheme

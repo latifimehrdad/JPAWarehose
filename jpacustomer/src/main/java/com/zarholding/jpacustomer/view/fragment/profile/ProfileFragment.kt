@@ -17,6 +17,7 @@ import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.tools.BiometricManager
+import com.hoomanholding.applibrary.tools.RoleManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.manager.ThemeManager
@@ -53,6 +54,9 @@ class ProfileFragment(
     @Inject
     lateinit var biometricManager: BiometricManager
 
+    @Inject
+    lateinit var roleManager: RoleManager
+
 
     //---------------------------------------------------------------------------------------------- launcher
     private val launcher =
@@ -88,11 +92,23 @@ class ProfileFragment(
         binding.imageViewLocation.startAnimation(alpha)
         binding.textViewVersion.text = viewModel.getAppVersion()
         checkTheme()
+        checkPermissions()
         observeLiveDate()
         setListener()
         viewModel.getUserInfo()
     }
     //---------------------------------------------------------------------------------------------- initView
+
+
+    //---------------------------------------------------------------------------------------------- checkPermissions
+    private fun checkPermissions() {
+        if (roleManager.isAccessToDetailOfUserInProfile())
+            binding.textViewMyState.visibility = View.VISIBLE
+        else
+            binding.textViewMyState.visibility = View.INVISIBLE
+    }
+    //---------------------------------------------------------------------------------------------- checkPermissions
+
 
 
     //---------------------------------------------------------------------------------------------- observeLiveDate
