@@ -140,6 +140,8 @@
     <string name="writeNewMessage">پیام خود را بگذارید…</string>
     <string name="isSending">در حال ارسال پیام …</string>
     <string name="exhibitionBasket">سبد نمایشگاه</string>
+    <string name="category">دسته بندی</string>
+    <string name="chooseCategory">انتخاب دسته بندی</string>
 <!--    <string name="finishStatus">بسته شده</string>-->
 <!--    <string name="replyByAdminStatus">پاسخ پشتیبان</string>-->
 <!--    <string name="replyByUser">پاسخ شما</string>-->

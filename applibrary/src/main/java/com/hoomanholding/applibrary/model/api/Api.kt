@@ -9,6 +9,7 @@ import com.hoomanholding.applibrary.model.data.request.*
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.model.data.response.about.AboutModel
 import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
+import com.hoomanholding.applibrary.model.data.response.category.CategoryModel
 import com.hoomanholding.applibrary.model.data.response.critic.CriticDetailModel
 import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
@@ -160,6 +161,12 @@ interface Api {
         @Query("ErrorText") errorText: String,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$baseData/basedata-GetProductCategory")
+    suspend fun requestGetProductCategory(
+            @Query("lvl") lvl: Int,
+            @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CategoryModel>?>>
     //---------------------------------------------------------------------------------------------- baseData
 
 

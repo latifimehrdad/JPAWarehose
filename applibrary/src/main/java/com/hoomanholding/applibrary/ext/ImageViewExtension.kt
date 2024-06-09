@@ -23,7 +23,7 @@ import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 //-------------------------------------------------------------------------------------------------- downloadProfileImage
 @SuppressLint("UseCompatLoadingForDrawables")
 fun ImageView.downloadImage(url: String?, placeholder: Drawable?) {
-    if (url.isNullOrEmpty()) {
+    if (url == null) {
         this.setImageDrawable(context.getDrawable(R.drawable.profile_image))
         return
     }

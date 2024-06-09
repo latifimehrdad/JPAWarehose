@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
-import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
+import com.hoomanholding.applibrary.model.data.response.category.CategoryModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
@@ -22,8 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProductBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
-import com.zarholding.jpacustomer.view.adapter.IntSpinnerAdapter
+import com.zarholding.jpacustomer.view.adapter.holder.CategoryHolder
 import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
+import com.zarholding.jpacustomer.view.adapter.recycler.CategoryAdapter
 import com.zarholding.jpacustomer.view.adapter.recycler.ProductAdapter
 import com.zarholding.jpacustomer.view.dialog.product.ProductDetailDialog
 
@@ -44,6 +45,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.shimmerViewContainer.config(getShimmerBuild())
+        binding.shimmerViewContainerCategory.config(getShimmerBuild())
         initView()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -52,6 +54,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
         binding.shimmerViewContainer.stopLoading()
+        binding.shimmerViewContainerCategory.stopLoading()
         activity?.let { (it as MainActivity).showMessage(message) }
     }
     //---------------------------------------------------------------------------------------------- showMessage
@@ -64,6 +67,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         setListener()
         getProduct()
         setSortSpinner()
+        setCategoryLevelSpinner()
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -99,10 +103,16 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             binding.shimmerViewContainer.stopLoading()
             setProductAdapter(it)
             binding.spinnerSort.selectItemByIndex(viewModel.getSortIndex())
+            binding.spinnerCategory.selectItemByIndex(viewModel.getCategoryLevelIndex())
         }
 
         viewModel.basketCountLiveData.observe(viewLifecycleOwner) {
             animationToCart(imageViewSelect, it)
+        }
+
+        viewModel.categoryLiveData.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainerCategory.stopLoading()
+            setCategoryAdapter(it)
         }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -157,6 +167,29 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
 
 
+    //---------------------------------------------------------------------------------------------- setSortSpinner
+    private fun setCategoryLevelSpinner() {
+
+        binding.spinnerCategory.apply {
+            setSpinnerAdapter(IconSpinnerAdapter(this))
+            setItems(viewModel.getCategoryLevel())
+            getSpinnerRecyclerView().layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            lifecycleOwner = viewLifecycleOwner
+            setOnSpinnerOutsideTouchListener { _, _ -> dismiss() }
+            setOnSpinnerItemSelectedListener<IconSpinnerItem> { oldIndex, _, newIndex, _ ->
+                if (oldIndex != newIndex) {
+                    binding.shimmerViewContainerCategory.startLoading()
+                    viewModel.setCategoryLevel(index = newIndex)
+                }
+            }
+        }
+
+        binding.spinnerCategory.selectItemByIndex(viewModel.getCategoryLevelIndex())
+    }
+    //---------------------------------------------------------------------------------------------- setSortSpinner
+
+
     //---------------------------------------------------------------------------------------------- getProduct
     private fun getProduct() {
         binding.shimmerViewContainer.startLoading()
@@ -184,6 +217,31 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         binding.recyclerViewProduct.layoutManager = manager
     }
     //---------------------------------------------------------------------------------------------- setProductAdapter
+
+
+
+    //---------------------------------------------------------------------------------------------- setProductAdapter
+    private fun setCategoryAdapter(items: List<CategoryModel>) {
+        if (context == null)
+            return
+        binding.recyclerViewCategory.adapter = null
+        CategoryAdapter.selectedPosition = viewModel.getCategoryIndex()
+        val click = object : CategoryHolder.Click {
+            override fun click(position: Int, item: CategoryModel) {
+                viewModel.setCategoryIndex(index = position)
+                CategoryAdapter.selectedPosition = position
+                binding.recyclerViewCategory.adapter?.notifyItemRangeChanged(0, items.size)
+            }
+        }
+        val adapter = CategoryAdapter(items, click)
+        val manager = LinearLayoutManager(
+                requireContext(),LinearLayoutManager.HORIZONTAL, true
+        )
+        binding.recyclerViewCategory.adapter = adapter
+        binding.recyclerViewCategory.layoutManager = manager
+    }
+    //---------------------------------------------------------------------------------------------- setProductAdapter
+
 
 
 

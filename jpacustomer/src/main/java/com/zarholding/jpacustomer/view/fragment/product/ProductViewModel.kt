@@ -2,11 +2,13 @@ package com.zarholding.jpacustomer.view.fragment.product
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.response.category.CategoryModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.zar.core.tools.extensions.persianNumberToEnglishNumber
 import com.zarholding.jpacustomer.model.repository.BasketRepository
+import com.zarholding.jpacustomer.model.repository.ProductCategoryRepository
 import com.zarholding.jpacustomer.model.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -21,8 +23,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(
-    private val productRepository: ProductRepository,
-    private val basketRepository: BasketRepository
+        private val productRepository: ProductRepository,
+        private val basketRepository: BasketRepository,
+        private val productCategoryRepository: ProductCategoryRepository
 ) : JpaViewModel() {
 
     private var productsList: List<ProductModel>? = null
@@ -33,6 +36,19 @@ class ProductViewModel @Inject constructor(
         MutableLiveData<List<ProductModel>>()
     }
     val basketCountLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+
+    private var categoryLevel: CategoryLevel? = null
+    private var categoryIndex : Int = -1
+    private var categoryList: List<CategoryModel> = emptyList()
+    val categoryLiveData: MutableLiveData<List<CategoryModel>> by lazy {
+        MutableLiveData<List<CategoryModel>>()
+    }
+
+
+    enum class CategoryLevel(val persianName: String, val index: Int, val level: Int) {
+        MaxPrice("سطح 3", 0, 3),
+        MinPrice("سطح 4", 1, 4)
+    }
 
 
     enum class SortType(val persianName: String, val index: Int) {
@@ -50,12 +66,45 @@ class ProductViewModel @Inject constructor(
         val list = mutableListOf<IconSpinnerItem>()
         for (name in SortType.values()) {
             list.add(
-                IconSpinnerItem(name.persianName)
+                    IconSpinnerItem(name.persianName)
             )
         }
         return list
     }
     //---------------------------------------------------------------------------------------------- getItemsSort
+
+
+    //---------------------------------------------------------------------------------------------- getCategoryLevel
+    fun getCategoryLevel(): List<IconSpinnerItem> {
+        val list = mutableListOf<IconSpinnerItem>()
+        for (name in CategoryLevel.values()) {
+            list.add(
+                    IconSpinnerItem(name.persianName)
+            )
+        }
+        return list
+    }
+    //---------------------------------------------------------------------------------------------- getCategoryLevel
+
+
+    //---------------------------------------------------------------------------------------------- getProduct
+    private fun getCategory() {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            categoryLevel?.let { cat ->
+                callApi(
+                        request = productCategoryRepository.requestGetProductCategory(
+                                lvl = cat.level
+                        ),
+                        onReceiveData = {
+                            categoryList = it
+                            categoryLiveData.postValue(categoryList)
+                            searchProduct(productsList?: emptyList())
+                        }
+                )
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getProduct
 
 
     //---------------------------------------------------------------------------------------------- getProduct
@@ -65,12 +114,12 @@ class ProductViewModel @Inject constructor(
                 searchProduct(it)
             } ?: run {
                 callApi(
-                    request = productRepository.requestGetCustomerProducts(),
-                    onReceiveData = { products ->
-                        sortType = null
-                        productsList = products
-                        searchProduct(products)
-                    }
+                        request = productRepository.requestGetCustomerProducts(),
+                        onReceiveData = { products ->
+                            sortType = null
+                            productsList = products
+                            searchProduct(products)
+                        }
                 )
             }
         }
@@ -99,7 +148,7 @@ class ProductViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- searchProduct
     private fun searchProduct(items: List<ProductModel>) {
-        val list = sortList(items = filterProductList(items = items))
+        val list = sortList(items = filterByCategory(items = filterProductList(items = items)))
         productLiveData.postValue(list)
     }
     //---------------------------------------------------------------------------------------------- searchProduct
@@ -131,48 +180,76 @@ class ProductViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- filterProductList
 
 
-    //---------------------------------------------------------------------------------------------- sortList
-    private fun sortList(items: List<ProductModel>) =
-        if (sortType == null)
-            items
-        else
-            when (sortType!!) {
-                SortType.MaxPrice -> {
-                    items.sortedByDescending { model ->
-                        model.price
+    //---------------------------------------------------------------------------------------------- filterByCategory
+    private fun filterByCategory(items: List<ProductModel>) : List<ProductModel> {
+            if (categoryLevel == null || categoryIndex == -1 || categoryList.size < categoryIndex + 1)
+                return items
+            else {
+                val category = categoryList[categoryIndex]
+                return when(categoryLevel!!.level) {
+                    3 -> {
+                        items.filter {product ->
+                            product.productCategoryLevel3 == category.productCategoryCode
+                        }
                     }
-                }
 
-                SortType.MinPrice -> {
-                    items.sortedBy { model ->
-                        model.price
+                    4 -> {
+                        items.filter {product ->
+                            product.productCategoryLevel4 == category.productCategoryCode
+                        }
                     }
-                }
 
-                SortType.BestSales -> {
-                    items.sortedByDescending { model ->
-                        model.price
-                    }
-                }
-
-                SortType.LowestSales -> {
-                    items.sortedBy { model ->
-                        model.price
-                    }
-                }
-
-                SortType.ProductCode -> {
-                    items.sortedBy { model ->
-                        model.productCode
-                    }
-                }
-
-                SortType.ProductName -> {
-                    items.sortedBy { model ->
-                        model.productName
+                    else -> {
+                        items
                     }
                 }
             }
+        }
+    //---------------------------------------------------------------------------------------------- filterByCategory
+
+
+    //---------------------------------------------------------------------------------------------- sortList
+    private fun sortList(items: List<ProductModel>) =
+            if (sortType == null)
+                items
+            else
+                when (sortType!!) {
+                    SortType.MaxPrice -> {
+                        items.sortedByDescending { model ->
+                            model.price
+                        }
+                    }
+
+                    SortType.MinPrice -> {
+                        items.sortedBy { model ->
+                            model.price
+                        }
+                    }
+
+                    SortType.BestSales -> {
+                        items.sortedByDescending { model ->
+                            model.price
+                        }
+                    }
+
+                    SortType.LowestSales -> {
+                        items.sortedBy { model ->
+                            model.price
+                        }
+                    }
+
+                    SortType.ProductCode -> {
+                        items.sortedBy { model ->
+                            model.productCode
+                        }
+                    }
+
+                    SortType.ProductName -> {
+                        items.sortedBy { model ->
+                            model.productName
+                        }
+                    }
+                }
     //---------------------------------------------------------------------------------------------- sortList
 
 
@@ -192,8 +269,8 @@ class ProductViewModel @Inject constructor(
     fun getBasketCount() {
         viewModelScope.launch(IO + exceptionHandler()) {
             callApi(
-                request = basketRepository.requestGetBasketCount(),
-                onReceiveData = { basketCountLiveData.postValue(it) }
+                    request = basketRepository.requestGetBasketCount(),
+                    onReceiveData = { basketCountLiveData.postValue(it) }
             )
         }
     }
@@ -205,11 +282,41 @@ class ProductViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getSortIndex
 
 
+    //---------------------------------------------------------------------------------------------- getCategoryLevelIndex
+    fun getCategoryLevelIndex() = categoryLevel?.index ?: -1
+    //---------------------------------------------------------------------------------------------- getCategoryLevelIndex
+
+
+    //---------------------------------------------------------------------------------------------- getCategoryLevelIndex
+    fun getCategoryIndex() = categoryIndex
+    //---------------------------------------------------------------------------------------------- getCategoryLevelIndex
+
+
     //---------------------------------------------------------------------------------------------- setSortIndex
     fun setSortIndex(index: Int) {
         sortType = SortType.values().find {
             it.index == index
         }
+        getProduct()
+    }
+    //---------------------------------------------------------------------------------------------- setSortIndex
+
+
+    //---------------------------------------------------------------------------------------------- setSortIndex
+    fun setCategoryLevel(index: Int) {
+        if (index != categoryLevel?.index)
+            categoryIndex = -1
+        categoryLevel = CategoryLevel.values().find {
+            it.index == index
+        }
+        getCategory()
+    }
+    //---------------------------------------------------------------------------------------------- setSortIndex
+
+
+    //---------------------------------------------------------------------------------------------- setSortIndex
+    fun setCategoryIndex(index: Int) {
+        categoryIndex = index
         getProduct()
     }
     //---------------------------------------------------------------------------------------------- setSortIndex

@@ -17,10 +17,10 @@ class RoleManager @Inject constructor(
 ) {
 
     private val customerOrderReport = "Reports.Sales.customerOrderReport" // نمایش دکمه گزارش سفارش مشتری
-    private val detailOfOrderInHome = "123"// نمایش دکمه جزئیات سفارش صفحه اصلی
-    private val detailOfUserInProfile = "132"// نمایش دکمه وضعیت من در صفحه پروفایل
-    private val basketMenu = "123"// نمایش دکمه سبد خرید در منو
-    private val reportMenu = "123"// نمایش دکمه گزارشات در منو
+    private val detailOfOrderInHome = "Customers.OrderDetails"// نمایش دکمه جزئیات سفارش صفحه اصلی
+    private val detailOfUserInProfile = "Customers.Details"// نمایش دکمه وضعیت من در صفحه پروفایل
+    private val basketMenu = "Customer.Basket"// نمایش دکمه سبد خرید در منو
+    private val reportMenu = "Reports.Sales"// نمایش دکمه گزارشات در منو
 
 
 
