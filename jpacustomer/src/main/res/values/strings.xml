@@ -84,6 +84,7 @@
     <string name="totalCredit">جمع بستانکاری</string>
     <string name="totalDebit">جمع بدهکاری</string>
     <string name="totalAmount">مبلغ کل</string>
+    <string name="totalCashAmount">مبلغ کالاهای نقدی</string>
     <string name="fi">مبلغ واحد</string>
     <string name="historyOfCompany">تاریخچه مجموعه</string>
     <string name="collectionVideos">ویدیوهای مجموعه</string>

@@ -9,5 +9,6 @@ data class BasketModel(
     val basketDate: String?,
     val basketNumber: Int,
     val basketAmount: Long,
+    val isExhibitionActive: Boolean,
     val items: List<DetailBasketModel>?
 )

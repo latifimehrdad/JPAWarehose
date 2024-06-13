@@ -159,7 +159,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     //---------------------------------------------------------------------------------------------- getProduct
     private fun getProduct() {
         binding.shimmerViewContainer.startLoading()
-        viewModel.getProduct()
+        viewModel.getBasket()
     }
     //---------------------------------------------------------------------------------------------- getProduct
 
@@ -208,8 +208,16 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
             return
         }
         var amount : Long = 0
-        for (item in viewModel.productsList!!)
+        var cashAmount: Long = 0
+        for (item in viewModel.productsList!!) {
             amount += (item.count * item.price)
+            if (item.isCash)
+                cashAmount += (item.count * item.price)
+        }
+        if (viewModel.isExhibitionActive)
+            binding.checkboxExhibit.visibility = View.VISIBLE
+        else
+            binding.checkboxExhibit.visibility = View.GONE
         binding.textViewTotalAmount.setTitleAndValue(
             title = getString(R.string.totalAmount),
             splitter = getString(R.string.colon),
@@ -217,10 +225,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
             value = amount
         )
         binding.textViewTotalAmountOfCashProduct.setTitleAndValue(
-            title = getString(R.string.totalAmount),
+            title = getString(R.string.totalCashAmount),
             splitter = getString(R.string.colon),
             last = getString(R.string.rial),
-            value = amount
+            value = cashAmount
         )
         binding.cardViewCalculateBasket.visibility = View.VISIBLE
     }

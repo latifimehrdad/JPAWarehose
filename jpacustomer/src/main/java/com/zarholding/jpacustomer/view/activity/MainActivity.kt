@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
-        checkPermissions()
         setAppTheme()
         setListener()
         hideProfileView()
@@ -92,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
 
     //---------------------------------------------------------------------------------------------- checkPermissions
-    private fun checkPermissions() {
+    fun checkPermissions() {
         if (roleManager.isAccessToBasketMenu())
             binding.customMenuCart.visibility = View.VISIBLE
         else

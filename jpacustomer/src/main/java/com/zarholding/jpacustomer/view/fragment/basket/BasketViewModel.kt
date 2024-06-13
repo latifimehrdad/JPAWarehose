@@ -3,6 +3,7 @@ package com.zarholding.jpacustomer.view.fragment.basket
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.request.AddToBasket
+import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
 import com.hoomanholding.applibrary.model.data.response.basket.DetailBasketModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zarholding.jpacustomer.model.repository.BasketRepository
@@ -30,10 +31,11 @@ class BasketViewModel @Inject constructor(
     val addToBasketLiveData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean> () }
     val submitBasketLiveData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean> () }
     var productShowListType = false
+    var isExhibitionActive: Boolean = false
 
 
-    //---------------------------------------------------------------------------------------------- getProduct
-    fun getProduct() {
+    //---------------------------------------------------------------------------------------------- getBasket
+    fun getBasket() {
         viewModelScope.launch(IO + exceptionHandler()) {
             productsList?.let {
                 searchProduct(it)
@@ -41,6 +43,7 @@ class BasketViewModel @Inject constructor(
                 callApi(
                     request = basketRepository.requestGetDetailBasket(),
                     onReceiveData = {
+                        isExhibitionActive = it.isExhibitionActive
                         it.items?.let {products ->
                             productsList = products
                             searchProduct(products)
@@ -51,14 +54,14 @@ class BasketViewModel @Inject constructor(
             getBasketCount()
         }
     }
-    //---------------------------------------------------------------------------------------------- getProduct
+    //---------------------------------------------------------------------------------------------- getBasket
 
 
 
     //---------------------------------------------------------------------------------------------- setFilterByProductName
     fun setFilterByProductName(search: String) {
         productSearch = search
-        getProduct()
+        getBasket()
     }
     //---------------------------------------------------------------------------------------------- setFilterByProductName
 
@@ -124,7 +127,7 @@ class BasketViewModel @Inject constructor(
                 request = basketRepository.requestDeleteBasket(productId),
                 onReceiveData = {
                     productsList = null
-                    getProduct()
+                    getBasket()
                     getBasketCount()
                 }
             )

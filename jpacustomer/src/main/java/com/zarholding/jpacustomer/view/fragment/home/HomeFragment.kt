@@ -72,7 +72,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
-
+        activity?.let { (it as MainActivity).checkPermissions() }
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         binding.shimmerViewContainer.config(getShimmerBuild())
         binding.swipeContainer.setColorSchemeResources(

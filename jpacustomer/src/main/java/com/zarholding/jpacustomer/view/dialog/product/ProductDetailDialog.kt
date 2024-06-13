@@ -18,12 +18,14 @@ import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
 import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
+import com.hoomanholding.applibrary.tools.RoleManager
 import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.DialogProductDetailBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Created by m-latifi on 6/4/2023.
@@ -37,6 +39,9 @@ class ProductDetailDialog(
 
     private val viewModel: ProductDetailViewModel by viewModels()
     private lateinit var binding: DialogProductDetailBinding
+
+    @Inject
+    lateinit var roleManager: RoleManager
 
 
     //---------------------------------------------------------------------------------------------- Click
@@ -79,6 +84,7 @@ class ProductDetailDialog(
 
     //---------------------------------------------------------------------------------------------- getValueToXml
     private fun getValueToXml() {
+        binding.imageviewStatus.visibility = View.GONE
         binding.editTextCount.setText("0")
         binding.textViewName.text = product.productName
         binding.touchImageView.downloadProfileImage(
@@ -104,6 +110,17 @@ class ProductDetailDialog(
             product.productCountinPackage.split(),
             product.productCountinBox.split()
         )
+        if (product.isCash)
+            binding.imageviewStatus.visibility = View.VISIBLE
+
+        if (roleManager.isAccessToBasketMenu()) {
+            binding.linearLayoutCount.visibility = View.VISIBLE
+            binding.buttonYes.visibility = View.VISIBLE
+        } else {
+            binding.linearLayoutCount.visibility = View.GONE
+            binding.buttonYes.visibility = View.GONE
+        }
+
     }
     //---------------------------------------------------------------------------------------------- getValueToXml
 

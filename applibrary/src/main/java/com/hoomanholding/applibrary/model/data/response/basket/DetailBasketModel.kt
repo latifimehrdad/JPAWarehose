@@ -13,5 +13,6 @@ data class DetailBasketModel(
     var count: Int,
     val price: Long,
     val detailAmount: Long,
-    val productThumbnailImageName: String?
+    val productThumbnailImageName: String?,
+    val isCash: Boolean
 )

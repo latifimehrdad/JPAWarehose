@@ -107,22 +107,22 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/textViewTotalAmountOfCashProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans_light"
+                    android:gravity="center"
+                    android:textColor="@color/yellow"
+                    android:textSize="@dimen/textSizeH3" />
+
+                <TextView
                     android:id="@+id/textViewTotalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans_light"
                     android:gravity="center"
                     android:textColor="@color/buttonTextColor"
-                    android:textSize="@dimen/textSizeH3" />
-
-                <TextView
-                    android:id="@+id/textViewTotalAmountOfCashProduct"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans_light"
-                    android:gravity="center"
-                    android:textColor="@color/buttonTextColor"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:textSize="@dimen/textSizeH3" />
 
                 <LinearLayout
