@@ -32,6 +32,8 @@
     <string name="currentStep">مرحله ی فعلی</string>
     <string name="oldOrder">سفارشات قبلی</string>
     <string name="mobileNumber">شماره موبایل</string>
+    <string name="checkNumber">شماره چک</string>
+    <string name="checkDate">تاریخ چک</string>
     <string name="showAll">نمایش همه</string>
     <string name="sortBy">مرتب سازی بر اساس</string>
     <string name="productCallForPrice">استعلام قیمت کالاها</string>
@@ -84,6 +86,8 @@
     <string name="totalCredit">جمع بستانکاری</string>
     <string name="totalDebit">جمع بدهکاری</string>
     <string name="totalAmount">مبلغ کل</string>
+    <string name="amount">مبلغ</string>
+    <string name="diffDay">تاخیر به روز</string>
     <string name="totalCashAmount">مبلغ کالاهای نقدی</string>
     <string name="fi">مبلغ واحد</string>
     <string name="historyOfCompany">تاریخچه مجموعه</string>
@@ -100,6 +104,7 @@
     <string name="factorReport">گزارش فاکتور</string>
     <string name="customerBalanceReport">دفتر مشتری</string>
     <string name="billOfSale">صورتحساب فروش کالا و خدمات</string>
+    <string name="shomarehSayadi">شماره صیادی</string>
     <string name="date">تاریخ</string>
     <string name="chooseDate">انتخاب تاریخ</string>
     <string name="orderDate">تاریخ سفارش</string>

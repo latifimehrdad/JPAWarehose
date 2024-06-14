@@ -9,6 +9,7 @@ import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
+import com.hoomanholding.applibrary.model.data.response.check.RecordCheckNotifyModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.tools.RoleManager
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -112,6 +113,10 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
                 else -> {}
             }
+        }
+
+        viewModel.recordCheckLiveData.observe(viewLifecycleOwner) {
+            checkShowRecordCheckDialog(item = it)
         }
 
         viewModel.orderLiveData.observe(viewLifecycleOwner) {
@@ -315,6 +320,14 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     //---------------------------------------------------------------------------------------------- showNewFeatureDialog
 
 
+
+    //---------------------------------------------------------------------------------------------- checkShowRecordCheckDialog
+    private fun checkShowRecordCheckDialog(item: RecordCheckNotifyModel) {
+        if (!item.isForceExit && item.checkList.isEmpty())
+            return
+
+    }
+    //---------------------------------------------------------------------------------------------- checkShowRecordCheckDialog
 
 
     //---------------------------------------------------------------------------------------------- onDestroyView

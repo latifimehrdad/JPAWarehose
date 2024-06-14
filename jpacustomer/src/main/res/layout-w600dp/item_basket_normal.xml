@@ -14,14 +14,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp">
 
-            <ImageView
-                android:id="@+id/imageViewDelete"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="@string/deleteBasket"
-                android:src="@drawable/a_ic_delete" />
+
 
             <!--        normal show-->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,8 +99,17 @@
                     android:src="@drawable/ic_expire"
                     app:layout_constraintDimensionRatio="W,1:1"
                     app:layout_constraintEnd_toEndOf="@id/imageViewPicture"
-                    app:layout_constraintHeight_percent="0.4"
+                    app:layout_constraintHeight_percent="0.45"
                     app:layout_constraintTop_toTopOf="@id/imageViewPicture" />
+
+                <ImageView
+                    android:id="@+id/imageViewDelete"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:contentDescription="@string/deleteBasket"
+                    android:src="@drawable/a_ic_delete" />
 
                 <LinearLayout
                     android:id="@+id/linearLayoutCount"

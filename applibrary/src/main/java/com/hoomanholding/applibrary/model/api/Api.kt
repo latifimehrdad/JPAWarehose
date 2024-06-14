@@ -10,6 +10,7 @@ import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.model.data.response.about.AboutModel
 import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
 import com.hoomanholding.applibrary.model.data.response.category.CategoryModel
+import com.hoomanholding.applibrary.model.data.response.check.RecordCheckNotifyModel
 import com.hoomanholding.applibrary.model.data.response.critic.CriticDetailModel
 import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
@@ -110,6 +111,11 @@ interface Api {
     suspend fun requestResendVerificationCode(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$user/getNotRecordCheck")
+    suspend fun requestGetNotRecordCheck(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<RecordCheckNotifyModel?>>
     //---------------------------------------------------------------------------------------------- user
 
 

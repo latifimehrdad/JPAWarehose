@@ -2,6 +2,7 @@ package com.zarholding.jpacustomer.view.fragment.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.response.check.RecordCheckNotifyModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
@@ -9,6 +10,7 @@ import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.zar.core.tools.manager.DeviceManager
 import com.zarholding.jpacustomer.model.repository.BasketRepository
 import com.zarholding.jpacustomer.model.repository.OrderRepository
+import com.zarholding.jpacustomer.model.repository.RecordCheckRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -22,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val orderRepository: OrderRepository,
-    private val basketRepository: BasketRepository
+    private val basketRepository: BasketRepository,
+    private val recordCheckRepository: RecordCheckRepository
 ) : JpaViewModel() {
 
     @Inject lateinit var sharedPreferencesManager: SharedPreferencesManager
@@ -35,6 +38,24 @@ class HomeViewModel @Inject constructor(
     var selectedOrder: CustomerOrderModel? = null
     val newVersionLiveData = SingleLiveEvent<String>()
     val basketCountLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+    val recordCheckLiveData: SingleLiveEvent<RecordCheckNotifyModel> by lazy {
+        SingleLiveEvent<RecordCheckNotifyModel>()
+    }
+
+
+    //---------------------------------------------------------------------------------------------- init
+    init {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            callApi(
+                request = recordCheckRepository.requestGetNotRecordCheck(),
+                onReceiveData = {
+                    recordCheckLiveData.postValue(it)
+                }
+            )
+        }
+    }
+    //---------------------------------------------------------------------------------------------- init
+
 
 
     //---------------------------------------------------------------------------------------------- getCustomerOrders
