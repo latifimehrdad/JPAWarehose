@@ -54,10 +54,10 @@ class ProductViewModel @Inject constructor(
     enum class SortType(val persianName: String, val index: Int) {
         MaxPrice("بیشترین قیمت", 0),
         MinPrice("کمترین قیمت", 1),
-        BestSales("بیشترین فروش", 2),
-        LowestSales("کمترین فروش", 3),
-        ProductName("نام کالا", 4),
-        ProductCode("کد کالا", 5)
+//        BestSales("بیشترین فروش", 2),
+//        LowestSales("کمترین فروش", 3),
+        ProductName("نام کالا", 2),
+        ProductCode("کد کالا", 3)
     }
 
 
@@ -221,18 +221,6 @@ class ProductViewModel @Inject constructor(
                     }
 
                     SortType.MinPrice -> {
-                        items.sortedBy { model ->
-                            model.price
-                        }
-                    }
-
-                    SortType.BestSales -> {
-                        items.sortedByDescending { model ->
-                            model.price
-                        }
-                    }
-
-                    SortType.LowestSales -> {
                         items.sortedBy { model ->
                             model.price
                         }

@@ -23,6 +23,7 @@ import com.zarholding.jpacustomer.view.adapter.IntSpinnerAdapter
 import com.zarholding.jpacustomer.view.adapter.holder.OrderHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.OrderAdapter
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
+import com.zarholding.jpacustomer.view.dialog.RecordCheckDialog
 import com.zarholding.jpacustomer.view.dialog.order.OrderDetailDialog
 import javax.inject.Inject
 
@@ -325,7 +326,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
     private fun checkShowRecordCheckDialog(item: RecordCheckNotifyModel) {
         if (!item.isForceExit && item.checkList.isEmpty())
             return
-
+        RecordCheckDialog(item = item).show(childFragmentManager, "RecordCheck")
     }
     //---------------------------------------------------------------------------------------------- checkShowRecordCheckDialog
 

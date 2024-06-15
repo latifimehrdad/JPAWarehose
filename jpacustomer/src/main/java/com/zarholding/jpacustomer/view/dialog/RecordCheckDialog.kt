@@ -37,7 +37,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecordCheckDialog(
-    private val click: Click,
     private val item: RecordCheckNotifyModel
 ) : DialogFragment() {
 
@@ -45,13 +44,6 @@ class RecordCheckDialog(
 
     @Inject
     lateinit var roleManager: RoleManager
-
-
-    //---------------------------------------------------------------------------------------------- Click
-    interface Click {
-        fun select()
-    }
-    //---------------------------------------------------------------------------------------------- Click
 
 
     //---------------------------------------------------------------------------------------------- onCreateView
@@ -75,7 +67,7 @@ class RecordCheckDialog(
         val inset = InsetDrawable(back, 50)
         window?.setBackgroundDrawable(inset)
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT
         window?.attributes = lp
         (activity as MainActivity?)?.hideFragmentContainer()
         getValueToXml()
@@ -111,6 +103,10 @@ class RecordCheckDialog(
         super.onDismiss(dialog)
         if (item.isForceExit)
             activity?.finish()
+        else
+            activity?.let {
+                (it as MainActivity).showFragmentContainer()
+            }
     }
     //---------------------------------------------------------------------------------------------- onDismiss
 }
