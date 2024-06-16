@@ -14,7 +14,7 @@ import com.hoomanholding.applibrary.model.data.database.entity.UserInfoEntity
     entities = [
         UserInfoEntity::class,
         RoleEntity::class],
-    version = 4
+    version = 5
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

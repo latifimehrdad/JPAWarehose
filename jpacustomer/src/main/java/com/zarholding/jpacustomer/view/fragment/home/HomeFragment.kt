@@ -74,6 +74,14 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        if (viewModel.isUserSubset()) {
+            binding.cardViewSubUser.visibility = View.VISIBLE
+            binding.textViewSubUserTitle.visibility = View.VISIBLE
+        }else {
+            binding.cardViewSubUser.visibility = View.GONE
+            binding.textViewSubUserTitle.visibility = View.GONE
+        }
+
         activity?.let { (it as MainActivity).checkPermissions() }
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         binding.shimmerViewContainer.config(getShimmerBuild())

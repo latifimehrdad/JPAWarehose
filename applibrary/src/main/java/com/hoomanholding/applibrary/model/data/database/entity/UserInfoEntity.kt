@@ -25,7 +25,8 @@ data class UserInfoEntity(
     val visitorMobile: String?,
     val userTopicstr: String?,
     val x: Double,
-    val y: Double
+    val y: Double,
+    val isSubset: Boolean
 ) {
     @PrimaryKey(autoGenerate = false)
     var id : Long = 0
