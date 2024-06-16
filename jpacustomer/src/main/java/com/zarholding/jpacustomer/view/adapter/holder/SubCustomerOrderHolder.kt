@@ -1,81 +1,61 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
+import android.content.Context
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.setTitleAndValue
-import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
+import com.hoomanholding.applibrary.model.data.enums.EnumState
+import com.hoomanholding.applibrary.model.data.response.basket.subuser.SubUserOrderDetailModel
+import com.hoomanholding.applibrary.model.data.response.basket.subuser.SubUserOrderModel
 import com.hoomanholding.applibrary.model.data.response.report.ReportCustomerOrderDetailModel
-import com.hoomanholding.applibrary.model.data.response.report.ReportCustomerOrderModel
 import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
-import com.zarholding.jpacustomer.databinding.ItemReportCustomerOrderBinding
-import com.zarholding.jpacustomer.view.adapter.recycler.ReportCustomerOrderDetailAdapter
+import com.zarholding.jpacustomer.databinding.ItemSubCustomerOrderBinding
+import com.zarholding.jpacustomer.view.adapter.recycler.SubCustomerOrderDetailAdapter
+import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 
-/**
- * Created by m-latifi on 6/8/2023.
- */
-
-class ReportCustomerOrderHolder(
-    private val binding: ItemReportCustomerOrderBinding
+class SubCustomerOrderHolder(
+    private val binding: ItemSubCustomerOrderBinding,
+    private val onClick: (state: EnumState, item: SubUserOrderModel, position: Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
     //---------------------------------------------------------------------------------------------- bind
-    fun bind(item: ReportCustomerOrderModel) {
+    fun bind(item: SubUserOrderModel, position: Int) {
         setValueToXml(item)
-        setListener(item)
+        setListener(item = item, position = position)
         binding.executePendingBindings()
     }
     //---------------------------------------------------------------------------------------------- bind
 
 
     //---------------------------------------------------------------------------------------------- setValueToXml
-    private fun setValueToXml(item: ReportCustomerOrderModel) {
-        binding.textViewOrderNumber.setTitleAndValue(
-            title = binding.textViewOrderNumber.context.getString(R.string.orderNumber),
-            splitter = binding.textViewOrderNumber.context.getString(R.string.colon),
-            value = item.orderNumber
-        )
+    private fun setValueToXml(item: SubUserOrderModel) {
+
         binding.textViewDate.setTitleAndValue(
             title = binding.textViewDate.context.getString(R.string.orderDate),
             splitter = binding.textViewDate.context.getString(R.string.colon),
-            value = item.orderDate
-        )
-        binding.textViewCustomerCode.setTitleAndValue(
-            title = binding.textViewDate.context.getString(R.string.customerCode),
-            splitter = binding.textViewDate.context.getString(R.string.colon),
-            value = item.customerCode
-        )
-        binding.textViewStoreName.setTitleAndValue(
-            title = binding.textViewDate.context.getString(R.string.shopName),
-            splitter = binding.textViewDate.context.getString(R.string.colon),
-            value = item.storeName
-        )
-        binding.textViewCustomerName.setTitleAndValue(
-            title = binding.textViewDate.context.getString(R.string.buyerName),
-            splitter = binding.textViewDate.context.getString(R.string.colon),
-            value = item.customerName
+            value = item.basketDate
         )
 
-        binding.textViewAmount.text = item.orderAmount.split()
+        binding.textViewAmount.setTitleAndValue(
+            title = binding.textViewAmount.context.getString(R.string.amount),
+            splitter = binding.textViewAmount.context.getString(R.string.colon),
+            value = item.basketAmount.split()
+        )
 
-        val state = when (item.orderStates) {
-            EnumOrderState.None -> binding.textViewState.context.getString(R.string.none)
-            EnumOrderState.Rejected -> binding.textViewState.context.getString(R.string.rejected)
-            EnumOrderState.Confirmed -> binding.textViewState.context.getString(R.string.confirmed)
-            EnumOrderState.Packing -> binding.textViewState.context.getString(R.string.packing)
-            EnumOrderState.Billing -> binding.textViewState.context.getString(R.string.billing)
-            EnumOrderState.Loading -> binding.textViewState.context.getString(R.string.loading)
-            EnumOrderState.Sent -> binding.textViewState.context.getString(R.string.sent)
-        }
-
-        binding.textViewState.setTitleAndValue(
-            title = binding.textViewState.context.getString(R.string.status),
-            splitter = binding.textViewState.context.getString(R.string.colon),
-            value = state
+        binding.textViewName.setTitleAndValue(
+            title = binding.textViewName.context.getString(R.string.fullName),
+            splitter = binding.textViewName.context.getString(R.string.colon),
+            value = item.fullName
+        )
+        binding.textViewBasketNumber.setTitleAndValue(
+            title = binding.textViewBasketNumber.context.getString(R.string.basketNumber),
+            splitter = binding.textViewBasketNumber.context.getString(R.string.colon),
+            value = item.basketNumber
         )
 
         if (binding.expandableMore.isExpanded)
@@ -85,15 +65,31 @@ class ReportCustomerOrderHolder(
 
 
     //---------------------------------------------------------------------------------------------- setListener
-    private fun setListener(item: ReportCustomerOrderModel) {
+    private fun setListener(item: SubUserOrderModel, position: Int) {
         binding.imageViewMore.setOnClickListener { clickShowMore(item) }
         binding.textViewShowMore.setOnClickListener { clickShowMore(item) }
+        binding.buttonYes.setOnClickListener {
+            showConfirmDialog(
+                context = binding.buttonYes.context,
+                state = EnumState.Confirmed,
+                item = item,
+                position = position
+            )
+        }
+        binding.buttonNo.setOnClickListener {
+            showConfirmDialog(
+                context = binding.buttonNo.context,
+                state = EnumState.Reject,
+                item = item,
+                position = position
+            )
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
     //---------------------------------------------------------------------------------------------- clickShowMore
-    private fun clickShowMore(item: ReportCustomerOrderModel) {
+    private fun clickShowMore(item: SubUserOrderModel) {
         if (binding.expandableMore.isExpanded) {
             binding.recyclerDetail.adapter = null
             binding.expandableMore.collapse()
@@ -108,8 +104,8 @@ class ReportCustomerOrderHolder(
 
 
     //---------------------------------------------------------------------------------------------- setDetailAdapter
-    private fun setDetailAdapter(items: List<ReportCustomerOrderDetailModel>) {
-        val adapter = ReportCustomerOrderDetailAdapter(items)
+    private fun setDetailAdapter(items: List<SubUserOrderDetailModel>) {
+        val adapter = SubCustomerOrderDetailAdapter(items)
         val manager = LinearLayoutManager(
             binding.recyclerDetail.context,
             LinearLayoutManager.VERTICAL,
@@ -161,5 +157,25 @@ class ReportCustomerOrderHolder(
         binding.recyclerDetail.adapter = null
     }
     //---------------------------------------------------------------------------------------------- hideMore
+
+
+    //---------------------------------------------------------------------------------------------- showConfirmDialog
+    private fun showConfirmDialog(context: Context, state: EnumState, item: SubUserOrderModel, position: Int) {
+        val title = when(state) {
+            EnumState.Confirmed -> { context.getString(R.string.areYouSureToConfirmTheOrder) }
+            EnumState.Reject -> { context.getString(R.string.areYouSureToRejectTheOrder) }
+        }
+
+        ConfirmDialog(
+            context = context,
+            title = title,
+            false
+        ){
+            binding.buttonYes.startLoading(context.getString(R.string.bePatient))
+            onClick.invoke(state, item, position)
+        }.show()
+    }
+    //---------------------------------------------------------------------------------------------- showConfirmDialog
+
 
 }

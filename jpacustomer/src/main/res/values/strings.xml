@@ -11,6 +11,8 @@
     <string name="userName">نام کاربری</string>
     <string name="password">رمز عبور</string>
     <string name="visitorName">نام ویزیتور</string>
+    <string name="fullName">نام و نام خانوادگی</string>
+    <string name="basketNumber">شماره سبد</string>
     <string name="buyerName">نام مشتری</string>
     <string name="rePassword">تکرار رمز عبور</string>
     <string name="savePasswordAndFingerPrint">برای ذخیره ی رمز عبور و نام کاربری و ورود با اثر انگشت لطفا این گزینه را  فعال نمایید</string>
@@ -38,6 +40,7 @@
     <string name="sortBy">مرتب سازی بر اساس</string>
     <string name="productCallForPrice">استعلام قیمت کالاها</string>
     <string name="callForPrice">استعلام قیمت</string>
+    <string name="dashboard">داشبورد</string>
     <string name="phoneNumber">تلفن تماس</string>
     <string name="price">قیمت</string>
     <string name="count">تعداد</string>
@@ -46,6 +49,7 @@
     <string name="doYouWantToBasketDelete">آیا برای حذف ( %1$s ) مطمئن هستید؟</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
+    <string name="reject">رد</string>
     <string name="confirmed">تایید شده</string>
     <string name="packing">در حال جمع آوری</string>
     <string name="billing">فاکتور شده</string>
@@ -88,6 +92,8 @@
     <string name="totalAmount">مبلغ کل</string>
     <string name="amount">مبلغ</string>
     <string name="diffDay">تاخیر به روز</string>
+    <string name="notRecord">ثبت نشده</string>
+    <string name="notPass">برگشتی</string>
     <string name="totalCashAmount">مبلغ کالاهای نقدی</string>
     <string name="fi">مبلغ واحد</string>
     <string name="historyOfCompany">تاریخچه مجموعه</string>
@@ -148,6 +154,8 @@
     <string name="exhibitionBasket">سبد نمایشگاه</string>
     <string name="category">دسته بندی</string>
     <string name="chooseCategory">انتخاب دسته بندی</string>
+    <string name="areYouSureToConfirmTheOrder">آیا برای تایید درخواست مطمئن هستید؟</string>
+    <string name="areYouSureToRejectTheOrder">آیا برای رد درخواست مطمئن هستید؟</string>
 <!--    <string name="finishStatus">بسته شده</string>-->
 <!--    <string name="replyByAdminStatus">پاسخ پشتیبان</string>-->
 <!--    <string name="replyByUser">پاسخ شما</string>-->

@@ -180,6 +180,10 @@
         android:id="@+id/customerOrderReportFragment"
         android:name="com.zarholding.jpacustomer.view.fragment.report.order.CustomerOrderReportFragment"/>
 
+    <fragment
+        android:id="@+id/subUserOrderFragment"
+        android:name="com.zarholding.jpacustomer.view.fragment.dashboard.subuser.order.SubUserOrderFragment"/>
+
 
     <action
         android:id="@+id/action_goto_SplashFragment"
@@ -270,5 +274,15 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/customerOrderReportFragment" />
+
+    <action
+        android:id="@+id/action_goto_subUserOrderFragment"
+        app:destination="@id/subUserOrderFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/subUserOrderFragment" />
 
 </navigation>

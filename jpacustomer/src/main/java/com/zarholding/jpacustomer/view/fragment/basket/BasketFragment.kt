@@ -75,6 +75,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainer.stopLoading()
             binding.buttonSubmit.stopLoading()
             showMessage(it.message)
             when (it.type) {

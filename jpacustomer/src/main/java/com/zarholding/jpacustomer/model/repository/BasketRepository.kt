@@ -48,4 +48,22 @@ class BasketRepository @Inject constructor(
             token = tokenRepository.getBearerToken()
         ) }
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
+
+
+    //---------------------------------------------------------------------------------------------- requestSubsetBasket
+    suspend fun requestSubsetBasket() =
+        apiCall { api.requestSubsetBasket(token = tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestSubsetBasket
+
+
+    //---------------------------------------------------------------------------------------------- requestSubmitSubUserBasket
+    suspend fun requestSubmitSubUserBasket(id: String) =
+        apiCall { api.requestSubmitSubUserBasket(
+            id = id,
+            token = tokenRepository.getBearerToken()
+        ) }
+    //---------------------------------------------------------------------------------------------- requestSubmitSubUserBasket
+
+
+
 }

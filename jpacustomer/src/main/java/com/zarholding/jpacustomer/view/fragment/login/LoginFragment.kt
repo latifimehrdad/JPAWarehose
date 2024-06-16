@@ -24,6 +24,7 @@ import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentLoginBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
+import com.zarholding.jpacustomer.view.fragment.home.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -60,6 +61,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = loginViewModel
+        HomeViewModel.isGetRecordCheck = false
         initView()
         setListener()
     }

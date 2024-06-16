@@ -24,6 +24,7 @@ import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.critic.CriticModel
+import com.hoomanholding.applibrary.model.data.response.basket.subuser.SubUserOrderModel
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.data.response.user.UserModel
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
@@ -283,6 +284,17 @@ interface Api {
     suspend fun requestSubmitBasket(
         @Query("description") description: String,
         @Query("exhibition") exhibition: Boolean,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Long?>>
+
+    @GET("$basket/SubsetBasket")
+    suspend fun requestSubsetBasket(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<SubUserOrderModel>?>>
+
+    @GET("$basket/SubsetCustomerBasket-submit")
+    suspend fun requestSubmitSubUserBasket(
+        @Query("Id") id: String,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Long?>>
     //---------------------------------------------------------------------------------------------- basket

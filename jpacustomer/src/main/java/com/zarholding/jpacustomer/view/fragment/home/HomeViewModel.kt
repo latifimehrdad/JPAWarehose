@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.response.check.RecordCheckNotifyModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
+import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
@@ -25,11 +26,18 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val orderRepository: OrderRepository,
     private val basketRepository: BasketRepository,
-    private val recordCheckRepository: RecordCheckRepository
+    private val recordCheckRepository: RecordCheckRepository,
+    private val userRepository: UserRepository
 ) : JpaViewModel() {
 
-    @Inject lateinit var sharedPreferencesManager: SharedPreferencesManager
-    @Inject lateinit var deviceManager: DeviceManager
+    companion object {
+        var isGetRecordCheck = false
+    }
+
+    @Inject
+    lateinit var sharedPreferencesManager: SharedPreferencesManager
+    @Inject
+    lateinit var deviceManager: DeviceManager
 
     val orderLiveData: MutableLiveData<List<CustomerOrderModel>> by lazy {
         MutableLiveData<List<CustomerOrderModel>>()
@@ -46,16 +54,17 @@ class HomeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- init
     init {
         viewModelScope.launch(IO + exceptionHandler()) {
-            callApi(
-                request = recordCheckRepository.requestGetNotRecordCheck(),
-                onReceiveData = {
-                    recordCheckLiveData.postValue(it)
-                }
-            )
+            if (!isGetRecordCheck)
+                callApi(
+                    request = recordCheckRepository.requestGetNotRecordCheck(),
+                    onReceiveData = {
+                        isGetRecordCheck = true
+                        recordCheckLiveData.postValue(it)
+                    }
+                )
         }
     }
     //---------------------------------------------------------------------------------------------- init
-
 
 
     //---------------------------------------------------------------------------------------------- getCustomerOrders
@@ -84,7 +93,6 @@ class HomeViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- getBasketCount
-
 
 
     //---------------------------------------------------------------------------------------------- checkVersionIsNew

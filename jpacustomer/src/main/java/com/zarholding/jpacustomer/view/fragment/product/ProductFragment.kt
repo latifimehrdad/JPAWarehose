@@ -121,6 +121,12 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
 
+        binding.imageViewClearFilter.setOnClickListener {
+            viewModel.clearFilter()
+            binding.editTextSearch.setText("")
+            binding.spinnerSort.clearSelectedItem()
+        }
+
         binding.imageViewClearText.setOnClickListener {
             binding.editTextSearch.setText("")
         }

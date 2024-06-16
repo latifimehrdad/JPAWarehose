@@ -2,6 +2,7 @@ package com.zarholding.jpacustomer.view.adapter.holder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.setTitleAndValue
+import com.hoomanholding.applibrary.model.data.enums.EnumMontazerVosolReason
 import com.hoomanholding.applibrary.model.data.response.check.RecordCheckModel
 import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
@@ -38,6 +39,24 @@ class RecordCheckHolder(
             splitter = context.getString(R.string.colon),
             value = item.diffDay
         )
+
+        val state = when(item.montazerVosolReason) {
+            EnumMontazerVosolReason.NotRecord -> {
+                context.getString(R.string.notRecord)
+            }
+            EnumMontazerVosolReason.NotPass -> {
+                context.getString(R.string.notPass)
+            }
+        }
+        binding.textViewState.setTitleAndValue(
+            title = context.getString(R.string.status),
+            splitter = context.getString(R.string.colon),
+            value = state
+        )
+        if (item.montazerVosolReason == EnumMontazerVosolReason.NotPass) {
+            binding.cardViewParent.setCardBackgroundColor(context.getColor(R.color.red))
+            binding.textViewState.setTextColor(context.getColor(R.color.red))
+        }
     }
 
 }

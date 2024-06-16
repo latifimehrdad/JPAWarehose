@@ -165,6 +165,10 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
         binding.cardViewPriceInquiry.setOnClickListener {
             gotoFragment(R.id.action_homeFragment_to_productFragment)
         }
+
+        binding.cardViewSubUser.setOnClickListener {
+            gotoFragment(R.id.action_goto_subUserOrderFragment)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
