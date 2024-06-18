@@ -30,7 +30,7 @@ class ProductViewModel @Inject constructor(
 
     private var productsList: List<ProductModel>? = null
     private var productSearch: String = ""
-    private var sortType: SortType? = SortType.Discount
+    private var sortType: SortType? = SortType.ProductName
     val productTypeLiveData = MutableLiveData(ProductType.All)
     val productLiveData: MutableLiveData<List<ProductModel>> by lazy {
         MutableLiveData<List<ProductModel>>()
@@ -121,12 +121,14 @@ class ProductViewModel @Inject constructor(
                         onReceiveData = {
                             categoryList = it
                             categoryLiveData.postValue(categoryList)
-                            searchProduct(productsList ?: emptyList())
+                            if (!productsList.isNullOrEmpty())
+                             searchProduct(productsList!!)
                         }
                     )
                 else {
                     categoryLiveData.postValue(emptyList())
-                    searchProduct(productsList ?: emptyList())
+                    if (!productsList.isNullOrEmpty())
+                        searchProduct(productsList!!)
                 }
 
             }
