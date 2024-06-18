@@ -42,7 +42,10 @@ class SubUserOrderViewModel @Inject constructor(
     fun requestSubmitSubUserBasket(id: String, state: EnumState) {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler()){
             callApi(
-                request = basketRepository.requestSubmitSubUserBasket(id),
+                request = basketRepository.requestSubmitSubUserBasket(
+                    id = id,
+                    state = state
+                ),
                 showMessageAfterSuccessResponse = true,
                 onReceiveData = {
                     subsetBasketLiveData.postValue(emptyList())

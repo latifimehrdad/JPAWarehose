@@ -5,6 +5,7 @@ import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.R
 import com.hoomanholding.applibrary.model.data.database.entity.receipt.arrange.ReceiptEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
+import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.request.*
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.model.data.response.about.AboutModel
@@ -295,6 +296,7 @@ interface Api {
     @GET("$basket/SubsetCustomerBasket-submit")
     suspend fun requestSubmitSubUserBasket(
         @Query("Id") id: String,
+        @Query("state") state: EnumState,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Long?>>
     //---------------------------------------------------------------------------------------------- basket

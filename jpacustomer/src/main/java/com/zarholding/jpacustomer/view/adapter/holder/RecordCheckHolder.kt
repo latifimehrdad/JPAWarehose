@@ -14,6 +14,10 @@ class RecordCheckHolder(
 
     fun binding(item: RecordCheckModel) {
         val context = binding.root.context
+        binding.cardViewParent.setCardBackgroundColor(context.getColor(R.color.white))
+        binding.textViewState.setTextColor(context.getColor(R.color.textColor))
+
+
         binding.textViewCheckNumber.setTitleAndValue(
             title = context.getString(R.string.checkNumber),
             splitter = context.getString(R.string.colon),
@@ -53,6 +57,7 @@ class RecordCheckHolder(
             splitter = context.getString(R.string.colon),
             value = state
         )
+
         if (item.montazerVosolReason == EnumMontazerVosolReason.NotPass) {
             binding.cardViewParent.setCardBackgroundColor(context.getColor(R.color.red))
             binding.textViewState.setTextColor(context.getColor(R.color.red))

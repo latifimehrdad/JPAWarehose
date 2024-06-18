@@ -74,7 +74,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
-        if (viewModel.isUserSubset()) {
+        if (!viewModel.isUserSubset()) {
             binding.cardViewSubUser.visibility = View.VISIBLE
             binding.textViewSubUserTitle.visibility = View.VISIBLE
         }else {

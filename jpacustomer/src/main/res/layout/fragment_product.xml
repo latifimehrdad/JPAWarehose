@@ -159,12 +159,32 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.hoomanholding.applibrary.view.custom.JpaButton
+            android:id="@+id/buttonSpecialProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/editTextSearch"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutCategory"
+            app:layout_constraintEnd_toStartOf="@id/buttonNewProduct"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:backgroundTint="@color/color3"
+            android:hint="@string/bePatient"
+            app:cornerRadius="@dimen/radius2"
+            android:textSize="@dimen/textSizeH3"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/white"
+            android:text='شگفت انگیز نمایشگاه' />
+
 
         <com.hoomanholding.applibrary.view.custom.JpaButton
             android:id="@+id/buttonNewProduct"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/editTextSearch"
+            app:layout_constraintStart_toEndOf="@id/buttonSpecialProduct"
             app:layout_constraintTop_toBottomOf="@id/constraintLayoutCategory"
             app:layout_constraintEnd_toStartOf="@id/buttonAllProduct"
             android:layout_marginTop="@dimen/_10sdp"

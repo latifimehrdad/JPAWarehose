@@ -42,6 +42,7 @@ class BasketHolderNormal(
     //---------------------------------------------------------------------------------------------- setValueToXml
     private fun setValueToXml(item: DetailBasketModel) {
         binding.imageviewStatus.visibility = View.GONE
+        binding.imageviewDiscount.visibility = View.GONE
         binding.textViewName.text = item.productName
         binding.textViewPrice.text = item.price.split()
         binding.editTextCount.setText(item.count.toString())
@@ -62,6 +63,9 @@ class BasketHolderNormal(
 
         if (item.isCash)
             binding.imageviewStatus.visibility = View.VISIBLE
+
+        if (item.isSpecial)
+            binding.imageviewDiscount.visibility = View.VISIBLE
 
     }
     //---------------------------------------------------------------------------------------------- setValueToXml

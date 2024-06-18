@@ -101,9 +101,11 @@ class RecordCheckDialog(
     //---------------------------------------------------------------------------------------------- onDismiss
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
-        if (item.isForceExit)
-            activity?.finish()
-        else
+        if (item.isForceExit) {
+            (activity as MainActivity?)?.showFragmentContainer()
+            (activity as MainActivity?)?.gotoFirstFragment()
+//            activity?.finish()
+        } else
             activity?.let {
                 (it as MainActivity).showFragmentContainer()
             }

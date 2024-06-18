@@ -40,6 +40,7 @@ class ProductHolder(
     //---------------------------------------------------------------------------------------------- setValueToXml
     private fun setValueToXml(item: ProductModel) {
         binding.imageviewStatus.visibility = View.GONE
+        binding.imageviewDiscount.visibility = View.GONE
         binding.textViewName.text = item.productName
         binding.textViewPrice.text = item.price.split()
         binding.textViewCode.setTitleAndValue(
@@ -64,6 +65,10 @@ class ProductHolder(
         )
         if (item.isCash)
             binding.imageviewStatus.visibility = View.VISIBLE
+
+        if (item.isSpecial)
+            binding.imageviewDiscount.visibility = View.VISIBLE
+
 
     }
     //---------------------------------------------------------------------------------------------- setValueToXml

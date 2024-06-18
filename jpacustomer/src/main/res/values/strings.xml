@@ -50,7 +50,8 @@
     <string name="doYouWantToBasketDelete">آیا برای حذف ( %1$s ) مطمئن هستید؟</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
-    <string name="reject">رد</string>
+    <string name="reject">عدم تایید</string>
+    <string name="confirmAndSend">تایید و ارسال</string>
     <string name="confirmed">تایید شده</string>
     <string name="packing">در حال جمع آوری</string>
     <string name="billing">فاکتور شده</string>

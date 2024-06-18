@@ -142,12 +142,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/buttonNo"
-                    android:backgroundTint="@color/green"
                     android:textSize="@dimen/buttonTextSize"
                     android:fontFamily="@font/yekan_bakh_medium"
                     app:cornerRadius="@dimen/radius3"
                     android:textColor="@color/buttonTextColor"
-                    android:text='@string/confirm' />
+                    android:text='@string/confirmAndSend' />
 
 
                 <com.hoomanholding.applibrary.view.custom.JpaButton
@@ -162,10 +161,9 @@
                     android:textSize="@dimen/buttonTextSize"
                     android:fontFamily="@font/yekan_bakh_medium"
                     app:cornerRadius="@dimen/radius3"
-                    android:backgroundTint="@color/red"
+                    android:backgroundTint="@color/color3"
                     android:textColor="@color/textColor"
-                    android:text='@string/reject'
-                    android:visibility="gone"/>
+                    android:text='@string/reject' />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

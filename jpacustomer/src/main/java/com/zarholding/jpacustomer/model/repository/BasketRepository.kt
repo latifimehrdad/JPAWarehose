@@ -1,6 +1,7 @@
 package com.zarholding.jpacustomer.model.repository
 
 import com.hoomanholding.applibrary.model.api.Api
+import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.repository.TokenRepository
 import com.zar.core.tools.api.apiCall
@@ -57,9 +58,10 @@ class BasketRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestSubmitSubUserBasket
-    suspend fun requestSubmitSubUserBasket(id: String) =
+    suspend fun requestSubmitSubUserBasket(id: String , state: EnumState) =
         apiCall { api.requestSubmitSubUserBasket(
             id = id,
+            state = state,
             token = tokenRepository.getBearerToken()
         ) }
     //---------------------------------------------------------------------------------------------- requestSubmitSubUserBasket

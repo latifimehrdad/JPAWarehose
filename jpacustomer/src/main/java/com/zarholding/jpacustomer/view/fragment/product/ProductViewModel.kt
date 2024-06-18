@@ -30,8 +30,8 @@ class ProductViewModel @Inject constructor(
 
     private var productsList: List<ProductModel>? = null
     private var productSearch: String = ""
-    private var sortType: SortType? = null
-    val productNewLiveData = MutableLiveData(false)
+    private var sortType: SortType? = SortType.Discount
+    val productTypeLiveData = MutableLiveData(ProductType.All)
     val productLiveData: MutableLiveData<List<ProductModel>> by lazy {
         MutableLiveData<List<ProductModel>>()
     }
@@ -44,22 +44,25 @@ class ProductViewModel @Inject constructor(
         MutableLiveData<List<CategoryModel>>()
     }
 
+    enum class ProductType {
+        All,
+        New,
+        Special
+    }
 
     enum class CategoryLevel(val persianName: String, val index: Int, val level: Int) {
-        MaxPrice("قطعات", 0, 3),
-        MinPrice("ماشین", 1, 4),
+        MaxPrice("گروه قطعات", 0, 3),
+        MinPrice("نوع خودرو", 1, 4),
         All("همه", 2, 0)
     }
 
 
     enum class SortType(val persianName: String, val index: Int) {
-        MaxPrice("بیشترین قیمت", 0),
-        MinPrice("کمترین قیمت", 1),
-
-        //        BestSales("بیشترین فروش", 2),
-//        LowestSales("کمترین فروش", 3),
-        ProductName("نام کالا", 2),
-        ProductCode("کد کالا", 3)
+        ProductName("نام کالا", 0),
+        ProductCode("کد کالا", 1),
+        Discount("شگفت انگیز نمایشگاه", 2),
+        MaxPrice("بیشترین قیمت", 3),
+        MinPrice("کمترین قیمت", 4)
     }
 
 
@@ -67,9 +70,9 @@ class ProductViewModel @Inject constructor(
     fun clearFilter() {
         viewModelScope.launch {
             categoryLiveData.postValue(emptyList())
-            productNewLiveData.postValue(false)
+            productTypeLiveData.postValue(ProductType.All)
             delay(500)
-            sortType = null
+            sortType = SortType.ProductName
             categoryLevel = CategoryLevel.All
             categoryIndex = CategoryLevel.All.index
             if (productSearch.isEmpty())
@@ -141,7 +144,7 @@ class ProductViewModel @Inject constructor(
                 callApi(
                     request = productRepository.requestGetCustomerProducts(),
                     onReceiveData = { products ->
-                        sortType = null
+                        sortType = SortType.ProductName
                         productsList = products
                         searchProduct(products)
                     }
@@ -153,9 +156,9 @@ class ProductViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- setFilterByProductNew
-    fun setFilterByProductNew(new: Boolean) {
+    fun setFilterByProductNew(type: ProductType) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            productNewLiveData.postValue(new)
+            productTypeLiveData.postValue(type)
             delay(500)
             getProduct()
         }
@@ -173,7 +176,7 @@ class ProductViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- searchProduct
     private fun searchProduct(items: List<ProductModel>) {
-        val list = sortList(items = filterByCategory(items = filterProductList(items = items)))
+        val list = sortList(items = filterByCategory(items = filterByType(items = filterProductList(items = items))))
         productLiveData.postValue(list)
     }
     //---------------------------------------------------------------------------------------------- searchProduct
@@ -181,28 +184,38 @@ class ProductViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- filterProductList
     private fun filterProductList(items: List<ProductModel>): List<ProductModel> {
-        val new = productNewLiveData.value ?: false
         productSearch = productSearch.persianNumberToEnglishNumber()
         val words = productSearch.split(" ")
-        val list = if (new)
-            if (words.isEmpty())
-                items.filter { product ->
-                    product.isNew
-                }
-            else
-                items.filter { product ->
-                    product.isNew && findWordInProductName(words, product)
-                }
-        else
-            if (words.isEmpty())
-                items
-            else
-                items.filter { product ->
-                    findWordInProductName(words, product)
-                }
+        val list = items.filter { product ->
+            findWordInProductName(words, product)
+        }
         return list
     }
     //---------------------------------------------------------------------------------------------- filterProductList
+
+
+    //---------------------------------------------------------------------------------------------- filterByCategory
+    private fun filterByType(items: List<ProductModel>): List<ProductModel> {
+        return when (productTypeLiveData.value) {
+            ProductType.New -> {
+                items.filter { product ->
+                    product.isNew
+                }
+            }
+
+            ProductType.Special -> {
+                items.filter { product ->
+                    product.isSpecial
+                }
+            }
+            else ->{
+                items
+            }
+
+        }
+    }
+    //---------------------------------------------------------------------------------------------- filterByCategory
+
 
 
     //---------------------------------------------------------------------------------------------- filterByCategory
@@ -260,6 +273,12 @@ class ProductViewModel @Inject constructor(
                 SortType.ProductName -> {
                     items.sortedBy { model ->
                         model.productName
+                    }
+                }
+
+                SortType.Discount -> {
+                    items.sortedByDescending {model ->
+                        model.isSpecial
                     }
                 }
             }

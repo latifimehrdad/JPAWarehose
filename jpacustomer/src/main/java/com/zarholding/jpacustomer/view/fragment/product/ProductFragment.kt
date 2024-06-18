@@ -82,19 +82,39 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             }
         }
 
-        viewModel.productNewLiveData.observe(viewLifecycleOwner){
+        viewModel.productTypeLiveData.observe(viewLifecycleOwner) {
             if (context == null)
                 return@observe
-            if (it){
-                binding.buttonAllProduct.backgroundTintList =
-                    requireContext().getColorStateList(R.color.color3)
-                binding.buttonNewProduct.backgroundTintList =
-                    requireContext().getColorStateList(R.color.primaryColor)
-            } else {
-                binding.buttonNewProduct.backgroundTintList =
-                    requireContext().getColorStateList(R.color.color3)
-                binding.buttonAllProduct.backgroundTintList =
-                    requireContext().getColorStateList(R.color.primaryColor)
+            when (it) {
+                ProductViewModel.ProductType.New -> {
+
+                    binding.buttonAllProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.color3)
+                    binding.buttonSpecialProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.color3)
+                    binding.buttonNewProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.primaryColor)
+                }
+
+                ProductViewModel.ProductType.Special -> {
+
+                    binding.buttonNewProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.color3)
+                    binding.buttonAllProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.color3)
+                    binding.buttonSpecialProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.primaryColor)
+                }
+
+                else -> {
+
+                    binding.buttonNewProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.color3)
+                    binding.buttonSpecialProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.color3)
+                    binding.buttonAllProduct.backgroundTintList =
+                        requireContext().getColorStateList(R.color.primaryColor)
+                }
             }
         }
 
@@ -132,11 +152,15 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         }
 
         binding.buttonAllProduct.setOnClickListener {
-            viewModel.setFilterByProductNew(false)
+            viewModel.setFilterByProductNew(ProductViewModel.ProductType.All)
         }
 
         binding.buttonNewProduct.setOnClickListener {
-            viewModel.setFilterByProductNew(true)
+            viewModel.setFilterByProductNew(ProductViewModel.ProductType.New)
+        }
+
+        binding.buttonSpecialProduct.setOnClickListener {
+            viewModel.setFilterByProductNew(ProductViewModel.ProductType.Special)
         }
 
         binding.editTextSearch.addTextChangedListener {
@@ -172,7 +196,6 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- setSortSpinner
 
 
-
     //---------------------------------------------------------------------------------------------- setSortSpinner
     private fun setCategoryLevelSpinner() {
 
@@ -180,7 +203,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             setSpinnerAdapter(IconSpinnerAdapter(this))
             setItems(viewModel.getCategoryLevel())
             getSpinnerRecyclerView().layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             lifecycleOwner = viewLifecycleOwner
             setOnSpinnerOutsideTouchListener { _, _ -> dismiss() }
             setOnSpinnerItemSelectedListener<IconSpinnerItem> { oldIndex, _, newIndex, _ ->
@@ -204,7 +227,6 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- getProduct
 
 
-
     //---------------------------------------------------------------------------------------------- setProductAdapter
     private fun setProductAdapter(items: List<ProductModel>) {
         if (context == null)
@@ -217,13 +239,12 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         }
         val adapter = ProductAdapter(items, click)
         val manager = LinearLayoutManager(
-            requireContext(),LinearLayoutManager.VERTICAL, false
+            requireContext(), LinearLayoutManager.VERTICAL, false
         )
         binding.recyclerViewProduct.adapter = adapter
         binding.recyclerViewProduct.layoutManager = manager
     }
     //---------------------------------------------------------------------------------------------- setProductAdapter
-
 
 
     //---------------------------------------------------------------------------------------------- setProductAdapter
@@ -241,7 +262,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         }
         val adapter = CategoryAdapter(items, click)
         val manager = LinearLayoutManager(
-                requireContext(),LinearLayoutManager.HORIZONTAL, true
+            requireContext(), LinearLayoutManager.HORIZONTAL, true
         )
         binding.recyclerViewCategory.adapter = adapter
         binding.recyclerViewCategory.layoutManager = manager
@@ -249,11 +270,9 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- setProductAdapter
 
 
-
-
     //---------------------------------------------------------------------------------------------- showProductDetailDialog
     private fun showProductDetailDialog(item: ProductModel, imageView: ImageView) {
-        val select = object : ProductDetailDialog.Click{
+        val select = object : ProductDetailDialog.Click {
             override fun select() {
                 imageViewSelect = imageView
                 viewModel.getBasketCount()

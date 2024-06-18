@@ -85,6 +85,7 @@ class ProductDetailDialog(
     //---------------------------------------------------------------------------------------------- getValueToXml
     private fun getValueToXml() {
         binding.imageviewStatus.visibility = View.GONE
+        binding.imageviewDiscount.visibility = View.GONE
         binding.editTextCount.setText("0")
         binding.textViewName.text = product.productName
         binding.touchImageView.downloadProfileImage(
@@ -110,8 +111,12 @@ class ProductDetailDialog(
             product.productCountinPackage.split(),
             product.productCountinBox.split()
         )
+
         if (product.isCash)
             binding.imageviewStatus.visibility = View.VISIBLE
+
+        if (product.isSpecial)
+            binding.imageviewDiscount.visibility = View.VISIBLE
 
         if (roleManager.isAccessToBasketMenu()) {
             binding.linearLayoutCount.visibility = View.VISIBLE

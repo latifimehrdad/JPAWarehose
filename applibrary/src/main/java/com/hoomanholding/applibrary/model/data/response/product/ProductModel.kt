@@ -23,5 +23,6 @@ data class ProductModel(
     val productBrandName: String?,
     val isNew: Boolean,
     val productThumbnailImageName: String?,
-    val isCash: Boolean
+    val isCash: Boolean,
+    val isSpecial: Boolean
 )

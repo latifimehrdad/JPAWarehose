@@ -171,7 +171,14 @@ class SubCustomerOrderHolder(
             title = title,
             false
         ){
-            binding.buttonYes.startLoading(context.getString(R.string.bePatient))
+            when(state){
+                EnumState.Confirmed -> {
+                    binding.buttonYes.startLoading(context.getString(R.string.bePatient))
+                }
+                EnumState.Reject -> {
+                    binding.buttonNo.startLoading(context.getString(R.string.bePatient))
+                }
+            }
             onClick.invoke(state, item, position)
         }.show()
     }
