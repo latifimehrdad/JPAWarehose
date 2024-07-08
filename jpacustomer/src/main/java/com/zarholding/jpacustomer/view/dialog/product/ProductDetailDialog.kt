@@ -23,6 +23,7 @@ import com.zar.core.enums.EnumApiError
 import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.DialogProductDetailBinding
+import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -34,7 +35,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProductDetailDialog(
     private val click: Click,
-    private val product: ProductModel
+    private val product: ProductModel,
+    private val type: EnumProductPageType
 ) : DialogFragment() {
 
     private val viewModel: ProductDetailViewModel by viewModels()
@@ -106,6 +108,14 @@ class ProductDetailDialog(
             splitter = getString(R.string.colon),
             value = product.productCode
         )
+
+        when(type) {
+            EnumProductPageType.Product ->
+                binding.buttonYes.setText(R.string.addToBasket)
+            EnumProductPageType.Return ->
+                binding.buttonYes.setText(R.string.addToReturn)
+        }
+
         binding.textViewCount.text = getString(
             R.string.countInBoxAndPackage,
             product.productCountinPackage.split(),
@@ -175,7 +185,10 @@ class ProductDetailDialog(
                 Count = count
             )
             binding.buttonYes.startLoading(getString(R.string.bePatient))
-            viewModel.requestAddToBasket(request)
+            when(type) {
+                EnumProductPageType.Product -> viewModel.requestAddToBasket(request)
+                EnumProductPageType.Return -> viewModel.requestAddToReturn(request)
+            }
         }
 
         binding.buttonNo.setOnClickListener { dismiss() }

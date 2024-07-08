@@ -11,6 +11,7 @@ import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumOrderState
 import com.hoomanholding.applibrary.model.data.response.check.RecordCheckNotifyModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.RoleManager
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
@@ -18,6 +19,7 @@ import com.zar.core.enums.EnumApiError
 import dagger.hilt.android.AndroidEntryPoint
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentHomeBinding
+import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.IntSpinnerAdapter
 import com.zarholding.jpacustomer.view.adapter.holder.OrderHolder
@@ -170,8 +172,10 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             }
         }
 
-        binding.cardViewPriceInquiry.setOnClickListener {
-            gotoFragment(R.id.action_homeFragment_to_productFragment)
+        binding.cardViewReturn.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt(CompanionValues.Type, EnumProductPageType.Return.type)
+            gotoFragment(fragment = R.id.action_homeFragment_to_productFragment, bundle = bundle)
         }
 
         binding.cardViewSubUser.setOnClickListener {

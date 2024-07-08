@@ -7,6 +7,7 @@ import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.zar.core.tools.extensions.persianNumberToEnglishNumber
+import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.model.repository.BasketRepository
 import com.zarholding.jpacustomer.model.repository.ProductCategoryRepository
 import com.zarholding.jpacustomer.model.repository.ProductRepository
@@ -67,7 +68,7 @@ class ProductViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- clearFilter
-    fun clearFilter() {
+    fun clearFilter(type: EnumProductPageType) {
         viewModelScope.launch {
             categoryLiveData.postValue(emptyList())
             productTypeLiveData.postValue(ProductType.All)
@@ -76,7 +77,7 @@ class ProductViewModel @Inject constructor(
             categoryLevel = CategoryLevel.All
             categoryIndex = CategoryLevel.All.index
             if (productSearch.isEmpty())
-                getProduct()
+                getProduct(type = type)
         }
     }
     //---------------------------------------------------------------------------------------------- clearFilter
@@ -138,7 +139,7 @@ class ProductViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- getProduct
-    fun getProduct() {
+    fun getProduct(type: EnumProductPageType) {
         viewModelScope.launch(IO + exceptionHandler()) {
             productsList?.let {
                 searchProduct(it)
@@ -162,16 +163,16 @@ class ProductViewModel @Inject constructor(
         viewModelScope.launch(IO + exceptionHandler()) {
             productTypeLiveData.postValue(type)
             delay(500)
-            getProduct()
+            getProduct(EnumProductPageType.Product)
         }
     }
     //---------------------------------------------------------------------------------------------- setFilterByProductNew
 
 
     //---------------------------------------------------------------------------------------------- setFilterByProductName
-    fun setFilterByProductName(search: String) {
+    fun setFilterByProductName(search: String, type: EnumProductPageType) {
         productSearch = search
-        getProduct()
+        getProduct(type = type)
     }
     //---------------------------------------------------------------------------------------------- setFilterByProductName
 
@@ -331,7 +332,7 @@ class ProductViewModel @Inject constructor(
         sortType = SortType.values().find {
             it.index == index
         }
-        getProduct()
+        getProduct(type = EnumProductPageType.Product)
     }
     //---------------------------------------------------------------------------------------------- setSortIndex
 
@@ -351,7 +352,7 @@ class ProductViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- setSortIndex
     fun setCategoryIndex(index: Int) {
         categoryIndex = index
-        getProduct()
+        getProduct(type = EnumProductPageType.Product)
     }
     //---------------------------------------------------------------------------------------------- setSortIndex
 

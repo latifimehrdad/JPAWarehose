@@ -193,6 +193,7 @@
                 app:layout_constraintTop_toTopOf="@id/buttonYes"
                 app:layout_constraintBottom_toBottomOf="@id/buttonYes"
                 app:layout_constraintStart_toEndOf="@id/buttonYes"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:minWidth="@dimen/_90sdp"
                 android:textSize="@dimen/buttonTextSize"

@@ -159,70 +159,79 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.hoomanholding.applibrary.view.custom.JpaButton
-            android:id="@+id/buttonSpecialProduct"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutProduct"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutCategory"
             app:layout_constraintStart_toStartOf="@id/editTextSearch"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayoutCategory"
-            app:layout_constraintEnd_toStartOf="@id/buttonNewProduct"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:backgroundTint="@color/color3"
-            android:hint="@string/bePatient"
-            app:cornerRadius="@dimen/radius2"
-            android:textSize="@dimen/textSizeH3"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_15sdp"
-            android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/white"
-            android:text='شگفت انگیز نمایشگاه' />
-
-
-        <com.hoomanholding.applibrary.view.custom.JpaButton
-            android:id="@+id/buttonNewProduct"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/buttonSpecialProduct"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayoutCategory"
-            app:layout_constraintEnd_toStartOf="@id/buttonAllProduct"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:backgroundTint="@color/color3"
-            android:hint="@string/bePatient"
-            app:cornerRadius="@dimen/radius2"
-            android:textSize="@dimen/textSizeH3"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_15sdp"
-            android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/white"
-            android:text='@string/newProductList' />
-
-        <com.hoomanholding.applibrary.view.custom.JpaButton
-            android:id="@+id/buttonAllProduct"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/editTextSearch"
-            app:layout_constraintTop_toTopOf="@id/buttonNewProduct"
-            app:layout_constraintStart_toEndOf="@id/buttonNewProduct"
-            android:backgroundTint="@color/primaryColor"
-            android:hint="@string/bePatient"
-            app:cornerRadius="@dimen/radius2"
-            android:textSize="@dimen/textSizeH3"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingHorizontal="@dimen/_15sdp"
-            android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/buttonTextColor"
-            android:text='@string/allProductList' />
+            android:layout_marginTop="10dp">
+
+            <com.hoomanholding.applibrary.view.custom.JpaButton
+                android:id="@+id/buttonSpecialProduct"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/buttonNewProduct"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:backgroundTint="@color/color3"
+                android:hint="@string/bePatient"
+                app:cornerRadius="@dimen/radius2"
+                android:textSize="@dimen/textSizeH3"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/white"
+                android:text='شگفت انگیز نمایشگاه' />
+
+            <com.hoomanholding.applibrary.view.custom.JpaButton
+                android:id="@+id/buttonNewProduct"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/buttonSpecialProduct"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/buttonAllProduct"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:backgroundTint="@color/color3"
+                android:hint="@string/bePatient"
+                app:cornerRadius="@dimen/radius2"
+                android:textSize="@dimen/textSizeH3"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/white"
+                android:text='@string/newProductList' />
+
+            <com.hoomanholding.applibrary.view.custom.JpaButton
+                android:id="@+id/buttonAllProduct"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/buttonNewProduct"
+                android:backgroundTint="@color/primaryColor"
+                android:hint="@string/bePatient"
+                app:cornerRadius="@dimen/radius2"
+                android:textSize="@dimen/textSizeH3"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/buttonTextColor"
+                android:text='@string/allProductList' />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewProduct"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/buttonAllProduct"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutProduct"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/editTextSearch"
             app:layout_constraintEnd_toEndOf="@id/editTextSearch"

@@ -18,9 +18,11 @@ import com.hoomanholding.applibrary.ext.downloadProfileImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.enums.EnumEntityType
 import com.hoomanholding.applibrary.model.data.enums.EnumSystemType
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.RoleManager
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ActivityMainBinding
+import com.zarholding.jpacustomer.model.EnumProductPageType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -136,7 +138,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.customMenuProduct.setOnClickListener {
-            gotoFragment(R.id.action_goto_productFragment)
+            val bundle = Bundle()
+            bundle.putInt(CompanionValues.Type, EnumProductPageType.Product.type)
+            gotoFragment(fragment = R.id.action_goto_productFragment, bundle = bundle)
         }
 
         binding.customMenuProfile.setOnClickListener {
@@ -285,8 +289,8 @@ class MainActivity : AppCompatActivity() {
 
 
     //---------------------------------------------------------------------------------------------- gotoFragment
-    private fun gotoFragment(fragment: Int) {
-        navController?.navigate(fragment, null)
+    private fun gotoFragment(fragment: Int, bundle: Bundle? = null) {
+        navController?.navigate(fragment, bundle)
     }
     //---------------------------------------------------------------------------------------------- gotoFragment
 

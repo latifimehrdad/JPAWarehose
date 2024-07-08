@@ -23,5 +23,6 @@ class CompanionValues {
         const val REPORT_END_DATE = "reportEndDate"
         const val APP_ID = "jpa"
         const val CHANNEL_Name = "notification"
+        const val Type = "type"
     }
 }

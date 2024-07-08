@@ -287,9 +287,9 @@
                 app:cardBackgroundColor="@color/color5"
                 app:cardCornerRadius="@dimen/radius1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cardViewPriceInquiry"
+                app:layout_constraintEnd_toStartOf="@id/cardViewReturn"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewCallForPrice">
+                app:layout_constraintTop_toBottomOf="@id/textViewReturn">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -313,18 +313,18 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textViewCallForPrice"
+                android:id="@+id/textViewReturn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransans_bold"
-                android:text="@string/callForPrice"
+                android:text="@string/requestReturn"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/buttonTextSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardViewPriceInquiry"
+                android:id="@+id/cardViewReturn"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="5dp"
@@ -334,7 +334,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cardViewSubUser"
-                app:layout_constraintTop_toBottomOf="@id/textViewCallForPrice">
+                app:layout_constraintTop_toBottomOf="@id/textViewReturn">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -351,7 +351,7 @@
                     android:drawablePadding="@dimen/_5sdp"
                     android:fontFamily="@font/iransans_bold"
                     android:gravity="center"
-                    android:text="@string/productCallForPrice"
+                    android:text="@string/requestReturn"
                     android:textColor="@color/white"
                     android:textSize="@dimen/textSizeH4" />
 

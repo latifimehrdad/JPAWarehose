@@ -12,6 +12,7 @@ import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.response.category.CategoryModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.skydoves.powerspinner.IconSpinnerAdapter
@@ -21,6 +22,7 @@ import com.zarholding.jpacustomer.CircleAnimationUtil
 import dagger.hilt.android.AndroidEntryPoint
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProductBinding
+import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.holder.CategoryHolder
 import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
@@ -40,6 +42,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
     private val viewModel: ProductViewModel by viewModels()
     private var imageViewSelect: ImageView? = null
+    private var viewType = EnumProductPageType.Product
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +65,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        setViewByType()
         binding.imageViewClearText.visibility = View.GONE
         observeLiveDate()
         setListener()
@@ -70,6 +74,24 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         setCategoryLevelSpinner()
     }
     //---------------------------------------------------------------------------------------------- initView
+
+
+    //---------------------------------------------------------------------------------------------- setViewByType
+    private fun setViewByType() {
+        val type = arguments?.getInt(CompanionValues.Type) ?: EnumProductPageType.Product.type
+        viewType = EnumProductPageType.getEnum(type)
+        when(viewType) {
+            EnumProductPageType.Product -> {
+                binding.constraintLayoutCategory.visibility = View.VISIBLE
+                binding.constraintLayoutProduct.visibility = View.VISIBLE
+            }
+            EnumProductPageType.Return -> {
+                binding.constraintLayoutCategory.visibility = View.GONE
+                binding.constraintLayoutProduct.visibility = View.GONE
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setViewByType
 
 
     //---------------------------------------------------------------------------------------------- observeLiveDate
@@ -142,7 +164,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     private fun setListener() {
 
         binding.imageViewClearFilter.setOnClickListener {
-            viewModel.clearFilter()
+            viewModel.clearFilter(type = viewType)
             binding.editTextSearch.setText("")
             binding.spinnerSort.clearSelectedItem()
         }
@@ -169,7 +191,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
                 binding.imageViewClearText.visibility = View.GONE
             else
                 binding.imageViewClearText.visibility = View.VISIBLE
-            viewModel.setFilterByProductName(text)
+            viewModel.setFilterByProductName(search = text, type = viewType)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -222,7 +244,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- getProduct
     private fun getProduct() {
         binding.shimmerViewContainer.startLoading()
-        viewModel.getProduct()
+        viewModel.getProduct(type = viewType)
     }
     //---------------------------------------------------------------------------------------------- getProduct
 
@@ -278,7 +300,11 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
                 viewModel.getBasketCount()
             }
         }
-        ProductDetailDialog(select, item).show(childFragmentManager, "product")
+        ProductDetailDialog(
+            click = select,
+            product = item,
+            type = viewType
+        ).show(childFragmentManager, "product")
     }
     //---------------------------------------------------------------------------------------------- showProductDetailDialog
 

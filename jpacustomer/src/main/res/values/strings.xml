@@ -39,6 +39,7 @@
     <string name="showAll">نمایش همه</string>
     <string name="sortBy">مرتب سازی بر اساس</string>
     <string name="productCallForPrice">استعلام قیمت کالاها</string>
+    <string name="requestReturn">درخواست مرجوعی</string>
     <string name="callForPrice">استعلام قیمت</string>
     <string name="dashboard">داشبورد</string>
     <string name="cartable">کارتابل</string>
@@ -47,6 +48,7 @@
     <string name="count">تعداد</string>
     <string name="deleteBasket">حذف از سبد</string>
     <string name="addToBasket">اضافه کردن به سبد</string>
+    <string name="addToReturn">اضافه کردن به مرجوعی</string>
     <string name="doYouWantToBasketDelete">آیا برای حذف ( %1$s ) مطمئن هستید؟</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
