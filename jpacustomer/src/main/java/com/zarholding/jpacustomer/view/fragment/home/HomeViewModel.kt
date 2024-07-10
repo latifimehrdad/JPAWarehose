@@ -115,11 +115,7 @@ class HomeViewModel @Inject constructor(
     private fun newFeature(): String {
         var feature = "امکانات و تغییرات نسخه ${deviceManager.appVersionName()}"
         feature += System.getProperty("line.separator")
-        feature += "اضافه کردن کارتابل برای تایید سفارشات مشتریان دارای زیر مجموعه"
-        feature += System.getProperty("line.separator")
-        feature += "امکان فیلتر و مرتب کردن لیست کالا ها"
-        feature += System.getProperty("line.separator")
-        feature += "نمایش کالاهای نقدی"
+        feature += "اضافه شدن بخش بسد مرجوعی کالا"
         return feature
     }
     //---------------------------------------------------------------------------------------------- newFeature
