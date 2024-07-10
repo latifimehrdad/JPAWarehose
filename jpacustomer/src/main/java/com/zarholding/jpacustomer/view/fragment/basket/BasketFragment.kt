@@ -82,6 +82,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
             binding.shimmerViewContainer.stopLoading()
             binding.buttonSubmit.stopLoading()
+            binding.buttonDeleteAll.stopLoading()
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
