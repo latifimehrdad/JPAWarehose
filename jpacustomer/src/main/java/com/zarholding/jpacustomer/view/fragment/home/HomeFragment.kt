@@ -84,6 +84,14 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
             binding.textViewSubUserTitle.visibility = View.GONE
         }
 
+        if (viewModel.isReturnBasket()) {
+            binding.cardViewReturn.visibility = View.VISIBLE
+            binding.textViewReturn.visibility = View.VISIBLE
+        }else {
+            binding.cardViewReturn.visibility = View.GONE
+            binding.textViewReturn.visibility = View.GONE
+        }
+
         activity?.let { (it as MainActivity).checkPermissions() }
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, backClick)
         binding.shimmerViewContainer.config(getShimmerBuild())

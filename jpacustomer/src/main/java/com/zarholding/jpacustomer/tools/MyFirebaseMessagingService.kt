@@ -132,7 +132,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     internal class MyWorker(appContext: Context, workerParams: WorkerParameters) :
         Worker(appContext, workerParams) {
         override fun doWork(): Result {
-            // TODO(developer): add long running task here.
             return Result.success()
         }
     }

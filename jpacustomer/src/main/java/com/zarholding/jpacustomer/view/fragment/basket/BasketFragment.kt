@@ -5,21 +5,25 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.data.response.basket.DetailBasketModel
+import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.custom.JpaButton
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentBasketBinding
+import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.holder.BasketHolderNormal
 import com.zarholding.jpacustomer.view.adapter.recycler.BasketAdapter
+import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import com.zarholding.jpacustomer.view.dialog.SubmitBasketDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +42,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     private var itemPosition: Int = 0
     private var itemCount: Int = 0
     private var adapter: BasketAdapter? = null
+    private var viewType = EnumProductPageType.Product
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,8 +71,8 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
             requireContext().getColorStateList(R.color.primaryColor)
         observeLiveDate()
         setListener()
-        getProduct()
         checkShowListType()
+        getProduct()
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -116,13 +121,31 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab == null)
+                    return
+                viewType = if (tab.position == 0)
+                    EnumProductPageType.Product
+                else
+                    EnumProductPageType.Return
+                getProduct()
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
+
         binding.imageViewClearText.setOnClickListener {
             binding.editTextSearch.setText("")
         }
 
         binding.editTextSearch.addTextChangedListener {
             val text = it.toString()
-            viewModel.setFilterByProductName(text)
+            viewModel.setFilterByProductName(text, type = viewType)
             if (text.isEmpty())
                 binding.imageViewClearText.visibility = View.GONE
             else
@@ -136,6 +159,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
 
         binding.buttonSubmit.setOnClickListener {
             showDialogConfirmToSubmitBasket()
+        }
+
+        binding.buttonDeleteAll.setOnClickListener {
+            showDialogConfirmToDeleteBasket()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -159,8 +186,18 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
 
     //---------------------------------------------------------------------------------------------- getProduct
     private fun getProduct() {
+        val visible = when(viewType) {
+            EnumProductPageType.Product -> View.VISIBLE
+            EnumProductPageType.Return -> View.GONE
+        }
+        binding.textViewTotalAmountOfCashProduct.visibility = visible
+        binding.textViewTotalAmount.visibility = visible
+        binding.checkboxExhibit.visibility = visible
+
+        binding.cardViewCalculateBasket.visibility = View.GONE
+        binding.recyclerViewProduct.adapter = null
         binding.shimmerViewContainer.startLoading()
-        viewModel.getBasket()
+        viewModel.getBasket(type = viewType)
     }
     //---------------------------------------------------------------------------------------------- getProduct
 
@@ -171,6 +208,8 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         if (context == null)
             return
         binding.recyclerViewProduct.adapter = null
+        if (items.isNotEmpty())
+            binding.cardViewCalculateBasket.visibility = View.VISIBLE
         val click = object : BasketHolderNormal.Click {
             override fun click(item: DetailBasketModel, button: JpaButton, position: Int, count: Int) {
                 if (button.isLoading)
@@ -180,7 +219,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
                 itemCount = count
                 val request = AddToBasket(item.productId, count,item.price)
                 button.startLoading(getString(R.string.bePatient))
-                viewModel.requestAddToBasket(request)
+                when(viewType) {
+                    EnumProductPageType.Product -> viewModel.requestAddToBasket(request)
+                    EnumProductPageType.Return -> viewModel.requestAddToReturn(request)
+                }
             }
 
             override fun deleteItem(item: DetailBasketModel) {
@@ -188,7 +230,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
                 binding.recyclerViewProduct.adapter = null
                 binding.cardViewCalculateBasket.visibility = View.GONE
                 binding.shimmerViewContainer.startLoading()
-                viewModel.requestDeleteBasket(item.productId)
+                viewModel.requestDeleteBasket(item.productId, type = viewType)
             }
         }
         adapter = BasketAdapter(items, click)
@@ -231,7 +273,6 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
             last = getString(R.string.rial),
             value = cashAmount
         )
-        binding.cardViewCalculateBasket.visibility = View.VISIBLE
     }
     //---------------------------------------------------------------------------------------------- calculateBasketAmount
 
@@ -245,6 +286,22 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
     //---------------------------------------------------------------------------------------------- showDialogConfirmToSubmitBasket
 
 
+    //---------------------------------------------------------------------------------------------- showDialogConfirmToDeleteBasket
+    private fun showDialogConfirmToDeleteBasket() {
+        if (context == null)
+            return
+        ConfirmDialog(
+            requireContext(),
+            getString(R.string.doYouWantToAllBasketDelete),
+            false
+        ){
+            submitDeleteBasket()
+        }.show()
+    }
+    //---------------------------------------------------------------------------------------------- showDialogConfirmToDeleteBasket
+
+
+
     //---------------------------------------------------------------------------------------------- submitBasket
     private fun submitBasket(description: String) {
         if (binding.buttonSubmit.isLoading)
@@ -252,9 +309,25 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         binding.buttonSubmit.startLoading(getString(R.string.bePatient))
         viewModel.requestSubmitBasket(
             description = description,
-            exhibition = binding.checkboxExhibit.isChecked
+            exhibition = binding.checkboxExhibit.isChecked,
+            type = viewType
         )
     }
     //---------------------------------------------------------------------------------------------- submitBasket
+
+
+
+
+
+    //---------------------------------------------------------------------------------------------- submitDeleteBasket
+    private fun submitDeleteBasket() {
+        if (binding.buttonSubmit.isLoading)
+            return
+        binding.buttonDeleteAll.startLoading(getString(R.string.bePatient))
+        viewModel.requestDeleteBasket(
+            type = viewType
+        )
+    }
+    //---------------------------------------------------------------------------------------------- submitDeleteBasket
 
 }

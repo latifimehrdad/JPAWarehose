@@ -291,7 +291,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/cardViewReturn"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewReturn">
+                app:layout_constraintTop_toBottomOf="@id/textViewSubUserTitle">
 
                 <ImageView
                     android:layout_width="match_parent"

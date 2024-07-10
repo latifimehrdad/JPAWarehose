@@ -76,13 +76,13 @@ class BasketHolderNormal(
     private fun setListener(item: DetailBasketModel, position: Int) {
         binding.imageViewMinus.setOnClickListener {
             val count = getEditTextCount() - 1
-            if (count >= 0)
+            if (count > 0)
                 binding.editTextCount.setText((count).toString())
         }
 
         binding.imageViewPlus.setOnClickListener {
             val count = getEditTextCount() + 1
-            if (count <= 999)
+            if (count <= item.maxCount)
                 binding.editTextCount.setText((count).toString())
         }
 

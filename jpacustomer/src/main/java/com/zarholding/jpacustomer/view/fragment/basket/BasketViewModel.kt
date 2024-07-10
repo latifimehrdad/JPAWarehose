@@ -6,7 +6,9 @@ import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
 import com.hoomanholding.applibrary.model.data.response.basket.DetailBasketModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
+import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.model.repository.BasketRepository
+import com.zarholding.jpacustomer.view.fragment.product.ProductViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ class BasketViewModel @Inject constructor(
     private val basketRepository: BasketRepository
 ) : JpaViewModel() {
 
+    private var productPageType: EnumProductPageType = EnumProductPageType.Product
     var productsList: List<DetailBasketModel>? = null
     var productSearch: String = ""
     val productLiveData: MutableLiveData<List<DetailBasketModel>> by lazy {
@@ -35,21 +38,35 @@ class BasketViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- getBasket
-    fun getBasket() {
+    fun getBasket(type: EnumProductPageType) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            productsList?.let {
-                searchProduct(it)
-            } ?: run {
-                callApi(
-                    request = basketRepository.requestGetDetailBasket(),
-                    onReceiveData = {
-                        isExhibitionActive = it.isExhibitionActive
-                        it.items?.let {products ->
-                            productsList = products
-                            searchProduct(products)
+            if (type == productPageType && productsList != null)
+                searchProduct(productsList!!)
+            else {
+                productPageType = type
+                when (type) {
+                    EnumProductPageType.Product -> callApi(
+                        request = basketRepository.requestGetDetailBasket(),
+                        onReceiveData = {
+                            isExhibitionActive = it.isExhibitionActive
+                            it.items?.let {products ->
+                                productsList = products
+                                searchProduct(products)
+                            }
                         }
-                    }
-                )
+                    )
+
+                    EnumProductPageType.Return -> callApi(
+                        request = basketRepository.requestGetDetailReturnBasket(),
+                        onReceiveData = {
+                            isExhibitionActive = it.isExhibitionActive
+                            it.items?.let {products ->
+                                productsList = products
+                                searchProduct(products)
+                            }
+                        }
+                    )
+                }
             }
             getBasketCount()
         }
@@ -59,9 +76,9 @@ class BasketViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- setFilterByProductName
-    fun setFilterByProductName(search: String) {
+    fun setFilterByProductName(search: String, type: EnumProductPageType) {
         productSearch = search
-        getBasket()
+        getBasket(type = type)
     }
     //---------------------------------------------------------------------------------------------- setFilterByProductName
 
@@ -109,6 +126,23 @@ class BasketViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddToBasket
 
 
+
+
+    //---------------------------------------------------------------------------------------------- requestAddToReturn
+    fun requestAddToReturn(request: AddToBasket) {
+        viewModelScope.launch(IO + exceptionHandler()){
+            callApi(
+                request = basketRepository.requestAddToReturnBasket(request),
+                onReceiveData = {
+                    addToBasketLiveData.postValue(it)
+                    changeCount(request.ProductId, request.Count)
+                }
+            )
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestAddToReturn
+
+
     //---------------------------------------------------------------------------------------------- changeCount
     private fun changeCount(productId: Int, count: Int) {
         val item = productsList?.find {
@@ -121,16 +155,26 @@ class BasketViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestDeleteBasket
-    fun requestDeleteBasket(productId: Int) {
+    fun requestDeleteBasket(productId: Int, type: EnumProductPageType) {
         viewModelScope.launch(IO + exceptionHandler()){
-            callApi(
-                request = basketRepository.requestDeleteBasket(productId),
-                onReceiveData = {
-                    productsList = null
-                    getBasket()
-                    getBasketCount()
-                }
-            )
+            when(type) {
+                EnumProductPageType.Product -> callApi(
+                    request = basketRepository.requestDeleteBasket(productId),
+                    onReceiveData = {
+                        productsList = null
+                        getBasket(type = type)
+                        getBasketCount()
+                    }
+                )
+                EnumProductPageType.Return -> callApi(
+                    request = basketRepository.requestDeleteReturnBasket(productId),
+                    onReceiveData = {
+                        productsList = null
+                        getBasket(type = type)
+                        getBasketCount()
+                    }
+                )
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- requestDeleteBasket
@@ -150,17 +194,52 @@ class BasketViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
-    fun requestSubmitBasket(description: String, exhibition: Boolean) {
+    fun requestSubmitBasket(description: String, exhibition: Boolean, type : EnumProductPageType) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            callApi(
-                request = basketRepository.requestSubmitBasket(
-                    description = description,
-                    exhibition = exhibition
-                ),
-                onReceiveData = { submitBasketLiveData.postValue(true) }
-            )
+            when(type){
+                EnumProductPageType.Product -> callApi(
+                    request = basketRepository.requestSubmitBasket(
+                        description = description,
+                        exhibition = exhibition
+                    ),
+                    showMessageAfterSuccessResponse = true,
+                    onReceiveData = { submitBasketLiveData.postValue(true) }
+                )
+                EnumProductPageType.Return -> callApi(
+                    request = basketRepository.requestSubmitReturnBasket(
+                        description = description,
+                        exhibition = exhibition
+                    ),
+                    showMessageAfterSuccessResponse = true,
+                    onReceiveData = { submitBasketLiveData.postValue(true) }
+                )
+            }
+
         }
     }
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
+
+
+
+    //---------------------------------------------------------------------------------------------- requestDeleteBasket
+    fun requestDeleteBasket(type : EnumProductPageType) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            when(type){
+                EnumProductPageType.Product -> callApi(
+                    request = basketRepository.requestDeleteAllBasket(),
+                    showMessageAfterSuccessResponse = true,
+                    onReceiveData = { submitBasketLiveData.postValue(true) }
+                )
+                EnumProductPageType.Return -> callApi(
+                    request = basketRepository.requestDeleteReturnAllBasket(),
+                    showMessageAfterSuccessResponse = true,
+                    onReceiveData = { submitBasketLiveData.postValue(true) }
+                )
+            }
+
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestDeleteBasket
+
 
 }

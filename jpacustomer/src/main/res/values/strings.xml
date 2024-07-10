@@ -13,6 +13,8 @@
     <string name="visitorName">نام ویزیتور</string>
     <string name="fullName">نام و نام خانوادگی</string>
     <string name="basketNumber">شماره سبد</string>
+    <string name="buyBasket">سبد خرید</string>
+    <string name="returnBasket">سبد مرجوعی</string>
     <string name="buyerName">نام مشتری</string>
     <string name="rePassword">تکرار رمز عبور</string>
     <string name="savePasswordAndFingerPrint">برای ذخیره ی رمز عبور و نام کاربری و ورود با اثر انگشت لطفا این گزینه را  فعال نمایید</string>
@@ -50,6 +52,7 @@
     <string name="addToBasket">اضافه کردن به سبد</string>
     <string name="addToReturn">اضافه کردن به مرجوعی</string>
     <string name="doYouWantToBasketDelete">آیا برای حذف ( %1$s ) مطمئن هستید؟</string>
+    <string name="doYouWantToAllBasketDelete">آیا برای حذف کامل سبد مطمئن هستید؟</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
     <string name="reject">عدم تایید</string>
@@ -65,6 +68,7 @@
     <string name="newProductList">لیست کالاهای جدید</string>
     <string name="allProductList">لیست همه ی کالاها</string>
     <string name="showFactorList">مشاهده فاکتور لیستی</string>
+    <string name="deleteAllBasket">حذف کل سبد</string>
     <string name="saveOrder">ثبت سفارش</string>
     <string name="productCode">کد کالا</string>
     <string name="productName">نام کالا</string>

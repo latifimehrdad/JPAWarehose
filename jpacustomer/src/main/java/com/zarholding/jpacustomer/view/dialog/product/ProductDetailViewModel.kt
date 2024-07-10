@@ -45,7 +45,7 @@ class ProductDetailViewModel @Inject constructor(
     fun requestAddToReturn(request: AddToBasket) {
         viewModelScope.launch(IO + exceptionHandler()){
             callApi(
-                request = basketRepository.requestAddToBasket(request),
+                request = basketRepository.requestAddToReturnBasket(request),
                 onReceiveData = { addToBasketLiveData.postValue(it) }
             )
         }

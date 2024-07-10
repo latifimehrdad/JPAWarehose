@@ -21,6 +21,7 @@ class RoleManager @Inject constructor(
     private val detailOfUserInProfile = "Customers.Details"// نمایش دکمه وضعیت من در صفحه پروفایل
     private val basketMenu = "Customer.Basket"// نمایش دکمه سبد خرید در منو
     private val reportMenu = "Reports.Sales"// نمایش دکمه گزارشات در منو
+    private val customerReturnBasket = "Customer.ReturnBasket"// نمایش دکمه ثبت مرجوعی در کاستومر
 
 
 
@@ -54,6 +55,10 @@ class RoleManager @Inject constructor(
     //---------------------------------------------------------------------------------------------- isAccessToReportMenu
     fun isAccessToReportMenu() = accessByRole(reportMenu)
     //---------------------------------------------------------------------------------------------- isAccessToReportMenu
+
+    //---------------------------------------------------------------------------------------------- isCustomerReturnBasket
+    fun isCustomerReturnBasket() = accessByRole(customerReturnBasket)
+    //---------------------------------------------------------------------------------------------- isCustomerReturnBasket
 
 
 }

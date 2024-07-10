@@ -175,6 +175,11 @@ interface Api {
             @Query("lvl") lvl: Int,
             @Header("Authorization") token: String
     ): Response<GeneralResponse<List<CategoryModel>?>>
+
+    @GET("$baseData/basedata-get-customerReturnProductList")
+    suspend fun requestGetCustomerReturnProducts(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<ProductModel>?>>
     //---------------------------------------------------------------------------------------------- baseData
 
 
@@ -264,8 +269,19 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<BasketModel?>>
 
+    @GET("$basket/returnbasket-details")
+    suspend fun requestGetDetailReturnBasket(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<BasketModel?>>
+
     @POST("$basket/basket-add")
     suspend fun requestAddToBasket(
+        @Body request: AddToBasket,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
+    @POST("$basket/returnbasket-add")
+    suspend fun requestAddToReturnBasket(
         @Body request: AddToBasket,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
@@ -281,12 +297,37 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
 
+    @GET("$basket/basket-deleteAll")
+    suspend fun requestDeleteAllBasket(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
+
+    @GET("$basket/returnbasket-delete")
+    suspend fun requestDeleteReturnBasket(
+        @Query("productId") productId: Int,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
+    @GET("$basket/returnbasket-deleteAll")
+    suspend fun requestDeleteReturnAllBasket(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Boolean?>>
+
     @GET("$basket/basket-submit")
     suspend fun requestSubmitBasket(
         @Query("description") description: String,
         @Query("exhibition") exhibition: Boolean,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Long?>>
+
+    @GET("$basket/returnbasket-submit")
+    suspend fun requestSubmitReturnBasket(
+        @Query("description") description: String,
+        @Query("exhibition") exhibition: Boolean,
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<Long?>>
+
 
     @GET("$basket/SubsetBasket")
     suspend fun requestSubsetBasket(

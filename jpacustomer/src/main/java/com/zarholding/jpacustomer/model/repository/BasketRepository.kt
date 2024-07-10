@@ -23,10 +23,22 @@ class BasketRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddToBasket
 
 
+    //---------------------------------------------------------------------------------------------- requestAddToReturnBasket
+    suspend fun requestAddToReturnBasket(request: AddToBasket) =
+        apiCall { api.requestAddToReturnBasket(request, tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestAddToReturnBasket
+
+
     //---------------------------------------------------------------------------------------------- basket
     suspend fun requestGetDetailBasket() =
         apiCall { api.requestGetDetailBasket(tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- basket
+
+
+    //---------------------------------------------------------------------------------------------- requestGetDetailReturnBasket
+    suspend fun requestGetDetailReturnBasket() =
+        apiCall { api.requestGetDetailReturnBasket(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestGetDetailReturnBasket
 
 
     //---------------------------------------------------------------------------------------------- requestGetBasketCount
@@ -41,6 +53,24 @@ class BasketRepository @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestDeleteBasket
 
 
+    //---------------------------------------------------------------------------------------------- requestDeleteAllBasket
+    suspend fun requestDeleteAllBasket() =
+        apiCall { api.requestDeleteAllBasket(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestDeleteAllBasket
+
+
+    //---------------------------------------------------------------------------------------------- requestDeleteReturnAllBasket
+    suspend fun requestDeleteReturnAllBasket() =
+        apiCall { api.requestDeleteReturnAllBasket(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestDeleteReturnAllBasket
+
+
+    //---------------------------------------------------------------------------------------------- requestDeleteReturnBasket
+    suspend fun requestDeleteReturnBasket(productId: Int) =
+        apiCall { api.requestDeleteReturnBasket(productId, tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestDeleteReturnBasket
+
+
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
     suspend fun requestSubmitBasket(description: String, exhibition: Boolean) =
         apiCall { api.requestSubmitBasket(
@@ -49,6 +79,16 @@ class BasketRepository @Inject constructor(
             token = tokenRepository.getBearerToken()
         ) }
     //---------------------------------------------------------------------------------------------- requestSubmitBasket
+
+
+    //---------------------------------------------------------------------------------------------- requestSubmitReturnBasket
+    suspend fun requestSubmitReturnBasket(description: String, exhibition: Boolean) =
+        apiCall { api.requestSubmitReturnBasket(
+            description = description,
+            exhibition = exhibition,
+            token = tokenRepository.getBearerToken()
+        ) }
+    //---------------------------------------------------------------------------------------------- requestSubmitReturnBasket
 
 
     //---------------------------------------------------------------------------------------------- requestSubsetBasket

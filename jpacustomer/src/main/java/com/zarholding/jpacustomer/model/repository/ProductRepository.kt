@@ -18,4 +18,10 @@ class ProductRepository @Inject constructor(
         apiCall { api.requestGetCustomerProducts(tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestGetCustomerProducts
 
+
+    //---------------------------------------------------------------------------------------------- requestGetCustomerReturnProducts
+    suspend fun requestGetCustomerReturnProducts() =
+        apiCall { api.requestGetCustomerReturnProducts(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestGetCustomerReturnProducts
+
 }

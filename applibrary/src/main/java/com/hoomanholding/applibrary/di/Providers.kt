@@ -20,11 +20,11 @@ import javax.inject.Singleton
 class Providers {
 
     companion object {
-        var url = "http://api.hoomanholding.com:9090" // Jpa
+//        var url = "http://api.hoomanholding.com:9090" // Jpa
 //        var url = "http://10.252.37.164:7575" //Zar
 //        var url = "http://h-azad-vdi:7575" //Zar
 //        var url = "http://192.168.2.248:8585" //Zar
-//        var url = "http://192.168.207.57:8585" //Zar
+        var url = "http://192.168.207.57:8585" //Zar
     }
 
     //---------------------------------------------------------------------------------------------- provideUrl

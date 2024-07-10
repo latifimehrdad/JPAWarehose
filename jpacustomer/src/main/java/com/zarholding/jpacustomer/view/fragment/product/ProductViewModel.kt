@@ -29,6 +29,7 @@ class ProductViewModel @Inject constructor(
     private val productCategoryRepository: ProductCategoryRepository
 ) : JpaViewModel() {
 
+    private var productPageType: EnumProductPageType = EnumProductPageType.Product
     private var productsList: List<ProductModel>? = null
     private var productSearch: String = ""
     private var sortType: SortType? = SortType.ProductName
@@ -141,17 +142,29 @@ class ProductViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- getProduct
     fun getProduct(type: EnumProductPageType) {
         viewModelScope.launch(IO + exceptionHandler()) {
-            productsList?.let {
-                searchProduct(it)
-            } ?: run {
-                callApi(
-                    request = productRepository.requestGetCustomerProducts(),
-                    onReceiveData = { products ->
-                        sortType = SortType.ProductName
-                        productsList = products
-                        searchProduct(products)
-                    }
-                )
+            if (type == productPageType && productsList != null)
+                searchProduct(productsList!!)
+            else {
+                productPageType = type
+                when (type) {
+                    EnumProductPageType.Product -> callApi(
+                        request = productRepository.requestGetCustomerProducts(),
+                        onReceiveData = { products ->
+                            sortType = SortType.ProductName
+                            productsList = products
+                            searchProduct(products)
+                        }
+                    )
+
+                    EnumProductPageType.Return -> callApi(
+                        request = productRepository.requestGetCustomerReturnProducts(),
+                        onReceiveData = { products ->
+                            sortType = SortType.ProductName
+                            productsList = products
+                            searchProduct(products)
+                        }
+                    )
+                }
             }
         }
     }
@@ -163,7 +176,7 @@ class ProductViewModel @Inject constructor(
         viewModelScope.launch(IO + exceptionHandler()) {
             productTypeLiveData.postValue(type)
             delay(500)
-            getProduct(EnumProductPageType.Product)
+            getProduct(type = productPageType)
         }
     }
     //---------------------------------------------------------------------------------------------- setFilterByProductNew
@@ -332,7 +345,7 @@ class ProductViewModel @Inject constructor(
         sortType = SortType.values().find {
             it.index == index
         }
-        getProduct(type = EnumProductPageType.Product)
+        getProduct(type = productPageType)
     }
     //---------------------------------------------------------------------------------------------- setSortIndex
 
@@ -352,7 +365,7 @@ class ProductViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- setSortIndex
     fun setCategoryIndex(index: Int) {
         categoryIndex = index
-        getProduct(type = EnumProductPageType.Product)
+        getProduct(type = productPageType)
     }
     //---------------------------------------------------------------------------------------------- setSortIndex
 

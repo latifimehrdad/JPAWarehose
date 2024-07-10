@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.response.check.RecordCheckNotifyModel
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.repository.UserRepository
+import com.hoomanholding.applibrary.tools.RoleManager
 import com.hoomanholding.applibrary.tools.SharedPreferencesManager
 import com.hoomanholding.applibrary.tools.SingleLiveEvent
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
@@ -27,7 +28,8 @@ class HomeViewModel @Inject constructor(
     private val orderRepository: OrderRepository,
     private val basketRepository: BasketRepository,
     private val recordCheckRepository: RecordCheckRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val roleManager: RoleManager
 ) : JpaViewModel() {
 
     companion object {
@@ -127,5 +129,10 @@ class HomeViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- isUserSubset
     fun isUserSubset() = userRepository.getUser()?.isSubset ?: false
     //---------------------------------------------------------------------------------------------- isUserSubset
+
+
+    //---------------------------------------------------------------------------------------------- isReturnBasket
+    fun isReturnBasket() = roleManager.isCustomerReturnBasket()
+    //---------------------------------------------------------------------------------------------- isReturnBasket
 
 }
