@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,9 @@ import com.zarholding.jpacustomer.view.adapter.recycler.ProductAdapter
 import com.zarholding.jpacustomer.view.dialog.AlertDialog
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import com.zarholding.jpacustomer.view.dialog.product.ProductDetailDialog
+import io.github.g00fy2.quickie.QRResult
+import io.github.g00fy2.quickie.ScanCustomCode
+import io.github.g00fy2.quickie.config.ScannerConfig
 
 
 /**
@@ -45,6 +49,9 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     private val viewModel: ProductViewModel by viewModels()
     private var imageViewSelect: ImageView? = null
     private var viewType = EnumProductPageType.Product
+
+    private val scanCustomCode =
+        registerForActivityResult(ScanCustomCode()) { result -> handleResult(result) }
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -209,6 +216,13 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         binding.cardViewConfirmToAddBasket.setOnClickListener {
             confirmToAddToBasket()
         }
+
+        binding.imageViewQrReader.setOnClickListener {
+            if (binding.recyclerViewProduct.adapter == null)
+                showMessage(getString(R.string.productsAreDownloading))
+            else
+                startQRCodeReader()
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -311,15 +325,23 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
     //---------------------------------------------------------------------------------------------- showProductDetailDialog
     private fun showProductDetailDialog(item: ProductModel, imageView: ImageView) {
+        if (context == null)
+            return
         val select = object : ProductDetailDialog.Click {
             override fun select() {
-                imageViewSelect = imageView
-                viewModel.getBasketCount()
                 if (!item.txtToOrderForProduct.isNullOrEmpty())
                     AlertDialog(
                         title = item.txtToOrderForProduct!!,
-                        onClick = {}
+                        textColor = requireContext().getColor(R.color.red),
+                        onClick = {
+                            imageViewSelect = imageView
+                            viewModel.getBasketCount()
+                        }
                     ).show(childFragmentManager, "product")
+                else {
+                    imageViewSelect = imageView
+                    viewModel.getBasketCount()
+                }
             }
         }
         ProductDetailDialog(
@@ -390,11 +412,45 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         else
             AlertDialog(
                 title = text,
+                textColor = requireContext().getColor(R.color.red),
                 onClick = {
                     viewModel.addToBasket(type = viewType)
                 }
             ).show(childFragmentManager, "")
     }
     //---------------------------------------------------------------------------------------------- addToBasket
+
+
+    //---------------------------------------------------------------------------------------------- startQRCodeReader
+    private fun startQRCodeReader() {
+        scanCustomCode.launch(
+            ScannerConfig.build {
+                setOverlayStringRes(R.string.clearCameraAndInFrontOfQr) // string resource used for the scanner overlay
+                setOverlayDrawableRes(R.drawable.a_ic_qr_code_scan) // drawable resource used for the scanner overlay
+                setShowTorchToggle(true)
+                setUseFrontCamera(false) // use the front camera
+            }
+        )
+    }
+    //---------------------------------------------------------------------------------------------- startQRCodeReader
+
+
+    //---------------------------------------------------------------------------------------------- handleResult
+    private fun handleResult(result: QRResult) {
+        when (result) {
+            is QRResult.QRSuccess -> {
+                val id = result.content.rawValue
+                if (id?.isDigitsOnly() == true) {
+                    binding.editTextSearch.setText(id)
+                } else
+                    showMessage(getString(R.string.qrIsWrong))
+            }
+
+            else -> {
+                showMessage(getString(R.string.qrIsWrong))
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- handleResult
 
 }

@@ -455,7 +455,7 @@ class ProductViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- checkTxtProduct
     fun checkTxtProduct(): String {
-        val listRequest = productsList?.filter { !it.txtToOrderForProduct.isNullOrEmpty() }
+        val listRequest = productsList?.filter { it.count > 0 }?.filter { !it.txtToOrderForProduct.isNullOrEmpty() }
         var text = ""
         listRequest?.forEach {
             text += "کد کالا : ${it.productCode} - ${it.txtToOrderForProduct} ${System.getProperty("line.separator")}"

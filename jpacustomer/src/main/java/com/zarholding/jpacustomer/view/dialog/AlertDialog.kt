@@ -16,6 +16,7 @@ import com.zarholding.jpacustomer.view.activity.MainActivity
 
 class AlertDialog(
     private val title: String,
+    private val textColor: Int,
     private val onClick: () -> Unit
 ) : DialogFragment() {
 
@@ -46,16 +47,23 @@ class AlertDialog(
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
         lp.height = WindowManager.LayoutParams.MATCH_PARENT
         window?.attributes = lp
-        binding.textViewTitle.text = title
+        setTitleText()
         setListener()
     }
     //---------------------------------------------------------------------------------------------- onCreateView
 
 
+    //---------------------------------------------------------------------------------------------- setTitleText
+    private fun setTitleText() {
+        binding.textViewTitle.text = title
+        binding.textViewTitle.setTextColor(textColor)
+    }
+    //---------------------------------------------------------------------------------------------- setTitleText
+
+
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.buttonYes.setOnClickListener {
-            onClick.invoke()
             dismiss()
         }
     }
@@ -65,6 +73,7 @@ class AlertDialog(
     //---------------------------------------------------------------------------------------------- onDismiss
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
+        onClick.invoke()
         (activity as MainActivity?)?.disableBlurView()
     }
     //---------------------------------------------------------------------------------------------- onDismiss

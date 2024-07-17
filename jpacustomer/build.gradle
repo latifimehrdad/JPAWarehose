@@ -69,4 +69,7 @@ dependencies {
 
     implementation 'com.github.Drjacky:ImagePicker:2.3.22'
 
+    //QR Code Scanner
+    implementation("io.github.g00fy2.quickie:quickie-bundled:1.8.0")
+
 }

@@ -6,6 +6,8 @@ package com.hoomanholding.applibrary.model.data.response.report
 
 data class BillingAndReturnReportModel(
     val id: Long,
+    val customerCode: Long,
+    val customerName: String?,
     val billingNumber: Long,
     val billingDate: String?,
     val amount: Long,

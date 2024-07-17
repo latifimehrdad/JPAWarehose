@@ -17,6 +17,9 @@
     <string name="buyBasket">سبد خرید</string>
     <string name="returnBasket">سبد مرجوعی</string>
     <string name="buyerName">نام مشتری</string>
+    <string name="productsAreDownloading">در حال دریافت کالاها</string>
+    <string name="clearCameraAndInFrontOfQr">دوربین گوشی را تمیز کنید و آن را مقابل تصویر قرار دهید</string>
+    <string name="qrIsWrong">تصویر اسکن شده اشتباه است</string>
     <string name="listOfCustomer">لیست مشتریان</string>
     <string name="rePassword">تکرار رمز عبور</string>
     <string name="savePasswordAndFingerPrint">برای ذخیره ی رمز عبور و نام کاربری و ورود با اثر انگشت لطفا این گزینه را  فعال نمایید</string>

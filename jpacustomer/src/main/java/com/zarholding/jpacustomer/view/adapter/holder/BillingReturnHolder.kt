@@ -49,6 +49,11 @@ class BillingReturnHolder(
             splitter = binding.textViewDate.context.getString(R.string.colon),
             value = item.billingDate
         )
+        binding.textViewCustomer.setTitleAndValue(
+            title = binding.textViewCustomer.context.getString(R.string.buyerName),
+            splitter = binding.textViewCustomer.context.getString(R.string.colon),
+            value = "${item.customerName} - ${item.customerCode}"
+        )
         if (binding.expandableMore.isExpanded)
             binding.expandableMore.collapse()
     }

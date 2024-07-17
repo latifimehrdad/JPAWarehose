@@ -194,7 +194,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         }
         binding.textViewTotalAmountOfCashProduct.visibility = visible
         binding.textViewTotalAmount.visibility = visible
-        binding.checkboxExhibit.visibility = visible
+//        binding.checkboxExhibit.visibility = visible
         if (visible == View.VISIBLE)
             binding.buttonSubmit.setText(R.string.saveOrder)
         else
@@ -263,10 +263,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
             if (item.isCash)
                 cashAmount += (item.count * item.price)
         }
-        if (viewModel.isExhibitionActive)
+/*        if (viewModel.isExhibitionActive)
             binding.checkboxExhibit.visibility = View.VISIBLE
         else
-            binding.checkboxExhibit.visibility = View.GONE
+            binding.checkboxExhibit.visibility = View.GONE*/
         binding.textViewTotalAmount.setTitleAndValue(
             title = getString(R.string.totalAmount),
             splitter = getString(R.string.colon),

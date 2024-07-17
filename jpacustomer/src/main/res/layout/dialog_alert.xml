@@ -36,6 +36,8 @@
                     android:fontFamily="@font/yekan_bakh_medium"
                     android:textStyle="bold"
                     android:maxLines="15"
+                    android:scrollbars="vertical"
+                    android:textIsSelectable="true"
                     android:shadowColor="@color/primaryColor"
                     android:gravity="center" />
 

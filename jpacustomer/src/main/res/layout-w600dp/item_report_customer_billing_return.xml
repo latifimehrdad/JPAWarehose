@@ -39,6 +39,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/textViewCustomer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransans_medium"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/textSizeH4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/textViewFinalPriceTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -47,9 +58,10 @@
                 android:text="@string/finalPrice"
                 android:textColor="@color/textColor"
                 android:textSize="@dimen/textSizeH4"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toStartOf="@id/textViewDate"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/textViewCustomer" />
 
             <TextView
                 android:id="@+id/textViewDate"
@@ -61,7 +73,7 @@
                 android:textSize="@dimen/textSizeH4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/textViewFinalPriceTitle" />
 
             <TextView
                 android:id="@+id/textViewOrderNumber"
@@ -72,7 +84,7 @@
                 android:textSize="@dimen/textSizeH4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textViewDate"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/textViewFinalPriceTitle" />
 
             <TextView
                 android:id="@+id/textViewRial"
