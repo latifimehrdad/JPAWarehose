@@ -25,5 +25,8 @@ data class ProductModel(
     val maxCount: Int,
     val productThumbnailImageName: String?,
     val isCash: Boolean,
-    val isSpecial: Boolean
+    val isSpecial: Boolean,
+    val billingDate: String,
+    val txtToOrderForProduct: String?,
+    var count: Int
 )

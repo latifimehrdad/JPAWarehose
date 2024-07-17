@@ -18,13 +18,13 @@ class BasketRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestAddToBasket
-    suspend fun requestAddToBasket(request: AddToBasket) =
+    suspend fun requestAddToBasket(request: List<AddToBasket>) =
         apiCall { api.requestAddToBasket(request, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestAddToBasket
 
 
     //---------------------------------------------------------------------------------------------- requestAddToReturnBasket
-    suspend fun requestAddToReturnBasket(request: AddToBasket) =
+    suspend fun requestAddToReturnBasket(request: List<AddToBasket>) =
         apiCall { api.requestAddToReturnBasket(request, tokenRepository.getBearerToken()) }
     //---------------------------------------------------------------------------------------------- requestAddToReturnBasket
 

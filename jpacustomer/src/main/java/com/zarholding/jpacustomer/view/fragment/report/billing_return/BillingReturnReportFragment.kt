@@ -8,12 +8,14 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
+import com.hoomanholding.applibrary.model.data.response.customer.CustomersModel
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.tools.PermissionManager
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -26,7 +28,12 @@ import com.zarholding.jpacustomer.databinding.FragmentReportBillingReturnBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.holder.BillingReturnHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.BillingReturnAdapter
+import com.zarholding.jpacustomer.view.adapter.recycler.CustomersAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -44,6 +51,7 @@ class BillingReturnReportFragment(
     lateinit var permissionManager: PermissionManager
 
     private var textViewListPdf: TextView? = null
+    private var isEnableForSearching: Boolean = true
 
 
     private enum class DateType {
@@ -69,10 +77,16 @@ class BillingReturnReportFragment(
 
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
+        binding.constraintLayoutCustomer.visibility = View.GONE
+        binding.recyclerViewCustomer.visibility = View.GONE
         viewModel.setReportType(arguments)
         binding.shimmerViewContainer.config(getShimmerBuild())
         observeLiveDate()
         setListener()
+        if (viewModel.isCustomerCustomers()) {
+            binding.constraintLayoutCustomer.visibility = View.VISIBLE
+        }
+        viewModel.requestGetCustomers()
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -91,6 +105,7 @@ class BillingReturnReportFragment(
 
         viewModel.dateFromLiveData.observe(viewLifecycleOwner) {
             binding.shimmerViewContainer.stopLoading()
+            binding.recyclerViewReport.adapter = null
             binding.textViewDateFrom.text = it
         }
 
@@ -105,12 +120,12 @@ class BillingReturnReportFragment(
             setAdapter(it)
         }
 
-        viewModel.downloadProgress.observe(viewLifecycleOwner){
+        viewModel.downloadProgress.observe(viewLifecycleOwner) {
             val title = "${getString(R.string.createPDF)} - $it %"
             textViewListPdf?.text = title
         }
 
-        viewModel.downloadSuccessLiveData.observe(viewLifecycleOwner){
+        viewModel.downloadSuccessLiveData.observe(viewLifecycleOwner) {
             textViewListPdf?.text = getString(R.string.createPDF)
             val fileURI = FileProvider.getUriForFile(
                 requireContext(),
@@ -122,6 +137,10 @@ class BillingReturnReportFragment(
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             requireContext().startActivity(intent)
+        }
+
+        viewModel.customersLiveData.observe(viewLifecycleOwner) {
+            setCustomerAdapter(it)
         }
 
     }
@@ -141,6 +160,22 @@ class BillingReturnReportFragment(
         binding.textViewReport.setOnClickListener {
             permissionForPdf()
         }
+
+        binding.imageViewClearText.setOnClickListener {
+            binding.editTextSearch.setText("")
+        }
+
+        binding.editTextSearch.addTextChangedListener {
+            if (isEnableForSearching) {
+                val text = it.toString()
+                if (text.isEmpty())
+                    binding.imageViewClearText.visibility = View.GONE
+                else
+                    binding.imageViewClearText.visibility = View.VISIBLE
+                viewModel.filterCustomer(customer = text)
+            }
+        }
+
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -199,19 +234,21 @@ class BillingReturnReportFragment(
     private fun setAdapter(items: List<BillingAndReturnReportModel>) {
         if (context == null)
             return
-        val click = object : BillingReturnHolder.Click{
+        val click = object : BillingReturnHolder.Click {
             override fun detailPdf(id: Long, textView: TextView) {
                 textViewListPdf = textView
 
-                when(viewModel.getReportType()) {
+                when (viewModel.getReportType()) {
                     EnumReportType.Return -> {
                         textView.text = getText(R.string.bePatient)
                         viewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Return.name)
                     }
+
                     EnumReportType.Billing -> {
                         textView.text = getText(R.string.bePatient)
                         viewModel.downloadCustomersBillingReturnPDF(id, EnumReportType.Billing.name)
                     }
+
                     else -> {}
                 }
             }
@@ -228,6 +265,24 @@ class BillingReturnReportFragment(
     //---------------------------------------------------------------------------------------------- setAdapter
 
 
+    //---------------------------------------------------------------------------------------------- setCustomerAdapter
+    private fun setCustomerAdapter(items: List<CustomersModel>) {
+        if (context == null)
+            return
+        val adapter = CustomersAdapter(items = items) {
+            selectCustomer(customersModel = it)
+        }
+        val manager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        binding.recyclerViewCustomer.layoutManager = manager
+        binding.recyclerViewCustomer.adapter = adapter
+        binding.recyclerViewCustomer.visibility = View.VISIBLE
+    }
+    //---------------------------------------------------------------------------------------------- setCustomerAdapter
+
 
     //---------------------------------------------------------------------------------------------- storagePermissionLauncher
     private val storagePermissionLauncher =
@@ -240,7 +295,6 @@ class BillingReturnReportFragment(
             }
         }
     //---------------------------------------------------------------------------------------------- storagePermissionLauncher
-
 
 
     //______________________________________________________________________________________________ permissionForPdf
@@ -258,7 +312,6 @@ class BillingReturnReportFragment(
     //______________________________________________________________________________________________ permissionForPdf
 
 
-
     //---------------------------------------------------------------------------------------------- downloadCustomerPDF
     private fun downloadCustomerPDF() {
         textViewListPdf = binding.textViewReport
@@ -267,4 +320,19 @@ class BillingReturnReportFragment(
     }
     //---------------------------------------------------------------------------------------------- downloadCustomerPDF
 
+
+    //---------------------------------------------------------------------------------------------- selectCustomer
+    private fun selectCustomer(customersModel: CustomersModel) {
+        binding.recyclerViewCustomer.visibility = View.GONE
+        viewModel.setCustomer(customersModel = customersModel)
+        binding.imageViewClearText.visibility = View.VISIBLE
+        CoroutineScope(Dispatchers.Main).launch {
+            isEnableForSearching = false
+            delay(500)
+            binding.editTextSearch.setText(customersModel.customerName)
+            delay(500)
+            isEnableForSearching = true
+        }
+    }
+    //---------------------------------------------------------------------------------------------- selectCustomer
 }

@@ -114,8 +114,9 @@ class BasketViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddToBasket
     fun requestAddToBasket(request: AddToBasket) {
         viewModelScope.launch(IO + exceptionHandler()){
+            val listRequest = listOf(request)
             callApi(
-                request = basketRepository.requestAddToBasket(request),
+                request = basketRepository.requestAddToBasket(listRequest),
                 onReceiveData = {
                     addToBasketLiveData.postValue(it)
                     changeCount(request.ProductId, request.Count)
@@ -131,8 +132,9 @@ class BasketViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- requestAddToReturn
     fun requestAddToReturn(request: AddToBasket) {
         viewModelScope.launch(IO + exceptionHandler()){
+            val listRequest = listOf(request)
             callApi(
-                request = basketRepository.requestAddToReturnBasket(request),
+                request = basketRepository.requestAddToReturnBasket(listRequest),
                 onReceiveData = {
                     addToBasketLiveData.postValue(it)
                     changeCount(request.ProductId, request.Count)

@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class ReportRepository @Inject constructor(
     private val api: Api,
-    private val tokenRepository: TokenRepository
+    private val tokenRepository: TokenRepository,
 ) {
 
     //---------------------------------------------------------------------------------------------- requestFirstPageReport
@@ -52,10 +52,10 @@ class ReportRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestCustomerBillingReport
-    suspend fun requestCustomerBillingReport(fromDate: String, toDate: String) =
+    suspend fun requestCustomerBillingReport(fromDate: String, toDate: String, customerId: Long?) =
         apiCall {
             api.requestCustomerBillingReport(
-                fromDate, toDate,
+                fromDate, toDate,customerId,
                 tokenRepository.getBearerToken()
             )
         }
@@ -63,12 +63,26 @@ class ReportRepository @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- requestCustomerReturnReport
-    suspend fun requestCustomerReturnReport(fromDate: String, toDate: String) =
+    suspend fun requestCustomerReturnReport(fromDate: String, toDate: String, customerId: Long?) =
         apiCall {
             api.requestCustomerReturnReport(
-                fromDate, toDate, tokenRepository.getBearerToken()
+                fromDate, toDate, customerId, tokenRepository.getBearerToken()
             )
         }
     //---------------------------------------------------------------------------------------------- requestCustomerReturnReport
+
+
+    //---------------------------------------------------------------------------------------------- requestCustomerReturnBasketReport
+    suspend fun requestCustomerReturnBasketReport() =
+        apiCall { api.requestCustomerReturnBasketReport(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestCustomerReturnBasketReport
+
+
+    //---------------------------------------------------------------------------------------------- requestGetCustomers
+    suspend fun requestGetCustomers() =
+        apiCall { api.requestGetCustomers(tokenRepository.getBearerToken()) }
+    //---------------------------------------------------------------------------------------------- requestGetCustomers
+
+
 
 }

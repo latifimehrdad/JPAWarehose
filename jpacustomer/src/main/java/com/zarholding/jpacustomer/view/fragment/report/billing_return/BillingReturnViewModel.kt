@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.enums.EnumReportType
+import com.hoomanholding.applibrary.model.data.response.customer.CustomersModel
 import com.hoomanholding.applibrary.model.data.response.report.BillingAndReturnReportModel
 import com.hoomanholding.applibrary.model.repository.ReportRepository
 import com.hoomanholding.applibrary.tools.CompanionValues
+import com.hoomanholding.applibrary.tools.RoleManager
 import com.hoomanholding.applibrary.viewmodel.JpaDownloadViewModel
 import com.zarholding.jpacustomer.R
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,15 +23,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BillingReturnViewModel @Inject constructor(
-    private val reportRepository: ReportRepository
+    private val reportRepository: ReportRepository,
+    private val roleManager: RoleManager
 ) : JpaDownloadViewModel() {
 
 
+    private var customersList = emptyList<CustomersModel>()
+    private var customerSelectedModel: CustomersModel? = null
     private var reportType: EnumReportType = EnumReportType.Billing
     val dateFromLiveData: MutableLiveData<String?> by lazy { MutableLiveData<String?>() }
     val dateToLiveData: MutableLiveData<String?> by lazy { MutableLiveData<String?>() }
     val reportLiveData: MutableLiveData<List<BillingAndReturnReportModel>> by lazy {
         MutableLiveData<List<BillingAndReturnReportModel>>()
+    }
+    val customersLiveData: MutableLiveData<List<CustomersModel>> by lazy {
+        MutableLiveData<List<CustomersModel>>()
     }
 
     //---------------------------------------------------------------------------------------------- getReportType
@@ -81,27 +89,31 @@ class BillingReturnViewModel @Inject constructor(
                 return@launch
             }
 
-            when(reportType){
+            when (reportType) {
                 EnumReportType.Billing -> callApi(
                     request = reportRepository
                         .requestCustomerBillingReport(
                             dateFromLiveData.value!!,
-                            dateToLiveData.value!!
+                            dateToLiveData.value!!,
+                            customerSelectedModel?.id
                         ),
                     onReceiveData = {
                         reportLiveData.postValue(it)
                     }
                 )
+
                 EnumReportType.Return -> callApi(
                     request = reportRepository
                         .requestCustomerReturnReport(
                             dateFromLiveData.value!!,
-                            dateToLiveData.value!!
+                            dateToLiveData.value!!,
+                            customerSelectedModel?.id
                         ),
                     onReceiveData = {
                         reportLiveData.postValue(it)
                     }
                 )
+
                 else -> {}
             }
         }
@@ -114,7 +126,11 @@ class BillingReturnViewModel @Inject constructor(
         viewModelScope.launch(IO + exceptionHandler()) {
             val file = initFile(type, "pdf")
             delay(1000)
-            val response = downloadFileRepository.downloadCustomersBillingPDF(billingId, type)
+            val response = downloadFileRepository.downloadCustomersBillingPDF(
+                billingId,
+                type,
+                customerSelectedModel?.id
+            )
             response.body()?.saveFile(file)?.collect { downloadState ->
                 when (downloadState) {
                     is DownloadState.Downloading -> {
@@ -146,7 +162,8 @@ class BillingReturnViewModel @Inject constructor(
                 .requestCustomerHeaderBillingsPDF(
                     dateFromLiveData.value!!,
                     dateToLiveData.value!!,
-                    getReportType().name
+                    getReportType().name,
+                    customerSelectedModel?.id
                 )
             response.body()?.saveFile(file)?.collect { downloadState ->
                 when (downloadState) {
@@ -169,5 +186,46 @@ class BillingReturnViewModel @Inject constructor(
     }
     //---------------------------------------------------------------------------------------------- requestCustomerHeaderBillingsPDF
 
+
+    //---------------------------------------------------------------------------------------------- isCustomerCustomers
+    fun isCustomerCustomers() = roleManager.isCustomerCustomers()
+    //---------------------------------------------------------------------------------------------- isCustomerCustomers
+
+
+    //---------------------------------------------------------------------------------------------- requestGetCustomers
+    fun requestGetCustomers() {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            if (isCustomerCustomers())
+                callApi(
+                    request = reportRepository.requestGetCustomers(),
+                    onReceiveData = {
+                        customersList = it
+                        customersLiveData.postValue(customersList)
+                    }
+                )
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestGetCustomers
+
+
+    //---------------------------------------------------------------------------------------------- filterCustomer
+    fun filterCustomer(customer: String) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val temp = customersList.filter {
+                it.customerName.contains(customer)
+            }
+            setDateTo(null)
+            setDateFrom(null)
+            customersLiveData.postValue(temp)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- filterCustomer
+
+
+    //---------------------------------------------------------------------------------------------- setCustomer
+    fun setCustomer(customersModel: CustomersModel) {
+        customerSelectedModel = customersModel
+    }
+    //---------------------------------------------------------------------------------------------- setCustomer
 
 }

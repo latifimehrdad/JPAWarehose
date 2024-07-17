@@ -2,11 +2,13 @@ package com.zarholding.jpacustomer.view.fragment.product
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.request.AddToBasket
 import com.hoomanholding.applibrary.model.data.response.category.CategoryModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.zar.core.tools.extensions.persianNumberToEnglishNumber
+import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.model.repository.BasketRepository
 import com.zarholding.jpacustomer.model.repository.ProductCategoryRepository
@@ -38,6 +40,7 @@ class ProductViewModel @Inject constructor(
         MutableLiveData<List<ProductModel>>()
     }
     val basketCountLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+    val addToBasketLiveData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
     private var categoryLevel: CategoryLevel? = CategoryLevel.All
     private var categoryIndex: Int = CategoryLevel.All.index
@@ -64,7 +67,8 @@ class ProductViewModel @Inject constructor(
         ProductCode("کد کالا", 1),
         Discount("شگفت انگیز نمایشگاه", 2),
         MaxPrice("بیشترین قیمت", 3),
-        MinPrice("کمترین قیمت", 4)
+        MinPrice("کمترین قیمت", 4),
+        BillingDate("خریدهای قبلی", 5)
     }
 
 
@@ -82,7 +86,6 @@ class ProductViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- clearFilter
-
 
 
     //---------------------------------------------------------------------------------------------- getItemsSort
@@ -124,7 +127,7 @@ class ProductViewModel @Inject constructor(
                             categoryList = it
                             categoryLiveData.postValue(categoryList)
                             if (!productsList.isNullOrEmpty())
-                             searchProduct(productsList!!)
+                                searchProduct(productsList!!)
                         }
                     )
                 else {
@@ -192,7 +195,8 @@ class ProductViewModel @Inject constructor(
 
     //---------------------------------------------------------------------------------------------- searchProduct
     private fun searchProduct(items: List<ProductModel>) {
-        val list = sortList(items = filterByCategory(items = filterByType(items = filterProductList(items = items))))
+        val list =
+            sortList(items = filterByCategory(items = filterByType(items = filterProductList(items = items))))
         productLiveData.postValue(list)
     }
     //---------------------------------------------------------------------------------------------- searchProduct
@@ -224,14 +228,14 @@ class ProductViewModel @Inject constructor(
                     product.isSpecial
                 }
             }
-            else ->{
+
+            else -> {
                 items
             }
 
         }
     }
     //---------------------------------------------------------------------------------------------- filterByCategory
-
 
 
     //---------------------------------------------------------------------------------------------- filterByCategory
@@ -293,8 +297,14 @@ class ProductViewModel @Inject constructor(
                 }
 
                 SortType.Discount -> {
-                    items.sortedByDescending {model ->
+                    items.sortedByDescending { model ->
                         model.isSpecial
+                    }
+                }
+
+                SortType.BillingDate -> {
+                    items.sortedByDescending { model ->
+                        model.billingDate
                     }
                 }
             }
@@ -368,5 +378,91 @@ class ProductViewModel @Inject constructor(
         getProduct(type = productPageType)
     }
     //---------------------------------------------------------------------------------------------- setSortIndex
+
+
+    //---------------------------------------------------------------------------------------------- addToBasket
+    fun addToBasket(type: EnumProductPageType) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            val listRequest = productsList?.filter { it.count > 0 }?.map {
+                AddToBasket(
+                    it.id,
+                    it.count,
+                    it.price
+                )
+            }
+            if (listRequest.isNullOrEmpty())
+                setMessage(resourcesProvider.getString(R.string.basketIsEmpty))
+            else
+                when (type) {
+                    EnumProductPageType.Product -> requestAddToBasket(request = listRequest)
+                    EnumProductPageType.Return -> requestAddToReturn(request = listRequest)
+                }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- addToBasket
+
+
+    //---------------------------------------------------------------------------------------------- requestAddToBasket
+    private fun requestAddToBasket(request: List<AddToBasket>) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+
+            callApi(
+                request = basketRepository.requestAddToBasket(request),
+                onReceiveData = {
+                    checkResponseAddToBasket(it)
+                }
+            )
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestAddToBasket
+
+
+    //---------------------------------------------------------------------------------------------- requestAddToReturn
+    private fun requestAddToReturn(request: List<AddToBasket>) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            callApi(
+                request = basketRepository.requestAddToReturnBasket(request),
+                onReceiveData = {
+                    checkResponseAddToBasket(it)
+                }
+            )
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestAddToReturn
+
+
+    //---------------------------------------------------------------------------------------------- checkResponseAddToBasket
+    private fun checkResponseAddToBasket(status: Boolean) {
+        viewModelScope.launch(IO + exceptionHandler()) {
+            if (status) {
+                val temp = productsList?.filter { it.count > 0 }
+                if (temp.isNullOrEmpty())
+                    addToBasketLiveData.postValue(true)
+                else {
+                    temp.forEach {
+                        it.count = 0
+                    }
+                    addToBasketLiveData.postValue(true)
+                }
+            } else
+                addToBasketLiveData.postValue(false)
+            delay(1000)
+            addToBasketLiveData.postValue(false)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- checkResponseAddToBasket
+
+
+    //---------------------------------------------------------------------------------------------- checkTxtProduct
+    fun checkTxtProduct(): String {
+        val listRequest = productsList?.filter { !it.txtToOrderForProduct.isNullOrEmpty() }
+        var text = ""
+        listRequest?.forEach {
+            text += "کد کالا : ${it.productCode} - ${it.txtToOrderForProduct} ${System.getProperty("line.separator")}"
+            text += "----------------- ${System.getProperty("line.separator")}"
+        }
+        return text
+    }
+    //---------------------------------------------------------------------------------------------- checkTxtProduct
 
 }

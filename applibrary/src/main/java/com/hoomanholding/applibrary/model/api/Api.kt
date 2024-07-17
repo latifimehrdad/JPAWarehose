@@ -26,6 +26,7 @@ import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReason
 import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.critic.CriticModel
 import com.hoomanholding.applibrary.model.data.response.basket.subuser.SubUserOrderModel
+import com.hoomanholding.applibrary.model.data.response.customer.CustomersModel
 import com.hoomanholding.applibrary.model.data.response.update.AppVersionModel
 import com.hoomanholding.applibrary.model.data.response.user.UserModel
 import com.hoomanholding.applibrary.model.data.response.user.VerifyCodeModel
@@ -180,6 +181,12 @@ interface Api {
     suspend fun requestGetCustomerReturnProducts(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<ProductModel>?>>
+
+
+    @GET("$baseData/basedata-get-Customrs")
+    suspend fun requestGetCustomers(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CustomersModel>?>>
     //---------------------------------------------------------------------------------------------- baseData
 
 
@@ -276,13 +283,13 @@ interface Api {
 
     @POST("$basket/basket-add")
     suspend fun requestAddToBasket(
-        @Body request: AddToBasket,
+        @Body request: List<AddToBasket>,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
 
     @POST("$basket/returnbasket-add")
     suspend fun requestAddToReturnBasket(
-        @Body request: AddToBasket,
+        @Body request: List<AddToBasket>,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<Boolean?>>
 
@@ -404,6 +411,7 @@ interface Api {
     suspend fun requestCustomerBillingReport(
         @Query("fromDate") fromDate: String,
         @Query("toDate") toDate: String,
+        @Query("customerId") customerId: Long?,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<BillingAndReturnReportModel>?>>
 
@@ -411,6 +419,7 @@ interface Api {
     suspend fun requestCustomerReturnReport(
         @Query("fromDate") fromDate: String,
         @Query("toDate") toDate: String,
+        @Query("customerId") customerId: Long?,
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<BillingAndReturnReportModel>?>>
 
@@ -426,6 +435,7 @@ interface Api {
         @Query("fromDate") fromDate: String,
         @Query("toDate") toDate: String,
         @Query("type") type: String,
+        @Query("customerId") customerId: Long?,
         @Header("Authorization") token: String
     ): Response<ResponseBody>
 
@@ -434,6 +444,7 @@ interface Api {
     suspend fun requestCustomersBillingPDF(
         @Query("billingId") billingId: Long,
         @Query("type") type: String,
+        @Query("customerId") customerId: Long?,
         @Header("Authorization") token: String
     ): Response<ResponseBody>
 
@@ -443,6 +454,11 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<ResponseBody>
 
+
+    @GET("$report/customers-report-customerReturnBasketReport")
+    suspend fun requestCustomerReturnBasketReport(
+        @Header("Authorization") token: String
+    ): Response<GeneralResponse<List<CustomerReturnBasketReportModel>?>>
 
 
     //---------------------------------------------------------------------------------------------- requestFirstPageReport

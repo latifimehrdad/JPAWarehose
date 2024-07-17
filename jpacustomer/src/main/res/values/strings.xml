@@ -13,9 +13,11 @@
     <string name="visitorName">نام ویزیتور</string>
     <string name="fullName">نام و نام خانوادگی</string>
     <string name="basketNumber">شماره سبد</string>
+    <string name="basketIsEmpty">سبد خالی است</string>
     <string name="buyBasket">سبد خرید</string>
     <string name="returnBasket">سبد مرجوعی</string>
     <string name="buyerName">نام مشتری</string>
+    <string name="listOfCustomer">لیست مشتریان</string>
     <string name="rePassword">تکرار رمز عبور</string>
     <string name="savePasswordAndFingerPrint">برای ذخیره ی رمز عبور و نام کاربری و ورود با اثر انگشت لطفا این گزینه را  فعال نمایید</string>
     <string name="receiveCode">دریافت کد تایید</string>
@@ -53,6 +55,7 @@
     <string name="addToReturn">اضافه کردن به مرجوعی</string>
     <string name="doYouWantToBasketDelete">آیا برای حذف ( %1$s ) مطمئن هستید؟</string>
     <string name="doYouWantToAllBasketDelete">آیا برای حذف کامل سبد مطمئن هستید؟</string>
+    <string name="doYouWantToConfirmBasket">آیا برای اضافه کردن موارد انتخابی سبد مطمئن هستید؟</string>
     <string name="none">در حال بررسی</string>
     <string name="rejected">رد شده</string>
     <string name="reject">عدم تایید</string>
@@ -117,6 +120,7 @@
     <string name="returnCount">تعداد مرجوعی امسال</string>
     <string name="factorReport">گزارش فاکتور</string>
     <string name="customerBalanceReport">دفتر مشتری</string>
+    <string name="customerBasketReturnReport">گزارش درخواست مرجوعی</string>
     <string name="billOfSale">صورتحساب فروش کالا و خدمات</string>
     <string name="shomarehSayadi">شماره صیادی</string>
     <string name="date">تاریخ</string>
@@ -160,6 +164,7 @@
     <string name="writeNewMessage">پیام خود را بگذارید…</string>
     <string name="isSending">در حال ارسال پیام …</string>
     <string name="exhibitionBasket">سبد نمایشگاه</string>
+    <string name="factorOfCustomer">فاکتور مشتری</string>
     <string name="category">دسته بندی</string>
     <string name="chooseCategory">انتخاب دسته بندی</string>
     <string name="areYouSureToConfirmTheOrder">آیا برای تایید درخواست مطمئن هستید؟</string>

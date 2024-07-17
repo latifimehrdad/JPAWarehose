@@ -2,14 +2,13 @@ package com.zarholding.jpacustomer.view.fragment.report
 
 import android.os.Bundle
 import android.view.View
-import com.hoomanholding.applibrary.model.data.enums.EnumReportType
-import com.hoomanholding.applibrary.tools.CompanionValues
-import com.hoomanholding.applibrary.tools.RoleManager
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentReportBinding
+import com.zarholding.jpacustomer.view.adapter.recycler.ReportItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 /**
  * Created by m-latifi on 6/7/2023.
@@ -20,45 +19,26 @@ class ReportFragment(
     override var layout: Int = R.layout.fragment_report
 ): JpaFragment<FragmentReportBinding>() {
 
-    @Inject
-    lateinit var roleManager: RoleManager
+    private val viewModel: ReportViewModel by viewModels()
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setListener()
-        if (roleManager.isAccessToCustomerOrderReport())
-            binding.cardViewCustomerOrderReport.visibility = View.VISIBLE
-        else
-            binding.cardViewCustomerOrderReport.visibility = View.GONE
+        if (context != null) {
+            val adapter = ReportItemAdapter(items = viewModel.getReport()) {
+                gotoFragment(fragment = it.action, bundle = it.bundle)
+            }
+            val manager = GridLayoutManager(
+                requireContext(),
+                3,
+                GridLayoutManager.VERTICAL,
+                false
+            )
+            binding.recyclerApp.layoutDirection = View.LAYOUT_DIRECTION_RTL
+            binding.recyclerApp.layoutManager = manager
+            binding.recyclerApp.adapter = adapter
+        }
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
-
-
-
-    //---------------------------------------------------------------------------------------------- setListener
-    private fun setListener() {
-        binding.cardViewCustomerOrderReport.setOnClickListener {
-            gotoFragment(R.id.action_goto_customerOrderReportFragment)
-        }
-
-        binding.cardViewCustomerBalanceReport.setOnClickListener {
-            gotoFragment(R.id.action_profileFragment_to_customerBalanceReportFragment)
-        }
-
-        binding.cardViewFactorReport.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.Billing.name)
-            gotoFragment(R.id.action_profileFragment_to_billingReturnReportFragment, bundle)
-        }
-
-        binding.cardViewFeedbackReport.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.Return.name)
-            gotoFragment(R.id.action_profileFragment_to_billingReturnReportFragment, bundle)
-        }
-
-    }
-    //---------------------------------------------------------------------------------------------- setListener
 
 }

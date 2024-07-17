@@ -61,6 +61,7 @@ class EditLocationDialog() : DialogFragment() {
     //---------------------------------------------------------------------------------------------- onCreateView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity?)?.enableBlurView()
         val lp = WindowManager.LayoutParams()
         val window = dialog?.window
         val back = ColorDrawable(Color.TRANSPARENT)
@@ -178,6 +179,7 @@ class EditLocationDialog() : DialogFragment() {
     //---------------------------------------------------------------------------------------------- onDismiss
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
+        (activity as MainActivity?)?.disableBlurView()
         activity?.let {
             (it as MainActivity).showFragmentContainer()
         }

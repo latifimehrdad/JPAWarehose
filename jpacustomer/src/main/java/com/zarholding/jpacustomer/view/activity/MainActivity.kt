@@ -71,6 +71,9 @@ class MainActivity : AppCompatActivity() {
         setAppTheme()
         setListener()
         hideProfileView()
+        binding.blurView.setupWith(binding.constraintLayoutParent)
+            .setBlurRadius(10f).setBlurEnabled(false)
+
         mainViewModel.userInfoLiveData.observe(this) { user ->
             user?.let {
                 binding.textViewUserName.setTitleAndValue(
@@ -173,7 +176,8 @@ class MainActivity : AppCompatActivity() {
                 binding.customMenuCart.clearSelected()
             }
 
-            R.id.homeFragment -> if (!binding.customMenuHome.isSelectedMenu()) {
+            R.id.homeFragment,
+            R.id.subUserOrderFragment-> {
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -237,7 +241,8 @@ class MainActivity : AppCompatActivity() {
             R.id.reportFragment,
             R.id.customerBalanceReportFragment,
             R.id.billingReturnReportFragment,
-            R.id.customerOrderReportFragment -> {
+            R.id.customerOrderReportFragment,
+            R.id.customerBasketReturnReportFragment -> {
                 binding.cardViewMenu.visibility = View.VISIBLE
                 binding.imageViewBack.visibility = View.VISIBLE
                 binding.cardViewProfile.visibility = View.VISIBLE
@@ -343,4 +348,19 @@ class MainActivity : AppCompatActivity() {
     }
     //---------------------------------------------------------------------------------------------- gotoHomeFragment
 
+
+    //---------------------------------------------------------------------------------------------- enableBlurView
+    fun enableBlurView() {
+        binding.blurView.setBlurEnabled(true)
+    }
+    //---------------------------------------------------------------------------------------------- enableBlurView
+
+
+    //---------------------------------------------------------------------------------------------- disableBlurView
+    fun disableBlurView() {
+        binding.blurView.setBlurEnabled(false)
+    }
+    //---------------------------------------------------------------------------------------------- disableBlurView
+
+    
 }

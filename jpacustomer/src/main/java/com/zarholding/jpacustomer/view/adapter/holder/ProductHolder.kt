@@ -3,10 +3,13 @@ package com.zarholding.jpacustomer.view.adapter.holder
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.text.isDigitsOnly
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.hoomanholding.applibrary.ext.downloadImage
 import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
+import com.hoomanholding.applibrary.view.custom.JpaButton
 import com.zar.core.tools.extensions.split
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.ItemProductBinding
@@ -29,9 +32,9 @@ class ProductHolder(
 
 
     //---------------------------------------------------------------------------------------------- bind
-    fun bind(item: ProductModel) {
+    fun bind(item: ProductModel, position: Int) {
         setValueToXml(item)
-        setListener(item)
+        setListener(item, position)
         binding.executePendingBindings()
     }
     //---------------------------------------------------------------------------------------------- bind
@@ -42,6 +45,7 @@ class ProductHolder(
         binding.imageviewStatus.visibility = View.GONE
         binding.imageviewDiscount.visibility = View.GONE
         binding.textViewName.text = item.productName
+        binding.editTextCount.setText(item.count.toString())
         binding.textViewPrice.text = item.price.split()
         binding.textViewCode.setTitleAndValue(
             title = binding.textViewCode.context.getString(R.string.productCode),
@@ -69,16 +73,48 @@ class ProductHolder(
         if (item.isSpecial)
             binding.imageviewDiscount.visibility = View.VISIBLE
 
-
     }
     //---------------------------------------------------------------------------------------------- setValueToXml
 
 
     //---------------------------------------------------------------------------------------------- setListener
-    private fun setListener(item: ProductModel) {
+    private fun setListener(item: ProductModel, position: Int) {
         binding.root.setOnClickListener {
             click.selectProduct(item, binding.imageViewPicture)
         }
+
+        binding.imageViewMinus.setOnClickListener {
+            val count = getEditTextCount() - 1
+            if (count > 0) {
+                binding.editTextCount.setText((count).toString())
+                item.count = count
+            }
+        }
+
+        binding.imageViewPlus.setOnClickListener {
+            val count = getEditTextCount() + 1
+            if (count <= item.maxCount) {
+                binding.editTextCount.setText((count).toString())
+                item.count = count
+            }
+        }
+
     }
     //---------------------------------------------------------------------------------------------- setListener
+
+
+    //---------------------------------------------------------------------------------------------- getEditTextCount
+    private fun getEditTextCount(): Int {
+        val text = binding.editTextCount.text.toString()
+        return if (text.isEmpty())
+            0
+        else if (text.isDigitsOnly())
+            text.toInt()
+        else {
+            binding.editTextCount.setText("0")
+            0
+        }
+    }
+    //---------------------------------------------------------------------------------------------- getEditTextCount
+
 }

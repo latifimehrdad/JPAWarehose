@@ -36,18 +36,18 @@ class DownloadFileRepository @Inject constructor() {
 
 
     //---------------------------------------------------------------------------------------------- downloadCustomersBillingPDF
-    suspend fun downloadCustomersBillingPDF(billingId: Long, type: String) =
+    suspend fun downloadCustomersBillingPDF(billingId: Long, type: String, customerId: Long?) =
         retrofit().create(Api::class.java)
-            .requestCustomersBillingPDF(billingId, type, tokenRepository.getBearerToken())
+            .requestCustomersBillingPDF(billingId, type, customerId, tokenRepository.getBearerToken())
 
     //---------------------------------------------------------------------------------------------- downloadCustomersBillingPDF
 
 
 
     //---------------------------------------------------------------------------------------------- requestCustomerHeaderBillingsPDF
-    suspend fun requestCustomerHeaderBillingsPDF(fromDate: String, toDate: String, type: String) =
+    suspend fun requestCustomerHeaderBillingsPDF(fromDate: String, toDate: String, type: String, customerId: Long?) =
             retrofit().create(Api::class.java).requestCustomerHeaderBillingsPDF(
-                fromDate, toDate, type, tokenRepository.getBearerToken()
+                fromDate, toDate, type, customerId, tokenRepository.getBearerToken()
             )
     //---------------------------------------------------------------------------------------------- requestCustomerHeaderBillingsPDF
 

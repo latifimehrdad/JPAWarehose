@@ -31,7 +31,7 @@ class ProductAdapter(
 
     //---------------------------------------------------------------------------------------------- getItemCount
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], position)
     }
     //---------------------------------------------------------------------------------------------- getItemCount
 
@@ -39,4 +39,12 @@ class ProductAdapter(
     //---------------------------------------------------------------------------------------------- getItemCount
     override fun getItemCount() = items.size
     //---------------------------------------------------------------------------------------------- getItemCount
+
+
+    //---------------------------------------------------------------------------------------------- changeCount
+    fun changeCount(position: Int, count: Int) {
+        items[position].count = count
+    }
+    //---------------------------------------------------------------------------------------------- changeCount
+
 }

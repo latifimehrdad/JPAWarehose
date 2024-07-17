@@ -251,9 +251,33 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:background="@color/recyclerLoadingBack"/>
+                android:background="@color/recyclerLoadingBack"
+                />
 
         </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewConfirmToAddBasket"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerViewProduct"
+            app:layout_constraintEnd_toEndOf="@id/recyclerViewProduct"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="50dp"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/primaryColor">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                android:contentDescription="@string/description"
+                android:src="@drawable/a_ic_shopping_bag"
+                app:tint="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

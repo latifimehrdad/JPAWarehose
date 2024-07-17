@@ -28,6 +28,8 @@ import com.zarholding.jpacustomer.view.adapter.holder.CategoryHolder
 import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.CategoryAdapter
 import com.zarholding.jpacustomer.view.adapter.recycler.ProductAdapter
+import com.zarholding.jpacustomer.view.dialog.AlertDialog
+import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import com.zarholding.jpacustomer.view.dialog.product.ProductDetailDialog
 
 
@@ -66,6 +68,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         setViewByType()
+        binding.cardViewConfirmToAddBasket.visibility = View.GONE
         binding.imageViewClearText.visibility = View.GONE
         observeLiveDate()
         setListener()
@@ -80,11 +83,12 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     private fun setViewByType() {
         val type = arguments?.getInt(CompanionValues.Type) ?: EnumProductPageType.Product.type
         viewType = EnumProductPageType.getEnum(type)
-        when(viewType) {
+        when (viewType) {
             EnumProductPageType.Product -> {
                 binding.constraintLayoutCategory.visibility = View.VISIBLE
                 binding.constraintLayoutProduct.visibility = View.VISIBLE
             }
+
             EnumProductPageType.Return -> {
                 binding.constraintLayoutCategory.visibility = View.GONE
                 binding.constraintLayoutProduct.visibility = View.GONE
@@ -97,6 +101,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     //---------------------------------------------------------------------------------------------- observeLiveDate
     private fun observeLiveDate() {
         viewModel.errorLiveDate.observe(viewLifecycleOwner) {
+            binding.shimmerViewContainer.stopLoading()
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -156,6 +161,13 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             binding.shimmerViewContainerCategory.stopLoading()
             setCategoryAdapter(it)
         }
+
+        viewModel.addToBasketLiveData.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.recyclerViewProduct.adapter = null
+                gotoFragment(R.id.action_goto_basketFragment)
+            }
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveDate
 
@@ -192,6 +204,10 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             else
                 binding.imageViewClearText.visibility = View.VISIBLE
             viewModel.setFilterByProductName(search = text, type = viewType)
+        }
+
+        binding.cardViewConfirmToAddBasket.setOnClickListener {
+            confirmToAddToBasket()
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -253,6 +269,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     private fun setProductAdapter(items: List<ProductModel>) {
         if (context == null)
             return
+        binding.cardViewConfirmToAddBasket.visibility = View.VISIBLE
         binding.recyclerViewProduct.adapter = null
         val click = object : ProductHolder.Click {
             override fun selectProduct(item: ProductModel, imageView: ImageView) {
@@ -298,6 +315,11 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             override fun select() {
                 imageViewSelect = imageView
                 viewModel.getBasketCount()
+                if (!item.txtToOrderForProduct.isNullOrEmpty())
+                    AlertDialog(
+                        title = item.txtToOrderForProduct!!,
+                        onClick = {}
+                    ).show(childFragmentManager, "product")
             }
         }
         ProductDetailDialog(
@@ -342,5 +364,37 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
             }).startAnimation()
     }
     //---------------------------------------------------------------------------------------------- animationToCart
+
+
+    //---------------------------------------------------------------------------------------------- confirmToAddToBasket
+    private fun confirmToAddToBasket() {
+        if (context == null)
+            return
+        ConfirmDialog(
+            requireContext(),
+            getString(R.string.doYouWantToConfirmBasket),
+            false
+        ) {
+            addToBasket()
+        }.show()
+    }
+    //---------------------------------------------------------------------------------------------- confirmToAddToBasket
+
+
+    //---------------------------------------------------------------------------------------------- addToBasket
+    private fun addToBasket() {
+        binding.shimmerViewContainer.startLoading()
+        val text = viewModel.checkTxtProduct()
+        if (text.isEmpty())
+            viewModel.addToBasket(type = viewType)
+        else
+            AlertDialog(
+                title = text,
+                onClick = {
+                    viewModel.addToBasket(type = viewType)
+                }
+            ).show(childFragmentManager, "")
+    }
+    //---------------------------------------------------------------------------------------------- addToBasket
 
 }

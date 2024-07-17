@@ -98,7 +98,8 @@
                 android:paddingHorizontal="@dimen/_15sdp"
                 android:fontFamily="@font/iransans_medium"
                 android:textColor="@color/white"
-                android:text='@string/showFactorList' />
+                android:text='@string/showFactorList'
+                android:visibility="gone"/>
 
 
             <com.hoomanholding.applibrary.view.custom.JpaButton
@@ -217,7 +218,8 @@
                     android:textColor="@color/buttonTextColor"
                     android:layoutDirection="rtl"
                     android:layout_marginHorizontal="10dp"
-                    android:buttonTint="@color/a_credit"/>
+                    android:buttonTint="@color/a_credit"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

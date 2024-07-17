@@ -83,6 +83,7 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
             binding.shimmerViewContainer.stopLoading()
             binding.buttonSubmit.stopLoading()
             binding.buttonDeleteAll.stopLoading()
+            itemButton?.stopLoading()
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -194,6 +195,10 @@ class BasketFragment(override var layout: Int = R.layout.fragment_basket) :
         binding.textViewTotalAmountOfCashProduct.visibility = visible
         binding.textViewTotalAmount.visibility = visible
         binding.checkboxExhibit.visibility = visible
+        if (visible == View.VISIBLE)
+            binding.buttonSubmit.setText(R.string.saveOrder)
+        else
+            binding.buttonSubmit.setText(R.string.requestReturn)
 
         binding.cardViewCalculateBasket.visibility = View.GONE
         binding.recyclerViewProduct.adapter = null

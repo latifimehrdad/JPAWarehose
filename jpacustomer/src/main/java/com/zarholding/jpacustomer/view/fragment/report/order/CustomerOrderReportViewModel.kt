@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.hoomanholding.applibrary.model.data.response.report.ReportCustomerOrderModel
 import com.hoomanholding.applibrary.model.repository.ReportRepository
 import com.hoomanholding.applibrary.model.repository.TokenRepository
-import com.hoomanholding.applibrary.model.repository.UserRepository
 import com.hoomanholding.applibrary.viewmodel.JpaDownloadViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +18,6 @@ import javax.inject.Inject
 @HiltViewModel
 class CustomerOrderReportViewModel @Inject constructor(
     private val reportRepository: ReportRepository,
-    private val userRepository: UserRepository,
     private val tokenRepository: TokenRepository
 ) : JpaDownloadViewModel() {
 

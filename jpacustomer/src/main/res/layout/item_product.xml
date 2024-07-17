@@ -28,7 +28,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintWidth_percent="0.25"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -81,10 +80,9 @@
                     android:gravity="start"
                     android:textColor="@color/textHintColor"
                     android:textSize="@dimen/textSizeH5"
-                    app:layout_constraintBottom_toTopOf="@id/textViewName"
                     app:layout_constraintEnd_toStartOf="@id/imageViewPicture"
                     app:layout_constraintStart_toEndOf="@id/linearLayoutPrice"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="@id/imageViewPicture"/>
 
                 <TextView
                     android:id="@+id/textViewName"
@@ -94,7 +92,7 @@
                     android:gravity="start"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/textSizeH4"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="@id/textViewCode"
                     app:layout_constraintStart_toStartOf="@id/textViewCode"
                     app:layout_constraintTop_toBottomOf="@id/textViewCode" />
@@ -110,6 +108,54 @@
                     app:layout_constraintDimensionRatio="W,1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/linearLayoutPrice" />
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/textViewName"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/textViewName"
+                    app:layout_constraintEnd_toEndOf="@id/textViewName">
+
+                    <ImageView
+                        android:id="@+id/imageViewMinus"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:contentDescription="@string/minus"
+                        android:src="@drawable/a_ic_minus"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/editTextCount"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_5sdp"
+                        android:autofillHints="none"
+                        android:background="@color/color4"
+                        android:fontFamily="@font/iransans_bold"
+                        android:gravity="center"
+                        android:hint="@string/zero"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:textColor="@color/textColor"
+                        android:textSize="@dimen/textSizeH1" />
+
+                    <ImageView
+                        android:id="@+id/imageViewPlus"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:contentDescription="@string/plus"
+                        android:src="@drawable/a_ic_plus"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
