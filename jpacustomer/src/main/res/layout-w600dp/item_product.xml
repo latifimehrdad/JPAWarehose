@@ -173,6 +173,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/imageviewTxt"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/logo"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_txt_product"
+                app:layout_constraintDimensionRatio="W,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.55"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
                 android:id="@+id/imageviewDiscount"
                 android:layout_width="20dp"
                 android:layout_height="20dp"

@@ -108,6 +108,11 @@ class ProductDetailDialog(
             splitter = getString(R.string.colon),
             value = product.productCode
         )
+        binding.textViewTxt.text = product.txtToOrderForProduct
+        if (product.txtToOrderForProduct.isNullOrEmpty())
+            binding.textViewTxt.visibility = View.GONE
+        else
+            binding.textViewTxt.visibility = View.VISIBLE
 
         when(type) {
             EnumProductPageType.Product ->
