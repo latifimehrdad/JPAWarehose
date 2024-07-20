@@ -159,13 +159,13 @@
 
                 <EditText
                     android:id="@+id/editTextCount"
-                    android:layout_width="@dimen/_30sdp"
+                    android:layout_width="@dimen/_50sdp"
                     android:layout_height="wrap_content"
                     android:background="@color/a_cardView5"
                     android:textColor="@color/a_textViewPrimary"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:textSize="@dimen/textSizeH1"
-                    android:maxLength="3"
+                    android:maxLength="5"
                     android:fontFamily="@font/iransans_bold"
                     android:gravity="center"
                     android:autofillHints="none"

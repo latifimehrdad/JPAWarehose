@@ -1,14 +1,9 @@
 package com.zarholding.jpacustomer.view.fragment.product
 
-import android.Manifest
 import android.animation.Animator
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -31,13 +26,16 @@ import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProductBinding
 import com.zarholding.jpacustomer.model.EnumProductPageType
 import com.zarholding.jpacustomer.view.activity.MainActivity
-import com.zarholding.jpacustomer.view.activity.ScanActivity
 import com.zarholding.jpacustomer.view.adapter.holder.CategoryHolder
 import com.zarholding.jpacustomer.view.adapter.holder.ProductHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.CategoryAdapter
 import com.zarholding.jpacustomer.view.adapter.recycler.ProductAdapter
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import com.zarholding.jpacustomer.view.dialog.product.ProductDetailDialog
+import io.github.g00fy2.quickie.QRResult
+import io.github.g00fy2.quickie.ScanCustomCode
+import io.github.g00fy2.quickie.config.BarcodeFormat
+import io.github.g00fy2.quickie.config.ScannerConfig
 import javax.inject.Inject
 
 
@@ -57,25 +55,9 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     @Inject
     lateinit var permissionManager: PermissionManager
 
-    //---------------------------------------------------------------------------------------------- cameraPermissionLauncher
-    private val cameraPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { results ->
-            permissionManager.checkPermissionResult(results) {
-                if (it)
-                    startQRCodeReader()
-            }
-        }
-    //---------------------------------------------------------------------------------------------- cameraPermissionLauncher
+    private val scanCustomCode =
+        registerForActivityResult(ScanCustomCode()) { result -> handleResult(result) }
 
-
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data = result.data?.extras?.getString("result")
-            handleResult(result = data)
-        }
-    }
 
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -425,38 +407,40 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
 
 
-    //---------------------------------------------------------------------------------------------- cameraPermission
-    private fun cameraPermission() {
-        val permissions = listOf(
-            Manifest.permission.CAMERA
-        )
-        val check = permissionManager.isPermissionGranted(permissions, cameraPermissionLauncher)
-        if (check)
-            startQRCodeReader()
-    }
-    //---------------------------------------------------------------------------------------------- cameraPermission
-
-
     //---------------------------------------------------------------------------------------------- startQRCodeReader
     private fun startQRCodeReader() {
-        val intent = Intent(requireContext(), ScanActivity::class.java)
-        resultLauncher.launch(intent)
+        val format = listOf(
+            BarcodeFormat.FORMAT_ALL_FORMATS
+        )
+        scanCustomCode.launch(
+            ScannerConfig.build {
+                setOverlayStringRes(R.string.clearCameraAndInFrontOfQr) // string resource used for the scanner overlay
+                setOverlayDrawableRes(R.drawable.ic_barcode) // drawable resource used for the scanner overlay
+                setShowTorchToggle(true)
+                setBarcodeFormats(format)
+                setUseFrontCamera(false) // use the front camera
+            }
+        )
     }
     //---------------------------------------------------------------------------------------------- startQRCodeReader
+
 
 
     //---------------------------------------------------------------------------------------------- handleResult
-    private fun handleResult(result: String?) {
-        if (result == null) {
-            showMessage(getString(R.string.qrIsWrong))
-        } else {
-            if (result.isDigitsOnly() && result.length > 6) {
-                val temp = result.subSequence(result.length - 6, result.length)
-                binding.editTextSearch.setText(temp)
-            } else
-                showMessage(getString(R.string.qrIsWrong))
+    private fun handleResult(result: QRResult) {
+        when (result) {
+            is QRResult.QRSuccess -> {
+                val temp = result.content.rawValue
+                if (temp.isDigitsOnly() && temp.length > 6) {
+                    val tempSub = temp.subSequence(temp.length - 6, temp.length)
+                    binding.editTextSearch.setText(tempSub)
+                } else
+                    showMessage(getString(R.string.qrIsWrong))
+            }
+            else -> {
+                activity?.onBackPressedDispatcher?.onBackPressed()
+            }
         }
     }
     //---------------------------------------------------------------------------------------------- handleResult
-
 }

@@ -69,7 +69,5 @@ dependencies {
 
     implementation 'com.github.Drjacky:ImagePicker:2.3.22'
 
-    //barcode
-    implementation 'com.google.android.gms:play-services-vision:20.1.3'
 
 }

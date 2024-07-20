@@ -65,10 +65,10 @@ class ProductViewModel @Inject constructor(
     enum class SortType(val persianName: String, val index: Int) {
         ProductName("نام کالا", 0),
         ProductCode("کد کالا", 1),
-        Discount("شگفت انگیز نمایشگاه", 2),
-        MaxPrice("بیشترین قیمت", 3),
-        MinPrice("کمترین قیمت", 4),
-        BillingDate("خریدهای قبلی", 5)
+        BillingDate("خریدهای قبلی", 2),
+        Discount("شگفت انگیز نمایشگاه", 3),
+        MaxPrice("بیشترین قیمت", 4),
+        MinPrice("کمترین قیمت", 5)
     }
 
 

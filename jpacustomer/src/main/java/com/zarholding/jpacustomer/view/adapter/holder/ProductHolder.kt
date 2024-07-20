@@ -89,7 +89,7 @@ class ProductHolder(
 
         binding.imageViewMinus.setOnClickListener {
             val count = getEditTextCount() - 1
-            if (count > 0) {
+            if (count > -1) {
                 binding.editTextCount.setText((count).toString())
                 item.count = count
             }
@@ -101,6 +101,15 @@ class ProductHolder(
                 binding.editTextCount.setText((count).toString())
                 item.count = count
             }
+        }
+
+        binding.editTextCount.addTextChangedListener {
+            val text = it.toString()
+            if (text.isNotEmpty())
+                if (text.isDigitsOnly())
+                    if (item.maxCount < text.toInt())
+                        binding.editTextCount.setText("0")
+            item.count = getEditTextCount()
         }
 
     }

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.text.isDigitsOnly
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.hoomanholding.applibrary.ext.downloadProfileImage
@@ -170,7 +171,7 @@ class ProductDetailDialog(
     private fun setListener() {
         binding.imageViewMinus.setOnClickListener {
             val count = getEditTextCount() - 1
-            if (count > 0)
+            if (count > -1)
                 binding.editTextCount.setText((count).toString())
         }
 
@@ -197,6 +198,14 @@ class ProductDetailDialog(
         }
 
         binding.buttonNo.setOnClickListener { dismiss() }
+
+        binding.editTextCount.addTextChangedListener {
+            val text = it.toString()
+            if (text.isNotEmpty())
+                if (text.isDigitsOnly())
+                    if (product.maxCount < text.toInt())
+                        binding.editTextCount.setText("0")
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 

@@ -77,7 +77,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutButtons"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/editTextSearch"
@@ -104,7 +104,7 @@
 
             <com.hoomanholding.applibrary.view.custom.JpaButton
                 android:id="@+id/buttonDeleteAll"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:hint="@string/bePatient"
