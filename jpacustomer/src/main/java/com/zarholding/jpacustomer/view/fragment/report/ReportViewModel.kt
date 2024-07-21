@@ -64,7 +64,7 @@ class ReportViewModel @Inject constructor(
     //---------------------------------------------------------------------------------------------- feedback
     private fun feedback(): ReportItem {
         val bundle = Bundle()
-        bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.Billing.name)
+        bundle.putString(CompanionValues.REPORT_TYPE, EnumReportType.Return.name)
         return ReportItem(
             title = resourcesProvider.getString(R.string.feedbackReport),
             bundle = bundle,

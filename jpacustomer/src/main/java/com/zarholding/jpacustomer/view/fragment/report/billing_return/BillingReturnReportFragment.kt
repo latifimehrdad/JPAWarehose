@@ -86,6 +86,11 @@ class BillingReturnReportFragment(
         if (viewModel.isCustomerCustomers()) {
             binding.constraintLayoutCustomer.visibility = View.VISIBLE
         }
+        when(viewModel.getReportType()) {
+            EnumReportType.Billing -> binding.textViewTitle.text = getString(R.string.factorReport)
+            EnumReportType.Return -> binding.textViewTitle.text = getString(R.string.feedbackReport)
+            EnumReportType.Balance -> binding.textViewTitle.text = getString(R.string.customerBalanceReport)
+        }
         viewModel.requestGetCustomers()
     }
     //---------------------------------------------------------------------------------------------- initView
