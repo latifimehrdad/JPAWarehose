@@ -103,14 +103,14 @@ class ProductHolder(
             }
         }
 
-        binding.editTextCount.addTextChangedListener {
+/*        binding.editTextCount.addTextChangedListener {
             val text = it.toString()
             if (text.isNotEmpty())
                 if (text.isDigitsOnly())
                     if (item.maxCount < text.toInt())
                         binding.editTextCount.setText("0")
             item.count = getEditTextCount()
-        }
+        }*/
 
     }
     //---------------------------------------------------------------------------------------------- setListener
