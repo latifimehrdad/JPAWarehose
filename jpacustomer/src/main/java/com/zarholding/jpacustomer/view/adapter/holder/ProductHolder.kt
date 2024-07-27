@@ -1,5 +1,8 @@
 package com.zarholding.jpacustomer.view.adapter.holder
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
@@ -24,6 +27,8 @@ class ProductHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
+    var textWatcher: TextWatcher? = null
+
     //---------------------------------------------------------------------------------------------- Click
     interface Click {
         fun selectProduct(item: ProductModel, imageView: ImageView)
@@ -42,11 +47,12 @@ class ProductHolder(
 
     //---------------------------------------------------------------------------------------------- setValueToXml
     private fun setValueToXml(item: ProductModel) {
+        binding.editTextCount.removeTextChangedListener(textWatcher)
+        binding.editTextCount.setText(item.count.toString())
         binding.imageviewStatus.visibility = View.GONE
         binding.imageviewDiscount.visibility = View.GONE
         binding.imageviewTxt.visibility = View.GONE
         binding.textViewName.text = item.productName
-        binding.editTextCount.setText(item.count.toString())
         binding.textViewPrice.text = item.price.split()
         binding.textViewCode.setTitleAndValue(
             title = binding.textViewCode.context.getString(R.string.productCode),
@@ -77,6 +83,27 @@ class ProductHolder(
         if (item.isSpecial)
             binding.imageviewDiscount.visibility = View.VISIBLE
 
+
+
+        textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s != null && s.toString().isDigitsOnly()) {
+                    item.count = if (s.isNotEmpty()) s.toString().toInt() else 0
+                }
+            }
+
+        }
+
+        binding.editTextCount.addTextChangedListener(textWatcher)
+
+
+
     }
     //---------------------------------------------------------------------------------------------- setValueToXml
 
@@ -88,7 +115,7 @@ class ProductHolder(
         }
 
         binding.imageViewMinus.setOnClickListener {
-            val count = getEditTextCount() - 1
+            val count = item.count - 1
             if (count > -1) {
                 binding.editTextCount.setText((count).toString())
                 item.count = count
@@ -96,26 +123,30 @@ class ProductHolder(
         }
 
         binding.imageViewPlus.setOnClickListener {
-            val count = getEditTextCount() + 1
+            val count = item.count + 1
             if (count <= item.maxCount) {
                 binding.editTextCount.setText((count).toString())
                 item.count = count
             }
         }
 
-/*        binding.editTextCount.addTextChangedListener {
-            val text = it.toString()
-            if (text.isNotEmpty())
-                if (text.isDigitsOnly())
-                    if (item.maxCount < text.toInt())
-                        binding.editTextCount.setText("0")
-            item.count = getEditTextCount()
+/*        Log.d("meri", " log5 ==== code = ${item.productCode} - count = ${item.count} - edit = ${binding.editTextCount.text}")
+        binding.editTextCount.addTextChangedListener {
+            Log.d("meri", " log2 ==== code = ${item.productCode} - count = ${item.count} - edit = ${binding.editTextCount.text}")
+//            val text = it.toString()
+//            if (text.isNotEmpty())
+//                if (text.isDigitsOnly())
+//                    if (item.maxCount < text.toInt())
+//                        binding.editTextCount.setText("0")
+            item.count = 10
+            Log.d("meri", " log3 ==== code = ${item.productCode} - count = ${item.count} - edit = ${binding.editTextCount.text}")
         }*/
 
     }
     //---------------------------------------------------------------------------------------------- setListener
 
 
+/*
     //---------------------------------------------------------------------------------------------- getEditTextCount
     private fun getEditTextCount(): Int {
         val text = binding.editTextCount.text.toString()
@@ -129,5 +160,6 @@ class ProductHolder(
         }
     }
     //---------------------------------------------------------------------------------------------- getEditTextCount
+*/
 
 }

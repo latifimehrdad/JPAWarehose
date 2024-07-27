@@ -144,7 +144,6 @@
                         android:hint="@string/zero"
                         android:inputType="number"
                         android:maxLength="5"
-                        android:enabled="false"
                         android:textColor="@color/textColor"
                         android:textSize="@dimen/textSizeH1"/>
 

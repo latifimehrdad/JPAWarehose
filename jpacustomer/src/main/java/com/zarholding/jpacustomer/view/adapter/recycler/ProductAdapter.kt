@@ -41,10 +41,7 @@ class ProductAdapter(
     //---------------------------------------------------------------------------------------------- getItemCount
 
 
-    //---------------------------------------------------------------------------------------------- changeCount
-    fun changeCount(position: Int, count: Int) {
-        items[position].count = count
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
     }
-    //---------------------------------------------------------------------------------------------- changeCount
-
 }
