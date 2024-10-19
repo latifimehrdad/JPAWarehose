@@ -259,7 +259,14 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     private fun showDatePickerDialog() {
         if (context == null)
             return
-        val datePickerDialog = DatePickerDialog(requireContext())
+        val dialogAction = object: DatePickerDialog.DialogAction {
+            override fun onStart() {
+            }
+
+            override fun onDismiss() {
+            }
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), dialogAction)
         datePickerDialog.selectionMode = DateRangeCalendarView.SelectionMode.Range
         datePickerDialog.isDisableDaysAgo = false
         datePickerDialog.acceptButtonColor =

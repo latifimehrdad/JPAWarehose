@@ -431,7 +431,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
         when (result) {
             is QRResult.QRSuccess -> {
                 val temp = result.content.rawValue
-                if (temp.isDigitsOnly() && temp.length > 6) {
+                if (temp != null && temp.isDigitsOnly() && temp.length > 6) {
                     val tempSub = temp.subSequence(temp.length - 6, temp.length)
                     binding.editTextSearch.setText(tempSub)
                 } else

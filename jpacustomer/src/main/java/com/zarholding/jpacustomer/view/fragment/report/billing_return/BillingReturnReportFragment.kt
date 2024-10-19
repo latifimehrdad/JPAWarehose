@@ -189,7 +189,14 @@ class BillingReturnReportFragment(
     private fun showDatePickerDialog(dateType: DateType) {
         if (context == null)
             return
-        val datePickerDialog = DatePickerDialog(requireContext())
+        val dialogAction = object : DatePickerDialog.DialogAction {
+            override fun onStart() {
+            }
+
+            override fun onDismiss() {
+            }
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), dialogAction)
         datePickerDialog.selectionMode = DateRangeCalendarView.SelectionMode.Single
         datePickerDialog.isDisableDaysAgo = false
         datePickerDialog.acceptButtonColor =

@@ -61,7 +61,7 @@ open class JpaViewModel @Inject constructor() : ViewModel() {
     //---------------------------------------------------------------------------------------------- setError
     private suspend fun setMessage(response: Response<*>?) {
         withContext(Dispatchers.Main) {
-            checkResponseError(response, errorLiveDate)
+            errorLiveDate.value = checkResponseError(response)
         }
     }
     //---------------------------------------------------------------------------------------------- setError

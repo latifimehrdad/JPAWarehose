@@ -133,8 +133,12 @@ class ArrangeFragment(override var layout: Int = R.layout.fragment_arrange) :
             is QRResult.QRSuccess -> {
                 result.content.rawValue
                 try {
-                    val id = result.content.rawValue.toLong()
-                    arrangeViewModel.findLocation(id)
+                    val id = result.content.rawValue?.toLong()
+                    id?.let {
+                        arrangeViewModel.findLocation(id)
+                    } ?: run {
+                        showMessage(getString(R.string.qrCodeNotId))
+                    }
                 } catch (e: NumberFormatException) {
                     showMessage(getString(R.string.qrCodeNotId))
                 }

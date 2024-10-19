@@ -1,19 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-android'
+    id 'com.google.devtools.ksp'
 }
 
 android {
     namespace 'com.hoomanholding.jpawarehose'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.hoomanholding.jpawarehose"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 3
         versionName "0.0.3"
 
@@ -42,19 +42,15 @@ android {
 dependencies {
 
     implementation project(path: ':applibrary')
-    implementation 'androidx.core:core-ktx:1.10.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.6'
 
     //Hilt
-    implementation 'com.google.dagger:hilt-android:2.45'
-    kapt 'com.google.dagger:hilt-android-compiler:2.45'
+    implementation 'com.google.dagger:hilt-android:2.51.1'
+    ksp "com.google.dagger:hilt-android-compiler:2.51.1"
 
     //Room DB
-    implementation "androidx.room:room-runtime:2.5.2"
-    kapt "androidx.room:room-compiler:2.5.2"
+    implementation "androidx.room:room-runtime:2.6.1"
+    ksp "androidx.room:room-compiler:2.6.1"
 
-}
-
-kapt {
-    correctErrorTypes true
 }

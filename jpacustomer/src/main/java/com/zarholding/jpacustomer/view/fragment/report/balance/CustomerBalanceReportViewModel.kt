@@ -83,10 +83,10 @@ class CustomerBalanceReportViewModel @Inject constructor(
                         }
                     }
                 } ?: run {
-                    checkResponseError(response, errorLiveDate)
+                    setMessage(response)
                 }
             else
-                checkResponseError(response, errorLiveDate)
+                setMessage(response)
         }
     }
     //---------------------------------------------------------------------------------------------- downloadCustomerBalancePDF
