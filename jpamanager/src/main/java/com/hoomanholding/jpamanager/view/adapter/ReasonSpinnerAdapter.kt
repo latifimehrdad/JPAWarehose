@@ -4,7 +4,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
+import com.hoomanholding.applibrary.model.data.response.basedata.ComboModel
 import com.hoomanholding.jpamanager.databinding.ItemSpinnerReasonBinding
 import com.skydoves.powerspinner.*
 
@@ -22,14 +22,14 @@ internal const val NO_SELECTED_INDEX: Int = -1
 class ReasonSpinnerAdapter(
     powerSpinnerView: PowerSpinnerView
 ) : RecyclerView.Adapter<ReasonSpinnerAdapter.ReasonSpinnerViewHolder>(),
-    PowerSpinnerInterface<DisApprovalReasonModel> {
+    PowerSpinnerInterface<ComboModel> {
 
     override var index: Int = powerSpinnerView.selectedIndex
     override val spinnerView: PowerSpinnerView = powerSpinnerView
-    override var onSpinnerItemSelectedListener: OnSpinnerItemSelectedListener<DisApprovalReasonModel>? = null
+    override var onSpinnerItemSelectedListener: OnSpinnerItemSelectedListener<ComboModel>? = null
 
     private val compoundPadding: Int = 12
-    private val spinnerItems: MutableList<DisApprovalReasonModel> = arrayListOf()
+    private val spinnerItems: MutableList<ComboModel> = arrayListOf()
 
     init {
         this.spinnerView.compoundDrawablePadding = compoundPadding
@@ -55,7 +55,7 @@ class ReasonSpinnerAdapter(
         holder.bind(spinnerItems[position], spinnerView)
     }
 
-    override fun setItems(itemList: List<DisApprovalReasonModel>) {
+    override fun setItems(itemList: List<ComboModel>) {
         this.spinnerItems.clear()
         this.spinnerItems.addAll(itemList)
         this.index = NO_SELECTED_INDEX
@@ -82,7 +82,7 @@ class ReasonSpinnerAdapter(
     inner class ReasonSpinnerViewHolder(private val binding: ItemSpinnerReasonBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        internal fun bind(item: DisApprovalReasonModel, spinnerView: PowerSpinnerView) {
+        internal fun bind(item: ComboModel, spinnerView: PowerSpinnerView) {
             binding.itemDefaultText.apply {
                 text = item.value
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, spinnerView.textSize)

@@ -2,13 +2,14 @@ package com.hoomanholding.jpamanager.view.fragment.invoice
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hoomanholding.applibrary.model.data.enums.EnumBaseDataType
 import com.hoomanholding.applibrary.model.data.request.OrderRequestModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.model.repository.OrderRepository
 import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.request.OrderToggleStateRequest
+import com.hoomanholding.applibrary.model.data.response.basedata.ComboModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
-import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.visitor.VisitorModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -17,7 +18,7 @@ import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.other.DateFilterModel
-import com.hoomanholding.jpamanager.model.repository.ReasonRepository
+import com.hoomanholding.jpamanager.model.repository.BaseDataRepository
 import com.zar.core.tools.extensions.toSolarDate
 import kotlinx.coroutines.delay
 import java.time.LocalDateTime
@@ -30,10 +31,10 @@ import java.time.LocalDateTime
 @HiltViewModel
 class InvoiceViewModel @Inject constructor(
     private val orderRepository: OrderRepository,
-    private val reasonRepository: ReasonRepository
+    private val baseDataRepository: BaseDataRepository
 ) : JpaViewModel() {
 
-    var disApprovalReasonModel: List<DisApprovalReasonModel>? = null
+    var disApprovalReasonModel: List<ComboModel>? = null
 
     val filterCustomerLiveData: MutableLiveData<CustomerModel?> by lazy {
         MutableLiveData<CustomerModel?>()
@@ -138,7 +139,7 @@ class InvoiceViewModel @Inject constructor(
     fun requestDisApprovalReasons() {
         viewModelScope.launch(IO + exceptionHandler()) {
             callApi(
-                request = reasonRepository.requestDisApprovalReasons(),
+                request = baseDataRepository.requestBaseDataComb(type = EnumBaseDataType.DisapprovalReason),
                 onReceiveData = { disApprovalReasonModel = it }
             )
         }

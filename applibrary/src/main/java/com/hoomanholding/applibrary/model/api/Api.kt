@@ -9,11 +9,11 @@ import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.request.*
 import com.hoomanholding.applibrary.model.data.response.GeneralResponse
 import com.hoomanholding.applibrary.model.data.response.about.AboutModel
+import com.hoomanholding.applibrary.model.data.response.basedata.ComboModel
 import com.hoomanholding.applibrary.model.data.response.basket.BasketModel
 import com.hoomanholding.applibrary.model.data.response.category.CategoryModel
 import com.hoomanholding.applibrary.model.data.response.check.RecordCheckNotifyModel
 import com.hoomanholding.applibrary.model.data.response.critic.CriticDetailModel
-import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialDetailModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerModel
@@ -22,7 +22,6 @@ import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderDetai
 import com.hoomanholding.applibrary.model.data.response.order.CustomerOrderModel
 import com.hoomanholding.applibrary.model.data.response.order.OrderModel
 import com.hoomanholding.applibrary.model.data.response.product.ProductModel
-import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
 import com.hoomanholding.applibrary.model.data.response.report.*
 import com.hoomanholding.applibrary.model.data.response.critic.CriticModel
 import com.hoomanholding.applibrary.model.data.response.basket.subuser.SubUserOrderModel
@@ -145,20 +144,16 @@ interface Api {
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<VisitorModel>?>>
 
-    @GET("$baseData/basedata-get-disapprovalreasons")
-    suspend fun requestDisApprovalReasons(
+    @GET("$baseData/basedata-get-baseDataCombo")
+    suspend fun requestBaseDataComb(
+        @Query("type") type: Int,
         @Header("Authorization") token: String
-    ): Response<GeneralResponse<List<DisApprovalReasonModel>?>>
+    ): Response<GeneralResponse<List<ComboModel>?>>
 
     @GET("$baseData/basedata-get-locations")
     suspend fun requestGetLocations(
         @Header("Authorization") token: String
     ): Response<GeneralResponse<List<LocationEntity>?>>
-
-    @GET("$baseData/basedata-get-currency")
-    suspend fun requestGetCurrency(
-        @Header("Authorization") token: String
-    ): Response<GeneralResponse<List<CurrencyModel>?>>
 
     @GET("$baseData/basedata-get-customerproductlist")
     suspend fun requestGetCustomerProducts(

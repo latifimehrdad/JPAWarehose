@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
-import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
+import com.hoomanholding.applibrary.model.data.response.basedata.ComboModel
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentHomeBinding
@@ -91,7 +91,7 @@ class HomeFragment(override var layout: Int = R.layout.fragment_home) :
 
 
     //---------------------------------------------------------------------------------------------- setSpinnerCurrencyItems
-    private fun setSpinnerCurrencyItems(items: List<CurrencyModel>){
+    private fun setSpinnerCurrencyItems(items: List<ComboModel>){
         val stringArray = items.map { it.value }
         binding.powerSpinnerCurrency.apply {
             setSpinnerAdapter(StringSpinnerAdapter(this))
