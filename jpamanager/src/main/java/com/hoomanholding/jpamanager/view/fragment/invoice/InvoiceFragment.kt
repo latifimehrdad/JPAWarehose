@@ -418,7 +418,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
 
     //---------------------------------------------------------------------------------------------- showDialogConformToChangeStatusOrders
     private fun showDialogConformToChangeStatusOrders(state: EnumState) {
-        if (viewModel.disApprovalReasonModel.isNullOrEmpty())
+        if (state == EnumState.Reject && viewModel.disApprovalReasonModel.isNullOrEmpty())
             return
         if (context == null)
             return

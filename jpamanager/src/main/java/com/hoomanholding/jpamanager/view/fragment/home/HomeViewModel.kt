@@ -2,15 +2,16 @@ package com.hoomanholding.jpamanager.view.fragment.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hoomanholding.applibrary.model.data.response.currency.CurrencyModel
+import com.hoomanholding.applibrary.model.data.enums.EnumBaseDataType
+import com.hoomanholding.applibrary.model.data.response.basedata.ComboModel
 import com.hoomanholding.applibrary.model.data.response.report.HomeReportModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.hoomanholding.applibrary.view.fragment.JpaViewModel
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.other.HomeReportItemModel
-import com.hoomanholding.jpamanager.model.repository.CurrencyRepository
 import com.hoomanholding.applibrary.model.repository.ReportRepository
+import com.hoomanholding.jpamanager.model.repository.BaseDataRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val reportRepository: ReportRepository,
-    private val currencyRepository: CurrencyRepository
+    private val baseDataRepository: BaseDataRepository
 ) : JpaViewModel() {
 
     var currencyTypeText: String = ""
@@ -31,8 +32,8 @@ class HomeViewModel @Inject constructor(
         MutableLiveData<List<HomeReportItemModel>>()
     }
 
-    val currencyLiveData: MutableLiveData<List<CurrencyModel>> by lazy {
-        MutableLiveData<List<CurrencyModel>>()
+    val currencyLiveData: MutableLiveData<List<ComboModel>> by lazy {
+        MutableLiveData<List<ComboModel>>()
     }
 
 
@@ -42,7 +43,7 @@ class HomeViewModel @Inject constructor(
             return
         viewModelScope.launch(IO + exceptionHandler()) {
             callApi(
-                request = currencyRepository.requestGetCurrency(),
+                request = baseDataRepository.requestBaseDataComb(type = EnumBaseDataType.Currency),
                 onReceiveData = { currencyLiveData.postValue(it) }
             )
         }

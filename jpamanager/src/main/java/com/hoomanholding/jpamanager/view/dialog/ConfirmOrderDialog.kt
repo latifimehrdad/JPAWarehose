@@ -11,9 +11,8 @@ import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.hoomanholding.applibrary.model.data.database.entity.SupplierEntity
 import com.hoomanholding.applibrary.model.data.enums.EnumState
-import com.hoomanholding.applibrary.model.data.response.reason.DisApprovalReasonModel
+import com.hoomanholding.applibrary.model.data.response.basedata.ComboModel
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.view.adapter.ReasonSpinnerAdapter
 import com.skydoves.powerspinner.PowerSpinnerView
@@ -21,7 +20,7 @@ import com.skydoves.powerspinner.PowerSpinnerView
 class ConfirmOrderDialog(
     context: Context,
     private val click: Click,
-    private val reasons: List<DisApprovalReasonModel>?,
+    private val reasons: List<ComboModel>?,
     private val status: EnumState
 ) : Dialog(context) {
 
@@ -80,7 +79,7 @@ class ConfirmOrderDialog(
                 setItems(reasons)
                 getSpinnerRecyclerView().layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                setOnSpinnerItemSelectedListener<DisApprovalReasonModel> { _, _, newIndex, _ ->
+                setOnSpinnerItemSelectedListener<ComboModel> { _, _, newIndex, _ ->
                     position = newIndex
                 }
             }
