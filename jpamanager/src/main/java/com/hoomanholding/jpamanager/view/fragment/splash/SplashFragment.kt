@@ -160,12 +160,15 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
 
         viewModel.successLiveData.observe(viewLifecycleOwner) {
-            viewModel.subscribeToTopic()
+            //viewModel.subscribeToTopic()
+            showMessage(getString(R.string.loginIsSuccess))
+            if (it)
+                gotoFragment(R.id.action_splashFragment_to_HomeFragment)
         }
 
         viewModel.userIsEnteredLiveData.observe(viewLifecycleOwner) {
             if (it)
-                getFireBaseToken()
+                viewModel.requestGetData()//getFireBaseToken()
             else
                 gotoFragmentLogin()
         }
