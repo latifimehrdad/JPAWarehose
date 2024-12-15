@@ -54,8 +54,8 @@
                 android:fontFamily="@font/yekan_bakh_light"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:paddingVertical="@dimen/_4sdp"
-                android:textSize="@dimen/_9sdp"
-                android:hint="@string/search"
+                android:textSize="12sp"
+                android:hint="@string/searchByNameCodeVisitor"
                 android:autofillHints="null"
                 android:inputType="text" />
 

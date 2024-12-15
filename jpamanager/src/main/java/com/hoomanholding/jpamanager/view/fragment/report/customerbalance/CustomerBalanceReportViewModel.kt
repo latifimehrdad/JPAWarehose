@@ -53,7 +53,10 @@ class CustomerBalanceReportViewModel @Inject constructor(
                     val searchList = list.filter {
                         if (it.customerName?.contains(search) == true)
                             true
-                        else it.customerCode?.contains(search) == true
+                        else if(it.customerCode?.contains(search) == true)
+                            true
+                        else it.visitorName?.contains(search) == true
+
                     }
                     customerBalanceReportLiveData.postValue(searchList)
                 } else

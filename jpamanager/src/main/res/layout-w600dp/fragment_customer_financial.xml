@@ -217,7 +217,43 @@
             app:layout_constraintTop_toBottomOf="@id/constraintLayoutListTitle"
             app:layout_constraintStart_toStartOf="@id/constraintLayoutListTitle"
             app:layout_constraintEnd_toEndOf="@id/constraintLayoutListTitle"
-            app:layout_constraintBottom_toTopOf="@id/constraintLayoutFooter"/>
+            app:layout_constraintBottom_toTopOf="@id/buttonConfirmFactor"
+            android:layout_marginBottom="10dp"/>
+
+
+        <com.hoomanholding.applibrary.view.custom.JpaButton
+            android:id="@+id/buttonConfirmFactor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/recyclerViewItem"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayoutFooter"
+            app:layout_constraintEnd_toStartOf="@id/buttonRejectFactor"
+            android:textSize="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_7sdp"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
+            app:backgroundTint="@null"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/drawable_confirm_button"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/confirmFactorText"
+            android:text='@string/confirmOrder' />
+
+        <com.hoomanholding.applibrary.view.custom.JpaButton
+            android:id="@+id/buttonRejectFactor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/buttonConfirmFactor"
+            app:layout_constraintBottom_toBottomOf="@id/buttonConfirmFactor"
+            app:layout_constraintEnd_toEndOf="@id/recyclerViewItem"
+            android:textSize="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_7sdp"
+            android:shadowRadius="@integer/material_motion_duration_long_2"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:backgroundTint="@null"
+            android:background="@drawable/drawable_reject_button"
+            android:fontFamily="@font/iransans_medium"
+            android:textColor="@color/rejectFactorText"
+            android:text='@string/rejectOrder' />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutFooter"
