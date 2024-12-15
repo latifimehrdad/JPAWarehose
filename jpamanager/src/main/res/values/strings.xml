@@ -6,6 +6,7 @@
     <string name="password">رمز ورود</string>
     <string name="enter">ورود</string>
     <string name="search">جستجو</string>
+    <string name="searchByNameCodeVisitor">جستجو(بر اساس نام،کد و ویزیتور مشتری)</string>
     <string name="loginByBiometric">ورود با اثر انگشت</string>
     <string name="onAuthenticationError">اثر انگشت شما تایید نشد</string>
     <string name="passwordIsInCorrect">رمز اشتباه است</string>

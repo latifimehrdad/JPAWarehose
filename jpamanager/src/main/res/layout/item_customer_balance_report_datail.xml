@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="item"
-            type="com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportDetailModel" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,11 +31,7 @@
                 android:textSize="@dimen/_9sdp"
                 android:paddingVertical="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
-                android:gravity="end"
-                app:setTitle="@{@string/creditor}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.credit}"
-                app:setLastTest="@{@string/rial}"/>
+                android:gravity="end"/>
 
             <TextView
                 android:id="@+id/textViewDebit"
@@ -53,11 +44,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_9sdp"
                 android:paddingVertical="@dimen/_2sdp"
-                android:fontFamily="@font/iransans_light"
-                app:setTitle="@{@string/debit}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.debit}"
-                app:setLastTest="@{@string/rial}"/>
+                android:fontFamily="@font/iransans_light"/>
 
             <TextView
                 android:id="@+id/textViewDecsription"
@@ -72,10 +59,7 @@
                 android:textSize="@dimen/_9sdp"
                 android:paddingVertical="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
-                android:padding="@dimen/_5sdp"
-                app:setTitle="@{@string/description}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.description}"/>
+                android:padding="@dimen/_5sdp" />
 
 
             <TextView
@@ -88,11 +72,7 @@
                 android:textSize="@dimen/_9sdp"
                 android:lines="1"
                 android:paddingVertical="@dimen/_2sdp"
-                android:fontFamily="@font/iransans_bold"
-                app:setTitle="@{@string/remained}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.balance}"
-                app:setLastTest="@{@string/rial}"/>
+                android:fontFamily="@font/iransans_bold"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -112,10 +92,7 @@
             android:gravity="center"
             android:lines="1"
             android:fontFamily="@font/iransans_medium"
-            android:textColor="@color/primaryColorVariant"
-            app:setTitle="@{@string/date}"
-            app:setSplitter="@{@string/colon}"
-            app:setValue="@{item.transactionDate}" />
+            android:textColor="@color/primaryColorVariant" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

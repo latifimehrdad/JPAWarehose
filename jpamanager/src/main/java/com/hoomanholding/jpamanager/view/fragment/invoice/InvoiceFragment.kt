@@ -215,9 +215,10 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
                 gotoFragment(R.id.action_InvoiceFragment_to_InvoiceFragmentDetail, bundle)
             }
 
-            override fun customerFinancialDetail(customerId: Int) {
+            override fun customerFinancialDetail(customerId: Int, orderId: Long) {
                 val bundle = Bundle()
                 bundle.putInt(CompanionValues.CUSTOMER_ID, customerId)
+                bundle.putLong(CompanionValues.ID, orderId)
                 gotoFragment(R.id.action_InvoiceFragment_to_customerFinancialFragment, bundle)
             }
         }

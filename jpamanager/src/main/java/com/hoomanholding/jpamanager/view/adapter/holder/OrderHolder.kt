@@ -20,7 +20,7 @@ class OrderHolder(
 
     interface Click {
         fun orderDetail(item: OrderModel)
-        fun customerFinancialDetail(customerId: Int)
+        fun customerFinancialDetail(customerId: Int, orderId: Long)
     }
 
 
@@ -51,7 +51,10 @@ class OrderHolder(
             click.orderDetail(item)
         }
         binding.textViewCustomerFinancial.setOnClickListener {
-            click.customerFinancialDetail(item.customerId)
+            click.customerFinancialDetail(
+                customerId = item.customerId,
+                orderId = item.id
+            )
         }
         checkSelected(item)
         binding.root.setOnClickListener {

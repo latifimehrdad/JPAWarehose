@@ -1,7 +1,9 @@
 package com.hoomanholding.jpamanager.view.adapter.holder
 
 import androidx.recyclerview.widget.RecyclerView
+import com.hoomanholding.applibrary.ext.setTitleAndValue
 import com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportModel
+import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.ItemCustomerBalanceReportBinding
 
 
@@ -21,7 +23,7 @@ class CustomerBalanceHolder(
 
     //---------------------------------------------------------------------------------------------- bind
     fun bind(item: CustomerBalanceReportModel) {
-        binding.item = item
+        setValues(item = item)
         binding.textViewDetail.setOnClickListener {
             click.reportDetail(item)
         }
@@ -29,4 +31,36 @@ class CustomerBalanceHolder(
     }
     //---------------------------------------------------------------------------------------------- bind
 
+
+    //---------------------------------------------------------------------------------------------- setValues
+    private fun setValues(item: CustomerBalanceReportModel) {
+        val context = binding.root.context
+        binding.textViewCustomerCode.setTitleAndValue(
+            title = context.getString(R.string.customerCode),
+            splitter = context.getString(R.string.colon),
+            value = item.customerCode
+        )
+        binding.textViewCustomerName.setTitleAndValue(
+            title = context.getString(R.string.customerName),
+            splitter = context.getString(R.string.colon),
+            value = item.customerName
+        )
+        binding.textViewStoreName.setTitleAndValue(
+            title = context.getString(R.string.shopName),
+            splitter = context.getString(R.string.colon),
+            value = item.storeName
+        )
+        binding.textViewVisitorName.setTitleAndValue(
+            title = context.getString(R.string.visitorName),
+            splitter = context.getString(R.string.colon),
+            value = item.visitorName
+        )
+        binding.textViewBalance.setTitleAndValue(
+            title = context.getString(R.string.remained),
+            splitter = context.getString(R.string.colon),
+            value = item.balance,
+            last = context.getString(R.string.rial)
+        )
+    }
+    //---------------------------------------------------------------------------------------------- setValues
 }

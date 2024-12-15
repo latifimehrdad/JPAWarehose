@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="item"
-            type="com.hoomanholding.applibrary.model.data.response.report.CustomerBalanceReportModel" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,10 +30,7 @@
                 android:textSize="@dimen/_6sdp"
                 android:paddingVertical="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
-                android:lines="1"
-                app:setTitle="@{@string/customerCode}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.customerCode}"/>
+                android:lines="1" />
 
             <TextView
                 android:id="@+id/textViewCustomerName"
@@ -53,10 +45,7 @@
                 android:textSize="@dimen/_6sdp"
                 android:paddingVertical="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
-                android:lines="1"
-                app:setTitle="@{@string/customerName}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.customerName}"/>
+                android:lines="1" />
 
             <TextView
                 android:id="@+id/textViewStoreName"
@@ -70,10 +59,7 @@
                 android:textSize="@dimen/_6sdp"
                 android:paddingVertical="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
-                android:lines="1"
-                app:setTitle="@{@string/shopName}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.storeName}"/>
+                android:lines="1" />
 
             <TextView
                 android:id="@+id/textViewVisitorName"
@@ -87,10 +73,7 @@
                 android:textSize="@dimen/_6sdp"
                 android:paddingVertical="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
-                android:lines="1"
-                app:setTitle="@{@string/visitorName}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.visitorName}"/>
+                android:lines="1" />
 
             <TextView
                 android:id="@+id/textViewBalance"
@@ -106,11 +89,7 @@
                 android:padding="@dimen/_2sdp"
                 android:fontFamily="@font/iransans_light"
                 android:maxLines="2"
-                android:gravity="center"
-                app:setTitle="@{@string/remained}"
-                app:setSplitter="@{@string/colon}"
-                app:setValue="@{item.balance}"
-                app:setLastTest="@{@string/rial}"/>
+                android:gravity="center" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

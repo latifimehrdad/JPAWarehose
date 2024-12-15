@@ -8,6 +8,7 @@ import com.hoomanholding.applibrary.ext.config
 import com.hoomanholding.applibrary.ext.startLoading
 import com.hoomanholding.applibrary.ext.stopLoading
 import com.hoomanholding.applibrary.model.data.enums.EnumCheckType
+import com.hoomanholding.applibrary.model.data.enums.EnumState
 import com.hoomanholding.applibrary.model.data.response.customer.CustomerFinancialModel
 import com.hoomanholding.applibrary.tools.CompanionValues
 import com.hoomanholding.applibrary.tools.getShimmerBuild
@@ -17,6 +18,7 @@ import com.hoomanholding.jpamanager.databinding.FragmentCustomerFinancialBinding
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.adapter.holder.CustomerFinancialDetailHolder
 import com.hoomanholding.jpamanager.view.adapter.recycler.CustomerFinancialAdapter
+import com.hoomanholding.jpamanager.view.dialog.ConfirmOrderDialog
 import com.hoomanholding.jpamanager.view.dialog.customer.CustomerHyperLinkDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,6 +57,7 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
         setListener()
         observeLiveData()
         getCustomerIdFromArgument()
+        viewModel.requestDisApprovalReasons()
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -62,6 +65,15 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
         binding.textViewAmountOfDebt.setOnClickListener { gotoCustomerBalanceDetail() }
+
+        binding.buttonConfirmFactor.setOnClickListener {
+            showDialogConformToChangeStatusOrders(EnumState.Confirmed)
+        }
+
+        binding.buttonRejectFactor.setOnClickListener {
+            showDialogConformToChangeStatusOrders(EnumState.Reject)
+        }
+
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -76,6 +88,10 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
             binding.shimmerViewContainer.stopLoading()
             setCustomerFinancialModel(it)
         }
+
+        viewModel.orderToggleStateLiveData.observe(viewLifecycleOwner) {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
 
@@ -84,11 +100,13 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
     private fun getCustomerIdFromArgument() {
         arguments?.let {
             val customerId = it.getInt(CompanionValues.CUSTOMER_ID, 0)
+            val orderId = it.getLong(CompanionValues.ID, 0L)
             if (customerId == 0) {
                 activity?.onBackPressedDispatcher?.onBackPressed()
                 return
             }
             viewModel.customerId = customerId
+            viewModel.orderId = orderId
             getCustomerFinancial()
         } ?: run {
             activity?.onBackPressedDispatcher?.onBackPressed()
@@ -156,5 +174,41 @@ class CustomerFinancialFragment(override var layout: Int = R.layout.fragment_cus
     }
     //---------------------------------------------------------------------------------------------- gotoCustomerBalanceDetail
 
+
+    //---------------------------------------------------------------------------------------------- showDialogConformToChangeStatusOrders
+    private fun showDialogConformToChangeStatusOrders(state: EnumState) {
+        if (state == EnumState.Reject && viewModel.disApprovalReasonModel.isNullOrEmpty())
+            return
+        if (context == null)
+            return
+
+        val click = object : ConfirmOrderDialog.Click {
+            override fun clickYes(position: Int, description: String) {
+                requestOrderToggleState(state, position, description)
+            }
+        }
+
+        val confirm = ConfirmOrderDialog(
+            requireContext(),
+            click,
+            viewModel.disApprovalReasonModel,
+            state
+        )
+        confirm.show()
+    }
+    //---------------------------------------------------------------------------------------------- showDialogConformToChangeStatusOrders
+
+
+    //---------------------------------------------------------------------------------------------- requestOrderToggleState
+    private fun requestOrderToggleState(state: EnumState, position: Int, description: String) {
+        when (state) {
+            EnumState.Reject ->
+                binding.buttonRejectFactor.startLoading(getString(R.string.bePatient))
+            EnumState.Confirmed ->
+                binding.buttonConfirmFactor.startLoading(getString(R.string.bePatient))
+        }
+        viewModel.requestOrderToggleState(position, description, state)
+    }
+    //---------------------------------------------------------------------------------------------- requestOrderToggleState
 
 }

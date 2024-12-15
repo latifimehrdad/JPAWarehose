@@ -28,7 +28,6 @@ class Providers {
 //        var url = "http://api.hoomanholding.com:7585"// Jpa Test
 
     }
-
     //---------------------------------------------------------------------------------------------- provideUrl
     @Provides
     @Singleton
