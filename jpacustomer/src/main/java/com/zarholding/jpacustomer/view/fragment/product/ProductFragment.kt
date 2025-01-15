@@ -1,9 +1,14 @@
 package com.zarholding.jpacustomer.view.fragment.product
 
 import android.animation.Animator
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.isDigitsOnly
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -36,6 +41,7 @@ import io.github.g00fy2.quickie.QRResult
 import io.github.g00fy2.quickie.ScanCustomCode
 import io.github.g00fy2.quickie.config.BarcodeFormat
 import io.github.g00fy2.quickie.config.ScannerConfig
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -57,6 +63,15 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
     private val scanCustomCode =
         registerForActivityResult(ScanCustomCode()) { result -> handleResult(result) }
+
+    private val activityResultLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                val resultData = result.data?.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS)
+                val spokenText = resultData?.get(0)
+                binding.editTextSearch.setText(spokenText)
+            }
+        }
 
 
     //---------------------------------------------------------------------------------------------- onViewCreated
@@ -187,6 +202,15 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
 
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
+
+        binding.imageViewSpeech.setOnClickListener {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            intent.putExtra(RecognizerIntent.EXTRA_RESULTS,Locale.getDefault())
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fa")
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"چیزی بگویید ...")
+            activityResultLauncher.launch(intent)
+        }
 
         binding.imageViewClearFilter.setOnClickListener {
             viewModel.clearFilter(type = viewType)

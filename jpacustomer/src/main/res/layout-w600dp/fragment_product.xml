@@ -57,6 +57,18 @@
             android:layout_margin="5dp"/>
 
         <ImageView
+            android:id="@+id/imageViewSpeech"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/description"
+            app:layout_constraintTop_toTopOf="@id/editTextSearch"
+            app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
+            app:layout_constraintStart_toEndOf="@id/imageViewClearFilter"
+            app:layout_constraintDimensionRatio="W,1:1"
+            android:src="@drawable/ic_voice"
+            android:layout_margin="5dp"/>
+
+        <ImageView
             android:id="@+id/imageViewClearText"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"

@@ -25,24 +25,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            app:layout_constraintStart_toEndOf="@id/imageViewQrReader"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_5sdp"
-            android:paddingVertical="10dp"
-            android:paddingStart="30dp"
-            android:gravity="right"
-            android:textSize="@dimen/textSizeH3"
-            android:fontFamily="@font/iransans_light"
+            android:layout_marginTop="12dp"
+            android:autofillHints="none"
             android:background="@drawable/drawable_back_edit"
-            android:inputType="text"
-            android:textColor="@color/textColor"
-            android:hint="@string/search"
-            android:textColorHint="@color/textHintColor"
             android:drawableEnd="@drawable/a_ic_search"
             android:drawablePadding="@dimen/_5sdp"
-            android:autofillHints="none"/>
+            android:fontFamily="@font/iransans_light"
+            android:gravity="right"
+            android:hint="@string/search"
+            android:inputType="text"
+            android:paddingVertical="10dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textHintColor"
+            android:textSize="@dimen/textSizeH3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toEndOf="@id/imageViewQrReader"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageViewClearFilter"
@@ -54,6 +55,18 @@
             app:layout_constraintStart_toStartOf="@id/editTextSearch"
             app:layout_constraintDimensionRatio="W,1:1"
             android:src="@drawable/ic_filter_remove"
+            android:layout_margin="5dp"/>
+
+        <ImageView
+            android:id="@+id/imageViewSpeech"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/description"
+            app:layout_constraintTop_toTopOf="@id/editTextSearch"
+            app:layout_constraintBottom_toBottomOf="@id/editTextSearch"
+            app:layout_constraintStart_toEndOf="@id/imageViewClearFilter"
+            app:layout_constraintDimensionRatio="W,1:1"
+            android:src="@drawable/ic_voice"
             android:layout_margin="5dp"/>
 
         <ImageView
