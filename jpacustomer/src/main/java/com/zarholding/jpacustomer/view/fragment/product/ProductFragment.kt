@@ -26,7 +26,6 @@ import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.zar.core.enums.EnumApiError
 import com.zarholding.jpacustomer.CircleAnimationUtil
-import dagger.hilt.android.AndroidEntryPoint
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentProductBinding
 import com.zarholding.jpacustomer.model.EnumProductPageType
@@ -37,6 +36,7 @@ import com.zarholding.jpacustomer.view.adapter.recycler.CategoryAdapter
 import com.zarholding.jpacustomer.view.adapter.recycler.ProductAdapter
 import com.zarholding.jpacustomer.view.dialog.ConfirmDialog
 import com.zarholding.jpacustomer.view.dialog.product.ProductDetailDialog
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.g00fy2.quickie.QRResult
 import io.github.g00fy2.quickie.ScanCustomCode
 import io.github.g00fy2.quickie.config.BarcodeFormat
@@ -67,7 +67,7 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     private val activityResultLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-                val resultData = result.data?.getStringArrayExtra(RecognizerIntent.EXTRA_RESULTS)
+                val resultData = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                 val spokenText = resultData?.get(0)
                 binding.editTextSearch.setText(spokenText)
             }
@@ -204,10 +204,13 @@ class ProductFragment(override var layout: Int = R.layout.fragment_product) :
     private fun setListener() {
 
         binding.imageViewSpeech.setOnClickListener {
+            val language = "fa-IR"
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,language)
             intent.putExtra(RecognizerIntent.EXTRA_RESULTS,Locale.getDefault())
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fa")
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language)
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, language)
+            intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, language)
             intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"چیزی بگویید ...")
             activityResultLauncher.launch(intent)
         }
