@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.hoomanholding.jpawarehose'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.hoomanholding.jpawarehose"
@@ -42,12 +42,12 @@ android {
 dependencies {
 
     implementation project(path: ':applibrary')
-    implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.6'
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.7'
 
     //Hilt
-    implementation 'com.google.dagger:hilt-android:2.51.1'
-    ksp "com.google.dagger:hilt-android-compiler:2.51.1"
+    implementation 'com.google.dagger:hilt-android:2.54'
+    ksp "com.google.dagger:hilt-android-compiler:2.54"
 
     //Room DB
     implementation "androidx.room:room-runtime:2.6.1"

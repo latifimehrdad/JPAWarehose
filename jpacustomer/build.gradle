@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace 'com.zarholding.jpacustomer'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.zarholding.jpacustomer"
@@ -44,13 +44,13 @@ dependencies {
 
 
     implementation project(path: ':applibrary')
-    implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.6'
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.7'
 
     //Hilt
-    implementation 'com.google.dagger:hilt-android:2.51.1'
+    implementation 'com.google.dagger:hilt-android:2.54'
     implementation 'androidx.work:work-runtime-ktx:2.8.1'
-    ksp "com.google.dagger:hilt-android-compiler:2.51.1"
+    ksp "com.google.dagger:hilt-android-compiler:2.54"
 
     //Room DB
     implementation "androidx.room:room-runtime:2.6.1"
@@ -60,7 +60,7 @@ dependencies {
     implementation 'org.osmdroid:osmdroid-android:6.1.18'
     implementation 'com.github.MKergall:osmbonuspack:6.9.0'
 
-    implementation 'com.google.android.gms:play-services-auth:21.2.0'
+    implementation 'com.google.android.gms:play-services-auth:21.3.0'
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.1.0'
 
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
