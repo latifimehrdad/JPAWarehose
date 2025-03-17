@@ -49,7 +49,10 @@ class CustomerBalanceReportViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO + exceptionHandler()) {
             callApi(
                 request = reportRepository.requestCustomerBalanceDetail(customerId),
-                onReceiveData = { reportDetailLiveData.postValue(it) }
+                onReceiveData = {
+
+                    reportDetailLiveData.postValue(it)
+                }
             )
         }
     }

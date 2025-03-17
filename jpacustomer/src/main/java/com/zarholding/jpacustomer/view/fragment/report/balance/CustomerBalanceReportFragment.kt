@@ -112,6 +112,12 @@ class CustomerBalanceReportFragment(
         binding.textViewReport.setOnClickListener {
             permissionForPdf()
         }
+
+        binding.cardViewGoDown.setOnClickListener {
+            binding.recyclerViewReport.smoothScrollToPosition(
+                binding.recyclerViewReport.adapter?.itemCount ?: 0
+            )
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
