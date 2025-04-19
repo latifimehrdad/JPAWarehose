@@ -21,14 +21,13 @@ import com.hoomanholding.applibrary.tools.PermissionManager
 import com.hoomanholding.applibrary.tools.getShimmerBuild
 import com.hoomanholding.applibrary.view.fragment.JpaFragment
 import com.zar.core.enums.EnumApiError
-import com.zar.core.view.picker.date.customviews.DateRangeCalendarView
-import com.zar.core.view.picker.date.dialog.DatePickerDialog
 import com.zarholding.jpacustomer.R
 import com.zarholding.jpacustomer.databinding.FragmentReportBillingReturnBinding
 import com.zarholding.jpacustomer.view.activity.MainActivity
 import com.zarholding.jpacustomer.view.adapter.holder.BillingReturnHolder
 import com.zarholding.jpacustomer.view.adapter.recycler.BillingReturnAdapter
 import com.zarholding.jpacustomer.view.adapter.recycler.CustomersAdapter
+import com.hoomanholding.applibrary.view.dialog.DateDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -189,54 +188,28 @@ class BillingReturnReportFragment(
     private fun showDatePickerDialog(dateType: DateType) {
         if (context == null)
             return
-        val dialogAction = object : DatePickerDialog.DialogAction {
+        val dialogAction = object : DateDialog.DialogAction {
             override fun onStart() {
             }
 
             override fun onDismiss() {
             }
         }
-        val datePickerDialog = DatePickerDialog(requireContext(), dialogAction)
-        datePickerDialog.selectionMode = DateRangeCalendarView.SelectionMode.Single
-        datePickerDialog.isDisableDaysAgo = false
-        datePickerDialog.acceptButtonColor =
-            resources.getColor(R.color.datePickerConfirmButtonBackColor, requireContext().theme)
-        datePickerDialog.headerBackgroundColor =
-            resources.getColor(R.color.datePickerConfirmButtonBackColor, requireContext().theme)
-        datePickerDialog.headerTextColor =
-            resources.getColor(R.color.white, requireContext().theme)
-        datePickerDialog.weekColor =
-            resources.getColor(R.color.a_textHint, requireContext().theme)
-        datePickerDialog.disableDateColor =
-            resources.getColor(R.color.a_textHint, requireContext().theme)
-        datePickerDialog.defaultDateColor =
-            resources.getColor(R.color.datePickerDateBackColor, requireContext().theme)
-        datePickerDialog.selectedDateCircleColor =
-            resources.getColor(R.color.datePickerConfirmButtonBackColor, requireContext().theme)
-        datePickerDialog.selectedDateColor =
-            resources.getColor(R.color.white, requireContext().theme)
-        datePickerDialog.rangeDateColor =
-            resources.getColor(R.color.datePickerConfirmButtonBackColor, requireContext().theme)
-        datePickerDialog.rangeStripColor =
-            resources.getColor(R.color.datePickerRangeColor, requireContext().theme)
-        datePickerDialog.holidayColor =
-            resources.getColor(R.color.red, requireContext().theme)
-        datePickerDialog.textSizeWeek = 12.0f
-        datePickerDialog.textSizeDate = 14.0f
-        datePickerDialog.textSizeTitle = 18.0f
-        datePickerDialog.setCanceledOnTouchOutside(true)
-        datePickerDialog.onSingleDateSelectedListener =
-            DatePickerDialog.OnSingleDateSelectedListener {
+
+        DateDialog(
+            action = dialogAction,
+            manager = childFragmentManager,
+            onSingleDateSelectedListener = {
                 when (dateType) {
                     DateType.DateFrom -> {
                         viewModel.setDateTo(null)
-                        viewModel.setDateFrom(it.persianShortDate)
+                        viewModel.setDateFrom(it)
                     }
 
-                    DateType.DateTo -> viewModel.setDateTo(it.persianShortDate)
+                    DateType.DateTo -> viewModel.setDateTo(it)
                 }
             }
-        datePickerDialog.showDialog()
+        )
 
     }
     //---------------------------------------------------------------------------------------------- showDatePickerDialog

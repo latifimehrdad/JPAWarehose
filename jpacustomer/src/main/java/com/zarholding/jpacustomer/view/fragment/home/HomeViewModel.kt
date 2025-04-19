@@ -116,6 +116,8 @@ class HomeViewModel @Inject constructor(
         var feature = "امکانات و تغییرات نسخه ${deviceManager.appVersionName()}"
         feature += System.getProperty("line.separator")
         feature += "رفع برخی ایرادات فنی"
+        feature += System.getProperty("line.separator")
+        feature += "تغییر ماژول انتخاب تاریخ"
 
         return feature
     }
