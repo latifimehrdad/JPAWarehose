@@ -32,7 +32,7 @@ class Providers {
     //---------------------------------------------------------------------------------------------- provideBPMSUrl
     @Provides
     @Singleton
-    fun provideShowLoad() = true
+    fun provideShowLoad() = false
     //---------------------------------------------------------------------------------------------- provideBPMSUrl
 
 
