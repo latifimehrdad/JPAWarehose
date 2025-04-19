@@ -115,7 +115,7 @@ class HomeViewModel @Inject constructor(
     private fun newFeature(): String {
         var feature = "امکانات و تغییرات نسخه ${deviceManager.appVersionName()}"
         feature += System.getProperty("line.separator")
-        feature += "کنترل اسکرول در دفتر مشتری"
+        feature += "رفع برخی ایرادات فنی"
 
         return feature
     }
